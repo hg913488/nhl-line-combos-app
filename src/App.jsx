@@ -280,24 +280,50 @@ function InjuriesView({ isMobile }) {
         const t = NHL_TEAMS[slug];
         if (!t?.id) return;
         try {
-          const res = await fetch(`https://api-web.nhle.com/v1/roster/${t.abbr}/current`);
+          // Use the injuries endpoint directly
+          const res = await fetch(`https://api-web.nhle.com/v1/injury/ir`);
           const data = await res.json();
           const injured = [];
-          ["forwards","defensemen","goalies"].forEach(pos => {
-            (data[pos] || []).forEach(p => {
-              if (p.injuries && p.injuries.length > 0) {
-                injured.push({
-                  name: `${p.firstName.default} ${p.lastName.default}`,
-                  pos: pos === "defensemen" ? "D" : pos === "goalies" ? "G" : "F",
-                  status: p.injuries[0].injuryStatus || "DTD",
-                  desc: p.injuries[0].injuryDescription || "",
-                });
-              }
-            });
+          (data.injuredPlayers || []).forEach(p => {
+            if (p.team?.abbrev === t.abbr) {
+              injured.push({
+                name: `${p.firstName} ${p.lastName}`,
+                pos: p.position || "?",
+                status: p.injuryStatus || "IR",
+                desc: p.injuryDescription || "",
+              });
+            }
           });
           if (injured.length > 0) results[slug] = injured;
-        } catch(e) {}
+        } catch(e) { console.log('injury fetch error', slug, e); }
       }));
+
+      // If IR endpoint returned nothing, try roster endpoint as fallback
+      if (Object.keys(results).length === 0) {
+        await Promise.all(slugsToFetch.map(async slug => {
+          const t = NHL_TEAMS[slug];
+          if (!t?.abbr) return;
+          try {
+            const res = await fetch(`https://api-web.nhle.com/v1/roster/${t.abbr}/current`);
+            const data = await res.json();
+            const injured = [];
+            ["forwards","defensemen","goalies"].forEach(pos => {
+              (data[pos] || []).forEach(p => {
+                if (p.injuryStatus) {
+                  injured.push({
+                    name: `${p.firstName?.default || ""} ${p.lastName?.default || ""}`.trim(),
+                    pos: pos === "defensemen" ? "D" : pos === "goalies" ? "G" : "F",
+                    status: p.injuryStatus,
+                    desc: p.injuryDescription || "",
+                  });
+                }
+              });
+            });
+            if (injured.length > 0) results[slug] = injured;
+          } catch(e) {}
+        }));
+      }
+
       setInjuries(results);
       setLoading(false);
     }
@@ -544,6 +570,16 @@ export default function App() {
       {tab === "today" && <TodayView isMobile={isMobile} />}
       {tab === "injuries" && <InjuriesView isMobile={isMobile} />}
       {tab === "compare" && <CompareView isMobile={isMobile} />}
+
+      {/* Footer */}
+      <div style={{ borderTop: `1px solid ${P.border}`, padding: "12px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
+        <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em" }}>DATA FROM</span>
+        <a href="https://www.dailyfaceoff.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.08em", textDecoration: "none" }}>DAILY FACEOFF</a>
+        <span style={{ fontSize: 9, color: P.dim }}>·</span>
+        <a href="https://www.nhl.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.08em", textDecoration: "none" }}>NHL.COM</a>
+        <span style={{ fontSize: 9, color: P.dim }}>·</span>
+        <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em" }}>BUILT BY <span style={{ color: P.casper, fontWeight: 700 }}>GOELSTUDIO</span></span>
+      </div>
     </div>
   );
 }
