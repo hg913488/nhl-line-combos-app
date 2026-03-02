@@ -1,5 +1,3 @@
-// ─── COPY BUTTON (top-right of artifact) ───
-// Use the "Copy" icon in the artifact toolbar above ↑
 import { useState, useMemo, useEffect } from "react";
 
 const UPDATED_AT = "2026-03-01";
@@ -18,7 +16,7 @@ const NHL_TEAMS = {
   "detroit-red-wings":    { city: "Detroit",      name: "Red Wings",     abbr: "DET" },
   "edmonton-oilers":      { city: "Edmonton",     name: "Oilers",        abbr: "EDM" },
   "florida-panthers":     { city: "Florida",      name: "Panthers",      abbr: "FLA" },
-  "los-angeles-kings":    { city: "Los Angeles",  name: "Kings",         abbr: "LA"  },
+  "los-angeles-kings":    { city: "Los Angeles",  name: "Kings",         abbr: "LAK" },
   "minnesota-wild":       { city: "Minnesota",    name: "Wild",          abbr: "MIN" },
   "montreal-canadiens":   { city: "Montréal",     name: "Canadiens",     abbr: "MTL" },
   "nashville-predators":  { city: "Nashville",    name: "Predators",     abbr: "NSH" },
@@ -40,7 +38,6 @@ const NHL_TEAMS = {
   "winnipeg-jets":        { city: "Winnipeg",     name: "Jets",          abbr: "WPG" },
 };
 
-// Full schedule — auto-selects today's games
 const SCHEDULE_RAW = `2026-03-01	Vegas Golden Knights	Pittsburgh Penguins
 2026-03-01	Chicago Blackhawks	Utah Mammoth
 2026-03-01	Winnipeg Jets	San Jose Sharks
@@ -409,11 +406,9 @@ const SCHEDULE_RAW = `2026-03-01	Vegas Golden Knights	Pittsburgh Penguins
 2026-04-16	Vancouver Canucks	Edmonton Oilers
 2026-04-16	Seattle Kraken	Colorado Avalanche`;
 
-// Name → slug map
 const NAME_TO_SLUG = Object.fromEntries(
   Object.entries(NHL_TEAMS).map(([slug, t]) => [`${t.city} ${t.name}`, slug])
 );
-// Manual overrides for names that don't match city+name pattern
 const NAME_OVERRIDES = {
   "Vegas Golden Knights": "vegas-golden-knights",
   "Utah Mammoth": "utah-mammoth",
@@ -423,7 +418,6 @@ const NAME_OVERRIDES = {
 
 function nameToSlug(name) {
   if (NAME_OVERRIDES[name]) return NAME_OVERRIDES[name];
-  // Try direct match against slug names
   const found = Object.entries(NHL_TEAMS).find(([, t]) =>
     `${t.city} ${t.name}`.toLowerCase() === name.toLowerCase() ||
     name.toLowerCase().includes(t.name.toLowerCase())
@@ -453,7 +447,16 @@ const P = {
   hover: "#1a2530", active: "#1e2d3d", accent: "#2a4a6b",
 };
 
-const LOGO_URL = (abbr) => `https://assets.nhle.com/logos/nhl/svg/${abbr}_dark.svg`;
+// LA Kings uses "LAK" in the NHL asset URL
+const LOGO_ABBR_OVERRIDE = {
+  "los-angeles-kings": "LAK",
+};
+
+const LOGO_URL = (slug, abbr) => {
+  const logoAbbr = LOGO_ABBR_OVERRIDE[slug] || abbr;
+  return `https://assets.nhle.com/logos/nhl/svg/${logoAbbr}_dark.svg`;
+};
+
 const COLLAPSED_W = 100;
 const EXPANDED_W = 320;
 
@@ -532,10 +535,23 @@ function SiteLogo({ size = 36 }) {
   );
 }
 
-function TeamLogo({ abbr, size = 48 }) {
+function TeamLogo({ slug, abbr, size = 48 }) {
   const [err, setErr] = useState(false);
-  if (err) return <div style={{ width: size, height: size, borderRadius: 6, background: P.dim, display: "flex", alignItems: "center", justifyContent: "center", fontSize: size * 0.22, fontWeight: 800, color: P.white, flexShrink: 0 }}>{abbr}</div>;
-  return <img src={LOGO_URL(abbr)} alt={abbr} width={size} height={size} onError={() => setErr(true)} style={{ objectFit: "contain", flexShrink: 0 }} />;
+  if (err) return (
+    <div style={{ width: size, height: size, borderRadius: 6, background: P.dim, display: "flex", alignItems: "center", justifyContent: "center", fontSize: size * 0.22, fontWeight: 800, color: P.white, flexShrink: 0 }}>
+      {abbr}
+    </div>
+  );
+  return (
+    <img
+      src={LOGO_URL(slug, abbr)}
+      alt={abbr}
+      width={size}
+      height={size}
+      onError={() => setErr(true)}
+      style={{ objectFit: "contain", flexShrink: 0 }}
+    />
+  );
 }
 
 function PlayerCard({ name, pos }) {
@@ -592,18 +608,17 @@ function LineupContent({ data }) {
   );
 }
 
-// ── ALL TEAMS view ────────────────────────────────────────────────────
 function TeamStrip({ slug, data, expanded, onToggle }) {
   const t = NHL_TEAMS[slug] || { city: slug, name: "", abbr: "?" };
   return (
     <div className={`strip${expanded ? " expanded" : ""}`} onClick={onToggle}>
       <div style={{ position: "absolute", top: 0, left: 0, width: COLLAPSED_W, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14, opacity: expanded ? 0 : 1, transition: "opacity 0.15s", pointerEvents: "none", padding: "0 10px" }}>
-        <TeamLogo abbr={t.abbr} size={52} />
+        <TeamLogo slug={slug} abbr={t.abbr} size={52} />
         <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize: 10, fontWeight: 600, color: P.casper, letterSpacing: "0.14em", whiteSpace: "nowrap" }}>{t.city.toUpperCase()}</div>
       </div>
-      <div style={{ opacity: expanded ? 1 : 0, transition: "opacity 0.2s 0.15s", padding: "18px 16px", minWidth: EXPANDED_W, pointerEvents: expanded ? "auto" : "none", overflowY: "auto", maxHeight: "calc(100vh - 88px)" }}>
+      <div style={{ opacity: expanded ? 1 : 0, transition: "opacity 0.2s 0.15s", padding: "18px 16px", minWidth: EXPANDED_W, pointerEvents: expanded ? "auto" : "none", overflowY: "auto", maxHeight: "calc(100vh - 104px)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, paddingBottom: 14, borderBottom: `1px solid ${P.border}` }}>
-          <TeamLogo abbr={t.abbr} size={48} />
+          <TeamLogo slug={slug} abbr={t.abbr} size={48} />
           <div>
             <div style={{ fontSize: 16, fontWeight: 700, color: P.white, lineHeight: 1.1 }}>{t.city}</div>
             <div style={{ fontSize: 11, color: P.dove, marginTop: 2 }}>{t.name}</div>
@@ -620,7 +635,7 @@ function MobileRow({ slug, data, expanded, onToggle }) {
   return (
     <div className={`mobile-row${expanded ? " open" : ""}`}>
       <div onClick={onToggle} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px" }}>
-        <TeamLogo abbr={t.abbr} size={40} />
+        <TeamLogo slug={slug} abbr={t.abbr} size={40} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: P.white }}>{t.city}</div>
           <div style={{ fontSize: 10, color: P.dove }}>{t.name}</div>
@@ -634,7 +649,6 @@ function MobileRow({ slug, data, expanded, onToggle }) {
   );
 }
 
-// ── COMPARE view ──────────────────────────────────────────────────────
 function CompareView({ isMobile }) {
   const [selected, setSelected] = useState([]);
   const [search, setSearch] = useState("");
@@ -649,8 +663,7 @@ function CompareView({ isMobile }) {
   }), [search]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "calc(100vh - 88px)" }}>
-      {/* Team picker */}
+    <div style={{ display: "flex", flexDirection: "column", height: "calc(100vh - 104px)" }}>
       <div style={{ borderBottom: `1px solid ${P.border}`, padding: "12px 16px", background: P.bg }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Filter teams..."
@@ -668,7 +681,7 @@ function CompareView({ isMobile }) {
             const isSel = selected.includes(slug);
             return (
               <div key={slug} className={`compare-chip${isSel ? " selected" : ""}`} onClick={() => toggle(slug)}>
-                <TeamLogo abbr={t.abbr} size={20} />
+                <TeamLogo slug={slug} abbr={t.abbr} size={20} />
                 <span style={{ fontSize: 11, fontWeight: 600, color: isSel ? P.white : P.casper, whiteSpace: "nowrap" }}>{t.abbr}</span>
                 {isSel && <button className="rm-btn" onClick={e => { e.stopPropagation(); toggle(slug); }}>×</button>}
               </div>
@@ -676,8 +689,6 @@ function CompareView({ isMobile }) {
           })}
         </div>
       </div>
-
-      {/* Side-by-side lineups */}
       {selected.length === 0 ? (
         <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 10 }}>
           <span style={{ fontSize: 28, opacity: 0.15 }}>⬆</span>
@@ -692,7 +703,7 @@ function CompareView({ isMobile }) {
               return (
                 <div key={slug} style={{ width: EXPANDED_W, flexShrink: 0, borderRight: i < selected.length - 1 ? `1px solid ${P.border}` : "none", display: "flex", flexDirection: "column" }}>
                   <div style={{ padding: "14px 16px", borderBottom: `1px solid ${P.border}`, display: "flex", alignItems: "center", gap: 10, background: P.surface, position: "sticky", top: 0 }}>
-                    <TeamLogo abbr={t.abbr} size={40} />
+                    <TeamLogo slug={slug} abbr={t.abbr} size={40} />
                     <div>
                       <div style={{ fontSize: 14, fontWeight: 700, color: P.white }}>{t.city}</div>
                       <div style={{ fontSize: 10, color: P.dove }}>{t.name}</div>
@@ -712,11 +723,9 @@ function CompareView({ isMobile }) {
   );
 }
 
-// ── TODAY view ────────────────────────────────────────────────────────
 function TodayView({ isMobile }) {
   const [expanded, setExpanded] = useState({});
   const toggle = (slug) => setExpanded(prev => ({ ...prev, [slug]: !prev[slug] }));
-
   const TODAY_GAMES = useMemo(() => getTodayGames(), []);
   const todaySlugs = useMemo(() => {
     const slugs = [];
@@ -731,7 +740,6 @@ function TodayView({ isMobile }) {
           const away = NHL_TEAMS[g.away], home = NHL_TEAMS[g.home];
           return (
             <div key={i}>
-              {/* Matchup header */}
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, padding: "10px 16px", background: P.dim + "33", borderBottom: `1px solid ${P.border}` }}>
                 <span style={{ fontSize: 10, fontWeight: 700, color: P.dove }}>{away?.abbr}</span>
                 <span style={{ fontSize: 9, color: P.dim }}>@</span>
@@ -749,7 +757,6 @@ function TodayView({ isMobile }) {
 
   return (
     <div style={{ overflowX: "auto" }}>
-      {/* Matchup headers */}
       <div style={{ display: "flex", borderBottom: `1px solid ${P.border}`, background: P.surface, position: "sticky", top: 0, zIndex: 10, minWidth: todaySlugs.length * COLLAPSED_W }}>
         {TODAY_GAMES.map((g, i) => (
           <div key={i} style={{ display: "flex", width: COLLAPSED_W * 2, flexShrink: 0, alignItems: "center", justifyContent: "center", gap: 8, padding: "6px 0", borderRight: `1px solid ${P.border}` }}>
@@ -759,7 +766,7 @@ function TodayView({ isMobile }) {
           </div>
         ))}
       </div>
-      <div style={{ display: "flex", alignItems: "stretch", minHeight: "calc(100vh - 124px)" }}>
+      <div style={{ display: "flex", alignItems: "stretch", minHeight: "calc(100vh - 140px)" }}>
         {todaySlugs.map(slug => (
           <TeamStrip key={slug} slug={slug} data={TEAMS_DATA[slug]} expanded={!!expanded[slug]} onToggle={() => toggle(slug)} />
         ))}
@@ -768,9 +775,11 @@ function TodayView({ isMobile }) {
   );
 }
 
-// ── Root ──────────────────────────────────────────────────────────────
+const HEADER_H = 68;
+const TABS_H = 36;
+
 export default function App() {
-  const [tab, setTab] = useState("all"); // "all" | "today" | "compare"
+  const [tab, setTab] = useState("all");
   const [expanded, setExpanded] = useState({});
   const [search, setSearch] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -794,9 +803,29 @@ export default function App() {
     <div style={{ fontFamily: "'Space Grotesk', sans-serif", background: P.bg, minHeight: "100vh", color: P.white }}>
       <style>{css}</style>
 
-      {/* Header */}
-      <div style={{ borderBottom: `1px solid ${P.border}`, padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 52, position: "sticky", top: 0, zIndex: 50, background: P.bg }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+      {/* Header — centered title, GoelStudio credit on right */}
+      <div style={{
+        borderBottom: `1px solid ${P.border}`,
+        padding: "0 16px",
+        display: "grid",
+        gridTemplateColumns: "1fr auto 1fr",
+        alignItems: "center",
+        height: HEADER_H,
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+        background: P.bg,
+      }}>
+        {/* Left: search (only on ALL tab) */}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          {tab === "all" && (
+            <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search..."
+              style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 10px", color: P.white, fontSize: 12, fontFamily: "inherit", width: isMobile ? 100 : 150 }} />
+          )}
+        </div>
+
+        {/* Center: logo + title */}
+        <div style={{ display: "flex", alignItems: "center", gap: 12, justifyContent: "center" }}>
           <SiteLogo size={36} />
           <div style={{ width: 1, height: 30, background: P.border }} />
           <div>
@@ -804,14 +833,17 @@ export default function App() {
             <div style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em" }}>UPDATED {UPDATED_AT}</div>
           </div>
         </div>
-        {tab === "all" && (
-          <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search..."
-            style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 10px", color: P.white, fontSize: 12, fontFamily: "inherit", width: isMobile ? 110 : 150 }} />
-        )}
+
+        {/* Right: credit */}
+        <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
+          <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em", whiteSpace: "nowrap" }}>
+            Created by <span style={{ color: P.casper, fontWeight: 600 }}>GoelStudio</span>
+          </span>
+        </div>
       </div>
 
       {/* Tab bar */}
-      <div style={{ borderBottom: `1px solid ${P.border}`, display: "flex", height: 36, position: "sticky", top: 52, zIndex: 49, background: P.bg }}>
+      <div style={{ borderBottom: `1px solid ${P.border}`, display: "flex", height: TABS_H, position: "sticky", top: HEADER_H, zIndex: 49, background: P.bg }}>
         {["all","today","compare"].map(t => (
           <button key={t} className={`tab-btn${tab === t ? " active" : ""}`} onClick={() => setTab(t)}>
             {t === "all" ? "ALL TEAMS" : t === "today" ? "TODAY" : "COMPARE"}
@@ -822,7 +854,7 @@ export default function App() {
       {/* Content */}
       {tab === "all" && !isMobile && (
         <div style={{ overflowX: "auto" }}>
-          <div style={{ display: "flex", flexDirection: "row", alignItems: "stretch", minHeight: "calc(100vh - 88px)" }}>
+          <div style={{ display: "flex", flexDirection: "row", alignItems: "stretch", minHeight: `calc(100vh - ${HEADER_H + TABS_H}px)` }}>
             {slugs.map(slug => <TeamStrip key={slug} slug={slug} data={TEAMS_DATA[slug]} expanded={!!expanded[slug]} onToggle={() => toggle(slug)} />)}
           </div>
         </div>
