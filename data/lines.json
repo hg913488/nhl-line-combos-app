@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-02 16:50:39 UTC",
+  "updated_at": "2026-03-02 22:27:26 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -46,7 +46,9 @@
         [
           "VILLE HUSSO"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "boston-bruins": {
       "forwards": [
@@ -92,7 +94,9 @@
         [
           "JOONAS KORPISALO"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "buffalo-sabres": {
       "forwards": [
@@ -138,7 +142,9 @@
         [
           "ALEX LYON"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "calgary-flames": {
       "forwards": [
@@ -184,7 +190,9 @@
         [
           "DUSTIN WOLF"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "carolina-hurricanes": {
       "forwards": [
@@ -225,12 +233,14 @@
       ],
       "goalies": [
         [
-          "BRANDON BUSSI"
+          "FREDERIK ANDERSEN"
         ],
         [
-          "FREDERIK ANDERSEN"
+          "BRANDON BUSSI"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "chicago-blackhawks": {
       "forwards": [
@@ -276,7 +286,9 @@
         [
           "ARVID SODERBLOM"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "colorado-avalanche": {
       "forwards": [
@@ -317,12 +329,14 @@
       ],
       "goalies": [
         [
-          "SCOTT WEDGEWOOD"
+          "MACKENZIE BLACKWOOD"
         ],
         [
-          "MACKENZIE BLACKWOOD"
+          "SCOTT WEDGEWOOD"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "columbus-blue-jackets": {
       "forwards": [
@@ -368,7 +382,9 @@
         [
           "JET GREAVES"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "dallas-stars": {
       "forwards": [
@@ -414,29 +430,31 @@
         [
           "CASEY DESMITH"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "detroit-red-wings": {
       "forwards": [
         [
-          "MARCO KASPER",
+          "MICHAEL RASMUSSEN",
           "DYLAN LARKIN",
-          "LUCAS RAYMOND"
+          "PATRICK KANE"
         ],
         [
           "ALEX DEBRINCAT",
           "ANDREW COPP",
-          "PATRICK KANE"
+          "LUCAS RAYMOND"
+        ],
+        [
+          "JAMES VAN RIEMSDYK",
+          "J.T. COMPHER",
+          "DOMINIK SHINE"
         ],
         [
           "EMMITT FINNIE",
-          "J.T. COMPHER",
+          "MARCO KASPER",
           "MASON APPLETON"
-        ],
-        [
-          "DOMINIK SHINE",
-          "MICHAEL RASMUSSEN",
-          "JAMES VAN RIEMSDYK"
         ]
       ],
       "defense": [
@@ -445,11 +463,11 @@
           "MORITZ SEIDER"
         ],
         [
-          "ALBERT JOHANSSON",
+          "BEN CHIAROT",
           "AXEL SANDIN-PELLIKKA"
         ],
         [
-          "BEN CHIAROT",
+          "ALBERT JOHANSSON",
           "JACOB BERNARD-DOCKER"
         ]
       ],
@@ -460,7 +478,9 @@
         [
           "CAM TALBOT"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "edmonton-oilers": {
       "forwards": [
@@ -506,7 +526,9 @@
         [
           "CONNOR INGRAM"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "florida-panthers": {
       "forwards": [
@@ -552,7 +574,9 @@
         [
           "DANIIL TARASOV"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "los-angeles-kings": {
       "forwards": [
@@ -562,13 +586,13 @@
           "ADRIAN KEMPE"
         ],
         [
-          "TREVOR MOORE",
+          "ALEX TURCOTTE",
           "QUINTON BYFIELD",
           "ALEX LAFERRIERE"
         ],
         [
           "WARREN FOEGELE",
-          "ALEX TURCOTTE",
+          "KENNY CONNORS",
           "COREY PERRY"
         ],
         [
@@ -594,8 +618,13 @@
       "goalies": [
         [
           "ANTON FORSBERG"
+        ],
+        [
+          "ERIK PORTILLO"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "minnesota-wild": {
       "forwards": [
@@ -641,7 +670,9 @@
         [
           "JESPER WALLSTEDT"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "montreal-canadiens": {
       "forwards": [
@@ -687,19 +718,21 @@
         [
           "SAM MONTEMBEAULT"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "nashville-predators": {
       "forwards": [
         [
-          "LUKE EVANGELISTA",
+          "STEVEN STAMKOS",
           "RYAN O'REILLY",
-          "STEVEN STAMKOS"
+          "JONATHAN MARCHESSAULT"
         ],
         [
           "FILIP FORSBERG",
           "ERIK HAULA",
-          "JONATHAN MARCHESSAULT"
+          "LUKE EVANGELISTA"
         ],
         [
           "MICHAEL BUNTING",
@@ -718,12 +751,12 @@
           "ROMAN JOSI"
         ],
         [
-          "ADAM WILSBY",
+          "NICOLAS HAGUE",
           "NICK PERBIX"
         ],
         [
-          "NICOLAS HAGUE",
-          "NICK BLANKENBURG"
+          "NICK BLANKENBURG",
+          "JUSTIN BARRON"
         ]
       ],
       "goalies": [
@@ -733,7 +766,9 @@
         [
           "JUSTUS ANNUNEN"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "new-jersey-devils": {
       "forwards": [
@@ -779,7 +814,9 @@
         [
           "JAKE ALLEN"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "new-york-islanders": {
       "forwards": [
@@ -825,7 +862,9 @@
         [
           "DAVID RITTICH"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "new-york-rangers": {
       "forwards": [
@@ -837,7 +876,7 @@
         [
           "WILL CUYLLE",
           "VINCENT TROCHECK",
-          "ALEXIS LAFRENI\u00c8RE"
+          "ALEXIS LAFRENIÈRE"
         ],
         [
           "TYE KARTYE",
@@ -871,13 +910,15 @@
         [
           "JONATHAN QUICK"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "ottawa-senators": {
       "forwards": [
         [
           "DRAKE BATHERSON",
-          "TIM ST\u00dcTZLE",
+          "TIM STÜTZLE",
           "CLAUDE GIROUX"
         ],
         [
@@ -917,7 +958,9 @@
         [
           "JAMES REIMER"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "philadelphia-flyers": {
       "forwards": [
@@ -932,12 +975,12 @@
           "BOBBY BRINK"
         ],
         [
-          "NIKITA GREBENKIN",
+          "DENVER BARKEY",
           "SEAN COUTURIER",
           "OWEN TIPPETT"
         ],
         [
-          "NICOLAS DESLAURIERS",
+          "NIKITA GREBENKIN",
           "CARL GRUNDSTROM",
           "GARNET HATHAWAY"
         ]
@@ -952,8 +995,8 @@
           "JAMIE DRYSDALE"
         ],
         [
-          "EMIL ANDRAE",
-          "NICK SEELER"
+          "NICK SEELER",
+          "EMIL ANDRAE"
         ]
       ],
       "goalies": [
@@ -963,7 +1006,9 @@
         [
           "SAMUEL ERSSON"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "pittsburgh-penguins": {
       "forwards": [
@@ -1009,7 +1054,9 @@
         [
           "STUART SKINNER"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "san-jose-sharks": {
       "forwards": [
@@ -1055,7 +1102,9 @@
         [
           "YAROSLAV ASKAROV"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "seattle-kraken": {
       "forwards": [
@@ -1090,18 +1139,20 @@
           "BRANDON MONTOUR"
         ],
         [
-          "CALE FLEURY",
-          "RYKER EVANS"
+          "RYKER EVANS",
+          "CALE FLEURY"
         ]
       ],
       "goalies": [
         [
-          "PHILIPP GRUBAUER"
+          "JOEY DACCORD"
         ],
         [
-          "JOEY DACCORD"
+          "PHILIPP GRUBAUER"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "st-louis-blues": {
       "forwards": [
@@ -1147,7 +1198,9 @@
         [
           "JORDAN BINNINGTON"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "tampa-bay-lightning": {
       "forwards": [
@@ -1192,7 +1245,9 @@
         [
           "JONAS JOHANSSON"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "toronto-maple-leafs": {
       "forwards": [
@@ -1238,7 +1293,9 @@
         [
           "JOSEPH WOLL"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "utah-mammoth": {
       "forwards": [
@@ -1284,7 +1341,9 @@
         [
           "VITEK VANECEK"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "vancouver-canucks": {
       "forwards": [
@@ -1325,12 +1384,14 @@
       ],
       "goalies": [
         [
-          "KEVIN LANKINEN"
+          "NIKITA TOLOPILO"
         ],
         [
-          "NIKITA TOLOPILO"
+          "KEVIN LANKINEN"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "vegas-golden-knights": {
       "forwards": [
@@ -1376,7 +1437,9 @@
         [
           "AKIRA SCHMID"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "washington-capitals": {
       "forwards": [
@@ -1422,7 +1485,9 @@
         [
           "CHARLIE LINDGREN"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     },
     "winnipeg-jets": {
       "forwards": [
@@ -1468,7 +1533,9 @@
         [
           "ERIC COMRIE"
         ]
-      ]
+      ],
+      "pp1": [],
+      "pp2": []
     }
   }
 }
