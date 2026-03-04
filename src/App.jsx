@@ -219,7 +219,7 @@ function TeamStrip({ slug, data, expanded, onToggle }) {
   const t = NHL_TEAMS[slug] || { city: slug, name: "", abbr: "?" };
   return (
     <div className={`strip${expanded ? " expanded" : ""}`} onClick={onToggle}>
-      <div style={{ position: "absolute", top: 0, left: 0, width: COLLAPSED_W, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", paddingTop: 24, gap: 14, opacity: expanded ? 0 : 1, transition: "opacity 0.15s", pointerEvents: "none", padding: "24px 10px 0" }}>
+      <div style={{ position: "absolute", top: "40%", left: 0, width: COLLAPSED_W, transform: "translateY(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 14, opacity: expanded ? 0 : 1, transition: "opacity 0.15s", pointerEvents: "none", padding: "0 10px" }}>
         <TeamLogo slug={slug} abbr={t.abbr} size={52} />
         <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize: 10, fontWeight: 600, color: P.casper, letterSpacing: "0.14em", whiteSpace: "nowrap" }}>{t.city.toUpperCase()}</div>
       </div>
@@ -280,7 +280,6 @@ function InjuriesView({ isMobile }) {
         const t = NHL_TEAMS[slug];
         if (!t?.id) return;
         try {
-          // Use the injuries endpoint directly
           const res = await fetch(`https://api-web.nhle.com/v1/injury/ir`);
           const data = await res.json();
           const injured = [];
@@ -298,7 +297,6 @@ function InjuriesView({ isMobile }) {
         } catch(e) { console.log('injury fetch error', slug, e); }
       }));
 
-      // If IR endpoint returned nothing, try roster endpoint as fallback
       if (Object.keys(results).length === 0) {
         await Promise.all(slugsToFetch.map(async slug => {
           const t = NHL_TEAMS[slug];
@@ -459,11 +457,6 @@ function TodayView({ isMobile }) {
   const [expanded, setExpanded] = useState({});
   const toggle = slug => setExpanded(prev => ({ ...prev, [slug]: !prev[slug] }));
   const TODAY_GAMES = useMemo(() => getTodayGames(), []);
-  const todaySlugs = useMemo(() => {
-    const s = [];
-    TODAY_GAMES.forEach(g => { s.push(g.away); s.push(g.home); });
-    return s;
-  }, [TODAY_GAMES]);
 
   if (isMobile) {
     return (
@@ -472,7 +465,6 @@ function TodayView({ isMobile }) {
           const away = NHL_TEAMS[g.away], home = NHL_TEAMS[g.home];
           return (
             <div key={i}>
-              {/* Matchup divider */}
               <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 16px", background: P.bg, borderTop: i > 0 ? `2px solid ${P.dim}` : "none", borderBottom: `1px solid ${P.border}` }}>
                 <div style={{ flex: 1, height: 1, background: P.border }} />
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -492,44 +484,16 @@ function TodayView({ isMobile }) {
     );
   }
 
-  // Desktop: all logos in one aligned row, dividers between matchups
+  // Desktop: strips only, thick divider between each matchup
   return (
     <div style={{ overflowX: "auto" }}>
-      {/* Single logo row — all teams aligned */}
-      <div style={{
-        display: "flex",
-        borderBottom: `2px solid ${P.border}`,
-        background: P.surface,
-        position: "sticky",
-        top: 0,
-        zIndex: 10,
-        minWidth: todaySlugs.length * COLLAPSED_W,
-      }}>
-        {TODAY_GAMES.map((g, i) => (
-          <>
-            <div key={`${i}-away`} style={{ width: COLLAPSED_W, flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "8px 0", borderRight: `1px solid ${P.border}` }}>
-              <TeamLogo slug={g.away} abbr={NHL_TEAMS[g.away]?.abbr} size={28} />
-              <span style={{ fontSize: 8, fontWeight: 700, color: P.dove, marginTop: 4, letterSpacing: "0.08em" }}>{NHL_TEAMS[g.away]?.abbr}</span>
-            </div>
-            <div key={`${i}-home`} style={{ width: COLLAPSED_W, flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "8px 0", borderRight: i < TODAY_GAMES.length - 1 ? `3px solid ${P.casper}` : "none" }}>
-              <TeamLogo slug={g.home} abbr={NHL_TEAMS[g.home]?.abbr} size={28} />
-              <span style={{ fontSize: 8, fontWeight: 700, color: P.dove, marginTop: 4, letterSpacing: "0.08em" }}>{NHL_TEAMS[g.home]?.abbr}</span>
-            </div>
-          </>
-        ))}
-      </div>
-
-      {/* Team strips — hide the collapsed logo/name since header row shows them */}
-      <div style={{ display: "flex", alignItems: "stretch", minHeight: `calc(100vh - ${HEADER_H + TABS_H + 56}px)` }}>
+      <div style={{ display: "flex", alignItems: "stretch", minHeight: `calc(100vh - ${HEADER_H + TABS_H}px)` }}>
         {TODAY_GAMES.map((g, i) => (
           <>
             <TeamStrip key={`${i}-away`} slug={g.away} data={TEAMS_DATA[g.away]} expanded={!!expanded[g.away]} onToggle={() => toggle(g.away)} />
-            {i < TODAY_GAMES.length - 1 && (
-              <div key={`${i}-div`} style={{ width: 3, flexShrink: 0, background: P.casper, opacity: 0.3, alignSelf: "stretch" }} />
-            )}
             <TeamStrip key={`${i}-home`} slug={g.home} data={TEAMS_DATA[g.home]} expanded={!!expanded[g.home]} onToggle={() => toggle(g.home)} />
             {i < TODAY_GAMES.length - 1 && (
-              <div key={`${i}-div2`} style={{ width: 3, flexShrink: 0, background: P.casper, opacity: 0.3, alignSelf: "stretch" }} />
+              <div key={`${i}-div`} style={{ width: 3, flexShrink: 0, background: P.casper, opacity: 0.3, alignSelf: "stretch" }} />
             )}
           </>
         ))}
