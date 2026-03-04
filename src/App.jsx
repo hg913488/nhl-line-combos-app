@@ -219,7 +219,7 @@ function TeamStrip({ slug, data, expanded, onToggle }) {
   const t = NHL_TEAMS[slug] || { city: slug, name: "", abbr: "?" };
   return (
     <div className={`strip${expanded ? " expanded" : ""}`} onClick={onToggle}>
-      <div style={{ position: "absolute", top: 0, left: 0, width: COLLAPSED_W, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14, opacity: expanded ? 0 : 1, transition: "opacity 0.15s", pointerEvents: "none", padding: "0 10px" }}>
+      <div style={{ position: "absolute", top: 0, left: 0, width: COLLAPSED_W, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", paddingTop: 24, gap: 14, opacity: expanded ? 0 : 1, transition: "opacity 0.15s", pointerEvents: "none", padding: "24px 10px 0" }}>
         <TeamLogo slug={slug} abbr={t.abbr} size={52} />
         <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize: 10, fontWeight: 600, color: P.casper, letterSpacing: "0.14em", whiteSpace: "nowrap" }}>{t.city.toUpperCase()}</div>
       </div>
@@ -498,7 +498,7 @@ function TodayView({ isMobile }) {
       {/* Single logo row — all teams aligned */}
       <div style={{
         display: "flex",
-        borderBottom: `1px solid ${P.border}`,
+        borderBottom: `2px solid ${P.border}`,
         background: P.surface,
         position: "sticky",
         top: 0,
@@ -507,27 +507,30 @@ function TodayView({ isMobile }) {
       }}>
         {TODAY_GAMES.map((g, i) => (
           <>
-            {/* Away team logo cell */}
-            <div key={`${i}-away`} style={{ width: COLLAPSED_W, flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "6px 0", borderRight: `1px solid ${P.border}` }}>
+            <div key={`${i}-away`} style={{ width: COLLAPSED_W, flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "8px 0", borderRight: `1px solid ${P.border}` }}>
               <TeamLogo slug={g.away} abbr={NHL_TEAMS[g.away]?.abbr} size={28} />
-              <span style={{ fontSize: 8, fontWeight: 700, color: P.dove, marginTop: 3, letterSpacing: "0.08em" }}>{NHL_TEAMS[g.away]?.abbr}</span>
+              <span style={{ fontSize: 8, fontWeight: 700, color: P.dove, marginTop: 4, letterSpacing: "0.08em" }}>{NHL_TEAMS[g.away]?.abbr}</span>
             </div>
-            {/* Home team logo cell with game divider on right */}
-            <div key={`${i}-home`} style={{ width: COLLAPSED_W, flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "6px 0", borderRight: i < TODAY_GAMES.length - 1 ? `2px solid ${P.dim}` : "none" }}>
+            <div key={`${i}-home`} style={{ width: COLLAPSED_W, flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "8px 0", borderRight: i < TODAY_GAMES.length - 1 ? `3px solid ${P.casper}` : "none" }}>
               <TeamLogo slug={g.home} abbr={NHL_TEAMS[g.home]?.abbr} size={28} />
-              <span style={{ fontSize: 8, fontWeight: 700, color: P.dove, marginTop: 3, letterSpacing: "0.08em" }}>{NHL_TEAMS[g.home]?.abbr}</span>
+              <span style={{ fontSize: 8, fontWeight: 700, color: P.dove, marginTop: 4, letterSpacing: "0.08em" }}>{NHL_TEAMS[g.home]?.abbr}</span>
             </div>
           </>
         ))}
       </div>
 
-      {/* Team strips */}
+      {/* Team strips — hide the collapsed logo/name since header row shows them */}
       <div style={{ display: "flex", alignItems: "stretch", minHeight: `calc(100vh - ${HEADER_H + TABS_H + 56}px)` }}>
         {TODAY_GAMES.map((g, i) => (
           <>
             <TeamStrip key={`${i}-away`} slug={g.away} data={TEAMS_DATA[g.away]} expanded={!!expanded[g.away]} onToggle={() => toggle(g.away)} />
-            <div key={`${i}-divider`} style={{ width: i < TODAY_GAMES.length - 1 ? 2 : 0, flexShrink: 0, background: P.dim, alignSelf: "stretch" }} />
+            {i < TODAY_GAMES.length - 1 && (
+              <div key={`${i}-div`} style={{ width: 3, flexShrink: 0, background: P.casper, opacity: 0.3, alignSelf: "stretch" }} />
+            )}
             <TeamStrip key={`${i}-home`} slug={g.home} data={TEAMS_DATA[g.home]} expanded={!!expanded[g.home]} onToggle={() => toggle(g.home)} />
+            {i < TODAY_GAMES.length - 1 && (
+              <div key={`${i}-div2`} style={{ width: 3, flexShrink: 0, background: P.casper, opacity: 0.3, alignSelf: "stretch" }} />
+            )}
           </>
         ))}
       </div>
