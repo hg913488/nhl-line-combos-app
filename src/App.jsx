@@ -45,7 +45,7 @@ const LOGO_ABBR_OVERRIDE = { "los-angeles-kings": "LAK" };
 const LOGO_URL = (slug, abbr) => `https://assets.nhle.com/logos/nhl/svg/${LOGO_ABBR_OVERRIDE[slug] || abbr}_dark.svg`;
 const COLLAPSED_W = 100;
 const EXPANDED_W = 320;
-const HEADER_H = 68;
+const HEADER_H = 80;
 const TABS_H = 36;
 
 const P = {
@@ -459,7 +459,11 @@ function TodayView({ isMobile }) {
   const [expanded, setExpanded] = useState({});
   const toggle = slug => setExpanded(prev => ({ ...prev, [slug]: !prev[slug] }));
   const TODAY_GAMES = useMemo(() => getTodayGames(), []);
-  const todaySlugs = useMemo(() => { const s = []; TODAY_GAMES.forEach(g => { s.push(g.away); s.push(g.home); }); return s; }, [TODAY_GAMES]);
+  const todaySlugs = useMemo(() => {
+    const s = [];
+    TODAY_GAMES.forEach(g => { s.push(g.away); s.push(g.home); });
+    return s;
+  }, [TODAY_GAMES]);
 
   if (isMobile) {
     return (
@@ -468,10 +472,17 @@ function TodayView({ isMobile }) {
           const away = NHL_TEAMS[g.away], home = NHL_TEAMS[g.home];
           return (
             <div key={i}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, padding: "10px 16px", background: P.dim + "33", borderBottom: `1px solid ${P.border}` }}>
-                <span style={{ fontSize: 10, fontWeight: 700, color: P.dove }}>{away?.abbr}</span>
-                <span style={{ fontSize: 9, color: P.dim }}>@</span>
-                <span style={{ fontSize: 10, fontWeight: 700, color: P.dove }}>{home?.abbr}</span>
+              {/* Matchup divider */}
+              <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 16px", background: P.bg, borderTop: i > 0 ? `2px solid ${P.dim}` : "none", borderBottom: `1px solid ${P.border}` }}>
+                <div style={{ flex: 1, height: 1, background: P.border }} />
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <TeamLogo slug={g.away} abbr={away?.abbr} size={22} />
+                  <span style={{ fontSize: 10, fontWeight: 700, color: P.dove }}>{away?.abbr}</span>
+                  <span style={{ fontSize: 9, color: P.dim, margin: "0 2px" }}>@</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: P.dove }}>{home?.abbr}</span>
+                  <TeamLogo slug={g.home} abbr={home?.abbr} size={22} />
+                </div>
+                <div style={{ flex: 1, height: 1, background: P.border }} />
               </div>
               {[g.away, g.home].map(slug => <MobileRow key={slug} slug={slug} data={TEAMS_DATA[slug]} expanded={!!expanded[slug]} onToggle={() => toggle(slug)} />)}
             </div>
@@ -481,19 +492,44 @@ function TodayView({ isMobile }) {
     );
   }
 
+  // Desktop: all logos in one aligned row, dividers between matchups
   return (
     <div style={{ overflowX: "auto" }}>
-      <div style={{ display: "flex", borderBottom: `1px solid ${P.border}`, background: P.surface, position: "sticky", top: 0, zIndex: 10, minWidth: todaySlugs.length * COLLAPSED_W }}>
+      {/* Single logo row — all teams aligned */}
+      <div style={{
+        display: "flex",
+        borderBottom: `1px solid ${P.border}`,
+        background: P.surface,
+        position: "sticky",
+        top: 0,
+        zIndex: 10,
+        minWidth: todaySlugs.length * COLLAPSED_W,
+      }}>
         {TODAY_GAMES.map((g, i) => (
-          <div key={i} style={{ display: "flex", width: COLLAPSED_W * 2, flexShrink: 0, alignItems: "center", justifyContent: "center", gap: 8, padding: "6px 0", borderRight: `1px solid ${P.border}` }}>
-            <span style={{ fontSize: 9, fontWeight: 700, color: P.dove }}>{NHL_TEAMS[g.away]?.abbr}</span>
-            <span style={{ fontSize: 8, color: P.dim }}>@</span>
-            <span style={{ fontSize: 9, fontWeight: 700, color: P.dove }}>{NHL_TEAMS[g.home]?.abbr}</span>
-          </div>
+          <>
+            {/* Away team logo cell */}
+            <div key={`${i}-away`} style={{ width: COLLAPSED_W, flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "6px 0", borderRight: `1px solid ${P.border}` }}>
+              <TeamLogo slug={g.away} abbr={NHL_TEAMS[g.away]?.abbr} size={28} />
+              <span style={{ fontSize: 8, fontWeight: 700, color: P.dove, marginTop: 3, letterSpacing: "0.08em" }}>{NHL_TEAMS[g.away]?.abbr}</span>
+            </div>
+            {/* Home team logo cell with game divider on right */}
+            <div key={`${i}-home`} style={{ width: COLLAPSED_W, flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "6px 0", borderRight: i < TODAY_GAMES.length - 1 ? `2px solid ${P.dim}` : "none" }}>
+              <TeamLogo slug={g.home} abbr={NHL_TEAMS[g.home]?.abbr} size={28} />
+              <span style={{ fontSize: 8, fontWeight: 700, color: P.dove, marginTop: 3, letterSpacing: "0.08em" }}>{NHL_TEAMS[g.home]?.abbr}</span>
+            </div>
+          </>
         ))}
       </div>
-      <div style={{ display: "flex", alignItems: "stretch", minHeight: `calc(100vh - ${HEADER_H + TABS_H + 36}px)` }}>
-        {todaySlugs.map(slug => <TeamStrip key={slug} slug={slug} data={TEAMS_DATA[slug]} expanded={!!expanded[slug]} onToggle={() => toggle(slug)} />)}
+
+      {/* Team strips */}
+      <div style={{ display: "flex", alignItems: "stretch", minHeight: `calc(100vh - ${HEADER_H + TABS_H + 56}px)` }}>
+        {TODAY_GAMES.map((g, i) => (
+          <>
+            <TeamStrip key={`${i}-away`} slug={g.away} data={TEAMS_DATA[g.away]} expanded={!!expanded[g.away]} onToggle={() => toggle(g.away)} />
+            <div key={`${i}-divider`} style={{ width: i < TODAY_GAMES.length - 1 ? 2 : 0, flexShrink: 0, background: P.dim, alignSelf: "stretch" }} />
+            <TeamStrip key={`${i}-home`} slug={g.home} data={TEAMS_DATA[g.home]} expanded={!!expanded[g.home]} onToggle={() => toggle(g.home)} />
+          </>
+        ))}
       </div>
     </div>
   );
@@ -532,12 +568,12 @@ export default function App() {
               style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 10px", color: P.white, fontSize: 12, fontFamily: "inherit", width: isMobile ? 100 : 150 }} />
           )}
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 12, justifyContent: "center" }}>
-          <SiteLogo size={36} />
-          <div style={{ width: 1, height: 30, background: P.border }} />
+        <div style={{ display: "flex", alignItems: "center", gap: 14, justifyContent: "center" }}>
+          <SiteLogo size={48} />
+          <div style={{ width: 1, height: 38, background: P.border }} />
           <div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: P.white, lineHeight: 1.1 }}>NHL LINE COMBOS</div>
-            <div style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em" }}>UPDATED {UPDATED_AT}</div>
+            <div style={{ fontSize: 18, fontWeight: 700, color: P.white, lineHeight: 1.1, letterSpacing: "0.04em" }}>BETWEEN THE LINES</div>
+            <div style={{ fontSize: 9, color: P.dove, letterSpacing: "0.1em", marginTop: 3 }}>NHL · UPDATED {UPDATED_AT}</div>
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
