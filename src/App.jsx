@@ -4,6 +4,7 @@ import scheduleRaw from './schedule.csv?raw';
 
 const UPDATED_AT = lineups.updated_at.slice(0, 10);
 const TEAMS_DATA = lineups.teams;
+const INJURIES_DATA = lineups.injuries || {};
 const SCHEDULE_RAW = scheduleRaw;
 
 const NHL_TEAMS = {
@@ -258,75 +259,17 @@ function MobileRow({ slug, data, expanded, onToggle }) {
 
 // ── INJURIES VIEW ─────────────────────────────────────────────────────
 function InjuryBadge({ type }) {
-  const map = { "IR": "inj-ir", "Out": "inj-out", "Day-To-Day": "inj-dtd", "DTD": "inj-dtd" };
-  return <span className={`inj-badge ${map[type] || "inj-dtd"}`}>{type}</span>;
+  const label = (type || "").toLowerCase();
+  let cls = "inj-dtd";
+  if (label.includes("out")) cls = "inj-out";
+  else if (label.includes("ir") || label.includes("injured reserve")) cls = "inj-ir";
+  else if (label.includes("day")) cls = "inj-dtd";
+  return <span className={`inj-badge ${cls}`}>{type}</span>;
 }
 
 function InjuriesView({ isMobile }) {
-  const [injuries, setInjuries] = useState({});
-  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    async function fetchAll() {
-      setLoading(true);
-      const results = {};
-      const todaySlugs = new Set();
-      getTodayGames().forEach(g => { todaySlugs.add(g.away); todaySlugs.add(g.home); });
-      const slugsToFetch = todaySlugs.size > 0 ? [...todaySlugs] : Object.keys(NHL_TEAMS);
-
-      await Promise.all(slugsToFetch.map(async slug => {
-        const t = NHL_TEAMS[slug];
-        if (!t?.id) return;
-        try {
-          const res = await fetch(`https://api-web.nhle.com/v1/injury/ir`);
-          const data = await res.json();
-          const injured = [];
-          (data.injuredPlayers || []).forEach(p => {
-            if (p.team?.abbrev === t.abbr) {
-              injured.push({
-                name: `${p.firstName} ${p.lastName}`,
-                pos: p.position || "?",
-                status: p.injuryStatus || "IR",
-                desc: p.injuryDescription || "",
-              });
-            }
-          });
-          if (injured.length > 0) results[slug] = injured;
-        } catch(e) { console.log('injury fetch error', slug, e); }
-      }));
-
-      if (Object.keys(results).length === 0) {
-        await Promise.all(slugsToFetch.map(async slug => {
-          const t = NHL_TEAMS[slug];
-          if (!t?.abbr) return;
-          try {
-            const res = await fetch(`https://api-web.nhle.com/v1/roster/${t.abbr}/current`);
-            const data = await res.json();
-            const injured = [];
-            ["forwards","defensemen","goalies"].forEach(pos => {
-              (data[pos] || []).forEach(p => {
-                if (p.injuryStatus) {
-                  injured.push({
-                    name: `${p.firstName?.default || ""} ${p.lastName?.default || ""}`.trim(),
-                    pos: pos === "defensemen" ? "D" : pos === "goalies" ? "G" : "F",
-                    status: p.injuryStatus,
-                    desc: p.injuryDescription || "",
-                  });
-                }
-              });
-            });
-            if (injured.length > 0) results[slug] = injured;
-          } catch(e) {}
-        }));
-      }
-
-      setInjuries(results);
-      setLoading(false);
-    }
-    fetchAll();
-  }, []);
+  const [filter, setFilter] = useState("all"); // "all" | "today"
 
   const todayGames = useMemo(() => getTodayGames(), []);
   const todaySlugs = useMemo(() => {
@@ -336,44 +279,67 @@ function InjuriesView({ isMobile }) {
   }, [todayGames]);
 
   const displaySlugs = useMemo(() => {
-    const base = todaySlugs.size > 0 ? [...todaySlugs] : Object.keys(NHL_TEAMS);
+    const allSlugsWithInjuries = Object.keys(INJURIES_DATA);
+    const base = filter === "today" && todaySlugs.size > 0
+      ? allSlugsWithInjuries.filter(s => todaySlugs.has(s))
+      : allSlugsWithInjuries;
     return base.filter(slug => {
       if (!search.trim()) return true;
       const t = NHL_TEAMS[slug];
       return `${t?.city} ${t?.name} ${t?.abbr}`.toLowerCase().includes(search.toLowerCase());
+    }).sort((a, b) => {
+      const tA = NHL_TEAMS[a], tB = NHL_TEAMS[b];
+      return (tA?.city || "").localeCompare(tB?.city || "");
     });
-  }, [todaySlugs, search]);
+  }, [filter, todaySlugs, search]);
+
+  const totalInjured = useMemo(() =>
+    displaySlugs.reduce((sum, s) => sum + (INJURIES_DATA[s]?.length || 0), 0)
+  , [displaySlugs]);
 
   return (
     <div style={{ padding: "16px", maxWidth: 900, margin: "0 auto" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16, flexWrap: "wrap" }}>
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search team..."
           style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 10px", color: P.white, fontSize: 12, fontFamily: "inherit", width: 160 }} />
         {todaySlugs.size > 0 && (
-          <span style={{ fontSize: 10, color: P.dove, letterSpacing: "0.08em" }}>
-            SHOWING TODAY'S {todaySlugs.size} TEAMS
-          </span>
+          <>
+            <button onClick={() => setFilter("all")}
+              style={{ background: filter === "all" ? P.active : "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: filter === "all" ? P.white : P.dove, fontSize: 9, fontFamily: "inherit", cursor: "pointer", letterSpacing: "0.08em" }}>
+              ALL TEAMS
+            </button>
+            <button onClick={() => setFilter("today")}
+              style={{ background: filter === "today" ? P.active : "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: filter === "today" ? P.white : P.dove, fontSize: 9, fontFamily: "inherit", cursor: "pointer", letterSpacing: "0.08em" }}>
+              TODAY'S GAMES
+            </button>
+          </>
         )}
-        {loading && <span style={{ fontSize: 10, color: P.dove, marginLeft: "auto" }}>Loading...</span>}
+        <span style={{ fontSize: 10, color: P.dove, marginLeft: "auto", letterSpacing: "0.08em" }}>
+          {totalInjured} PLAYER{totalInjured !== 1 ? "S" : ""} · {displaySlugs.length} TEAM{displaySlugs.length !== 1 ? "S" : ""}
+        </span>
       </div>
 
-      {!loading && Object.keys(injuries).length === 0 && (
+      {displaySlugs.length === 0 && (
         <div style={{ textAlign: "center", padding: "40px 0", color: P.dove, fontSize: 12 }}>
-          No injury data found for today's teams 🎉
+          {Object.keys(INJURIES_DATA).length === 0
+            ? "No injury data available — check back after the next data update."
+            : "No injuries found matching your search."}
         </div>
       )}
 
-      {displaySlugs.filter(s => injuries[s]).map(slug => {
+      {displaySlugs.map(slug => {
         const t = NHL_TEAMS[slug];
+        const players = INJURIES_DATA[slug] || [];
         return (
           <div key={slug} className="news-card">
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10, paddingBottom: 8, borderBottom: `1px solid ${P.border}` }}>
               <TeamLogo slug={slug} abbr={t.abbr} size={28} />
               <span style={{ fontSize: 13, fontWeight: 700, color: P.white }}>{t.city} {t.name}</span>
+              <span style={{ fontSize: 10, color: P.dove, marginLeft: "auto" }}>{players.length}</span>
             </div>
-            {injuries[slug].map((p, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", padding: "5px 0", borderBottom: i < injuries[slug].length - 1 ? `1px solid ${P.border}` : "none" }}>
-                <span style={{ fontSize: 10, fontWeight: 700, color: P.dove, width: 20 }}>{p.pos}</span>
+            {players.map((p, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center", padding: "5px 0", borderBottom: i < players.length - 1 ? `1px solid ${P.border}` : "none" }}>
+                <span style={{ fontSize: 10, fontWeight: 700, color: P.dove, width: 28 }}>{p.pos}</span>
                 <span style={{ fontSize: 12, fontWeight: 600, color: P.white, flex: 1 }}>{p.name}</span>
                 <InjuryBadge type={p.status} />
                 {p.desc && <span style={{ fontSize: 10, color: P.dove, marginLeft: 8 }}>{p.desc}</span>}
@@ -579,7 +545,7 @@ export default function App() {
         <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em" }}>DATA FROM</span>
         <a href="https://www.dailyfaceoff.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.08em", textDecoration: "none" }}>DAILY FACEOFF</a>
         <span style={{ fontSize: 9, color: P.dim }}>·</span>
-        <a href="https://www.nhl.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.08em", textDecoration: "none" }}>NHL.COM</a>
+        <a href="https://www.espn.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.08em", textDecoration: "none" }}>ESPN</a>
         <span style={{ fontSize: 9, color: P.dim }}>·</span>
         <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em" }}>BUILT BY <span style={{ color: P.casper, fontWeight: 700 }}>GOELSTUDIO</span></span>
       </div>
