@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-04 20:03:12 UTC",
+  "updated_at": "2026-03-04 23:01:28 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -261,7 +261,7 @@
         ],
         [
           "WILLIAM CARRIER",
-          "MARK JANKOWSKI",
+          "JESPERI KOTKANIEMI",
           "ERIC ROBINSON"
         ]
       ],
@@ -987,7 +987,7 @@
       "defense": [
         [
           "LUKE HUGHES",
-          "BRETT PESCE"
+          "SIMON NEMEC"
         ],
         [
           "JONAS SIEGENTHALER",
@@ -995,7 +995,7 @@
         ],
         [
           "BRENDEN DILLON",
-          "SIMON NEMEC"
+          "JOHNATHAN KOVACEVIC"
         ]
       ],
       "goalies": [
@@ -1029,7 +1029,7 @@
           "MATHEW BARZAL"
         ],
         [
-          "ANTHONY DUCLAIR",
+          "JONATHAN DROUIN",
           "CALUM RITCHIE",
           "EMIL HEINEMAN"
         ],
@@ -1047,7 +1047,7 @@
       "defense": [
         [
           "MATTHEW SCHAEFER",
-          "RYAN PULOCK"
+          "SCOTT MAYFIELD"
         ],
         [
           "ADAM PELECH",
@@ -1055,15 +1055,15 @@
         ],
         [
           "CARSON SOUCY",
-          "SCOTT MAYFIELD"
+          "ADAM BOQVIST"
         ]
       ],
       "goalies": [
         [
-          "ILYA SOROKIN"
+          "DAVID RITTICH"
         ],
         [
-          "DAVID RITTICH"
+          "ILYA SOROKIN"
         ]
       ],
       "pp1": [
@@ -1078,7 +1078,7 @@
         "ANDERS LEE",
         "ONDREJ PALAT",
         "TONY DEANGELO",
-        "ANTHONY DUCLAIR"
+        "JONATHAN DROUIN"
       ]
     },
     "new-york-rangers": {
@@ -1480,10 +1480,10 @@
       ],
       "goalies": [
         [
-          "JORDAN BINNINGTON"
+          "JOEL HOFER"
         ],
         [
-          "JOEL HOFER"
+          "JORDAN BINNINGTON"
         ]
       ],
       "pp1": [
@@ -1563,7 +1563,7 @@
     "toronto-maple-leafs": {
       "forwards": [
         [
-          "BOBBY MCMANN",
+          "MATIAS MACCELLI",
           "AUSTON MATTHEWS",
           "WILLIAM NYLANDER"
         ],
@@ -1573,14 +1573,14 @@
           "MAX DOMI"
         ],
         [
-          "MATIAS MACCELLI",
+          "NICHOLAS ROBERTSON",
           "NICOLAS ROY",
-          "DAKOTA JOSHUA"
+          "EASTON COWAN"
         ],
         [
+          "DAKOTA JOSHUA",
           "STEVEN LORENTZ",
-          "SCOTT LAUGHTON",
-          "EASTON COWAN"
+          "CALLE JARNKROK"
         ]
       ],
       "defense": [
@@ -1593,7 +1593,7 @@
           "JAKE MCCABE"
         ],
         [
-          "OLIVER EKMAN-LARSSON",
+          "TROY STECHER",
           "PHILIPPE MYERS"
         ]
       ],
@@ -1613,11 +1613,11 @@
         "MORGAN RIELLY"
       ],
       "pp2": [
-        "BOBBY MCMANN",
+        "NICHOLAS ROBERTSON",
         "MAX DOMI",
         "EASTON COWAN",
         "MATIAS MACCELLI",
-        "OLIVER EKMAN-LARSSON"
+        "JAKE MCCABE"
       ]
     },
     "utah-mammoth": {
@@ -1926,20 +1926,14 @@
       {
         "name": "MIKAEL GRANLUND",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Injured Reserve",
+        "desc": "Injured Reserve"
       },
       {
         "name": "TROY TERRY",
         "pos": "RW",
         "status": "Day-To-Day",
         "desc": "day-to-day"
-      },
-      {
-        "name": "FRANK VATRANO",
-        "pos": "RW",
-        "status": "Injured Reserve",
-        "desc": "Injured Reserve"
       },
       {
         "name": "PETR MRAZEK",
@@ -2110,6 +2104,12 @@
     ],
     "detroit-red-wings": [
       {
+        "name": "BRETT PESCE",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "ZACK MACEWEN",
         "pos": "RW",
         "status": "Injured Reserve",
@@ -2188,22 +2188,10 @@
     ],
     "los-angeles-kings": [
       {
-        "name": "TREVOR MOORE",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "QUINTON BYFIELD",
         "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "DREW DOUGHTY",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "DARCY KUEMPER",
@@ -2291,6 +2279,12 @@
       }
     ],
     "new-jersey-devils": [
+      {
+        "name": "RYAN PULOCK",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
       {
         "name": "KYLE PALMIERI",
         "pos": "C",
@@ -2443,6 +2437,24 @@
       }
     ],
     "st-louis-blues": [
+      {
+        "name": "BOBBY MCMANN",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "SCOTT LAUGHTON",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "OLIVER EKMAN-LARSSON",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
       {
         "name": "CHRIS TANEV",
         "pos": "D",
