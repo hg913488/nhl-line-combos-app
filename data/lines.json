@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-05 19:00:15 UTC",
+  "updated_at": "2026-03-05 20:55:13 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -730,14 +730,14 @@
           "ADRIAN KEMPE"
         ],
         [
-          "WARREN FOEGELE",
-          "ALEX LAFERRIERE",
-          "COREY PERRY"
+          "TREVOR MOORE",
+          "ALEX TURCOTTE",
+          "ALEX LAFERRIERE"
         ],
         [
-          "JARED WRIGHT",
+          "WARREN FOEGELE",
           "KENNY CONNORS",
-          "ALEX TURCOTTE"
+          "COREY PERRY"
         ],
         [
           "JEFF MALOTT",
@@ -747,24 +747,24 @@
       ],
       "defense": [
         [
+          "MIKEY ANDERSON",
+          "DREW DOUGHTY"
+        ],
+        [
           "JOEL EDMUNDSON",
           "BRANDT CLARKE"
         ],
         [
-          "MIKEY ANDERSON",
+          "BRIAN DUMOULIN",
           "CODY CECI"
-        ],
-        [
-          "ANGUS BOOTH",
-          "BRIAN DUMOULIN"
         ]
       ],
       "goalies": [
         [
-          "DARCY KUEMPER"
+          "ANTON FORSBERG"
         ],
         [
-          "ANTON FORSBERG"
+          "DARCY KUEMPER"
         ]
       ],
       "pp1": [
@@ -777,9 +777,9 @@
       "pp2": [
         "TAYLOR WARD",
         "ALEX TURCOTTE",
-        "WARREN FOEGELE",
+        "TREVOR MOORE",
         "ALEX LAFERRIERE",
-        "BRIAN DUMOULIN"
+        "DREW DOUGHTY"
       ]
     },
     "minnesota-wild": {
@@ -905,23 +905,24 @@
     "nashville-predators": {
       "forwards": [
         [
-          "STEVEN STAMKOS",
-          "RYAN O'REILLY",
-          "JONATHAN MARCHESSAULT"
-        ],
-        [
           "FILIP FORSBERG",
           "ERIK HAULA",
           "LUKE EVANGELISTA"
         ],
         [
-          "MICHAEL BUNTING",
-          "TYSON JOST",
-          "ZACHARY L'HEUREUX"
+          "STEVEN STAMKOS",
+          "FEDOR SVECHKOV",
+          "JONATHAN MARCHESSAULT"
         ],
         [
-          "OZZY WIESBLATT",
+          "MICHAEL BUNTING",
+          "TYSON JOST",
           "MATTHEW WOOD"
+        ],
+        [
+          "REID SCHAEFER",
+          "OZZY WIESBLATT",
+          "ZACHARY L'HEUREUX"
         ]
       ],
       "defense": [
@@ -934,7 +935,7 @@
           "NICK PERBIX"
         ],
         [
-          "ADAM WILSBY",
+          "RYAN UFKO",
           "JUSTIN BARRON"
         ]
       ],
@@ -948,14 +949,14 @@
       ],
       "pp1": [
         "FILIP FORSBERG",
-        "RYAN O'REILLY",
+        "ERIK HAULA",
         "JONATHAN MARCHESSAULT",
         "STEVEN STAMKOS",
         "ROMAN JOSI"
       ],
       "pp2": [
         "MICHAEL BUNTING",
-        "ERIK HAULA",
+        "FEDOR SVECHKOV",
         "MATTHEW WOOD",
         "BRADY SKJEI",
         "LUKE EVANGELISTA"
@@ -2030,6 +2031,12 @@
     ],
     "chicago-blackhawks": [
       {
+        "name": "TEUVO TERAVAINEN",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
         "name": "ANDREW MANGIAPANE",
         "pos": "LW",
         "status": "Day-To-Day",
@@ -2194,16 +2201,16 @@
     ],
     "los-angeles-kings": [
       {
-        "name": "QUINTON BYFIELD",
-        "pos": "RW",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
         "name": "DARCY KUEMPER",
         "pos": "G",
         "status": "Day-To-Day",
         "desc": "day-to-day"
+      },
+      {
+        "name": "QUINTON BYFIELD",
+        "pos": "RW",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "JOEL ARMIA",
@@ -2502,12 +2509,6 @@
         "pos": "RW",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
-      },
-      {
-        "name": "ALEXANDER HOLTZ",
-        "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
       }
     ],
     "vancouver-canucks": [
