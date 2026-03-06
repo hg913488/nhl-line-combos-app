@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-06 15:55:28 UTC",
+  "updated_at": "2026-03-06 18:00:24 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -320,9 +320,9 @@
           "ILYA MIKHEYEV"
         ],
         [
-          "LANDON SLAGGERT",
-          "NICK FOLIGNO",
-          "SAM LAFFERTY"
+          "ANDREW MANGIAPANE",
+          "SAM LAFFERTY",
+          "LANDON SLAGGERT"
         ]
       ],
       "defense": [
@@ -355,7 +355,7 @@
         "SAM RINZEL"
       ],
       "pp2": [
-        "NICK FOLIGNO",
+        "ANDREW MANGIAPANE",
         "OLIVER MOORE",
         "RYAN GREENE",
         "ARTYOM LEVSHUNOV",
@@ -490,19 +490,19 @@
           "WYATT JOHNSTON"
         ],
         [
-          "MICHAEL BUNTING",
+          "SAM STEEL",
           "MATT DUCHENE",
           "JAMIE BENN"
         ],
         [
-          "SAM STEEL",
+          "ADAM ERNE",
           "JUSTIN HRYCKOWIAN",
           "MAVRIK BOURQUE"
         ],
         [
-          "ADAM ERNE",
+          "COLIN BLACKWELL",
           "OSKAR BACK",
-          "COLIN BLACKWELL"
+          "NATHAN BASTIAN"
         ]
       ],
       "defense": [
@@ -516,7 +516,7 @@
         ],
         [
           "LIAN BICHSEL",
-          "TYLER MYERS"
+          "ILYA LYUBUSHKIN"
         ]
       ],
       "goalies": [
@@ -535,9 +535,9 @@
         "MIRO HEISKANEN"
       ],
       "pp2": [
-        "MICHAEL BUNTING",
-        "JUSTIN HRYCKOWIAN",
         "JAMIE BENN",
+        "JUSTIN HRYCKOWIAN",
+        "MAVRIK BOURQUE",
         "ESA LINDELL",
         "THOMAS HARLEY"
       ]
@@ -736,8 +736,7 @@
         ],
         [
           "JARED WRIGHT",
-          "KENNY CONNORS",
-          "COREY PERRY"
+          "KENNY CONNORS"
         ],
         [
           "JEFF MALOTT",
@@ -768,7 +767,6 @@
         ]
       ],
       "pp1": [
-        "COREY PERRY",
         "ANZE KOPITAR",
         "ADRIAN KEMPE",
         "ARTEMI PANARIN",
@@ -797,10 +795,10 @@
         [
           "YAKOV TRENIN",
           "DANILA YUROV",
-          "ROBBY FABBRI"
+          "BOBBY BRINK"
         ],
         [
-          "VINNIE HINOSTROZA",
+          "ROBBY FABBRI",
           "NICO STURM",
           "MICHAEL MCCARRON"
         ]
@@ -837,7 +835,7 @@
       "pp2": [
         "VLADIMIR TARASENKO",
         "RYAN HARTMAN",
-        "VINNIE HINOSTROZA",
+        "BOBBY BRINK",
         "BROCK FABER",
         "JARED SPURGEON"
       ]
@@ -1521,7 +1519,8 @@
         ],
         [
           "SCOTT SABOURIN",
-          "CONOR GEEKIE"
+          "CONOR GEEKIE",
+          "COREY PERRY"
         ]
       ],
       "defense": [
@@ -1554,7 +1553,7 @@
         "DARREN RADDYSH"
       ],
       "pp2": [
-        "CONOR GEEKIE",
+        "COREY PERRY",
         "ANTHONY CIRELLI",
         "PONTUS HOLMBERG",
         "BRANDON HAGEL",
@@ -1927,8 +1926,8 @@
       {
         "name": "JOHN CARLSON",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "TROY TERRY",
@@ -2037,18 +2036,6 @@
     ],
     "chicago-blackhawks": [
       {
-        "name": "TEUVO TERAVAINEN",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "ANDREW MANGIAPANE",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "RYAN ELLIS",
         "pos": "D",
         "status": "Injured Reserve",
@@ -2062,6 +2049,12 @@
       }
     ],
     "colorado-avalanche": [
+      {
+        "name": "NICOLAS ROY",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
       {
         "name": "ARTTURI LEHKONEN",
         "pos": "LW",
@@ -2097,16 +2090,10 @@
     ],
     "dallas-stars": [
       {
-        "name": "ROOPE HINTZ",
-        "pos": "C",
-        "status": "Injured Reserve",
-        "desc": "Injured Reserve"
-      },
-      {
         "name": "TYLER MYERS",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "MIKKO RANTANEN",
@@ -2253,8 +2240,8 @@
       {
         "name": "BRETT PESCE",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "ZACK MACEWEN",
