@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-05 23:11:47 UTC",
+  "updated_at": "2026-03-06 00:01:46 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -490,12 +490,12 @@
           "WYATT JOHNSTON"
         ],
         [
-          "SAM STEEL",
+          "MICHAEL BUNTING",
           "MATT DUCHENE",
           "JAMIE BENN"
         ],
         [
-          "MICHAEL BUNTING",
+          "SAM STEEL",
           "JUSTIN HRYCKOWIAN",
           "MAVRIK BOURQUE"
         ],
@@ -665,24 +665,24 @@
     "florida-panthers": {
       "forwards": [
         [
-          "SANDIS VILMANIS",
+          "EVAN RODRIGUES",
           "ANTON LUNDELL",
           "SAM REINHART"
         ],
         [
-          "CARTER VERHAEGHE",
+          "MACKIE SAMOSKEVICH",
           "SAM BENNETT",
           "MATTHEW TKACHUK"
         ],
         [
+          "CARTER VERHAEGHE",
           "EETU LUOSTARINEN",
-          "EVAN RODRIGUES",
           "BRAD MARCHAND"
         ],
         [
-          "MACKIE SAMOSKEVICH",
+          "SANDIS VILMANIS",
           "TOMAS NOSEK",
-          "A.J. GREER"
+          "JESPER BOQVIST"
         ]
       ],
       "defense": [
@@ -695,7 +695,7 @@
           "DMITRY KULIKOV"
         ],
         [
-          "TOBIAS BJORNFOT",
+          "DONOVAN SEBRANGO",
           "UVIS BALINSKIS"
         ]
       ],
@@ -735,7 +735,7 @@
           "ALEX LAFERRIERE"
         ],
         [
-          "WARREN FOEGELE",
+          "JARED WRIGHT",
           "KENNY CONNORS",
           "COREY PERRY"
         ],
@@ -915,7 +915,7 @@
           "JONATHAN MARCHESSAULT"
         ],
         [
-          "MICHAEL BUNTING",
+          "JOAKIM KEMELL",
           "TYSON JOST",
           "MATTHEW WOOD"
         ],
@@ -955,11 +955,11 @@
         "ROMAN JOSI"
       ],
       "pp2": [
-        "MICHAEL BUNTING",
-        "FEDOR SVECHKOV",
         "MATTHEW WOOD",
-        "BRADY SKJEI",
-        "LUKE EVANGELISTA"
+        "FEDOR SVECHKOV",
+        "LUKE EVANGELISTA",
+        "RYAN UFKO",
+        "BRADY SKJEI"
       ]
     },
     "new-jersey-devils": {
@@ -1085,14 +1085,14 @@
     "new-york-rangers": {
       "forwards": [
         [
-          "WILL CUYLLE",
+          "GABRIEL PERREAULT",
           "MIKA ZIBANEJAD",
-          "GABRIEL PERREAULT"
+          "ALEXIS LAFRENIÈRE"
         ],
         [
-          "TAYLOR RADDYSH",
-          "VINCENT TROCHECK",
-          "ALEXIS LAFRENIÈRE"
+          "WILL CUYLLE",
+          "JONNY BRODZINSKI",
+          "TAYLOR RADDYSH"
         ],
         [
           "TYE KARTYE",
@@ -1101,8 +1101,8 @@
         ],
         [
           "ADAM EDSTROM",
-          "SAM CARRICK",
-          "JUUSO PARSSINEN"
+          "JUUSO PARSSINEN",
+          "JAROSLAV CHMELAR"
         ]
       ],
       "defense": [
@@ -1129,13 +1129,13 @@
       ],
       "pp1": [
         "ALEXIS LAFRENIÈRE",
-        "VINCENT TROCHECK",
+        "WILL CUYLLE",
         "GABRIEL PERREAULT",
         "MIKA ZIBANEJAD",
         "ADAM FOX"
       ],
       "pp2": [
-        "WILL CUYLLE",
+        "JONNY BRODZINSKI",
         "NOAH LABA",
         "CONOR SHEARY",
         "BRADEN SCHNEIDER",
@@ -1564,23 +1564,23 @@
     "toronto-maple-leafs": {
       "forwards": [
         [
-          "EASTON COWAN",
+          "MATIAS MACCELLI",
           "AUSTON MATTHEWS",
           "WILLIAM NYLANDER"
         ],
         [
           "MATTHEW KNIES",
           "JOHN TAVARES",
-          "MAX DOMI"
-        ],
-        [
-          "MATIAS MACCELLI",
-          "JACOB QUILLAN",
-          "DAKOTA JOSHUA"
+          "EASTON COWAN"
         ],
         [
           "NICHOLAS ROBERTSON",
+          "MAX DOMI",
+          "DAKOTA JOSHUA"
+        ],
+        [
           "STEVEN LORENTZ",
+          "JACOB QUILLAN",
           "CALLE JARNKROK"
         ]
       ],
@@ -1646,7 +1646,7 @@
       ],
       "defense": [
         [
-          "MIKHAIL SERGACHEV",
+          "IAN COLE",
           "SEAN DURZI"
         ],
         [
@@ -1654,7 +1654,7 @@
           "JOHN MARINO"
         ],
         [
-          "IAN COLE",
+          "DMITRI SIMASHEV",
           "NICK DESIMONE"
         ]
       ],
@@ -1671,14 +1671,14 @@
         "NICK SCHMALTZ",
         "CLAYTON KELLER",
         "DYLAN GUENTHER",
-        "MIKHAIL SERGACHEV"
+        "SEAN DURZI"
       ],
       "pp2": [
         "LAWSON CROUSE",
         "LOGAN COOLEY",
         "MICHAEL CARCONE",
         "JJ PETERKA",
-        "SEAN DURZI"
+        "NATE SCHMIDT"
       ]
     },
     "vancouver-canucks": {
@@ -2077,10 +2077,10 @@
     ],
     "columbus-blue-jackets": [
       {
-        "name": "DANTE FABBRO",
+        "name": "ZACH WERENSKI",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       }
     ],
     "dallas-stars": [
@@ -2283,6 +2283,18 @@
     ],
     "new-york-rangers": [
       {
+        "name": "SAM CARRICK",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "VINCENT TROCHECK",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "J.T. MILLER",
         "pos": "LW",
         "status": "Injured Reserve",
@@ -2342,12 +2354,6 @@
       }
     ],
     "pittsburgh-penguins": [
-      {
-        "name": "BLAKE LIZOTTE",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
       {
         "name": "FILIP HALLANDER",
         "pos": "C",
@@ -2465,8 +2471,8 @@
       {
         "name": "MIKHAIL SERGACHEV",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "MACKENZIE WEEGAR",
