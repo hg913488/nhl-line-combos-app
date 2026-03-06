@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-06 18:08:43 UTC",
+  "updated_at": "2026-03-06 19:49:52 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -376,12 +376,12 @@
         ],
         [
           "PARKER KELLY",
-          "JACK DRURY",
+          "NICOLAS ROY",
           "VICTOR OLOFSSON"
         ],
         [
-          "JASON POLIN",
           "ZAKHAR BARDAKOV",
+          "JACK DRURY",
           "GAVIN BRINDLEY"
         ]
       ],
@@ -615,14 +615,14 @@
           "JACK ROSLOVIC"
         ],
         [
-          "JOSH SAMANSKI",
-          "ADAM HENRIQUE",
-          "TRENT FREDERIC"
-        ],
-        [
           "VASILY PODKOLZIN",
           "JASON DICKINSON",
           "KASPERI KAPANEN"
+        ],
+        [
+          "COLTON DACH",
+          "ADAM HENRIQUE",
+          "TRENT FREDERIC"
         ]
       ],
       "defense": [
@@ -631,12 +631,12 @@
           "EVAN BOUCHARD"
         ],
         [
-          "DARNELL NURSE",
-          "TY EMBERSON"
-        ],
-        [
           "JAKE WALMAN",
           "CONNOR MURPHY"
+        ],
+        [
+          "DARNELL NURSE",
+          "TY EMBERSON"
         ]
       ],
       "goalies": [
@@ -799,8 +799,8 @@
         ],
         [
           "ROBBY FABBRI",
-          "NICO STURM",
-          "MICHAEL MCCARRON"
+          "MICHAEL MCCARRON",
+          "NICO STURM"
         ]
       ],
       "defense": [
@@ -953,11 +953,11 @@
         "ROMAN JOSI"
       ],
       "pp2": [
+        "ZACHARY L'HEUREUX",
         "MATTHEW WOOD",
-        "FEDOR SVECHKOV",
         "LUKE EVANGELISTA",
         "RYAN UFKO",
-        "BRADY SKJEI"
+        "JOAKIM KEMELL"
       ]
     },
     "new-jersey-devils": {
@@ -1359,10 +1359,10 @@
       ],
       "goalies": [
         [
-          "YAROSLAV ASKAROV"
+          "ALEX NEDELJKOVIC"
         ],
         [
-          "ALEX NEDELJKOVIC"
+          "YAROSLAV ASKAROV"
         ]
       ],
       "pp1": [
@@ -1755,12 +1755,12 @@
         [
           "BRANDON SAAD",
           "TOMAS HERTL",
-          "COLE REINHARDT"
+          "KEEGAN KOLESAR"
         ],
         [
           "COLE SMITH",
-          "COLTON SISSONS",
-          "KEEGAN KOLESAR"
+          "NIC DOWD",
+          "COLTON SISSONS"
         ]
       ],
       "defense": [
@@ -1769,12 +1769,12 @@
           "SHEA THEODORE"
         ],
         [
-          "JEREMY LAUZON",
-          "RASMUS ANDERSSON"
-        ],
-        [
           "NOAH HANIFIN",
           "KAEDAN KORCZAK"
+        ],
+        [
+          "JEREMY LAUZON",
+          "RASMUS ANDERSSON"
         ]
       ],
       "goalies": [
@@ -1924,16 +1924,16 @@
   "injuries": {
     "anaheim-ducks": [
       {
-        "name": "JOHN CARLSON",
-        "pos": "D",
+        "name": "TROY TERRY",
+        "pos": "RW",
         "status": "Out",
         "desc": "out"
       },
       {
-        "name": "TROY TERRY",
-        "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "name": "JOHN CARLSON",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "MIKAEL GRANLUND",
@@ -2050,19 +2050,7 @@
     ],
     "colorado-avalanche": [
       {
-        "name": "NICOLAS ROY",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "ARTTURI LEHKONEN",
-        "pos": "LW",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
-        "name": "JOEL KIVIRANTA",
         "pos": "LW",
         "status": "Out",
         "desc": "out"
@@ -2124,13 +2112,13 @@
     ],
     "edmonton-oilers": [
       {
-        "name": "CURTIS LAZAR",
+        "name": "MATTIAS JANMARK",
         "pos": "C",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
       },
       {
-        "name": "MATTIAS JANMARK",
+        "name": "CURTIS LAZAR",
         "pos": "C",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
@@ -2209,12 +2197,6 @@
       }
     ],
     "montreal-canadiens": [
-      {
-        "name": "JOE VELENO",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
       {
         "name": "PATRIK LAINE",
         "pos": "RW",
@@ -2474,8 +2456,8 @@
       {
         "name": "EVANDER KANE",
         "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "PIERRE-OLIVIER JOSEPH",
