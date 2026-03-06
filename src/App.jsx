@@ -149,10 +149,10 @@ function PlayerCard({ name, pos }) {
   const last = parts.slice(-1)[0];
   const first = parts.slice(0, -1).join(" ");
   return (
-    <div style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 4px", display: "flex", flexDirection: "column", alignItems: "center", flex: 1, minWidth: 0 }}>
-      <span style={{ fontSize: 8, fontWeight: 700, color: P.dove, letterSpacing: "0.1em", marginBottom: 3 }}>{pos}</span>
-      <span style={{ fontSize: 8, color: P.dove, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "100%", textAlign: "center" }}>{first}</span>
-      <span style={{ fontSize: 11, fontWeight: 700, color: P.white, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "100%", textAlign: "center" }}>{last}</span>
+    <div style={{ background: "#E8EAEC", border: `1px solid #D0D4D8`, borderRadius: 4, padding: "6px 4px", display: "flex", flexDirection: "column", alignItems: "center", flex: 1, minWidth: 0 }}>
+      <span style={{ fontSize: 8, fontWeight: 700, color: "#8A8E91", letterSpacing: "0.1em", marginBottom: 3 }}>{pos}</span>
+      <span style={{ fontSize: 8, color: "#555", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "100%", textAlign: "center" }}>{first}</span>
+      <span style={{ fontSize: 11, fontWeight: 700, color: "#161616", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "100%", textAlign: "center" }}>{last}</span>
     </div>
   );
 }
@@ -269,7 +269,7 @@ function InjuryBadge({ type }) {
 
 function InjuriesView({ isMobile }) {
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("all"); // "all" | "today"
+  const [filter, setFilter] = useState("all");
 
   const todayGames = useMemo(() => getTodayGames(), []);
   const todaySlugs = useMemo(() => {
