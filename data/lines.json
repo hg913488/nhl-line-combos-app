@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-08 15:44:35 UTC",
+  "updated_at": "2026-03-08 19:02:41 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -365,14 +365,14 @@
     "colorado-avalanche": {
       "forwards": [
         [
-          "GABRIEL LANDESKOG",
+          "VALERI NICHUSHKIN",
           "NATHAN MACKINNON",
           "MARTIN NECAS"
         ],
         [
           "ROSS COLTON",
           "BROCK NELSON",
-          "VALERI NICHUSHKIN"
+          "NAZEM KADRI"
         ],
         [
           "PARKER KELLY",
@@ -410,7 +410,7 @@
       "pp1": [
         "BROCK NELSON",
         "NATHAN MACKINNON",
-        "GABRIEL LANDESKOG",
+        "NAZEM KADRI",
         "MARTIN NECAS",
         "CALE MAKAR"
       ],
@@ -598,7 +598,7 @@
         "MARCO KASPER",
         "ANDREW COPP",
         "MICHAEL BRANDSEGG-NYGÅRD",
-        "ALBERT JOHANSSON",
+        "JUSTIN FAULK",
         "AXEL SANDIN-PELLIKKA"
       ]
     },
@@ -610,12 +610,12 @@
           "ZACH HYMAN"
         ],
         [
-          "MATTHEW SAVOIE",
+          "VASILY PODKOLZIN",
           "LEON DRAISAITL",
           "JACK ROSLOVIC"
         ],
         [
-          "VASILY PODKOLZIN",
+          "MATTHEW SAVOIE",
           "JASON DICKINSON",
           "KASPERI KAPANEN"
         ],
@@ -641,10 +641,10 @@
       ],
       "goalies": [
         [
-          "TRISTAN JARRY"
+          "CONNOR INGRAM"
         ],
         [
-          "CONNOR INGRAM"
+          "TRISTAN JARRY"
         ]
       ],
       "pp1": [
@@ -800,7 +800,7 @@
           "VLADIMIR TARASENKO"
         ],
         [
-          "ROBBY FABBRI",
+          "NICK FOLIGNO",
           "MICHAEL MCCARRON",
           "NICO STURM"
         ]
@@ -1092,12 +1092,12 @@
         [
           "WILL CUYLLE",
           "VINCENT TROCHECK",
-          "TAYLOR RADDYSH"
+          "CONOR SHEARY"
         ],
         [
           "TYE KARTYE",
           "NOAH LABA",
-          "CONOR SHEARY"
+          "BRENDAN BRISSON"
         ],
         [
           "ADAM EDSTROM",
@@ -1137,7 +1137,7 @@
       "pp2": [
         "WILL CUYLLE",
         "CONOR SHEARY",
-        "TAYLOR RADDYSH",
+        "BRENDAN BRISSON",
         "BRADEN SCHNEIDER",
         "VLADISLAV GAVRIKOV"
       ]
@@ -1272,12 +1272,12 @@
         [
           "ANTHONY MANTHA",
           "TOMMY NOVAK",
-          "JUSTIN BRAZEAU"
+          "AVERY HAYES"
         ],
         [
           "VILLE KOIVUNEN",
           "BEN KINDEL",
-          "AVERY HAYES"
+          "ELMER SODERBLOM"
         ],
         [
           "CONNOR DEWAR",
@@ -1315,7 +1315,7 @@
         "ANTHONY MANTHA"
       ],
       "pp2": [
-        "JUSTIN BRAZEAU",
+        "AVERY HAYES",
         "TOMMY NOVAK",
         "VILLE KOIVUNEN",
         "KRIS LETANG",
@@ -1749,7 +1749,7 @@
           "BRAEDEN BOWMAN"
         ],
         [
-          "REILLY SMITH",
+          "BRETT HOWDEN",
           "MITCH MARNER",
           "PAVEL DOROFEYEV"
         ],
@@ -1796,7 +1796,7 @@
       "pp2": [
         "IVAN BARBASHEV",
         "COLTON SISSONS",
-        "REILLY SMITH",
+        "BRETT HOWDEN",
         "RASMUS ANDERSSON",
         "SHEA THEODORE"
       ]
@@ -2075,6 +2075,12 @@
     ],
     "colorado-avalanche": [
       {
+        "name": "GABRIEL LANDESKOG",
+        "pos": "LW",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "ARTTURI LEHKONEN",
         "pos": "LW",
         "status": "Out",
@@ -2139,6 +2145,12 @@
       {
         "name": "ADAM HENRIQUE",
         "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "MATTIAS EKHOLM",
+        "pos": "D",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       },
@@ -2279,6 +2291,12 @@
     ],
     "new-york-rangers": [
       {
+        "name": "TAYLOR RADDYSH",
+        "pos": "RW",
+        "status": "Injured Reserve",
+        "desc": "Injured Reserve"
+      },
+      {
         "name": "J.T. MILLER",
         "pos": "LW",
         "status": "Injured Reserve",
@@ -2307,7 +2325,7 @@
     ],
     "philadelphia-flyers": [
       {
-        "name": "TRAVIS KONECNY",
+        "name": "GARNET HATHAWAY",
         "pos": "RW",
         "status": "Day-To-Day",
         "desc": "day-to-day"
@@ -2315,6 +2333,12 @@
       {
         "name": "NICK SEELER",
         "pos": "D",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "TRAVIS KONECNY",
+        "pos": "RW",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       },
@@ -2338,6 +2362,12 @@
       }
     ],
     "pittsburgh-penguins": [
+      {
+        "name": "JUSTIN BRAZEAU",
+        "pos": "RW",
+        "status": "Out",
+        "desc": "out"
+      },
       {
         "name": "EVGENI MALKIN",
         "pos": "C",
