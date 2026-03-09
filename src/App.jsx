@@ -1,10 +1,12 @@
 import { useState, useMemo, useEffect } from "react";
 import lineups from '../data/lines.json';
+import goalsAgainstData from '../data/goals_against_by_position.json';
 import scheduleRaw from './schedule.csv?raw';
 
 const UPDATED_AT = lineups.updated_at.slice(0, 10);
 const TEAMS_DATA = lineups.teams;
 const INJURIES_DATA = lineups.injuries || {};
+const GA_DATA = goalsAgainstData;
 const SCHEDULE_RAW = scheduleRaw;
 
 const NHL_TEAMS = {
@@ -89,6 +91,16 @@ const css = `
   .inj-out { background:#c0392b22; color:#e74c3c; border:1px solid #c0392b44; }
   .inj-dtd { background:#d4ac0d22; color:#f1c40f; border:1px solid #d4ac0d44; }
   .inj-ir { background:#7d3c9822; color:#a569bd; border:1px solid #7d3c9844; }
+  .ga-table { width:100%; border-collapse:collapse; font-size:12px; }
+  .ga-table th { font-size:9px; font-weight:700; letter-spacing:0.12em; color:${P.dove}; padding:8px 6px; text-align:center; border-bottom:1px solid ${P.border}; position:sticky; top:0; background:${P.bg}; z-index:1; }
+  .ga-table th:first-child { text-align:left; padding-left:12px; }
+  .ga-table td { padding:7px 6px; text-align:center; border-bottom:1px solid ${P.border}; font-variant-numeric:tabular-nums; }
+  .ga-table td:first-child { text-align:left; padding-left:4px; }
+  .ga-table tr:hover td { background:${P.hover}; }
+  .ga-table .total-col { font-weight:700; color:${P.casper}; }
+  .ga-sort-btn { background:none; border:none; cursor:pointer; font-family:inherit; font-size:9px; font-weight:700; letter-spacing:0.12em; color:${P.dove}; padding:8px 6px; width:100%; text-align:center; }
+  .ga-sort-btn:hover { color:${P.casper}; }
+  .ga-sort-btn.active-sort { color:${P.white}; }
 `;
 
 // ── Schedule parsing ──────────────────────────────────────────────────
@@ -121,6 +133,11 @@ function getTodayGames() {
     }
   }
   return games;
+}
+
+// ── Slug <-> Abbr helpers ─────────────────────────────────────────────
+function abbrToSlug(abbr) {
+  return Object.entries(NHL_TEAMS).find(([, t]) => t.abbr === abbr)?.[0] || null;
 }
 
 // ── Sub-components ────────────────────────────────────────────────────
@@ -450,7 +467,6 @@ function TodayView({ isMobile }) {
     );
   }
 
-  // Desktop: strips only, thick divider between each matchup
   return (
     <div style={{ overflowX: "auto" }}>
       <div style={{ display: "flex", alignItems: "stretch", minHeight: `calc(100vh - ${HEADER_H + TABS_H}px)` }}>
@@ -463,6 +479,207 @@ function TodayView({ isMobile }) {
             )}
           </>
         ))}
+      </div>
+    </div>
+  );
+}
+
+// ── GOALS AGAINST BY POSITION VIEW ───────────────────────────────────
+function heatColor(value, min, max) {
+  if (max === min) return "transparent";
+  const ratio = (value - min) / (max - min);
+  // Green (low/good) -> Yellow -> Red (high/bad)
+  if (ratio < 0.5) {
+    const t = ratio / 0.5;
+    const r = Math.round(30 + t * 182);
+    const g = Math.round(132 - t * 0);
+    const b = Math.round(73 - t * 60);
+    return `rgba(${r},${g},${b},0.18)`;
+  } else {
+    const t = (ratio - 0.5) / 0.5;
+    const r = Math.round(212 - t * 20);
+    const g = Math.round(132 - t * 75);
+    const b = Math.round(13 + t * 0);
+    return `rgba(${r},${g},${b},0.18)`;
+  }
+}
+
+function GoalsAgainstView({ isMobile }) {
+  const [duration, setDuration] = useState("ytd");
+  const [location, setLocation] = useState("all");
+  const [sortCol, setSortCol] = useState("total");
+  const [sortDir, setSortDir] = useState("desc");
+  const [search, setSearch] = useState("");
+  const [viewFilter, setViewFilter] = useState("all"); // all | today
+
+  const todayGames = useMemo(() => getTodayGames(), []);
+  const todayAbbrs = useMemo(() => {
+    const s = new Set();
+    todayGames.forEach(g => {
+      const aw = NHL_TEAMS[g.away]?.abbr;
+      const hw = NHL_TEAMS[g.home]?.abbr;
+      if (aw) s.add(aw);
+      if (hw) s.add(hw);
+    });
+    return s;
+  }, [todayGames]);
+
+  const splitKey = duration === "l10" ? "l10" : (location === "home" ? "home" : location === "away" ? "away" : "ytd");
+  const totalKey = duration === "l10" ? "l10Total" : (location === "home" ? "homeTotal" : location === "away" ? "awayTotal" : "ytdTotal");
+
+  const positions = GA_DATA.positions || ["C", "LW", "RW", "D"];
+
+  const rows = useMemo(() => {
+    const teams = GA_DATA.teams || {};
+    return Object.entries(teams)
+      .filter(([abbr]) => {
+        if (viewFilter === "today" && todayAbbrs.size > 0 && !todayAbbrs.has(abbr)) return false;
+        if (!search.trim()) return true;
+        const slug = abbrToSlug(abbr);
+        const t = slug ? NHL_TEAMS[slug] : null;
+        return t ? `${t.city} ${t.name} ${abbr}`.toLowerCase().includes(search.toLowerCase()) : abbr.toLowerCase().includes(search.toLowerCase());
+      })
+      .map(([abbr, data]) => ({
+        abbr,
+        slug: abbrToSlug(abbr),
+        ...data[splitKey],
+        total: data[totalKey],
+      }))
+      .sort((a, b) => {
+        const aVal = sortCol === "total" ? a.total : (a[sortCol] || 0);
+        const bVal = sortCol === "total" ? b.total : (b[sortCol] || 0);
+        return sortDir === "desc" ? bVal - aVal : aVal - bVal;
+      });
+  }, [splitKey, totalKey, sortCol, sortDir, search, viewFilter, todayAbbrs]);
+
+  // Calculate min/max for heat map per column
+  const colRanges = useMemo(() => {
+    const ranges = {};
+    positions.forEach(pos => {
+      const vals = rows.map(r => r[pos] || 0);
+      ranges[pos] = { min: Math.min(...vals), max: Math.max(...vals) };
+    });
+    const totals = rows.map(r => r.total || 0);
+    ranges.total = { min: Math.min(...totals), max: Math.max(...totals) };
+    return ranges;
+  }, [rows, positions]);
+
+  const handleSort = col => {
+    if (sortCol === col) setSortDir(d => d === "desc" ? "asc" : "desc");
+    else { setSortCol(col); setSortDir("desc"); }
+  };
+
+  const sortArrow = col => sortCol === col ? (sortDir === "desc" ? " ↓" : " ↑") : "";
+
+  const filterBtn = (label, value, setter, current) => (
+    <button onClick={() => setter(value)}
+      style={{ background: current === value ? P.active : "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: current === value ? P.white : P.dove, fontSize: 9, fontFamily: "inherit", cursor: "pointer", letterSpacing: "0.08em" }}>
+      {label}
+    </button>
+  );
+
+  return (
+    <div style={{ padding: "16px", maxWidth: 900, margin: "0 auto" }}>
+      {/* Filters row */}
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
+        <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search team..."
+          style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 10px", color: P.white, fontSize: 12, fontFamily: "inherit", width: 140 }} />
+
+        <div style={{ width: 1, height: 20, background: P.border, margin: "0 4px" }} />
+
+        {filterBtn("YTD", "ytd", setDuration, duration)}
+        {filterBtn("L10", "l10", setDuration, duration)}
+
+        {duration === "ytd" && (
+          <>
+            <div style={{ width: 1, height: 20, background: P.border, margin: "0 4px" }} />
+            {filterBtn("ALL", "all", setLocation, location)}
+            {filterBtn("HOME", "home", setLocation, location)}
+            {filterBtn("AWAY", "away", setLocation, location)}
+          </>
+        )}
+
+        {todayAbbrs.size > 0 && (
+          <>
+            <div style={{ width: 1, height: 20, background: P.border, margin: "0 4px" }} />
+            {filterBtn("ALL TEAMS", "all", setViewFilter, viewFilter)}
+            {filterBtn("TODAY", "today", setViewFilter, viewFilter)}
+          </>
+        )}
+
+        <span style={{ fontSize: 9, color: P.dove, marginLeft: "auto", letterSpacing: "0.08em" }}>
+          UPDATED {GA_DATA.lastUpdated || "—"}
+        </span>
+      </div>
+
+      {/* Position grouping labels */}
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 12 }}>
+        <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em" }}>GOALS AGAINST BY SCORER POSITION</span>
+        <span style={{ fontSize: 9, color: P.dim }}>·</span>
+        <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em" }}>
+          {duration === "l10" ? "LAST 10 GAMES" : location === "home" ? "HOME GAMES" : location === "away" ? "AWAY GAMES" : "FULL SEASON"}
+        </span>
+      </div>
+
+      {/* Table */}
+      <div style={{ overflowX: "auto", background: P.surface, borderRadius: 6, border: `1px solid ${P.border}` }}>
+        <table className="ga-table">
+          <thead>
+            <tr>
+              <th style={{ width: isMobile ? 60 : 160, minWidth: isMobile ? 60 : 160 }}>
+                <button className={`ga-sort-btn${sortCol === "abbr" ? " active-sort" : ""}`} style={{ textAlign: "left", paddingLeft: 12 }}
+                  onClick={() => { setSortCol("abbr"); setSortDir(d => d === "asc" ? "desc" : "asc"); }}>
+                  TEAM{sortCol === "abbr" ? sortArrow("abbr") : ""}
+                </button>
+              </th>
+              {positions.map(pos => (
+                <th key={pos}>
+                  <button className={`ga-sort-btn${sortCol === pos ? " active-sort" : ""}`} onClick={() => handleSort(pos)}>
+                    {pos}{sortArrow(pos)}
+                  </button>
+                </th>
+              ))}
+              <th>
+                <button className={`ga-sort-btn${sortCol === "total" ? " active-sort" : ""}`} onClick={() => handleSort("total")}>
+                  TOTAL{sortArrow("total")}
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(row => {
+              const t = row.slug ? NHL_TEAMS[row.slug] : null;
+              return (
+                <tr key={row.abbr}>
+                  <td>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, paddingLeft: 4 }}>
+                      {row.slug && <TeamLogo slug={row.slug} abbr={row.abbr} size={22} />}
+                      {!isMobile && <span style={{ fontSize: 12, fontWeight: 600, color: P.white }}>{t ? t.city : row.abbr}</span>}
+                      {isMobile && <span style={{ fontSize: 11, fontWeight: 700, color: P.casper }}>{row.abbr}</span>}
+                    </div>
+                  </td>
+                  {positions.map(pos => {
+                    const val = row[pos] || 0;
+                    const range = colRanges[pos];
+                    return (
+                      <td key={pos} style={{ background: heatColor(val, range.min, range.max), color: P.white, fontWeight: 500 }}>
+                        {val}
+                      </td>
+                    );
+                  })}
+                  <td className="total-col" style={{ background: heatColor(row.total, colRanges.total.min, colRanges.total.max) }}>
+                    {row.total}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Footer note */}
+      <div style={{ marginTop: 12, fontSize: 9, color: P.dim, letterSpacing: "0.06em", textAlign: "center" }}>
+        POSITION DATA FROM NHL.COM ROSTERS · HIGHER VALUES = MORE GOALS ALLOWED TO THAT POSITION
       </div>
     </div>
   );
@@ -488,6 +705,8 @@ export default function App() {
   }), [search]);
 
   const toggle = slug => setExpanded(prev => ({ ...prev, [slug]: !prev[slug] }));
+
+  const TABS = ["all", "today", "stats", "injuries", "compare"];
 
   return (
     <div style={{ fontFamily: "'Space Grotesk', sans-serif", background: P.bg, minHeight: "100vh", color: P.white }}>
@@ -518,9 +737,9 @@ export default function App() {
 
       {/* Tabs */}
       <div style={{ borderBottom: `1px solid ${P.border}`, display: "flex", height: TABS_H, position: "sticky", top: HEADER_H, zIndex: 49, background: P.bg }}>
-        {["all","today","injuries","compare"].map(t => (
+        {TABS.map(t => (
           <button key={t} className={`tab-btn${tab === t ? " active" : ""}`} onClick={() => setTab(t)}>
-            {t === "all" ? "ALL TEAMS" : t === "today" ? "TODAY" : t === "injuries" ? "INJURIES" : "COMPARE"}
+            {t === "all" ? "ALL TEAMS" : t === "today" ? "TODAY" : t === "stats" ? "STATS" : t === "injuries" ? "INJURIES" : "COMPARE"}
           </button>
         ))}
       </div>
@@ -537,6 +756,7 @@ export default function App() {
         <div>{slugs.map(slug => <MobileRow key={slug} slug={slug} data={TEAMS_DATA[slug]} expanded={!!expanded[slug]} onToggle={() => toggle(slug)} />)}</div>
       )}
       {tab === "today" && <TodayView isMobile={isMobile} />}
+      {tab === "stats" && <GoalsAgainstView isMobile={isMobile} />}
       {tab === "injuries" && <InjuriesView isMobile={isMobile} />}
       {tab === "compare" && <CompareView isMobile={isMobile} />}
 
@@ -545,7 +765,7 @@ export default function App() {
         <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em" }}>DATA FROM</span>
         <a href="https://www.dailyfaceoff.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.08em", textDecoration: "none" }}>DAILY FACEOFF</a>
         <span style={{ fontSize: 9, color: P.dim }}>·</span>
-        <a href="https://www.espn.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.08em", textDecoration: "none" }}>ESPN</a>
+        <a href="https://www.nhl.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.08em", textDecoration: "none" }}>NHL.COM</a>
         <span style={{ fontSize: 9, color: P.dim }}>·</span>
         <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em" }}>BUILT BY <span style={{ color: P.casper, fontWeight: 700 }}>GOELSTUDIO</span></span>
       </div>
