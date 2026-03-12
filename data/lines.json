@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-12 17:38:34 UTC",
+  "updated_at": "2026-03-12 19:55:41 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -75,7 +75,7 @@
           "VIKTOR ARVIDSSON"
         ],
         [
-          "MICHAEL EYSSIMONT",
+          "ALEXANDER STEEVES",
           "FRASER MINTEN",
           "MORGAN GEEKIE"
         ],
@@ -917,12 +917,12 @@
         [
           "ZACHARY L'HEUREUX",
           "MATTHEW WOOD",
-          "REID SCHAEFER"
+          "JOAKIM KEMELL"
         ],
         [
           "TYSON JOST",
           "FEDOR SVECHKOV",
-          "JOAKIM KEMELL"
+          "OZZY WIESBLATT"
         ]
       ],
       "defense": [
@@ -1421,10 +1421,10 @@
       ],
       "goalies": [
         [
-          "PHILIPP GRUBAUER"
+          "JOEY DACCORD"
         ],
         [
-          "JOEY DACCORD"
+          "PHILIPP GRUBAUER"
         ]
       ],
       "pp1": [
@@ -1455,14 +1455,14 @@
           "JORDAN KYROU"
         ],
         [
-          "JONATHAN DROUIN",
-          "PAVEL BUCHNEVICH",
-          "OTTO STENBERG"
+          "OTTO STENBERG",
+          "PIUS SUTER",
+          "PAVEL BUCHNEVICH"
         ],
         [
           "ALEXEY TOROPCHENKO",
           "JACK FINLEY",
-          "PIUS SUTER"
+          "NATHAN WALKER"
         ]
       ],
       "defense": [
@@ -1488,9 +1488,9 @@
         ]
       ],
       "pp1": [
-        "DYLAN HOLLOWAY",
         "ROBERT THOMAS",
-        "JONATHAN DROUIN",
+        "PIUS SUTER",
+        "DYLAN HOLLOWAY",
         "JIMMY SNUGGERUD",
         "PHILIP BROBERG"
       ],
@@ -1507,22 +1507,22 @@
         [
           "JAKE GUENTZEL",
           "BRAYDEN POINT",
-          "NIKITA KUCHEROV"
+          "GAGE GONCALVES"
         ],
         [
           "BRANDON HAGEL",
           "ANTHONY CIRELLI",
-          "COREY PERRY"
+          "NIKITA KUCHEROV"
         ],
         [
           "ZEMGUS GIRGENSONS",
           "YANNI GOURDE",
-          "PONTUS HOLMBERG"
+          "NIKITA KUCHEROV"
         ],
         [
           "OLIVER BJORKSTRAND",
           "CONOR GEEKIE",
-          "GAGE GONCALVES"
+          "COREY PERRY"
         ]
       ],
       "defense": [
@@ -1747,17 +1747,17 @@
         [
           "IVAN BARBASHEV",
           "JACK EICHEL",
-          "BRAEDEN BOWMAN"
+          "MARK STONE"
+        ],
+        [
+          "PAVEL DOROFEYEV",
+          "TOMAS HERTL",
+          "MITCH MARNER"
         ],
         [
           "BRETT HOWDEN",
-          "MITCH MARNER",
-          "PAVEL DOROFEYEV"
-        ],
-        [
-          "REILLY SMITH",
-          "TOMAS HERTL",
-          "COLTON SISSONS"
+          "COLTON SISSONS",
+          "BRAEDEN BOWMAN"
         ],
         [
           "COLE SMITH",
@@ -1788,16 +1788,16 @@
         ]
       ],
       "pp1": [
-        "BRAEDEN BOWMAN",
+        "MARK STONE",
         "TOMAS HERTL",
         "PAVEL DOROFEYEV",
         "JACK EICHEL",
         "MITCH MARNER"
       ],
       "pp2": [
-        "IVAN BARBASHEV",
-        "COLTON SISSONS",
+        "BRAEDEN BOWMAN",
         "BRETT HOWDEN",
+        "IVAN BARBASHEV",
         "RASMUS ANDERSSON",
         "SHEA THEODORE"
       ]
@@ -2130,16 +2130,16 @@
     ],
     "edmonton-oilers": [
       {
-        "name": "COLTON DACH",
-        "pos": "C",
+        "name": "TY EMBERSON",
+        "pos": "D",
         "status": "Out",
         "desc": "out"
       },
       {
-        "name": "TY EMBERSON",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "name": "COLTON DACH",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "MATTIAS JANMARK",
@@ -2358,8 +2358,8 @@
       {
         "name": "SAMUEL GIRARD",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "KEVIN HAYES",
@@ -2440,8 +2440,8 @@
       {
         "name": "BOBBY MCMANN",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "JADEN SCHWARTZ",
@@ -2451,6 +2451,14 @@
       },
       {
         "name": "MAX MCCORMICK",
+        "pos": "LW",
+        "status": "Out",
+        "desc": "out"
+      }
+    ],
+    "st-louis-blues": [
+      {
+        "name": "JONATHAN DROUIN",
         "pos": "LW",
         "status": "Out",
         "desc": "out"
@@ -2506,12 +2514,6 @@
     ],
     "vancouver-canucks": [
       {
-        "name": "EVANDER KANE",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "PIERRE-OLIVIER JOSEPH",
         "pos": "D",
         "status": "Injured Reserve",
@@ -2538,14 +2540,6 @@
       {
         "name": "DEREK FORBORT",
         "pos": "D",
-        "status": "Injured Reserve",
-        "desc": "Injured Reserve"
-      }
-    ],
-    "vegas-golden-knights": [
-      {
-        "name": "MARK STONE",
-        "pos": "RW",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
       }
