@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-13 17:05:00 UTC",
+  "updated_at": "2026-03-13 19:48:44 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -65,7 +65,7 @@
     "boston-bruins": {
       "forwards": [
         [
-          "MORGAN GEEKIE",
+          "MARAT KHUSNUTDINOV",
           "ELIAS LINDHOLM",
           "DAVID PASTRNAK"
         ],
@@ -75,9 +75,9 @@
           "VIKTOR ARVIDSSON"
         ],
         [
-          "ALEXANDER STEEVES",
+          "MICHAEL EYSSIMONT",
           "FRASER MINTEN",
-          "MARAT KHUSNUTDINOV"
+          "MORGAN GEEKIE"
         ],
         [
           "TANNER JEANNOT",
@@ -260,7 +260,7 @@
           "JORDAN MARTINOOK"
         ],
         [
-          "WILLIAM CARRIER",
+          "NICOLAS DESLAURIERS",
           "MARK JANKOWSKI",
           "ERIC ROBINSON"
         ]
@@ -820,10 +820,10 @@
       ],
       "goalies": [
         [
-          "JESPER WALLSTEDT"
+          "FILIP GUSTAVSSON"
         ],
         [
-          "FILIP GUSTAVSSON"
+          "JESPER WALLSTEDT"
         ]
       ],
       "pp1": [
@@ -1514,28 +1514,28 @@
           "JAKE GUENTZEL"
         ],
         [
-          "OLIVER BJORKSTRAND",
+          "ZEMGUS GIRGENSONS",
           "YANNI GOURDE",
           "PONTUS HOLMBERG"
         ],
         [
           "COREY PERRY",
-          "ZEMGUS GIRGENSONS",
-          "SCOTT SABOURIN"
+          "NICK PAUL",
+          "OLIVER BJORKSTRAND"
         ]
       ],
       "defense": [
         [
           "VICTOR HEDMAN",
-          "J.J. MOSER"
-        ],
-        [
-          "RYAN MCDONAGH",
           "DARREN RADDYSH"
         ],
         [
-          "CHARLE-EDOUARD D'ASTOUS",
-          "DECLAN CARLILE"
+          "RYAN MCDONAGH",
+          "J.J. MOSER"
+        ],
+        [
+          "EMIL LILLEBERG",
+          "CHARLE-EDOUARD D'ASTOUS"
         ]
       ],
       "goalies": [
@@ -1952,6 +1952,24 @@
       }
     ],
     "buffalo-sabres": [
+      {
+        "name": "COLTEN ELLIS",
+        "pos": "G",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "TANNER PEARSON",
+        "pos": "LW",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "MATTIAS SAMUELSSON",
+        "pos": "D",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
       {
         "name": "ALEX TUCH",
         "pos": "RW",
@@ -2431,16 +2449,16 @@
     ],
     "san-jose-sharks": [
       {
-        "name": "YAROSLAV ASKAROV",
-        "pos": "G",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "TY DELLANDREA",
         "pos": "C",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
+      },
+      {
+        "name": "YAROSLAV ASKAROV",
+        "pos": "G",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       },
       {
         "name": "LOGAN COUTURE",
@@ -2469,26 +2487,18 @@
         "desc": "out"
       }
     ],
-    "st-louis-blues": [
-      {
-        "name": "JONATHAN DROUIN",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      }
-    ],
     "tampa-bay-lightning": [
-      {
-        "name": "NICK PAUL",
-        "pos": "LW",
-        "status": "Injured Reserve",
-        "desc": "Injured Reserve"
-      },
       {
         "name": "ERIK CERNAK",
         "pos": "D",
         "status": "Day-To-Day",
         "desc": "day-to-day"
+      },
+      {
+        "name": "NICK PAUL",
+        "pos": "LW",
+        "status": "Injured Reserve",
+        "desc": "Injured Reserve"
       },
       {
         "name": "DECLAN CARLILE",
