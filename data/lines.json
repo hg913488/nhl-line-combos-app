@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-14 14:59:10 UTC",
+  "updated_at": "2026-03-14 15:52:47 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -132,7 +132,7 @@
         [
           "JOSH DOAN",
           "JOSH NORRIS",
-          "PEYTON KREBS"
+          "ALEX TUCH"
         ],
         [
           "JASON ZUCKER",
@@ -140,19 +140,19 @@
           "JACK QUINN"
         ],
         [
-          "TANNER PEARSON",
+          "PEYTON KREBS",
           "SAM CARRICK",
           "BECK MALENSTYN"
         ]
       ],
       "defense": [
         [
-          "MATTIAS SAMUELSSON",
+          "BOWEN BYRAM",
           "RASMUS DAHLIN"
         ],
         [
-          "BOWEN BYRAM",
-          "OWEN POWER"
+          "OWEN POWER",
+          "MICHAEL KESSELRING"
         ],
         [
           "LOGAN STANLEY",
@@ -175,7 +175,7 @@
         "RASMUS DAHLIN"
       ],
       "pp2": [
-        "ZACH BENSON",
+        "ALEX TUCH",
         "RYAN MCLEOD",
         "NOAH OSTLUND",
         "JACK QUINN",
@@ -861,7 +861,7 @@
         [
           "JOSH ANDERSON",
           "PHILLIP DANAULT",
-          "BRENDAN GALLAGHER"
+          "ALEXANDRE TEXIER"
         ]
       ],
       "defense": [
@@ -889,12 +889,12 @@
       "pp1": [
         "JURAJ SLAFKOVSKY",
         "NICK SUZUKI",
-        "KIRBY DACH",
         "IVAN DEMIDOV",
+        "COLE CAUFIELD",
         "LANE HUTSON"
       ],
       "pp2": [
-        "BRENDAN GALLAGHER",
+        "KIRBY DACH",
         "OLIVER KAPANEN",
         "ZACK BOLDUC",
         "ALEX NEWHOOK",
@@ -1000,10 +1000,10 @@
       ],
       "goalies": [
         [
-          "JACOB MARKSTROM"
+          "JAKE ALLEN"
         ],
         [
-          "JAKE ALLEN"
+          "JACOB MARKSTROM"
         ]
       ],
       "pp1": [
@@ -1089,7 +1089,7 @@
           "ALEXIS LAFRENIÈRE"
         ],
         [
-          "ADAM EDSTROM",
+          "J.T. MILLER",
           "VINCENT TROCHECK",
           "WILL CUYLLE"
         ],
@@ -1099,9 +1099,9 @@
           "CONOR SHEARY"
         ],
         [
-          "JONNY BRODZINSKI",
+          "ADAM EDSTROM",
           "JUUSO PARSSINEN",
-          "JAROSLAV CHMELAR"
+          "TAYLOR RADDYSH"
         ]
       ],
       "defense": [
@@ -1110,12 +1110,12 @@
           "ADAM FOX"
         ],
         [
-          "MATTHEW ROBERTSON",
+          "WILL BORGEN",
           "BRADEN SCHNEIDER"
         ],
         [
-          "URHO VAAKANAINEN",
-          "WILL BORGEN"
+          "MATTHEW ROBERTSON",
+          "URHO VAAKANAINEN"
         ]
       ],
       "goalies": [
@@ -1129,14 +1129,14 @@
       "pp1": [
         "ALEXIS LAFRENIÈRE",
         "VINCENT TROCHECK",
-        "GABRIEL PERREAULT",
+        "J.T. MILLER",
         "MIKA ZIBANEJAD",
         "ADAM FOX"
       ],
       "pp2": [
         "WILL CUYLLE",
-        "JONNY BRODZINSKI",
         "CONOR SHEARY",
+        "GABRIEL PERREAULT",
         "MATTHEW ROBERTSON",
         "VLADISLAV GAVRIKOV"
       ]
@@ -1600,10 +1600,10 @@
       ],
       "goalies": [
         [
-          "ANTHONY STOLARZ"
+          "JOSEPH WOLL"
         ],
         [
-          "JOSEPH WOLL"
+          "ANTHONY STOLARZ"
         ]
       ],
       "pp1": [
@@ -2283,12 +2283,6 @@
     ],
     "montreal-canadiens": [
       {
-        "name": "COLE CAUFIELD",
-        "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "PATRIK LAINE",
         "pos": "RW",
         "status": "Injured Reserve",
@@ -2367,8 +2361,8 @@
       {
         "name": "NICK JENSEN",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "JAKE SANDERSON",
@@ -2378,6 +2372,12 @@
       }
     ],
     "philadelphia-flyers": [
+      {
+        "name": "CHRISTIAN DVORAK",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
       {
         "name": "TY MURCHISON",
         "pos": "D",
@@ -2497,8 +2497,8 @@
       {
         "name": "DECLAN CARLILE",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Injured Reserve",
+        "desc": "Injured Reserve"
       },
       {
         "name": "EMIL LILLEBERG",
