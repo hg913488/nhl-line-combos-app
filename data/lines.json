@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-14 19:49:42 UTC",
+  "updated_at": "2026-03-14 22:56:35 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -125,13 +125,8 @@
     "buffalo-sabres": {
       "forwards": [
         [
-          "ZACH BENSON",
+          "PEYTON KREBS",
           "TAGE THOMPSON",
-          "NOAH OSTLUND"
-        ],
-        [
-          "JOSH DOAN",
-          "JOSH NORRIS",
           "ALEX TUCH"
         ],
         [
@@ -140,19 +135,24 @@
           "JACK QUINN"
         ],
         [
-          "PEYTON KREBS",
+          "NOAH OSTLUND",
+          "JOSH NORRIS",
+          "JOSH DOAN"
+        ],
+        [
+          "ZACH BENSON",
           "SAM CARRICK",
           "BECK MALENSTYN"
         ]
       ],
       "defense": [
         [
-          "BOWEN BYRAM",
-          "RASMUS DAHLIN"
+          "RASMUS DAHLIN",
+          "ZACH METSA"
         ],
         [
-          "OWEN POWER",
-          "MICHAEL KESSELRING"
+          "BOWEN BYRAM",
+          "OWEN POWER"
         ],
         [
           "LOGAN STANLEY",
@@ -260,7 +260,7 @@
           "JORDAN MARTINOOK"
         ],
         [
-          "NICOLAS DESLAURIERS",
+          "WILLIAM CARRIER",
           "MARK JANKOWSKI",
           "ERIC ROBINSON"
         ]
@@ -554,13 +554,13 @@
           "LUCAS RAYMOND"
         ],
         [
-          "JOHN LEONARD",
+          "JAMES VAN RIEMSDYK",
           "SHELDON DRIES",
           "MASON APPLETON"
         ],
         [
           "DOMINIK SHINE",
-          "JAMES VAN RIEMSDYK"
+          "JOHN LEONARD"
         ]
       ],
       "defense": [
@@ -733,7 +733,7 @@
           "ALEX LAFERRIERE"
         ],
         [
-          "ALEX TURCOTTE",
+          "MATHIEU JOSEPH",
           "SCOTT LAUGHTON",
           "JARED WRIGHT"
         ],
@@ -793,14 +793,14 @@
           "MATT BOLDY"
         ],
         [
-          "ROBBY FABBRI",
+          "NICK FOLIGNO",
           "DANILA YUROV",
           "VLADIMIR TARASENKO"
         ],
         [
-          "YAKOV TRENIN",
+          "NICO STURM",
           "MICHAEL MCCARRON",
-          "NICK FOLIGNO"
+          "YAKOV TRENIN"
         ]
       ],
       "defense": [
@@ -1025,22 +1025,22 @@
         [
           "EMIL HEINEMAN",
           "BO HORVAT",
-          "CALUM RITCHIE"
+          "MATHEW BARZAL"
         ],
         [
-          "ONDREJ PALAT",
+          "ANTHONY DUCLAIR",
           "BRAYDEN SCHENN",
-          "MATHEW BARZAL"
+          "SIMON HOLMSTROM"
         ],
         [
           "ANDERS LEE",
           "JEAN-GABRIEL PAGEAU",
-          "SIMON HOLMSTROM"
+          "CALUM RITCHIE"
         ],
         [
-          "MAXIM SHABANOV",
+          "KYLE MACLEAN",
           "CASEY CIZIKAS",
-          "MARC GATCOMB"
+          "ONDREJ PALAT"
         ]
       ],
       "defense": [
@@ -1098,9 +1098,9 @@
           "CONOR SHEARY"
         ],
         [
-          "ADAM EDSTROM",
+          "TAYLOR RADDYSH",
           "JUUSO PARSSINEN",
-          "TAYLOR RADDYSH"
+          "JAROSLAV CHMELAR"
         ]
       ],
       "defense": [
@@ -1109,12 +1109,12 @@
           "ADAM FOX"
         ],
         [
-          "WILL BORGEN",
+          "MATTHEW ROBERTSON",
           "BRADEN SCHNEIDER"
         ],
         [
-          "MATTHEW ROBERTSON",
-          "URHO VAAKANAINEN"
+          "URHO VAAKANAINEN",
+          "WILL BORGEN"
         ]
       ],
       "goalies": [
@@ -1526,15 +1526,15 @@
       "defense": [
         [
           "VICTOR HEDMAN",
-          "DARREN RADDYSH"
-        ],
-        [
-          "RYAN MCDONAGH",
           "J.J. MOSER"
         ],
         [
-          "EMIL LILLEBERG",
-          "CHARLE-EDOUARD D'ASTOUS"
+          "RYAN MCDONAGH",
+          "ERIK CERNAK"
+        ],
+        [
+          "CHARLE-EDOUARD D'ASTOUS",
+          "DARREN RADDYSH"
         ]
       ],
       "goalies": [
@@ -1958,6 +1958,12 @@
     ],
     "buffalo-sabres": [
       {
+        "name": "TYSON KOZAK",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "MATTIAS SAMUELSSON",
         "pos": "D",
         "status": "Out",
@@ -1974,12 +1980,6 @@
         "pos": "LW",
         "status": "Out",
         "desc": "out"
-      },
-      {
-        "name": "TYSON KOZAK",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
       },
       {
         "name": "JIRI KULICH",
@@ -2198,20 +2198,20 @@
       {
         "name": "SAM BENNETT",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "SAM REINHART",
-        "pos": "C",
         "status": "Out",
         "desc": "out"
       },
       {
         "name": "UVIS BALINSKIS",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "SAM REINHART",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "ALEKSANDER BARKOV",
@@ -2268,8 +2268,8 @@
       {
         "name": "BOBBY BRINK",
         "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "MARCUS FOLIGNO",
