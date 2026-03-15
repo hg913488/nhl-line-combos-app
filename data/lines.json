@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-15 15:54:37 UTC",
+  "updated_at": "2026-03-15 19:39:02 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -118,7 +118,7 @@
         "FRASER MINTEN",
         "CASEY MITTELSTADT",
         "VIKTOR ARVIDSSON",
-        "ALEXANDER STEEVES",
+        "MARAT KHUSNUTDINOV",
         "MASON LOHREI"
       ]
     },
@@ -289,13 +289,13 @@
       ],
       "pp1": [
         "ANDREI SVECHNIKOV",
-        "SEBASTIAN AHO",
+        "JORDAN STAAL",
         "SETH JARVIS",
-        "NIKOLAJ EHLERS",
+        "SEBASTIAN AHO",
         "ALEXANDER NIKISHIN"
       ],
       "pp2": [
-        "MARK JANKOWSKI",
+        "NIKOLAJ EHLERS",
         "LOGAN STANKOVEN",
         "JACKSON BLAKE",
         "TAYLOR HALL",
@@ -424,7 +424,7 @@
     "columbus-blue-jackets": {
       "forwards": [
         [
-          "COLE SILLINGER",
+          "MASON MARCHMENT",
           "ADAM FANTILLI",
           "KIRILL MARCHENKO"
         ],
@@ -434,7 +434,7 @@
           "CONOR GARLAND"
         ],
         [
-          "MASON MARCHMENT",
+          "COLE SILLINGER",
           "CHARLIE COYLE",
           "MATHIEU OLIVIER"
         ],
@@ -760,24 +760,24 @@
       ],
       "goalies": [
         [
-          "ANTON FORSBERG"
+          "DARCY KUEMPER"
         ],
         [
-          "DARCY KUEMPER"
+          "ANTON FORSBERG"
         ]
       ],
       "pp1": [
-        "QUINTON BYFIELD",
+        "ALEX LAFERRIERE",
         "ANZE KOPITAR",
         "ADRIAN KEMPE",
         "ARTEMI PANARIN",
         "BRANDT CLARKE"
       ],
       "pp2": [
-        "TAYLOR WARD",
-        "ALEX LAFERRIERE",
-        "SCOTT LAUGHTON",
         "TREVOR MOORE",
+        "QUINTON BYFIELD",
+        "SCOTT LAUGHTON",
+        "ARTEMI PANARIN",
         "DREW DOUGHTY"
       ]
     },
@@ -1311,14 +1311,14 @@
         "RICKARD RAKELL",
         "EGOR CHINAKHOV",
         "ERIK KARLSSON",
-        "TOMMY NOVAK"
+        "ANTHONY MANTHA"
       ],
       "pp2": [
         "ELMER SODERBLOM",
         "BEN KINDEL",
         "VILLE KOIVUNEN",
         "KRIS LETANG",
-        "ANTHONY MANTHA"
+        "TOMMY NOVAK"
       ]
     },
     "san-jose-sharks": {
@@ -1341,7 +1341,7 @@
         [
           "BARCLAY GOODROW",
           "ZACK OSTAPCHUK",
-          "RYAN REAVES"
+          "PAVOL REGENDA"
         ]
       ],
       "defense": [
@@ -1454,8 +1454,8 @@
           "JORDAN KYROU"
         ],
         [
-          "OTTO STENBERG",
           "PIUS SUTER",
+          "DALIBOR DVORSKY",
           "JONATAN BERGGREN"
         ],
         [
@@ -1497,7 +1497,7 @@
         "JAKE NEIGHBOURS",
         "JORDAN KYROU",
         "JONATAN BERGGREN",
-        "CAM FOWLER",
+        "DALIBOR DVORSKY",
         "LOGAN MAILLOUX"
       ]
     },
@@ -1526,16 +1526,16 @@
       ],
       "defense": [
         [
-          "VICTOR HEDMAN",
+          "DARREN RADDYSH",
           "J.J. MOSER"
         ],
         [
-          "RYAN MCDONAGH",
+          "VICTOR HEDMAN",
           "ERIK CERNAK"
         ],
         [
           "CHARLE-EDOUARD D'ASTOUS",
-          "DARREN RADDYSH"
+          "RYAN MCDONAGH"
         ]
       ],
       "goalies": [
@@ -1591,7 +1591,7 @@
         ],
         [
           "JAKE MCCABE",
-          "OLIVER EKMAN-LARSSON"
+          "HENRY THRUN"
         ],
         [
           "SIMON BENOIT",
@@ -1610,14 +1610,14 @@
         "MATTHEW KNIES",
         "JOHN TAVARES",
         "MATIAS MACCELLI",
-        "OLIVER EKMAN-LARSSON",
+        "MORGAN RIELLY",
         "WILLIAM NYLANDER"
       ],
       "pp2": [
         "DAKOTA JOSHUA",
         "MAX DOMI",
         "NICHOLAS ROBERTSON",
-        "MORGAN RIELLY",
+        "JAKE MCCABE",
         "EASTON COWAN"
       ]
     },
@@ -1797,7 +1797,7 @@
         "BRAEDEN BOWMAN",
         "BRETT HOWDEN",
         "IVAN BARBASHEV",
-        "RASMUS ANDERSSON",
+        "NOAH HANIFIN",
         "SHEA THEODORE"
       ]
     },
@@ -1924,12 +1924,6 @@
   },
   "injuries": {
     "anaheim-ducks": [
-      {
-        "name": "JOHN CARLSON",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
       {
         "name": "RADKO GUDAS",
         "pos": "D",
@@ -2169,8 +2163,8 @@
       {
         "name": "TY EMBERSON",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "RYAN NUGENT-HOPKINS",
@@ -2355,8 +2349,8 @@
       {
         "name": "NICK JENSEN",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "JAKE SANDERSON",
@@ -2451,8 +2445,8 @@
       {
         "name": "IGOR CHERNYSHOV",
         "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "YAROSLAV ASKAROV",
@@ -2514,6 +2508,12 @@
       }
     ],
     "toronto-maple-leafs": [
+      {
+        "name": "OLIVER EKMAN-LARSSON",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
       {
         "name": "AUSTON MATTHEWS",
         "pos": "C",
