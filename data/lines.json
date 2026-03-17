@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-17 18:08:22 UTC",
+  "updated_at": "2026-03-17 20:02:01 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -664,22 +664,22 @@
     "florida-panthers": {
       "forwards": [
         [
-          "EETU LUOSTARINEN",
-          "ANTON LUNDELL",
+          "CARTER VERHAEGHE",
+          "SAM BENNETT",
           "MATTHEW TKACHUK"
         ],
         [
-          "CARTER VERHAEGHE",
-          "EVAN RODRIGUES",
+          "A.J. GREER",
+          "ANTON LUNDELL",
           "MACKIE SAMOSKEVICH"
         ],
         [
           "COLE REINHARDT",
           "TOMAS NOSEK",
-          "A.J. GREER"
+          "JESPER BOQVIST"
         ],
         [
-          "JESPER BOQVIST",
+          "NOLAN FOOTE",
           "LUKE KUNIN",
           "VINNIE HINOSTROZA"
         ]
@@ -690,12 +690,12 @@
           "AARON EKBLAD"
         ],
         [
-          "NIKO MIKKOLA",
-          "MICHAEL BENNING"
+          "DMITRY KULIKOV",
+          "SETH JONES"
         ],
         [
           "DONOVAN SEBRANGO",
-          "DMITRY KULIKOV"
+          "MICHAEL BENNING"
         ]
       ],
       "goalies": [
@@ -708,16 +708,16 @@
       ],
       "pp1": [
         "CARTER VERHAEGHE",
-        "ANTON LUNDELL",
+        "SAM BENNETT",
         "MATTHEW TKACHUK",
         "MACKIE SAMOSKEVICH",
-        "AARON EKBLAD"
+        "SETH JONES"
       ],
       "pp2": [
-        "EETU LUOSTARINEN",
-        "EVAN RODRIGUES",
         "JESPER BOQVIST",
-        "GUSTAV FORSLING",
+        "ANTON LUNDELL",
+        "VINNIE HINOSTROZA",
+        "AARON EKBLAD",
         "MICHAEL BENNING"
       ]
     },
@@ -1335,13 +1335,13 @@
         ],
         [
           "PAVOL REGENDA",
-          "PHILIPP KURASHEV",
+          "ALEXANDER WENNBERG",
           "KIEFER SHERWOOD"
         ],
         [
           "BARCLAY GOODROW",
-          "ADAM GAUDETTE",
-          "ZACK OSTAPCHUK"
+          "ZACK OSTAPCHUK",
+          "ADAM GAUDETTE"
         ]
       ],
       "defense": [
@@ -1351,7 +1351,7 @@
         ],
         [
           "MARIO FERRARO",
-          "SHAKIR MUKHAMADULLIN"
+          "NICK LEDDY"
         ],
         [
           "SAM DICKINSON",
@@ -1368,17 +1368,17 @@
       ],
       "pp1": [
         "TYLER TOFFOLI",
+        "ALEXANDER WENNBERG",
         "WILL SMITH",
-        "WILLIAM EKLUND",
         "MACKLIN CELEBRINI",
         "DMITRY ORLOV"
       ],
       "pp2": [
-        "KIEFER SHERWOOD",
-        "MICHAEL MISA",
         "PAVOL REGENDA",
+        "MICHAEL MISA",
+        "KIEFER SHERWOOD",
         "JOHN KLINGBERG",
-        "PHILIPP KURASHEV"
+        "WILLIAM EKLUND"
       ]
     },
     "seattle-kraken": {
@@ -1925,6 +1925,12 @@
   "injuries": {
     "anaheim-ducks": [
       {
+        "name": "ROSS JOHNSTON",
+        "pos": "LW",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
         "name": "RADKO GUDAS",
         "pos": "D",
         "status": "Suspension",
@@ -1947,6 +1953,12 @@
     ],
     "buffalo-sabres": [
       {
+        "name": "ALEX TUCH",
+        "pos": "RW",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
         "name": "TANNER PEARSON",
         "pos": "LW",
         "status": "Day-To-Day",
@@ -1961,12 +1973,6 @@
       {
         "name": "COLTEN ELLIS",
         "pos": "G",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "TYSON KOZAK",
-        "pos": "C",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       },
@@ -2191,10 +2197,10 @@
     ],
     "florida-panthers": [
       {
-        "name": "SAM BENNETT",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "name": "BRAD MARCHAND",
+        "pos": "LW",
+        "status": "Injured Reserve",
+        "desc": "Injured Reserve"
       },
       {
         "name": "UVIS BALINSKIS",
@@ -2211,18 +2217,6 @@
       {
         "name": "ALEKSANDER BARKOV",
         "pos": "C",
-        "status": "Injured Reserve",
-        "desc": "Injured Reserve"
-      },
-      {
-        "name": "BRAD MARCHAND",
-        "pos": "LW",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
-        "name": "SETH JONES",
-        "pos": "D",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
       },
@@ -2484,6 +2478,12 @@
       }
     ],
     "seattle-kraken": [
+      {
+        "name": "EELI TOLVANEN",
+        "pos": "RW",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
       {
         "name": "JADEN SCHWARTZ",
         "pos": "C",
