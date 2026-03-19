@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-19 18:00:17 UTC",
+  "updated_at": "2026-03-19 19:56:52 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -691,11 +691,11 @@
           "AARON EKBLAD"
         ],
         [
-          "DMITRY KULIKOV",
+          "NIKO MIKKOLA",
           "SETH JONES"
         ],
         [
-          "DONOVAN SEBRANGO",
+          "DMITRY KULIKOV",
           "MICHAEL BENNING"
         ]
       ],
@@ -727,7 +727,7 @@
         [
           "ARTEMI PANARIN",
           "ANZE KOPITAR",
-          "MATHIEU JOSEPH"
+          "ADRIAN KEMPE"
         ],
         [
           "TREVOR MOORE",
@@ -737,7 +737,7 @@
         [
           "ALEX TURCOTTE",
           "SCOTT LAUGHTON",
-          "JARED WRIGHT"
+          "MATHIEU JOSEPH"
         ],
         [
           "JEFF MALOTT",
@@ -770,14 +770,14 @@
       "pp1": [
         "ALEX LAFERRIERE",
         "ANZE KOPITAR",
-        "QUINTON BYFIELD",
+        "ADRIAN KEMPE",
         "ARTEMI PANARIN",
         "BRANDT CLARKE"
       ],
       "pp2": [
-        "TREVOR MOORE",
-        "SCOTT LAUGHTON",
         "ALEX TURCOTTE",
+        "QUINTON BYFIELD",
+        "TREVOR MOORE",
         "ARTEMI PANARIN",
         "DREW DOUGHTY"
       ]
@@ -1096,7 +1096,7 @@
         ],
         [
           "TYE KARTYE",
-          "NOAH LABA",
+          "JONNY BRODZINSKI",
           "CONOR SHEARY"
         ],
         [
@@ -1115,7 +1115,7 @@
           "BRADEN SCHNEIDER"
         ],
         [
-          "URHO VAAKANAINEN",
+          "VINCENT IORIO",
           "WILL BORGEN"
         ]
       ],
@@ -2224,16 +2224,16 @@
     ],
     "los-angeles-kings": [
       {
-        "name": "ADRIAN KEMPE",
-        "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "JOEL ARMIA",
         "pos": "RW",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
+      },
+      {
+        "name": "ADRIAN KEMPE",
+        "pos": "RW",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       },
       {
         "name": "ANDREI KUZMENKO",
@@ -2444,14 +2444,14 @@
       {
         "name": "YAROSLAV ASKAROV",
         "pos": "G",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "IGOR CHERNYSHOV",
         "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "TY DELLANDREA",
@@ -2495,6 +2495,12 @@
       }
     ],
     "tampa-bay-lightning": [
+      {
+        "name": "MAXWELL CROZIER",
+        "pos": "D",
+        "status": "Injured Reserve",
+        "desc": "Injured Reserve"
+      },
       {
         "name": "EMIL LILLEBERG",
         "pos": "D",
