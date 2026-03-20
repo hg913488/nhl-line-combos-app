@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-20 17:10:57 UTC",
+  "updated_at": "2026-03-20 19:50:33 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -20,8 +20,8 @@
           "CUTTER GAUTHIER"
         ],
         [
-          "FRANK VATRANO",
           "TIM WASHE",
+          "MASON MCTAVISH",
           "JANSEN HARKINS"
         ]
       ],
@@ -55,10 +55,10 @@
         "MIKAEL GRANLUND"
       ],
       "pp2": [
-        "CUTTER GAUTHIER",
         "ALEX KILLORN",
+        "MASON MCTAVISH",
         "BECKETT SENNECKE",
-        "JACOB TROUBA",
+        "CUTTER GAUTHIER",
         "JACKSON LACOMBE"
       ]
     },
@@ -321,6 +321,7 @@
         ],
         [
           "NICK LARDIS",
+          "SACHA BOISVERT",
           "LANDON SLAGGERT"
         ]
       ],
@@ -386,7 +387,7 @@
       ],
       "defense": [
         [
-          "BRETT KULAK",
+          "DEVON TOEWS",
           "CALE MAKAR"
         ],
         [
@@ -394,7 +395,7 @@
           "BRENT BURNS"
         ],
         [
-          "DEVON TOEWS",
+          "BRETT KULAK",
           "SAM MALINSKI"
         ]
       ],
@@ -604,24 +605,24 @@
     "edmonton-oilers": {
       "forwards": [
         [
-          "VASILY PODKOLZIN",
+          "MATTHEW SAVOIE",
           "CONNOR MCDAVID",
-          "MATTHEW SAVOIE"
+          "ZACH HYMAN"
         ],
         [
-          "ZACH HYMAN",
+          "VASILY PODKOLZIN",
           "RYAN NUGENT-HOPKINS",
-          "JACK ROSLOVIC"
-        ],
-        [
-          "JOSH SAMANSKI",
-          "JASON DICKINSON",
           "KASPERI KAPANEN"
         ],
         [
           "MAX JONES",
+          "JASON DICKINSON",
+          "JACK ROSLOVIC"
+        ],
+        [
+          "JOSH SAMANSKI",
           "ADAM HENRIQUE",
-          "TRENT FREDERIC"
+          "ROBY JARVENTIE"
         ]
       ],
       "defense": [
@@ -647,16 +648,16 @@
         ]
       ],
       "pp1": [
-        "MATTHEW SAVOIE",
-        "RYAN NUGENT-HOPKINS",
         "ZACH HYMAN",
+        "RYAN NUGENT-HOPKINS",
+        "MATTHEW SAVOIE",
         "CONNOR MCDAVID",
         "EVAN BOUCHARD"
       ],
       "pp2": [
-        "KASPERI KAPANEN",
-        "JACK ROSLOVIC",
         "VASILY PODKOLZIN",
+        "JACK ROSLOVIC",
+        "KASPERI KAPANEN",
         "MATTIAS EKHOLM",
         "JAKE WALMAN"
       ]
@@ -784,19 +785,19 @@
     "minnesota-wild": {
       "forwards": [
         [
-          "MATT BOLDY",
+          "MARCUS JOHANSSON",
           "DANILA YUROV",
           "BOBBY BRINK"
         ],
         [
-          "MATS ZUCCARELLO",
+          "VLADIMIR TARASENKO",
           "RYAN HARTMAN",
-          "VLADIMIR TARASENKO"
+          "MATS ZUCCARELLO"
         ],
         [
-          "MARCUS JOHANSSON",
+          "NICK FOLIGNO",
           "MICHAEL MCCARRON",
-          "NICK FOLIGNO"
+          "BOBBY BRINK"
         ],
         [
           "NICO STURM",
@@ -1586,11 +1587,11 @@
       "defense": [
         [
           "MORGAN RIELLY",
-          "PHILIPPE MYERS"
+          "BRANDON CARLO"
         ],
         [
           "JAKE MCCABE",
-          "BRANDON CARLO"
+          "SIMON BENOIT"
         ],
         [
           "OLIVER EKMAN-LARSSON",
@@ -1659,10 +1660,10 @@
       ],
       "goalies": [
         [
-          "VITEK VANECEK"
+          "KAREL VEJMELKA"
         ],
         [
-          "KAREL VEJMELKA"
+          "VITEK VANECEK"
         ]
       ],
       "pp1": [
@@ -1986,8 +1987,8 @@
       {
         "name": "YAN KUZNETSOV",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "JONATHAN HUBERDEAU",
@@ -2024,8 +2025,8 @@
       {
         "name": "SHAYNE GOSTISBEHERE",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "PYOTR KOCHETKOV",
@@ -2064,8 +2065,8 @@
       {
         "name": "ROSS COLTON",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "LOGAN O'CONNOR",
@@ -2140,14 +2141,14 @@
     ],
     "edmonton-oilers": [
       {
-        "name": "TY EMBERSON",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "TRENT FREDERIC",
         "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "TY EMBERSON",
+        "pos": "D",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       },
@@ -2216,12 +2217,6 @@
     ],
     "los-angeles-kings": [
       {
-        "name": "JOEL ARMIA",
-        "pos": "RW",
-        "status": "Injured Reserve",
-        "desc": "Injured Reserve"
-      },
-      {
         "name": "ANDREI KUZMENKO",
         "pos": "LW",
         "status": "Injured Reserve",
@@ -2236,14 +2231,14 @@
     ],
     "minnesota-wild": [
       {
-        "name": "KIRILL KAPRIZOV",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "JOEL ERIKSSON EK",
         "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "KIRILL KAPRIZOV",
+        "pos": "LW",
         "status": "Out",
         "desc": "out"
       },
@@ -2458,6 +2453,12 @@
     ],
     "san-jose-sharks": [
       {
+        "name": "TYLER TOFFOLI",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "YAROSLAV ASKAROV",
         "pos": "G",
         "status": "Day-To-Day",
@@ -2466,12 +2467,6 @@
       {
         "name": "IGOR CHERNYSHOV",
         "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "TYLER TOFFOLI",
-        "pos": "C",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       },
