@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-21 19:46:23 UTC",
+  "updated_at": "2026-03-21 22:54:16 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -1389,7 +1389,7 @@
           "JORDAN EBERLE"
         ],
         [
-          "FREDERICK GAUDREAU",
+          "EELI TOLVANEN",
           "CHANDLER STEPHENSON",
           "KAAPO KAKKO"
         ],
@@ -1431,7 +1431,7 @@
         "MATTY BENIERS",
         "JORDAN EBERLE",
         "VINCE DUNN",
-        "JARED MCCANN"
+        "EELI TOLVANEN"
       ],
       "pp2": [
         "BOBBY MCMANN",
@@ -1475,7 +1475,7 @@
         ],
         [
           "CAM FOWLER",
-          "TYLER TUCKER"
+          "JUSTIN HOLL"
         ]
       ],
       "goalies": [
@@ -1530,11 +1530,11 @@
           "J.J. MOSER"
         ],
         [
-          "VICTOR HEDMAN",
+          "RYAN MCDONAGH",
           "ERIK CERNAK"
         ],
         [
-          "RYAN MCDONAGH",
+          "EMIL LILLEBERG",
           "CHARLE-EDOUARD D'ASTOUS"
         ]
       ],
@@ -1558,7 +1558,7 @@
         "ANTHONY CIRELLI",
         "GAGE GONCALVES",
         "BRANDON HAGEL",
-        "VICTOR HEDMAN"
+        "CHARLE-EDOUARD D'ASTOUS"
       ]
     },
     "toronto-maple-leafs": {
@@ -1587,23 +1587,23 @@
       "defense": [
         [
           "JAKE MCCABE",
-          "OLIVER EKMAN-LARSSON"
+          "TROY STECHER"
         ],
         [
-          "MORGAN RIELLY",
+          "OLIVER EKMAN-LARSSON",
           "BRANDON CARLO"
         ],
         [
           "SIMON BENOIT",
-          "TROY STECHER"
+          "PHILIPPE MYERS"
         ]
       ],
       "goalies": [
         [
-          "ANTHONY STOLARZ"
+          "JOSEPH WOLL"
         ],
         [
-          "JOSEPH WOLL"
+          "ANTHONY STOLARZ"
         ]
       ],
       "pp1": [
@@ -1617,7 +1617,7 @@
         "DAKOTA JOSHUA",
         "MAX DOMI",
         "NICHOLAS ROBERTSON",
-        "MORGAN RIELLY",
+        "JAKE MCCABE",
         "EASTON COWAN"
       ]
     },
@@ -1684,9 +1684,9 @@
     "vancouver-canucks": {
       "forwards": [
         [
-          "JAKE DEBRUSK",
+          "DREW O'CONNOR",
           "ELIAS PETTERSSON",
-          "DREW O'CONNOR"
+          "LINUS KARLSSON"
         ],
         [
           "LIAM OHGREN",
@@ -1694,12 +1694,12 @@
           "BROCK BOESER"
         ],
         [
-          "MAX SASSON",
+          "NILS HOGLANDER",
           "TEDDY BLUEGER",
-          "LINUS KARLSSON"
+          "JAKE DEBRUSK"
         ],
         [
-          "NILS HOGLANDER",
+          "CURTIS DOUGLAS",
           "AATU RATY",
           "EVANDER KANE"
         ]
@@ -2277,8 +2277,8 @@
       {
         "name": "JOSH ANDERSON",
         "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "KIRBY DACH",
@@ -2325,8 +2325,8 @@
       {
         "name": "MAXIM SHABANOV",
         "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "ALEXANDER ROMANOV",
@@ -2395,22 +2395,22 @@
     ],
     "philadelphia-flyers": [
       {
-        "name": "SEAN COUTURIER",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "LUKE GLENDENING",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "DENVER BARKEY",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "SEAN COUTURIER",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "TY MURCHISON",
@@ -2432,6 +2432,12 @@
       }
     ],
     "pittsburgh-penguins": [
+      {
+        "name": "RYAN SHEA",
+        "pos": "D",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
       {
         "name": "KEVIN HAYES",
         "pos": "RW",
@@ -2465,6 +2471,12 @@
     ],
     "san-jose-sharks": [
       {
+        "name": "IGOR CHERNYSHOV",
+        "pos": "LW",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "YAROSLAV ASKAROV",
         "pos": "G",
         "status": "Out",
@@ -2483,12 +2495,6 @@
         "desc": "out"
       },
       {
-        "name": "IGOR CHERNYSHOV",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "TY DELLANDREA",
         "pos": "C",
         "status": "Injured Reserve",
@@ -2505,14 +2511,14 @@
       {
         "name": "RYAN WINTERTON",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
-        "name": "EELI TOLVANEN",
-        "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "name": "JARED MCCANN",
+        "pos": "LW",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "JADEN SCHWARTZ",
@@ -2531,8 +2537,8 @@
       {
         "name": "TYLER TUCKER",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       }
     ],
     "tampa-bay-lightning": [
@@ -2563,6 +2569,12 @@
     ],
     "toronto-maple-leafs": [
       {
+        "name": "MORGAN RIELLY",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "AUSTON MATTHEWS",
         "pos": "C",
         "status": "Out",
@@ -2576,12 +2588,6 @@
       }
     ],
     "vancouver-canucks": [
-      {
-        "name": "PIERRE-OLIVIER JOSEPH",
-        "pos": "D",
-        "status": "Injured Reserve",
-        "desc": "Injured Reserve"
-      },
       {
         "name": "THATCHER DEMKO",
         "pos": "G",
