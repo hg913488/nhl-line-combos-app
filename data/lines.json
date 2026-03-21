@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-21 15:49:02 UTC",
+  "updated_at": "2026-03-21 19:03:58 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -932,10 +932,10 @@
         ],
         [
           "NICOLAS HAGUE",
-          "JUSTIN BARRON"
+          "NICK PERBIX"
         ],
         [
-          "NICK PERBIX",
+          "JUSTIN BARRON",
           "RYAN UFKO"
         ]
       ],
@@ -1329,29 +1329,29 @@
           "WILL SMITH"
         ],
         [
-          "WILLIAM EKLUND",
-          "MICHAEL MISA",
-          "KIEFER SHERWOOD"
-        ],
-        [
           "COLLIN GRAF",
           "ALEXANDER WENNBERG",
           "ADAM GAUDETTE"
         ],
         [
+          "WILLIAM EKLUND",
+          "MICHAEL MISA",
+          "KIEFER SHERWOOD"
+        ],
+        [
           "BARCLAY GOODROW",
           "ZACK OSTAPCHUK",
-          "ADAM GAUDETTE"
+          "RYAN REAVES"
         ]
       ],
       "defense": [
         [
-          "MARIO FERRARO",
-          "SHAKIR MUKHAMADULLIN"
-        ],
-        [
           "DMITRY ORLOV",
           "JOHN KLINGBERG"
+        ],
+        [
+          "SHAKIR MUKHAMADULLIN",
+          "MARIO FERRARO"
         ],
         [
           "SAM DICKINSON",
@@ -1771,11 +1771,11 @@
         ],
         [
           "NOAH HANIFIN",
-          "RASMUS ANDERSSON"
+          "BEN HUTTON"
         ],
         [
           "JEREMY LAUZON",
-          "KAEDAN KORCZAK"
+          "RASMUS ANDERSSON"
         ]
       ],
       "goalies": [
@@ -1866,12 +1866,12 @@
         [
           "KYLE CONNOR",
           "MARK SCHEIFELE",
-          "ALEX IAFALLO"
+          "GABRIEL VILARDI"
         ],
         [
           "COLE PERFETTI",
           "ADAM LOWRY",
-          "GABRIEL VILARDI"
+          "ALEX IAFALLO"
         ],
         [
           "GUSTAV NYQUIST",
@@ -1895,7 +1895,7 @@
         ],
         [
           "HAYDN FLEURY",
-          "JACOB BRYSON"
+          "NEAL PIONK"
         ]
       ],
       "goalies": [
@@ -1917,7 +1917,7 @@
         "BRAD LAMBERT",
         "JONATHAN TOEWS",
         "GUSTAV NYQUIST",
-        "ELIAS SALOMONSSON",
+        "NEAL PIONK",
         "ISAK ROSEN"
       ]
     }
@@ -2297,14 +2297,8 @@
       {
         "name": "ADAM WILSBY",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "JUUSE SAROS",
-        "pos": "G",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       }
     ],
     "new-jersey-devils": [
@@ -2361,16 +2355,22 @@
     ],
     "new-york-rangers": [
       {
-        "name": "NOAH LABA",
-        "pos": "C",
+        "name": "JONATHAN QUICK",
+        "pos": "G",
         "status": "Out",
         "desc": "out"
       },
       {
         "name": "URHO VAAKANAINEN",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "NOAH LABA",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "MATT REMPE",
@@ -2433,16 +2433,10 @@
     ],
     "pittsburgh-penguins": [
       {
-        "name": "SAMUEL GIRARD",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "KEVIN HAYES",
         "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "BLAKE LIZOTTE",
@@ -2471,22 +2465,22 @@
     ],
     "san-jose-sharks": [
       {
+        "name": "YAROSLAV ASKAROV",
+        "pos": "G",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "VINCENT DESHARNAIS",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "TYLER TOFFOLI",
         "pos": "C",
         "status": "Out",
         "desc": "out"
-      },
-      {
-        "name": "YAROSLAV ASKAROV",
-        "pos": "G",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
       },
       {
         "name": "IGOR CHERNYSHOV",
@@ -2545,20 +2539,14 @@
       {
         "name": "VICTOR HEDMAN",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "MAXWELL CROZIER",
         "pos": "D",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
-      },
-      {
-        "name": "EMIL LILLEBERG",
-        "pos": "D",
-        "status": "Out",
-        "desc": "out"
       },
       {
         "name": "DECLAN CARLILE",
