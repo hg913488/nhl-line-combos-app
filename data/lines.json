@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-21 14:56:29 UTC",
+  "updated_at": "2026-03-21 15:49:02 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -588,16 +588,16 @@
         ]
       ],
       "pp1": [
-        "JAMES VAN RIEMSDYK",
-        "J.T. COMPHER",
-        "PATRICK KANE",
         "ALEX DEBRINCAT",
+        "ANDREW COPP",
+        "PATRICK KANE",
+        "LUCAS RAYMOND",
         "MORITZ SEIDER"
       ],
       "pp2": [
+        "JAMES VAN RIEMSDYK",
+        "J.T. COMPHER",
         "EMMITT FINNIE",
-        "ANDREW COPP",
-        "LUCAS RAYMOND",
         "DAVID PERRON",
         "JUSTIN FAULK"
       ]
@@ -1025,24 +1025,24 @@
     "new-york-islanders": {
       "forwards": [
         [
-          "EMIL HEINEMAN",
+          "ANDERS LEE",
           "BO HORVAT",
           "MATHEW BARZAL"
         ],
         [
           "ANTHONY DUCLAIR",
           "BRAYDEN SCHENN",
-          "SIMON HOLMSTROM"
-        ],
-        [
-          "ANDERS LEE",
-          "JEAN-GABRIEL PAGEAU",
-          "CALUM RITCHIE"
+          "EMIL HEINEMAN"
         ],
         [
           "ONDREJ PALAT",
+          "JEAN-GABRIEL PAGEAU",
+          "SIMON HOLMSTROM"
+        ],
+        [
+          "CALUM RITCHIE",
           "CASEY CIZIKAS",
-          "KYLE MACLEAN"
+          "MARC GATCOMB"
         ]
       ],
       "defense": [
@@ -2139,12 +2139,6 @@
         "desc": "day-to-day"
       },
       {
-        "name": "MASON APPLETON",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "MICHAEL RASMUSSEN",
         "pos": "C",
         "status": "Out",
@@ -2367,14 +2361,14 @@
     ],
     "new-york-rangers": [
       {
-        "name": "URHO VAAKANAINEN",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "NOAH LABA",
         "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "URHO VAAKANAINEN",
+        "pos": "D",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       },
@@ -2387,13 +2381,13 @@
     ],
     "ottawa-senators": [
       {
-        "name": "NICK JENSEN",
+        "name": "JAKE SANDERSON",
         "pos": "D",
         "status": "Out",
         "desc": "out"
       },
       {
-        "name": "JAKE SANDERSON",
+        "name": "NICK JENSEN",
         "pos": "D",
         "status": "Out",
         "desc": "out"
@@ -2438,12 +2432,6 @@
       }
     ],
     "pittsburgh-penguins": [
-      {
-        "name": "RYAN GRAVES",
-        "pos": "D",
-        "status": "Injured Reserve",
-        "desc": "Injured Reserve"
-      },
       {
         "name": "SAMUEL GIRARD",
         "pos": "D",
@@ -2646,12 +2634,6 @@
       }
     ],
     "winnipeg-jets": [
-      {
-        "name": "NEAL PIONK",
-        "pos": "D",
-        "status": "Injured Reserve",
-        "desc": "Injured Reserve"
-      },
       {
         "name": "COLIN MILLER",
         "pos": "D",
