@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-22 15:49:47 UTC",
+  "updated_at": "2026-03-22 19:15:44 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -312,15 +312,15 @@
         [
           "TYLER BERTUZZI",
           "FRANK NAZAR",
-          "TEUVO TERAVAINEN"
+          "NICK LARDIS"
         ],
         [
-          "LANDON SLAGGERT",
+          "TEUVO TERAVAINEN",
           "RYAN DONATO",
           "ILYA MIKHEYEV"
         ],
         [
-          "NICK LARDIS",
+          "LANDON SLAGGERT",
           "DOMINIC TONINATO",
           "SAM LAFFERTY"
         ]
@@ -335,7 +335,7 @@
           "SAM RINZEL"
         ],
         [
-          "ETHAN DEL MASTRO",
+          "LOUIS CREVIER",
           "MATT GRZELCYK"
         ]
       ],
@@ -370,9 +370,9 @@
           "MARTIN NECAS"
         ],
         [
-          "NAZEM KADRI",
+          "GABRIEL LANDESKOG",
           "BROCK NELSON",
-          "NICOLAS ROY"
+          "NAZEM KADRI"
         ],
         [
           "PARKER KELLY",
@@ -381,7 +381,7 @@
         ],
         [
           "ZAKHAR BARDAKOV",
-          "IVAN IVAN",
+          "NICOLAS ROY",
           "GAVIN BRINDLEY"
         ]
       ],
@@ -416,10 +416,10 @@
       ],
       "pp2": [
         "VALERI NICHUSHKIN",
-        "NICOLAS ROY",
+        "GABRIEL LANDESKOG",
         "GAVIN BRINDLEY",
         "DEVON TOEWS",
-        "BRENT BURNS"
+        "SAM MALINSKI"
       ]
     },
     "columbus-blue-jackets": {
@@ -922,7 +922,7 @@
         [
           "REID SCHAEFER",
           "FEDOR SVECHKOV",
-          "OZZY WIESBLATT"
+          "JOAKIM KEMELL"
         ]
       ],
       "defense": [
@@ -935,7 +935,7 @@
           "NICK PERBIX"
         ],
         [
-          "JUSTIN BARRON",
+          "ADAM WILSBY",
           "RYAN UFKO"
         ]
       ],
@@ -1294,7 +1294,7 @@
           "KRIS LETANG"
         ],
         [
-          "RYAN SHEA",
+          "RYAN GRAVES",
           "CONNOR CLIFTON"
         ]
       ],
@@ -1985,16 +1985,16 @@
     ],
     "calgary-flames": [
       {
-        "name": "YAN KUZNETSOV",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "CONNOR ZARY",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "YAN KUZNETSOV",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "JONATHAN HUBERDEAU",
@@ -2031,8 +2031,8 @@
       {
         "name": "SHAYNE GOSTISBEHERE",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "PYOTR KOCHETKOV",
@@ -2042,12 +2042,6 @@
       }
     ],
     "chicago-blackhawks": [
-      {
-        "name": "LOUIS CREVIER",
-        "pos": "D",
-        "status": "Out",
-        "desc": "out"
-      },
       {
         "name": "ANDREW MANGIAPANE",
         "pos": "LW",
@@ -2083,8 +2077,8 @@
       {
         "name": "ROSS COLTON",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "LOGAN O'CONNOR",
@@ -2287,14 +2281,6 @@
         "desc": "Injured Reserve"
       }
     ],
-    "nashville-predators": [
-      {
-        "name": "ADAM WILSBY",
-        "pos": "D",
-        "status": "Out",
-        "desc": "out"
-      }
-    ],
     "new-jersey-devils": [
       {
         "name": "BRETT PESCE",
@@ -2303,13 +2289,13 @@
         "desc": "out"
       },
       {
-        "name": "ZACK MACEWEN",
+        "name": "STEFAN NOESEN",
         "pos": "RW",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
       },
       {
-        "name": "STEFAN NOESEN",
+        "name": "ZACK MACEWEN",
         "pos": "RW",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
@@ -2427,16 +2413,10 @@
     ],
     "pittsburgh-penguins": [
       {
-        "name": "KEVIN HAYES",
-        "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "RYAN SHEA",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "BLAKE LIZOTTE",
@@ -2620,6 +2600,12 @@
       }
     ],
     "washington-capitals": [
+      {
+        "name": "ETHEN FRANK",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
       {
         "name": "DAVID KAMPF",
         "pos": "C",
