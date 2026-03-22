@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-22 19:47:53 UTC",
+  "updated_at": "2026-03-22 22:55:59 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -500,8 +500,8 @@
           "COLIN BLACKWELL"
         ],
         [
-          "ADAM ERNE",
           "OSKAR BACK",
+          "ARTTU HYRY",
           "NATHAN BASTIAN"
         ]
       ],
@@ -516,15 +516,15 @@
         ],
         [
           "LIAN BICHSEL",
-          "TYLER MYERS"
+          "ILYA LYUBUSHKIN"
         ]
       ],
       "goalies": [
         [
-          "CASEY DESMITH"
+          "JAKE OETTINGER"
         ],
         [
-          "JAKE OETTINGER"
+          "CASEY DESMITH"
         ]
       ],
       "pp1": [
@@ -1027,12 +1027,12 @@
         [
           "ANDERS LEE",
           "BO HORVAT",
-          "MATHEW BARZAL"
+          "EMIL HEINEMAN"
         ],
         [
-          "ANTHONY DUCLAIR",
+          "CALUM RITCHIE",
           "BRAYDEN SCHENN",
-          "EMIL HEINEMAN"
+          "MATHEW BARZAL"
         ],
         [
           "ONDREJ PALAT",
@@ -1040,7 +1040,7 @@
           "SIMON HOLMSTROM"
         ],
         [
-          "CALUM RITCHIE",
+          "KYLE MACLEAN",
           "CASEY CIZIKAS",
           "MARC GATCOMB"
         ]
@@ -1048,14 +1048,14 @@
       "defense": [
         [
           "MATTHEW SCHAEFER",
-          "RYAN PULOCK"
-        ],
-        [
-          "ADAM PELECH",
-          "TONY DEANGELO"
+          "ADAM PELECH"
         ],
         [
           "CARSON SOUCY",
+          "TONY DEANGELO"
+        ],
+        [
+          "ADAM BOQVIST",
           "SCOTT MAYFIELD"
         ]
       ],
@@ -1077,7 +1077,7 @@
       "pp2": [
         "ANDERS LEE",
         "SIMON HOLMSTROM",
-        "ANTHONY DUCLAIR",
+        "ONDREJ PALAT",
         "EMIL HEINEMAN",
         "TONY DEANGELO"
       ]
@@ -1175,7 +1175,7 @@
           "JORDAN SPENCE"
         ],
         [
-          "DENNIS GILBERT",
+          "LASSI THOMSON",
           "NIKOLAS MATINPALO"
         ]
       ],
@@ -1749,19 +1749,19 @@
           "MARK STONE"
         ],
         [
-          "PAVEL DOROFEYEV",
-          "TOMAS HERTL",
-          "MITCH MARNER"
+          "REILLY SMITH",
+          "MITCH MARNER",
+          "PAVEL DOROFEYEV"
         ],
         [
           "BRETT HOWDEN",
-          "COLTON SISSONS",
-          "BRAEDEN BOWMAN"
+          "TOMAS HERTL",
+          "KEEGAN KOLESAR"
         ],
         [
           "COLE SMITH",
           "NIC DOWD",
-          "KEEGAN KOLESAR"
+          "COLTON SISSONS"
         ]
       ],
       "defense": [
@@ -1771,7 +1771,7 @@
         ],
         [
           "NOAH HANIFIN",
-          "BEN HUTTON"
+          "KAEDAN KORCZAK"
         ],
         [
           "JEREMY LAUZON",
@@ -1794,7 +1794,7 @@
         "MITCH MARNER"
       ],
       "pp2": [
-        "BRAEDEN BOWMAN",
+        "REILLY SMITH",
         "BRETT HOWDEN",
         "IVAN BARBASHEV",
         "RASMUS ANDERSSON",
@@ -2042,6 +2042,12 @@
       }
     ],
     "chicago-blackhawks": [
+      {
+        "name": "MATT GRZELCYK",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
       {
         "name": "ANDREW MANGIAPANE",
         "pos": "LW",
@@ -2303,10 +2309,16 @@
     ],
     "new-york-islanders": [
       {
-        "name": "MAXIM SHABANOV",
-        "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "name": "RYAN PULOCK",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "ANTHONY DUCLAIR",
+        "pos": "LW",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "ALEXANDER ROMANOV",
@@ -2361,13 +2373,19 @@
     ],
     "ottawa-senators": [
       {
-        "name": "JAKE SANDERSON",
+        "name": "NICK JENSEN",
+        "pos": "D",
+        "status": "Injured Reserve",
+        "desc": "Injured Reserve"
+      },
+      {
+        "name": "DENNIS GILBERT",
         "pos": "D",
         "status": "Out",
         "desc": "out"
       },
       {
-        "name": "NICK JENSEN",
+        "name": "JAKE SANDERSON",
         "pos": "D",
         "status": "Out",
         "desc": "out"
