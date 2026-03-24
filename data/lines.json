@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-24 21:01:32 UTC",
+  "updated_at": "2026-03-24 23:02:58 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -375,28 +375,28 @@
           "VALERI NICHUSHKIN"
         ],
         [
-          "JOEL KIVIRANTA",
+          "PARKER KELLY",
           "NAZEM KADRI",
-          "NICOLAS ROY"
+          "LOGAN O'CONNOR"
         ],
         [
-          "PARKER KELLY",
+          "ZAKHAR BARDAKOV",
           "JACK DRURY",
-          "LOGAN O'CONNOR"
+          "JOEL KIVIRANTA"
         ]
       ],
       "defense": [
         [
-          "DEVON TOEWS",
+          "BRETT KULAK",
           "CALE MAKAR"
+        ],
+        [
+          "DEVON TOEWS",
+          "SAM MALINSKI"
         ],
         [
           "JOSH MANSON",
           "BRENT BURNS"
-        ],
-        [
-          "BRETT KULAK",
-          "SAM MALINSKI"
         ]
       ],
       "goalies": [
@@ -416,10 +416,10 @@
       ],
       "pp2": [
         "VALERI NICHUSHKIN",
-        "NICOLAS ROY",
         "ROSS COLTON",
+        "GABRIEL LANDESKOG",
         "DEVON TOEWS",
-        "GABRIEL LANDESKOG"
+        "BRENT BURNS"
       ]
     },
     "columbus-blue-jackets": {
@@ -555,14 +555,14 @@
           "PATRICK KANE"
         ],
         [
-          "MARCO KASPER",
+          "DAVID PERRON",
           "ANDREW COPP",
           "MASON APPLETON"
         ],
         [
-          "DAVID PERRON",
-          "SHELDON DRIES",
-          "JAMES VAN RIEMSDYK"
+          "JAMES VAN RIEMSDYK",
+          "MARCO KASPER",
+          "DOMINIK SHINE"
         ]
       ],
       "defense": [
@@ -860,7 +860,7 @@
           "ALEXANDRE TEXIER"
         ],
         [
-          "JOE VELENO",
+          "JOSH ANDERSON",
           "PHILLIP DANAULT",
           "BRENDAN GALLAGHER"
         ]
@@ -1385,22 +1385,21 @@
     "seattle-kraken": {
       "forwards": [
         [
-          "BOBBY MCMANN",
+          "BERKLY CATTON",
           "MATTY BENIERS",
           "JORDAN EBERLE"
         ],
         [
-          "KAAPO KAKKO",
+          "BOBBY MCMANN",
           "CHANDLER STEPHENSON",
+          "KAAPO KAKKO"
+        ],
+        [
+          "EELI TOLVANEN",
+          "SHANE WRIGHT",
           "FREDERICK GAUDREAU"
         ],
         [
-          "BERKLY CATTON",
-          "SHANE WRIGHT",
-          "EELI TOLVANEN"
-        ],
-        [
-          "JANI NYMAN",
           "BEN MEYERS",
           "JACOB MELANSON"
         ]
@@ -1940,12 +1939,6 @@
     ],
     "boston-bruins": [
       {
-        "name": "TANNER JEANNOT",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "DANS LOCMELIS",
         "pos": "C",
         "status": "Out",
@@ -2082,6 +2075,12 @@
     ],
     "colorado-avalanche": [
       {
+        "name": "NICOLAS ROY",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "ARTTURI LEHKONEN",
         "pos": "LW",
         "status": "Out",
@@ -2120,12 +2119,6 @@
         "pos": "C",
         "status": "Out",
         "desc": "out"
-      },
-      {
-        "name": "DYLAN LARKIN",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
       }
     ],
     "edmonton-oilers": [
@@ -2252,12 +2245,6 @@
     ],
     "montreal-canadiens": [
       {
-        "name": "JOSH ANDERSON",
-        "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "KIRBY DACH",
         "pos": "C",
         "status": "Out",
@@ -2382,24 +2369,6 @@
     ],
     "philadelphia-flyers": [
       {
-        "name": "LUKE GLENDENING",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "DENVER BARKEY",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "SEAN COUTURIER",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "TY MURCHISON",
         "pos": "D",
         "status": "Out",
@@ -2514,8 +2483,8 @@
       {
         "name": "VICTOR HEDMAN",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "MAXWELL CROZIER",
