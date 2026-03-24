@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-24 18:07:34 UTC",
+  "updated_at": "2026-03-24 20:01:03 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -35,8 +35,8 @@
           "JOHN CARLSON"
         ],
         [
-          "OLEN ZELLWEGER",
-          "IAN MOORE"
+          "IAN MOORE",
+          "RADKO GUDAS"
         ]
       ],
       "goalies": [
@@ -200,8 +200,8 @@
           "VICTOR OLOFSSON"
         ],
         [
+          "RYAN LOMBERG",
           "MARTIN POSPISIL",
-          "TYSON GROSS",
           "ADAM KLAPKA"
         ]
       ],
@@ -735,14 +735,14 @@
           "ALEX LAFERRIERE"
         ],
         [
-          "JOEL ARMIA",
+          "MATHIEU JOSEPH",
           "SCOTT LAUGHTON",
           "JARED WRIGHT"
         ],
         [
-          "ALEX TURCOTTE",
+          "JEFF MALOTT",
           "SAMUEL HELENIUS",
-          "MATHIEU JOSEPH"
+          "JOEL ARMIA"
         ]
       ],
       "defense": [
@@ -1175,7 +1175,7 @@
           "NIKOLAS MATINPALO"
         ],
         [
-          "MATTHEW ANDONOVSKI",
+          "JORIAN DONOVAN",
           "CARTER YAKEMCHUK"
         ]
       ],
@@ -1347,15 +1347,15 @@
       ],
       "defense": [
         [
-          "SHAKIR MUKHAMADULLIN",
-          "MARIO FERRARO"
-        ],
-        [
           "DMITRY ORLOV",
           "JOHN KLINGBERG"
         ],
         [
-          "NICK LEDDY",
+          "SHAKIR MUKHAMADULLIN",
+          "MARIO FERRARO"
+        ],
+        [
+          "SAM DICKINSON",
           "VINCENT DESHARNAIS"
         ]
       ],
@@ -1375,7 +1375,7 @@
         "DMITRY ORLOV"
       ],
       "pp2": [
-        "ADAM GAUDETTE",
+        "PAVOL REGENDA",
         "MICHAEL MISA",
         "KIEFER SHERWOOD",
         "IGOR CHERNYSHOV",
@@ -1822,7 +1822,7 @@
         [
           "BRANDON DUHAIME",
           "HENDRIX LAPIERRE",
-          "ETHEN FRANK"
+          "IVAN MIROSHNICHENKO"
         ]
       ],
       "defense": [
@@ -1831,20 +1831,20 @@
           "TREVOR VAN RIEMSDYK"
         ],
         [
-          "COLE HUTSON",
-          "MATT ROY"
-        ],
-        [
           "MARTIN FEHERVARY",
           "RASMUS SANDIN"
+        ],
+        [
+          "COLE HUTSON",
+          "MATT ROY"
         ]
       ],
       "goalies": [
         [
-          "LOGAN THOMPSON"
+          "CHARLIE LINDGREN"
         ],
         [
-          "CHARLIE LINDGREN"
+          "LOGAN THOMPSON"
         ]
       ],
       "pp1": [
@@ -1857,7 +1857,7 @@
       "pp2": [
         "CONNOR MCMICHAEL",
         "DYLAN STROME",
-        "JUSTIN SOURDIF",
+        "IVAN MIROSHNICHENKO",
         "ALEX OVECHKIN",
         "COLE HUTSON"
       ]
@@ -1992,14 +1992,14 @@
     ],
     "calgary-flames": [
       {
-        "name": "CONNOR ZARY",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "YAN KUZNETSOV",
         "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "CONNOR ZARY",
+        "pos": "C",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       },
@@ -2116,16 +2116,16 @@
     ],
     "detroit-red-wings": [
       {
-        "name": "DYLAN LARKIN",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "MICHAEL RASMUSSEN",
         "pos": "C",
         "status": "Out",
         "desc": "out"
+      },
+      {
+        "name": "DYLAN LARKIN",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       }
     ],
     "edmonton-oilers": [
@@ -2162,6 +2162,18 @@
     ],
     "florida-panthers": [
       {
+        "name": "ANTON LUNDELL",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "SAM REINHART",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "NIKO MIKKOLA",
         "pos": "D",
         "status": "Injured Reserve",
@@ -2184,18 +2196,6 @@
         "pos": "LW",
         "status": "Suspension",
         "desc": "Suspension"
-      },
-      {
-        "name": "ANTON LUNDELL",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "SAM REINHART",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
       },
       {
         "name": "BRAD MARCHAND",
@@ -2223,6 +2223,12 @@
       }
     ],
     "los-angeles-kings": [
+      {
+        "name": "ADRIAN KEMPE",
+        "pos": "RW",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
       {
         "name": "ANDREI KUZMENKO",
         "pos": "LW",
@@ -2450,18 +2456,6 @@
         "pos": "RW",
         "status": "Out",
         "desc": "out"
-      },
-      {
-        "name": "VINCENT DESHARNAIS",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "IGOR CHERNYSHOV",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
       },
       {
         "name": "TYLER TOFFOLI",
