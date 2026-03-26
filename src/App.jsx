@@ -51,62 +51,74 @@ const EXPANDED_W = 320;
 const HEADER_H = 100;
 const TABS_H = 36;
 
-const P = {
+const DARK_PALETTE = {
   bg: "#0d0d0d", surface: "#161616", border: "#252525",
   dove: "#686B6C", casper: "#B8C4CA", white: "#F0F0F0", dim: "#3a3a3a",
   hover: "#1a2530", active: "#1e2d3d", accent: "#2a4a6b",
   red: "#c0392b", yellow: "#d4ac0d", green: "#1e8449",
 };
 
-const css = `
+const LIGHT_PALETTE = {
+  bg: "#FAFAFA", surface: "#FFFFFF", border: "#E5E5E5",
+  dove: "#8B8B8B", casper: "#6B6B6B", white: "#1C1C1C", dim: "#C8C8C8",
+  hover: "#F0EDEB", active: "#E8E3DE", accent: "#2a4a6b",
+  red: "#c0392b", yellow: "#d4ac0d", green: "#1e8449",
+};
+
+// Mutable reference — App() updates this synchronously before rendering children
+let P = { ...DARK_PALETTE };
+
+function makeCss(palette) {
+  return `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { background: ${P.bg}; height: 100%; }
+  html, body { background: ${palette.bg}; height: 100%; }
   ::-webkit-scrollbar { width: 4px; height: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: ${P.dim}; border-radius: 2px; }
+  ::-webkit-scrollbar-thumb { background: ${palette.dim}; border-radius: 2px; }
   input:focus { outline: none; }
-  .strip { flex-shrink:0; width:${COLLAPSED_W}px; transition:width 0.35s cubic-bezier(0.4,0,0.2,1),background 0.15s; overflow:hidden; cursor:pointer; border-right:1px solid ${P.border}; position:relative; background:${P.surface}; user-select:none; }
+  .strip { flex-shrink:0; width:${COLLAPSED_W}px; transition:width 0.35s cubic-bezier(0.4,0,0.2,1),background 0.15s; overflow:hidden; cursor:pointer; border-right:1px solid ${palette.border}; position:relative; background:${palette.surface}; user-select:none; }
   .strip:last-child { border-right:none; }
-  .strip:hover { background:${P.hover}; }
-  .strip.expanded { width:${EXPANDED_W}px; background:${P.active}; }
-  .strip.expanded:hover { background:${P.active}; }
-  .mobile-row { border-bottom:1px solid ${P.border}; background:${P.surface}; cursor:pointer; transition:background 0.15s; }
-  .mobile-row:hover { background:${P.hover}; }
-  .mobile-row.open { background:${P.active}; }
+  .strip:hover { background:${palette.hover}; }
+  .strip.expanded { width:${EXPANDED_W}px; background:${palette.active}; }
+  .strip.expanded:hover { background:${palette.active}; }
+  .mobile-row { border-bottom:1px solid ${palette.border}; background:${palette.surface}; cursor:pointer; transition:background 0.15s; }
+  .mobile-row:hover { background:${palette.hover}; }
+  .mobile-row.open { background:${palette.active}; }
   .mobile-body { overflow:hidden; max-height:0; transition:max-height 0.35s cubic-bezier(0.4,0,0.2,1); }
   .mobile-body.open { max-height:2000px; }
   .tab-btn { background:none; border:none; cursor:pointer; font-family:'Syne',sans-serif; font-size:10px; font-weight:700; letter-spacing:0.12em; padding:0 16px; height:100%; transition:color 0.15s,border-bottom 0.15s; border-bottom:2px solid transparent; }
-  .tab-btn.active { color:${P.white}; border-bottom-color:${P.casper}; }
-  .tab-btn:not(.active) { color:${P.dove}; }
-  .tab-btn:not(.active):hover { color:${P.casper}; }
-  .compare-chip { display:flex; align-items:center; gap:6px; background:${P.surface}; border:1px solid ${P.border}; border-radius:20px; padding:4px 10px 4px 6px; cursor:pointer; transition:border-color 0.15s; }
-  .compare-chip:hover { border-color:${P.dove}; }
-  .compare-chip.selected { border-color:${P.casper}; background:${P.active}; }
-  .rm-btn { background:none; border:none; cursor:pointer; color:${P.dove}; font-size:14px; line-height:1; padding:0 0 0 4px; }
-  .rm-btn:hover { color:${P.white}; }
-  .news-card { background:${P.surface}; border:1px solid ${P.border}; border-radius:6px; padding:12px 14px; margin-bottom:8px; }
-  .news-card:hover { border-color:${P.dove}; }
+  .tab-btn.active { color:${palette.white}; border-bottom-color:${palette.casper}; }
+  .tab-btn:not(.active) { color:${palette.dove}; }
+  .tab-btn:not(.active):hover { color:${palette.casper}; }
+  .compare-chip { display:flex; align-items:center; gap:6px; background:${palette.surface}; border:1px solid ${palette.border}; border-radius:20px; padding:4px 10px 4px 6px; cursor:pointer; transition:border-color 0.15s; }
+  .compare-chip:hover { border-color:${palette.dove}; }
+  .compare-chip.selected { border-color:${palette.casper}; background:${palette.active}; }
+  .rm-btn { background:none; border:none; cursor:pointer; color:${palette.dove}; font-size:14px; line-height:1; padding:0 0 0 4px; }
+  .rm-btn:hover { color:${palette.white}; }
+  .news-card { background:${palette.surface}; border:1px solid ${palette.border}; border-radius:6px; padding:12px 14px; margin-bottom:8px; }
+  .news-card:hover { border-color:${palette.dove}; }
   .inj-badge { display:inline-block; font-size:8px; font-weight:700; letter-spacing:0.08em; padding:2px 5px; border-radius:3px; margin-left:6px; vertical-align:middle; font-family:'Space Mono',monospace; }
   .inj-out { background:#c0392b22; color:#e74c3c; border:1px solid #c0392b44; }
   .inj-dtd { background:#d4ac0d22; color:#f1c40f; border:1px solid #d4ac0d44; }
   .inj-ir { background:#7d3c9822; color:#a569bd; border:1px solid #7d3c9844; }
   .ga-table { width:100%; border-collapse:collapse; font-size:12px; }
-  .ga-table th { font-size:9px; font-weight:700; letter-spacing:0.12em; color:${P.dove}; padding:8px 6px; text-align:center; border-bottom:1px solid ${P.border}; position:sticky; top:0; background:${P.bg}; z-index:1; font-family:'Space Mono',monospace; }
+  .ga-table th { font-size:9px; font-weight:700; letter-spacing:0.12em; color:${palette.dove}; padding:8px 6px; text-align:center; border-bottom:1px solid ${palette.border}; position:sticky; top:0; background:${palette.bg}; z-index:1; font-family:'Space Mono',monospace; }
   .ga-table th:first-child { text-align:left; padding-left:12px; }
-  .ga-table td { padding:7px 6px; text-align:center; border-bottom:1px solid ${P.border}; font-variant-numeric:tabular-nums; font-family:'Space Mono',monospace; }
+  .ga-table td { padding:7px 6px; text-align:center; border-bottom:1px solid ${palette.border}; font-variant-numeric:tabular-nums; font-family:'Space Mono',monospace; }
   .ga-table td:first-child { text-align:left; padding-left:4px; }
-  .ga-table tr:hover td { background:${P.hover}; }
-  .ga-table .total-col { font-weight:700; color:${P.casper}; }
-  .ga-sort-btn { background:none; border:none; cursor:pointer; font-family:'Space Mono',monospace; font-size:9px; font-weight:700; letter-spacing:0.12em; color:${P.dove}; padding:8px 6px; width:100%; text-align:center; }
-  .ga-sort-btn:hover { color:${P.casper}; }
-  .ga-sort-btn.active-sort { color:${P.white}; }
-  .suggest-drop { position:absolute; top:calc(100% + 4px); left:0; right:0; background:${P.surface}; border:1px solid ${P.border}; border-radius:4px; z-index:100; overflow:hidden; }
-  .suggest-item { padding:9px 12px; cursor:pointer; font-size:12px; color:${P.casper}; font-family:'Space Grotesk',sans-serif; transition:background 0.1s; }
-  .suggest-item:hover, .suggest-item.active { background:${P.active}; color:${P.white}; }
+  .ga-table tr:hover td { background:${palette.hover}; }
+  .ga-table .total-col { font-weight:700; color:${palette.casper}; }
+  .ga-sort-btn { background:none; border:none; cursor:pointer; font-family:'Space Mono',monospace; font-size:9px; font-weight:700; letter-spacing:0.12em; color:${palette.dove}; padding:8px 6px; width:100%; text-align:center; }
+  .ga-sort-btn:hover { color:${palette.casper}; }
+  .ga-sort-btn.active-sort { color:${palette.white}; }
+  .suggest-drop { position:absolute; top:calc(100% + 4px); left:0; right:0; background:${palette.surface}; border:1px solid ${palette.border}; border-radius:4px; z-index:100; overflow:hidden; }
+  .suggest-item { padding:9px 12px; cursor:pointer; font-size:12px; color:${palette.casper}; font-family:'Space Grotesk',sans-serif; transition:background 0.1s; }
+  .suggest-item:hover, .suggest-item.active { background:${palette.active}; color:${palette.white}; }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .spinner { width:14px; height:14px; border:2px solid ${P.border}; border-top-color:${P.casper}; border-radius:50%; animation:spin 0.7s linear infinite; }
+  .spinner { width:14px; height:14px; border:2px solid ${palette.border}; border-top-color:${palette.casper}; border-radius:50%; animation:spin 0.7s linear infinite; }
 `;
+}
 
 // ── Schedule parsing ──────────────────────────────────────────────────
 const NAME_OVERRIDES = {
@@ -687,14 +699,14 @@ function PlayerStatsView({ isMobile }) {
   const inputRef = useRef(null);
 
   const fetchSuggestions = useCallback(async (q) => {
-    if (q.trim().length < 2) { setSuggestions([]); setShowDrop(false); return; }
+    if (q.trim().length < 3) { setSuggestions([]); setShowDrop(false); return; }
     setSugLoading(true);
     try {
-      const res = await fetch(`https://suggest.svc.nhl.com/svc/suggest/v1/minplayers/${encodeURIComponent(q)}/99`);
+      const res = await fetch(`https://suggest.svc.nhl.com/svc/suggest/v1/minactiveplayers/${encodeURIComponent(q)}/99`);
       const data = await res.json();
       const players = (data.suggestions || []).slice(0, 5).map(s => {
         const parts = s.split("|");
-        return { id: parts[0], lastName: parts[1], firstName: parts[2], team: parts[4] || "", pos: parts[5] || "" };
+        return { id: parts[0], lastName: parts[1], firstName: parts[2], team: parts[11] || "", pos: parts[12] || "" };
       });
       setSuggestions(players);
       setShowDrop(players.length > 0);
@@ -883,6 +895,10 @@ export default function App() {
   const [expanded, setExpanded] = useState({});
   const [search, setSearch] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isDark, setIsDark] = useState(() => localStorage.getItem("theme") !== "light");
+
+  // Synchronously update P before children render so all components see the correct palette
+  Object.assign(P, isDark ? DARK_PALETTE : LIGHT_PALETTE);
 
   useEffect(() => {
     const fn = () => setIsMobile(window.innerWidth < 768);
@@ -903,7 +919,7 @@ export default function App() {
 
   return (
     <div style={{ fontFamily: "'Space Grotesk', sans-serif", background: P.bg, minHeight: "100vh", color: P.white }}>
-      <style>{css}</style>
+      <style>{makeCss(isDark ? DARK_PALETTE : LIGHT_PALETTE)}</style>
 
       {/* Header */}
       <div style={{ borderTop: `3px solid ${P.casper}`, borderBottom: `1px solid ${P.border}`, padding: "0 24px", display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center", height: HEADER_H, position: "sticky", top: 0, zIndex: 50, background: P.bg }}>
@@ -922,9 +938,13 @@ export default function App() {
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
-          <span style={{ fontSize: 8, color: P.dove, letterSpacing: "0.1em", whiteSpace: "nowrap", fontFamily: "'Space Mono', monospace" }}>
-            BY <span style={{ color: P.casper, fontWeight: 700 }}>GOELSTUDIO</span>
-          </span>
+          <button
+            onClick={() => { const next = !isDark; setIsDark(next); localStorage.setItem("theme", next ? "dark" : "light"); }}
+            style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 20, padding: "5px 10px", cursor: "pointer", color: P.casper, fontSize: 14, lineHeight: 1, fontFamily: "inherit", transition: "border-color 0.15s,color 0.15s" }}
+            title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {isDark ? "☀" : "☽"}
+          </button>
         </div>
       </div>
 
@@ -961,7 +981,7 @@ export default function App() {
         <span style={{ fontSize: 9, color: P.dim }}>·</span>
         <a href="https://www.nhl.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.08em", textDecoration: "none", fontFamily: "'Space Mono',monospace" }}>NHL.COM</a>
         <span style={{ fontSize: 9, color: P.dim }}>·</span>
-        <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em", fontFamily: "'Space Mono',monospace" }}>BUILT BY <span style={{ color: P.casper, fontWeight: 700 }}>GOELSTUDIO</span></span>
+        <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em", fontFamily: "'Space Mono',monospace" }}>HIMANK GOEL</span>
       </div>
     </div>
   );
