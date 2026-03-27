@@ -733,6 +733,7 @@ function PlayerStatsView({ isMobile }) {
     setShowDrop(false);
     setSuggestions([]);
     setQuery(`${player.firstName} ${player.lastName}`);
+    clearTimeout(debounceRef.current);
     inputRef.current?.blur();
     setLoading(true);
     setError(null);
