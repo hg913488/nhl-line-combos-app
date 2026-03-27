@@ -698,8 +698,10 @@ function PlayerStatsView({ isMobile }) {
   const [showDrop, setShowDrop] = useState(false);
   const debounceRef = useRef(null);
   const inputRef = useRef(null);
+  const isSelectedRef = useRef(false);
 
   const fetchSuggestions = useCallback(async (q) => {
+    if (isSelectedRef.current) return;
     if (q.trim().length < 3) { setSuggestions([]); setShowDrop(false); return; }
     setSugLoading(true);
     try {
@@ -729,6 +731,7 @@ function PlayerStatsView({ isMobile }) {
   }, [query, fetchSuggestions]);
 
   const selectPlayer = useCallback(async (player) => {
+    isSelectedRef.current = true;
     setSelectedPlayer(player);
     setShowDrop(false);
     setSuggestions([]);
@@ -794,7 +797,7 @@ function PlayerStatsView({ isMobile }) {
           <input
             ref={inputRef}
             value={query}
-            onChange={e => { setQuery(e.target.value); setSelectedPlayer(null); setGamelog([]); setError(null); }}
+            onChange={e => { isSelectedRef.current = false; setQuery(e.target.value); setSelectedPlayer(null); setGamelog([]); setError(null); }}
             onKeyDown={handleKey}
             onFocus={() => suggestions.length > 0 && setShowDrop(true)}
             onBlur={() => setTimeout(() => setShowDrop(false), 150)}
@@ -943,10 +946,13 @@ export default function App() {
       {/* Header */}
       <div style={{ borderTop: `3px solid ${P.casper}`, borderBottom: `1px solid ${P.border}`, padding: "0 24px", display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center", height: HEADER_H, position: "sticky", top: 0, zIndex: 50, background: P.bg }}>
         <div style={{ display: "flex", alignItems: "center" }}>
-          {tab === "all" && (
-            <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search..."
-              style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 10px", color: P.white, fontSize: 12, fontFamily: "inherit", width: isMobile ? 100 : 150 }} />
-          )}
+          <button
+            onClick={() => { const next = !isDark; setIsDark(next); localStorage.setItem("theme", next ? "dark" : "light"); }}
+            style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 20, padding: "5px 10px", cursor: "pointer", color: P.casper, fontSize: 14, lineHeight: 1, fontFamily: "inherit", transition: "border-color 0.15s,color 0.15s" }}
+            title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {isDark ? "☀" : "☽"}
+          </button>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 16, justifyContent: "center" }}>
           <img src="/logo.png" height={48} alt="HG" style={{ objectFit: "contain", filter: "invert(1)", flexShrink: 0 }} />
@@ -956,15 +962,7 @@ export default function App() {
             <div style={{ fontSize: 9, color: P.dove, letterSpacing: "0.18em", marginTop: 4, fontFamily: "'Space Mono', monospace" }}>NHL · UPDATED {UPDATED_AT}</div>
           </div>
         </div>
-        <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
-          <button
-            onClick={() => { const next = !isDark; setIsDark(next); localStorage.setItem("theme", next ? "dark" : "light"); }}
-            style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 20, padding: "5px 10px", cursor: "pointer", color: P.casper, fontSize: 14, lineHeight: 1, fontFamily: "inherit", transition: "border-color 0.15s,color 0.15s" }}
-            title={isDark ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {isDark ? "☀" : "☽"}
-          </button>
-        </div>
+        <div />
       </div>
 
       {/* Tabs */}
