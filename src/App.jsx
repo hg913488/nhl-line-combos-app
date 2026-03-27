@@ -747,6 +747,7 @@ function PlayerStatsView({ isMobile }) {
         assists: g.assists,
         points: g.points,
         plusMinus: g.plusMinus,
+        shots: g.shots,
         toi: g.timeOnIcePerGame,
       }));
       setGamelog(games);
@@ -773,12 +774,13 @@ function PlayerStatsView({ isMobile }) {
       a: gamelog.reduce((s, g) => s + (g.assists || 0), 0),
       pts: gamelog.reduce((s, g) => s + (g.points || 0), 0),
       pm: gamelog.reduce((s, g) => s + (g.plusMinus || 0), 0),
+      sog: gamelog.reduce((s, g) => s + (g.shots || 0), 0),
     };
   }, [gamelog]);
 
   const colW = isMobile
-    ? { date: 52, opp: 44, g: 28, a: 28, pts: 30, pm: 32, toi: 44 }
-    : { date: 72, opp: 56, g: 36, a: 36, pts: 44, pm: 44, toi: 60 };
+    ? { date: 52, opp: 44, g: 28, a: 28, pts: 30, pm: 32, sog: 28, toi: 44 }
+    : { date: 72, opp: 56, g: 36, a: 36, pts: 44, pm: 44, sog: 40, toi: 60 };
 
   const thStyle = { fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", color: P.dove, padding: "8px 6px", textAlign: "center", fontFamily: "'Space Mono',monospace", borderBottom: `1px solid ${P.border}` };
   const tdStyle = { padding: "8px 6px", textAlign: "center", fontSize: isMobile ? 11 : 12, fontFamily: "'Space Mono',monospace", color: P.white, borderBottom: `1px solid ${P.border}` };
@@ -804,7 +806,7 @@ function PlayerStatsView({ isMobile }) {
           <div className="suggest-drop">
             {suggestions.map((p, i) => (
               <div key={p.id} className={`suggest-item${i === activeIdx ? " active" : ""}`}
-                onMouseDown={() => selectPlayer(p)}>
+                onPointerDown={() => selectPlayer(p)}>
                 <span style={{ fontWeight: 600 }}>{p.firstName} {p.lastName}</span>
                 <span style={{ color: P.dove, fontSize: 10, marginLeft: 8, fontFamily: "'Space Mono',monospace" }}>{p.pos}{p.team ? ` · ${p.team}` : ""}</span>
               </div>
@@ -857,6 +859,7 @@ function PlayerStatsView({ isMobile }) {
                   <th style={{ ...thStyle, width: colW.a }}>A</th>
                   <th style={{ ...thStyle, width: colW.pts, color: P.casper }}>PTS</th>
                   <th style={{ ...thStyle, width: colW.pm }}>+/-</th>
+                  <th style={{ ...thStyle, width: colW.sog }}>SOG</th>
                   <th style={{ ...thStyle, width: colW.toi }}>TOI</th>
                 </tr>
               </thead>
@@ -875,6 +878,7 @@ function PlayerStatsView({ isMobile }) {
                       <td style={{ ...tdStyle }}>{g.assists ?? 0}</td>
                       <td style={{ ...tdStyle, fontWeight: 700, color: P.casper }}>{g.points ?? 0}</td>
                       <td style={{ ...tdStyle, color: pmColor }}>{pm > 0 ? `+${pm}` : pm}</td>
+                      <td style={{ ...tdStyle, color: P.dove }}>{g.shots ?? 0}</td>
                       <td style={{ ...tdStyle, color: P.dove }}>{formatTOI(g.toi)}</td>
                     </tr>
                   );
@@ -889,6 +893,7 @@ function PlayerStatsView({ isMobile }) {
                     <td style={{ ...tdStyle, fontWeight: 700, borderBottom: "none" }}>{totals.a}</td>
                     <td style={{ ...tdStyle, fontWeight: 700, color: P.casper, borderBottom: "none" }}>{totals.pts}</td>
                     <td style={{ ...tdStyle, color: totals.pm > 0 ? P.green : totals.pm < 0 ? P.red : P.dove, fontWeight: 700, borderBottom: "none" }}>{totals.pm > 0 ? `+${totals.pm}` : totals.pm}</td>
+                    <td style={{ ...tdStyle, fontWeight: 700, borderBottom: "none" }}>{totals.sog}</td>
                     <td style={{ ...tdStyle, borderBottom: "none" }}>—</td>
                   </tr>
                 </tfoot>
