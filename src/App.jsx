@@ -736,9 +736,20 @@ function PlayerStatsView({ isMobile }) {
     setError(null);
     setGamelog([]);
     try {
-      const res = await fetch(`https://api-web.nhle.com/v1/player/${player.id}/game-log/now`);
+      const sort = encodeURIComponent(JSON.stringify([{ property: "gameDate", direction: "DESC" }]));
+      const exp = encodeURIComponent(`playerId=${player.id} and seasonId=20252026 and gameTypeId=2`);
+      const res = await fetch(`https://api.nhle.com/stats/rest/en/skater/summary?isAggregate=false&isGame=true&limit=5&sort=${sort}&cayenneExp=${exp}`);
       const data = await res.json();
-      const games = (data.gameLog || []).slice(-5).reverse();
+      const games = (data.data || []).slice(0, 5).map(g => ({
+        gameDate: g.gameDate,
+        homeRoadFlag: g.homeRoad,
+        opponentAbbrev: g.opponentTeamAbbrev,
+        goals: g.goals,
+        assists: g.assists,
+        points: g.points,
+        plusMinus: g.plusMinus,
+        toi: g.timeOnIcePerGame,
+      }));
       setGamelog(games);
       if (games.length === 0) setError("No recent games found for this player.");
     } catch {
