@@ -751,8 +751,8 @@ function PlayerStatsView({ isMobile }) {
       }));
       setGamelog(games);
       if (games.length === 0) setError("No recent games found for this player.");
-    } catch {
-      setError("Could not load stats. Please try again.");
+    } catch (err) {
+      setError(`Could not load stats (${err?.message || "network error"}). Please try again.`);
     } finally {
       setLoading(false);
     }
