@@ -731,8 +731,9 @@ function PlayerStatsView({ isMobile }) {
   const selectPlayer = useCallback(async (player) => {
     setSelectedPlayer(player);
     setShowDrop(false);
-    setQuery(`${player.firstName} ${player.lastName}`);
     setSuggestions([]);
+    setQuery(`${player.firstName} ${player.lastName}`);
+    inputRef.current?.blur();
     setLoading(true);
     setError(null);
     setGamelog([]);
