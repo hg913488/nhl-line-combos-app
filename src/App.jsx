@@ -702,11 +702,13 @@ function PlayerStatsView({ isMobile }) {
     if (q.trim().length < 3) { setSuggestions([]); setShowDrop(false); return; }
     setSugLoading(true);
     try {
-      const res = await fetch(`https://suggest.svc.nhl.com/svc/suggest/v1/minactiveplayers/${encodeURIComponent(q)}/99`);
+      const res = await fetch(`https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=5&q=${encodeURIComponent(q)}&active=true`);
       const data = await res.json();
-      const players = (data.suggestions || []).slice(0, 5).map(s => {
-        const parts = s.split("|");
-        return { id: parts[0], lastName: parts[1], firstName: parts[2], team: parts[11] || "", pos: parts[12] || "" };
+      const players = (Array.isArray(data) ? data : []).slice(0, 5).map(p => {
+        const nameParts = (p.name || "").split(" ");
+        const firstName = nameParts[0] || "";
+        const lastName = nameParts.slice(1).join(" ") || "";
+        return { id: String(p.playerId), firstName, lastName, team: p.teamAbbrev || "", pos: p.positionCode || "" };
       });
       setSuggestions(players);
       setShowDrop(players.length > 0);
