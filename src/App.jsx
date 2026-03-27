@@ -68,6 +68,9 @@ const LIGHT_PALETTE = {
 // Mutable reference — App() updates this synchronously before rendering children
 let P = { ...DARK_PALETTE };
 
+// Module-level ref so PlayerCard (outside App) can trigger the modal in App()
+let triggerPlayerLookup = null;
+
 function makeCss(palette) {
   return `
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
@@ -118,6 +121,24 @@ function makeCss(palette) {
   .suggest-item:hover, .suggest-item.active { background:${palette.active}; color:${palette.white}; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .spinner { width:14px; height:14px; border:2px solid ${palette.border}; border-top-color:${palette.casper}; border-radius:50%; animation:spin 0.7s linear infinite; }
+  .player-card-clickable { cursor:pointer; transition:transform 0.15s,box-shadow 0.15s,border-color 0.15s; }
+  .player-card-clickable:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.35); border-color:#B8C4CA !important; }
+  @keyframes modalFadeIn { from { opacity:0; } to { opacity:1; } }
+  @keyframes modalSlideUp { from { opacity:0; transform:translateY(24px) scale(0.96); } to { opacity:1; transform:translateY(0) scale(1); } }
+  .modal-backdrop { position:fixed; inset:0; z-index:300; display:flex; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,0.65); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); animation:modalFadeIn 0.18s ease; }
+  .modal-card { width:100%; max-width:480px; border-radius:20px; overflow:hidden; position:relative; background:rgba(22,22,22,0.78); backdrop-filter:blur(40px) saturate(180%) brightness(1.08); -webkit-backdrop-filter:blur(40px) saturate(180%) brightness(1.08); border:1px solid rgba(255,255,255,0.09); box-shadow:0 2px 0 rgba(255,255,255,0.05) inset,0 32px 80px rgba(0,0,0,0.75),0 8px 32px rgba(0,0,0,0.4); animation:modalSlideUp 0.28s cubic-bezier(0.34,1.56,0.64,1); }
+  .modal-card::before { content:''; position:absolute; top:0; left:16px; right:16px; height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.16),transparent); pointer-events:none; }
+  .modal-close-btn { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.08); border-radius:50%; width:28px; height:28px; color:${palette.dove}; font-size:15px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background 0.15s,color 0.15s; }
+  .modal-close-btn:hover { background:rgba(255,255,255,0.14); color:${palette.white}; }
+  .modal-stats-row { transition:background 0.1s; }
+  .modal-stats-row:hover td { background:rgba(255,255,255,0.04); }
+  .header-title-text { font-size:22px; font-weight:800; color:${palette.white}; line-height:1.05; letter-spacing:0.06em; font-family:'Syne',sans-serif; white-space:nowrap; }
+  .header-center { display:flex; align-items:center; gap:16px; justify-content:center; }
+  .header-logo { height:48px; object-fit:contain; filter:invert(1); flex-shrink:0; }
+  .header-divider { width:1px; height:40px; background:${palette.border}; flex-shrink:0; }
+  .header-sub { font-size:9px; color:${palette.dove}; letter-spacing:0.18em; margin-top:4px; font-family:'Space Mono',monospace; white-space:nowrap; }
+  @media (max-width:500px) { .header-logo { display:none; } .header-divider { display:none; } .header-title-text { font-size:18px; } }
+  @media (max-width:360px) { .header-title-text { font-size:15px; letter-spacing:0.03em; } }
 `;
 }
 
@@ -169,7 +190,11 @@ function PlayerCard({ name, pos }) {
   const last = parts.slice(-1)[0];
   const first = parts.slice(0, -1).join(" ");
   return (
-    <div style={{ background: "#E8EAEC", border: `1px solid #D0D4D8`, borderRadius: 4, padding: "6px 4px", display: "flex", flexDirection: "column", alignItems: "center", flex: 1, minWidth: 0 }}>
+    <div
+      className="player-card-clickable"
+      onClick={() => triggerPlayerLookup?.(name)}
+      style={{ background: "#E8EAEC", border: `1px solid #D0D4D8`, borderRadius: 4, padding: "6px 4px", display: "flex", flexDirection: "column", alignItems: "center", flex: 1, minWidth: 0 }}
+    >
       <span style={{ fontSize: 8, fontWeight: 700, color: "#8A8E91", letterSpacing: "0.1em", marginBottom: 3, fontFamily: "'Space Mono', monospace" }}>{pos}</span>
       <span style={{ fontSize: 8, color: "#555", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "100%", textAlign: "center" }}>{first}</span>
       <span style={{ fontSize: 11, fontWeight: 700, color: "#161616", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "100%", textAlign: "center" }}>{last}</span>
@@ -911,6 +936,133 @@ function PlayerStatsView({ isMobile }) {
   );
 }
 
+// ── PLAYER MODAL ──────────────────────────────────────────────────────
+function PlayerModal({ modal, onClose }) {
+  if (!modal) return null;
+  const { player, gamelog, loading, error } = modal;
+
+  const totals = gamelog.length ? {
+    g:   gamelog.reduce((s, g) => s + (g.goals || 0), 0),
+    a:   gamelog.reduce((s, g) => s + (g.assists || 0), 0),
+    pts: gamelog.reduce((s, g) => s + (g.points || 0), 0),
+    pm:  gamelog.reduce((s, g) => s + (g.plusMinus || 0), 0),
+    sog: gamelog.reduce((s, g) => s + (g.shots || 0), 0),
+  } : null;
+
+  const maxPts = gamelog.length ? Math.max(...gamelog.map(g => g.points || 0), 1) : 1;
+
+  const thS = { fontFamily: "'Space Mono',monospace", fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", color: "rgba(184,196,202,0.6)", padding: "10px 8px", textAlign: "center", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(0,0,0,0.18)" };
+  const tdS = { fontFamily: "'Space Mono',monospace", fontSize: 12, color: P.white, padding: "10px 8px", textAlign: "center", borderBottom: "1px solid rgba(255,255,255,0.04)" };
+
+  return (
+    <div className="modal-backdrop" onClick={e => e.target === e.currentTarget && onClose()}>
+      <div className="modal-card">
+        {/* Header */}
+        <div style={{ padding: "20px 20px 16px", borderBottom: "1px solid rgba(255,255,255,0.07)", display: "flex", alignItems: "flex-start", gap: 14 }}>
+          <div style={{ width: 46, height: 46, borderRadius: 12, background: "linear-gradient(135deg,#2a4a6b,#1a3a5a)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Syne',sans-serif", fontSize: 15, fontWeight: 800, color: P.casper, flexShrink: 0, border: "1px solid rgba(255,255,255,0.08)" }}>
+            {player ? (player.firstName[0] || "") + (player.lastName[0] || "") : "??"}
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 20, fontWeight: 800, letterSpacing: "0.04em", lineHeight: 1.05, color: P.white }}>
+              {player ? `${player.firstName.toUpperCase()} ${player.lastName.toUpperCase()}` : ""}
+            </div>
+            <div style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, letterSpacing: "0.12em", color: P.dove, marginTop: 5 }}>
+              {player?.pos}{player?.team ? ` · ${player.team}` : ""} · LAST 5 GAMES
+            </div>
+          </div>
+          <button className="modal-close-btn" onClick={onClose}>×</button>
+        </div>
+
+        {/* Sparkline */}
+        {gamelog.length > 0 && (
+          <div style={{ display: "flex", gap: 4, padding: "12px 20px", borderBottom: "1px solid rgba(255,255,255,0.05)", alignItems: "flex-end", height: 52 }}>
+            {gamelog.map((g, i) => {
+              const pct = Math.max((g.points || 0) / maxPts, 0.06);
+              const h = Math.round(pct * 26);
+              const hasGoal = (g.goals || 0) > 0;
+              return (
+                <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 3, height: "100%", justifyContent: "flex-end" }}>
+                  <div style={{ width: "100%", borderRadius: "2px 2px 0 0", background: hasGoal ? "linear-gradient(180deg,#4a9eff,#2a4a6b)" : P.accent, height: h, minHeight: 3 }} />
+                  <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 7, color: P.dim, letterSpacing: "0.04em" }}>
+                    {g.gameDate ? new Date(g.gameDate + "T12:00:00").toLocaleDateString("en-US", { month: "numeric", day: "numeric" }) : "—"}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Loading */}
+        {loading && (
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "40px 0", color: P.dove }}>
+            <div className="spinner" />
+            <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, letterSpacing: "0.12em" }}>LOADING STATS...</span>
+          </div>
+        )}
+
+        {/* Error */}
+        {error && !loading && (
+          <div style={{ textAlign: "center", padding: "32px 0", color: P.red, fontSize: 11, fontFamily: "'Space Mono',monospace", letterSpacing: "0.08em" }}>{error}</div>
+        )}
+
+        {/* Stats table */}
+        {gamelog.length > 0 && !loading && (
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse" }}>
+              <thead>
+                <tr>
+                  <th style={{ ...thS, textAlign: "left", paddingLeft: 20 }}>DATE</th>
+                  <th style={thS}>OPP</th>
+                  <th style={thS}>G</th>
+                  <th style={thS}>A</th>
+                  <th style={{ ...thS, color: "rgba(184,196,202,0.9)" }}>PTS</th>
+                  <th style={thS}>+/-</th>
+                  <th style={thS}>SOG</th>
+                  <th style={thS}>TOI</th>
+                </tr>
+              </thead>
+              <tbody>
+                {gamelog.map((g, i) => {
+                  const pm = g.plusMinus || 0;
+                  const pmColor = pm > 0 ? P.green : pm < 0 ? P.red : P.dove;
+                  return (
+                    <tr key={i} className="modal-stats-row">
+                      <td style={{ ...tdS, textAlign: "left", paddingLeft: 20, color: P.casper, fontSize: 11 }}>
+                        {g.gameDate ? new Date(g.gameDate + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "—"}
+                      </td>
+                      <td style={{ ...tdS, color: P.dove, fontSize: 11 }}>{g.homeRoadFlag === "R" ? "@ " : ""}{g.opponentAbbrev || "—"}</td>
+                      <td style={tdS}>{g.goals ?? 0}</td>
+                      <td style={tdS}>{g.assists ?? 0}</td>
+                      <td style={{ ...tdS, fontWeight: 700, color: P.casper }}>{g.points ?? 0}</td>
+                      <td style={{ ...tdS, color: pmColor }}>{pm > 0 ? `+${pm}` : pm}</td>
+                      <td style={{ ...tdS, color: P.dove }}>{g.shots ?? 0}</td>
+                      <td style={{ ...tdS, color: P.dove }}>{formatTOI(g.toi)}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+              {totals && (
+                <tfoot>
+                  <tr style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+                    <td style={{ ...tdS, textAlign: "left", paddingLeft: 20, fontSize: 9, letterSpacing: "0.1em", color: P.dove }}>L5 TOTAL</td>
+                    <td style={tdS} />
+                    <td style={{ ...tdS, fontWeight: 700 }}>{totals.g}</td>
+                    <td style={{ ...tdS, fontWeight: 700 }}>{totals.a}</td>
+                    <td style={{ ...tdS, fontWeight: 700, color: P.casper }}>{totals.pts}</td>
+                    <td style={{ ...tdS, fontWeight: 700, color: totals.pm > 0 ? P.green : totals.pm < 0 ? P.red : P.dove }}>{totals.pm > 0 ? `+${totals.pm}` : totals.pm}</td>
+                    <td style={{ ...tdS, fontWeight: 700 }}>{totals.sog}</td>
+                    <td style={tdS}>—</td>
+                  </tr>
+                </tfoot>
+              )}
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ── ROOT ──────────────────────────────────────────────────────────────
 export default function App() {
   const [tab, setTab] = useState("all");
@@ -918,9 +1070,63 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isDark, setIsDark] = useState(() => localStorage.getItem("theme") !== "light");
+  const [modal, setModal] = useState(null); // { player, gamelog, loading, error }
 
   // Synchronously update P before children render so all components see the correct palette
   Object.assign(P, isDark ? DARK_PALETTE : LIGHT_PALETTE);
+
+  // Wire up the module-level ref so PlayerCard can trigger the modal
+  triggerPlayerLookup = useCallback(async (fullName) => {
+    const nameParts = fullName.trim().split(" ");
+    const firstName = nameParts[0] || "";
+    const lastName = nameParts.slice(1).join(" ") || "";
+    const player = { firstName, lastName, pos: "", team: "", id: null };
+
+    // Open modal immediately in loading state, then look up the player id + stats
+    setModal({ player, gamelog: [], loading: true, error: null });
+
+    try {
+      // Search for the player to get their id
+      const res = await fetch(`https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=1&q=${encodeURIComponent(fullName)}&active=true`);
+      const data = await res.json();
+      const found = Array.isArray(data) && data[0];
+      if (!found) {
+        setModal(m => ({ ...m, loading: false, error: "Player not found." }));
+        return;
+      }
+      const pNameParts = (found.name || "").split(" ");
+      const resolvedPlayer = {
+        id: String(found.playerId),
+        firstName: pNameParts[0] || firstName,
+        lastName: pNameParts.slice(1).join(" ") || lastName,
+        pos: found.positionCode || "",
+        team: found.teamAbbrev || "",
+      };
+      setModal(m => ({ ...m, player: resolvedPlayer }));
+
+      const logRes = await fetch(`/api/gamelog?playerId=${resolvedPlayer.id}`);
+      const logData = await logRes.json();
+      const games = (logData.data || []).slice(0, 5).map(g => ({
+        gameDate: g.gameDate,
+        homeRoadFlag: g.homeRoad,
+        opponentAbbrev: g.opponentTeamAbbrev,
+        goals: g.goals,
+        assists: g.assists,
+        points: g.points,
+        plusMinus: g.plusMinus,
+        shots: g.shots,
+        toi: g.timeOnIcePerGame,
+      }));
+      setModal(m => ({
+        ...m,
+        gamelog: games,
+        loading: false,
+        error: games.length === 0 ? "No recent games found." : null,
+      }));
+    } catch (err) {
+      setModal(m => ({ ...m, loading: false, error: `Could not load stats (${err?.message || "network error"}).` }));
+    }
+  }, []);
 
   useEffect(() => {
     const fn = () => setIsMobile(window.innerWidth < 768);
@@ -944,25 +1150,15 @@ export default function App() {
       <style>{makeCss(isDark ? DARK_PALETTE : LIGHT_PALETTE)}</style>
 
       {/* Header */}
-      <div style={{ borderTop: `3px solid ${P.casper}`, borderBottom: `1px solid ${P.border}`, padding: "0 24px", display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center", height: HEADER_H, position: "sticky", top: 0, zIndex: 50, background: P.bg }}>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <button
-            onClick={() => { const next = !isDark; setIsDark(next); localStorage.setItem("theme", next ? "dark" : "light"); }}
-            style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 20, padding: "5px 10px", cursor: "pointer", color: P.casper, fontSize: 14, lineHeight: 1, fontFamily: "inherit", transition: "border-color 0.15s,color 0.15s" }}
-            title={isDark ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {isDark ? "☀" : "☽"}
-          </button>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 16, justifyContent: "center" }}>
-          <img src="/logo.png" height={48} alt="HG" style={{ objectFit: "contain", filter: "invert(1)", flexShrink: 0 }} />
-          <div style={{ width: 1, height: 40, background: P.border }} />
+      <div style={{ borderTop: `3px solid ${P.casper}`, borderBottom: `1px solid ${P.border}`, padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "center", height: HEADER_H, position: "sticky", top: 0, zIndex: 50, background: P.bg }}>
+        <div className="header-center">
+          <img src="/logo.png" alt="HG" className="header-logo" />
+          <div className="header-divider" />
           <div>
-            <div style={{ fontSize: 22, fontWeight: 800, color: P.white, lineHeight: 1.05, letterSpacing: "0.06em", fontFamily: "'Syne', sans-serif", whiteSpace: "nowrap" }}>BETWEEN THE LINES</div>
-            <div style={{ fontSize: 9, color: P.dove, letterSpacing: "0.18em", marginTop: 4, fontFamily: "'Space Mono', monospace" }}>NHL · UPDATED {UPDATED_AT}</div>
+            <div className="header-title-text">BETWEEN THE LINES</div>
+            <div className="header-sub">NHL · UPDATED {UPDATED_AT}</div>
           </div>
         </div>
-        <div />
       </div>
 
       {/* Tabs */}
@@ -991,6 +1187,9 @@ export default function App() {
       {tab === "player" && <PlayerStatsView isMobile={isMobile} />}
       {tab === "compare" && <CompareView isMobile={isMobile} />}
 
+      {/* Glass player modal */}
+      {modal && <PlayerModal modal={modal} onClose={() => setModal(null)} />}
+
       {/* Footer */}
       <div style={{ borderTop: `1px solid ${P.border}`, padding: "12px 24px", display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
         <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em", fontFamily: "'Space Mono',monospace" }}>DATA FROM</span>
@@ -999,6 +1198,14 @@ export default function App() {
         <a href="https://www.nhl.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.08em", textDecoration: "none", fontFamily: "'Space Mono',monospace" }}>NHL.COM</a>
         <span style={{ fontSize: 9, color: P.dim }}>·</span>
         <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em", fontFamily: "'Space Mono',monospace" }}>HIMANK GOEL</span>
+        <span style={{ fontSize: 9, color: P.dim }}>·</span>
+        <button
+          onClick={() => { const next = !isDark; setIsDark(next); localStorage.setItem("theme", next ? "dark" : "light"); }}
+          style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 20, padding: "4px 10px", cursor: "pointer", color: P.casper, fontSize: 12, lineHeight: 1, fontFamily: "inherit", transition: "border-color 0.15s,color 0.15s" }}
+          title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+        >
+          {isDark ? "☀ LIGHT" : "☽ DARK"}
+        </button>
       </div>
     </div>
   );
