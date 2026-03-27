@@ -87,7 +87,8 @@ function makeCss(palette) {
   .mobile-row.open { background:${palette.active}; }
   .mobile-body { overflow:hidden; max-height:0; transition:max-height 0.35s cubic-bezier(0.4,0,0.2,1); }
   .mobile-body.open { max-height:2000px; }
-  .tab-btn { background:none; border:none; cursor:pointer; font-family:'Syne',sans-serif; font-size:10px; font-weight:700; letter-spacing:0.12em; padding:0 16px; height:100%; transition:color 0.15s,border-bottom 0.15s; border-bottom:2px solid transparent; }
+  .tabs-bar::-webkit-scrollbar { display:none; }
+  .tab-btn { background:none; border:none; cursor:pointer; font-family:'Syne',sans-serif; font-size:10px; font-weight:700; letter-spacing:0.12em; padding:0 16px; height:100%; transition:color 0.15s,border-bottom 0.15s; border-bottom:2px solid transparent; flex-shrink:0; white-space:nowrap; }
   .tab-btn.active { color:${palette.white}; border-bottom-color:${palette.casper}; }
   .tab-btn:not(.active) { color:${palette.dove}; }
   .tab-btn:not(.active):hover { color:${palette.casper}; }
@@ -946,7 +947,7 @@ export default function App() {
           <img src="/logo.png" height={48} alt="HG" style={{ objectFit: "contain", filter: "invert(1)", flexShrink: 0 }} />
           <div style={{ width: 1, height: 40, background: P.border }} />
           <div>
-            <div style={{ fontSize: 22, fontWeight: 800, color: P.white, lineHeight: 1.05, letterSpacing: "0.06em", fontFamily: "'Syne', sans-serif" }}>BETWEEN THE LINES</div>
+            <div style={{ fontSize: 22, fontWeight: 800, color: P.white, lineHeight: 1.05, letterSpacing: "0.06em", fontFamily: "'Syne', sans-serif", whiteSpace: "nowrap" }}>BETWEEN THE LINES</div>
             <div style={{ fontSize: 9, color: P.dove, letterSpacing: "0.18em", marginTop: 4, fontFamily: "'Space Mono', monospace" }}>NHL · UPDATED {UPDATED_AT}</div>
           </div>
         </div>
@@ -962,7 +963,7 @@ export default function App() {
       </div>
 
       {/* Tabs */}
-      <div style={{ borderBottom: `1px solid ${P.border}`, display: "flex", height: TABS_H, position: "sticky", top: HEADER_H, zIndex: 49, background: P.bg, padding: "0 8px" }}>
+      <div className="tabs-bar" style={{ borderBottom: `1px solid ${P.border}`, display: "flex", height: TABS_H, position: "sticky", top: HEADER_H, zIndex: 49, background: P.bg, padding: "0 8px", overflowX: "auto", scrollbarWidth: "none" }}>
         {TABS.map(t => (
           <button key={t} className={`tab-btn${tab === t ? " active" : ""}`} onClick={() => setTab(t)}>
             {TAB_LABELS[t]}
