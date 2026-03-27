@@ -737,9 +737,7 @@ function PlayerStatsView({ isMobile }) {
     setError(null);
     setGamelog([]);
     try {
-      const sort = encodeURIComponent(JSON.stringify([{ property: "gameDate", direction: "DESC" }]));
-      const exp = encodeURIComponent(`playerId=${player.id} and seasonId=20252026 and gameTypeId=2`);
-      const res = await fetch(`https://api.nhle.com/stats/rest/en/skater/summary?isAggregate=false&isGame=true&limit=5&sort=${sort}&cayenneExp=${exp}`);
+      const res = await fetch(`/api/gamelog?playerId=${player.id}`);
       const data = await res.json();
       const games = (data.data || []).slice(0, 5).map(g => ({
         gameDate: g.gameDate,
