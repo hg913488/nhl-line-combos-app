@@ -172,10 +172,10 @@ function makeCss(palette) {
   @keyframes modalFadeIn { from { opacity:0; } to { opacity:1; } }
   @keyframes modalSlideUp { from { opacity:0; transform:translateY(24px) scale(0.96); } to { opacity:1; transform:translateY(0) scale(1); } }
   .modal-backdrop { position:fixed; inset:0; z-index:300; display:flex; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,0.65); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); animation:modalFadeIn 0.18s ease; }
-  .modal-card { width:100%; max-width:480px; border-radius:20px; overflow:hidden; position:relative; background:rgba(22,22,22,0.78); backdrop-filter:blur(40px) saturate(180%) brightness(1.08); -webkit-backdrop-filter:blur(40px) saturate(180%) brightness(1.08); border:1px solid rgba(255,255,255,0.09); box-shadow:0 2px 0 rgba(255,255,255,0.05) inset,0 32px 80px rgba(0,0,0,0.75),0 8px 32px rgba(0,0,0,0.4); animation:modalSlideUp 0.28s cubic-bezier(0.34,1.56,0.64,1); }
-  .modal-card::before { content:''; position:absolute; top:0; left:16px; right:16px; height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.16),transparent); pointer-events:none; }
-  .modal-close-btn { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.08); border-radius:50%; width:28px; height:28px; color:${palette.dove}; font-size:15px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background 0.15s,color 0.15s; }
-  .modal-close-btn:hover { background:rgba(255,255,255,0.14); color:${palette.white}; }
+  .modal-card { width:100%; max-width:480px; border-radius:20px; overflow:hidden; position:relative; background:${palette.surface}; backdrop-filter:blur(40px) saturate(180%) brightness(1.08); -webkit-backdrop-filter:blur(40px) saturate(180%) brightness(1.08); border:1px solid ${palette.border}; box-shadow:0 32px 80px rgba(0,0,0,0.35),0 8px 32px rgba(0,0,0,0.2); animation:modalSlideUp 0.28s cubic-bezier(0.34,1.56,0.64,1); }
+  .modal-card::before { content:''; position:absolute; top:0; left:16px; right:16px; height:1px; background:linear-gradient(90deg,transparent,${palette.border},transparent); pointer-events:none; }
+  .modal-close-btn { background:${palette.hover}; border:1px solid ${palette.border}; border-radius:50%; width:28px; height:28px; color:${palette.dove}; font-size:15px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background 0.15s,color 0.15s; }
+  .modal-close-btn:hover { background:${palette.active}; color:${palette.white}; }
   .modal-stats-row { transition:background 0.1s; }
   .modal-stats-row:hover td { background:rgba(255,255,255,0.04); }
   .header-title-text { font-size:22px; font-weight:800; color:${palette.white}; line-height:1.05; letter-spacing:0.06em; font-family:'Syne',sans-serif; white-space:nowrap; }
@@ -1023,15 +1023,15 @@ function PlayerModal({ modal, onClose }) {
 
   const maxPts = gamelog.length ? Math.max(...gamelog.map(g => g.points || 0), 1) : 1;
 
-  const thS = { fontFamily: "'Space Mono',monospace", fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", color: "rgba(184,196,202,0.6)", padding: "10px 8px", textAlign: "center", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(0,0,0,0.18)" };
-  const tdS = { fontFamily: "'Space Mono',monospace", fontSize: 12, color: P.white, padding: "10px 8px", textAlign: "center", borderBottom: "1px solid rgba(255,255,255,0.04)" };
+  const thS = { fontFamily: "'Space Mono',monospace", fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", color: P.dove, padding: "10px 8px", textAlign: "center", borderBottom: `1px solid ${P.border}`, background: P.hover };
+  const tdS = { fontFamily: "'Space Mono',monospace", fontSize: 12, color: P.white, padding: "10px 8px", textAlign: "center", borderBottom: `1px solid ${P.border}` };
 
   return (
     <div className="modal-backdrop" onClick={e => e.target === e.currentTarget && onClose()}>
       <div className="modal-card">
         {/* Header */}
-        <div style={{ padding: "20px 20px 16px", borderBottom: "1px solid rgba(255,255,255,0.07)", display: "flex", alignItems: "flex-start", gap: 14 }}>
-          <div style={{ width: 46, height: 46, borderRadius: 12, background: "linear-gradient(135deg,#2a4a6b,#1a3a5a)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Syne',sans-serif", fontSize: 15, fontWeight: 800, color: P.casper, flexShrink: 0, border: "1px solid rgba(255,255,255,0.08)" }}>
+        <div style={{ padding: "20px 20px 16px", borderBottom: `1px solid ${P.border}`, display: "flex", alignItems: "flex-start", gap: 14 }}>
+          <div style={{ width: 46, height: 46, borderRadius: 12, background: P.active, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Syne',sans-serif", fontSize: 15, fontWeight: 800, color: P.casper, flexShrink: 0, border: `1px solid ${P.border}` }}>
             {player ? (player.firstName[0] || "") + (player.lastName[0] || "") : "??"}
           </div>
           <div style={{ flex: 1 }}>
@@ -1047,7 +1047,7 @@ function PlayerModal({ modal, onClose }) {
 
         {/* Sparkline */}
         {gamelog.length > 0 && (
-          <div style={{ display: "flex", gap: 4, padding: "12px 20px", borderBottom: "1px solid rgba(255,255,255,0.05)", alignItems: "flex-end", height: 52 }}>
+          <div style={{ display: "flex", gap: 4, padding: "12px 20px", borderBottom: `1px solid ${P.border}`, alignItems: "flex-end", height: 52 }}>
             {gamelog.map((g, i) => {
               const pct = Math.max((g.points || 0) / maxPts, 0.06);
               const h = Math.round(pct * 26);
@@ -1087,7 +1087,7 @@ function PlayerModal({ modal, onClose }) {
                   <th style={thS}>OPP</th>
                   <th style={thS}>G</th>
                   <th style={thS}>A</th>
-                  <th style={{ ...thS, color: "rgba(184,196,202,0.9)" }}>PTS</th>
+                  <th style={{ ...thS, color: P.casper }}>PTS</th>
                   <th style={thS}>+/-</th>
                   <th style={thS}>SOG</th>
                   <th style={thS}>TOI</th>
@@ -1115,7 +1115,7 @@ function PlayerModal({ modal, onClose }) {
               </tbody>
               {totals && (
                 <tfoot>
-                  <tr style={{ borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+                  <tr style={{ borderTop: `1px solid ${P.border}` }}>
                     <td style={{ ...tdS, textAlign: "left", paddingLeft: 20, fontSize: 9, letterSpacing: "0.1em", color: P.dove }}>L5 TOTAL</td>
                     <td style={tdS} />
                     <td style={{ ...tdS, fontWeight: 700 }}>{totals.g}</td>
