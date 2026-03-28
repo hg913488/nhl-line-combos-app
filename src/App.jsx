@@ -241,7 +241,7 @@ function PlayerCard({ name, pos, lineChangedTo }) {
   return (
     <div
       className="player-card-clickable"
-      onClick={() => triggerPlayerLookup?.(name)}
+      onClick={(e) => { e.stopPropagation(); triggerPlayerLookup?.(name); }}
       style={{ background: "#E8EAEC", border: `1px solid #D0D4D8`, borderRadius: 4, padding: "6px 4px", display: "flex", flexDirection: "column", alignItems: "center", flex: 1, minWidth: 0, position: "relative" }}
     >
       {lineChangedTo != null && (
