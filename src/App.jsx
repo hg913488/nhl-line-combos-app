@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef, useCallback } from "react";
+import React, { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import lineups from '../data/lines.json';
 import goalsAgainstData from '../data/goals_against_by_position.json';
 import scheduleRaw from './schedule.csv?raw';
@@ -70,6 +70,52 @@ let P = { ...DARK_PALETTE };
 
 // Module-level ref so PlayerCard (outside App) can trigger the modal in App()
 let triggerPlayerLookup = null;
+
+// Module-level standings lookup — updated by App() before render
+let STANDINGS = {};
+
+// ── Lineup change detection ────────────────────────────────────────────
+// Builds a map of { playerName: newLineNumber } for players who moved lines
+// since the last snapshot. Snapshot is keyed by UPDATED_AT date so it resets
+// whenever the data is refreshed.
+function buildLineChanges() {
+  const SNAP_KEY = "lineup_snapshot";
+  const changes = {}; // { "PLAYER NAME": newLineNum }
+
+  try {
+    const raw = localStorage.getItem(SNAP_KEY);
+    const snap = raw ? JSON.parse(raw) : null;
+
+    // Save/refresh snapshot when date changes or first visit
+    if (!snap || snap.date !== UPDATED_AT) {
+      const newSnap = { date: UPDATED_AT, teams: {} };
+      Object.entries(TEAMS_DATA).forEach(([slug, d]) => {
+        newSnap.teams[slug] = { forwards: d.forwards || [] };
+      });
+      localStorage.setItem(SNAP_KEY, JSON.stringify(newSnap));
+      return changes; // no diff on first load
+    }
+
+    // Compare current forwards to snapshot
+    Object.entries(TEAMS_DATA).forEach(([slug, d]) => {
+      const prevFwds = snap.teams[slug]?.forwards || [];
+      const currFwds = d.forwards || [];
+      // Build previous line index for each player
+      const prevLineOf = {};
+      prevFwds.forEach((line, i) => line.forEach(p => { prevLineOf[p] = i + 1; }));
+      // Check current line index
+      currFwds.forEach((line, i) => {
+        line.forEach(p => {
+          const prev = prevLineOf[p];
+          if (prev != null && prev !== i + 1) changes[p] = i + 1;
+        });
+      });
+    });
+  } catch (_) {}
+  return changes;
+}
+
+const LINE_CHANGES = buildLineChanges();
 
 function makeCss(palette) {
   return `
@@ -185,17 +231,28 @@ function TeamLogo({ slug, abbr, size = 48 }) {
   return <img src={LOGO_URL(slug, abbr)} alt={abbr} width={size} height={size} onError={() => setErr(true)} style={{ objectFit: "contain", flexShrink: 0 }} />;
 }
 
-function PlayerCard({ name, pos }) {
+function PlayerCard({ name, pos, lineChangedTo }) {
   const parts = name.split(" ");
   const last = parts.slice(-1)[0];
   const first = parts.slice(0, -1).join(" ");
+  const isStarter = pos === "STR";
+  const isBackup = pos === "BKP";
+  const isGoalie = isStarter || isBackup;
   return (
     <div
       className="player-card-clickable"
       onClick={() => triggerPlayerLookup?.(name)}
-      style={{ background: "#E8EAEC", border: `1px solid #D0D4D8`, borderRadius: 4, padding: "6px 4px", display: "flex", flexDirection: "column", alignItems: "center", flex: 1, minWidth: 0 }}
+      style={{ background: "#E8EAEC", border: `1px solid #D0D4D8`, borderRadius: 4, padding: "6px 4px", display: "flex", flexDirection: "column", alignItems: "center", flex: 1, minWidth: 0, position: "relative" }}
     >
-      <span style={{ fontSize: 8, fontWeight: 700, color: "#8A8E91", letterSpacing: "0.1em", marginBottom: 3, fontFamily: "'Space Mono', monospace" }}>{pos}</span>
+      {lineChangedTo != null && (
+        <div title={`Moved to Line ${lineChangedTo}`} style={{ position: "absolute", top: 3, right: 3, width: 6, height: 6, borderRadius: "50%", background: "#C9A96E", flexShrink: 0 }} />
+      )}
+      <span style={{ fontSize: 8, fontWeight: 700, color: "#8A8E91", letterSpacing: "0.1em", marginBottom: 3, fontFamily: "'Space Mono', monospace" }}>{isGoalie ? "" : pos}</span>
+      {isGoalie && (
+        <span style={{ fontSize: 7, fontWeight: 700, letterSpacing: "0.08em", padding: "1px 4px", borderRadius: 3, marginBottom: 3, fontFamily: "'Space Mono',monospace", background: isStarter ? "rgba(30,132,73,0.18)" : "rgba(104,107,108,0.18)", color: isStarter ? "#1e8449" : "#686B6C", border: `1px solid ${isStarter ? "rgba(30,132,73,0.35)" : "rgba(104,107,108,0.35)"}` }}>
+          {isStarter ? "STARTER" : "BACKUP"}
+        </span>
+      )}
       <span style={{ fontSize: 8, color: "#555", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "100%", textAlign: "center" }}>{first}</span>
       <span style={{ fontSize: 11, fontWeight: 700, color: "#161616", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "100%", textAlign: "center" }}>{last}</span>
     </div>
@@ -207,7 +264,7 @@ function ForwardLine({ line, lineNum }) {
   return (
     <div style={{ marginBottom: 12 }}>
       <div style={{ fontSize: 9, color: P.casper, fontWeight: 700, letterSpacing: "0.12em", marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>LINE {lineNum}</div>
-      <div style={{ display: "flex", gap: 4 }}>{line.map((p, i) => <PlayerCard key={i} name={p} pos={pos[i]} />)}</div>
+      <div style={{ display: "flex", gap: 4 }}>{line.map((p, i) => <PlayerCard key={i} name={p} pos={pos[i]} lineChangedTo={LINE_CHANGES[p] ?? null} />)}</div>
     </div>
   );
 }
@@ -275,6 +332,7 @@ function TeamStrip({ slug, data, expanded, onToggle }) {
           <div>
             <div style={{ fontSize: 16, fontWeight: 700, color: P.white, lineHeight: 1.1, fontFamily: "'Syne', sans-serif" }}>{t.city}</div>
             <div style={{ fontSize: 11, color: P.dove, marginTop: 2 }}>{t.name}</div>
+            {STANDINGS[t.abbr] && <div style={{ fontSize: 10, color: P.casper, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: "0.06em" }}>{STANDINGS[t.abbr]}</div>}
           </div>
         </div>
         <LineupContent data={data} />
@@ -296,6 +354,12 @@ function MobileRow({ slug, data, expanded, onToggle }) {
         <div style={{ fontSize: 18, color: P.dove, lineHeight: 1, transform: expanded ? "rotate(180deg)" : "none", transition: "transform 0.25s" }}>▾</div>
       </div>
       <div className={`mobile-body${expanded ? " open" : ""}`}>
+        {expanded && STANDINGS[t.abbr] && (
+          <div style={{ padding: "10px 20px 0", display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontSize: 10, color: P.dove, fontFamily: "'Space Mono',monospace", letterSpacing: "0.06em" }}>RECORD</span>
+            <span style={{ fontSize: 11, fontWeight: 700, color: P.casper, fontFamily: "'Space Mono',monospace" }}>{STANDINGS[t.abbr]}</span>
+          </div>
+        )}
         <div style={{ padding: "0 20px 24px" }}><LineupContent data={data} /></div>
       </div>
     </div>
@@ -767,8 +831,16 @@ function PlayerStatsView({ isMobile }) {
     setError(null);
     setGamelog([]);
     try {
-      const res = await fetch(`/api/gamelog?playerId=${player.id}`);
-      const data = await res.json();
+      const cacheKey = `gamelog_${player.id}`;
+      const cached = sessionStorage.getItem(cacheKey);
+      let data;
+      if (cached) {
+        data = JSON.parse(cached);
+      } else {
+        const res = await fetch(`/api/gamelog?playerId=${player.id}`);
+        data = await res.json();
+        sessionStorage.setItem(cacheKey, JSON.stringify(data));
+      }
       const games = (data.data || []).slice(0, 5).map(g => ({
         gameDate: g.gameDate,
         homeRoadFlag: g.homeRoad,
@@ -1063,6 +1135,23 @@ function PlayerModal({ modal, onClose }) {
   );
 }
 
+// ── ERROR BOUNDARY ────────────────────────────────────────────────────
+class ErrorBoundary extends React.Component {
+  constructor(props) { super(props); this.state = { hasError: false }; }
+  static getDerivedStateFromError() { return { hasError: true }; }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: "40px 24px", textAlign: "center", color: P.dove, fontFamily: "'Space Grotesk',sans-serif" }}>
+          <div style={{ fontSize: 13, marginBottom: 8 }}>Something went wrong loading this view.</div>
+          <button onClick={() => this.setState({ hasError: false })} style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 14px", color: P.casper, cursor: "pointer", fontSize: 11, fontFamily: "'Space Mono',monospace" }}>RETRY</button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 // ── ROOT ──────────────────────────────────────────────────────────────
 export default function App() {
   const [tab, setTab] = useState("all");
@@ -1071,9 +1160,11 @@ export default function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isDark, setIsDark] = useState(() => localStorage.getItem("theme") !== "light");
   const [modal, setModal] = useState(null); // { player, gamelog, loading, error }
+  const [standings, setStandings] = useState({}); // { [abbr]: "W-L-OT" }
 
   // Synchronously update P before children render so all components see the correct palette
   Object.assign(P, isDark ? DARK_PALETTE : LIGHT_PALETTE);
+  Object.assign(STANDINGS, standings);
 
   // Wire up the module-level ref so PlayerCard can trigger the modal
   triggerPlayerLookup = useCallback(async (fullName) => {
@@ -1104,8 +1195,16 @@ export default function App() {
       };
       setModal(m => ({ ...m, player: resolvedPlayer }));
 
-      const logRes = await fetch(`/api/gamelog?playerId=${resolvedPlayer.id}`);
-      const logData = await logRes.json();
+      const logCacheKey = `gamelog_${resolvedPlayer.id}`;
+      const logCached = sessionStorage.getItem(logCacheKey);
+      let logData;
+      if (logCached) {
+        logData = JSON.parse(logCached);
+      } else {
+        const logRes = await fetch(`/api/gamelog?playerId=${resolvedPlayer.id}`);
+        logData = await logRes.json();
+        sessionStorage.setItem(logCacheKey, JSON.stringify(logData));
+      }
       const games = (logData.data || []).slice(0, 5).map(g => ({
         gameDate: g.gameDate,
         homeRoadFlag: g.homeRoad,
@@ -1132,6 +1231,18 @@ export default function App() {
     const fn = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", fn);
     return () => window.removeEventListener("resize", fn);
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/standings")
+      .then(r => r.json())
+      .then(data => {
+        if (!Array.isArray(data)) return;
+        const map = {};
+        data.forEach(t => { if (t.teamAbbrev) map[t.teamAbbrev] = `${t.wins}-${t.losses}-${t.otLosses}`; });
+        setStandings(map);
+      })
+      .catch(() => {});
   }, []);
 
   const slugs = useMemo(() => Object.keys(TEAMS_DATA).filter(slug => {
@@ -1181,11 +1292,11 @@ export default function App() {
       {tab === "all" && isMobile && (
         <div>{slugs.map(slug => <MobileRow key={slug} slug={slug} data={TEAMS_DATA[slug]} expanded={!!expanded[slug]} onToggle={() => toggle(slug)} />)}</div>
       )}
-      {tab === "today" && <TodayView isMobile={isMobile} />}
-      {tab === "stats" && <GoalsAgainstView isMobile={isMobile} />}
-      {tab === "injuries" && <InjuriesView isMobile={isMobile} />}
-      {tab === "player" && <PlayerStatsView isMobile={isMobile} />}
-      {tab === "compare" && <CompareView isMobile={isMobile} />}
+      {tab === "today" && <ErrorBoundary><TodayView isMobile={isMobile} /></ErrorBoundary>}
+      {tab === "stats" && <ErrorBoundary><GoalsAgainstView isMobile={isMobile} /></ErrorBoundary>}
+      {tab === "injuries" && <ErrorBoundary><InjuriesView isMobile={isMobile} /></ErrorBoundary>}
+      {tab === "player" && <ErrorBoundary><PlayerStatsView isMobile={isMobile} /></ErrorBoundary>}
+      {tab === "compare" && <ErrorBoundary><CompareView isMobile={isMobile} /></ErrorBoundary>}
 
       {/* Glass player modal */}
       {modal && <PlayerModal modal={modal} onClose={() => setModal(null)} />}
