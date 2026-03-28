@@ -49,7 +49,7 @@ const LOGO_URL = (slug, abbr) => `https://assets.nhle.com/logos/nhl/svg/${LOGO_A
 const COLLAPSED_W = 100;
 const EXPANDED_W = 320;
 const HEADER_H = 100;
-const TABS_H = 36;
+const TABS_H = 46;
 
 const DARK_PALETTE = {
   bg: "#0d0d0d", surface: "#161616", border: "#252525",
@@ -137,7 +137,7 @@ function makeCss(palette) {
   .mobile-body { overflow:hidden; max-height:0; transition:max-height 0.35s cubic-bezier(0.4,0,0.2,1); }
   .mobile-body.open { max-height:2000px; }
   .tabs-bar::-webkit-scrollbar { display:none; }
-  .tab-btn { background:none; border:none; cursor:pointer; font-family:'Syne',sans-serif; font-size:10px; font-weight:700; letter-spacing:0.12em; padding:0 16px; height:100%; transition:color 0.15s,border-bottom 0.15s; border-bottom:2px solid transparent; flex-shrink:0; white-space:nowrap; }
+  .tab-btn { background:none; border:none; cursor:pointer; font-family:'Syne',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.12em; padding:0 18px; height:100%; transition:color 0.15s,border-bottom 0.15s; border-bottom:2px solid transparent; flex-shrink:0; white-space:nowrap; }
   .tab-btn.active { color:${palette.white}; border-bottom-color:${palette.casper}; }
   .tab-btn:not(.active) { color:${palette.dove}; }
   .tab-btn:not(.active):hover { color:${palette.casper}; }
