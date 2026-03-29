@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-29 19:59:47 UTC",
+  "updated_at": "2026-03-29 23:03:41 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -312,12 +312,12 @@
         [
           "TYLER BERTUZZI",
           "ANTON FRONDELL",
-          "FRANK NAZAR"
+          "ILYA MIKHEYEV"
         ],
         [
-          "ANDRE BURAKOVSKY",
           "RYAN DONATO",
-          "ILYA MIKHEYEV"
+          "FRANK NAZAR",
+          "ANDRE BURAKOVSKY"
         ],
         [
           "TEUVO TERAVAINEN",
@@ -430,7 +430,7 @@
           "KIRILL MARCHENKO"
         ],
         [
-          "DANTON HEINEN",
+          "BOONE JENNER",
           "SEAN MONAHAN",
           "CONOR GARLAND"
         ],
@@ -440,23 +440,23 @@
           "MATHIEU OLIVIER"
         ],
         [
+          "DANTON HEINEN",
           "ISAC LUNDESTROM",
-          "BOONE JENNER",
           "MILES WOOD"
         ]
       ],
       "defense": [
         [
           "ZACH WERENSKI",
+          "DANTE FABBRO"
+        ],
+        [
+          "EGOR ZAMULA",
           "IVAN PROVOROV"
         ],
         [
           "DENTON MATEYCHUK",
           "ERIK GUDBRANSON"
-        ],
-        [
-          "EGOR ZAMULA",
-          "DANTE FABBRO"
         ]
       ],
       "goalies": [
@@ -856,12 +856,11 @@
         ],
         [
           "ZACK BOLDUC",
-          "JAKE EVANS",
-          "JOSH ANDERSON"
+          "PHILLIP DANAULT",
+          "JAKE EVANS"
         ],
         [
           "JOE VELENO",
-          "PHILLIP DANAULT",
           "BRENDAN GALLAGHER"
         ]
       ],
@@ -911,17 +910,18 @@
         ],
         [
           "FILIP FORSBERG",
-          "MATTHEW WOOD",
+          "ERIK HAULA",
           "JONATHAN MARCHESSAULT"
         ],
         [
           "LUKE EVANGELISTA",
-          "ERIK HAULA",
+          "MATTHEW WOOD",
           "TYSON JOST"
         ],
         [
           "REID SCHAEFER",
-          "FEDOR SVECHKOV"
+          "FEDOR SVECHKOV",
+          "JOAKIM KEMELL"
         ]
       ],
       "defense": [
@@ -931,11 +931,11 @@
         ],
         [
           "NICOLAS HAGUE",
-          "JUSTIN BARRON"
+          "NICK PERBIX"
         ],
         [
-          "NICK PERBIX",
-          "RYAN UFKO"
+          "ADAM WILSBY",
+          "JUSTIN BARRON"
         ]
       ],
       "goalies": [
@@ -1204,7 +1204,7 @@
     "philadelphia-flyers": {
       "forwards": [
         [
-          "ALEX BUMP",
+          "CARL GRUNDSTROM",
           "CHRISTIAN DVORAK",
           "TRAVIS KONECNY"
         ],
@@ -1214,7 +1214,7 @@
           "OWEN TIPPETT"
         ],
         [
-          "CARL GRUNDSTROM",
+          "ALEX BUMP",
           "NOAH CATES",
           "MATVEI MICHKOV"
         ],
@@ -1504,14 +1504,14 @@
     "tampa-bay-lightning": {
       "forwards": [
         [
+          "COREY PERRY",
+          "BRAYDEN POINT",
+          "JAKE GUENTZEL"
+        ],
+        [
           "BRANDON HAGEL",
           "ANTHONY CIRELLI",
           "GAGE GONCALVES"
-        ],
-        [
-          "JAKE GUENTZEL",
-          "BRAYDEN POINT",
-          "COREY PERRY"
         ],
         [
           "ZEMGUS GIRGENSONS",
@@ -1519,7 +1519,8 @@
           "PONTUS HOLMBERG"
         ],
         [
-          "COREY PERRY",
+          "OLIVER BJORKSTRAND",
+          "NICK PAUL",
           "SCOTT SABOURIN"
         ]
       ],
@@ -1555,7 +1556,7 @@
       "pp2": [
         "COREY PERRY",
         "ANTHONY CIRELLI",
-        "PONTUS HOLMBERG",
+        "NICK PAUL",
         "OLIVER BJORKSTRAND",
         "CHARLE-EDOUARD D'ASTOUS"
       ]
@@ -2236,6 +2237,12 @@
     ],
     "los-angeles-kings": [
       {
+        "name": "SAMUEL HELENIUS",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
         "name": "ANDREI KUZMENKO",
         "pos": "LW",
         "status": "Injured Reserve",
@@ -2266,14 +2273,14 @@
       {
         "name": "ALEXANDRE TEXIER",
         "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "JOSH ANDERSON",
         "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "KIRBY DACH",
@@ -2292,8 +2299,8 @@
       {
         "name": "ARSENY GRITSYUK",
         "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "BRETT PESCE",
@@ -2526,14 +2533,8 @@
       {
         "name": "NIKITA KUCHEROV",
         "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "NICK PAUL",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "VICTOR HEDMAN",
