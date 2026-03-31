@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-03-31 21:00:17 UTC",
+  "updated_at": "2026-03-31 23:04:53 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -485,12 +485,12 @@
     "dallas-stars": {
       "forwards": [
         [
-          "JASON ROBERTSON",
+          "JAMIE BENN",
           "WYATT JOHNSTON",
           "MIKKO RANTANEN"
         ],
         [
-          "JAMIE BENN",
+          "JASON ROBERTSON",
           "MATT DUCHENE",
           "MAVRIK BOURQUE"
         ],
@@ -1030,14 +1030,14 @@
           "EMIL HEINEMAN"
         ],
         [
-          "CALUM RITCHIE",
+          "ANTHONY DUCLAIR",
           "BRAYDEN SCHENN",
           "MATHEW BARZAL"
         ],
         [
           "ONDREJ PALAT",
           "JEAN-GABRIEL PAGEAU",
-          "SIMON HOLMSTROM"
+          "CALUM RITCHIE"
         ],
         [
           "KYLE MACLEAN",
@@ -1061,24 +1061,24 @@
       ],
       "goalies": [
         [
-          "DAVID RITTICH"
+          "ILYA SOROKIN"
         ],
         [
-          "ILYA SOROKIN"
+          "DAVID RITTICH"
         ]
       ],
       "pp1": [
         "BRAYDEN SCHENN",
         "BO HORVAT",
-        "SIMON HOLMSTROM",
         "CALUM RITCHIE",
+        "MATHEW BARZAL",
         "MATTHEW SCHAEFER"
       ],
       "pp2": [
         "ANDERS LEE",
         "JEAN-GABRIEL PAGEAU",
         "EMIL HEINEMAN",
-        "MATHEW BARZAL",
+        "ANTHONY DUCLAIR",
         "ADAM BOQVIST"
       ]
     },
@@ -1270,14 +1270,14 @@
           "BRYAN RUST"
         ],
         [
+          "TOMMY NOVAK",
+          "BEN KINDEL",
+          "EVGENI MALKIN"
+        ],
+        [
           "ANTHONY MANTHA",
           "RICKARD RAKELL",
           "JUSTIN BRAZEAU"
-        ],
-        [
-          "TOMMY NOVAK",
-          "BEN KINDEL",
-          "AVERY HAYES"
         ],
         [
           "ELMER SODERBLOM",
@@ -1312,10 +1312,10 @@
         "SIDNEY CROSBY",
         "RICKARD RAKELL",
         "ERIK KARLSSON",
-        "ANTHONY MANTHA"
+        "EVGENI MALKIN"
       ],
       "pp2": [
-        "JUSTIN BRAZEAU",
+        "ANTHONY MANTHA",
         "BEN KINDEL",
         "EGOR CHINAKHOV",
         "KRIS LETANG",
@@ -1928,8 +1928,8 @@
       {
         "name": "CUTTER GAUTHIER",
         "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "JANSEN HARKINS",
@@ -2266,16 +2266,16 @@
     ],
     "montreal-canadiens": [
       {
-        "name": "ALEXANDRE CARRIER",
-        "pos": "D",
+        "name": "ALEXANDRE TEXIER",
+        "pos": "LW",
         "status": "Out",
         "desc": "out"
       },
       {
-        "name": "ALEXANDRE TEXIER",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "name": "ALEXANDRE CARRIER",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "KIRBY DACH",
@@ -2318,6 +2318,12 @@
     ],
     "new-york-islanders": [
       {
+        "name": "SIMON HOLMSTROM",
+        "pos": "RW",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "TONY DEANGELO",
         "pos": "D",
         "status": "Out",
@@ -2352,8 +2358,8 @@
       {
         "name": "JONATHAN QUICK",
         "pos": "G",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "MATT REMPE",
@@ -2421,12 +2427,6 @@
       }
     ],
     "pittsburgh-penguins": [
-      {
-        "name": "EVGENI MALKIN",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
       {
         "name": "BLAKE LIZOTTE",
         "pos": "C",
@@ -2513,12 +2513,6 @@
       }
     ],
     "tampa-bay-lightning": [
-      {
-        "name": "NIKITA KUCHEROV",
-        "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
       {
         "name": "VICTOR HEDMAN",
         "pos": "D",
