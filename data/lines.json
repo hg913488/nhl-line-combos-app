@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-03 15:31:49 UTC",
+  "updated_at": "2026-04-03 18:55:23 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -235,7 +235,7 @@
         "ZAYNE PAREKH"
       ],
       "pp2": [
-        "YEGOR SHARANGOVICH",
+        "JOEL FARABEE",
         "RYAN STROME",
         "CONNOR ZARY",
         "KEVIN BAHL",
@@ -375,14 +375,14 @@
           "VALERI NICHUSHKIN"
         ],
         [
-          "ROSS COLTON",
+          "PARKER KELLY",
           "NAZEM KADRI",
-          "LOGAN O'CONNOR"
+          "JOEL KIVIRANTA"
         ],
         [
-          "PARKER KELLY",
+          "ROSS COLTON",
           "JACK DRURY",
-          "JOEL KIVIRANTA"
+          "LOGAN O'CONNOR"
         ]
       ],
       "defense": [
@@ -1029,14 +1029,14 @@
           "EMIL HEINEMAN"
         ],
         [
-          "ANTHONY DUCLAIR",
+          "CALUM RITCHIE",
           "BRAYDEN SCHENN",
           "MATHEW BARZAL"
         ],
         [
           "ONDREJ PALAT",
           "JEAN-GABRIEL PAGEAU",
-          "CALUM RITCHIE"
+          "SIMON HOLMSTROM"
         ],
         [
           "KYLE MACLEAN",
@@ -1069,15 +1069,15 @@
       "pp1": [
         "BRAYDEN SCHENN",
         "BO HORVAT",
+        "SIMON HOLMSTROM",
         "CALUM RITCHIE",
-        "MATHEW BARZAL",
         "MATTHEW SCHAEFER"
       ],
       "pp2": [
         "ANDERS LEE",
         "JEAN-GABRIEL PAGEAU",
         "EMIL HEINEMAN",
-        "ADAM PELECH",
+        "MATHEW BARZAL",
         "ADAM BOQVIST"
       ]
     },
@@ -1427,15 +1427,15 @@
         ]
       ],
       "pp1": [
+        "BOBBY MCMANN",
         "CHANDLER STEPHENSON",
-        "MATTY BENIERS",
         "JORDAN EBERLE",
         "VINCE DUNN",
         "JARED MCCANN"
       ],
       "pp2": [
-        "BOBBY MCMANN",
         "JADEN SCHWARTZ",
+        "MATTY BENIERS",
         "KAAPO KAKKO",
         "BRANDON MONTOUR",
         "EELI TOLVANEN"
@@ -1454,14 +1454,14 @@
           "JORDAN KYROU"
         ],
         [
-          "OTTO STENBERG",
+          "JONATHAN DROUIN",
           "DALIBOR DVORSKY",
-          "JONATAN BERGGREN"
+          "OTTO STENBERG"
         ],
         [
-          "ALEXEY TOROPCHENKO",
-          "JACK FINLEY",
-          "PIUS SUTER"
+          "PIUS SUTER",
+          "OSKAR SUNDQVIST",
+          "NATHAN WALKER"
         ]
       ],
       "defense": [
@@ -1475,7 +1475,7 @@
         ],
         [
           "CAM FOWLER",
-          "JUSTIN HOLL"
+          "MATTHEW KESSEL"
         ]
       ],
       "goalies": [
@@ -1610,14 +1610,14 @@
         "MATTHEW KNIES",
         "JOHN TAVARES",
         "EASTON COWAN",
-        "OLIVER EKMAN-LARSSON",
+        "MORGAN RIELLY",
         "WILLIAM NYLANDER"
       ],
       "pp2": [
         "DAKOTA JOSHUA",
         "MAX DOMI",
         "NICHOLAS ROBERTSON",
-        "MORGAN RIELLY",
+        "OLIVER EKMAN-LARSSON",
         "MATIAS MACCELLI"
       ]
     },
@@ -1675,7 +1675,7 @@
       ],
       "pp2": [
         "LAWSON CROUSE",
-        "JACK MCBAIN",
+        "ALEX KERFOOT",
         "MICHAEL CARCONE",
         "JJ PETERKA",
         "MACKENZIE WEEGAR"
@@ -1925,16 +1925,16 @@
   "injuries": {
     "anaheim-ducks": [
       {
-        "name": "RADKO GUDAS",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "PAVEL MINTYUKOV",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "RADKO GUDAS",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "CUTTER GAUTHIER",
@@ -2379,16 +2379,16 @@
     ],
     "new-york-rangers": [
       {
-        "name": "MATT REMPE",
-        "pos": "C",
-        "status": "Injured Reserve",
-        "desc": "Injured Reserve"
-      },
-      {
         "name": "URHO VAAKANAINEN",
         "pos": "D",
         "status": "Out",
         "desc": "out"
+      },
+      {
+        "name": "MATT REMPE",
+        "pos": "C",
+        "status": "Injured Reserve",
+        "desc": "Injured Reserve"
       }
     ],
     "ottawa-senators": [
@@ -2639,8 +2639,8 @@
       {
         "name": "VLADISLAV NAMESTNIKOV",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "ELIAS SALOMONSSON",
