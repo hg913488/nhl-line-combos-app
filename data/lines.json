@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-04 14:38:30 UTC",
+  "updated_at": "2026-04-04 15:20:42 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -127,21 +127,21 @@
         [
           "PEYTON KREBS",
           "TAGE THOMPSON",
-          "ALEX TUCH"
+          "JOSH DOAN"
         ],
         [
           "JASON ZUCKER",
+          "JOSH NORRIS",
+          "ALEX TUCH"
+        ],
+        [
+          "ZACH BENSON",
           "RYAN MCLEOD",
           "JACK QUINN"
         ],
         [
-          "ZACH BENSON",
-          "JOSH NORRIS",
-          "JOSH DOAN"
-        ],
-        [
           "JORDAN GREENWAY",
-          "JOSH DUNNE",
+          "TYSON KOZAK",
           "BECK MALENSTYN"
         ]
       ],
@@ -151,8 +151,8 @@
           "RASMUS DAHLIN"
         ],
         [
-          "OWEN POWER",
-          "BOWEN BYRAM"
+          "BOWEN BYRAM",
+          "OWEN POWER"
         ],
         [
           "LOGAN STANLEY",
@@ -425,37 +425,37 @@
     "columbus-blue-jackets": {
       "forwards": [
         [
-          "COLE SILLINGER",
+          "MASON MARCHMENT",
           "ADAM FANTILLI",
           "KIRILL MARCHENKO"
         ],
         [
-          "KENT JOHNSON",
+          "BOONE JENNER",
           "SEAN MONAHAN",
-          "DANTON HEINEN"
-        ],
-        [
-          "LUCA DEL BEL BELLUZ",
-          "CHARLIE COYLE",
           "CONOR GARLAND"
         ],
         [
-          "BOONE JENNER",
-          "ISAC LUNDESTROM",
+          "COLE SILLINGER",
+          "CHARLIE COYLE",
+          "DANTON HEINEN"
+        ],
+        [
+          "ZACH ASTON-REESE",
+          "LUCA DEL BEL BELLUZ",
           "MILES WOOD"
         ]
       ],
       "defense": [
         [
           "ZACH WERENSKI",
+          "DENTON MATEYCHUK"
+        ],
+        [
+          "IVAN PROVOROV",
           "DANTE FABBRO"
         ],
         [
-          "EGOR ZAMULA",
-          "IVAN PROVOROV"
-        ],
-        [
-          "DENTON MATEYCHUK",
+          "JAKE CHRISTIANSEN",
           "ERIK GUDBRANSON"
         ]
       ],
@@ -470,12 +470,12 @@
       "pp1": [
         "CHARLIE COYLE",
         "ADAM FANTILLI",
-        "LUCA DEL BEL BELLUZ",
+        "MASON MARCHMENT",
         "ZACH WERENSKI",
         "KIRILL MARCHENKO"
       ],
       "pp2": [
-        "KENT JOHNSON",
+        "LUCA DEL BEL BELLUZ",
         "SEAN MONAHAN",
         "CONOR GARLAND",
         "DENTON MATEYCHUK",
@@ -979,9 +979,9 @@
           "NICK BJUGSTAD"
         ],
         [
-          "EVGENII DADONOV",
+          "MARC MCLAUGHLIN",
           "PAUL COTTER",
-          "MAXIM TSYPLAKOV"
+          "BRIAN HALONEN"
         ]
       ],
       "defense": [
@@ -1000,10 +1000,10 @@
       ],
       "goalies": [
         [
-          "JAKE ALLEN"
+          "JACOB MARKSTROM"
         ],
         [
-          "JACOB MARKSTROM"
+          "JAKE ALLEN"
         ]
       ],
       "pp1": [
@@ -1579,9 +1579,9 @@
           "NICHOLAS ROBERTSON"
         ],
         [
-          "STEVEN LORENTZ",
+          "MICHAEL PEZZETTA",
           "JACOB QUILLAN",
-          "CALLE JARNKROK"
+          "STEVEN LORENTZ"
         ]
       ],
       "defense": [
@@ -1595,7 +1595,7 @@
         ],
         [
           "SIMON BENOIT",
-          "OLIVER EKMAN-LARSSON"
+          "TROY STECHER"
         ]
       ],
       "goalies": [
@@ -1614,10 +1614,10 @@
         "WILLIAM NYLANDER"
       ],
       "pp2": [
-        "DAKOTA JOSHUA",
         "MAX DOMI",
+        "BO GROULX",
         "NICHOLAS ROBERTSON",
-        "OLIVER EKMAN-LARSSON",
+        "JAKE MCCABE",
         "MATIAS MACCELLI"
       ]
     },
@@ -1804,12 +1804,12 @@
     "washington-capitals": {
       "forwards": [
         [
-          "ALEX OVECHKIN",
+          "ALIAKSEI PROTAS",
           "DYLAN STROME",
-          "CONNOR MCMICHAEL"
+          "ALEX OVECHKIN"
         ],
         [
-          "HENDRIX LAPIERRE",
+          "CONNOR MCMICHAEL",
           "PIERRE-LUC DUBOIS",
           "TOM WILSON"
         ],
@@ -1820,8 +1820,8 @@
         ],
         [
           "BRANDON DUHAIME",
-          "DAVID KAMPF",
-          "IVAN MIROSHNICHENKO"
+          "HENDRIX LAPIERRE",
+          "ETHEN FRANK"
         ]
       ],
       "defense": [
@@ -1856,7 +1856,7 @@
       "pp2": [
         "CONNOR MCMICHAEL",
         "DYLAN STROME",
-        "JUSTIN SOURDIF",
+        "ETHEN FRANK",
         "ALEX OVECHKIN",
         "COLE HUTSON"
       ]
@@ -2387,7 +2387,7 @@
     ],
     "ottawa-senators": [
       {
-        "name": "CARTER YAKEMCHUK",
+        "name": "TYLER KLEVEN",
         "pos": "D",
         "status": "Out",
         "desc": "out"
@@ -2399,10 +2399,10 @@
         "desc": "day-to-day"
       },
       {
-        "name": "TYLER KLEVEN",
+        "name": "CARTER YAKEMCHUK",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "DENNIS GILBERT",
@@ -2616,12 +2616,6 @@
       }
     ],
     "washington-capitals": [
-      {
-        "name": "ALIAKSEI PROTAS",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
       {
         "name": "ERIKS MATEIKO",
         "pos": "LW",
