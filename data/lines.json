@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-04 19:36:07 UTC",
+  "updated_at": "2026-04-04 22:18:13 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -75,7 +75,7 @@
           "VIKTOR ARVIDSSON"
         ],
         [
-          "LUKAS REICHEL",
+          "MICHAEL EYSSIMONT",
           "ELIAS LINDHOLM",
           "MORGAN GEEKIE"
         ],
@@ -92,7 +92,7 @@
         ],
         [
           "HAMPUS LINDHOLM",
-          "HENRI JOKIHARJU"
+          "JORDAN HARRIS"
         ],
         [
           "NIKITA ZADOROV",
@@ -305,7 +305,7 @@
     "chicago-blackhawks": {
       "forwards": [
         [
-          "TEUVO TERAVAINEN",
+          "RYAN GREENE",
           "CONNOR BEDARD",
           "NICK LARDIS"
         ],
@@ -317,10 +317,10 @@
         [
           "RYAN DONATO",
           "FRANK NAZAR",
-          "RYAN GREENE"
+          "ANDRE BURAKOVSKY"
         ],
         [
-          "ANDRE BURAKOVSKY",
+          "TEUVO TERAVAINEN",
           "SACHA BOISVERT",
           "LANDON SLAGGERT"
         ]
@@ -328,11 +328,11 @@
       "defense": [
         [
           "ALEX VLASIC",
-          "LOUIS CREVIER"
+          "SAM RINZEL"
         ],
         [
           "WYATT KAISER",
-          "SAM RINZEL"
+          "LOUIS CREVIER"
         ],
         [
           "KEVIN KORCHINSKI",
@@ -1034,12 +1034,12 @@
           "MATHEW BARZAL"
         ],
         [
-          "ONDREJ PALAT",
+          "MAXIM SHABANOV",
           "JEAN-GABRIEL PAGEAU",
           "SIMON HOLMSTROM"
         ],
         [
-          "KYLE MACLEAN",
+          "ONDREJ PALAT",
           "CASEY CIZIKAS",
           "MARC GATCOMB"
         ]
@@ -1054,8 +1054,8 @@
           "CARSON SOUCY"
         ],
         [
-          "SCOTT MAYFIELD",
-          "ADAM BOQVIST"
+          "ISAIAH GEORGE",
+          "SCOTT MAYFIELD"
         ]
       ],
       "goalies": [
@@ -1078,7 +1078,7 @@
         "JEAN-GABRIEL PAGEAU",
         "EMIL HEINEMAN",
         "MATHEW BARZAL",
-        "ADAM BOQVIST"
+        "RYAN PULOCK"
       ]
     },
     "new-york-rangers": {
@@ -1509,9 +1509,9 @@
           "NIKITA KUCHEROV"
         ],
         [
-          "GAGE GONCALVES",
+          "OLIVER BJORKSTRAND",
           "ANTHONY CIRELLI",
-          "OLIVER BJORKSTRAND"
+          "GAGE GONCALVES"
         ],
         [
           "ZEMGUS GIRGENSONS",
@@ -1699,7 +1699,7 @@
           "LINUS KARLSSON"
         ],
         [
-          "CURTIS DOUGLAS",
+          "EVANDER KANE",
           "TY MUELLER",
           "AATU RATY"
         ]
@@ -1714,8 +1714,8 @@
           "TOM WILLANDER"
         ],
         [
-          "ELIAS NILS PETTERSSON",
-          "PIERRE-OLIVIER JOSEPH"
+          "PIERRE-OLIVIER JOSEPH",
+          "VICTOR MANCINI"
         ]
       ],
       "goalies": [
@@ -1965,8 +1965,8 @@
       {
         "name": "MASON LOHREI",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "DANS LOCMELIS",
@@ -2002,12 +2002,6 @@
       }
     ],
     "calgary-flames": [
-      {
-        "name": "JONATHAN CASTAGNA",
-        "pos": "RW",
-        "status": "Out",
-        "desc": "out"
-      },
       {
         "name": "JOEL HANLEY",
         "pos": "D",
@@ -2054,12 +2048,6 @@
       }
     ],
     "chicago-blackhawks": [
-      {
-        "name": "NICK LARDIS",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
       {
         "name": "ANDREW MANGIAPANE",
         "pos": "LW",
@@ -2159,8 +2147,14 @@
       {
         "name": "JUSTIN FAULK",
         "pos": "D",
-        "status": "Out",
-        "desc": "out"
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "MASON APPLETON",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       }
     ],
     "edmonton-oilers": [
@@ -2172,12 +2166,6 @@
       },
       {
         "name": "LEON DRAISAITL",
-        "pos": "C",
-        "status": "Injured Reserve",
-        "desc": "Injured Reserve"
-      },
-      {
-        "name": "COLTON DACH",
         "pos": "C",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
@@ -2495,14 +2483,14 @@
       {
         "name": "SCOTT SABOURIN",
         "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "BRANDON HAGEL",
         "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "VICTOR HEDMAN",
@@ -2564,12 +2552,6 @@
       }
     ],
     "vancouver-canucks": [
-      {
-        "name": "EVANDER KANE",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
       {
         "name": "THATCHER DEMKO",
         "pos": "G",
