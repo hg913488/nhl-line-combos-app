@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-05 15:22:02 UTC",
+  "updated_at": "2026-04-05 18:53:11 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -75,7 +75,7 @@
           "VIKTOR ARVIDSSON"
         ],
         [
-          "MICHAEL EYSSIMONT",
+          "LUKAS REICHEL",
           "ELIAS LINDHOLM",
           "MORGAN GEEKIE"
         ],
@@ -92,7 +92,7 @@
         ],
         [
           "HAMPUS LINDHOLM",
-          "JORDAN HARRIS"
+          "MASON LOHREI"
         ],
         [
           "NIKITA ZADOROV",
@@ -546,7 +546,7 @@
         [
           "EMMITT FINNIE",
           "DYLAN LARKIN",
-          "MARCO KASPER"
+          "LUCAS RAYMOND"
         ],
         [
           "ALEX DEBRINCAT",
@@ -554,28 +554,28 @@
           "PATRICK KANE"
         ],
         [
-          "DAVID PERRON",
+          "MARCO KASPER",
           "J.T. COMPHER",
-          "LUCAS RAYMOND"
+          "DAVID PERRON"
         ],
         [
           "JAMES VAN RIEMSDYK",
           "MICHAEL RASMUSSEN",
-          "DOMINIK SHINE"
+          "CARTER MAZUR"
         ]
       ],
       "defense": [
         [
-          "ALBERT JOHANSSON",
-          "MORITZ SEIDER"
-        ],
-        [
           "SIMON EDVINSSON",
-          "JACOB BERNARD-DOCKER"
+          "MORITZ SEIDER"
         ],
         [
           "BEN CHIAROT",
           "AXEL SANDIN-PELLIKKA"
+        ],
+        [
+          "ALBERT JOHANSSON",
+          "JACOB BERNARD-DOCKER"
         ]
       ],
       "goalies": [
@@ -679,23 +679,23 @@
           "JESPER BOQVIST"
         ],
         [
-          "COLE REINHARDT",
+          "NOLAN FOOTE",
           "COLE SCHWINDT",
-          "LUKE KUNIN"
+          "VINNIE HINOSTROZA"
         ]
       ],
       "defense": [
         [
           "GUSTAV FORSLING",
-          "MICHAEL BENNING"
-        ],
-        [
-          "DONOVAN SEBRANGO",
-          "SETH JONES"
+          "DMITRY KULIKOV"
         ],
         [
           "TOBIAS BJORNFOT",
-          "MIKULAS HOVORKA"
+          "SETH JONES"
+        ],
+        [
+          "DONOVAN SEBRANGO",
+          "MICHAEL BENNING"
         ]
       ],
       "goalies": [
@@ -715,8 +715,8 @@
       ],
       "pp2": [
         "EETU LUOSTARINEN",
-        "COLE SCHWINDT",
         "JESPER BOQVIST",
+        "VINNIE HINOSTROZA",
         "GUSTAV FORSLING",
         "MICHAEL BENNING"
       ]
@@ -815,7 +815,7 @@
         ],
         [
           "JACOB MIDDLETON",
-          "ZACH BOGOSIAN"
+          "JEFF PETRY"
         ]
       ],
       "goalies": [
@@ -1300,10 +1300,10 @@
       ],
       "goalies": [
         [
-          "STUART SKINNER"
+          "ARTURS SILOVS"
         ],
         [
-          "ARTURS SILOVS"
+          "TAYLOR GAUTHIER"
         ]
       ],
       "pp1": [
@@ -1963,12 +1963,6 @@
     ],
     "boston-bruins": [
       {
-        "name": "MASON LOHREI",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "DANS LOCMELIS",
         "pos": "C",
         "status": "Out",
@@ -2145,16 +2139,16 @@
     ],
     "detroit-red-wings": [
       {
-        "name": "JUSTIN FAULK",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "MASON APPLETON",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "JUSTIN FAULK",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
       }
     ],
     "edmonton-oilers": [
@@ -2178,12 +2172,6 @@
       }
     ],
     "florida-panthers": [
-      {
-        "name": "DMITRY KULIKOV",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
       {
         "name": "EVAN RODRIGUES",
         "pos": "C",
@@ -2254,6 +2242,12 @@
       }
     ],
     "minnesota-wild": [
+      {
+        "name": "ZACH BOGOSIAN",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
       {
         "name": "CHARLIE STRAMEL",
         "pos": "C",
@@ -2421,10 +2415,16 @@
     ],
     "pittsburgh-penguins": [
       {
-        "name": "CALEB JONES",
-        "pos": "D",
+        "name": "STUART SKINNER",
+        "pos": "G",
         "status": "Out",
         "desc": "out"
+      },
+      {
+        "name": "CALEB JONES",
+        "pos": "D",
+        "status": "Injured Reserve",
+        "desc": "Injured Reserve"
       },
       {
         "name": "BLAKE LIZOTTE",
@@ -2471,14 +2471,6 @@
         "pos": "LW",
         "status": "Out",
         "desc": "out"
-      }
-    ],
-    "st-louis-blues": [
-      {
-        "name": "PAVEL BUCHNEVICH",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
       }
     ],
     "tampa-bay-lightning": [
