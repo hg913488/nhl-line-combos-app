@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-06 15:36:45 UTC",
+  "updated_at": "2026-04-06 19:09:08 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -127,28 +127,28 @@
         [
           "PEYTON KREBS",
           "TAGE THOMPSON",
-          "JOSH DOAN"
-        ],
-        [
-          "JASON ZUCKER",
-          "JOSH NORRIS",
           "ALEX TUCH"
         ],
         [
-          "ZACH BENSON",
+          "JASON ZUCKER",
           "RYAN MCLEOD",
           "JACK QUINN"
         ],
         [
+          "ZACH BENSON",
+          "JOSH NORRIS",
+          "JOSH DOAN"
+        ],
+        [
           "JORDAN GREENWAY",
-          "TYSON KOZAK",
+          "JOSH DUNNE",
           "BECK MALENSTYN"
         ]
       ],
       "defense": [
         [
-          "MATTIAS SAMUELSSON",
-          "RASMUS DAHLIN"
+          "RASMUS DAHLIN",
+          "MATTIAS SAMUELSSON"
         ],
         [
           "BOWEN BYRAM",
@@ -156,15 +156,15 @@
         ],
         [
           "LOGAN STANLEY",
-          "ZACH METSA"
+          "LUKE SCHENN"
         ]
       ],
       "goalies": [
         [
-          "ALEX LYON"
+          "UKKO-PEKKA LUUKKONEN"
         ],
         [
-          "UKKO-PEKKA LUUKKONEN"
+          "ALEX LYON"
         ]
       ],
       "pp1": [
@@ -501,6 +501,7 @@
         ],
         [
           "ADAM ERNE",
+          "RADEK FAKSA",
           "ARTTU HYRY"
         ]
       ],
@@ -926,11 +927,11 @@
       ],
       "defense": [
         [
-          "BRADY SKJEI",
-          "ROMAN JOSI"
+          "ROMAN JOSI",
+          "RYAN UFKO"
         ],
         [
-          "NICOLAS HAGUE",
+          "BRADY SKJEI",
           "NICK PERBIX"
         ],
         [
@@ -957,7 +958,7 @@
         "MATTHEW WOOD",
         "ERIK HAULA",
         "LUKE EVANGELISTA",
-        "BRADY SKJEI",
+        "RYAN UFKO",
         "ZACHARY L'HEUREUX"
       ]
     },
@@ -1026,17 +1027,17 @@
         [
           "ANDERS LEE",
           "BO HORVAT",
-          "EMIL HEINEMAN"
+          "ANTHONY DUCLAIR"
         ],
         [
+          "CALUM RITCHIE",
           "MATHEW BARZAL",
-          "JEAN-GABRIEL PAGEAU",
-          "SIMON HOLMSTROM"
+          "BRAYDEN SCHENN"
         ],
         [
           "MAXIM SHABANOV",
-          "BRAYDEN SCHENN",
-          "CALUM RITCHIE"
+          "JEAN-GABRIEL PAGEAU",
+          "EMIL HEINEMAN"
         ],
         [
           "ONDREJ PALAT",
@@ -1069,15 +1070,15 @@
       "pp1": [
         "BRAYDEN SCHENN",
         "BO HORVAT",
-        "MATHEW BARZAL",
         "CALUM RITCHIE",
+        "MATHEW BARZAL",
         "MATTHEW SCHAEFER"
       ],
       "pp2": [
         "ANDERS LEE",
         "JEAN-GABRIEL PAGEAU",
         "EMIL HEINEMAN",
-        "SIMON HOLMSTROM",
+        "ANTHONY DUCLAIR",
         "RYAN PULOCK"
       ]
     },
@@ -1341,7 +1342,7 @@
         [
           "BARCLAY GOODROW",
           "ZACK OSTAPCHUK",
-          "ADAM GAUDETTE"
+          "TY DELLANDREA"
         ]
       ],
       "defense": [
@@ -1420,10 +1421,10 @@
       ],
       "goalies": [
         [
-          "JOEY DACCORD"
+          "PHILIPP GRUBAUER"
         ],
         [
-          "PHILIPP GRUBAUER"
+          "JOEY DACCORD"
         ]
       ],
       "pp1": [
@@ -1874,14 +1875,14 @@
           "GABRIEL VILARDI"
         ],
         [
-          "COLE KOEPKE",
-          "JONATHAN TOEWS",
-          "PARKER FORD"
+          "NINO NIEDERREITER",
+          "VLADISLAV NAMESTNIKOV",
+          "BRAD LAMBERT"
         ],
         [
-          "ISAK ROSEN",
-          "MORGAN BARRON",
-          "BRAD LAMBERT"
+          "COLE KOEPKE",
+          "JONATHAN TOEWS",
+          "ISAK ROSEN"
         ]
       ],
       "defense": [
@@ -1909,15 +1910,15 @@
       "pp1": [
         "GABRIEL VILARDI",
         "MARK SCHEIFELE",
-        "COLE PERFETTI",
+        "JONATHAN TOEWS",
         "JOSH MORRISSEY",
         "KYLE CONNOR"
       ],
       "pp2": [
+        "NINO NIEDERREITER",
+        "VLADISLAV NAMESTNIKOV",
         "BRAD LAMBERT",
-        "JONATHAN TOEWS",
-        "ALEX IAFALLO",
-        "ISAK ROSEN",
+        "COLE PERFETTI",
         "NEAL PIONK"
       ]
     }
@@ -2113,6 +2114,18 @@
     ],
     "dallas-stars": [
       {
+        "name": "NATHAN BASTIAN",
+        "pos": "RW",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "RADEK FAKSA",
+        "pos": "C",
+        "status": "Injured Reserve",
+        "desc": "Injured Reserve"
+      },
+      {
         "name": "TYLER MYERS",
         "pos": "D",
         "status": "Day-To-Day",
@@ -2131,22 +2144,10 @@
         "desc": "out"
       },
       {
-        "name": "NATHAN BASTIAN",
-        "pos": "RW",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
         "name": "ROOPE HINTZ",
         "pos": "C",
         "status": "Out",
         "desc": "out"
-      },
-      {
-        "name": "RADEK FAKSA",
-        "pos": "C",
-        "status": "Injured Reserve",
-        "desc": "Injured Reserve"
       },
       {
         "name": "TYLER SEGUIN",
@@ -2171,16 +2172,16 @@
     ],
     "edmonton-oilers": [
       {
-        "name": "ZACH HYMAN",
-        "pos": "LW",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
         "name": "LEON DRAISAITL",
         "pos": "C",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
+      },
+      {
+        "name": "ZACH HYMAN",
+        "pos": "LW",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "MATTIAS JANMARK",
@@ -2493,14 +2494,14 @@
     ],
     "tampa-bay-lightning": [
       {
-        "name": "SCOTT SABOURIN",
-        "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "BRANDON HAGEL",
         "pos": "LW",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "SCOTT SABOURIN",
+        "pos": "RW",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       },
@@ -2573,6 +2574,12 @@
       {
         "name": "KEVIN LANKINEN",
         "pos": "G",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "EVANDER KANE",
+        "pos": "LW",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       },
@@ -2621,12 +2628,6 @@
         "pos": "RW",
         "status": "Out",
         "desc": "out"
-      },
-      {
-        "name": "VLADISLAV NAMESTNIKOV",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
       },
       {
         "name": "ELIAS SALOMONSSON",
