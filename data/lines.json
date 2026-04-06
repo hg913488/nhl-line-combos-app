@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-05 22:19:57 UTC",
+  "updated_at": "2026-04-06 14:55:02 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -65,8 +65,8 @@
     "boston-bruins": {
       "forwards": [
         [
-          "MARAT KHUSNUTDINOV",
-          "FRASER MINTEN",
+          "MORGAN GEEKIE",
+          "ELIAS LINDHOLM",
           "DAVID PASTRNAK"
         ],
         [
@@ -76,8 +76,8 @@
         ],
         [
           "LUKAS REICHEL",
-          "ELIAS LINDHOLM",
-          "MORGAN GEEKIE"
+          "FRASER MINTEN",
+          "MARAT KHUSNUTDINOV"
         ],
         [
           "TANNER JEANNOT",
@@ -101,10 +101,10 @@
       ],
       "goalies": [
         [
-          "JOONAS KORPISALO"
+          "JEREMY SWAYMAN"
         ],
         [
-          "JEREMY SWAYMAN"
+          "JOONAS KORPISALO"
         ]
       ],
       "pp1": [
@@ -161,10 +161,10 @@
       ],
       "goalies": [
         [
-          "UKKO-PEKKA LUUKKONEN"
+          "ALEX LYON"
         ],
         [
-          "ALEX LYON"
+          "UKKO-PEKKA LUUKKONEN"
         ]
       ],
       "pp1": [
@@ -370,18 +370,18 @@
           "MARTIN NECAS"
         ],
         [
-          "GABRIEL LANDESKOG",
-          "BROCK NELSON",
-          "VALERI NICHUSHKIN"
-        ],
-        [
-          "PARKER KELLY",
           "NAZEM KADRI",
-          "JOEL KIVIRANTA"
+          "BROCK NELSON",
+          "GABRIEL LANDESKOG"
         ],
         [
           "ROSS COLTON",
           "JACK DRURY",
+          "JOEL KIVIRANTA"
+        ],
+        [
+          "PARKER KELLY",
+          "ZAKHAR BARDAKOV",
           "LOGAN O'CONNOR"
         ]
       ],
@@ -417,7 +417,7 @@
       "pp2": [
         "ARTTURI LEHKONEN",
         "GABRIEL LANDESKOG",
-        "VALERI NICHUSHKIN",
+        "ROSS COLTON",
         "SAM MALINSKI",
         "BRENT BURNS"
       ]
@@ -571,19 +571,19 @@
         ],
         [
           "BEN CHIAROT",
-          "AXEL SANDIN-PELLIKKA"
+          "JACOB BERNARD-DOCKER"
         ],
         [
           "ALBERT JOHANSSON",
-          "JACOB BERNARD-DOCKER"
+          "AXEL SANDIN-PELLIKKA"
         ]
       ],
       "goalies": [
         [
-          "CAM TALBOT"
+          "JOHN GIBSON"
         ],
         [
-          "JOHN GIBSON"
+          "CAM TALBOT"
         ]
       ],
       "pp1": [
@@ -760,10 +760,10 @@
       ],
       "goalies": [
         [
-          "DARCY KUEMPER"
+          "ANTON FORSBERG"
         ],
         [
-          "ANTON FORSBERG"
+          "DARCY KUEMPER"
         ]
       ],
       "pp1": [
@@ -836,9 +836,9 @@
       "pp2": [
         "VLADIMIR TARASENKO",
         "RYAN HARTMAN",
-        "BOBBY BRINK",
+        "MARCUS JOHANSSON",
         "BROCK FABER",
-        "MARCUS JOHANSSON"
+        "JARED SPURGEON"
       ]
     },
     "montreal-canadiens": {
@@ -1136,7 +1136,7 @@
       "pp2": [
         "WILL CUYLLE",
         "JONNY BRODZINSKI",
-        "NOAH LABA",
+        "CONOR SHEARY",
         "VLADISLAV GAVRIKOV",
         "GABRIEL PERREAULT"
       ]
@@ -1249,16 +1249,16 @@
       "pp1": [
         "TRAVIS KONECNY",
         "CHRISTIAN DVORAK",
-        "TYSON FOERSTER",
-        "RASMUS RISTOLAINEN",
+        "OWEN TIPPETT",
+        "JAMIE DRYSDALE",
         "TREVOR ZEGRAS"
       ],
       "pp2": [
         "PORTER MARTONE",
         "NOAH CATES",
+        "TYSON FOERSTER",
         "MATVEI MICHKOV",
-        "OWEN TIPPETT",
-        "JAMIE DRYSDALE"
+        "RASMUS RISTOLAINEN"
       ]
     },
     "pittsburgh-penguins": {
@@ -1420,10 +1420,10 @@
       ],
       "goalies": [
         [
-          "PHILIPP GRUBAUER"
+          "JOEY DACCORD"
         ],
         [
-          "JOEY DACCORD"
+          "PHILIPP GRUBAUER"
         ]
       ],
       "pp1": [
@@ -1450,18 +1450,18 @@
         ],
         [
           "JAKE NEIGHBOURS",
-          "PAVEL BUCHNEVICH",
-          "JORDAN KYROU"
+          "PIUS SUTER",
+          "JONATAN BERGGREN"
         ],
         [
           "JONATHAN DROUIN",
           "DALIBOR DVORSKY",
-          "OTTO STENBERG"
+          "JORDAN KYROU"
         ],
         [
-          "PIUS SUTER",
-          "OSKAR SUNDQVIST",
-          "NATHAN WALKER"
+          "PAVEL BUCHNEVICH",
+          "JACK FINLEY",
+          "ALEXEY TOROPCHENKO"
         ]
       ],
       "defense": [
@@ -1840,10 +1840,10 @@
       ],
       "goalies": [
         [
-          "CHARLIE LINDGREN"
+          "LOGAN THOMPSON"
         ],
         [
-          "LOGAN THOMPSON"
+          "CHARLIE LINDGREN"
         ]
       ],
       "pp1": [
@@ -2035,16 +2035,16 @@
     ],
     "carolina-hurricanes": [
       {
-        "name": "JORDAN MARTINOOK",
-        "pos": "LW",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
         "name": "JORDAN STAAL",
         "pos": "C",
-        "status": "Out",
-        "desc": "out"
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "JORDAN MARTINOOK",
+        "pos": "LW",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       },
       {
         "name": "PYOTR KOCHETKOV",
@@ -2093,16 +2093,22 @@
     ],
     "colorado-avalanche": [
       {
-        "name": "CALE MAKAR",
-        "pos": "D",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
         "name": "NICOLAS ROY",
         "pos": "C",
-        "status": "Out",
-        "desc": "out"
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "CALE MAKAR",
+        "pos": "D",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "VALERI NICHUSHKIN",
+        "pos": "RW",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       }
     ],
     "dallas-stars": [
@@ -2151,16 +2157,16 @@
     ],
     "detroit-red-wings": [
       {
-        "name": "MASON APPLETON",
-        "pos": "C",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
         "name": "JUSTIN FAULK",
         "pos": "D",
-        "status": "Out",
-        "desc": "out"
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "MASON APPLETON",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       }
     ],
     "edmonton-oilers": [
@@ -2257,8 +2263,8 @@
       {
         "name": "ZACH BOGOSIAN",
         "pos": "D",
-        "status": "Out",
-        "desc": "out"
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       },
       {
         "name": "CHARLIE STRAMEL",
@@ -2409,8 +2415,8 @@
       {
         "name": "NIKITA GREBENKIN",
         "pos": "RW",
-        "status": "Out",
-        "desc": "out"
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       },
       {
         "name": "TY MURCHISON",
@@ -2429,8 +2435,8 @@
       {
         "name": "STUART SKINNER",
         "pos": "G",
-        "status": "Out",
-        "desc": "out"
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       },
       {
         "name": "CALEB JONES",
@@ -2605,14 +2611,14 @@
     ],
     "winnipeg-jets": [
       {
-        "name": "ELIAS SALOMONSSON",
-        "pos": "D",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
         "name": "VLADISLAV NAMESTNIKOV",
         "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "ELIAS SALOMONSSON",
+        "pos": "D",
         "status": "Out",
         "desc": "out"
       },
