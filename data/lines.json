@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-07 15:15:30 UTC",
+  "updated_at": "2026-04-07 16:03:42 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -255,14 +255,14 @@
           "JACKSON BLAKE"
         ],
         [
-          "WILLIAM CARRIER",
-          "MARK JANKOWSKI",
-          "NIKOLAJ EHLERS"
+          "NIKOLAJ EHLERS",
+          "JORDAN STAAL",
+          "JORDAN MARTINOOK"
         ],
         [
-          "NICOLAS DESLAURIERS",
-          "JESPERI KOTKANIEMI",
-          "ERIC ROBINSON"
+          "WILLIAM CARRIER",
+          "MARK JANKOWSKI",
+          "NICOLAS DESLAURIERS"
         ]
       ],
       "defense": [
@@ -295,10 +295,10 @@
         "SHAYNE GOSTISBEHERE"
       ],
       "pp2": [
-        "TAYLOR HALL",
+        "MARK JANKOWSKI",
         "LOGAN STANKOVEN",
         "JACKSON BLAKE",
-        "NIKOLAJ EHLERS",
+        "TAYLOR HALL",
         "ALEXANDER NIKISHIN"
       ]
     },
@@ -425,34 +425,34 @@
     "columbus-blue-jackets": {
       "forwards": [
         [
-          "MASON MARCHMENT",
+          "COLE SILLINGER",
           "ADAM FANTILLI",
-          "KIRILL MARCHENKO"
+          "KENT JOHNSON"
         ],
         [
-          "BOONE JENNER",
-          "SEAN MONAHAN",
+          "KIRILL MARCHENKO",
+          "CHARLIE COYLE",
           "CONOR GARLAND"
         ],
         [
-          "COLE SILLINGER",
-          "CHARLIE COYLE",
+          "KIRILL MARCHENKO",
+          "BOONE JENNER",
           "DANTON HEINEN"
         ],
         [
-          "ZACH ASTON-REESE",
-          "ISAC LUNDESTROM",
-          "MILES WOOD"
+          "LUCA DEL BEL BELLUZ",
+          "SEAN MONAHAN",
+          "ISAC LUNDESTROM"
         ]
       ],
       "defense": [
         [
           "ZACH WERENSKI",
-          "DENTON MATEYCHUK"
+          "DANTE FABBRO"
         ],
         [
           "IVAN PROVOROV",
-          "DANTE FABBRO"
+          "DENTON MATEYCHUK"
         ],
         [
           "JAKE CHRISTIANSEN",
@@ -501,7 +501,6 @@
         ],
         [
           "ADAM ERNE",
-          "RADEK FAKSA",
           "ARTTU HYRY"
         ]
       ],
@@ -572,11 +571,11 @@
         ],
         [
           "BEN CHIAROT",
-          "JACOB BERNARD-DOCKER"
+          "JUSTIN FAULK"
         ],
         [
           "ALBERT JOHANSSON",
-          "AXEL SANDIN-PELLIKKA"
+          "JACOB BERNARD-DOCKER"
         ]
       ],
       "goalies": [
@@ -599,7 +598,7 @@
         "ANDREW COPP",
         "EMMITT FINNIE",
         "DAVID PERRON",
-        "AXEL SANDIN-PELLIKKA"
+        "JUSTIN FAULK"
       ]
     },
     "edmonton-oilers": {
@@ -795,12 +794,12 @@
           "MATT BOLDY"
         ],
         [
-          "YAKOV TRENIN",
+          "VLADIMIR TARASENKO",
           "DANILA YUROV",
-          "VLADIMIR TARASENKO"
+          "BOBBY BRINK"
         ],
         [
-          "NICK FOLIGNO",
+          "YAKOV TRENIN",
           "MICHAEL MCCARRON",
           "MARCUS FOLIGNO"
         ]
@@ -821,10 +820,10 @@
       ],
       "goalies": [
         [
-          "FILIP GUSTAVSSON"
+          "JESPER WALLSTEDT"
         ],
         [
-          "JESPER WALLSTEDT"
+          "FILIP GUSTAVSSON"
         ]
       ],
       "pp1": [
@@ -1121,10 +1120,10 @@
       ],
       "goalies": [
         [
-          "JONATHAN QUICK"
+          "IGOR SHESTERKIN"
         ],
         [
-          "IGOR SHESTERKIN"
+          "JONATHAN QUICK"
         ]
       ],
       "pp1": [
@@ -1517,10 +1516,10 @@
         [
           "ZEMGUS GIRGENSONS",
           "YANNI GOURDE",
-          "PONTUS HOLMBERG"
+          "COREY PERRY"
         ],
         [
-          "COREY PERRY",
+          "JAKOB PELLETIER",
           "SCOTT SABOURIN",
           "MITCHELL CHAFFEE"
         ]
@@ -1580,19 +1579,19 @@
           "NICHOLAS ROBERTSON"
         ],
         [
-          "MICHAEL PEZZETTA",
-          "CALLE JARNKROK",
-          "STEVEN LORENTZ"
+          "STEVEN LORENTZ",
+          "JACOB QUILLAN",
+          "CALLE JARNKROK"
         ]
       ],
       "defense": [
         [
-          "MORGAN RIELLY",
-          "PHILIPPE MYERS"
-        ],
-        [
           "JAKE MCCABE",
           "BRANDON CARLO"
+        ],
+        [
+          "MORGAN RIELLY",
+          "PHILIPPE MYERS"
         ],
         [
           "SIMON BENOIT",
@@ -2106,6 +2105,14 @@
         "desc": "day-to-day"
       }
     ],
+    "columbus-blue-jackets": [
+      {
+        "name": "MILES WOOD",
+        "pos": "LW",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      }
+    ],
     "dallas-stars": [
       {
         "name": "NATHAN BASTIAN",
@@ -2118,12 +2125,6 @@
         "pos": "C",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
-      },
-      {
-        "name": "TYLER MYERS",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
       },
       {
         "name": "SAM STEEL",
@@ -2152,14 +2153,14 @@
     ],
     "detroit-red-wings": [
       {
-        "name": "JUSTIN FAULK",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "MASON APPLETON",
         "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "JUSTIN FAULK",
+        "pos": "D",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       }
