@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-09 15:26:41 UTC",
+  "updated_at": "2026-04-09 17:15:21 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -454,7 +454,7 @@
           "DENTON MATEYCHUK"
         ],
         [
-          "JAKE CHRISTIANSEN",
+          "EGOR ZAMULA",
           "ERIK GUDBRANSON"
         ]
       ],
@@ -484,23 +484,24 @@
     "dallas-stars": {
       "forwards": [
         [
-          "JASON ROBERTSON",
+          "JUSTIN HRYCKOWIAN",
           "WYATT JOHNSTON",
           "MIKKO RANTANEN"
         ],
         [
-          "JAMIE BENN",
+          "JASON ROBERTSON",
           "MATT DUCHENE",
-          "COLIN BLACKWELL"
-        ],
-        [
-          "OSKAR BACK",
-          "JUSTIN HRYCKOWIAN",
           "MAVRIK BOURQUE"
         ],
         [
           "ADAM ERNE",
-          "ARTTU HYRY"
+          "ARTTU HYRY",
+          "JAMIE BENN"
+        ],
+        [
+          "CAMERON HUGHES",
+          "OSKAR BACK",
+          "COLIN BLACKWELL"
         ]
       ],
       "defense": [
@@ -510,11 +511,11 @@
         ],
         [
           "THOMAS HARLEY",
-          "NILS LUNDKVIST"
+          "TYLER MYERS"
         ],
         [
           "LIAN BICHSEL",
-          "TYLER MYERS"
+          "ILYA LYUBUSHKIN"
         ]
       ],
       "goalies": [
@@ -686,15 +687,15 @@
       "defense": [
         [
           "GUSTAV FORSLING",
-          "DMITRY KULIKOV"
+          "MICHAEL BENNING"
         ],
         [
           "TOBIAS BJORNFOT",
-          "SETH JONES"
+          "LUDVIG JANSSON"
         ],
         [
-          "DONOVAN SEBRANGO",
-          "MICHAEL BENNING"
+          "MAREK ALSCHER",
+          "DONOVAN SEBRANGO"
         ]
       ],
       "goalies": [
@@ -710,14 +711,14 @@
         "SAM BENNETT",
         "MACKIE SAMOSKEVICH",
         "CARTER VERHAEGHE",
-        "SETH JONES"
+        "MICHAEL BENNING"
       ],
       "pp2": [
         "NOAH GREGOR",
         "COLE SCHWINDT",
         "TOMAS NOSEK",
         "GUSTAV FORSLING",
-        "MICHAEL BENNING"
+        "VINNIE HINOSTROZA"
       ]
     },
     "los-angeles-kings": {
@@ -793,12 +794,12 @@
           "MATT BOLDY"
         ],
         [
-          "VLADIMIR TARASENKO",
+          "YAKOV TRENIN",
           "DANILA YUROV",
-          "BOBBY BRINK"
+          "VLADIMIR TARASENKO"
         ],
         [
-          "YAKOV TRENIN",
+          "NICK FOLIGNO",
           "MICHAEL MCCARRON",
           "MARCUS FOLIGNO"
         ]
@@ -999,10 +1000,10 @@
       ],
       "goalies": [
         [
-          "JACOB MARKSTROM"
+          "JAKE ALLEN"
         ],
         [
-          "JAKE ALLEN"
+          "JACOB MARKSTROM"
         ]
       ],
       "pp1": [
@@ -1448,19 +1449,19 @@
           "JIMMY SNUGGERUD"
         ],
         [
-          "JONATHAN DROUIN",
+          "JAKE NEIGHBOURS",
+          "PAVEL BUCHNEVICH",
+          "JONATAN BERGGREN"
+        ],
+        [
+          "OTTO STENBERG",
           "DALIBOR DVORSKY",
           "JORDAN KYROU"
         ],
         [
-          "JAKE NEIGHBOURS",
-          "PIUS SUTER",
-          "JONATAN BERGGREN"
-        ],
-        [
           "ALEXEY TOROPCHENKO",
           "JACK FINLEY",
-          "PAVEL BUCHNEVICH"
+          "NATHAN WALKER"
         ]
       ],
       "defense": [
@@ -1479,10 +1480,10 @@
       ],
       "goalies": [
         [
-          "JOEL HOFER"
+          "JORDAN BINNINGTON"
         ],
         [
-          "JORDAN BINNINGTON"
+          "JOEL HOFER"
         ]
       ],
       "pp1": [
@@ -1573,12 +1574,12 @@
           "MATIAS MACCELLI"
         ],
         [
-          "DAKOTA JOSHUA",
+          "STEVEN LORENTZ",
           "BO GROULX",
           "NICHOLAS ROBERTSON"
         ],
         [
-          "STEVEN LORENTZ",
+          "MICHAEL PEZZETTA",
           "JACOB QUILLAN",
           "CALLE JARNKROK"
         ]
@@ -1586,15 +1587,15 @@
       "defense": [
         [
           "JAKE MCCABE",
-          "BRANDON CARLO"
+          "SIMON BENOIT"
         ],
         [
           "MORGAN RIELLY",
           "PHILIPPE MYERS"
         ],
         [
-          "SIMON BENOIT",
-          "OLIVER EKMAN-LARSSON"
+          "OLIVER EKMAN-LARSSON",
+          "TROY STECHER"
         ]
       ],
       "goalies": [
@@ -2099,6 +2100,12 @@
     ],
     "dallas-stars": [
       {
+        "name": "NILS LUNDKVIST",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "NATHAN BASTIAN",
         "pos": "RW",
         "status": "Out",
@@ -2339,12 +2346,6 @@
     ],
     "new-york-islanders": [
       {
-        "name": "TONY DEANGELO",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "ALEXANDER ROMANOV",
         "pos": "D",
         "status": "Injured Reserve",
@@ -2425,12 +2426,6 @@
     ],
     "pittsburgh-penguins": [
       {
-        "name": "STUART SKINNER",
-        "pos": "G",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "CALEB JONES",
         "pos": "D",
         "status": "Injured Reserve",
@@ -2470,6 +2465,12 @@
       }
     ],
     "seattle-kraken": [
+      {
+        "name": "MATT MURRAY",
+        "pos": "G",
+        "status": "Out",
+        "desc": "out"
+      },
       {
         "name": "SHANE WRIGHT",
         "pos": "C",
@@ -2635,8 +2636,8 @@
       {
         "name": "GUSTAV NYQUIST",
         "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "MORGAN BARRON",
