@@ -1,13 +1,66 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-10 15:40:10 UTC",
+  "updated_at": "2026-04-10 19:01:48 UTC",
   "teams": {
     "anaheim-ducks": {
-      "forwards": [],
-      "defense": [],
-      "goalies": [],
-      "pp1": [],
-      "pp2": []
+      "forwards": [
+        [
+          "CHRIS KREIDER",
+          "LEO CARLSSON",
+          "TROY TERRY"
+        ],
+        [
+          "ALEX KILLORN",
+          "MIKAEL GRANLUND",
+          "BECKETT SENNECKE"
+        ],
+        [
+          "FRANK VATRANO",
+          "MASON MCTAVISH",
+          "JEFFREY VIEL"
+        ],
+        [
+          "TIM WASHE",
+          "RYAN POEHLING",
+          "IAN MOORE"
+        ]
+      ],
+      "defense": [
+        [
+          "JACKSON LACOMBE",
+          "JACOB TROUBA"
+        ],
+        [
+          "PAVEL MINTYUKOV",
+          "JOHN CARLSON"
+        ],
+        [
+          "TYSON HINDS",
+          "DREW HELLESON"
+        ]
+      ],
+      "goalies": [
+        [
+          "LUKAS DOSTAL"
+        ],
+        [
+          "VILLE HUSSO"
+        ]
+      ],
+      "pp1": [
+        "CHRIS KREIDER",
+        "LEO CARLSSON",
+        "TROY TERRY",
+        "JOHN CARLSON",
+        "MIKAEL GRANLUND"
+      ],
+      "pp2": [
+        "ALEX KILLORN",
+        "MASON MCTAVISH",
+        "BECKETT SENNECKE",
+        "RYAN POEHLING",
+        "JACKSON LACOMBE"
+      ]
     },
     "boston-bruins": {
       "forwards": [
@@ -2105,6 +2158,12 @@
     ],
     "dallas-stars": [
       {
+        "name": "ROOPE HINTZ",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "NILS LUNDKVIST",
         "pos": "D",
         "status": "Day-To-Day",
@@ -2136,12 +2195,6 @@
       },
       {
         "name": "SAM STEEL",
-        "pos": "C",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
-        "name": "ROOPE HINTZ",
         "pos": "C",
         "status": "Out",
         "desc": "out"
@@ -2336,6 +2389,12 @@
       }
     ],
     "new-jersey-devils": [
+      {
+        "name": "JACOB MARKSTROM",
+        "pos": "G",
+        "status": "Out",
+        "desc": "out"
+      },
       {
         "name": "LUKE HUGHES",
         "pos": "D",
