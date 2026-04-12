@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-12 15:26:43 UTC",
+  "updated_at": "2026-04-12 18:57:58 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -1266,36 +1266,36 @@
       "forwards": [
         [
           "EGOR CHINAKHOV",
-          "RICKARD RAKELL",
-          "VILLE KOIVUNEN"
+          "SIDNEY CROSBY",
+          "BRYAN RUST"
         ],
         [
-          "ANTHONY MANTHA",
           "TOMMY NOVAK",
-          "JUSTIN BRAZEAU"
+          "RICKARD RAKELL",
+          "EVGENI MALKIN"
         ],
         [
-          "RUTGER MCGROARTY",
+          "VILLE KOIVUNEN",
           "KEVIN HAYES",
-          "AVERY HAYES"
+          "JUSTIN BRAZEAU"
         ],
         [
           "ELMER SODERBLOM",
           "JOONA KOPPANEN",
-          "NOEL ACCIARI"
+          "RUTGER MCGROARTY"
         ]
       ],
       "defense": [
         [
-          "RYAN SHEA",
-          "CONNOR CLIFTON"
+          "PARKER WOTHERSPOON",
+          "ERIK KARLSSON"
         ],
         [
           "SAMUEL GIRARD",
-          "JACK ST. IVANY"
+          "KRIS LETANG"
         ],
         [
-          "RYAN GRAVES",
+          "JACK ST. IVANY",
           "ILYA SOLOVYOV"
         ]
       ],
@@ -1308,18 +1308,18 @@
         ]
       ],
       "pp1": [
-        "ANTHONY MANTHA",
         "RICKARD RAKELL",
-        "EGOR CHINAKHOV",
-        "SAMUEL GIRARD",
-        "TOMMY NOVAK"
+        "SIDNEY CROSBY",
+        "BRYAN RUST",
+        "ERIK KARLSSON",
+        "EVGENI MALKIN"
       ],
       "pp2": [
         "ELMER SODERBLOM",
         "RUTGER MCGROARTY",
         "JUSTIN BRAZEAU",
-        "RYAN SHEA",
-        "VILLE KOIVUNEN"
+        "KRIS LETANG",
+        "EGOR CHINAKHOV"
       ]
     },
     "san-jose-sharks": {
@@ -1342,7 +1342,7 @@
         [
           "BARCLAY GOODROW",
           "ZACK OSTAPCHUK",
-          "TY DELLANDREA"
+          "ADAM GAUDETTE"
         ]
       ],
       "defense": [
@@ -1745,13 +1745,13 @@
     "vegas-golden-knights": {
       "forwards": [
         [
-          "IVAN BARBASHEV",
+          "MITCH MARNER",
           "JACK EICHEL",
           "MARK STONE"
         ],
         [
+          "IVAN BARBASHEV",
           "BRETT HOWDEN",
-          "MITCH MARNER",
           "PAVEL DOROFEYEV"
         ],
         [
@@ -1828,7 +1828,7 @@
       "defense": [
         [
           "MARTIN FEHERVARY",
-          "RASMUS SANDIN"
+          "TIMOTHY LILJEGREN"
         ],
         [
           "JAKOB CHYCHRUN",
@@ -2234,6 +2234,12 @@
     ],
     "edmonton-oilers": [
       {
+        "name": "MAX JONES",
+        "pos": "LW",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
         "name": "JASON DICKINSON",
         "pos": "C",
         "status": "Day-To-Day",
@@ -2550,46 +2556,34 @@
     ],
     "pittsburgh-penguins": [
       {
+        "name": "NOEL ACCIARI",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "CONNOR CLIFTON",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "RYAN SHEA",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "BEN KINDEL",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
-        "name": "SIDNEY CROSBY",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "EVGENI MALKIN",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "KRIS LETANG",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "ERIK KARLSSON",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "BRYAN RUST",
+        "name": "ANTHONY MANTHA",
         "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "PARKER WOTHERSPOON",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "CONNOR DEWAR",
@@ -2792,22 +2786,16 @@
     ],
     "washington-capitals": [
       {
-        "name": "CHARLIE LINDGREN",
-        "pos": "G",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "RASMUS SANDIN",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
-        "name": "PIERRE-LUC DUBOIS",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "name": "CHARLIE LINDGREN",
+        "pos": "G",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "ERIKS MATEIKO",
