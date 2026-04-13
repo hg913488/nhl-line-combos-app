@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-13 20:09:05 UTC",
+  "updated_at": "2026-04-13 22:34:55 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -2066,6 +2066,12 @@
     ],
     "carolina-hurricanes": [
       {
+        "name": "PYOTR KOCHETKOV",
+        "pos": "G",
+        "status": "Injured Reserve",
+        "desc": "Injured Reserve"
+      },
+      {
         "name": "ANDREI SVECHNIKOV",
         "pos": "RW",
         "status": "Out",
@@ -2100,12 +2106,6 @@
         "pos": "C",
         "status": "Out",
         "desc": "out"
-      },
-      {
-        "name": "PYOTR KOCHETKOV",
-        "pos": "G",
-        "status": "Injured Reserve",
-        "desc": "Injured Reserve"
       }
     ],
     "chicago-blackhawks": [
@@ -2148,6 +2148,12 @@
     ],
     "colorado-avalanche": [
       {
+        "name": "NAZEM KADRI",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "JOSH MANSON",
         "pos": "D",
         "status": "Out",
@@ -2156,12 +2162,6 @@
       {
         "name": "CALE MAKAR",
         "pos": "D",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
-        "name": "NAZEM KADRI",
-        "pos": "C",
         "status": "Out",
         "desc": "out"
       }
@@ -2266,22 +2266,22 @@
     ],
     "florida-panthers": [
       {
-        "name": "MATTHEW TKACHUK",
-        "pos": "LW",
+        "name": "CARTER VERHAEGHE",
+        "pos": "C",
         "status": "Out",
         "desc": "out"
       },
       {
-        "name": "CARTER VERHAEGHE",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "SAM BENNETT",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "MATTHEW TKACHUK",
+        "pos": "LW",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "SETH JONES",
@@ -2351,6 +2351,12 @@
       }
     ],
     "los-angeles-kings": [
+      {
+        "name": "ALEX TURCOTTE",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
       {
         "name": "JEFF MALOTT",
         "pos": "LW",
@@ -2468,6 +2474,12 @@
     ],
     "new-jersey-devils": [
       {
+        "name": "BRETT PESCE",
+        "pos": "D",
+        "status": "Injured Reserve",
+        "desc": "Injured Reserve"
+      },
+      {
         "name": "JACOB MARKSTROM",
         "pos": "G",
         "status": "Out",
@@ -2482,12 +2494,6 @@
       {
         "name": "ARSENY GRITSYUK",
         "pos": "RW",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
-        "name": "BRETT PESCE",
-        "pos": "D",
         "status": "Out",
         "desc": "out"
       },
@@ -2717,6 +2723,12 @@
       }
     ],
     "tampa-bay-lightning": [
+      {
+        "name": "JONAS JOHANSSON",
+        "pos": "G",
+        "status": "Out",
+        "desc": "out"
+      },
       {
         "name": "BRANDON HAGEL",
         "pos": "LW",
