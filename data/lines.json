@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-14 20:09:03 UTC",
+  "updated_at": "2026-04-14 22:36:38 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -250,9 +250,9 @@
           "JACKSON BLAKE"
         ],
         [
-          "NIKOLAJ EHLERS",
+          "BRADLY NADEAU",
           "JESPERI KOTKANIEMI",
-          "BRADLY NADEAU"
+          "FELIX UNGER SORUM"
         ],
         [
           "WILLIAM CARRIER",
@@ -267,31 +267,31 @@
       ],
       "defense": [
         [
-          "K'ANDRE MILLER",
-          "JALEN CHATFIELD"
-        ],
-        [
           "ALEXANDER NIKISHIN",
-          "SEAN WALKER"
+          "K'ANDRE MILLER"
         ],
         [
           "MIKE REILLY",
           "CHARLES-ALEXIS LEGAULT"
+        ],
+        [
+          "RONAN SEELEY",
+          "JOEL NYSTROM"
         ]
       ],
       "goalies": [
         [
-          "FREDERIK ANDERSEN"
+          "PYOTR KOCHETKOV"
         ],
         [
-          "BRANDON BUSSI"
+          "FREDERIK ANDERSEN"
         ]
       ],
       "pp1": [
         "TAYLOR HALL",
         "LOGAN STANKOVEN",
         "JACKSON BLAKE",
-        "NIKOLAJ EHLERS",
+        "FELIX UNGER SORUM",
         "ALEXANDER NIKISHIN"
       ],
       "pp2": [
@@ -299,7 +299,7 @@
         "JESPERI KOTKANIEMI",
         "BRADLY NADEAU",
         "K'ANDRE MILLER",
-        "SEAN WALKER"
+        "MIKE REILLY"
       ]
     },
     "chicago-blackhawks": {
@@ -1206,11 +1206,6 @@
       "forwards": [
         [
           "TYSON FOERSTER",
-          "TREVOR ZEGRAS",
-          "OWEN TIPPETT"
-        ],
-        [
-          "TRAVIS KONECNY",
           "CHRISTIAN DVORAK",
           "PORTER MARTONE"
         ],
@@ -1220,23 +1215,28 @@
           "MATVEI MICHKOV"
         ],
         [
-          "GARNET HATHAWAY",
-          "SEAN COUTURIER",
-          "LUKE GLENDENING"
+          "ALEX BUMP",
+          "ANTHONY RICHARD",
+          "JACOB GAUCHER"
+        ],
+        [
+          "CARL GRUNDSTROM",
+          "LUKE GLENDENING",
+          "GARNET HATHAWAY"
         ]
       ],
       "defense": [
         [
-          "TRAVIS SANHEIM",
-          "RASMUS RISTOLAINEN"
-        ],
-        [
-          "CAM YORK",
-          "JAMIE DRYSDALE"
-        ],
-        [
           "NICK SEELER",
-          "EMIL ANDRAE"
+          "DAVID JIRICEK"
+        ],
+        [
+          "EMIL ANDRAE",
+          "NOAH JUULSEN"
+        ],
+        [
+          "HUNTER MCDONALD",
+          "OLIVER BONK"
         ]
       ],
       "goalies": [
@@ -1244,22 +1244,22 @@
           "SAMUEL ERSSON"
         ],
         [
-          "DAN VLADAR"
+          "ALEKSEI KOLOSOV"
         ]
       ],
       "pp1": [
-        "TRAVIS KONECNY",
+        "PORTER MARTONE",
         "CHRISTIAN DVORAK",
-        "OWEN TIPPETT",
-        "RASMUS RISTOLAINEN",
+        "TYSON FOERSTER",
+        "EMIL ANDRAE",
         "MATVEI MICHKOV"
       ],
       "pp2": [
-        "PORTER MARTONE",
+        "DENVER BARKEY",
         "NOAH CATES",
-        "TYSON FOERSTER",
-        "JAMIE DRYSDALE",
-        "TREVOR ZEGRAS"
+        "ANTHONY RICHARD",
+        "ALEX BUMP",
+        "OLIVER BONK"
       ]
     },
     "pittsburgh-penguins": {
@@ -1462,7 +1462,7 @@
         [
           "ALEXEY TOROPCHENKO",
           "JACK FINLEY",
-          "OTTO STENBERG"
+          "JONATAN BERGGREN"
         ]
       ],
       "defense": [
@@ -1471,12 +1471,12 @@
           "LOGAN MAILLOUX"
         ],
         [
-          "THEO LINDSTEIN",
+          "CAM FOWLER",
           "COLTON PARAYKO"
         ],
         [
-          "CAM FOWLER",
-          "TYLER TUCKER"
+          "TYLER TUCKER",
+          "MATTHEW KESSEL"
         ]
       ],
       "goalies": [
@@ -2066,46 +2066,40 @@
     ],
     "carolina-hurricanes": [
       {
+        "name": "SHAYNE GOSTISBEHERE",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "ANDREI SVECHNIKOV",
         "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "SETH JARVIS",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "JORDAN STAAL",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "JACCOB SLAVIN",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
-        "name": "SHAYNE GOSTISBEHERE",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "name": "JORDAN STAAL",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "SEBASTIAN AHO",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
-        "name": "PYOTR KOCHETKOV",
-        "pos": "G",
-        "status": "Injured Reserve",
-        "desc": "Injured Reserve"
+        "name": "SETH JARVIS",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
       }
     ],
     "chicago-blackhawks": [
@@ -2593,6 +2587,54 @@
       }
     ],
     "philadelphia-flyers": [
+      {
+        "name": "JAMIE DRYSDALE",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "CAM YORK",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "TREVOR ZEGRAS",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "TRAVIS SANHEIM",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "OWEN TIPPETT",
+        "pos": "RW",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "SEAN COUTURIER",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "RASMUS RISTOLAINEN",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "TRAVIS KONECNY",
+        "pos": "RW",
+        "status": "Out",
+        "desc": "out"
+      },
       {
         "name": "NIKITA GREBENKIN",
         "pos": "RW",
