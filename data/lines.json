@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-15 15:10:50 UTC",
+  "updated_at": "2026-04-15 15:58:21 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -665,19 +665,19 @@
     "florida-panthers": {
       "forwards": [
         [
+          "CARTER VERHAEGHE",
+          "SAM BENNETT",
+          "MATTHEW TKACHUK"
+        ],
+        [
           "MACKIE SAMOSKEVICH",
           "EETU LUOSTARINEN",
           "A.J. GREER"
         ],
         [
-          "WILMER SKOOG",
-          "COLE SCHWINDT",
-          "JESPER BOQVIST"
-        ],
-        [
           "NOLAN FOOTE",
-          "TOMAS NOSEK",
-          "NOAH GREGOR"
+          "NOAH GREGOR",
+          "JESPER BOQVIST"
         ],
         [
           "COLE REINHARDT",
@@ -687,7 +687,7 @@
       ],
       "defense": [
         [
-          "GUSTAV FORSLING",
+          "TOBIAS BJORNFOT",
           "MICHAEL BENNING"
         ],
         [
@@ -695,7 +695,7 @@
           "MAREK ALSCHER"
         ],
         [
-          "TOBIAS BJORNFOT",
+          "MIKULAS HOVORKA",
           "LUDVIG JANSSON"
         ]
       ],
@@ -708,16 +708,16 @@
         ]
       ],
       "pp1": [
-        "NOAH GREGOR",
-        "EETU LUOSTARINEN",
+        "MATTHEW TKACHUK",
+        "SAM BENNETT",
         "MACKIE SAMOSKEVICH",
-        "MICHAEL BENNING",
-        "JESPER BOQVIST"
+        "CARTER VERHAEGHE",
+        "MICHAEL BENNING"
       ],
       "pp2": [
-        "COLE SCHWINDT",
-        "WILMER SKOOG",
-        "A.J. GREER",
+        "JESPER BOQVIST",
+        "EETU LUOSTARINEN",
+        "NOAH GREGOR",
         "GUSTAV FORSLING",
         "VINNIE HINOSTROZA"
       ]
@@ -1601,10 +1601,10 @@
       ],
       "goalies": [
         [
-          "JOSEPH WOLL"
+          "DENNIS HILDEBY"
         ],
         [
-          "DENNIS HILDEBY"
+          "JOSEPH WOLL"
         ]
       ],
       "pp1": [
@@ -2258,6 +2258,18 @@
     ],
     "florida-panthers": [
       {
+        "name": "GUSTAV FORSLING",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "TOMAS NOSEK",
+        "pos": "LW",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "CARTER VERHAEGHE",
         "pos": "C",
         "status": "Day-To-Day",
@@ -2562,6 +2574,30 @@
     ],
     "ottawa-senators": [
       {
+        "name": "TIM STUTZLE",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "THOMAS CHABOT",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "JAKE SANDERSON",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "BRADY TKACHUK",
+        "pos": "LW",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "NICK JENSEN",
         "pos": "D",
         "status": "Injured Reserve",
@@ -2572,24 +2608,6 @@
         "pos": "D",
         "status": "Out",
         "desc": "out"
-      },
-      {
-        "name": "TIM STUTZLE",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "JAKE SANDERSON",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "THOMAS CHABOT",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
       }
     ],
     "philadelphia-flyers": [
@@ -2806,12 +2824,6 @@
     ],
     "tampa-bay-lightning": [
       {
-        "name": "BRANDON HAGEL",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "DARREN RADDYSH",
         "pos": "D",
         "status": "Day-To-Day",
@@ -2831,12 +2843,6 @@
       },
       {
         "name": "VICTOR HEDMAN",
-        "pos": "D",
-        "status": "12",
-        "desc": "ir-lt"
-      },
-      {
-        "name": "MAXWELL CROZIER",
         "pos": "D",
         "status": "12",
         "desc": "ir-lt"
