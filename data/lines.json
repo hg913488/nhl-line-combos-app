@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-17 15:03:15 UTC",
+  "updated_at": "2026-04-17 15:48:52 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -36,7 +36,7 @@
         ],
         [
           "TYSON HINDS",
-          "TRISTAN LUNEAU"
+          "RADKO GUDAS"
         ]
       ],
       "goalies": [
@@ -125,60 +125,61 @@
     "buffalo-sabres": {
       "forwards": [
         [
+          "PEYTON KREBS",
+          "TAGE THOMPSON",
+          "ALEX TUCH"
+        ],
+        [
+          "JASON ZUCKER",
+          "RYAN MCLEOD",
+          "JACK QUINN"
+        ],
+        [
           "ZACH BENSON",
           "JOSH NORRIS",
           "JOSH DOAN"
         ],
         [
-          "TANNER PEARSON",
-          "PEYTON KREBS",
-          "JACK QUINN"
-        ],
-        [
           "JORDAN GREENWAY",
           "TYSON KOZAK",
-          "ALEX TUCH"
-        ],
-        [
-          "JOSH DUNNE",
           "BECK MALENSTYN"
         ]
       ],
       "defense": [
         [
-          "BOWEN BYRAM",
-          "CONOR TIMMINS"
+          "RASMUS DAHLIN",
+          "MATTIAS SAMUELSSON"
         ],
         [
           "OWEN POWER",
-          "ZACH METSA"
+          "BOWEN BYRAM"
         ],
         [
           "LOGAN STANLEY",
-          "MICHAEL KESSELRING"
+          "LUKE SCHENN"
         ]
       ],
       "goalies": [
         [
-          "COLTEN ELLIS"
+          "UKKO-PEKKA LUUKKONEN"
         ],
         [
-          "UKKO-PEKKA LUUKKONEN"
+          "ALEX LYON"
         ]
       ],
       "pp1": [
-        "ALEX TUCH",
+        "JASON ZUCKER",
         "JOSH NORRIS",
-        "JACK QUINN",
         "JOSH DOAN",
-        "BOWEN BYRAM"
+        "TAGE THOMPSON",
+        "RASMUS DAHLIN"
       ],
       "pp2": [
-        "PEYTON KREBS",
-        "TYSON KOZAK",
         "ZACH BENSON",
-        "MICHAEL KESSELRING",
-        "OWEN POWER"
+        "RYAN MCLEOD",
+        "ALEX TUCH",
+        "JACK QUINN",
+        "BOWEN BYRAM"
       ]
     },
     "calgary-flames": {
@@ -295,10 +296,10 @@
       ],
       "pp2": [
         "TAYLOR HALL",
+        "JORDAN STAAL",
         "LOGAN STANKOVEN",
-        "JACKSON BLAKE",
-        "K'ANDRE MILLER",
-        "ALEXANDER NIKISHIN"
+        "ALEXANDER NIKISHIN",
+        "JACKSON BLAKE"
       ]
     },
     "chicago-blackhawks": {
@@ -1218,8 +1219,8 @@
           "MATVEI MICHKOV"
         ],
         [
-          "SEAN COUTURIER",
           "LUKE GLENDENING",
+          "SEAN COUTURIER",
           "GARNET HATHAWAY"
         ]
       ],
@@ -1503,37 +1504,38 @@
     "tampa-bay-lightning": {
       "forwards": [
         [
-          "BRANDON HAGEL",
-          "NICK PAUL",
+          "GAGE GONCALVES",
+          "BRAYDEN POINT",
           "NIKITA KUCHEROV"
         ],
         [
-          "GAGE GONCALVES",
-          "YANNI GOURDE",
-          "OLIVER BJORKSTRAND"
+          "BRANDON HAGEL",
+          "ANTHONY CIRELLI",
+          "JAKE GUENTZEL"
         ],
         [
-          "JAKOB PELLETIER",
           "ZEMGUS GIRGENSONS",
-          "COREY PERRY"
+          "YANNI GOURDE",
+          "NICK PAUL"
         ],
         [
-          "SCOTT SABOURIN",
-          "MITCHELL CHAFFEE"
+          "COREY PERRY",
+          "DOMINIC JAMES",
+          "OLIVER BJORKSTRAND"
         ]
       ],
       "defense": [
         [
-          "CHARLE-EDOUARD D'ASTOUS",
+          "J.J. MOSER",
           "DARREN RADDYSH"
         ],
         [
-          "EMIL LILLEBERG",
+          "RYAN MCDONAGH",
           "ERIK CERNAK"
         ],
         [
-          "DECLAN CARLILE",
-          "MAXWELL CROZIER"
+          "CHARLE-EDOUARD D'ASTOUS",
+          "EMIL LILLEBERG"
         ]
       ],
       "goalies": [
@@ -1545,18 +1547,18 @@
         ]
       ],
       "pp1": [
-        "COREY PERRY",
-        "OLIVER BJORKSTRAND",
+        "JAKE GUENTZEL",
+        "BRAYDEN POINT",
         "NIKITA KUCHEROV",
         "BRANDON HAGEL",
         "DARREN RADDYSH"
       ],
       "pp2": [
-        "MITCHELL CHAFFEE",
-        "YANNI GOURDE",
-        "JAKOB PELLETIER",
-        "CHARLE-EDOUARD D'ASTOUS",
-        "GAGE GONCALVES"
+        "NICK PAUL",
+        "DOMINIC JAMES",
+        "COREY PERRY",
+        "OLIVER BJORKSTRAND",
+        "CHARLE-EDOUARD D'ASTOUS"
       ]
     },
     "toronto-maple-leafs": {
@@ -2078,14 +2080,6 @@
         "desc": "out"
       }
     ],
-    "carolina-hurricanes": [
-      {
-        "name": "LOGAN STANKOVEN",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      }
-    ],
     "chicago-blackhawks": [
       {
         "name": "ANDREW MANGIAPANE",
@@ -2474,18 +2468,6 @@
         "desc": "out"
       },
       {
-        "name": "OWEN TIPPETT",
-        "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "CHRISTIAN DVORAK",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "TY MURCHISON",
         "pos": "D",
         "status": "7",
@@ -2578,38 +2560,8 @@
         "desc": "day-to-day"
       },
       {
-        "name": "ANTHONY CIRELLI",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "PONTUS HOLMBERG",
         "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "J.J. MOSER",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "RYAN MCDONAGH",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "JAKE GUENTZEL",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "BRAYDEN POINT",
-        "pos": "C",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       },
