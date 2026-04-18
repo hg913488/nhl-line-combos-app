@@ -1,5 +1,90 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-17 22:29:28 UTC",
-  "matchups": []
+  "updated_at": "2026-04-18 14:47:58 UTC",
+  "matchups": [
+    {
+      "away": {
+        "team": "ottawa-senators",
+        "goalie": "LINUS ULLMARK",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2534/Ullmark-Linus_OTT-2025_.png",
+        "stats": {
+          "record": "28-12-8",
+          "gaa": "2.73",
+          "svpct": "0.89",
+          "so": 3
+        }
+      },
+      "home": {
+        "team": "carolina-hurricanes",
+        "goalie": "FREDERIK ANDERSEN",
+        "status": "Likely",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/1942/Andersen-Frederik_CAR-2026_.png",
+        "stats": {
+          "record": "16-14-5",
+          "gaa": "3.05",
+          "svpct": "0.874",
+          "so": 0
+        }
+      },
+      "date": "2026-04-18",
+      "time": "15:00"
+    },
+    {
+      "away": {
+        "team": "minnesota-wild",
+        "goalie": "JESPER WALLSTEDT",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/31763/Wallstedt-Jesper_MIN-2024_.png",
+        "stats": {
+          "record": "18-9-6",
+          "gaa": "2.61",
+          "svpct": "0.915",
+          "so": 4
+        }
+      },
+      "home": {
+        "team": "dallas-stars",
+        "goalie": "JAKE OETTINGER",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2813/Oettinger-Jake_DAL-2021_.png",
+        "stats": {
+          "record": "34-12-6",
+          "gaa": "2.62",
+          "svpct": "0.899",
+          "so": 4
+        }
+      },
+      "date": "2026-04-18",
+      "time": "17:30"
+    },
+    {
+      "away": {
+        "team": "philadelphia-flyers",
+        "goalie": "DAN VLADAR",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/3831/Vladar-Dan_PHI-11_30_25_.png",
+        "stats": {
+          "record": "29-14-7",
+          "gaa": "2.42",
+          "svpct": "0.906",
+          "so": 0
+        }
+      },
+      "home": {
+        "team": "pittsburgh-penguins",
+        "goalie": "STUART SKINNER",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/4741/Skinner-Stuart_PIT-2_.png",
+        "stats": {
+          "record": "23-17-9",
+          "gaa": "2.92",
+          "svpct": "0.887",
+          "so": 2
+        }
+      },
+      "date": "2026-04-18",
+      "time": "20:00"
+    }
+  ]
 }
