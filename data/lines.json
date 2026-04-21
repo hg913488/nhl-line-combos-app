@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-20 22:33:23 UTC",
+  "updated_at": "2026-04-21 15:19:02 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -57,7 +57,7 @@
       "pp2": [
         "ALEX KILLORN",
         "MASON MCTAVISH",
-        "BECKETT SENNECKE",
+        "RYAN POEHLING",
         "CUTTER GAUTHIER",
         "JACKSON LACOMBE"
       ]
@@ -296,10 +296,10 @@
       ],
       "pp2": [
         "TAYLOR HALL",
+        "JORDAN STAAL",
         "LOGAN STANKOVEN",
-        "MARK JANKOWSKI",
-        "ALEXANDER NIKISHIN",
-        "JACKSON BLAKE"
+        "JACKSON BLAKE",
+        "ALEXANDER NIKISHIN"
       ]
     },
     "chicago-blackhawks": {
@@ -655,8 +655,8 @@
       ],
       "pp2": [
         "MATTHEW SAVOIE",
-        "ADAM HENRIQUE",
         "JACK ROSLOVIC",
+        "VASILY PODKOLZIN",
         "MATTIAS EKHOLM",
         "JAKE WALMAN"
       ]
@@ -786,7 +786,7 @@
         [
           "KIRILL KAPRIZOV",
           "RYAN HARTMAN",
-          "MATS ZUCCARELLO"
+          "VLADIMIR TARASENKO"
         ],
         [
           "MARCUS JOHANSSON",
@@ -794,14 +794,14 @@
           "MATT BOLDY"
         ],
         [
-          "VLADIMIR TARASENKO",
+          "NICK FOLIGNO",
           "DANILA YUROV",
-          "YAKOV TRENIN"
+          "BOBBY BRINK"
         ],
         [
           "MARCUS FOLIGNO",
           "MICHAEL MCCARRON",
-          "NICK FOLIGNO"
+          "YAKOV TRENIN"
         ]
       ],
       "defense": [
@@ -827,18 +827,18 @@
         ]
       ],
       "pp1": [
-        "MATS ZUCCARELLO",
+        "RYAN HARTMAN",
         "JOEL ERIKSSON EK",
         "MATT BOLDY",
         "QUINN HUGHES",
         "KIRILL KAPRIZOV"
       ],
       "pp2": [
+        "DANILA YUROV",
         "MARCUS JOHANSSON",
-        "RYAN HARTMAN",
-        "VLADIMIR TARASENKO",
+        "BOBBY BRINK",
         "BROCK FABER",
-        "JARED SPURGEON"
+        "VLADIMIR TARASENKO"
       ]
     },
     "montreal-canadiens": {
@@ -1144,22 +1144,22 @@
     "ottawa-senators": {
       "forwards": [
         [
-          "DRAKE BATHERSON",
+          "BRADY TKACHUK",
           "TIM STÜTZLE",
+          "DRAKE BATHERSON"
+        ],
+        [
+          "RIDLY GREIG",
+          "DYLAN COZENS",
           "CLAUDE GIROUX"
         ],
         [
-          "BRADY TKACHUK",
-          "DYLAN COZENS",
-          "RIDLY GREIG"
-        ],
-        [
-          "NICK COUSINS",
+          "WARREN FOEGELE",
           "SHANE PINTO",
           "MICHAEL AMADIO"
         ],
         [
-          "WARREN FOEGELE",
+          "NICK COUSINS",
           "LARS ELLER",
           "FABIAN ZETTERLUND"
         ]
@@ -1235,7 +1235,7 @@
         ],
         [
           "NICK SEELER",
-          "EMIL ANDRAE"
+          "NOAH JUULSEN"
         ]
       ],
       "goalies": [
@@ -1534,7 +1534,7 @@
           "ERIK CERNAK"
         ],
         [
-          "CHARLE-EDOUARD D'ASTOUS",
+          "DECLAN CARLILE",
           "EMIL LILLEBERG"
         ]
       ],
@@ -1543,7 +1543,7 @@
           "ANDREI VASILEVSKIY"
         ],
         [
-          "BRANDON HALVERSON"
+          "JONAS JOHANSSON"
         ]
       ],
       "pp1": [
@@ -1558,7 +1558,7 @@
         "ANTHONY CIRELLI",
         "COREY PERRY",
         "OLIVER BJORKSTRAND",
-        "CHARLE-EDOUARD D'ASTOUS"
+        "J.J. MOSER"
       ]
     },
     "toronto-maple-leafs": {
@@ -1927,12 +1927,6 @@
       {
         "name": "ROSS JOHNSTON",
         "pos": "LW",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
-        "name": "RADKO GUDAS",
-        "pos": "D",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       },
@@ -2113,12 +2107,6 @@
     ],
     "edmonton-oilers": [
       {
-        "name": "JASON DICKINSON",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "MAX JONES",
         "pos": "LW",
         "status": "Out",
@@ -2220,6 +2208,18 @@
       }
     ],
     "minnesota-wild": [
+      {
+        "name": "MATS ZUCCARELLO",
+        "pos": "RW",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "YAKOV TRENIN",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
       {
         "name": "CHARLIE STRAMEL",
         "pos": "C",
@@ -2327,13 +2327,13 @@
     ],
     "ottawa-senators": [
       {
-        "name": "TYLER KLEVEN",
+        "name": "ARTEM ZUB",
         "pos": "D",
-        "status": "Out",
-        "desc": "out"
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       },
       {
-        "name": "ARTEM ZUB",
+        "name": "TYLER KLEVEN",
         "pos": "D",
         "status": "Day-To-Day",
         "desc": "day-to-day"
@@ -2346,6 +2346,12 @@
       }
     ],
     "philadelphia-flyers": [
+      {
+        "name": "EMIL ANDRAE",
+        "pos": "D",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
       {
         "name": "NIKITA GREBENKIN",
         "pos": "RW",
@@ -2439,16 +2445,16 @@
     ],
     "tampa-bay-lightning": [
       {
-        "name": "CHARLE-EDOUARD D'ASTOUS",
-        "pos": "D",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
         "name": "VICTOR HEDMAN",
         "pos": "D",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
+      },
+      {
+        "name": "CHARLE-EDOUARD D'ASTOUS",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "PONTUS HOLMBERG",
