@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-22 16:01:21 UTC",
+  "updated_at": "2026-04-22 19:21:41 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -36,7 +36,7 @@
         ],
         [
           "TYSON HINDS",
-          "RADKO GUDAS"
+          "DREW HELLESON"
         ]
       ],
       "goalies": [
@@ -50,9 +50,9 @@
       "pp1": [
         "CHRIS KREIDER",
         "LEO CARLSSON",
+        "MIKAEL GRANLUND",
         "TROY TERRY",
-        "JOHN CARLSON",
-        "MIKAEL GRANLUND"
+        "JOHN CARLSON"
       ],
       "pp2": [
         "ALEX KILLORN",
@@ -801,7 +801,7 @@
         [
           "MARCUS FOLIGNO",
           "MICHAEL MCCARRON",
-          "YAKOV TRENIN"
+          "NICO STURM"
         ]
       ],
       "defense": [
@@ -1925,6 +1925,12 @@
   "injuries": {
     "anaheim-ducks": [
       {
+        "name": "RADKO GUDAS",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "ROSS JOHNSTON",
         "pos": "LW",
         "status": "Day-To-Day",
@@ -2107,6 +2113,12 @@
     ],
     "edmonton-oilers": [
       {
+        "name": "JASON DICKINSON",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
         "name": "ADAM HENRIQUE",
         "pos": "C",
         "status": "Out",
@@ -2215,14 +2227,14 @@
     ],
     "minnesota-wild": [
       {
-        "name": "MATS ZUCCARELLO",
-        "pos": "RW",
+        "name": "YAKOV TRENIN",
+        "pos": "C",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       },
       {
-        "name": "YAKOV TRENIN",
-        "pos": "C",
+        "name": "MATS ZUCCARELLO",
+        "pos": "RW",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       },
@@ -2451,16 +2463,16 @@
     ],
     "tampa-bay-lightning": [
       {
-        "name": "CHARLE-EDOUARD D'ASTOUS",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "VICTOR HEDMAN",
         "pos": "D",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
+      },
+      {
+        "name": "CHARLE-EDOUARD D'ASTOUS",
+        "pos": "D",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       },
       {
         "name": "PONTUS HOLMBERG",
