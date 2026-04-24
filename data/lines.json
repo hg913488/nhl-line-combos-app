@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-24 15:57:21 UTC",
+  "updated_at": "2026-04-24 19:01:13 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -1925,16 +1925,16 @@
   "injuries": {
     "anaheim-ducks": [
       {
-        "name": "RADKO GUDAS",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "ROSS JOHNSTON",
         "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
+      },
+      {
+        "name": "RADKO GUDAS",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "JANSEN HARKINS",
@@ -2235,16 +2235,16 @@
     ],
     "minnesota-wild": [
       {
-        "name": "YAKOV TRENIN",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "MATS ZUCCARELLO",
         "pos": "RW",
         "status": "Day-To-Day",
         "desc": "day-to-day"
+      },
+      {
+        "name": "YAKOV TRENIN",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "CHARLIE STRAMEL",
@@ -2355,14 +2355,14 @@
       {
         "name": "ARTEM ZUB",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "JAKE SANDERSON",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "NICK JENSEN",
@@ -2372,6 +2372,12 @@
       }
     ],
     "philadelphia-flyers": [
+      {
+        "name": "DAN VLADAR",
+        "pos": "G",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
       {
         "name": "EMIL ANDRAE",
         "pos": "D",
@@ -2479,16 +2485,16 @@
     ],
     "tampa-bay-lightning": [
       {
+        "name": "CHARLE-EDOUARD D'ASTOUS",
+        "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      },
+      {
         "name": "VICTOR HEDMAN",
         "pos": "D",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
-      },
-      {
-        "name": "CHARLE-EDOUARD D'ASTOUS",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
       },
       {
         "name": "PONTUS HOLMBERG",
