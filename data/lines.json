@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-25 15:30:59 UTC",
+  "updated_at": "2026-04-25 19:01:04 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -172,13 +172,13 @@
         "TAGE THOMPSON",
         "ALEX TUCH",
         "RASMUS DAHLIN",
-        "JACK QUINN"
+        "NOAH OSTLUND"
       ],
       "pp2": [
         "JOSH DOAN",
         "RYAN MCLEOD",
         "ZACH BENSON",
-        "NOAH OSTLUND",
+        "JACK QUINN",
         "BOWEN BYRAM"
       ]
     },
@@ -255,12 +255,12 @@
           "JACKSON BLAKE"
         ],
         [
-          "NIKOLAJ EHLERS",
+          "WILLIAM CARRIER",
           "JORDAN STAAL",
           "JORDAN MARTINOOK"
         ],
         [
-          "WILLIAM CARRIER",
+          "NICOLAS DESLAURIERS",
           "MARK JANKOWSKI",
           "ERIC ROBINSON"
         ]
@@ -291,14 +291,14 @@
         "ANDREI SVECHNIKOV",
         "SEBASTIAN AHO",
         "SETH JARVIS",
-        "NIKOLAJ EHLERS",
+        "JACKSON BLAKE",
         "SHAYNE GOSTISBEHERE"
       ],
       "pp2": [
         "TAYLOR HALL",
         "LOGAN STANKOVEN",
         "MARK JANKOWSKI",
-        "JACKSON BLAKE",
+        "JORDAN STAAL",
         "ALEXANDER NIKISHIN"
       ]
     },
@@ -1144,17 +1144,17 @@
     "ottawa-senators": {
       "forwards": [
         [
-          "BRADY TKACHUK",
+          "WARREN FOEGELE",
           "TIM STÜTZLE",
           "DRAKE BATHERSON"
         ],
         [
-          "RIDLY GREIG",
+          "BRADY TKACHUK",
           "DYLAN COZENS",
           "CLAUDE GIROUX"
         ],
         [
-          "WARREN FOEGELE",
+          "CLAUDE GIROUX",
           "SHANE PINTO",
           "MICHAEL AMADIO"
         ],
@@ -1166,16 +1166,16 @@
       ],
       "defense": [
         [
-          "JAKE SANDERSON",
-          "NIKOLAS MATINPALO"
-        ],
-        [
           "THOMAS CHABOT",
           "JORDAN SPENCE"
         ],
         [
           "TYLER KLEVEN",
-          "CAMERON CROTTY"
+          "NIKOLAS MATINPALO"
+        ],
+        [
+          "DENNIS GILBERT",
+          "CARTER YAKEMCHUK"
         ]
       ],
       "goalies": [
@@ -1190,7 +1190,7 @@
         "DRAKE BATHERSON",
         "DYLAN COZENS",
         "BRADY TKACHUK",
-        "JAKE SANDERSON",
+        "CARTER YAKEMCHUK",
         "TIM STÜTZLE"
       ],
       "pp2": [
@@ -1300,10 +1300,10 @@
       ],
       "goalies": [
         [
-          "STUART SKINNER"
+          "ARTURS SILOVS"
         ],
         [
-          "ARTURS SILOVS"
+          "STUART SKINNER"
         ]
       ],
       "pp1": [
@@ -2035,6 +2035,14 @@
       {
         "name": "HENRY MEWS",
         "pos": "D",
+        "status": "Out",
+        "desc": "out"
+      }
+    ],
+    "carolina-hurricanes": [
+      {
+        "name": "NIKOLAJ EHLERS",
+        "pos": "LW",
         "status": "Out",
         "desc": "out"
       }
