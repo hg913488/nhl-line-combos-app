@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-27 22:39:12 UTC",
+  "updated_at": "2026-04-28 16:09:50 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -115,11 +115,11 @@
         "CHARLIE MCAVOY"
       ],
       "pp2": [
-        "VIKTOR ARVIDSSON",
-        "CASEY MITTELSTADT",
         "FRASER MINTEN",
-        "HAMPUS LINDHOLM",
-        "LUKAS REICHEL"
+        "CASEY MITTELSTADT",
+        "MARAT KHUSNUTDINOV",
+        "VIKTOR ARVIDSSON",
+        "HAMPUS LINDHOLM"
       ]
     },
     "buffalo-sabres": {
@@ -169,15 +169,15 @@
       ],
       "pp1": [
         "JASON ZUCKER",
-        "TAGE THOMPSON",
+        "NOAH OSTLUND",
         "ALEX TUCH",
-        "RASMUS DAHLIN",
-        "NOAH OSTLUND"
+        "TAGE THOMPSON",
+        "RASMUS DAHLIN"
       ],
       "pp2": [
-        "JOSH DOAN",
-        "RYAN MCLEOD",
         "ZACH BENSON",
+        "RYAN MCLEOD",
+        "JOSH DOAN",
         "JACK QUINN",
         "BOWEN BYRAM"
       ]
@@ -512,11 +512,11 @@
         ],
         [
           "THOMAS HARLEY",
-          "ILYA LYUBUSHKIN"
+          "TYLER MYERS"
         ],
         [
           "LIAN BICHSEL",
-          "TYLER MYERS"
+          "ILYA LYUBUSHKIN"
         ]
       ],
       "goalies": [
@@ -785,13 +785,13 @@
       "forwards": [
         [
           "KIRILL KAPRIZOV",
-          "RYAN HARTMAN",
-          "BOBBY BRINK"
+          "JOEL ERIKSSON EK",
+          "MATT BOLDY"
         ],
         [
           "MARCUS JOHANSSON",
-          "JOEL ERIKSSON EK",
-          "MATT BOLDY"
+          "RYAN HARTMAN",
+          "BOBBY BRINK"
         ],
         [
           "NICK FOLIGNO",
@@ -1746,7 +1746,7 @@
         [
           "IVAN BARBASHEV",
           "JACK EICHEL",
-          "PAVEL DOROFEYEV"
+          "BRETT HOWDEN"
         ],
         [
           "REILLY SMITH",
@@ -1754,7 +1754,7 @@
           "MARK STONE"
         ],
         [
-          "BRETT HOWDEN",
+          "PAVEL DOROFEYEV",
           "TOMAS HERTL",
           "KEEGAN KOLESAR"
         ],
@@ -1787,17 +1787,17 @@
         ]
       ],
       "pp1": [
-        "TOMAS HERTL",
+        "IVAN BARBASHEV",
         "JACK EICHEL",
         "MARK STONE",
-        "MITCH MARNER",
-        "PAVEL DOROFEYEV"
+        "PAVEL DOROFEYEV",
+        "SHEA THEODORE"
       ],
       "pp2": [
-        "IVAN BARBASHEV",
-        "COLTON SISSONS",
         "BRETT HOWDEN",
-        "SHEA THEODORE",
+        "MITCH MARNER",
+        "TOMAS HERTL",
+        "NOAH HANIFIN",
         "RASMUS ANDERSSON"
       ]
     },
@@ -1927,8 +1927,8 @@
       {
         "name": "JANSEN HARKINS",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "RADKO GUDAS",
@@ -1971,20 +1971,8 @@
     ],
     "buffalo-sabres": [
       {
-        "name": "TYSON KOZAK",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "JOSH NORRIS",
         "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
-        "name": "JASON ZUCKER",
-        "pos": "LW",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       },
@@ -2119,14 +2107,14 @@
     ],
     "dallas-stars": [
       {
-        "name": "NILS LUNDKVIST",
-        "pos": "D",
+        "name": "ROOPE HINTZ",
+        "pos": "C",
         "status": "Out",
         "desc": "out"
       },
       {
-        "name": "ROOPE HINTZ",
-        "pos": "C",
+        "name": "NILS LUNDKVIST",
+        "pos": "D",
         "status": "Out",
         "desc": "out"
       },
@@ -2416,12 +2404,6 @@
       }
     ],
     "philadelphia-flyers": [
-      {
-        "name": "EMIL ANDRAE",
-        "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
       {
         "name": "NIKITA GREBENKIN",
         "pos": "RW",
