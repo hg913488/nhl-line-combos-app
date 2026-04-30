@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-29 22:44:50 UTC",
+  "updated_at": "2026-04-30 15:48:23 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -846,15 +846,15 @@
         [
           "COLE CAUFIELD",
           "NICK SUZUKI",
-          "JURAJ SLAFKOVSKY"
+          "JOSH ANDERSON"
         ],
         [
-          "ALEX NEWHOOK",
+          "JURAJ SLAFKOVSKY",
           "JAKE EVANS",
           "IVAN DEMIDOV"
         ],
         [
-          "JOSH ANDERSON",
+          "ALEX NEWHOOK",
           "PHILLIP DANAULT",
           "BRENDAN GALLAGHER"
         ],
@@ -1204,14 +1204,14 @@
     "philadelphia-flyers": {
       "forwards": [
         [
-          "DENVER BARKEY",
+          "OWEN TIPPETT",
           "TREVOR ZEGRAS",
-          "OWEN TIPPETT"
+          "PORTER MARTONE"
         ],
         [
-          "TRAVIS KONECNY",
+          "DENVER BARKEY",
           "CHRISTIAN DVORAK",
-          "PORTER MARTONE"
+          "TRAVIS KONECNY"
         ],
         [
           "ALEX BUMP",
@@ -1250,7 +1250,7 @@
         "TRAVIS KONECNY",
         "CHRISTIAN DVORAK",
         "MATVEI MICHKOV",
-        "OWEN TIPPETT",
+        "DENVER BARKEY",
         "RASMUS RISTOLAINEN"
       ],
       "pp2": [
@@ -1639,8 +1639,8 @@
           "MICHAEL CARCONE"
         ],
         [
-          "LIAM O'BRIEN",
           "KEVIN STENLUND",
+          "BARRETT HAYTON",
           "BRANDON TANEV"
         ]
       ],
@@ -1746,7 +1746,7 @@
         [
           "IVAN BARBASHEV",
           "JACK EICHEL",
-          "BRETT HOWDEN"
+          "PAVEL DOROFEYEV"
         ],
         [
           "REILLY SMITH",
@@ -1754,7 +1754,7 @@
           "MARK STONE"
         ],
         [
-          "PAVEL DOROFEYEV",
+          "BRETT HOWDEN",
           "TOMAS HERTL",
           "KEEGAN KOLESAR"
         ],
@@ -1787,18 +1787,18 @@
         ]
       ],
       "pp1": [
-        "IVAN BARBASHEV",
-        "JACK EICHEL",
         "MARK STONE",
-        "PAVEL DOROFEYEV",
-        "SHEA THEODORE"
+        "JACK EICHEL",
+        "TOMAS HERTL",
+        "SHEA THEODORE",
+        "PAVEL DOROFEYEV"
       ],
       "pp2": [
+        "IVAN BARBASHEV",
         "BRETT HOWDEN",
         "MITCH MARNER",
-        "TOMAS HERTL",
-        "NOAH HANIFIN",
-        "RASMUS ANDERSSON"
+        "RASMUS ANDERSSON",
+        "NOAH HANIFIN"
       ]
     },
     "washington-capitals": {
@@ -2101,14 +2101,14 @@
     ],
     "dallas-stars": [
       {
-        "name": "NILS LUNDKVIST",
-        "pos": "D",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
         "name": "ARTTU HYRY",
         "pos": "RW",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "NILS LUNDKVIST",
+        "pos": "D",
         "status": "Out",
         "desc": "out"
       },
@@ -2153,16 +2153,16 @@
     ],
     "edmonton-oilers": [
       {
-        "name": "ADAM HENRIQUE",
-        "pos": "C",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
-      },
-      {
         "name": "MAX JONES",
         "pos": "LW",
         "status": "Out",
         "desc": "out"
+      },
+      {
+        "name": "ADAM HENRIQUE",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       },
       {
         "name": "MATTIAS JANMARK",
@@ -2263,8 +2263,8 @@
       {
         "name": "JONAS BRODIN",
         "pos": "D",
-        "status": "Day-To-Day",
-        "desc": "day-to-day"
+        "status": "Out",
+        "desc": "out"
       },
       {
         "name": "CHARLIE STRAMEL",
@@ -2395,8 +2395,8 @@
       {
         "name": "NIKITA GREBENKIN",
         "pos": "RW",
-        "status": "Out",
-        "desc": "out"
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       },
       {
         "name": "TY MURCHISON",
@@ -2493,10 +2493,16 @@
     ],
     "tampa-bay-lightning": [
       {
+        "name": "NICK PAUL",
+        "pos": "LW",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
         "name": "CHARLE-EDOUARD D'ASTOUS",
         "pos": "D",
-        "status": "Out",
-        "desc": "out"
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       },
       {
         "name": "VICTOR HEDMAN",
@@ -2547,14 +2553,6 @@
         "pos": "D",
         "status": "Injured Reserve",
         "desc": "Injured Reserve"
-      }
-    ],
-    "utah-mammoth": [
-      {
-        "name": "BARRETT HAYTON",
-        "pos": "C",
-        "status": "Out",
-        "desc": "out"
       }
     ],
     "vancouver-canucks": [
