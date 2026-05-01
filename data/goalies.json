@@ -1,61 +1,89 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-04-30 22:42:02 UTC",
+  "updated_at": "2026-05-01 15:02:17 UTC",
   "matchups": [
     {
       "away": {
-        "team": "dallas-stars",
-        "goalie": "JAKE OETTINGER",
-        "status": "Likely",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2813/Oettinger-Jake_DAL-2021_.png",
+        "team": "tampa-bay-lightning",
+        "goalie": "ANDREI VASILEVSKIY",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2413/Vasilevskiy-Andrei_TBL-2024_.png",
         "stats": {
-          "record": "34-12-6",
-          "gaa": "2.62",
-          "svpct": "0.899",
-          "so": 4
+          "record": "38-15-4",
+          "gaa": "2.35",
+          "svpct": "0.909",
+          "so": 1
         }
       },
       "home": {
-        "team": "minnesota-wild",
-        "goalie": "JESPER WALLSTEDT",
+        "team": "montreal-canadiens",
+        "goalie": "JAKUB DOBES",
         "status": "Unconfirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/31763/Wallstedt-Jesper_MIN-2024_.png",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/31895/Dobes-Jakub_MTL-2024_.png",
         "stats": {
-          "record": "18-9-6",
-          "gaa": "2.61",
-          "svpct": "0.915",
-          "so": 4
+          "record": "29-10-4",
+          "gaa": "2.78",
+          "svpct": "0.901",
+          "so": 0
         }
       },
-      "date": "2026-04-30",
+      "date": "2026-05-01",
+      "time": "19:00"
+    },
+    {
+      "away": {
+        "team": "buffalo-sabres",
+        "goalie": "ALEX LYON",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2873/Lyon-Alex_BUF-1_.png",
+        "stats": {
+          "record": "20-10-4",
+          "gaa": "2.77",
+          "svpct": "0.906",
+          "so": 3
+        }
+      },
+      "home": {
+        "team": "boston-bruins",
+        "goalie": "JEREMY SWAYMAN",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/28098/Swayman-Jeremy_BOS-2024_1.png",
+        "stats": {
+          "record": "31-18-4",
+          "gaa": "2.71",
+          "svpct": "0.907",
+          "so": 2
+        }
+      },
+      "date": "2026-05-01",
       "time": "19:30"
     },
     {
       "away": {
-        "team": "edmonton-oilers",
-        "goalie": "CONNOR INGRAM",
+        "team": "vegas-golden-knights",
+        "goalie": "CARTER HART",
         "status": "Unconfirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/4523/Ingram-Connor_EDM-2026_.png",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/3874/Hart-Carter_VGK-12_13_25_.png",
         "stats": {
-          "record": "16-10-3",
-          "gaa": "2.6",
-          "svpct": "0.898",
-          "so": 2
-        }
-      },
-      "home": {
-        "team": "anaheim-ducks",
-        "goalie": "LUKAS DOSTAL",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/29143/Dostal-Lukas_ANA-2026_.png",
-        "stats": {
-          "record": "30-20-4",
-          "gaa": "3.12",
-          "svpct": "0.888",
+          "record": "11-3-3",
+          "gaa": "2.71",
+          "svpct": "0.89",
           "so": 0
         }
       },
-      "date": "2026-04-30",
+      "home": {
+        "team": "utah-mammoth",
+        "goalie": "KAREL VEJMELKA",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/26614/Vejmelka-Karel_Utah-2025_.png",
+        "stats": {
+          "record": "38-19-3",
+          "gaa": "2.76",
+          "svpct": "0.895",
+          "so": 2
+        }
+      },
+      "date": "2026-05-01",
       "time": "22:00"
     }
   ]
