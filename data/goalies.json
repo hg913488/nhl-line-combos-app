@@ -1,34 +1,62 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-05-02 22:30:39 UTC",
+  "updated_at": "2026-05-03 14:54:51 UTC",
   "matchups": [
     {
       "away": {
-        "team": "philadelphia-flyers",
-        "goalie": "DAN VLADAR",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/3831/Vladar-Dan_PHI-11_30_25_.png",
+        "team": "montreal-canadiens",
+        "goalie": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/31895/Dobes-Jakub_MTL-2024_.png",
         "stats": {
-          "record": "29-14-7",
-          "gaa": "2.42",
-          "svpct": "0.906",
+          "record": "29-10-4",
+          "gaa": "2.78",
+          "svpct": "0.901",
           "so": 0
         }
       },
       "home": {
-        "team": "carolina-hurricanes",
-        "goalie": "FREDERIK ANDERSEN",
-        "status": "Likely",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/1942/Andersen-Frederik_CAR-2026_.png",
+        "team": "tampa-bay-lightning",
+        "goalie": "ANDREI VASILEVSKIY",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2413/Vasilevskiy-Andrei_TBL-2024_.png",
         "stats": {
-          "record": "16-14-5",
-          "gaa": "3.05",
-          "svpct": "0.874",
-          "so": 0
+          "record": "38-15-4",
+          "gaa": "2.35",
+          "svpct": "0.909",
+          "so": 1
         }
       },
-      "date": "2026-05-02",
-      "time": "20:00"
+      "date": "2026-05-03",
+      "time": "18:00"
+    },
+    {
+      "away": {
+        "team": "minnesota-wild",
+        "goalie": "JESPER WALLSTEDT",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/31763/Wallstedt-Jesper_MIN-2024_.png",
+        "stats": {
+          "record": "18-9-6",
+          "gaa": "2.61",
+          "svpct": "0.915",
+          "so": 4
+        }
+      },
+      "home": {
+        "team": "colorado-avalanche",
+        "goalie": "SCOTT WEDGEWOOD",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/1873/Wedgewood-Scott_COL-2025_.png",
+        "stats": {
+          "record": "31-6-6",
+          "gaa": "2.02",
+          "svpct": "0.921",
+          "so": 4
+        }
+      },
+      "date": "2026-05-03",
+      "time": "21:00"
     }
   ]
 }
