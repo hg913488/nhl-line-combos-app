@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-05-05 22:45:13 UTC",
+  "updated_at": "2026-05-06 16:03:33 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -147,15 +147,15 @@
       ],
       "defense": [
         [
-          "MATTIAS SAMUELSSON",
-          "RASMUS DAHLIN"
+          "RASMUS DAHLIN",
+          "MATTIAS SAMUELSSON"
         ],
         [
-          "OWEN POWER",
-          "BOWEN BYRAM"
+          "BOWEN BYRAM",
+          "OWEN POWER"
         ],
         [
-          "MICHAEL KESSELRING",
+          "LOGAN STANLEY",
           "CONOR TIMMINS"
         ]
       ],
@@ -370,12 +370,12 @@
           "MARTIN NECAS"
         ],
         [
-          "ROSS COLTON",
+          "GABRIEL LANDESKOG",
           "BROCK NELSON",
           "VALERI NICHUSHKIN"
         ],
         [
-          "GABRIEL LANDESKOG",
+          "ROSS COLTON",
           "NAZEM KADRI",
           "NICOLAS ROY"
         ],
@@ -827,17 +827,17 @@
         ]
       ],
       "pp1": [
-        "MATS ZUCCARELLO",
         "MATT BOLDY",
+        "RYAN HARTMAN",
         "KIRILL KAPRIZOV",
         "QUINN HUGHES",
-        "BROCK FABER"
+        "MATS ZUCCARELLO"
       ],
       "pp2": [
         "MARCUS JOHANSSON",
-        "RYAN HARTMAN",
+        "DANILA YUROV",
         "VLADIMIR TARASENKO",
-        "QUINN HUGHES",
+        "BROCK FABER",
         "JARED SPURGEON"
       ]
     },
@@ -849,19 +849,19 @@
           "JURAJ SLAFKOVSKY"
         ],
         [
-          "BRENDAN GALLAGHER",
           "ALEX NEWHOOK",
+          "JAKE EVANS",
           "IVAN DEMIDOV"
         ],
         [
-          "JAKE EVANS",
+          "ALEXANDRE TEXIER",
           "PHILLIP DANAULT",
           "JOSH ANDERSON"
         ],
         [
           "ZACK BOLDUC",
           "KIRBY DACH",
-          "ALEXANDRE TEXIER"
+          "BRENDAN GALLAGHER"
         ]
       ],
       "defense": [
@@ -894,11 +894,11 @@
         "LANE HUTSON"
       ],
       "pp2": [
-        "ALEX NEWHOOK",
-        "KIRBY DACH",
         "ZACK BOLDUC",
+        "KIRBY DACH",
+        "ALEXANDRE TEXIER",
         "MIKE MATHESON",
-        "ALEXANDRE TEXIER"
+        "NOAH DOBSON"
       ]
     },
     "nashville-predators": {
@@ -2241,16 +2241,22 @@
     ],
     "minnesota-wild": [
       {
-        "name": "JOEL ERIKSSON EK",
-        "pos": "C",
-        "status": "Out",
-        "desc": "out"
-      },
-      {
         "name": "JONAS BRODIN",
         "pos": "D",
-        "status": "Out",
-        "desc": "out"
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "JOEL ERIKSSON EK",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "ZACH BOGOSIAN",
+        "pos": "D",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       },
       {
         "name": "CHARLIE STRAMEL",
@@ -2550,6 +2556,12 @@
       }
     ],
     "vancouver-canucks": [
+      {
+        "name": "NILS HOGLANDER",
+        "pos": "LW",
+        "status": "Out",
+        "desc": "out"
+      },
       {
         "name": "EVANDER KANE",
         "pos": "LW",
