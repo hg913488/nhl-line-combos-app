@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-05-11 22:44:25 UTC",
+  "updated_at": "2026-05-12 16:24:32 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -131,7 +131,7 @@
         ],
         [
           "JASON ZUCKER",
-          "RYAN MCLEOD",
+          "KONSTA HELENIUS",
           "JACK QUINN"
         ],
         [
@@ -141,7 +141,7 @@
         ],
         [
           "JORDAN GREENWAY",
-          "SAM CARRICK",
+          "RYAN MCLEOD",
           "BECK MALENSTYN"
         ]
       ],
@@ -155,16 +155,16 @@
           "OWEN POWER"
         ],
         [
-          "LOGAN STANLEY",
+          "LUKE SCHENN",
           "CONOR TIMMINS"
         ]
       ],
       "goalies": [
         [
-          "ALEX LYON"
+          "UKKO-PEKKA LUUKKONEN"
         ],
         [
-          "UKKO-PEKKA LUUKKONEN"
+          "ALEX LYON"
         ]
       ],
       "pp1": [
@@ -365,24 +365,24 @@
     "colorado-avalanche": {
       "forwards": [
         [
-          "ARTTURI LEHKONEN",
+          "GABRIEL LANDESKOG",
           "NATHAN MACKINNON",
           "MARTIN NECAS"
         ],
         [
-          "GABRIEL LANDESKOG",
+          "ROSS COLTON",
           "BROCK NELSON",
-          "VALERI NICHUSHKIN"
+          "NICOLAS ROY"
         ],
         [
-          "ROSS COLTON",
+          "VALERI NICHUSHKIN",
           "NAZEM KADRI",
-          "NICOLAS ROY"
+          "LOGAN O'CONNOR"
         ],
         [
           "PARKER KELLY",
           "JACK DRURY",
-          "LOGAN O'CONNOR"
+          "JOEL KIVIRANTA"
         ]
       ],
       "defense": [
@@ -392,10 +392,10 @@
         ],
         [
           "BRETT KULAK",
-          "SAM MALINSKI"
+          "BRENT BURNS"
         ],
         [
-          "BRENT BURNS",
+          "JACK AHCAN",
           "JOSH MANSON"
         ]
       ],
@@ -415,7 +415,7 @@
         "CALE MAKAR"
       ],
       "pp2": [
-        "ARTTURI LEHKONEN",
+        "ROSS COLTON",
         "BROCK NELSON",
         "VALERI NICHUSHKIN",
         "DEVON TOEWS",
@@ -2071,6 +2071,20 @@
         "desc": "Injured Reserve"
       }
     ],
+    "colorado-avalanche": [
+      {
+        "name": "ARTTURI LEHKONEN",
+        "pos": "LW",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "SAM MALINSKI",
+        "pos": "D",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      }
+    ],
     "dallas-stars": [
       {
         "name": "ROOPE HINTZ",
@@ -2229,14 +2243,14 @@
       {
         "name": "JONAS BRODIN",
         "pos": "D",
-        "status": "Out",
-        "desc": "out"
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       },
       {
         "name": "JOEL ERIKSSON EK",
         "pos": "C",
-        "status": "Out",
-        "desc": "out"
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
       },
       {
         "name": "CHARLIE STRAMEL",
@@ -2371,14 +2385,8 @@
     ],
     "philadelphia-flyers": [
       {
-        "name": "RODRIGO ABOLS",
-        "pos": "C",
-        "status": "Injured Reserve",
-        "desc": "Injured Reserve"
-      },
-      {
-        "name": "NIKITA GREBENKIN",
-        "pos": "RW",
+        "name": "NOAH CATES",
+        "pos": "LW",
         "status": "Out",
         "desc": "out"
       },
@@ -2389,8 +2397,14 @@
         "desc": "out"
       },
       {
-        "name": "NOAH CATES",
-        "pos": "LW",
+        "name": "RODRIGO ABOLS",
+        "pos": "C",
+        "status": "Injured Reserve",
+        "desc": "Injured Reserve"
+      },
+      {
+        "name": "NIKITA GREBENKIN",
+        "pos": "RW",
         "status": "Out",
         "desc": "out"
       },
