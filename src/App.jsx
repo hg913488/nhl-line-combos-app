@@ -771,6 +771,12 @@ function PlayoffsView({ isMobile }) {
 }
 
 // ── IIHF VIEW ──────────────────────────────────────────────────────────
+const IIHF_FLAG = {
+  SUI:'ch', FIN:'fi', USA:'us', GER:'de', LAT:'lv', AUT:'at', HUN:'hu', GBR:'gb',
+  CZE:'cz', CAN:'ca', SWE:'se', DEN:'dk', SVK:'sk', NOR:'no', SLO:'si', ITA:'it',
+};
+const iihfFlagUrl = code => `https://flagcdn.com/w40/${IIHF_FLAG[code] || 'xx'}.png`;
+
 function IIHFView({ isMobile }) {
   const todayStr = new Date().toISOString().slice(0, 10);
   const todayGames = IIHF_SCHEDULE_DATA.games.filter(g => g.date === todayStr);
@@ -801,8 +807,9 @@ function IIHFView({ isMobile }) {
               {teams.map((t, i) => (
                 <tr key={t.code} style={{ background: i % 2 === 0 ? "transparent" : `${P.bg}66` }}>
                   <td style={{ ...tdS, textAlign: "left", paddingLeft: 10 }}>
+                    <img src={iihfFlagUrl(t.code)} alt={t.code} width={20} height={15} style={{ verticalAlign: "middle", borderRadius: 2, marginRight: 6, display: "inline-block" }} />
                     <span style={codeBadge}>{t.code}</span>
-                    {!isMobile && <span style={{ color: P.casper, fontSize: 11 }}>{t.name}</span>}
+                    {!isMobile && <span style={{ color: P.casper, fontSize: 11, marginLeft: 4 }}>{t.name}</span>}
                   </td>
                   <td style={tdS}>{t.gp}</td>
                   <td style={tdS}>{t.w}</td>
@@ -835,10 +842,12 @@ function IIHFView({ isMobile }) {
             <div key={g.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", background: P.surface, border: `1px solid ${P.border}`, borderRadius: 6, marginBottom: 6 }}>
               <span style={{ ...codeBadge, marginRight: 0 }}>GRP {g.group}</span>
               <div style={{ flex: 1, display: "flex", alignItems: "center", gap: 8 }}>
+                <img src={iihfFlagUrl(g.away)} alt={g.away} width={20} height={15} style={{ verticalAlign: "middle", borderRadius: 2 }} />
                 <span style={codeBadge}>{g.away}</span>
                 {g.awayScore != null && <span style={{ fontSize: 15, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>{g.awayScore}</span>}
                 <span style={{ fontSize: 9, color: P.dim }}>@</span>
                 {g.homeScore != null && <span style={{ fontSize: 15, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>{g.homeScore}</span>}
+                <img src={iihfFlagUrl(g.home)} alt={g.home} width={20} height={15} style={{ verticalAlign: "middle", borderRadius: 2 }} />
                 <span style={codeBadge}>{g.home}</span>
               </div>
               <span style={{ fontSize: 9, fontFamily: "'Space Mono',monospace", color: g.state === "scheduled" ? P.casper : P.dove }}>
