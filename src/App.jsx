@@ -2,12 +2,18 @@ import React, { useState, useMemo, useEffect, useRef, useCallback } from "react"
 import lineups from '../data/lines.json';
 import goalsAgainstData from '../data/goals_against_by_position.json';
 import scheduleRaw from './schedule.csv?raw';
+import playoffBracket from '../data/playoff_bracket.json';
+import iihfGroups from '../data/iihf_groups.json';
+import iihfSchedule from '../data/iihf_schedule.json';
 
 const UPDATED_AT = lineups.updated_at.slice(0, 10);
 const TEAMS_DATA = lineups.teams;
 const INJURIES_DATA = lineups.injuries || {};
 const GA_DATA = goalsAgainstData;
 const SCHEDULE_RAW = scheduleRaw;
+const BRACKET_DATA = playoffBracket;
+const IIHF_GROUPS_DATA = iihfGroups;
+const IIHF_SCHEDULE_DATA = iihfSchedule;
 
 const NHL_TEAMS = {
   "anaheim-ducks":        { city: "Anaheim",      name: "Ducks",         abbr: "ANA", id: 24 },
@@ -530,47 +536,325 @@ function CompareView({ isMobile }) {
 // ── TODAY VIEW ────────────────────────────────────────────────────────
 function TodayView({ isMobile }) {
   const [expanded, setExpanded] = useState({});
+  const [playoffToday, setPlayoffToday] = useState([]);
   const toggle = slug => setExpanded(prev => ({ ...prev, [slug]: !prev[slug] }));
   const TODAY_GAMES = useMemo(() => getTodayGames(), []);
 
+  useEffect(() => {
+    const today = new Date().toISOString().slice(0, 10);
+    fetch(`/api/playoff-schedule?date=${today}`)
+      .then(r => r.json())
+      .then(d => setPlayoffToday(d.games || []))
+      .catch(() => {});
+  }, []);
+
+  const playoffSection = playoffToday.length > 0 ? (
+    <div style={{ padding: "14px 24px", borderBottom: `2px solid ${P.dim}` }}>
+      <div style={{ fontSize: 9, fontWeight: 700, color: "#e67e22", letterSpacing: "0.18em", marginBottom: 10, fontFamily: "'Syne',sans-serif" }}>TONIGHT'S PLAYOFFS</div>
+      {playoffToday.map(g => {
+        const awaySlug = abbrToSlug(g.awayTeam.abbrev);
+        const homeSlug = abbrToSlug(g.homeTeam.abbrev);
+        const ser = Object.values(BRACKET_DATA.series).find(
+          s => (s.topSeed === g.awayTeam.abbrev || s.bottomSeed === g.awayTeam.abbrev) &&
+               (s.topSeed === g.homeTeam.abbrev || s.bottomSeed === g.homeTeam.abbrev)
+        );
+        const gameNum = ser ? ser.topWins + ser.bottomWins + 1 : null;
+        const seriesLabel = ser ? `Game ${gameNum} · ${ser.topSeed} ${ser.topWins}—${ser.bottomWins} ${ser.bottomSeed}` : "";
+        const timeStr = g.startTimeUTC
+          ? new Date(g.startTimeUTC).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", timeZoneName: "short" })
+          : "";
+        return (
+          <div key={g.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 0", borderBottom: `1px solid ${P.border}` }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6, flex: 1, minWidth: 0 }}>
+              {awaySlug && <TeamLogo slug={awaySlug} abbr={g.awayTeam.abbrev} size={26} />}
+              <span style={{ fontSize: 11, fontWeight: 700, color: P.casper, fontFamily: "'Syne',sans-serif" }}>{g.awayTeam.abbrev}</span>
+              {g.awayTeam.score != null && <span style={{ fontSize: 16, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>{g.awayTeam.score}</span>}
+              <span style={{ fontSize: 9, color: P.dim, margin: "0 4px" }}>@</span>
+              {g.homeTeam.score != null && <span style={{ fontSize: 16, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>{g.homeTeam.score}</span>}
+              <span style={{ fontSize: 11, fontWeight: 700, color: P.casper, fontFamily: "'Syne',sans-serif" }}>{g.homeTeam.abbrev}</span>
+              {homeSlug && <TeamLogo slug={homeSlug} abbr={g.homeTeam.abbrev} size={26} />}
+            </div>
+            <div style={{ textAlign: "right", flexShrink: 0 }}>
+              {seriesLabel && <div style={{ fontSize: 9, color: P.dove, fontFamily: "'Space Mono',monospace" }}>{seriesLabel}</div>}
+              {g.gameState === "FUT" && timeStr && <div style={{ fontSize: 9, color: P.casper, fontFamily: "'Space Mono',monospace", marginTop: 2 }}>{timeStr}</div>}
+              {g.gameState === "LIVE" && <div style={{ fontSize: 9, color: P.green, fontFamily: "'Space Mono',monospace", marginTop: 2 }}>LIVE{g.period ? ` · P${g.period}` : ""}</div>}
+              {(g.gameState === "FINAL" || g.gameState === "OFF") && <div style={{ fontSize: 9, color: P.dove, fontFamily: "'Space Mono',monospace", marginTop: 2 }}>FINAL</div>}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  ) : null;
+
+  const noGames = TODAY_GAMES.length === 0 && playoffToday.length === 0;
+
   if (isMobile) {
     return (
-      <div>
-        {TODAY_GAMES.map((g, i) => {
-          const away = NHL_TEAMS[g.away], home = NHL_TEAMS[g.home];
-          return (
-            <div key={i}>
-              <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 20px", background: P.bg, borderTop: i > 0 ? `2px solid ${P.dim}` : "none", borderBottom: `1px solid ${P.border}` }}>
-                <div style={{ flex: 1, height: 1, background: P.border }} />
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <TeamLogo slug={g.away} abbr={away?.abbr} size={22} />
-                  <span style={{ fontSize: 10, fontWeight: 700, color: P.dove, fontFamily: "'Syne',sans-serif" }}>{away?.abbr}</span>
-                  <span style={{ fontSize: 9, color: P.dim, margin: "0 2px" }}>@</span>
-                  <span style={{ fontSize: 10, fontWeight: 700, color: P.dove, fontFamily: "'Syne',sans-serif" }}>{home?.abbr}</span>
-                  <TeamLogo slug={g.home} abbr={home?.abbr} size={22} />
+      <>
+        {playoffSection}
+        {noGames && (
+          <div style={{ textAlign: "center", padding: "48px 24px", color: P.dove }}>
+            <div style={{ fontSize: 11, letterSpacing: "0.12em", fontFamily: "'Syne',sans-serif" }}>NO GAMES SCHEDULED TODAY</div>
+          </div>
+        )}
+        <div>
+          {TODAY_GAMES.map((g, i) => {
+            const away = NHL_TEAMS[g.away], home = NHL_TEAMS[g.home];
+            return (
+              <div key={i}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 20px", background: P.bg, borderTop: i > 0 ? `2px solid ${P.dim}` : "none", borderBottom: `1px solid ${P.border}` }}>
+                  <div style={{ flex: 1, height: 1, background: P.border }} />
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <TeamLogo slug={g.away} abbr={away?.abbr} size={22} />
+                    <span style={{ fontSize: 10, fontWeight: 700, color: P.dove, fontFamily: "'Syne',sans-serif" }}>{away?.abbr}</span>
+                    <span style={{ fontSize: 9, color: P.dim, margin: "0 2px" }}>@</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: P.dove, fontFamily: "'Syne',sans-serif" }}>{home?.abbr}</span>
+                    <TeamLogo slug={g.home} abbr={home?.abbr} size={22} />
+                  </div>
+                  <div style={{ flex: 1, height: 1, background: P.border }} />
                 </div>
-                <div style={{ flex: 1, height: 1, background: P.border }} />
+                {[g.away, g.home].map(slug => <MobileRow key={slug} slug={slug} data={TEAMS_DATA[slug]} expanded={!!expanded[slug]} onToggle={() => toggle(slug)} />)}
               </div>
-              {[g.away, g.home].map(slug => <MobileRow key={slug} slug={slug} data={TEAMS_DATA[slug]} expanded={!!expanded[slug]} onToggle={() => toggle(slug)} />)}
+            );
+          })}
+        </div>
+      </>
+    );
+  }
+
+  return (
+    <>
+      {playoffSection}
+      {noGames && (
+        <div style={{ textAlign: "center", padding: "48px 24px", color: P.dove }}>
+          <div style={{ fontSize: 11, letterSpacing: "0.12em", fontFamily: "'Syne',sans-serif" }}>NO GAMES SCHEDULED TODAY</div>
+        </div>
+      )}
+      <div style={{ overflowX: "auto" }}>
+        <div style={{ display: "flex", alignItems: "stretch", minHeight: TODAY_GAMES.length ? `calc(100vh - ${HEADER_H + TABS_H}px)` : 0 }}>
+          {TODAY_GAMES.map((g, i) => (
+            <React.Fragment key={i}>
+              <TeamStrip slug={g.away} data={TEAMS_DATA[g.away]} expanded={!!expanded[g.away]} onToggle={() => toggle(g.away)} />
+              <TeamStrip slug={g.home} data={TEAMS_DATA[g.home]} expanded={!!expanded[g.home]} onToggle={() => toggle(g.home)} />
+              {i < TODAY_GAMES.length - 1 && (
+                <div style={{ width: 3, flexShrink: 0, background: P.casper, opacity: 0.3, alignSelf: "stretch" }} />
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
+
+// ── PLAYOFFS VIEW ─────────────────────────────────────────────────────
+function PlayoffsView({ isMobile }) {
+  const [expandedSeries, setExpandedSeries] = useState(null);
+  const { series, round1East, round1West, round2East, round2West, confFinals, final } = BRACKET_DATA;
+
+  function fmtDate(dateStr) {
+    if (!dateStr) return "";
+    return new Date(dateStr + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+  }
+
+  function SeriesCard({ seriesId }) {
+    const ser = series[seriesId];
+    if (!ser) return null;
+    const isExp = expandedSeries === seriesId;
+    const isLive = ser.status === "in-progress";
+    const isDone = ser.status === "final";
+    const isUpcoming = ser.status === "upcoming";
+    const topSlug = abbrToSlug(ser.topSeed);
+    const botSlug = abbrToSlug(ser.bottomSeed);
+    const nextGame = ser.games?.find(g => g.state === "scheduled");
+    const gameNum = (ser.topWins + ser.bottomWins) + 1;
+
+    if (isUpcoming && ser.topSeed === "TBD") {
+      return (
+        <div style={{ padding: "14px 16px", background: P.surface, border: `1px solid ${P.border}`, borderRadius: 6, opacity: 0.4 }}>
+          <span style={{ fontSize: 9, color: P.dove, fontFamily: "'Space Mono',monospace", letterSpacing: "0.1em" }}>TO BE DETERMINED</span>
+        </div>
+      );
+    }
+
+    return (
+      <div onClick={() => setExpandedSeries(isExp ? null : seriesId)}
+        style={{ background: P.surface, border: `1px solid ${isLive ? P.accent : P.border}`, borderRadius: 6, overflow: "hidden", cursor: "pointer", transition: "border-color 0.15s" }}>
+        {/* Matchup row */}
+        <div style={{ padding: "14px 16px", display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, flex: 1, minWidth: 0 }}>
+            {topSlug && <TeamLogo slug={topSlug} abbr={ser.topSeed} size={28} />}
+            <span style={{ fontSize: 12, fontWeight: 700, color: isDone && ser.winnerAbbr === ser.topSeed ? P.white : P.casper, fontFamily: "'Syne',sans-serif" }}>{ser.topSeed}</span>
+          </div>
+          <div style={{ textAlign: "center", flexShrink: 0 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <span style={{ fontSize: 22, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace", minWidth: 18, textAlign: "right" }}>{ser.topWins}</span>
+              <span style={{ fontSize: 10, color: P.dim }}>—</span>
+              <span style={{ fontSize: 22, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace", minWidth: 18, textAlign: "left" }}>{ser.bottomWins}</span>
             </div>
-          );
-        })}
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, flex: 1, minWidth: 0, justifyContent: "flex-end" }}>
+            <span style={{ fontSize: 12, fontWeight: 700, color: isDone && ser.winnerAbbr === ser.bottomSeed ? P.white : P.casper, fontFamily: "'Syne',sans-serif" }}>{ser.bottomSeed}</span>
+            {botSlug && <TeamLogo slug={botSlug} abbr={ser.bottomSeed} size={28} />}
+          </div>
+        </div>
+        {/* Status + expand toggle */}
+        <div style={{ padding: "0 16px 10px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ fontSize: 9, fontFamily: "'Space Mono',monospace", color: isLive ? P.casper : P.dove }}>
+            {isLive && nextGame && `GAME ${nextGame.gameNumber} · ${fmtDate(nextGame.date)}`}
+            {isLive && !nextGame && "IN PROGRESS"}
+            {isDone && `${ser.winnerAbbr} WINS IN ${ser.topWins + ser.bottomWins}`}
+          </span>
+          <span style={{ fontSize: 9, color: P.dim, fontFamily: "'Space Mono',monospace" }}>{isExp ? "▲" : "▼"} GAMES</span>
+        </div>
+        {/* Game-by-game (expanded) */}
+        {isExp && (
+          <div style={{ borderTop: `1px solid ${P.border}` }}>
+            {ser.games.map(g => (
+              <div key={g.gameNumber} style={{ display: "flex", alignItems: "center", padding: "7px 16px", gap: 10, borderBottom: `1px solid ${P.border}`, opacity: g.state === "scheduled" ? 0.4 : 1 }}>
+                <span style={{ fontSize: 9, color: P.dove, fontFamily: "'Space Mono',monospace", minWidth: 20 }}>G{g.gameNumber}</span>
+                <span style={{ fontSize: 9, color: P.dim, fontFamily: "'Space Mono',monospace", flex: 1 }}>{fmtDate(g.date)} · {g.homeAbbr} HOME</span>
+                {g.state !== "scheduled"
+                  ? <span style={{ fontSize: 11, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>
+                      {g.homeScore}–{g.awayScore}{g.state === "final-ot" ? " OT" : g.state === "final-2ot" ? " 2OT" : ""}
+                    </span>
+                  : <span style={{ fontSize: 9, color: P.dim, fontFamily: "'Space Mono',monospace" }}>{g.time}</span>
+                }
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  function RoundLabel({ label, color }) {
+    return <div style={{ fontSize: 9, fontWeight: 700, color: color || P.dove, letterSpacing: "0.14em", marginBottom: 8, fontFamily: "'Syne',sans-serif" }}>{label}</div>;
+  }
+
+  function ConferenceBlock({ label, r1Ids, r2Ids, cfId }) {
+    return (
+      <div style={{ marginBottom: isMobile ? 32 : 0 }}>
+        <div style={{ fontSize: 10, fontWeight: 700, color: "#e67e22", letterSpacing: "0.18em", marginBottom: 16, fontFamily: "'Syne',sans-serif" }}>{label}</div>
+        <RoundLabel label="SECOND ROUND" />
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
+          {r2Ids.map(id => <SeriesCard key={id} seriesId={id} />)}
+        </div>
+        <RoundLabel label="FIRST ROUND" />
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 6, marginBottom: 20 }}>
+          {r1Ids.map(id => <SeriesCard key={id} seriesId={id} />)}
+        </div>
+        <RoundLabel label="CONFERENCE FINAL" />
+        <SeriesCard seriesId={cfId} />
       </div>
     );
   }
 
   return (
-    <div style={{ overflowX: "auto" }}>
-      <div style={{ display: "flex", alignItems: "stretch", minHeight: `calc(100vh - ${HEADER_H + TABS_H}px)` }}>
-        {TODAY_GAMES.map((g, i) => (
-          <>
-            <TeamStrip key={`${i}-away`} slug={g.away} data={TEAMS_DATA[g.away]} expanded={!!expanded[g.away]} onToggle={() => toggle(g.away)} />
-            <TeamStrip key={`${i}-home`} slug={g.home} data={TEAMS_DATA[g.home]} expanded={!!expanded[g.home]} onToggle={() => toggle(g.home)} />
-            {i < TODAY_GAMES.length - 1 && (
-              <div key={`${i}-div`} style={{ width: 3, flexShrink: 0, background: P.casper, opacity: 0.3, alignSelf: "stretch" }} />
-            )}
-          </>
-        ))}
+    <div style={{ padding: "16px 24px", maxWidth: 1100, margin: "0 auto" }}>
+      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 24, paddingBottom: 14, borderBottom: `1px solid ${P.border}` }}>
+        <div>
+          <div style={{ fontSize: 18, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: "0.06em" }}>2026 NHL PLAYOFFS</div>
+          <div style={{ fontSize: 9, color: P.dove, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: "0.1em" }}>SECOND ROUND IN PROGRESS · UPDATED {BRACKET_DATA.updatedAt}</div>
+        </div>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 32, marginBottom: 32 }}>
+        <ConferenceBlock label="EASTERN CONFERENCE" r1Ids={round1East} r2Ids={round2East} cfId={confFinals[0]} />
+        <ConferenceBlock label="WESTERN CONFERENCE" r1Ids={round1West} r2Ids={round2West} cfId={confFinals[1]} />
+      </div>
+      <div>
+        <div style={{ fontSize: 9, fontWeight: 700, color: P.yellow, letterSpacing: "0.18em", marginBottom: 8, fontFamily: "'Syne',sans-serif" }}>STANLEY CUP FINAL</div>
+        <SeriesCard seriesId={final} />
+      </div>
+    </div>
+  );
+}
+
+// ── IIHF VIEW ──────────────────────────────────────────────────────────
+function IIHFView({ isMobile }) {
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayGames = IIHF_SCHEDULE_DATA.games.filter(g => g.date === todayStr);
+
+  const thS = { fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", color: P.dove, padding: "8px 6px", textAlign: "center", borderBottom: `1px solid ${P.border}`, fontFamily: "'Space Mono',monospace", background: P.bg };
+  const tdS = { padding: "7px 6px", textAlign: "center", fontSize: 12, fontFamily: "'Space Mono',monospace", color: P.white, borderBottom: `1px solid ${P.border}` };
+  const codeBadge = { display: "inline-block", fontSize: 9, fontWeight: 700, letterSpacing: "0.08em", padding: "2px 5px", borderRadius: 3, background: P.dim, color: P.casper, fontFamily: "'Space Mono',monospace" };
+
+  function GroupTable({ groupKey }) {
+    const teams = IIHF_GROUPS_DATA.groups[groupKey] || [];
+    return (
+      <div style={{ marginBottom: isMobile ? 20 : 0 }}>
+        <div style={{ fontSize: 11, fontWeight: 700, color: P.casper, letterSpacing: "0.14em", marginBottom: 8, fontFamily: "'Syne',sans-serif" }}>GROUP {groupKey}</div>
+        <div style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 6, overflow: "hidden" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse" }}>
+            <thead>
+              <tr>
+                <th style={{ ...thS, textAlign: "left", paddingLeft: 12 }}>NATION</th>
+                <th style={thS}>GP</th>
+                <th style={thS}>W</th>
+                {!isMobile && <><th style={thS}>OTW</th><th style={thS}>OTL</th></>}
+                <th style={thS}>L</th>
+                {!isMobile && <><th style={thS}>GF</th><th style={thS}>GA</th></>}
+                <th style={{ ...thS, color: P.casper }}>PTS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {teams.map((t, i) => (
+                <tr key={t.code} style={{ background: i % 2 === 0 ? "transparent" : `${P.bg}66` }}>
+                  <td style={{ ...tdS, textAlign: "left", paddingLeft: 10 }}>
+                    <span style={codeBadge}>{t.code}</span>
+                    {!isMobile && <span style={{ color: P.casper, fontSize: 11 }}>{t.name}</span>}
+                  </td>
+                  <td style={tdS}>{t.gp}</td>
+                  <td style={tdS}>{t.w}</td>
+                  {!isMobile && <><td style={tdS}>{t.otw}</td><td style={tdS}>{t.otl}</td></>}
+                  <td style={tdS}>{t.l}</td>
+                  {!isMobile && <><td style={tdS}>{t.gf}</td><td style={tdS}>{t.ga}</td></>}
+                  <td style={{ ...tdS, fontWeight: 700, color: P.casper }}>{t.pts}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ padding: "16px 24px", maxWidth: 900, margin: "0 auto" }}>
+      <div style={{ marginBottom: 20, paddingBottom: 14, borderBottom: `1px solid ${P.border}` }}>
+        <div style={{ fontSize: 18, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: "0.06em" }}>2026 IIHF WORLD CHAMPIONSHIP</div>
+        <div style={{ fontSize: 9, color: P.dove, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: "0.1em" }}>
+          {IIHF_GROUPS_DATA.location} · {IIHF_GROUPS_DATA.dates}
+        </div>
+      </div>
+
+      {todayGames.length > 0 && (
+        <div style={{ marginBottom: 24 }}>
+          <div style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.14em", marginBottom: 10, fontFamily: "'Syne',sans-serif" }}>TODAY'S GAMES</div>
+          {todayGames.map(g => (
+            <div key={g.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", background: P.surface, border: `1px solid ${P.border}`, borderRadius: 6, marginBottom: 6 }}>
+              <span style={{ ...codeBadge, marginRight: 0 }}>GRP {g.group}</span>
+              <div style={{ flex: 1, display: "flex", alignItems: "center", gap: 8 }}>
+                <span style={codeBadge}>{g.away}</span>
+                {g.awayScore != null && <span style={{ fontSize: 15, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>{g.awayScore}</span>}
+                <span style={{ fontSize: 9, color: P.dim }}>@</span>
+                {g.homeScore != null && <span style={{ fontSize: 15, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>{g.homeScore}</span>}
+                <span style={codeBadge}>{g.home}</span>
+              </div>
+              <span style={{ fontSize: 9, fontFamily: "'Space Mono',monospace", color: g.state === "scheduled" ? P.casper : P.dove }}>
+                {g.state === "final" ? "FINAL" : g.state === "final-ot" ? "FINAL/OT" : g.time}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 0 : 24 }}>
+        <GroupTable groupKey="A" />
+        <GroupTable groupKey="B" />
+      </div>
+      <div style={{ fontSize: 9, color: P.dim, textAlign: "center", fontFamily: "'Space Mono',monospace", letterSpacing: "0.06em", marginTop: 16 }}>
+        POINT SYSTEM: W=3 · OTW=2 · OTL=1 · L=0 · UPDATED {IIHF_GROUPS_DATA.updatedAt}
       </div>
     </div>
   );
@@ -777,6 +1061,7 @@ function formatDate(dateStr) {
 
 function PlayerStatsView({ isMobile }) {
   const [query, setQuery] = useState("");
+  const [gameType, setGameType] = useState("2");
   const [suggestions, setSuggestions] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [gamelog, setGamelog] = useState([]);
@@ -788,6 +1073,12 @@ function PlayerStatsView({ isMobile }) {
   const debounceRef = useRef(null);
   const inputRef = useRef(null);
   const isSelectedRef = useRef(false);
+
+  useEffect(() => {
+    setSelectedPlayer(null);
+    setGamelog([]);
+    setError(null);
+  }, [gameType]);
 
   const fetchSuggestions = useCallback(async (q) => {
     if (isSelectedRef.current) return;
@@ -831,13 +1122,13 @@ function PlayerStatsView({ isMobile }) {
     setError(null);
     setGamelog([]);
     try {
-      const cacheKey = `gamelog_${player.id}`;
+      const cacheKey = `gamelog_${player.id}_gt${gameType}`;
       const cached = sessionStorage.getItem(cacheKey);
       let data;
       if (cached) {
         data = JSON.parse(cached);
       } else {
-        const res = await fetch(`/api/gamelog?playerId=${player.id}`);
+        const res = await fetch(`/api/gamelog?playerId=${player.id}&gameType=${gameType}`);
         data = await res.json();
         sessionStorage.setItem(cacheKey, JSON.stringify(data));
       }
@@ -853,13 +1144,13 @@ function PlayerStatsView({ isMobile }) {
         toi: g.timeOnIcePerGame,
       }));
       setGamelog(games);
-      if (games.length === 0) setError("No recent games found for this player.");
+      if (games.length === 0) setError(gameType === "3" ? "No playoff games found for this player." : "No recent games found for this player.");
     } catch (err) {
       setError(`Could not load stats (${err?.message || "network error"}). Please try again.`);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [gameType]);
 
   const handleKey = (e) => {
     if (!showDrop || suggestions.length === 0) return;
@@ -889,6 +1180,14 @@ function PlayerStatsView({ isMobile }) {
 
   return (
     <div style={{ padding: "16px 24px", maxWidth: 700, margin: "0 auto" }}>
+      <div style={{ display: "flex", gap: 6, marginBottom: 14 }}>
+        {[["2", "REG SEASON"], ["3", "PLAYOFFS"]].map(([val, label]) => (
+          <button key={val} onClick={() => setGameType(val)}
+            style={{ background: gameType === val ? P.active : "none", border: `1px solid ${gameType === val ? P.accent : P.border}`, borderRadius: 4, padding: "5px 12px", color: gameType === val ? P.white : P.dove, fontSize: 9, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: "0.08em", transition: "all 0.15s" }}>
+            {label}
+          </button>
+        ))}
+      </div>
       <div style={{ position: "relative", marginBottom: 24 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <input
@@ -921,7 +1220,7 @@ function PlayerStatsView({ isMobile }) {
         <div style={{ textAlign: "center", padding: "48px 0", color: P.dove }}>
           <div style={{ fontSize: 32, opacity: 0.1, marginBottom: 12 }}>⬆</div>
           <div style={{ fontSize: 11, letterSpacing: "0.12em", fontFamily: "'Syne',sans-serif" }}>SEARCH FOR A PLAYER ABOVE</div>
-          <div style={{ fontSize: 10, color: P.dim, marginTop: 6, fontFamily: "'Space Mono',monospace" }}>LAST 5 GAMES · CURRENT SEASON</div>
+          <div style={{ fontSize: 10, color: P.dim, marginTop: 6, fontFamily: "'Space Mono',monospace" }}>LAST 5 GAMES · {gameType === "3" ? "PLAYOFFS" : "REGULAR SEASON"}</div>
         </div>
       )}
 
@@ -945,7 +1244,7 @@ function PlayerStatsView({ isMobile }) {
                 {selectedPlayer.firstName.toUpperCase()} {selectedPlayer.lastName.toUpperCase()}
               </div>
               <div style={{ fontSize: 10, color: P.dove, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: "0.1em" }}>
-                {selectedPlayer.pos}{selectedPlayer.team ? ` · ${selectedPlayer.team}` : ""} · LAST 5 GAMES
+                {selectedPlayer.pos}{selectedPlayer.team ? ` · ${selectedPlayer.team}` : ""} · LAST 5 {gameType === "3" ? "PLAYOFF" : ""} GAMES
               </div>
             </div>
           </div>
@@ -1154,7 +1453,10 @@ class ErrorBoundary extends React.Component {
 
 // ── ROOT ──────────────────────────────────────────────────────────────
 export default function App() {
-  const [tab, setTab] = useState("all");
+  const [tab, setTab] = useState(() => {
+    const m = new Date().getMonth() + 1; // 1–12
+    return m >= 4 && m <= 6 ? "playoffs" : "all";
+  });
   const [expanded, setExpanded] = useState({});
   const [search, setSearch] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -1253,8 +1555,8 @@ export default function App() {
 
   const toggle = slug => setExpanded(prev => ({ ...prev, [slug]: !prev[slug] }));
 
-  const TABS = ["all", "today", "stats", "injuries", "player", "compare"];
-  const TAB_LABELS = { all: "ALL TEAMS", today: "TODAY", stats: "STATS", injuries: "INJURIES", player: "PLAYER STATS", compare: "COMPARE" };
+  const TABS = ["all", "today", "playoffs", "iihf", "stats", "injuries", "player", "compare"];
+  const TAB_LABELS = { all: "ALL TEAMS", today: "TODAY", playoffs: "PLAYOFFS", iihf: "IIHF", stats: "STATS", injuries: "INJURIES", player: "PLAYER STATS", compare: "COMPARE" };
 
   return (
     <div style={{ fontFamily: "'Space Grotesk', sans-serif", background: P.bg, minHeight: "100vh", color: P.white }}>
@@ -1293,6 +1595,8 @@ export default function App() {
         <div>{slugs.map(slug => <MobileRow key={slug} slug={slug} data={TEAMS_DATA[slug]} expanded={!!expanded[slug]} onToggle={() => toggle(slug)} />)}</div>
       )}
       {tab === "today" && <ErrorBoundary><TodayView isMobile={isMobile} /></ErrorBoundary>}
+      {tab === "playoffs" && <ErrorBoundary><PlayoffsView isMobile={isMobile} /></ErrorBoundary>}
+      {tab === "iihf" && <ErrorBoundary><IIHFView isMobile={isMobile} /></ErrorBoundary>}
       {tab === "stats" && <ErrorBoundary><GoalsAgainstView isMobile={isMobile} /></ErrorBoundary>}
       {tab === "injuries" && <ErrorBoundary><InjuriesView isMobile={isMobile} /></ErrorBoundary>}
       {tab === "player" && <ErrorBoundary><PlayerStatsView isMobile={isMobile} /></ErrorBoundary>}

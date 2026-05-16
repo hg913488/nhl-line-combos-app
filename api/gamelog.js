@@ -1,12 +1,13 @@
 export default async function handler(req, res) {
-  const { playerId } = req.query;
+  const { playerId, gameType } = req.query;
 
   if (!playerId || !/^\d+$/.test(playerId)) {
     return res.status(400).json({ error: "Invalid playerId" });
   }
 
+  const gameTypeId = gameType === "3" ? 3 : 2;
   const sort = encodeURIComponent(JSON.stringify([{ property: "gameDate", direction: "DESC" }]));
-  const exp = encodeURIComponent(`playerId=${playerId} and seasonId=20252026 and gameTypeId=2`);
+  const exp = encodeURIComponent(`playerId=${playerId} and seasonId=20252026 and gameTypeId=${gameTypeId}`);
   const url = `https://api.nhle.com/stats/rest/en/skater/summary?isAggregate=false&isGame=true&limit=5&sort=${sort}&cayenneExp=${exp}`;
 
   try {
