@@ -5,6 +5,7 @@ import scheduleRaw from './schedule.csv?raw';
 import playoffBracket from '../data/playoff_bracket.json';
 import iihfGroups from '../data/iihf_groups.json';
 import iihfSchedule from '../data/iihf_schedule.json';
+import iihfRostersData from '../data/iihf_rosters.json';
 
 const UPDATED_AT = lineups.updated_at.slice(0, 10);
 const TEAMS_DATA = lineups.teams;
@@ -14,6 +15,7 @@ const SCHEDULE_RAW = scheduleRaw;
 const BRACKET_DATA = playoffBracket;
 const IIHF_GROUPS_DATA = iihfGroups;
 const IIHF_SCHEDULE_DATA = iihfSchedule;
+const IIHF_ROSTERS = iihfRostersData.rosters;
 
 const NHL_TEAMS = {
   "anaheim-ducks":        { city: "Anaheim",      name: "Ducks",         abbr: "ANA", id: 24 },
@@ -777,9 +779,74 @@ const IIHF_FLAG = {
 };
 const iihfFlagUrl = code => `https://flagcdn.com/w40/${IIHF_FLAG[code] || 'xx'}.png`;
 
+function IIHFRosterModal({ code, name, onClose }) {
+  const roster = IIHF_ROSTERS[code] || { players: [] };
+  const forwards = roster.players.filter(p => p.pos === 'F');
+  const defense  = roster.players.filter(p => p.pos === 'D');
+  const goalies  = roster.players.filter(p => p.pos === 'G' || p.pos === 'GK');
+
+  const overlayStyle = {
+    position: "fixed", inset: 0, background: "rgba(0,0,0,0.72)", zIndex: 1000,
+    display: "flex", alignItems: "center", justifyContent: "center", padding: 16,
+  };
+  const modalStyle = {
+    background: P.surface, border: `1px solid ${P.border}`, borderRadius: 10,
+    width: "100%", maxWidth: 520, maxHeight: "82vh", overflowY: "auto",
+    boxShadow: "0 24px 64px rgba(0,0,0,0.6)",
+  };
+  const sectionLabel = { fontSize: 9, fontWeight: 700, letterSpacing: "0.14em", color: P.dove,
+    fontFamily: "'Space Mono',monospace", padding: "10px 16px 4px", borderTop: `1px solid ${P.border}` };
+  const playerRow = { display: "flex", alignItems: "center", gap: 10, padding: "6px 16px",
+    borderBottom: `1px solid ${P.border}22` };
+  const numStyle = { fontSize: 10, fontWeight: 700, color: P.casper, fontFamily: "'Space Mono',monospace",
+    width: 28, textAlign: "right", flexShrink: 0 };
+  const nameStyle = { fontSize: 12, color: P.white, fontFamily: "'Space Mono',monospace", flex: 1 };
+  const clubStyle = { fontSize: 10, color: P.dove, fontFamily: "'Space Mono',monospace", textAlign: "right" };
+
+  function Section({ label, players }) {
+    if (!players.length) return null;
+    return (
+      <>
+        <div style={sectionLabel}>{label}</div>
+        {players.map(p => (
+          <div key={p.num + p.name} style={playerRow}>
+            <span style={numStyle}>#{p.num}</span>
+            <span style={nameStyle}>{p.name}</span>
+            <span style={clubStyle}>{p.club}</span>
+          </div>
+        ))}
+      </>
+    );
+  }
+
+  return (
+    <div style={overlayStyle} onClick={onClose}>
+      <div style={modalStyle} onClick={e => e.stopPropagation()}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "14px 16px",
+          borderBottom: `1px solid ${P.border}`, position: "sticky", top: 0, background: P.surface, zIndex: 1 }}>
+          <img src={iihfFlagUrl(code)} alt={code} width={28} height={21} style={{ borderRadius: 3 }} />
+          <div>
+            <div style={{ fontSize: 15, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: "0.04em" }}>{name}</div>
+            <div style={{ fontSize: 9, color: P.dove, fontFamily: "'Space Mono',monospace", letterSpacing: "0.08em" }}>
+              {forwards.length}F · {defense.length}D · {goalies.length}G
+            </div>
+          </div>
+          <button onClick={onClose} style={{ marginLeft: "auto", background: "none", border: "none",
+            color: P.dove, cursor: "pointer", fontSize: 18, lineHeight: 1, padding: 4 }}>✕</button>
+        </div>
+        <Section label="FORWARDS" players={forwards} />
+        <Section label="DEFENCE" players={defense} />
+        <Section label="GOALIES" players={goalies} />
+        <div style={{ height: 8 }} />
+      </div>
+    </div>
+  );
+}
+
 function IIHFView({ isMobile }) {
   const todayStr = new Date().toISOString().slice(0, 10);
   const todayGames = IIHF_SCHEDULE_DATA.games.filter(g => g.date === todayStr);
+  const [openRoster, setOpenRoster] = useState(null);
 
   const thS = { fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", color: P.dove, padding: "8px 6px", textAlign: "center", borderBottom: `1px solid ${P.border}`, fontFamily: "'Space Mono',monospace", background: P.bg };
   const tdS = { padding: "7px 6px", textAlign: "center", fontSize: 12, fontFamily: "'Space Mono',monospace", color: P.white, borderBottom: `1px solid ${P.border}` };
@@ -826,8 +893,22 @@ function IIHFView({ isMobile }) {
     );
   }
 
+  // All 16 teams ordered by group then standings rank
+  const allTeams = [
+    ...IIHF_GROUPS_DATA.groups.A,
+    ...IIHF_GROUPS_DATA.groups.B,
+  ];
+
   return (
     <div style={{ padding: "16px 24px", maxWidth: 900, margin: "0 auto" }}>
+      {openRoster && (
+        <IIHFRosterModal
+          code={openRoster.code}
+          name={openRoster.name}
+          onClose={() => setOpenRoster(null)}
+        />
+      )}
+
       <div style={{ marginBottom: 20, paddingBottom: 14, borderBottom: `1px solid ${P.border}` }}>
         <div style={{ fontSize: 18, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: "0.06em" }}>2026 IIHF WORLD CHAMPIONSHIP</div>
         <div style={{ fontSize: 9, color: P.dove, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: "0.1em" }}>
@@ -858,10 +939,43 @@ function IIHFView({ isMobile }) {
         </div>
       )}
 
-      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 0 : 24 }}>
+      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 0 : 24, marginBottom: 28 }}>
         <GroupTable groupKey="A" />
         <GroupTable groupKey="B" />
       </div>
+
+      {/* Team roster cards */}
+      <div style={{ marginBottom: 12 }}>
+        <div style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.14em", marginBottom: 12, fontFamily: "'Syne',sans-serif" }}>
+          ROSTERS — TAP A TEAM
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(4,1fr)" : "repeat(8,1fr)", gap: 8 }}>
+          {allTeams.map(t => {
+            const roster = IIHF_ROSTERS[t.code] || { players: [] };
+            const count = roster.players.length;
+            return (
+              <button
+                key={t.code}
+                onClick={() => setOpenRoster({ code: t.code, name: t.name })}
+                style={{
+                  background: P.surface, border: `1px solid ${P.border}`, borderRadius: 8,
+                  padding: "10px 4px", cursor: "pointer", display: "flex", flexDirection: "column",
+                  alignItems: "center", gap: 5, transition: "border-color 0.15s, background 0.15s",
+                  position: "relative",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = P.casper; e.currentTarget.style.background = `${P.casper}12`; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = P.border; e.currentTarget.style.background = P.surface; }}
+              >
+                <img src={iihfFlagUrl(t.code)} alt={t.code} width={32} height={24} style={{ borderRadius: 3, display: "block" }} />
+                <span style={{ fontSize: 9, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace", letterSpacing: "0.06em" }}>{t.code}</span>
+                <span style={{ fontSize: 8, color: P.dove, fontFamily: "'Space Mono',monospace" }}>{count}P</span>
+                <span style={{ position: "absolute", top: 5, right: 6, fontSize: 9, color: P.casper, lineHeight: 1 }}>›</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       <div style={{ fontSize: 9, color: P.dim, textAlign: "center", fontFamily: "'Space Mono',monospace", letterSpacing: "0.06em", marginTop: 16 }}>
         POINT SYSTEM: W=3 · OTW=2 · OTL=1 · L=0 · UPDATED {IIHF_GROUPS_DATA.updatedAt}
       </div>
