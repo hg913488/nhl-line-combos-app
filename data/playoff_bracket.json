@@ -1,6 +1,6 @@
 {
   "season": "20252026",
-  "updatedAt": "2026-05-16",
+  "updatedAt": "2026-05-17",
   "series": {
     "R1E-A-BUF-BOS": {
       "id": "R1E-A-BUF-BOS",
@@ -534,11 +534,11 @@
       "seriesLetter": "I",
       "topSeed": "BUF",
       "bottomSeed": "MTL",
-      "topWins": 2,
+      "topWins": 3,
       "bottomWins": 3,
       "status": "in-progress",
       "winnerAbbr": null,
-      "nextGameDate": "2026-05-16",
+      "nextGameDate": "2026-05-18",
       "games": [
         {
           "gameNumber": 1,
@@ -590,9 +590,9 @@
           "date": "2026-05-16",
           "awayAbbr": "BUF",
           "homeAbbr": "MTL",
-          "awayScore": null,
-          "homeScore": null,
-          "state": "scheduled"
+          "awayScore": 8,
+          "homeScore": 3,
+          "state": "final"
         },
         {
           "gameNumber": 7,
@@ -785,19 +785,83 @@
         }
       ]
     },
-    "R3E-ECF-TBD-TBD": {
-      "id": "R3E-ECF-TBD-TBD",
+    "R3E-M-TBD-CAR": {
+      "id": "R3E-M-TBD-CAR",
       "round": 3,
       "conference": "E",
-      "seriesLetter": null,
+      "seriesLetter": "M",
       "topSeed": "TBD",
-      "bottomSeed": "TBD",
+      "bottomSeed": "CAR",
       "topWins": 0,
       "bottomWins": 0,
       "status": "upcoming",
       "winnerAbbr": null,
-      "nextGameDate": null,
-      "games": []
+      "nextGameDate": "2026-05-21",
+      "games": [
+        {
+          "gameNumber": 1,
+          "date": "2026-05-21",
+          "awayAbbr": "TBD",
+          "homeAbbr": "CAR",
+          "awayScore": null,
+          "homeScore": null,
+          "state": "scheduled"
+        },
+        {
+          "gameNumber": 2,
+          "date": "2026-05-23",
+          "awayAbbr": "TBD",
+          "homeAbbr": "CAR",
+          "awayScore": null,
+          "homeScore": null,
+          "state": "scheduled"
+        },
+        {
+          "gameNumber": 3,
+          "date": "2026-05-25",
+          "awayAbbr": "CAR",
+          "homeAbbr": "TBD",
+          "awayScore": null,
+          "homeScore": null,
+          "state": "scheduled"
+        },
+        {
+          "gameNumber": 4,
+          "date": "2026-05-27",
+          "awayAbbr": "CAR",
+          "homeAbbr": "TBD",
+          "awayScore": null,
+          "homeScore": null,
+          "state": "scheduled"
+        },
+        {
+          "gameNumber": 5,
+          "date": "2026-05-29",
+          "awayAbbr": "TBD",
+          "homeAbbr": "CAR",
+          "awayScore": null,
+          "homeScore": null,
+          "state": "scheduled"
+        },
+        {
+          "gameNumber": 6,
+          "date": "2026-05-31",
+          "awayAbbr": "CAR",
+          "homeAbbr": "TBD",
+          "awayScore": null,
+          "homeScore": null,
+          "state": "scheduled"
+        },
+        {
+          "gameNumber": 7,
+          "date": "2026-06-02",
+          "awayAbbr": "TBD",
+          "homeAbbr": "CAR",
+          "awayScore": null,
+          "homeScore": null,
+          "state": "scheduled"
+        }
+      ]
     },
     "R3W-N-COL-VGK": {
       "id": "R3W-N-COL-VGK",
@@ -913,7 +977,7 @@
     "R2W-L-VGK-ANA"
   ],
   "confFinals": [
-    "R3E-ECF-TBD-TBD",
+    "R3E-M-TBD-CAR",
     "R3W-N-COL-VGK"
   ],
   "final": "R4-SCF-TBD-TBD"
