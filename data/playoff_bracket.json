@@ -1,6 +1,6 @@
 {
   "season": "20252026",
-  "updatedAt": "2026-05-20",
+  "updatedAt": "2026-05-21",
   "series": {
     "R1E-A-BUF-BOS": {
       "id": "R1E-A-BUF-BOS",
@@ -871,19 +871,19 @@
       "topSeed": "COL",
       "bottomSeed": "VGK",
       "topWins": 0,
-      "bottomWins": 0,
-      "status": "upcoming",
+      "bottomWins": 1,
+      "status": "in-progress",
       "winnerAbbr": null,
-      "nextGameDate": "2026-05-20",
+      "nextGameDate": "2026-05-22",
       "games": [
         {
           "gameNumber": 1,
           "date": "2026-05-20",
           "awayAbbr": "VGK",
           "homeAbbr": "COL",
-          "awayScore": null,
-          "homeScore": null,
-          "state": "scheduled"
+          "awayScore": 4,
+          "homeScore": 2,
+          "state": "final"
         },
         {
           "gameNumber": 2,
