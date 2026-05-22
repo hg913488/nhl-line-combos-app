@@ -1,6 +1,6 @@
 {
   "season": "20252026",
-  "updatedAt": "2026-05-21",
+  "updatedAt": "2026-05-22",
   "series": {
     "R1E-A-BUF-BOS": {
       "id": "R1E-A-BUF-BOS",
@@ -793,19 +793,19 @@
       "topSeed": "CAR",
       "bottomSeed": "MTL",
       "topWins": 0,
-      "bottomWins": 0,
-      "status": "upcoming",
+      "bottomWins": 1,
+      "status": "in-progress",
       "winnerAbbr": null,
-      "nextGameDate": "2026-05-21",
+      "nextGameDate": "2026-05-23",
       "games": [
         {
           "gameNumber": 1,
           "date": "2026-05-21",
           "awayAbbr": "MTL",
           "homeAbbr": "CAR",
-          "awayScore": null,
-          "homeScore": null,
-          "state": "scheduled"
+          "awayScore": 6,
+          "homeScore": 2,
+          "state": "final"
         },
         {
           "gameNumber": 2,
