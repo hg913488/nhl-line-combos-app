@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-05-24 22:45:32 UTC",
+  "updated_at": "2026-05-25 16:25:11 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -365,18 +365,18 @@
     "colorado-avalanche": {
       "forwards": [
         [
-          "GABRIEL LANDESKOG",
+          "ARTTURI LEHKONEN",
           "NATHAN MACKINNON",
+          "GABRIEL LANDESKOG"
+        ],
+        [
+          "NAZEM KADRI",
+          "BROCK NELSON",
           "MARTIN NECAS"
         ],
         [
-          "ARTTURI LEHKONEN",
-          "BROCK NELSON",
-          "NICOLAS ROY"
-        ],
-        [
           "ROSS COLTON",
-          "NAZEM KADRI",
+          "NICOLAS ROY",
           "VALERI NICHUSHKIN"
         ],
         [
@@ -388,15 +388,15 @@
       "defense": [
         [
           "DEVON TOEWS",
-          "SAM MALINSKI"
+          "CALE MAKAR"
         ],
         [
           "BRETT KULAK",
-          "BRENT BURNS"
+          "SAM MALINSKI"
         ],
         [
-          "NICK BLANKENBURG",
-          "JOSH MANSON"
+          "JOSH MANSON",
+          "BRENT BURNS"
         ]
       ],
       "goalies": [
@@ -412,13 +412,13 @@
         "NAZEM KADRI",
         "GABRIEL LANDESKOG",
         "NATHAN MACKINNON",
-        "DEVON TOEWS"
+        "CALE MAKAR"
       ],
       "pp2": [
         "ARTTURI LEHKONEN",
         "BROCK NELSON",
         "VALERI NICHUSHKIN",
-        "BRENT BURNS",
+        "DEVON TOEWS",
         "SAM MALINSKI"
       ]
     },
@@ -860,7 +860,7 @@
         ],
         [
           "ZACK BOLDUC",
-          "OLIVER KAPANEN",
+          "JOE VELENO",
           "KIRBY DACH"
         ]
       ],
@@ -1746,7 +1746,7 @@
         [
           "IVAN BARBASHEV",
           "JACK EICHEL",
-          "MARK STONE"
+          "PAVEL DOROFEYEV"
         ],
         [
           "BRETT HOWDEN",
@@ -1754,9 +1754,9 @@
           "MITCH MARNER"
         ],
         [
-          "PAVEL DOROFEYEV",
           "TOMAS HERTL",
-          "COLTON SISSONS"
+          "COLTON SISSONS",
+          "MARK STONE"
         ],
         [
           "COLE SMITH",
@@ -1774,8 +1774,8 @@
           "RASMUS ANDERSSON"
         ],
         [
-          "KAEDAN KORCZAK",
-          "DYLAN COGHLAN"
+          "DYLAN COGHLAN",
+          "KAEDAN KORCZAK"
         ]
       ],
       "goalies": [
@@ -1790,15 +1790,15 @@
         "MARK STONE",
         "JACK EICHEL",
         "PAVEL DOROFEYEV",
-        "SHEA THEODORE",
+        "TOMAS HERTL",
         "MITCH MARNER"
       ],
       "pp2": [
         "IVAN BARBASHEV",
-        "TOMAS HERTL",
+        "WILLIAM KARLSSON",
         "BRETT HOWDEN",
         "RASMUS ANDERSSON",
-        "WILLIAM KARLSSON"
+        "SHEA THEODORE"
       ]
     },
     "washington-capitals": {
@@ -2091,8 +2091,14 @@
     ],
     "colorado-avalanche": [
       {
-        "name": "CALE MAKAR",
-        "pos": "D",
+        "name": "VALERI NICHUSHKIN",
+        "pos": "RW",
+        "status": "Day-To-Day",
+        "desc": "day-to-day"
+      },
+      {
+        "name": "NATHAN MACKINNON",
+        "pos": "C",
         "status": "Day-To-Day",
         "desc": "day-to-day"
       }
@@ -2522,6 +2528,12 @@
       }
     ],
     "toronto-maple-leafs": [
+      {
+        "name": "MAX DOMI",
+        "pos": "C",
+        "status": "Out",
+        "desc": "out"
+      },
       {
         "name": "ANTHONY STOLARZ",
         "pos": "G",
