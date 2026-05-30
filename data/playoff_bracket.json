@@ -1,6 +1,6 @@
 {
   "season": "20252026",
-  "updatedAt": "2026-05-29",
+  "updatedAt": "2026-05-30",
   "series": {
     "R1E-A-BUF-BOS": {
       "id": "R1E-A-BUF-BOS",
@@ -792,11 +792,11 @@
       "seriesLetter": "M",
       "topSeed": "CAR",
       "bottomSeed": "MTL",
-      "topWins": 3,
+      "topWins": 4,
       "bottomWins": 1,
-      "status": "in-progress",
-      "winnerAbbr": null,
-      "nextGameDate": "2026-05-29",
+      "status": "final",
+      "winnerAbbr": "CAR",
+      "nextGameDate": null,
       "games": [
         {
           "gameNumber": 1,
@@ -839,27 +839,9 @@
           "date": "2026-05-29",
           "awayAbbr": "MTL",
           "homeAbbr": "CAR",
-          "awayScore": null,
-          "homeScore": null,
-          "state": "scheduled"
-        },
-        {
-          "gameNumber": 6,
-          "date": "2026-05-31",
-          "awayAbbr": "CAR",
-          "homeAbbr": "MTL",
-          "awayScore": null,
-          "homeScore": null,
-          "state": "scheduled"
-        },
-        {
-          "gameNumber": 7,
-          "date": "2026-06-02",
-          "awayAbbr": "MTL",
-          "homeAbbr": "CAR",
-          "awayScore": null,
-          "homeScore": null,
-          "state": "scheduled"
+          "awayScore": 1,
+          "homeScore": 6,
+          "state": "final"
         }
       ]
     },
@@ -914,19 +896,83 @@
         }
       ]
     },
-    "R4-SCF-TBD-TBD": {
-      "id": "R4-SCF-TBD-TBD",
+    "R4-O-CAR-VGK": {
+      "id": "R4-O-CAR-VGK",
       "round": 4,
       "conference": "",
-      "seriesLetter": null,
-      "topSeed": "TBD",
-      "bottomSeed": "TBD",
+      "seriesLetter": "O",
+      "topSeed": "CAR",
+      "bottomSeed": "VGK",
       "topWins": 0,
       "bottomWins": 0,
       "status": "upcoming",
       "winnerAbbr": null,
-      "nextGameDate": null,
-      "games": []
+      "nextGameDate": "2026-06-02",
+      "games": [
+        {
+          "gameNumber": 1,
+          "date": "2026-06-02",
+          "awayAbbr": "VGK",
+          "homeAbbr": "CAR",
+          "awayScore": null,
+          "homeScore": null,
+          "state": "scheduled"
+        },
+        {
+          "gameNumber": 2,
+          "date": "2026-06-04",
+          "awayAbbr": "VGK",
+          "homeAbbr": "CAR",
+          "awayScore": null,
+          "homeScore": null,
+          "state": "scheduled"
+        },
+        {
+          "gameNumber": 3,
+          "date": "2026-06-06",
+          "awayAbbr": "CAR",
+          "homeAbbr": "VGK",
+          "awayScore": null,
+          "homeScore": null,
+          "state": "scheduled"
+        },
+        {
+          "gameNumber": 4,
+          "date": "2026-06-09",
+          "awayAbbr": "CAR",
+          "homeAbbr": "VGK",
+          "awayScore": null,
+          "homeScore": null,
+          "state": "scheduled"
+        },
+        {
+          "gameNumber": 5,
+          "date": "2026-06-11",
+          "awayAbbr": "VGK",
+          "homeAbbr": "CAR",
+          "awayScore": null,
+          "homeScore": null,
+          "state": "scheduled"
+        },
+        {
+          "gameNumber": 6,
+          "date": "2026-06-14",
+          "awayAbbr": "CAR",
+          "homeAbbr": "VGK",
+          "awayScore": null,
+          "homeScore": null,
+          "state": "scheduled"
+        },
+        {
+          "gameNumber": 7,
+          "date": "2026-06-17",
+          "awayAbbr": "VGK",
+          "homeAbbr": "CAR",
+          "awayScore": null,
+          "homeScore": null,
+          "state": "scheduled"
+        }
+      ]
     }
   },
   "round1East": [
@@ -953,5 +999,5 @@
     "R3E-M-CAR-MTL",
     "R3W-N-COL-VGK"
   ],
-  "final": "R4-SCF-TBD-TBD"
+  "final": "R4-O-CAR-VGK"
 }
