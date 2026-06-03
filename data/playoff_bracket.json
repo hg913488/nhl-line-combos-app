@@ -1,6 +1,6 @@
 {
   "season": "20252026",
-  "updatedAt": "2026-06-02",
+  "updatedAt": "2026-06-03",
   "series": {
     "R1E-A-BUF-BOS": {
       "id": "R1E-A-BUF-BOS",
@@ -904,19 +904,19 @@
       "topSeed": "CAR",
       "bottomSeed": "VGK",
       "topWins": 0,
-      "bottomWins": 0,
-      "status": "upcoming",
+      "bottomWins": 1,
+      "status": "in-progress",
       "winnerAbbr": null,
-      "nextGameDate": "2026-06-02",
+      "nextGameDate": "2026-06-04",
       "games": [
         {
           "gameNumber": 1,
           "date": "2026-06-02",
           "awayAbbr": "VGK",
           "homeAbbr": "CAR",
-          "awayScore": null,
-          "homeScore": null,
-          "state": "scheduled"
+          "awayScore": 5,
+          "homeScore": 4,
+          "state": "final"
         },
         {
           "gameNumber": 2,
