@@ -1531,16 +1531,14 @@ export default function App() {
       {modal && <PlayerDetails modal={modal} onClose={() => setModal(null)} />}
 
       {/* Footer */}
-      <div style={{ borderTop: `1px solid ${P.border}`, padding: "12px 24px", display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
-        <span style={{ fontSize: 10, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>DATA FROM</span>
-        <a href="https://www.dailyfaceoff.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 10, fontWeight: 700, color: P.casper, letterSpacing: 0, textDecoration: "none", fontFamily: "'Space Mono',monospace" }}>DAILY FACEOFF</a>
-        <span style={{ fontSize: 10, color: P.dim }}>·</span>
-        <a href="https://www.nhl.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 10, fontWeight: 700, color: P.casper, letterSpacing: 0, textDecoration: "none", fontFamily: "'Space Mono',monospace" }}>NHL.COM</a>
-        <span style={{ fontSize: 10, color: P.dim }}>·</span>
-        <span style={{ fontSize: 10, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>HIMANK GOEL</span>
-        <span style={{ fontSize: 10, color: P.dim }}>·</span>
-
-      </div>
+      <footer className="site-footer">
+        <span>DATA FROM</span>
+        <a href="https://www.dailyfaceoff.com" target="_blank" rel="noopener noreferrer">DAILY FACEOFF</a>
+        <i aria-hidden="true">·</i>
+        <a href="https://www.nhl.com" target="_blank" rel="noopener noreferrer">NHL.COM</a>
+        <i aria-hidden="true">·</i>
+        <strong>BY GRAINXFORM</strong>
+      </footer>
     </div>
   );
 }
