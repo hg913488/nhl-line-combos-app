@@ -6,7 +6,7 @@ html, body { overflow-x: clip; }
 .app-shell button { color: var(--white); cursor: pointer; }
 .app-shell :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .app-shell .muted { color: var(--dove); font-size: 10px; }
-.app-shell .app-header { justify-content: flex-start !important; padding-left: 28px !important; }
+.app-shell .app-header { justify-content: center !important; padding-inline: 72px !important; }
 .app-shell .header-center { gap: 12px; }
 .app-shell .header-title-text { font-size: 20px; }
 .app-shell .header-sub { font-size: 10px; margin-top: 5px; }
@@ -165,7 +165,7 @@ html, body { overflow-x: clip; }
   .app-shell .player-tile { flex-direction: column; text-align: center; padding: 12px 6px; gap: 5px; }
 }
 @media (max-width: 767px) {
-  .app-shell .app-header { padding-left: 16px !important; padding-right: 65px !important; }
+  .app-shell .app-header { padding-inline: 58px !important; }
   .app-shell .header-title-text { font-size: 16px; white-space: normal; line-height: 1.15; }
   .app-shell .header-sub { font-size: 10px; }
   .app-shell .theme-toggle { right: 12px; }
