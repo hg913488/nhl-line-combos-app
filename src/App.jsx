@@ -306,7 +306,7 @@ function ForwardLine({ line, lineNum }) {
   const pos = line.length === 3 ? ["LW","C","RW"] : line.length === 2 ? ["C","RW"] : ["C"];
   return (
     <div style={{ marginBottom: 12 }}>
-      <div style={{ fontSize: 12, color: P.casper, fontWeight: 700, letterSpacing: 0, marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>LINE {lineNum}</div>
+      <div style={{ fontSize: 11, color: P.casper, fontWeight: 700, letterSpacing: 0, marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>LINE {lineNum}</div>
       <div style={{ display: "flex", gap: 4 }}>{line.map((p, i) => <PlayerCard key={i} name={p} pos={pos[i]} lineChangedTo={LINE_CHANGES[p] ?? null} />)}</div>
     </div>
   );
@@ -315,7 +315,7 @@ function ForwardLine({ line, lineNum }) {
 function DefensePair({ pair, pairNum }) {
   return (
     <div style={{ marginBottom: 12 }}>
-      <div style={{ fontSize: 12, color: P.dove, fontWeight: 700, letterSpacing: 0, marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>PAIR {pairNum}</div>
+      <div style={{ fontSize: 11, color: P.dove, fontWeight: 700, letterSpacing: 0, marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>PAIR {pairNum}</div>
       <div style={{ display: "flex", gap: 4 }}>{pair.map((p, i) => <PlayerCard key={i} name={p} pos={i === 0 ? "LD" : "RD"} />)}</div>
     </div>
   );
@@ -325,7 +325,7 @@ function PPUnit({ unit, unitNum }) {
   if (!unit || unit.length === 0) return null;
   return (
     <div style={{ marginBottom: 12 }}>
-      <div style={{ fontSize: 12, color: "#e67e22", fontWeight: 700, letterSpacing: 0, marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>PP{unitNum}</div>
+      <div style={{ fontSize: 11, color: "#e67e22", fontWeight: 700, letterSpacing: 0, marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>PP{unitNum}</div>
       <div className="powerplay-grid">{unit.map((p, i) => <PlayerCard key={i} name={p} pos={`PP${unitNum}`} />)}</div>
     </div>
   );
@@ -334,7 +334,7 @@ function PPUnit({ unit, unitNum }) {
 function Divider({ label, color }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 8, margin: "16px 0 10px" }}>
-      <span style={{ fontSize: 12, fontWeight: 700, color: color || P.casper, letterSpacing: 0, whiteSpace: "nowrap", fontFamily: "'Syne', sans-serif" }}>{label}</span>
+      <span style={{ fontSize: 11, fontWeight: 700, color: color || P.casper, letterSpacing: 0, whiteSpace: "nowrap", fontFamily: "'Syne', sans-serif" }}>{label}</span>
       <div style={{ flex: 1, height: 1, background: P.border }} />
     </div>
   );
@@ -368,15 +368,15 @@ function TeamStrip({ slug, data, expanded, onToggle }) {
     <div className={`strip${expanded ? " expanded" : ""}`} onClick={onToggle}>
       <div style={{ position: "absolute", top: "40%", left: 0, width: COLLAPSED_W, transform: "translateY(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 14, opacity: expanded ? 0 : 1, transition: "opacity 0.15s", pointerEvents: "none", padding: "0 10px" }}>
         <TeamLogo slug={slug} abbr={t.abbr} size={52} />
-        <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize: 12, fontWeight: 700, color: P.casper, letterSpacing: 0, whiteSpace: "nowrap", fontFamily: "'Syne', sans-serif" }}>{t.city.toUpperCase()}</div>
+        <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize: 11, fontWeight: 700, color: P.casper, letterSpacing: 0, whiteSpace: "nowrap", fontFamily: "'Syne', sans-serif" }}>{t.city.toUpperCase()}</div>
       </div>
       <div style={{ opacity: expanded ? 1 : 0, transition: "opacity 0.2s 0.15s", padding: "18px 20px", minWidth: EXPANDED_W, pointerEvents: expanded ? "auto" : "none", overflowY: "auto", maxHeight: `calc(100vh - ${HEADER_H + TABS_H}px)` }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, paddingBottom: 14, borderBottom: `1px solid ${P.border}` }}>
           <TeamLogo slug={slug} abbr={t.abbr} size={48} />
           <div>
-            <div style={{ fontSize: 16, fontWeight: 700, color: P.white, lineHeight: 1.1, fontFamily: "'Syne', sans-serif" }}>{t.city}</div>
-            <div style={{ fontSize: 14, color: P.dove, marginTop: 2 }}>{t.name}</div>
-            {STANDINGS[t.abbr] && <div style={{ fontSize: 12, color: P.casper, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>{STANDINGS[t.abbr].record}</div>}
+            <div style={{ fontSize: 15, fontWeight: 700, color: P.white, lineHeight: 1.1, fontFamily: "'Syne', sans-serif" }}>{t.city}</div>
+            <div style={{ fontSize: 13, color: P.dove, marginTop: 2 }}>{t.name}</div>
+            {STANDINGS[t.abbr] && <div style={{ fontSize: 11, color: P.casper, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>{STANDINGS[t.abbr].record}</div>}
           </div>
         </div>
         {expanded && <RosterContext.Provider value={{ players: roster.team === t.abbr ? roster.players : {}, team: t.abbr }}><LineupContent data={data} /></RosterContext.Provider>}
@@ -415,16 +415,16 @@ function MobileRow({ slug, data, expanded, onToggle }) {
       <div onClick={onToggle} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 20px" }}>
         <TeamLogo slug={slug} abbr={t.abbr} size={40} />
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: P.white, fontFamily: "'Syne', sans-serif" }}>{t.city}</div>
-          <div style={{ fontSize: 12, color: P.dove }}>{t.name}</div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: P.white, fontFamily: "'Syne', sans-serif" }}>{t.city}</div>
+          <div style={{ fontSize: 11, color: P.dove }}>{t.name}</div>
         </div>
-        <div style={{ fontSize: 18, color: P.dove, lineHeight: 1, transform: expanded ? "rotate(180deg)" : "none", transition: "transform 0.25s" }}>▾</div>
+        <div style={{ fontSize: 17, color: P.dove, lineHeight: 1, transform: expanded ? "rotate(180deg)" : "none", transition: "transform 0.25s" }}>▾</div>
       </div>
       <div className={`mobile-body${expanded ? " open" : ""}`}>
         {expanded && STANDINGS[t.abbr] && (
           <div style={{ padding: "10px 20px 0", display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ fontSize: 12, color: P.dove, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>RECORD</span>
-            <span style={{ fontSize: 14, fontWeight: 700, color: P.casper, fontFamily: "'Space Mono',monospace" }}>{STANDINGS[t.abbr].record}</span>
+            <span style={{ fontSize: 11, color: P.dove, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>RECORD</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: P.casper, fontFamily: "'Space Mono',monospace" }}>{STANDINGS[t.abbr].record}</span>
           </div>
         )}
         <div style={{ padding: "0 20px 24px" }}>{expanded && <LineupContent data={data} />}</div>
@@ -477,26 +477,26 @@ function InjuriesView({ isMobile }) {
     <div style={{ padding: "16px 24px", maxWidth: 900, margin: "0 auto" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16, flexWrap: "wrap" }}>
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search team..."
-          style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 10px", color: P.white, fontSize: 14, fontFamily: "inherit", width: 160 }} />
+          style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 10px", color: P.white, fontSize: 13, fontFamily: "inherit", width: 160 }} />
         {todaySlugs.size > 0 && (
           <>
             <button onClick={() => setFilter("all")}
-              style={{ background: filter === "all" ? P.active : "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: filter === "all" ? P.white : P.dove, fontSize: 12, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>
+              style={{ background: filter === "all" ? P.active : "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: filter === "all" ? P.white : P.dove, fontSize: 11, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>
               ALL TEAMS
             </button>
             <button onClick={() => setFilter("today")}
-              style={{ background: filter === "today" ? P.active : "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: filter === "today" ? P.white : P.dove, fontSize: 12, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>
+              style={{ background: filter === "today" ? P.active : "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: filter === "today" ? P.white : P.dove, fontSize: 11, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>
               TODAY'S GAMES
             </button>
           </>
         )}
-        <span style={{ fontSize: 12, color: P.dove, marginLeft: "auto", letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>
+        <span style={{ fontSize: 11, color: P.dove, marginLeft: "auto", letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>
           {totalInjured} PLAYER{totalInjured !== 1 ? "S" : ""} · {displaySlugs.length} TEAM{displaySlugs.length !== 1 ? "S" : ""}
         </span>
       </div>
 
       {displaySlugs.length === 0 && (
-        <div style={{ textAlign: "center", padding: "40px 0", color: P.dove, fontSize: 14 }}>
+        <div style={{ textAlign: "center", padding: "40px 0", color: P.dove, fontSize: 13 }}>
           {Object.keys(INJURIES_DATA).length === 0
             ? "No injury data available — check back after the next data update."
             : "No injuries found matching your search."}
@@ -510,15 +510,15 @@ function InjuriesView({ isMobile }) {
           <div key={slug} className="news-card">
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10, paddingBottom: 8, borderBottom: `1px solid ${P.border}` }}>
               <TeamLogo slug={slug} abbr={t.abbr} size={28} />
-              <span style={{ fontSize: 13, fontWeight: 700, color: P.white, fontFamily: "'Syne',sans-serif" }}>{t.city} {t.name}</span>
-              <span style={{ fontSize: 12, color: P.dove, marginLeft: "auto", fontFamily: "'Space Mono',monospace" }}>{players.length}</span>
+              <span style={{ fontSize: 12, fontWeight: 700, color: P.white, fontFamily: "'Syne',sans-serif" }}>{t.city} {t.name}</span>
+              <span style={{ fontSize: 11, color: P.dove, marginLeft: "auto", fontFamily: "'Space Mono',monospace" }}>{players.length}</span>
             </div>
             {players.map((p, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", padding: "5px 0", borderBottom: i < players.length - 1 ? `1px solid ${P.border}` : "none" }}>
-                <span style={{ fontSize: 12, fontWeight: 700, color: P.dove, width: 28, fontFamily: "'Space Mono',monospace" }}>{p.pos}</span>
-                <span style={{ fontSize: 14, fontWeight: 600, color: P.white, flex: 1 }}>{p.name}</span>
+                <span style={{ fontSize: 11, fontWeight: 700, color: P.dove, width: 28, fontFamily: "'Space Mono',monospace" }}>{p.pos}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: P.white, flex: 1 }}>{p.name}</span>
                 <InjuryBadge type={p.status} />
-                {p.desc && <span style={{ fontSize: 12, color: P.dove, marginLeft: 8 }}>{p.desc}</span>}
+                {p.desc && <span style={{ fontSize: 11, color: P.dove, marginLeft: 8 }}>{p.desc}</span>}
               </div>
             ))}
           </div>
@@ -543,9 +543,9 @@ function CompareView({ isMobile }) {
       <div style={{ borderBottom: `1px solid ${P.border}`, padding: "12px 24px", background: P.bg }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Filter teams..."
-            style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.white, fontSize: 14, fontFamily: "inherit", width: 160 }} />
-          {selected.length > 0 && <button onClick={() => setSelected([])} style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.dove, fontSize: 12, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>CLEAR ALL</button>}
-          <span style={{ fontSize: 12, color: P.dove, marginLeft: "auto", fontFamily: "'Space Mono',monospace" }}>{selected.length} selected</span>
+            style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.white, fontSize: 13, fontFamily: "inherit", width: 160 }} />
+          {selected.length > 0 && <button onClick={() => setSelected([])} style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.dove, fontSize: 11, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>CLEAR ALL</button>}
+          <span style={{ fontSize: 11, color: P.dove, marginLeft: "auto", fontFamily: "'Space Mono',monospace" }}>{selected.length} selected</span>
         </div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
           {filteredSlugs.map(slug => {
@@ -554,7 +554,7 @@ function CompareView({ isMobile }) {
             return (
               <div key={slug} className={`compare-chip${isSel ? " selected" : ""}`} onClick={() => toggle(slug)}>
                 <TeamLogo slug={slug} abbr={t.abbr} size={20} />
-                <span style={{ fontSize: 14, fontWeight: 600, color: isSel ? P.white : P.casper, whiteSpace: "nowrap" }}>{t.abbr}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: isSel ? P.white : P.casper, whiteSpace: "nowrap" }}>{t.abbr}</span>
                 {isSel && <button className="rm-btn" onClick={e => { e.stopPropagation(); toggle(slug); }}>×</button>}
               </div>
             );
@@ -563,8 +563,8 @@ function CompareView({ isMobile }) {
       </div>
       {selected.length === 0 ? (
         <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 10 }}>
-          <span style={{ fontSize: 28, opacity: 0.15 }}>⬆</span>
-          <span style={{ fontSize: 14, color: P.dove, letterSpacing: 0, fontFamily: "'Syne',sans-serif" }}>SELECT TEAMS ABOVE TO COMPARE</span>
+          <span style={{ fontSize: 27, opacity: 0.15 }}>⬆</span>
+          <span style={{ fontSize: 13, color: P.dove, letterSpacing: 0, fontFamily: "'Syne',sans-serif" }}>SELECT TEAMS ABOVE TO COMPARE</span>
         </div>
       ) : (
         <div style={{ flex: 1, overflowX: "auto", overflowY: "hidden" }}>
@@ -576,10 +576,10 @@ function CompareView({ isMobile }) {
                   <div style={{ padding: "14px 20px", borderBottom: `1px solid ${P.border}`, display: "flex", alignItems: "center", gap: 10, background: P.surface, position: "sticky", top: 0 }}>
                     <TeamLogo slug={slug} abbr={t.abbr} size={40} />
                     <div>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: P.white, fontFamily: "'Syne',sans-serif" }}>{t.city}</div>
-                      <div style={{ fontSize: 12, color: P.dove }}>{t.name}</div>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: P.white, fontFamily: "'Syne',sans-serif" }}>{t.city}</div>
+                      <div style={{ fontSize: 11, color: P.dove }}>{t.name}</div>
                     </div>
-                    <button className="rm-btn" style={{ marginLeft: "auto", fontSize: 18 }} onClick={() => toggle(slug)}>×</button>
+                    <button className="rm-btn" style={{ marginLeft: "auto", fontSize: 17 }} onClick={() => toggle(slug)}>×</button>
                   </div>
                   <div style={{ overflowY: "auto", flex: 1, padding: "0 20px 24px" }}>
                     <LineupContent data={TEAMS_DATA[slug]} />
@@ -644,7 +644,7 @@ function PlayoffsView({ isMobile }) {
     if (isUpcoming && ser.topSeed === "TBD") {
       return (
         <div style={{ padding: "14px 16px", background: P.surface, border: `1px solid ${P.border}`, borderRadius: 6, opacity: 0.4 }}>
-          <span style={{ fontSize: 12, color: P.dove, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>TO BE DETERMINED</span>
+          <span style={{ fontSize: 11, color: P.dove, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>TO BE DETERMINED</span>
         </div>
       );
     }
@@ -656,41 +656,41 @@ function PlayoffsView({ isMobile }) {
         <div style={{ padding: "14px 16px", display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, flex: 1, minWidth: 0 }}>
             {topSlug && <TeamLogo slug={topSlug} abbr={ser.topSeed} size={28} />}
-            <span style={{ fontSize: 14, fontWeight: 700, color: isDone && ser.winnerAbbr === ser.topSeed ? P.white : P.casper, fontFamily: "'Syne',sans-serif" }}>{ser.topSeed}</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: isDone && ser.winnerAbbr === ser.topSeed ? P.white : P.casper, fontFamily: "'Syne',sans-serif" }}>{ser.topSeed}</span>
           </div>
           <div style={{ textAlign: "center", flexShrink: 0 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ fontSize: 22, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace", minWidth: 18, textAlign: "right" }}>{ser.topWins}</span>
-              <span style={{ fontSize: 12, color: P.dim }}>—</span>
-              <span style={{ fontSize: 22, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace", minWidth: 18, textAlign: "left" }}>{ser.bottomWins}</span>
+              <span style={{ fontSize: 21, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace", minWidth: 18, textAlign: "right" }}>{ser.topWins}</span>
+              <span style={{ fontSize: 11, color: P.dim }}>—</span>
+              <span style={{ fontSize: 21, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace", minWidth: 18, textAlign: "left" }}>{ser.bottomWins}</span>
             </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 8, flex: 1, minWidth: 0, justifyContent: "flex-end" }}>
-            <span style={{ fontSize: 14, fontWeight: 700, color: isDone && ser.winnerAbbr === ser.bottomSeed ? P.white : P.casper, fontFamily: "'Syne',sans-serif" }}>{ser.bottomSeed}</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: isDone && ser.winnerAbbr === ser.bottomSeed ? P.white : P.casper, fontFamily: "'Syne',sans-serif" }}>{ser.bottomSeed}</span>
             {botSlug && <TeamLogo slug={botSlug} abbr={ser.bottomSeed} size={28} />}
           </div>
         </div>
         {/* Status + expand toggle */}
         <div style={{ padding: "0 16px 10px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ fontSize: 12, fontFamily: "'Space Mono',monospace", color: isLive ? P.casper : P.dove }}>
+          <span style={{ fontSize: 11, fontFamily: "'Space Mono',monospace", color: isLive ? P.casper : P.dove }}>
             {isLive && nextGame && `GAME ${nextGame.gameNumber} · ${fmtDate(nextGame.date)}`}
             {isLive && !nextGame && "IN PROGRESS"}
             {isDone && `${ser.winnerAbbr} WINS IN ${ser.topWins + ser.bottomWins}`}
           </span>
-          <span style={{ fontSize: 12, color: P.dim, fontFamily: "'Space Mono',monospace" }}>{isExp ? "▲" : "▼"} GAMES</span>
+          <span style={{ fontSize: 11, color: P.dim, fontFamily: "'Space Mono',monospace" }}>{isExp ? "▲" : "▼"} GAMES</span>
         </div>
         {/* Game-by-game (expanded) */}
         {isExp && (
           <div style={{ borderTop: `1px solid ${P.border}` }}>
             {ser.games.map(g => (
               <div key={g.gameNumber} style={{ display: "flex", alignItems: "center", padding: "7px 16px", gap: 10, borderBottom: `1px solid ${P.border}`, opacity: g.state === "scheduled" ? 0.4 : 1 }}>
-                <span style={{ fontSize: 12, color: P.dove, fontFamily: "'Space Mono',monospace", minWidth: 20 }}>G{g.gameNumber}</span>
-                <span style={{ fontSize: 12, color: P.dim, fontFamily: "'Space Mono',monospace", flex: 1 }}>{fmtDate(g.date)} · {g.homeAbbr} HOME</span>
+                <span style={{ fontSize: 11, color: P.dove, fontFamily: "'Space Mono',monospace", minWidth: 20 }}>G{g.gameNumber}</span>
+                <span style={{ fontSize: 11, color: P.dim, fontFamily: "'Space Mono',monospace", flex: 1 }}>{fmtDate(g.date)} · {g.homeAbbr} HOME</span>
                 {g.state !== "scheduled"
-                  ? <span style={{ fontSize: 14, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>
+                  ? <span style={{ fontSize: 13, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>
                       {g.homeScore}–{g.awayScore}{g.state === "final-ot" ? " OT" : g.state === "final-2ot" ? " 2OT" : ""}
                     </span>
-                  : <span style={{ fontSize: 12, color: P.dim, fontFamily: "'Space Mono',monospace" }}>{g.time}</span>
+                  : <span style={{ fontSize: 11, color: P.dim, fontFamily: "'Space Mono',monospace" }}>{g.time}</span>
                 }
               </div>
             ))}
@@ -701,13 +701,13 @@ function PlayoffsView({ isMobile }) {
   }
 
   function RoundLabel({ label, color }) {
-    return <div style={{ fontSize: 12, fontWeight: 700, color: color || P.dove, letterSpacing: 0, marginBottom: 8, fontFamily: "'Syne',sans-serif" }}>{label}</div>;
+    return <div style={{ fontSize: 11, fontWeight: 700, color: color || P.dove, letterSpacing: 0, marginBottom: 8, fontFamily: "'Syne',sans-serif" }}>{label}</div>;
   }
 
   function ConferenceBlock({ label, r1Ids, r2Ids, cfId }) {
     return (
       <div style={{ marginBottom: isMobile ? 32 : 0 }}>
-        <div style={{ fontSize: 12, fontWeight: 700, color: "#e67e22", letterSpacing: 0, marginBottom: 16, fontFamily: "'Syne',sans-serif" }}>{label}</div>
+        <div style={{ fontSize: 11, fontWeight: 700, color: "#e67e22", letterSpacing: 0, marginBottom: 16, fontFamily: "'Syne',sans-serif" }}>{label}</div>
         <RoundLabel label="SECOND ROUND" />
         <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
           {r2Ids.map(id => <SeriesCard key={id} seriesId={id} />)}
@@ -726,8 +726,8 @@ function PlayoffsView({ isMobile }) {
     <div style={{ padding: "16px 24px", maxWidth: 1100, margin: "0 auto" }}>
       <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 24, paddingBottom: 14, borderBottom: `1px solid ${P.border}` }}>
         <div>
-          <div style={{ fontSize: 18, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: 0 }}>2026 NHL PLAYOFFS</div>
-          <div style={{ fontSize: 12, color: P.dove, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>SNAPSHOT · UPDATED {BRACKET_DATA.updatedAt}</div>
+          <div style={{ fontSize: 17, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: 0 }}>2026 NHL PLAYOFFS</div>
+          <div style={{ fontSize: 11, color: P.dove, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>SNAPSHOT · UPDATED {BRACKET_DATA.updatedAt}</div>
         </div>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 32, marginBottom: 32 }}>
@@ -735,7 +735,7 @@ function PlayoffsView({ isMobile }) {
         <ConferenceBlock label="WESTERN CONFERENCE" r1Ids={round1West} r2Ids={round2West} cfId={confFinals[1]} />
       </div>
       <div>
-        <div style={{ fontSize: 12, fontWeight: 700, color: P.yellow, letterSpacing: 0, marginBottom: 8, fontFamily: "'Syne',sans-serif" }}>STANLEY CUP FINAL</div>
+        <div style={{ fontSize: 11, fontWeight: 700, color: P.yellow, letterSpacing: 0, marginBottom: 8, fontFamily: "'Syne',sans-serif" }}>STANLEY CUP FINAL</div>
         <SeriesCard seriesId={final} />
       </div>
     </div>
@@ -764,14 +764,14 @@ function IIHFRosterModal({ code, name, onClose }) {
     width: "100%", maxWidth: 520, maxHeight: "82vh", overflowY: "auto",
     boxShadow: "0 24px 64px rgba(0,0,0,0.6)",
   };
-  const sectionLabel = { fontSize: 12, fontWeight: 700, letterSpacing: 0, color: P.dove,
+  const sectionLabel = { fontSize: 11, fontWeight: 700, letterSpacing: 0, color: P.dove,
     fontFamily: "'Space Mono',monospace", padding: "10px 16px 4px", borderTop: `1px solid ${P.border}` };
   const playerRow = { display: "flex", alignItems: "center", gap: 10, padding: "6px 16px",
     borderBottom: `1px solid ${P.border}22` };
-  const numStyle = { fontSize: 12, fontWeight: 700, color: P.casper, fontFamily: "'Space Mono',monospace",
+  const numStyle = { fontSize: 11, fontWeight: 700, color: P.casper, fontFamily: "'Space Mono',monospace",
     width: 28, textAlign: "right", flexShrink: 0 };
-  const nameStyle = { fontSize: 14, color: P.white, fontFamily: "'Space Mono',monospace", flex: 1 };
-  const clubStyle = { fontSize: 12, color: P.dove, fontFamily: "'Space Mono',monospace", textAlign: "right" };
+  const nameStyle = { fontSize: 13, color: P.white, fontFamily: "'Space Mono',monospace", flex: 1 };
+  const clubStyle = { fontSize: 11, color: P.dove, fontFamily: "'Space Mono',monospace", textAlign: "right" };
 
   function Section({ label, players }) {
     if (!players.length) return null;
@@ -796,13 +796,13 @@ function IIHFRosterModal({ code, name, onClose }) {
           borderBottom: `1px solid ${P.border}`, position: "sticky", top: 0, background: P.surface, zIndex: 1 }}>
           <img src={iihfFlagUrl(code)} alt={code} width={28} height={21} style={{ borderRadius: 3 }} />
           <div>
-            <div style={{ fontSize: 15, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: 0 }}>{name}</div>
-            <div style={{ fontSize: 12, color: P.dove, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>
+            <div style={{ fontSize: 14, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: 0 }}>{name}</div>
+            <div style={{ fontSize: 11, color: P.dove, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>
               {forwards.length}F · {defense.length}D · {goalies.length}G
             </div>
           </div>
           <button onClick={onClose} style={{ marginLeft: "auto", background: "none", border: "none",
-            color: P.dove, cursor: "pointer", fontSize: 18, lineHeight: 1, padding: 4 }}>✕</button>
+            color: P.dove, cursor: "pointer", fontSize: 17, lineHeight: 1, padding: 4 }}>✕</button>
         </div>
         <Section label="FORWARDS" players={forwards} />
         <Section label="DEFENCE" players={defense} />
@@ -818,15 +818,15 @@ function IIHFView({ isMobile }) {
   const todayGames = IIHF_SCHEDULE_DATA.games.filter(g => g.date === todayStr);
   const [openRoster, setOpenRoster] = useState(null);
 
-  const thS = { fontSize: 12, fontWeight: 700, letterSpacing: 0, color: P.dove, padding: "8px 6px", textAlign: "center", borderBottom: `1px solid ${P.border}`, fontFamily: "'Space Mono',monospace", background: P.bg };
-  const tdS = { padding: "7px 6px", textAlign: "center", fontSize: 14, fontFamily: "'Space Mono',monospace", color: P.white, borderBottom: `1px solid ${P.border}` };
-  const codeBadge = { display: "inline-block", fontSize: 12, fontWeight: 700, letterSpacing: 0, padding: "2px 5px", borderRadius: 3, background: P.dim, color: P.casper, fontFamily: "'Space Mono',monospace" };
+  const thS = { fontSize: 11, fontWeight: 700, letterSpacing: 0, color: P.dove, padding: "8px 6px", textAlign: "center", borderBottom: `1px solid ${P.border}`, fontFamily: "'Space Mono',monospace", background: P.bg };
+  const tdS = { padding: "7px 6px", textAlign: "center", fontSize: 13, fontFamily: "'Space Mono',monospace", color: P.white, borderBottom: `1px solid ${P.border}` };
+  const codeBadge = { display: "inline-block", fontSize: 11, fontWeight: 700, letterSpacing: 0, padding: "2px 5px", borderRadius: 3, background: P.dim, color: P.casper, fontFamily: "'Space Mono',monospace" };
 
   function GroupTable({ groupKey }) {
     const teams = IIHF_GROUPS_DATA.groups[groupKey] || [];
     return (
       <div style={{ marginBottom: isMobile ? 20 : 0 }}>
-        <div style={{ fontSize: 14, fontWeight: 700, color: P.casper, letterSpacing: 0, marginBottom: 8, fontFamily: "'Syne',sans-serif" }}>GROUP {groupKey}</div>
+        <div style={{ fontSize: 13, fontWeight: 700, color: P.casper, letterSpacing: 0, marginBottom: 8, fontFamily: "'Syne',sans-serif" }}>GROUP {groupKey}</div>
         <div style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 6, overflow: "hidden" }}>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
@@ -846,7 +846,7 @@ function IIHFView({ isMobile }) {
                   <td style={{ ...tdS, textAlign: "left", paddingLeft: 10 }}>
                     <img src={iihfFlagUrl(t.code)} alt={t.code} width={20} height={15} style={{ verticalAlign: "middle", borderRadius: 2, marginRight: 6, display: "inline-block" }} />
                     <span style={codeBadge}>{t.code}</span>
-                    {!isMobile && <span style={{ color: P.casper, fontSize: 14, marginLeft: 4 }}>{t.name}</span>}
+                    {!isMobile && <span style={{ color: P.casper, fontSize: 13, marginLeft: 4 }}>{t.name}</span>}
                   </td>
                   <td style={tdS}>{t.gp}</td>
                   <td style={tdS}>{t.w}</td>
@@ -880,28 +880,28 @@ function IIHFView({ isMobile }) {
       )}
 
       <div style={{ marginBottom: 20, paddingBottom: 14, borderBottom: `1px solid ${P.border}` }}>
-        <div style={{ fontSize: 18, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: 0 }}>2026 IIHF WORLD CHAMPIONSHIP</div>
-        <div style={{ fontSize: 12, color: P.dove, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>
+        <div style={{ fontSize: 17, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: 0 }}>2026 IIHF WORLD CHAMPIONSHIP</div>
+        <div style={{ fontSize: 11, color: P.dove, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>
           {IIHF_GROUPS_DATA.location} · {IIHF_GROUPS_DATA.dates}
         </div>
       </div>
 
       {todayGames.length > 0 && (
         <div style={{ marginBottom: 24 }}>
-          <div style={{ fontSize: 12, fontWeight: 700, color: P.casper, letterSpacing: 0, marginBottom: 10, fontFamily: "'Syne',sans-serif" }}>TODAY'S GAMES</div>
+          <div style={{ fontSize: 11, fontWeight: 700, color: P.casper, letterSpacing: 0, marginBottom: 10, fontFamily: "'Syne',sans-serif" }}>TODAY'S GAMES</div>
           {todayGames.map(g => (
             <div key={g.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", background: P.surface, border: `1px solid ${P.border}`, borderRadius: 6, marginBottom: 6 }}>
               <span style={{ ...codeBadge, marginRight: 0 }}>GRP {g.group}</span>
               <div style={{ flex: 1, display: "flex", alignItems: "center", gap: 8 }}>
                 <img src={iihfFlagUrl(g.away)} alt={g.away} width={20} height={15} style={{ verticalAlign: "middle", borderRadius: 2 }} />
                 <span style={codeBadge}>{g.away}</span>
-                {g.awayScore != null && <span style={{ fontSize: 15, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>{g.awayScore}</span>}
-                <span style={{ fontSize: 12, color: P.dim }}>@</span>
-                {g.homeScore != null && <span style={{ fontSize: 15, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>{g.homeScore}</span>}
+                {g.awayScore != null && <span style={{ fontSize: 14, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>{g.awayScore}</span>}
+                <span style={{ fontSize: 11, color: P.dim }}>@</span>
+                {g.homeScore != null && <span style={{ fontSize: 14, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>{g.homeScore}</span>}
                 <img src={iihfFlagUrl(g.home)} alt={g.home} width={20} height={15} style={{ verticalAlign: "middle", borderRadius: 2 }} />
                 <span style={codeBadge}>{g.home}</span>
               </div>
-              <span style={{ fontSize: 12, fontFamily: "'Space Mono',monospace", color: g.state === "scheduled" ? P.casper : P.dove }}>
+              <span style={{ fontSize: 11, fontFamily: "'Space Mono',monospace", color: g.state === "scheduled" ? P.casper : P.dove }}>
                 {g.state === "final" ? "FINAL" : g.state === "final-ot" ? "FINAL/OT" : g.time}
               </span>
             </div>
@@ -916,7 +916,7 @@ function IIHFView({ isMobile }) {
 
       {/* Team roster cards */}
       <div style={{ marginBottom: 12 }}>
-        <div style={{ fontSize: 12, fontWeight: 700, color: P.casper, letterSpacing: 0, marginBottom: 12, fontFamily: "'Syne',sans-serif" }}>
+        <div style={{ fontSize: 11, fontWeight: 700, color: P.casper, letterSpacing: 0, marginBottom: 12, fontFamily: "'Syne',sans-serif" }}>
           ROSTERS — TAP A TEAM
         </div>
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(4,1fr)" : "repeat(8,1fr)", gap: 8 }}>
@@ -937,16 +937,16 @@ function IIHFView({ isMobile }) {
                 onMouseLeave={e => { e.currentTarget.style.borderColor = P.border; e.currentTarget.style.background = P.surface; }}
               >
                 <img src={iihfFlagUrl(t.code)} alt={t.code} width={32} height={24} style={{ borderRadius: 3, display: "block" }} />
-                <span style={{ fontSize: 12, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>{t.code}</span>
-                <span style={{ fontSize: 12, color: P.dove, fontFamily: "'Space Mono',monospace" }}>{count}P</span>
-                <span style={{ position: "absolute", top: 5, right: 6, fontSize: 12, color: P.casper, lineHeight: 1 }}>›</span>
+                <span style={{ fontSize: 11, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>{t.code}</span>
+                <span style={{ fontSize: 11, color: P.dove, fontFamily: "'Space Mono',monospace" }}>{count}P</span>
+                <span style={{ position: "absolute", top: 5, right: 6, fontSize: 11, color: P.casper, lineHeight: 1 }}>›</span>
               </button>
             );
           })}
         </div>
       </div>
 
-      <div style={{ fontSize: 12, color: P.dim, textAlign: "center", fontFamily: "'Space Mono',monospace", letterSpacing: 0, marginTop: 16 }}>
+      <div style={{ fontSize: 11, color: P.dim, textAlign: "center", fontFamily: "'Space Mono',monospace", letterSpacing: 0, marginTop: 16 }}>
         POINT SYSTEM: W=3 · OTW=2 · OTL=1 · L=0 · UPDATED {IIHF_GROUPS_DATA.updatedAt}
       </div>
     </div>
@@ -1039,7 +1039,7 @@ function GoalsAgainstView({ isMobile }) {
 
   const filterBtn = (label, value, setter, current) => (
     <button onClick={() => setter(value)}
-      style={{ background: current === value ? P.active : "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: current === value ? P.white : P.dove, fontSize: 12, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>
+      style={{ background: current === value ? P.active : "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: current === value ? P.white : P.dove, fontSize: 11, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>
       {label}
     </button>
   );
@@ -1048,7 +1048,7 @@ function GoalsAgainstView({ isMobile }) {
     <div style={{ padding: "16px 24px", maxWidth: 900, margin: "0 auto" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search team..."
-          style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 10px", color: P.white, fontSize: 14, fontFamily: "inherit", width: 140 }} />
+          style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 10px", color: P.white, fontSize: 13, fontFamily: "inherit", width: 140 }} />
         <div style={{ width: 1, height: 20, background: P.border, margin: "0 4px" }} />
         {filterBtn("YTD", "ytd", setDuration, duration)}
         {filterBtn("L10", "l10", setDuration, duration)}
@@ -1067,14 +1067,14 @@ function GoalsAgainstView({ isMobile }) {
             {filterBtn("TODAY", "today", setViewFilter, viewFilter)}
           </>
         )}
-        <span style={{ fontSize: 12, color: P.dove, marginLeft: "auto", letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>
+        <span style={{ fontSize: 11, color: P.dove, marginLeft: "auto", letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>
           UPDATED {GA_DATA.lastUpdated || "—"}
         </span>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 12 }}>
-        <span style={{ fontSize: 12, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>GOALS AGAINST BY SCORER POSITION ({GA_DATA.season})</span>
-        <span style={{ fontSize: 12, color: P.dim }}>·</span>
-        <span style={{ fontSize: 12, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>
+        <span style={{ fontSize: 11, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>GOALS AGAINST BY SCORER POSITION ({GA_DATA.season})</span>
+        <span style={{ fontSize: 11, color: P.dim }}>·</span>
+        <span style={{ fontSize: 11, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>
           {duration === "l10" ? "LAST 10 GAMES" : location === "home" ? "HOME GAMES" : location === "away" ? "AWAY GAMES" : "FULL SEASON"}
         </span>
       </div>
@@ -1110,8 +1110,8 @@ function GoalsAgainstView({ isMobile }) {
                   <td>
                     <div style={{ display: "flex", alignItems: "center", gap: 8, paddingLeft: 4 }}>
                       {row.slug && <TeamLogo slug={row.slug} abbr={row.abbr} size={22} />}
-                      {!isMobile && <span style={{ fontSize: 14, fontWeight: 600, color: P.white }}>{t ? t.city : row.abbr}</span>}
-                      {isMobile && <span style={{ fontSize: 14, fontWeight: 700, color: P.casper, fontFamily: "'Space Mono',monospace" }}>{row.abbr}</span>}
+                      {!isMobile && <span style={{ fontSize: 13, fontWeight: 600, color: P.white }}>{t ? t.city : row.abbr}</span>}
+                      {isMobile && <span style={{ fontSize: 13, fontWeight: 700, color: P.casper, fontFamily: "'Space Mono',monospace" }}>{row.abbr}</span>}
                     </div>
                   </td>
                   {positions.map(pos => {
@@ -1132,7 +1132,7 @@ function GoalsAgainstView({ isMobile }) {
           </tbody>
         </table>
       </div>
-      <div style={{ marginTop: 12, fontSize: 12, color: P.dim, letterSpacing: 0, textAlign: "center", fontFamily: "'Space Mono',monospace" }}>
+      <div style={{ marginTop: 12, fontSize: 11, color: P.dim, letterSpacing: 0, textAlign: "center", fontFamily: "'Space Mono',monospace" }}>
         POSITION DATA FROM NHL.COM ROSTERS · HIGHER VALUES = MORE GOALS ALLOWED TO THAT POSITION
       </div>
     </div>
@@ -1205,8 +1205,8 @@ class ErrorBoundary extends React.Component {
     if (this.state.hasError) {
       return (
         <div style={{ padding: "40px 24px", textAlign: "center", color: P.dove, fontFamily: "'Space Grotesk',sans-serif" }}>
-          <div style={{ fontSize: 13, marginBottom: 8 }}>Something went wrong loading this view.</div>
-          <button onClick={() => this.setState({ hasError: false })} style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 14px", color: P.casper, cursor: "pointer", fontSize: 14, fontFamily: "'Space Mono',monospace" }}>RETRY</button>
+          <div style={{ fontSize: 12, marginBottom: 8 }}>Something went wrong loading this view.</div>
+          <button onClick={() => this.setState({ hasError: false })} style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 14px", color: P.casper, cursor: "pointer", fontSize: 13, fontFamily: "'Space Mono',monospace" }}>RETRY</button>
         </div>
       );
     }
@@ -1303,13 +1303,13 @@ export default function App() {
 
       {/* Footer */}
       <div style={{ borderTop: `1px solid ${P.border}`, padding: "12px 24px", display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
-        <span style={{ fontSize: 12, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>DATA FROM</span>
-        <a href="https://www.dailyfaceoff.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, fontWeight: 700, color: P.casper, letterSpacing: 0, textDecoration: "none", fontFamily: "'Space Mono',monospace" }}>DAILY FACEOFF</a>
-        <span style={{ fontSize: 12, color: P.dim }}>·</span>
-        <a href="https://www.nhl.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, fontWeight: 700, color: P.casper, letterSpacing: 0, textDecoration: "none", fontFamily: "'Space Mono',monospace" }}>NHL.COM</a>
-        <span style={{ fontSize: 12, color: P.dim }}>·</span>
-        <span style={{ fontSize: 12, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>HIMANK GOEL</span>
-        <span style={{ fontSize: 12, color: P.dim }}>·</span>
+        <span style={{ fontSize: 11, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>DATA FROM</span>
+        <a href="https://www.dailyfaceoff.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, fontWeight: 700, color: P.casper, letterSpacing: 0, textDecoration: "none", fontFamily: "'Space Mono',monospace" }}>DAILY FACEOFF</a>
+        <span style={{ fontSize: 11, color: P.dim }}>·</span>
+        <a href="https://www.nhl.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 11, fontWeight: 700, color: P.casper, letterSpacing: 0, textDecoration: "none", fontFamily: "'Space Mono',monospace" }}>NHL.COM</a>
+        <span style={{ fontSize: 11, color: P.dim }}>·</span>
+        <span style={{ fontSize: 11, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>HIMANK GOEL</span>
+        <span style={{ fontSize: 11, color: P.dim }}>·</span>
 
       </div>
     </div>
