@@ -38,7 +38,7 @@ export const HOME_UNIFORMS = {
 export default function JerseyIcon({ team, number, size = 62 }) {
   const clipId = `jersey-${useId().replace(/:/g, '')}`;
   const uniform = HOME_UNIFORMS[team] || HOME_UNIFORMS.VAN;
-  const jerseyPath = 'M34 6 43 2c2 4 12 4 14 0l9 4 20 10 11 35-16 6-12-27 3 54H28l3-54-12 27-16-6 11-35Z';
+  const jerseyPath = 'M33 6 42 2c2 4 14 4 16 0l9 4 19 10 11 35-16 6-11-26 9 53H21l9-53-11 26-16-6 11-35Z';
 
   return (
     <svg className="jersey-icon" width={size} height={Math.round(size * 0.9)} viewBox="0 0 100 88" aria-hidden="true">
@@ -49,9 +49,9 @@ export default function JerseyIcon({ team, number, size = 62 }) {
       </defs>
       <path d={jerseyPath} fill={uniform.body} stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
       <g clipPath={`url(#${clipId})`}>
-        <path d="M31 5 43 0c2 6 12 6 14 0l12 5 7 16-17 7H41l-17-7Z" fill={uniform.shoulder} />
-        <path d="m7 37 17 6-3 8-17-6Zm86 0-17 6 3 8 17-6ZM27 68h46v7H27Z" fill={uniform.stripe} />
-        <path d="M27 76h46v2H27Z" fill={uniform.number} opacity=".9" />
+        <path d="M29 5 42 0c2 6 14 6 16 0l13 5 7 16-18 7H40l-18-7Z" fill={uniform.shoulder} />
+        <path d="m7 37 17 6-3 8-17-6Zm86 0-17 6 3 8 17-6ZM20 68h60v7H20Z" fill={uniform.stripe} />
+        <path d="M20 76h60v2H20Z" fill={uniform.number} opacity=".9" />
       </g>
       <path d="M43 2c2 4 12 4 14 0l-3 13-4 4-4-4Z" fill={uniform.stripe} stroke="currentColor" strokeWidth="1" />
       <path d="M46 4c2 2 6 2 8 0l-2 7-2 2-2-2Z" fill={uniform.body} />

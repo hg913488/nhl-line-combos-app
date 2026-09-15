@@ -83,7 +83,7 @@ html, body { overflow-x: clip; }
 .app-shell .player-tile { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 14px 12px; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; position: relative; text-align: left; min-height: 82px; }
 .app-shell .player-tile:hover { background: var(--hover); border-color: var(--accent) !important; transform: none; box-shadow: none; }
 .jersey-icon { display: block; flex: 0 0 62px; color: color-mix(in srgb, var(--border), white 22%); overflow: visible; }
-.jersey-number { font: 800 25px/1 'Space Grotesk', sans-serif; letter-spacing: 0; }
+.jersey-number { font: 800 24px/1 'Space Grotesk', sans-serif; letter-spacing: 0; }
 .player-name { min-width: 0; overflow-wrap: anywhere; line-height: 1.25; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; }
 .player-name > span { display: block; font-size: 12px; font-weight: 400; color: var(--dove); letter-spacing: 0; }
 .player-name strong { display: block; font-size: 15px; font-weight: 700; letter-spacing: 0; }
