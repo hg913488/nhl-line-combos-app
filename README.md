@@ -2,7 +2,7 @@
 
 > Daily NHL line combinations, injuries, and player stats — updated automatically throughout the day.
 
-**[nhl-line-combos-app.vercel.app](https://nhl-line-combos-app.vercel.app)**
+**[nhl-between-the-lines-app.vercel.app](https://nhl-between-the-lines-app.vercel.app)**
 
 ---
 
