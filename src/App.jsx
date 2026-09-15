@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback, createContext, useContext } from "react";
-import { Sun, Moon, Search, AlertCircle } from 'lucide-react';
+import { Sun, Moon, Search, AlertCircle, ZoomIn, ZoomOut } from 'lucide-react';
 import useSchedule, { localDate } from './useSchedule.js';
 import PlayerDetails from './PlayerDetails.jsx';
 import JerseyIcon from './JerseyIcon.jsx';
@@ -524,34 +524,70 @@ function InjuriesView({ isMobile }) {
 }
 
 // ── COMPARE VIEW ──────────────────────────────────────────────────────
+const COMPARE_ZOOM = [
+  { label: 'DETAIL', width: 320 },
+  { label: 'COMPACT', width: 220 },
+  { label: '10-UP', width: 112 },
+];
+
+function compactName(name) {
+  const parts = String(name || '').trim().split(/\s+/);
+  return parts[parts.length - 1] || name;
+}
+
+function CompactLineup({ data, dense }) {
+  const groups = [
+    { label: 'FORWARDS', prefix: 'L', units: data.forwards || [] },
+    { label: 'DEFENSE', prefix: 'D', units: data.defense || [] },
+    { label: 'GOALIES', prefix: 'G', units: (data.goalies || []).map(goalie => [goalie[0]]) },
+    { label: 'POWER PLAY', prefix: 'PP', units: [data.pp1 || [], data.pp2 || []].filter(unit => unit.length) },
+  ];
+
+  return <div className={`compact-lineup${dense ? ' dense' : ''}`}>
+    {groups.filter(group => group.units.length).map(group => <section key={group.label}>
+      <h3>{group.label}</h3>
+      {group.units.map((unit, index) => <div className="compact-unit" key={`${group.label}-${index}`}>
+        <span>{group.prefix}{index + 1}</span>
+        <div>{unit.map(player => <button key={player} onClick={() => triggerPlayerLookup?.(player)} title={player}>{dense ? compactName(player) : player}</button>)}</div>
+      </div>)}
+    </section>)}
+  </div>;
+}
+
 function CompareView({ isMobile }) {
   const [selected, setSelected] = useState([]);
   const [search, setSearch] = useState("");
-  const toggle = slug => setSelected(prev => prev.includes(slug) ? prev.filter(s => s !== slug) : [...prev, slug]);
+  const [zoom, setZoom] = useState(1);
+  const toggle = slug => setSelected(prev => prev.includes(slug) ? prev.filter(s => s !== slug) : prev.length < 10 ? [...prev, slug] : prev);
   const filteredSlugs = useMemo(() => Object.keys(NHL_TEAMS).filter(slug => {
     const t = NHL_TEAMS[slug];
     return `${t.city} ${t.name} ${t.abbr}`.toLowerCase().includes(search.toLowerCase());
   }), [search]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: `calc(100vh - ${HEADER_H + TABS_H}px)` }}>
-      <div style={{ borderBottom: `1px solid ${P.border}`, padding: "12px 24px", background: P.bg }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
+    <div className="compare-page" style={{ height: `calc(100vh - ${HEADER_H + TABS_H}px)` }}>
+      <div className="compare-controls">
+        <div className="compare-toolbar">
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Filter teams..."
             style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.white, fontSize: 12, fontFamily: "inherit", width: 160 }} />
           {selected.length > 0 && <button onClick={() => setSelected([])} style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.dove, fontSize: 10, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>CLEAR ALL</button>}
-          <span style={{ fontSize: 10, color: P.dove, marginLeft: "auto", fontFamily: "'Space Mono',monospace" }}>{selected.length} selected</span>
+          <div className="compare-zoom" aria-label="Lineup size">
+            <button onClick={() => setZoom(value => Math.min(COMPARE_ZOOM.length - 1, value + 1))} disabled={zoom === COMPARE_ZOOM.length - 1} aria-label="Zoom out" title="Show more teams"><ZoomOut size={15} /></button>
+            <span>{COMPARE_ZOOM[zoom].label}</span>
+            <button onClick={() => setZoom(value => Math.max(0, value - 1))} disabled={zoom === 0} aria-label="Zoom in" title="Show more lineup detail"><ZoomIn size={15} /></button>
+          </div>
+          <span className="compare-count">{selected.length} / 10 selected</span>
         </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+        <div className="compare-team-picker">
           {filteredSlugs.map(slug => {
             const t = NHL_TEAMS[slug];
             const isSel = selected.includes(slug);
+            const disabled = !isSel && selected.length >= 10;
             return (
-              <div key={slug} className={`compare-chip${isSel ? " selected" : ""}`} onClick={() => toggle(slug)}>
+              <button key={slug} className={`compare-chip${isSel ? " selected" : ""}`} onClick={() => toggle(slug)} disabled={disabled} aria-pressed={isSel}>
                 <TeamLogo slug={slug} abbr={t.abbr} size={20} />
                 <span style={{ fontSize: 12, fontWeight: 600, color: isSel ? P.white : P.casper, whiteSpace: "nowrap" }}>{t.abbr}</span>
-                {isSel && <button className="rm-btn" onClick={e => { e.stopPropagation(); toggle(slug); }}>×</button>}
-              </div>
+              </button>
             );
           })}
         </div>
@@ -562,22 +598,22 @@ function CompareView({ isMobile }) {
           <span style={{ fontSize: 12, color: P.dove, letterSpacing: 0, fontFamily: "'Syne',sans-serif" }}>SELECT TEAMS ABOVE TO COMPARE</span>
         </div>
       ) : (
-        <div style={{ flex: 1, overflowX: "auto", overflowY: "hidden" }}>
-          <div style={{ display: "flex", height: "100%", minWidth: selected.length * (EXPANDED_W + 1) }}>
+        <div className="compare-viewport">
+          <div className={`compare-columns zoom-${zoom}`} style={{ minWidth: selected.length * COMPARE_ZOOM[zoom].width }}>
             {selected.map((slug, i) => {
               const t = NHL_TEAMS[slug];
               return (
-                <div key={slug} style={{ width: EXPANDED_W, flexShrink: 0, borderRight: i < selected.length - 1 ? `1px solid ${P.border}` : "none", display: "flex", flexDirection: "column" }}>
-                  <div style={{ padding: "14px 20px", borderBottom: `1px solid ${P.border}`, display: "flex", alignItems: "center", gap: 10, background: P.surface, position: "sticky", top: 0 }}>
-                    <TeamLogo slug={slug} abbr={t.abbr} size={40} />
-                    <div>
-                      <div style={{ fontSize: 12, fontWeight: 700, color: P.white, fontFamily: "'Syne',sans-serif" }}>{t.city}</div>
-                      <div style={{ fontSize: 10, color: P.dove }}>{t.name}</div>
+                <div className="compare-column" key={slug} style={{ borderRight: i < selected.length - 1 ? `1px solid ${P.border}` : "none" }}>
+                  <div className="compare-team-heading">
+                    <TeamLogo slug={slug} abbr={t.abbr} size={zoom === 2 ? 24 : zoom === 1 ? 30 : 40} />
+                    <div className="compare-team-name">
+                      <div>{zoom === 2 ? t.abbr : t.city}</div>
+                      {zoom < 2 && <small>{t.name}</small>}
                     </div>
-                    <button className="rm-btn" style={{ marginLeft: "auto", fontSize: 16 }} onClick={() => toggle(slug)}>×</button>
+                    <button className="rm-btn" aria-label={`Remove ${t.city} ${t.name}`} onClick={() => toggle(slug)}>×</button>
                   </div>
-                  <div style={{ overflowY: "auto", flex: 1, padding: "0 20px 24px" }}>
-                    <LineupContent data={TEAMS_DATA[slug]} />
+                  <div className="compare-lineup">
+                    {zoom === 0 ? <LineupContent data={TEAMS_DATA[slug]} /> : <CompactLineup data={TEAMS_DATA[slug]} dense={zoom === 2} />}
                   </div>
                 </div>
               );
@@ -672,8 +708,7 @@ function ReporterTimeline({ isDark }) {
   </div>;
 }
 
-function NewsView({ isDark }) {
-  const [source, setSource] = useState('nhl');
+function NewsView({ isDark, source, onSourceChange }) {
   const [stories, setStories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -692,7 +727,7 @@ function NewsView({ isDark }) {
   const remaining = stories.slice(1);
 
   return <main className="news-page">
-    <header className="news-heading"><div><span>NEWS DESK</span><h1>News</h1></div><div className="news-source-tabs" role="tablist" aria-label="News source"><button role="tab" aria-selected={source === 'nhl'} onClick={() => setSource('nhl')}>NHL NEWS</button><button role="tab" aria-selected={source === 'reporters'} onClick={() => setSource('reporters')}>REPORTERS</button></div></header>
+    <header className="news-heading"><div><span>NEWS DESK</span><h1>News</h1></div><div className="news-source-tabs" role="tablist" aria-label="News source"><button role="tab" aria-selected={source === 'nhl'} onClick={() => onSourceChange('nhl')}>NHL NEWS</button><button role="tab" aria-selected={source === 'reporters'} onClick={() => onSourceChange('reporters')}>REPORTERS</button></div></header>
     {source === 'nhl' && <>
       {loading && <p className="data-state" role="status">Loading NHL News...</p>}
       {error && <p className="data-state" role="alert">{error}</p>}
@@ -1338,6 +1373,7 @@ class ErrorBoundary extends React.Component {
 export default function App() {
   const [tab, setTab] = useState('all');
   const [teamMode, setTeamMode] = useState('quick');
+  const [newsSource, setNewsSource] = useState('nhl');
   const [showIntro, setShowIntro] = useState(() => !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -1384,8 +1420,12 @@ export default function App() {
       .catch(() => setStandingsError(true));
   }, []);
 
-  const TABS = ["all", "today", "news", "injuries", "player", "picks", "playoffs", "stats", "compare"];
-  const TAB_LABELS = { all: "TEAMS", today: "TODAY", news: "NEWS", injuries: "INJURIES", player: "PLAYERS", picks: "PICKS", playoffs: "PLAYOFFS", stats: "MATCHUPS", compare: "COMPARE" };
+  const mobileNavValue = tab === 'all' ? 'teams-focus' : tab === 'news' ? `news-${newsSource}` : tab;
+  const selectView = value => {
+    if (value.startsWith('teams-')) { setTeamMode(value.replace('teams-', '')); setTab('all'); return; }
+    if (value.startsWith('news-')) { setNewsSource(value.replace('news-', '')); setTab('news'); return; }
+    setTab(value);
+  };
 
   return (
     <div className="app-shell" data-theme={isDark ? 'dark' : 'light'} style={{ fontFamily: "'Space Grotesk', sans-serif", background: P.bg, minHeight: "100vh", color: P.white, ...Object.fromEntries(Object.entries(P).map(([key, value]) => ['--' + key, value])) }}>
@@ -1412,23 +1452,46 @@ export default function App() {
       <button className="icon-button theme-toggle" onClick={toggleTheme} aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'} title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>{isDark ? <Sun size={19} /> : <Moon size={19} />}</button>
       {/* Tabs */}
       <div className="tabs-bar" style={{ borderBottom: `1px solid ${P.border}`, display: "flex", height: TABS_H, position: "sticky", top: HEADER_H, zIndex: 49, background: P.bg, padding: "0 8px", overflow: "visible" }}>
-        <select className="mobile-view-select" aria-label="View" value={tab} onChange={event => setTab(event.target.value)}>
-          {TABS.map(value => <option key={value} value={value}>{TAB_LABELS[value]}</option>)}
+        <select className="mobile-view-select" aria-label="View" value={mobileNavValue} onChange={event => selectView(event.target.value)}>
+          <optgroup label="TEAMS"><option value="teams-focus">Team Lineups</option><option value="compare">Compare</option></optgroup>
+          <option value="today">TODAY</option>
+          <optgroup label="NEWS"><option value="news-nhl">NHL News</option><option value="news-reporters">Reporters</option><option value="injuries">Injuries</option></optgroup>
+          <optgroup label="STATS"><option value="player">Player Stats</option><option value="stats">Matchups</option><option value="playoffs">Playoffs</option></optgroup>
+          <option value="picks">PICKS</option>
         </select>
-        {TABS.map(t => t === 'all' ? <div className="teams-tab-menu" key={t}>
-          <button className={`tab-btn${tab === t ? " active" : ""}`} aria-pressed={tab === t} onClick={() => setTab(t)}>TEAMS</button>
-          <div className="team-view-switcher" aria-label="Team layout">
-            <button aria-pressed={teamMode === 'quick'} onClick={() => { setTeamMode('quick'); setTab('all'); }}>QUICK SCAN</button>
-            <button aria-pressed={teamMode === 'focus'} onClick={() => { setTeamMode('focus'); setTab('all'); }}>FOCUSED TEAM</button>
+        <div className="nav-menu">
+          <button className={`tab-btn${['all', 'compare'].includes(tab) ? " active" : ""}`} onClick={() => { setTeamMode('quick'); setTab('all'); }}>TEAMS</button>
+          <div className="nav-submenu" aria-label="Teams views">
+            <button aria-pressed={tab === 'all' && teamMode === 'quick'} onClick={() => { setTeamMode('quick'); setTab('all'); }}>QUICK SCAN</button>
+            <button aria-pressed={tab === 'all' && teamMode === 'focus'} onClick={() => { setTeamMode('focus'); setTab('all'); }}>FOCUSED TEAM</button>
+            <button aria-pressed={tab === 'compare'} onClick={() => setTab('compare')}>COMPARE</button>
           </div>
-        </div> : <button key={t} className={`tab-btn${tab === t ? " active" : ""}`} aria-pressed={tab === t} onClick={() => setTab(t)}>{TAB_LABELS[t]}</button>)}
+        </div>
+        <button className={`tab-btn${tab === 'today' ? " active" : ""}`} aria-pressed={tab === 'today'} onClick={() => setTab('today')}>TODAY</button>
+        <div className="nav-menu">
+          <button className={`tab-btn${['news', 'injuries'].includes(tab) ? " active" : ""}`} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NEWS</button>
+          <div className="nav-submenu" aria-label="News views">
+            <button aria-pressed={tab === 'news' && newsSource === 'nhl'} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NHL NEWS</button>
+            <button aria-pressed={tab === 'news' && newsSource === 'reporters'} onClick={() => { setNewsSource('reporters'); setTab('news'); }}>REPORTERS</button>
+            <button aria-pressed={tab === 'injuries'} onClick={() => setTab('injuries')}>INJURIES</button>
+          </div>
+        </div>
+        <div className="nav-menu">
+          <button className={`tab-btn${['player', 'stats', 'playoffs'].includes(tab) ? " active" : ""}`} onClick={() => setTab('player')}>STATS</button>
+          <div className="nav-submenu" aria-label="Stats views">
+            <button aria-pressed={tab === 'player'} onClick={() => setTab('player')}>PLAYER STATS</button>
+            <button aria-pressed={tab === 'stats'} onClick={() => setTab('stats')}>MATCHUPS</button>
+            <button aria-pressed={tab === 'playoffs'} onClick={() => setTab('playoffs')}>PLAYOFFS</button>
+          </div>
+        </div>
+        <button className={`tab-btn${tab === 'picks' ? " active" : ""}`} aria-pressed={tab === 'picks'} onClick={() => setTab('picks')}>PICKS</button>
       </div>
 
       {/* Content */}
       {standingsError && <p className="api-notice" role="status">Team records are temporarily unavailable.</p>}
       {tab === "all" && <TeamsView isMobile={isMobile} mode={teamMode} />}
       {tab === "today" && <ErrorBoundary><TodayView isMobile={isMobile} /></ErrorBoundary>}
-      {tab === "news" && <ErrorBoundary><NewsView isDark={isDark} /></ErrorBoundary>}
+      {tab === "news" && <ErrorBoundary><NewsView isDark={isDark} source={newsSource} onSourceChange={setNewsSource} /></ErrorBoundary>}
       {tab === "picks" && <ErrorBoundary><PicksView /></ErrorBoundary>}
       {tab === "playoffs" && <ErrorBoundary><PlayoffsView isMobile={isMobile} /></ErrorBoundary>}
       {tab === "stats" && <ErrorBoundary><GoalsAgainstView isMobile={isMobile} /></ErrorBoundary>}
