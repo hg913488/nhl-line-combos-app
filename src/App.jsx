@@ -614,7 +614,66 @@ function TodayView() {
   </main>;
 }
 
-function NewsView() {
+const REPORTERS_LIST_URL = 'https://x.com/i/lists/2099709774887788639';
+const REPORTERS_LIST_ID = '2099709774887788639';
+
+function ReporterTimeline({ isDark }) {
+  const containerRef = useRef(null);
+  const [status, setStatus] = useState('loading');
+
+  useEffect(() => {
+    let active = true;
+    const container = containerRef.current;
+    if (!container) return undefined;
+    setStatus('loading');
+    container.replaceChildren();
+
+    const observer = new MutationObserver(() => {
+      if (active && container.querySelector('iframe')) setStatus('ready');
+    });
+    observer.observe(container, { childList: true, subtree: true });
+
+    const render = () => window.twttr?.widgets?.createTimeline(
+      { sourceType: 'list', id: REPORTERS_LIST_ID },
+      container,
+      { height: 760, theme: isDark ? 'dark' : 'light', chrome: 'noheader nofooter noborders transparent' },
+    )?.catch(onError);
+    let script = document.querySelector('script[src="https://platform.twitter.com/widgets.js"]');
+    const onError = () => { if (active) setStatus('error'); };
+    if (window.twttr?.widgets) {
+      render();
+    } else {
+      if (!script) {
+        script = document.createElement('script');
+        script.src = 'https://platform.twitter.com/widgets.js';
+        script.async = true;
+        script.charset = 'utf-8';
+        document.body.appendChild(script);
+      }
+      script.addEventListener('load', render, { once: true });
+      script.addEventListener('error', onError, { once: true });
+    }
+
+    const timeout = window.setTimeout(() => { if (active && !container.querySelector('iframe')) setStatus('error'); }, 10000);
+    return () => {
+      active = false;
+      observer.disconnect();
+      window.clearTimeout(timeout);
+      script?.removeEventListener('load', render);
+      script?.removeEventListener('error', onError);
+      container.replaceChildren();
+    };
+  }, [isDark]);
+
+  return <div className="reporter-timeline-wrap" data-status={status}>
+    {status === 'loading' && <p className="reporter-status" role="status">Loading reporter feed...</p>}
+    <div className="reporter-timeline" ref={containerRef} />
+    {status === 'error' && <p className="reporter-status">The embedded feed was blocked. <a href={REPORTERS_LIST_URL} target="_blank" rel="noopener noreferrer">Open NHL Reporters on X</a></p>}
+  </div>;
+}
+
+function NewsView({ isDark }) {
+  const [source, setSource] = useState('nhl');
   const [stories, setStories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -633,11 +692,12 @@ function NewsView() {
   const remaining = stories.slice(1);
 
   return <main className="news-page">
-    <header className="news-heading"><div><span>FROM NHL.COM</span><h1>News</h1></div><a href="https://www.nhl.com/news/" target="_blank" rel="noopener noreferrer">ALL NHL NEWS</a></header>
-    {loading && <p className="data-state" role="status">Loading NHL News...</p>}
-    {error && <p className="data-state" role="alert">{error}</p>}
-    {!loading && !error && !lead && <p className="data-state">No news stories are available right now.</p>}
-    {lead && <>
+    <header className="news-heading"><div><span>NEWS DESK</span><h1>News</h1></div><div className="news-source-tabs" role="tablist" aria-label="News source"><button role="tab" aria-selected={source === 'nhl'} onClick={() => setSource('nhl')}>NHL NEWS</button><button role="tab" aria-selected={source === 'reporters'} onClick={() => setSource('reporters')}>REPORTERS</button></div></header>
+    {source === 'nhl' && <>
+      {loading && <p className="data-state" role="status">Loading NHL News...</p>}
+      {error && <p className="data-state" role="alert">{error}</p>}
+      {!loading && !error && !lead && <p className="data-state">No news stories are available right now.</p>}
+      {lead && <>
       <a className="news-lead" href={lead.url} target="_blank" rel="noopener noreferrer">
         {lead.image && <img src={lead.image} alt="" />}
         <div><time>{formatNewsDate(lead.publishedAt)}</time><h2>{lead.title}</h2>{lead.summary && <p>{lead.summary}</p>}<span>READ ON NHL.COM</span></div>
@@ -648,7 +708,9 @@ function NewsView() {
           <div><time>{formatNewsDate(story.publishedAt)}</time><h2>{story.title}</h2>{story.summary && <p>{story.summary}</p>}</div>
         </a>)}
       </section>
+      </>}
     </>}
+    {source === 'reporters' && <section className="reporters-feed" aria-label="NHL reporters on X"><header><div><span>CURATED X LIST</span><h2>NHL Reporters</h2></div><a href={REPORTERS_LIST_URL} target="_blank" rel="noopener noreferrer">OPEN ON X</a></header><ReporterTimeline isDark={isDark} /></section>}
   </main>;
 }
 
@@ -1366,7 +1428,7 @@ export default function App() {
       {standingsError && <p className="api-notice" role="status">Team records are temporarily unavailable.</p>}
       {tab === "all" && <TeamsView isMobile={isMobile} mode={teamMode} />}
       {tab === "today" && <ErrorBoundary><TodayView isMobile={isMobile} /></ErrorBoundary>}
-      {tab === "news" && <ErrorBoundary><NewsView /></ErrorBoundary>}
+      {tab === "news" && <ErrorBoundary><NewsView isDark={isDark} /></ErrorBoundary>}
       {tab === "picks" && <ErrorBoundary><PicksView /></ErrorBoundary>}
       {tab === "playoffs" && <ErrorBoundary><PlayoffsView isMobile={isMobile} /></ErrorBoundary>}
       {tab === "stats" && <ErrorBoundary><GoalsAgainstView isMobile={isMobile} /></ErrorBoundary>}
