@@ -1,25 +1,39 @@
+export function currentSeason(date = new Date()) {
+  const year = date.getUTCFullYear() - (date.getUTCMonth() < 6 ? 1 : 0);
+  return `${year}${year + 1}`;
+}
+
+export function validSeason(value) {
+  return typeof value === 'string' && /^\d{8}$/.test(value) && Number(value.slice(4)) === Number(value.slice(0, 4)) + 1;
+}
+
+export function normalizeGame(g) {
+  const [minutes, seconds] = (g.toi || "0:00").split(":").map(Number);
+  return {
+    ...g,
+    homeRoad: g.homeRoadFlag,
+    opponentTeamAbbrev: g.opponentAbbrev,
+    timeOnIcePerGame: minutes * 60 + seconds,
+    saves: g.shotsAgainst == null || g.goalsAgainst == null ? null : g.shotsAgainst - g.goalsAgainst,
+  };
+}
+
 export default async function handler(req, res) {
-  const { playerId, gameType } = req.query;
-
-  if (!playerId || !/^\d+$/.test(playerId)) {
-    return res.status(400).json({ error: "Invalid playerId" });
+  const { playerId, gameType = "2", season = currentSeason() } = req.query;
+  if (!/^\d+$/.test(playerId || "") || !validSeason(season) || !["2", "3"].includes(gameType)) {
+    return res.status(400).json({ error: "Invalid player, season, or game type" });
   }
-
-  const gameTypeId = gameType === "3" ? 3 : 2;
-  const sort = encodeURIComponent(JSON.stringify([{ property: "gameDate", direction: "DESC" }]));
-  const exp = encodeURIComponent(`playerId=${playerId} and seasonId=20252026 and gameTypeId=${gameTypeId}`);
-  const url = `https://api.nhle.com/stats/rest/en/skater/summary?isAggregate=false&isGame=true&limit=5&sort=${sort}&cayenneExp=${exp}`;
-
   try {
-    const upstream = await fetch(url);
-    if (!upstream.ok) {
-      return res.status(upstream.status).json({ error: "Upstream error" });
-    }
-    const data = await upstream.json();
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate=300");
-    return res.status(200).json(data);
-  } catch (err) {
-    return res.status(500).json({ error: "Failed to fetch game log" });
+    const upstream = await fetch(`https://api-web.nhle.com/v1/player/${playerId}/game-log/${season}/${gameType}`, {
+      signal: AbortSignal.timeout(12000),
+    });
+    if (!upstream.ok) return res.status(502).json({ error: "Player statistics are temporarily unavailable" });
+    const body = await upstream.json();
+    if (!Array.isArray(body.gameLog)) throw new Error("Invalid game log response");
+    const games = body.gameLog.map(normalizeGame).sort((a, b) => b.gameDate.localeCompare(a.gameDate) || b.gameId - a.gameId);
+    res.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate=600");
+    return res.status(200).json({ data: games, seasonId: season, gameTypeId: Number(gameType) });
+  } catch {
+    return res.status(502).json({ error: "Could not load player statistics. Please try again." });
   }
 }

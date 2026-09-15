@@ -1,7 +1,12 @@
-import React, { useState, useMemo, useEffect, useRef, useCallback } from "react";
+import React, { useState, useMemo, useEffect, useRef, useCallback, createContext, useContext } from "react";
+import { Sun, Moon, Search, Shirt, AlertCircle } from 'lucide-react';
+import useSchedule, { localDate } from './useSchedule.js';
+import PlayerDetails from './PlayerDetails.jsx';
+import { getJSON, normalizeName, seasonForDate, seasonLabel, seasonsFrom } from './data-client.js';
+import './styles.css';
 import lineups from '../data/lines.json';
 import goalsAgainstData from '../data/goals_against_by_position.json';
-import scheduleRaw from './schedule.csv?raw';
+
 import playoffBracket from '../data/playoff_bracket.json';
 import iihfGroups from '../data/iihf_groups.json';
 import iihfSchedule from '../data/iihf_schedule.json';
@@ -11,7 +16,7 @@ const UPDATED_AT = lineups.updated_at.slice(0, 10);
 const TEAMS_DATA = lineups.teams;
 const INJURIES_DATA = lineups.injuries || {};
 const GA_DATA = goalsAgainstData;
-const SCHEDULE_RAW = scheduleRaw;
+
 const BRACKET_DATA = playoffBracket;
 const IIHF_GROUPS_DATA = iihfGroups;
 const IIHF_SCHEDULE_DATA = iihfSchedule;
@@ -53,24 +58,24 @@ const NHL_TEAMS = {
 };
 
 const LOGO_ABBR_OVERRIDE = { "los-angeles-kings": "LAK" };
-const LOGO_URL = (slug, abbr) => `https://assets.nhle.com/logos/nhl/svg/${LOGO_ABBR_OVERRIDE[slug] || abbr}_dark.svg`;
+const LOGO_URL = (slug, abbr) => `https://assets.nhle.com/logos/nhl/svg/${LOGO_ABBR_OVERRIDE[slug] || abbr}_${P.bg === LIGHT_PALETTE.bg ? "light" : "dark"}.svg`;
 const COLLAPSED_W = 100;
 const EXPANDED_W = 320;
-const HEADER_H = 100;
-const TABS_H = 46;
+const HEADER_H = 76;
+const TABS_H = 48;
 
 const DARK_PALETTE = {
-  bg: "#0d0d0d", surface: "#161616", border: "#252525",
-  dove: "#686B6C", casper: "#B8C4CA", white: "#F0F0F0", dim: "#3a3a3a",
-  hover: "#1a2530", active: "#1e2d3d", accent: "#2a4a6b",
-  red: "#c0392b", yellow: "#d4ac0d", green: "#1e8449",
+  bg: "#17191D", surface: "#22262C", border: "#3B4149",
+  dove: "#A7ADB5", casper: "#CDD3DA", white: "#E7EAF0", dim: "#88919C",
+  hover: "#2C3239", active: "#29343C", accent: "#438BB7",
+  red: "#F09389", yellow: "#DEC272", green: "#6FC9A4",
 };
 
 const LIGHT_PALETTE = {
-  bg: "#FAFAFA", surface: "#FFFFFF", border: "#E5E5E5",
-  dove: "#8B8B8B", casper: "#6B6B6B", white: "#1C1C1C", dim: "#C8C8C8",
-  hover: "#F0EDEB", active: "#E8E3DE", accent: "#2a4a6b",
-  red: "#c0392b", yellow: "#d4ac0d", green: "#1e8449",
+  bg: "#F4F6F8", surface: "#FFFFFF", border: "#D5DBE2",
+  dove: "#59616D", casper: "#46515E", white: "#20252B", dim: "#66717E",
+  hover: "#EDF1F4", active: "#E4EEF2", accent: "#23668E",
+  red: "#AC342C", yellow: "#816414", green: "#176D49",
 };
 
 // Mutable reference — App() updates this synchronously before rendering children
@@ -127,13 +132,13 @@ const LINE_CHANGES = buildLineChanges();
 
 function makeCss(palette) {
   return `
-  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: ${palette.bg}; height: 100%; }
   ::-webkit-scrollbar { width: 4px; height: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: ${palette.dim}; border-radius: 2px; }
-  input:focus { outline: none; }
+  :focus-visible { outline: 2px solid ${palette.accent}; outline-offset: 3px; }
   .strip { flex-shrink:0; width:${COLLAPSED_W}px; transition:width 0.35s cubic-bezier(0.4,0,0.2,1),background 0.15s; overflow:hidden; cursor:pointer; border-right:1px solid ${palette.border}; position:relative; background:${palette.surface}; user-select:none; }
   .strip:last-child { border-right:none; }
   .strip:hover { background:${palette.hover}; }
@@ -145,7 +150,7 @@ function makeCss(palette) {
   .mobile-body { overflow:hidden; max-height:0; transition:max-height 0.35s cubic-bezier(0.4,0,0.2,1); }
   .mobile-body.open { max-height:2000px; }
   .tabs-bar::-webkit-scrollbar { display:none; }
-  .tab-btn { background:none; border:none; cursor:pointer; font-family:'Syne',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.12em; padding:0 18px; height:100%; transition:color 0.15s,border-bottom 0.15s; border-bottom:2px solid transparent; flex-shrink:0; white-space:nowrap; }
+  .tab-btn { background:none; border:none; cursor:pointer; font-family:'Syne',sans-serif; font-size:14px; font-weight:700; letter-spacing:0; padding:0 18px; height:100%; transition:color 0.15s,border-bottom 0.15s; border-bottom:2px solid transparent; flex-shrink:0; white-space:nowrap; }
   .tab-btn.active { color:${palette.white}; border-bottom-color:${palette.casper}; }
   .tab-btn:not(.active) { color:${palette.dove}; }
   .tab-btn:not(.active):hover { color:${palette.casper}; }
@@ -156,22 +161,22 @@ function makeCss(palette) {
   .rm-btn:hover { color:${palette.white}; }
   .news-card { background:${palette.surface}; border:1px solid ${palette.border}; border-radius:6px; padding:12px 14px; margin-bottom:8px; }
   .news-card:hover { border-color:${palette.dove}; }
-  .inj-badge { display:inline-block; font-size:8px; font-weight:700; letter-spacing:0.08em; padding:2px 5px; border-radius:3px; margin-left:6px; vertical-align:middle; font-family:'Space Mono',monospace; }
+  .inj-badge { display:inline-block; font-size:12px; font-weight:700; letter-spacing:0; padding:2px 5px; border-radius:3px; margin-left:6px; vertical-align:middle; font-family:'Space Mono',monospace; }
   .inj-out { background:#c0392b22; color:#e74c3c; border:1px solid #c0392b44; }
   .inj-dtd { background:#d4ac0d22; color:#f1c40f; border:1px solid #d4ac0d44; }
   .inj-ir { background:#7d3c9822; color:#a569bd; border:1px solid #7d3c9844; }
-  .ga-table { width:100%; border-collapse:collapse; font-size:12px; }
-  .ga-table th { font-size:9px; font-weight:700; letter-spacing:0.12em; color:${palette.dove}; padding:8px 6px; text-align:center; border-bottom:1px solid ${palette.border}; position:sticky; top:0; background:${palette.bg}; z-index:1; font-family:'Space Mono',monospace; }
+  .ga-table { width:100%; border-collapse:collapse; font-size:14px; }
+  .ga-table th { font-size:12px; font-weight:700; letter-spacing:0; color:${palette.dove}; padding:8px 6px; text-align:center; border-bottom:1px solid ${palette.border}; position:sticky; top:0; background:${palette.bg}; z-index:1; font-family:'Space Mono',monospace; }
   .ga-table th:first-child { text-align:left; padding-left:12px; }
   .ga-table td { padding:7px 6px; text-align:center; border-bottom:1px solid ${palette.border}; font-variant-numeric:tabular-nums; font-family:'Space Mono',monospace; }
   .ga-table td:first-child { text-align:left; padding-left:4px; }
   .ga-table tr:hover td { background:${palette.hover}; }
   .ga-table .total-col { font-weight:700; color:${palette.casper}; }
-  .ga-sort-btn { background:none; border:none; cursor:pointer; font-family:'Space Mono',monospace; font-size:9px; font-weight:700; letter-spacing:0.12em; color:${palette.dove}; padding:8px 6px; width:100%; text-align:center; }
+  .ga-sort-btn { background:none; border:none; cursor:pointer; font-family:'Space Mono',monospace; font-size:12px; font-weight:700; letter-spacing:0; color:${palette.dove}; padding:8px 6px; width:100%; text-align:center; }
   .ga-sort-btn:hover { color:${palette.casper}; }
   .ga-sort-btn.active-sort { color:${palette.white}; }
   .suggest-drop { position:absolute; top:calc(100% + 4px); left:0; right:0; background:${palette.surface}; border:1px solid ${palette.border}; border-radius:4px; z-index:100; overflow:hidden; }
-  .suggest-item { padding:9px 12px; cursor:pointer; font-size:12px; color:${palette.casper}; font-family:'Space Grotesk',sans-serif; transition:background 0.1s; }
+  .suggest-item { padding:9px 12px; cursor:pointer; font-size:14px; color:${palette.casper}; font-family:'Space Grotesk',sans-serif; transition:background 0.1s; }
   .suggest-item:hover, .suggest-item.active { background:${palette.active}; color:${palette.white}; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .spinner { width:14px; height:14px; border:2px solid ${palette.border}; border-top-color:${palette.casper}; border-radius:50%; animation:spin 0.7s linear infinite; }
@@ -186,13 +191,13 @@ function makeCss(palette) {
   .modal-close-btn:hover { background:${palette.active}; color:${palette.white}; }
   .modal-stats-row { transition:background 0.1s; }
   .modal-stats-row:hover td { background:rgba(255,255,255,0.04); }
-  .header-title-text { font-size:22px; font-weight:800; color:${palette.white}; line-height:1.05; letter-spacing:0.06em; font-family:'Syne',sans-serif; white-space:nowrap; }
+  .header-title-text { font-size:22px; font-weight:800; color:${palette.white}; line-height:1.05; letter-spacing:0; font-family:'Syne',sans-serif; white-space:nowrap; }
   .header-center { display:flex; align-items:center; gap:16px; justify-content:center; }
   .header-logo { height:48px; object-fit:contain; filter:invert(1); flex-shrink:0; }
   .header-divider { width:1px; height:40px; background:${palette.border}; flex-shrink:0; }
-  .header-sub { font-size:9px; color:${palette.dove}; letter-spacing:0.18em; margin-top:4px; font-family:'Space Mono',monospace; white-space:nowrap; }
+  .header-sub { font-size:12px; color:${palette.dove}; letter-spacing:0; margin-top:4px; font-family:'Space Mono',monospace; white-space:nowrap; }
   @media (max-width:500px) { .header-logo { display:none; } .header-divider { display:none; } .header-title-text { font-size:18px; } }
-  @media (max-width:360px) { .header-title-text { font-size:15px; letter-spacing:0.03em; } }
+  @media (max-width:360px) { .header-title-text { font-size:15px; letter-spacing:0; } }
 `;
 }
 
@@ -211,21 +216,9 @@ function nameToSlug(name) {
   return found ? found[0] : null;
 }
 
-function getTodayGames() {
-  const today = new Date();
-  const pad = n => String(n).padStart(2, "0");
-  const todayStr = `${today.getFullYear()}-${pad(today.getMonth()+1)}-${pad(today.getDate())}`;
-  const games = [];
-  for (const line of SCHEDULE_RAW.trim().split("\n")) {
-    const parts = line.split("\t");
-    const date = parts[0], away = parts[1], home = parts[2];
-    if (date === todayStr) {
-      const awaySlug = nameToSlug(away);
-      const homeSlug = nameToSlug(home);
-      if (awaySlug && homeSlug) games.push({ away: awaySlug, home: homeSlug });
-    }
-  }
-  return games;
+function useTodayGames() {
+  const { games } = useSchedule();
+  return useMemo(() => games.map(game => ({ away: abbrToSlug(game.awayTeam.abbrev), home: abbrToSlug(game.homeTeam.abbrev) })), [games]);
 }
 
 function abbrToSlug(abbr) {
@@ -239,39 +232,85 @@ function TeamLogo({ slug, abbr, size = 48 }) {
   return <img src={LOGO_URL(slug, abbr)} alt={abbr} width={size} height={size} onError={() => setErr(true)} style={{ objectFit: "contain", flexShrink: 0 }} />;
 }
 
+const DATA_SEASON = seasonForDate(new Date(UPDATED_AT + 'T12:00:00Z'));
+const RosterContext = createContext(null);
+const TEAM_COLORS = {
+  ANA: '#B64D20', BOS: '#E5BC46', BUF: '#154E9B', CGY: '#C52E34', CAR: '#C8303C',
+  CHI: '#C7373C', COL: '#863C50', CBJ: '#234E80', DAL: '#17875E', DET: '#CB3540',
+  EDM: '#D96629', FLA: '#AE3844', LAK: '#454B52', MIN: '#267757', MTL: '#BE3340',
+  NSH: '#DFB632', NJD: '#BD3440', NYI: '#D06A2A', NYR: '#245CB1', OTT: '#B73640',
+  PHI: '#D46B29', PIT: '#DABB47', SJS: '#18858A', SEA: '#568F9D', STL: '#2764B3',
+  TBL: '#2B5DA6', TOR: '#2A62AE', UTA: '#719CBD', VAN: '#286691', VGK: '#AE9858',
+  WSH: '#BE3442', WPG: '#2B537C',
+};
+
+function TeamBrowser() {
+  const [slug, setSlug] = useState('vancouver-canucks');
+  const [query, setQuery] = useState('');
+  const [roster, setRoster] = useState({});
+  const [rosterError, setRosterError] = useState(false);
+  const team = NHL_TEAMS[slug];
+  useEffect(() => {
+    let active = true;
+    setRoster({}); setRosterError(false);
+    getJSON(`/api/roster?team=${team.abbr}&season=${DATA_SEASON}`, 3600000)
+      .then(data => {
+        const players = Object.fromEntries(data.players.map(player => [normalizeName(player.firstName + ' ' + player.lastName), { ...player, snapshot: true }]));
+        if (active) setRoster({ team: team.abbr, players });
+      }).catch(() => { if (active) setRosterError(true); });
+    return () => { active = false; };
+  }, [team.abbr]);
+  const visible = Object.entries(NHL_TEAMS).filter(([, t]) => (t.city + ' ' + t.name + ' ' + t.abbr).toLowerCase().includes(query.toLowerCase()));
+  return <main className="team-browser">
+    <aside className="team-navigation" aria-label="Teams">
+      <label className="team-search"><Search size={17} /><input aria-label="Search teams" placeholder="Find a team" value={query} onChange={event => setQuery(event.target.value)} /></label>
+      <select className="mobile-team-select" aria-label="Selected team" value={slug} onChange={event => setSlug(event.target.value)}>
+        {Object.entries(NHL_TEAMS).map(([key, t]) => <option value={key} key={key}>{t.city} {t.name}</option>)}
+      </select>
+      <div className="team-list">{visible.map(([key, t]) => <button key={key} className={slug === key ? 'selected' : ''} aria-pressed={slug === key} onClick={() => setSlug(key)}>
+        <TeamLogo slug={key} abbr={t.abbr} size={26} /><span>{t.city}<small>{t.name}</small></span><span className="team-abbr">{t.abbr}</span>
+      </button>)}
+      {!visible.length && <p className="data-state">No matching teams.</p>}</div>
+    </aside>
+    <section className="team-content">
+      <header className="team-heading"><TeamLogo slug={slug} abbr={team.abbr} size={60} /><div><p className="muted">{seasonLabel(DATA_SEASON)} lineup snapshot</p><h1>{team.city} {team.name}</h1></div>
+        {STANDINGS[team.abbr] && <div className="team-record"><span>Record as of {STANDINGS[team.abbr].date}</span><strong>{STANDINGS[team.abbr].record}</strong></div>}
+      </header>
+      <p className="snapshot-notice"><AlertCircle size={17} /> Observed {UPDATED_AT}. Lineups may have changed since this snapshot.</p>
+      {rosterError && <p className="muted">Jersey numbers are temporarily unavailable.</p>}
+      <RosterContext.Provider value={{ players: roster.team === team.abbr ? roster.players : {}, color: TEAM_COLORS[team.abbr], team: team.abbr }}>
+        <div className="team-lineup"><LineupContent data={TEAMS_DATA[slug]} /></div>
+      </RosterContext.Provider>
+    </section>
+  </main>;
+}
+
 function PlayerCard({ name, pos, lineChangedTo }) {
-  const parts = name.split(" ");
-  const last = parts.slice(-1)[0];
-  const first = parts.slice(0, -1).join(" ");
-  const isStarter = pos === "STR";
-  const isBackup = pos === "BKP";
-  const isGoalie = isStarter || isBackup;
-  return (
-    <div
-      className="player-card-clickable"
-      onClick={(e) => { e.stopPropagation(); triggerPlayerLookup?.(name); }}
-      style={{ background: "#E8EAEC", border: `1px solid #D0D4D8`, borderRadius: 4, padding: "6px 4px", display: "flex", flexDirection: "column", alignItems: "center", flex: 1, minWidth: 0, position: "relative" }}
-    >
-      {lineChangedTo != null && (
-        <div title={`Moved to Line ${lineChangedTo}`} style={{ position: "absolute", top: 3, right: 3, width: 6, height: 6, borderRadius: "50%", background: "#C9A96E", flexShrink: 0 }} />
-      )}
-      <span style={{ fontSize: 8, fontWeight: 700, color: "#8A8E91", letterSpacing: "0.1em", marginBottom: 3, fontFamily: "'Space Mono', monospace" }}>{isGoalie ? "" : pos}</span>
-      {isGoalie && (
-        <span style={{ fontSize: 7, fontWeight: 700, letterSpacing: "0.08em", padding: "1px 4px", borderRadius: 3, marginBottom: 3, fontFamily: "'Space Mono',monospace", background: isStarter ? "rgba(30,132,73,0.18)" : "rgba(104,107,108,0.18)", color: isStarter ? "#1e8449" : "#686B6C", border: `1px solid ${isStarter ? "rgba(30,132,73,0.35)" : "rgba(104,107,108,0.35)"}` }}>
-          {isStarter ? "STARTER" : "BACKUP"}
-        </span>
-      )}
-      <span style={{ fontSize: 8, color: "#555", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "100%", textAlign: "center" }}>{first}</span>
-      <span style={{ fontSize: 11, fontWeight: 700, color: "#161616", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "100%", textAlign: "center" }}>{last}</span>
-    </div>
-  );
+  const roster = useContext(RosterContext);
+  const player = roster?.players[normalizeName(name)];
+  const isGoalie = pos === 'STR' || pos === 'BKP';
+  const parts = name.split(' ');
+  const first = player?.firstName || parts.slice(0, -1).join(' ');
+  const last = player?.lastName || parts.slice(-1)[0];
+  const label = isGoalie ? 'G' : pos;
+  return <button type="button" className="player-card-clickable player-tile"
+    aria-label={`View ${name} statistics`}
+    onClick={event => { event.stopPropagation(); triggerPlayerLookup?.(name, player); }}>
+    {roster && <span className="player-jersey" aria-hidden="true" style={{ '--jersey-color': roster.color }}>
+      <Shirt size={52} strokeWidth={1.2} fill="var(--jersey-color)" />
+      <span>{player?.number ?? ''}</span>
+    </span>}
+    <span className="player-name"><span>{first}</span><strong>{last}</strong></span>
+    <span className="player-position">{label}</span>
+    {lineChangedTo != null && <span className="line-change">Line {lineChangedTo}</span>}
+  </button>;
 }
 
 function ForwardLine({ line, lineNum }) {
   const pos = line.length === 3 ? ["LW","C","RW"] : line.length === 2 ? ["C","RW"] : ["C"];
   return (
     <div style={{ marginBottom: 12 }}>
-      <div style={{ fontSize: 9, color: P.casper, fontWeight: 700, letterSpacing: "0.12em", marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>LINE {lineNum}</div>
+      <div style={{ fontSize: 12, color: P.casper, fontWeight: 700, letterSpacing: 0, marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>LINE {lineNum}</div>
       <div style={{ display: "flex", gap: 4 }}>{line.map((p, i) => <PlayerCard key={i} name={p} pos={pos[i]} lineChangedTo={LINE_CHANGES[p] ?? null} />)}</div>
     </div>
   );
@@ -280,7 +319,7 @@ function ForwardLine({ line, lineNum }) {
 function DefensePair({ pair, pairNum }) {
   return (
     <div style={{ marginBottom: 12 }}>
-      <div style={{ fontSize: 9, color: P.dove, fontWeight: 700, letterSpacing: "0.12em", marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>PAIR {pairNum}</div>
+      <div style={{ fontSize: 12, color: P.dove, fontWeight: 700, letterSpacing: 0, marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>PAIR {pairNum}</div>
       <div style={{ display: "flex", gap: 4 }}>{pair.map((p, i) => <PlayerCard key={i} name={p} pos={i === 0 ? "LD" : "RD"} />)}</div>
     </div>
   );
@@ -290,8 +329,8 @@ function PPUnit({ unit, unitNum }) {
   if (!unit || unit.length === 0) return null;
   return (
     <div style={{ marginBottom: 12 }}>
-      <div style={{ fontSize: 9, color: "#e67e22", fontWeight: 700, letterSpacing: "0.12em", marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>PP{unitNum}</div>
-      <div style={{ display: "flex", gap: 4 }}>{unit.map((p, i) => <PlayerCard key={i} name={p} pos={`PP${unitNum}`} />)}</div>
+      <div style={{ fontSize: 12, color: "#e67e22", fontWeight: 700, letterSpacing: 0, marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>PP{unitNum}</div>
+      <div className="powerplay-grid">{unit.map((p, i) => <PlayerCard key={i} name={p} pos={`PP${unitNum}`} />)}</div>
     </div>
   );
 }
@@ -299,7 +338,7 @@ function PPUnit({ unit, unitNum }) {
 function Divider({ label, color }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 8, margin: "16px 0 10px" }}>
-      <span style={{ fontSize: 9, fontWeight: 700, color: color || P.casper, letterSpacing: "0.14em", whiteSpace: "nowrap", fontFamily: "'Syne', sans-serif" }}>{label}</span>
+      <span style={{ fontSize: 12, fontWeight: 700, color: color || P.casper, letterSpacing: 0, whiteSpace: "nowrap", fontFamily: "'Syne', sans-serif" }}>{label}</span>
       <div style={{ flex: 1, height: 1, background: P.border }} />
     </div>
   );
@@ -332,18 +371,18 @@ function TeamStrip({ slug, data, expanded, onToggle }) {
     <div className={`strip${expanded ? " expanded" : ""}`} onClick={onToggle}>
       <div style={{ position: "absolute", top: "40%", left: 0, width: COLLAPSED_W, transform: "translateY(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 14, opacity: expanded ? 0 : 1, transition: "opacity 0.15s", pointerEvents: "none", padding: "0 10px" }}>
         <TeamLogo slug={slug} abbr={t.abbr} size={52} />
-        <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize: 10, fontWeight: 700, color: P.casper, letterSpacing: "0.14em", whiteSpace: "nowrap", fontFamily: "'Syne', sans-serif" }}>{t.city.toUpperCase()}</div>
+        <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize: 12, fontWeight: 700, color: P.casper, letterSpacing: 0, whiteSpace: "nowrap", fontFamily: "'Syne', sans-serif" }}>{t.city.toUpperCase()}</div>
       </div>
       <div style={{ opacity: expanded ? 1 : 0, transition: "opacity 0.2s 0.15s", padding: "18px 20px", minWidth: EXPANDED_W, pointerEvents: expanded ? "auto" : "none", overflowY: "auto", maxHeight: `calc(100vh - ${HEADER_H + TABS_H}px)` }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, paddingBottom: 14, borderBottom: `1px solid ${P.border}` }}>
           <TeamLogo slug={slug} abbr={t.abbr} size={48} />
           <div>
             <div style={{ fontSize: 16, fontWeight: 700, color: P.white, lineHeight: 1.1, fontFamily: "'Syne', sans-serif" }}>{t.city}</div>
-            <div style={{ fontSize: 11, color: P.dove, marginTop: 2 }}>{t.name}</div>
-            {STANDINGS[t.abbr] && <div style={{ fontSize: 10, color: P.casper, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: "0.06em" }}>{STANDINGS[t.abbr]}</div>}
+            <div style={{ fontSize: 14, color: P.dove, marginTop: 2 }}>{t.name}</div>
+            {STANDINGS[t.abbr] && <div style={{ fontSize: 12, color: P.casper, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>{STANDINGS[t.abbr].record}</div>}
           </div>
         </div>
-        <LineupContent data={data} />
+        {expanded && <LineupContent data={data} />}
       </div>
     </div>
   );
@@ -357,18 +396,18 @@ function MobileRow({ slug, data, expanded, onToggle }) {
         <TeamLogo slug={slug} abbr={t.abbr} size={40} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: P.white, fontFamily: "'Syne', sans-serif" }}>{t.city}</div>
-          <div style={{ fontSize: 10, color: P.dove }}>{t.name}</div>
+          <div style={{ fontSize: 12, color: P.dove }}>{t.name}</div>
         </div>
         <div style={{ fontSize: 18, color: P.dove, lineHeight: 1, transform: expanded ? "rotate(180deg)" : "none", transition: "transform 0.25s" }}>▾</div>
       </div>
       <div className={`mobile-body${expanded ? " open" : ""}`}>
         {expanded && STANDINGS[t.abbr] && (
           <div style={{ padding: "10px 20px 0", display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ fontSize: 10, color: P.dove, fontFamily: "'Space Mono',monospace", letterSpacing: "0.06em" }}>RECORD</span>
-            <span style={{ fontSize: 11, fontWeight: 700, color: P.casper, fontFamily: "'Space Mono',monospace" }}>{STANDINGS[t.abbr]}</span>
+            <span style={{ fontSize: 12, color: P.dove, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>RECORD</span>
+            <span style={{ fontSize: 14, fontWeight: 700, color: P.casper, fontFamily: "'Space Mono',monospace" }}>{STANDINGS[t.abbr].record}</span>
           </div>
         )}
-        <div style={{ padding: "0 20px 24px" }}><LineupContent data={data} /></div>
+        <div style={{ padding: "0 20px 24px" }}>{expanded && <LineupContent data={data} />}</div>
       </div>
     </div>
   );
@@ -388,7 +427,7 @@ function InjuriesView({ isMobile }) {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
 
-  const todayGames = useMemo(() => getTodayGames(), []);
+  const todayGames = useTodayGames();
   const todaySlugs = useMemo(() => {
     const s = new Set();
     todayGames.forEach(g => { s.add(g.away); s.add(g.home); });
@@ -418,26 +457,26 @@ function InjuriesView({ isMobile }) {
     <div style={{ padding: "16px 24px", maxWidth: 900, margin: "0 auto" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16, flexWrap: "wrap" }}>
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search team..."
-          style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 10px", color: P.white, fontSize: 12, fontFamily: "inherit", width: 160 }} />
+          style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 10px", color: P.white, fontSize: 14, fontFamily: "inherit", width: 160 }} />
         {todaySlugs.size > 0 && (
           <>
             <button onClick={() => setFilter("all")}
-              style={{ background: filter === "all" ? P.active : "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: filter === "all" ? P.white : P.dove, fontSize: 9, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: "0.08em" }}>
+              style={{ background: filter === "all" ? P.active : "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: filter === "all" ? P.white : P.dove, fontSize: 12, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>
               ALL TEAMS
             </button>
             <button onClick={() => setFilter("today")}
-              style={{ background: filter === "today" ? P.active : "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: filter === "today" ? P.white : P.dove, fontSize: 9, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: "0.08em" }}>
+              style={{ background: filter === "today" ? P.active : "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: filter === "today" ? P.white : P.dove, fontSize: 12, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>
               TODAY'S GAMES
             </button>
           </>
         )}
-        <span style={{ fontSize: 10, color: P.dove, marginLeft: "auto", letterSpacing: "0.08em", fontFamily: "'Space Mono',monospace" }}>
+        <span style={{ fontSize: 12, color: P.dove, marginLeft: "auto", letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>
           {totalInjured} PLAYER{totalInjured !== 1 ? "S" : ""} · {displaySlugs.length} TEAM{displaySlugs.length !== 1 ? "S" : ""}
         </span>
       </div>
 
       {displaySlugs.length === 0 && (
-        <div style={{ textAlign: "center", padding: "40px 0", color: P.dove, fontSize: 12 }}>
+        <div style={{ textAlign: "center", padding: "40px 0", color: P.dove, fontSize: 14 }}>
           {Object.keys(INJURIES_DATA).length === 0
             ? "No injury data available — check back after the next data update."
             : "No injuries found matching your search."}
@@ -452,14 +491,14 @@ function InjuriesView({ isMobile }) {
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10, paddingBottom: 8, borderBottom: `1px solid ${P.border}` }}>
               <TeamLogo slug={slug} abbr={t.abbr} size={28} />
               <span style={{ fontSize: 13, fontWeight: 700, color: P.white, fontFamily: "'Syne',sans-serif" }}>{t.city} {t.name}</span>
-              <span style={{ fontSize: 10, color: P.dove, marginLeft: "auto", fontFamily: "'Space Mono',monospace" }}>{players.length}</span>
+              <span style={{ fontSize: 12, color: P.dove, marginLeft: "auto", fontFamily: "'Space Mono',monospace" }}>{players.length}</span>
             </div>
             {players.map((p, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", padding: "5px 0", borderBottom: i < players.length - 1 ? `1px solid ${P.border}` : "none" }}>
-                <span style={{ fontSize: 10, fontWeight: 700, color: P.dove, width: 28, fontFamily: "'Space Mono',monospace" }}>{p.pos}</span>
-                <span style={{ fontSize: 12, fontWeight: 600, color: P.white, flex: 1 }}>{p.name}</span>
+                <span style={{ fontSize: 12, fontWeight: 700, color: P.dove, width: 28, fontFamily: "'Space Mono',monospace" }}>{p.pos}</span>
+                <span style={{ fontSize: 14, fontWeight: 600, color: P.white, flex: 1 }}>{p.name}</span>
                 <InjuryBadge type={p.status} />
-                {p.desc && <span style={{ fontSize: 10, color: P.dove, marginLeft: 8 }}>{p.desc}</span>}
+                {p.desc && <span style={{ fontSize: 12, color: P.dove, marginLeft: 8 }}>{p.desc}</span>}
               </div>
             ))}
           </div>
@@ -484,9 +523,9 @@ function CompareView({ isMobile }) {
       <div style={{ borderBottom: `1px solid ${P.border}`, padding: "12px 24px", background: P.bg }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Filter teams..."
-            style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.white, fontSize: 12, fontFamily: "inherit", width: 160 }} />
-          {selected.length > 0 && <button onClick={() => setSelected([])} style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.dove, fontSize: 9, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: "0.08em" }}>CLEAR ALL</button>}
-          <span style={{ fontSize: 10, color: P.dove, marginLeft: "auto", fontFamily: "'Space Mono',monospace" }}>{selected.length} selected</span>
+            style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.white, fontSize: 14, fontFamily: "inherit", width: 160 }} />
+          {selected.length > 0 && <button onClick={() => setSelected([])} style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.dove, fontSize: 12, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>CLEAR ALL</button>}
+          <span style={{ fontSize: 12, color: P.dove, marginLeft: "auto", fontFamily: "'Space Mono',monospace" }}>{selected.length} selected</span>
         </div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
           {filteredSlugs.map(slug => {
@@ -495,7 +534,7 @@ function CompareView({ isMobile }) {
             return (
               <div key={slug} className={`compare-chip${isSel ? " selected" : ""}`} onClick={() => toggle(slug)}>
                 <TeamLogo slug={slug} abbr={t.abbr} size={20} />
-                <span style={{ fontSize: 11, fontWeight: 600, color: isSel ? P.white : P.casper, whiteSpace: "nowrap" }}>{t.abbr}</span>
+                <span style={{ fontSize: 14, fontWeight: 600, color: isSel ? P.white : P.casper, whiteSpace: "nowrap" }}>{t.abbr}</span>
                 {isSel && <button className="rm-btn" onClick={e => { e.stopPropagation(); toggle(slug); }}>×</button>}
               </div>
             );
@@ -505,7 +544,7 @@ function CompareView({ isMobile }) {
       {selected.length === 0 ? (
         <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 10 }}>
           <span style={{ fontSize: 28, opacity: 0.15 }}>⬆</span>
-          <span style={{ fontSize: 12, color: P.dove, letterSpacing: "0.1em", fontFamily: "'Syne',sans-serif" }}>SELECT TEAMS ABOVE TO COMPARE</span>
+          <span style={{ fontSize: 14, color: P.dove, letterSpacing: 0, fontFamily: "'Syne',sans-serif" }}>SELECT TEAMS ABOVE TO COMPARE</span>
         </div>
       ) : (
         <div style={{ flex: 1, overflowX: "auto", overflowY: "hidden" }}>
@@ -518,7 +557,7 @@ function CompareView({ isMobile }) {
                     <TeamLogo slug={slug} abbr={t.abbr} size={40} />
                     <div>
                       <div style={{ fontSize: 14, fontWeight: 700, color: P.white, fontFamily: "'Syne',sans-serif" }}>{t.city}</div>
-                      <div style={{ fontSize: 10, color: P.dove }}>{t.name}</div>
+                      <div style={{ fontSize: 12, color: P.dove }}>{t.name}</div>
                     </div>
                     <button className="rm-btn" style={{ marginLeft: "auto", fontSize: 18 }} onClick={() => toggle(slug)}>×</button>
                   </div>
@@ -536,117 +575,28 @@ function CompareView({ isMobile }) {
 }
 
 // ── TODAY VIEW ────────────────────────────────────────────────────────
-function TodayView({ isMobile }) {
-  const [expanded, setExpanded] = useState({});
-  const [playoffToday, setPlayoffToday] = useState([]);
-  const toggle = slug => setExpanded(prev => ({ ...prev, [slug]: !prev[slug] }));
-  const TODAY_GAMES = useMemo(() => getTodayGames(), []);
-
-  useEffect(() => {
-    const today = new Date().toISOString().slice(0, 10);
-    fetch(`/api/playoff-schedule?date=${today}`)
-      .then(r => r.json())
-      .then(d => setPlayoffToday(d.games || []))
-      .catch(() => {});
-  }, []);
-
-  const playoffSection = playoffToday.length > 0 ? (
-    <div style={{ padding: "14px 24px", borderBottom: `2px solid ${P.dim}` }}>
-      <div style={{ fontSize: 9, fontWeight: 700, color: "#e67e22", letterSpacing: "0.18em", marginBottom: 10, fontFamily: "'Syne',sans-serif" }}>TONIGHT'S PLAYOFFS</div>
-      {playoffToday.map(g => {
-        const awaySlug = abbrToSlug(g.awayTeam.abbrev);
-        const homeSlug = abbrToSlug(g.homeTeam.abbrev);
-        const ser = Object.values(BRACKET_DATA.series).find(
-          s => (s.topSeed === g.awayTeam.abbrev || s.bottomSeed === g.awayTeam.abbrev) &&
-               (s.topSeed === g.homeTeam.abbrev || s.bottomSeed === g.homeTeam.abbrev)
-        );
-        const gameNum = ser ? ser.topWins + ser.bottomWins + 1 : null;
-        const seriesLabel = ser ? `Game ${gameNum} · ${ser.topSeed} ${ser.topWins}—${ser.bottomWins} ${ser.bottomSeed}` : "";
-        const timeStr = g.startTimeUTC
-          ? new Date(g.startTimeUTC).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", timeZoneName: "short" })
-          : "";
-        return (
-          <div key={g.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 0", borderBottom: `1px solid ${P.border}` }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 6, flex: 1, minWidth: 0 }}>
-              {awaySlug && <TeamLogo slug={awaySlug} abbr={g.awayTeam.abbrev} size={26} />}
-              <span style={{ fontSize: 11, fontWeight: 700, color: P.casper, fontFamily: "'Syne',sans-serif" }}>{g.awayTeam.abbrev}</span>
-              {g.awayTeam.score != null && <span style={{ fontSize: 16, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>{g.awayTeam.score}</span>}
-              <span style={{ fontSize: 9, color: P.dim, margin: "0 4px" }}>@</span>
-              {g.homeTeam.score != null && <span style={{ fontSize: 16, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>{g.homeTeam.score}</span>}
-              <span style={{ fontSize: 11, fontWeight: 700, color: P.casper, fontFamily: "'Syne',sans-serif" }}>{g.homeTeam.abbrev}</span>
-              {homeSlug && <TeamLogo slug={homeSlug} abbr={g.homeTeam.abbrev} size={26} />}
-            </div>
-            <div style={{ textAlign: "right", flexShrink: 0 }}>
-              {seriesLabel && <div style={{ fontSize: 9, color: P.dove, fontFamily: "'Space Mono',monospace" }}>{seriesLabel}</div>}
-              {g.gameState === "FUT" && timeStr && <div style={{ fontSize: 9, color: P.casper, fontFamily: "'Space Mono',monospace", marginTop: 2 }}>{timeStr}</div>}
-              {g.gameState === "LIVE" && <div style={{ fontSize: 9, color: P.green, fontFamily: "'Space Mono',monospace", marginTop: 2 }}>LIVE{g.period ? ` · P${g.period}` : ""}</div>}
-              {(g.gameState === "FINAL" || g.gameState === "OFF") && <div style={{ fontSize: 9, color: P.dove, fontFamily: "'Space Mono',monospace", marginTop: 2 }}>FINAL</div>}
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  ) : null;
-
-  const noGames = TODAY_GAMES.length === 0 && playoffToday.length === 0;
-
-  if (isMobile) {
-    return (
-      <>
-        {playoffSection}
-        {noGames && (
-          <div style={{ textAlign: "center", padding: "48px 24px", color: P.dove }}>
-            <div style={{ fontSize: 11, letterSpacing: "0.12em", fontFamily: "'Syne',sans-serif" }}>NO GAMES SCHEDULED TODAY</div>
-          </div>
-        )}
-        <div>
-          {TODAY_GAMES.map((g, i) => {
-            const away = NHL_TEAMS[g.away], home = NHL_TEAMS[g.home];
-            return (
-              <div key={i}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 20px", background: P.bg, borderTop: i > 0 ? `2px solid ${P.dim}` : "none", borderBottom: `1px solid ${P.border}` }}>
-                  <div style={{ flex: 1, height: 1, background: P.border }} />
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <TeamLogo slug={g.away} abbr={away?.abbr} size={22} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: P.dove, fontFamily: "'Syne',sans-serif" }}>{away?.abbr}</span>
-                    <span style={{ fontSize: 9, color: P.dim, margin: "0 2px" }}>@</span>
-                    <span style={{ fontSize: 10, fontWeight: 700, color: P.dove, fontFamily: "'Syne',sans-serif" }}>{home?.abbr}</span>
-                    <TeamLogo slug={g.home} abbr={home?.abbr} size={22} />
-                  </div>
-                  <div style={{ flex: 1, height: 1, background: P.border }} />
-                </div>
-                {[g.away, g.home].map(slug => <MobileRow key={slug} slug={slug} data={TEAMS_DATA[slug]} expanded={!!expanded[slug]} onToggle={() => toggle(slug)} />)}
-              </div>
-            );
-          })}
-        </div>
-      </>
-    );
-  }
-
-  return (
-    <>
-      {playoffSection}
-      {noGames && (
-        <div style={{ textAlign: "center", padding: "48px 24px", color: P.dove }}>
-          <div style={{ fontSize: 11, letterSpacing: "0.12em", fontFamily: "'Syne',sans-serif" }}>NO GAMES SCHEDULED TODAY</div>
-        </div>
-      )}
-      <div style={{ overflowX: "auto" }}>
-        <div style={{ display: "flex", alignItems: "stretch", minHeight: TODAY_GAMES.length ? `calc(100vh - ${HEADER_H + TABS_H}px)` : 0 }}>
-          {TODAY_GAMES.map((g, i) => (
-            <React.Fragment key={i}>
-              <TeamStrip slug={g.away} data={TEAMS_DATA[g.away]} expanded={!!expanded[g.away]} onToggle={() => toggle(g.away)} />
-              <TeamStrip slug={g.home} data={TEAMS_DATA[g.home]} expanded={!!expanded[g.home]} onToggle={() => toggle(g.home)} />
-              {i < TODAY_GAMES.length - 1 && (
-                <div style={{ width: 3, flexShrink: 0, background: P.casper, opacity: 0.3, alignSelf: "stretch" }} />
-              )}
-            </React.Fragment>
-          ))}
+function TodayView() {
+  const [date, setDate] = useState(localDate());
+  const { games, loading, error } = useSchedule(date);
+  const [open, setOpen] = useState({});
+  return <main className="schedule-page">
+    <header className="schedule-heading"><h1>Schedule</h1><label>Date<input type="date" aria-label="Schedule date" value={date} onChange={event => { if (event.target.value) setDate(event.target.value); }} /></label></header>
+    {loading && <p className="data-state" role="status">Loading schedule...</p>}
+    {error && <p className="data-state" role="alert">{error}</p>}
+    {!loading && !error && !games.length && <p className="data-state">No games scheduled for {date}.</p>}
+    {games.map(game => <article className="schedule-game" key={game.id}>
+      <div className="schedule-game-header">
+        <div className="matchup-teams">{[game.awayTeam, game.homeTeam].map(team => <div key={team.abbrev}>
+          <TeamLogo slug={abbrToSlug(team.abbrev)} abbr={team.abbrev} size={36} /><strong>{team.abbrev}</strong><span>{team.score ?? '-'}</span>
+        </div>)}</div>
+        <div className="matchup-status"><span>{['FINAL', 'OFF'].includes(game.gameState) ? 'Final' : game.gameState === 'LIVE' || game.gameState === 'CRIT' ? 'Live' : new Date(game.startTimeUTC).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' })}</span>
+          <small>{game.gameType === 1 ? 'Preseason' : game.gameType === 3 ? 'Playoffs' : 'Regular season'}</small>
+          <button className="text-button" aria-expanded={!!open[game.id]} onClick={() => setOpen(value => ({ ...value, [game.id]: !value[game.id] }))}>{open[game.id] ? 'Close lineups' : 'Lineups'}</button>
         </div>
       </div>
-    </>
-  );
+      {open[game.id] && <><p className="snapshot-notice">Lineup snapshot: {UPDATED_AT}. Not confirmed for this game.</p><div className="matchup-lineups">{[game.awayTeam, game.homeTeam].map(team => <section key={team.abbrev}><h2>{team.abbrev}</h2>{TEAMS_DATA[abbrToSlug(team.abbrev)] ? <LineupContent data={TEAMS_DATA[abbrToSlug(team.abbrev)]} /> : <p>No lineup available.</p>}</section>)}</div></>}
+    </article>)}
+  </main>;
 }
 
 // ── PLAYOFFS VIEW ─────────────────────────────────────────────────────
@@ -674,7 +624,7 @@ function PlayoffsView({ isMobile }) {
     if (isUpcoming && ser.topSeed === "TBD") {
       return (
         <div style={{ padding: "14px 16px", background: P.surface, border: `1px solid ${P.border}`, borderRadius: 6, opacity: 0.4 }}>
-          <span style={{ fontSize: 9, color: P.dove, fontFamily: "'Space Mono',monospace", letterSpacing: "0.1em" }}>TO BE DETERMINED</span>
+          <span style={{ fontSize: 12, color: P.dove, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>TO BE DETERMINED</span>
         </div>
       );
     }
@@ -686,41 +636,41 @@ function PlayoffsView({ isMobile }) {
         <div style={{ padding: "14px 16px", display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, flex: 1, minWidth: 0 }}>
             {topSlug && <TeamLogo slug={topSlug} abbr={ser.topSeed} size={28} />}
-            <span style={{ fontSize: 12, fontWeight: 700, color: isDone && ser.winnerAbbr === ser.topSeed ? P.white : P.casper, fontFamily: "'Syne',sans-serif" }}>{ser.topSeed}</span>
+            <span style={{ fontSize: 14, fontWeight: 700, color: isDone && ser.winnerAbbr === ser.topSeed ? P.white : P.casper, fontFamily: "'Syne',sans-serif" }}>{ser.topSeed}</span>
           </div>
           <div style={{ textAlign: "center", flexShrink: 0 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <span style={{ fontSize: 22, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace", minWidth: 18, textAlign: "right" }}>{ser.topWins}</span>
-              <span style={{ fontSize: 10, color: P.dim }}>—</span>
+              <span style={{ fontSize: 12, color: P.dim }}>—</span>
               <span style={{ fontSize: 22, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace", minWidth: 18, textAlign: "left" }}>{ser.bottomWins}</span>
             </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 8, flex: 1, minWidth: 0, justifyContent: "flex-end" }}>
-            <span style={{ fontSize: 12, fontWeight: 700, color: isDone && ser.winnerAbbr === ser.bottomSeed ? P.white : P.casper, fontFamily: "'Syne',sans-serif" }}>{ser.bottomSeed}</span>
+            <span style={{ fontSize: 14, fontWeight: 700, color: isDone && ser.winnerAbbr === ser.bottomSeed ? P.white : P.casper, fontFamily: "'Syne',sans-serif" }}>{ser.bottomSeed}</span>
             {botSlug && <TeamLogo slug={botSlug} abbr={ser.bottomSeed} size={28} />}
           </div>
         </div>
         {/* Status + expand toggle */}
         <div style={{ padding: "0 16px 10px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ fontSize: 9, fontFamily: "'Space Mono',monospace", color: isLive ? P.casper : P.dove }}>
+          <span style={{ fontSize: 12, fontFamily: "'Space Mono',monospace", color: isLive ? P.casper : P.dove }}>
             {isLive && nextGame && `GAME ${nextGame.gameNumber} · ${fmtDate(nextGame.date)}`}
             {isLive && !nextGame && "IN PROGRESS"}
             {isDone && `${ser.winnerAbbr} WINS IN ${ser.topWins + ser.bottomWins}`}
           </span>
-          <span style={{ fontSize: 9, color: P.dim, fontFamily: "'Space Mono',monospace" }}>{isExp ? "▲" : "▼"} GAMES</span>
+          <span style={{ fontSize: 12, color: P.dim, fontFamily: "'Space Mono',monospace" }}>{isExp ? "▲" : "▼"} GAMES</span>
         </div>
         {/* Game-by-game (expanded) */}
         {isExp && (
           <div style={{ borderTop: `1px solid ${P.border}` }}>
             {ser.games.map(g => (
               <div key={g.gameNumber} style={{ display: "flex", alignItems: "center", padding: "7px 16px", gap: 10, borderBottom: `1px solid ${P.border}`, opacity: g.state === "scheduled" ? 0.4 : 1 }}>
-                <span style={{ fontSize: 9, color: P.dove, fontFamily: "'Space Mono',monospace", minWidth: 20 }}>G{g.gameNumber}</span>
-                <span style={{ fontSize: 9, color: P.dim, fontFamily: "'Space Mono',monospace", flex: 1 }}>{fmtDate(g.date)} · {g.homeAbbr} HOME</span>
+                <span style={{ fontSize: 12, color: P.dove, fontFamily: "'Space Mono',monospace", minWidth: 20 }}>G{g.gameNumber}</span>
+                <span style={{ fontSize: 12, color: P.dim, fontFamily: "'Space Mono',monospace", flex: 1 }}>{fmtDate(g.date)} · {g.homeAbbr} HOME</span>
                 {g.state !== "scheduled"
-                  ? <span style={{ fontSize: 11, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>
+                  ? <span style={{ fontSize: 14, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>
                       {g.homeScore}–{g.awayScore}{g.state === "final-ot" ? " OT" : g.state === "final-2ot" ? " 2OT" : ""}
                     </span>
-                  : <span style={{ fontSize: 9, color: P.dim, fontFamily: "'Space Mono',monospace" }}>{g.time}</span>
+                  : <span style={{ fontSize: 12, color: P.dim, fontFamily: "'Space Mono',monospace" }}>{g.time}</span>
                 }
               </div>
             ))}
@@ -731,13 +681,13 @@ function PlayoffsView({ isMobile }) {
   }
 
   function RoundLabel({ label, color }) {
-    return <div style={{ fontSize: 9, fontWeight: 700, color: color || P.dove, letterSpacing: "0.14em", marginBottom: 8, fontFamily: "'Syne',sans-serif" }}>{label}</div>;
+    return <div style={{ fontSize: 12, fontWeight: 700, color: color || P.dove, letterSpacing: 0, marginBottom: 8, fontFamily: "'Syne',sans-serif" }}>{label}</div>;
   }
 
   function ConferenceBlock({ label, r1Ids, r2Ids, cfId }) {
     return (
       <div style={{ marginBottom: isMobile ? 32 : 0 }}>
-        <div style={{ fontSize: 10, fontWeight: 700, color: "#e67e22", letterSpacing: "0.18em", marginBottom: 16, fontFamily: "'Syne',sans-serif" }}>{label}</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: "#e67e22", letterSpacing: 0, marginBottom: 16, fontFamily: "'Syne',sans-serif" }}>{label}</div>
         <RoundLabel label="SECOND ROUND" />
         <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
           {r2Ids.map(id => <SeriesCard key={id} seriesId={id} />)}
@@ -756,8 +706,8 @@ function PlayoffsView({ isMobile }) {
     <div style={{ padding: "16px 24px", maxWidth: 1100, margin: "0 auto" }}>
       <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 24, paddingBottom: 14, borderBottom: `1px solid ${P.border}` }}>
         <div>
-          <div style={{ fontSize: 18, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: "0.06em" }}>2026 NHL PLAYOFFS</div>
-          <div style={{ fontSize: 9, color: P.dove, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: "0.1em" }}>SECOND ROUND IN PROGRESS · UPDATED {BRACKET_DATA.updatedAt}</div>
+          <div style={{ fontSize: 18, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: 0 }}>2026 NHL PLAYOFFS</div>
+          <div style={{ fontSize: 12, color: P.dove, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>SNAPSHOT · UPDATED {BRACKET_DATA.updatedAt}</div>
         </div>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 32, marginBottom: 32 }}>
@@ -765,7 +715,7 @@ function PlayoffsView({ isMobile }) {
         <ConferenceBlock label="WESTERN CONFERENCE" r1Ids={round1West} r2Ids={round2West} cfId={confFinals[1]} />
       </div>
       <div>
-        <div style={{ fontSize: 9, fontWeight: 700, color: P.yellow, letterSpacing: "0.18em", marginBottom: 8, fontFamily: "'Syne',sans-serif" }}>STANLEY CUP FINAL</div>
+        <div style={{ fontSize: 12, fontWeight: 700, color: P.yellow, letterSpacing: 0, marginBottom: 8, fontFamily: "'Syne',sans-serif" }}>STANLEY CUP FINAL</div>
         <SeriesCard seriesId={final} />
       </div>
     </div>
@@ -794,14 +744,14 @@ function IIHFRosterModal({ code, name, onClose }) {
     width: "100%", maxWidth: 520, maxHeight: "82vh", overflowY: "auto",
     boxShadow: "0 24px 64px rgba(0,0,0,0.6)",
   };
-  const sectionLabel = { fontSize: 9, fontWeight: 700, letterSpacing: "0.14em", color: P.dove,
+  const sectionLabel = { fontSize: 12, fontWeight: 700, letterSpacing: 0, color: P.dove,
     fontFamily: "'Space Mono',monospace", padding: "10px 16px 4px", borderTop: `1px solid ${P.border}` };
   const playerRow = { display: "flex", alignItems: "center", gap: 10, padding: "6px 16px",
     borderBottom: `1px solid ${P.border}22` };
-  const numStyle = { fontSize: 10, fontWeight: 700, color: P.casper, fontFamily: "'Space Mono',monospace",
+  const numStyle = { fontSize: 12, fontWeight: 700, color: P.casper, fontFamily: "'Space Mono',monospace",
     width: 28, textAlign: "right", flexShrink: 0 };
-  const nameStyle = { fontSize: 12, color: P.white, fontFamily: "'Space Mono',monospace", flex: 1 };
-  const clubStyle = { fontSize: 10, color: P.dove, fontFamily: "'Space Mono',monospace", textAlign: "right" };
+  const nameStyle = { fontSize: 14, color: P.white, fontFamily: "'Space Mono',monospace", flex: 1 };
+  const clubStyle = { fontSize: 12, color: P.dove, fontFamily: "'Space Mono',monospace", textAlign: "right" };
 
   function Section({ label, players }) {
     if (!players.length) return null;
@@ -826,8 +776,8 @@ function IIHFRosterModal({ code, name, onClose }) {
           borderBottom: `1px solid ${P.border}`, position: "sticky", top: 0, background: P.surface, zIndex: 1 }}>
           <img src={iihfFlagUrl(code)} alt={code} width={28} height={21} style={{ borderRadius: 3 }} />
           <div>
-            <div style={{ fontSize: 15, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: "0.04em" }}>{name}</div>
-            <div style={{ fontSize: 9, color: P.dove, fontFamily: "'Space Mono',monospace", letterSpacing: "0.08em" }}>
+            <div style={{ fontSize: 15, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: 0 }}>{name}</div>
+            <div style={{ fontSize: 12, color: P.dove, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>
               {forwards.length}F · {defense.length}D · {goalies.length}G
             </div>
           </div>
@@ -848,15 +798,15 @@ function IIHFView({ isMobile }) {
   const todayGames = IIHF_SCHEDULE_DATA.games.filter(g => g.date === todayStr);
   const [openRoster, setOpenRoster] = useState(null);
 
-  const thS = { fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", color: P.dove, padding: "8px 6px", textAlign: "center", borderBottom: `1px solid ${P.border}`, fontFamily: "'Space Mono',monospace", background: P.bg };
-  const tdS = { padding: "7px 6px", textAlign: "center", fontSize: 12, fontFamily: "'Space Mono',monospace", color: P.white, borderBottom: `1px solid ${P.border}` };
-  const codeBadge = { display: "inline-block", fontSize: 9, fontWeight: 700, letterSpacing: "0.08em", padding: "2px 5px", borderRadius: 3, background: P.dim, color: P.casper, fontFamily: "'Space Mono',monospace" };
+  const thS = { fontSize: 12, fontWeight: 700, letterSpacing: 0, color: P.dove, padding: "8px 6px", textAlign: "center", borderBottom: `1px solid ${P.border}`, fontFamily: "'Space Mono',monospace", background: P.bg };
+  const tdS = { padding: "7px 6px", textAlign: "center", fontSize: 14, fontFamily: "'Space Mono',monospace", color: P.white, borderBottom: `1px solid ${P.border}` };
+  const codeBadge = { display: "inline-block", fontSize: 12, fontWeight: 700, letterSpacing: 0, padding: "2px 5px", borderRadius: 3, background: P.dim, color: P.casper, fontFamily: "'Space Mono',monospace" };
 
   function GroupTable({ groupKey }) {
     const teams = IIHF_GROUPS_DATA.groups[groupKey] || [];
     return (
       <div style={{ marginBottom: isMobile ? 20 : 0 }}>
-        <div style={{ fontSize: 11, fontWeight: 700, color: P.casper, letterSpacing: "0.14em", marginBottom: 8, fontFamily: "'Syne',sans-serif" }}>GROUP {groupKey}</div>
+        <div style={{ fontSize: 14, fontWeight: 700, color: P.casper, letterSpacing: 0, marginBottom: 8, fontFamily: "'Syne',sans-serif" }}>GROUP {groupKey}</div>
         <div style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 6, overflow: "hidden" }}>
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
@@ -876,7 +826,7 @@ function IIHFView({ isMobile }) {
                   <td style={{ ...tdS, textAlign: "left", paddingLeft: 10 }}>
                     <img src={iihfFlagUrl(t.code)} alt={t.code} width={20} height={15} style={{ verticalAlign: "middle", borderRadius: 2, marginRight: 6, display: "inline-block" }} />
                     <span style={codeBadge}>{t.code}</span>
-                    {!isMobile && <span style={{ color: P.casper, fontSize: 11, marginLeft: 4 }}>{t.name}</span>}
+                    {!isMobile && <span style={{ color: P.casper, fontSize: 14, marginLeft: 4 }}>{t.name}</span>}
                   </td>
                   <td style={tdS}>{t.gp}</td>
                   <td style={tdS}>{t.w}</td>
@@ -910,15 +860,15 @@ function IIHFView({ isMobile }) {
       )}
 
       <div style={{ marginBottom: 20, paddingBottom: 14, borderBottom: `1px solid ${P.border}` }}>
-        <div style={{ fontSize: 18, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: "0.06em" }}>2026 IIHF WORLD CHAMPIONSHIP</div>
-        <div style={{ fontSize: 9, color: P.dove, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: "0.1em" }}>
+        <div style={{ fontSize: 18, fontWeight: 800, color: P.white, fontFamily: "'Syne',sans-serif", letterSpacing: 0 }}>2026 IIHF WORLD CHAMPIONSHIP</div>
+        <div style={{ fontSize: 12, color: P.dove, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>
           {IIHF_GROUPS_DATA.location} · {IIHF_GROUPS_DATA.dates}
         </div>
       </div>
 
       {todayGames.length > 0 && (
         <div style={{ marginBottom: 24 }}>
-          <div style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.14em", marginBottom: 10, fontFamily: "'Syne',sans-serif" }}>TODAY'S GAMES</div>
+          <div style={{ fontSize: 12, fontWeight: 700, color: P.casper, letterSpacing: 0, marginBottom: 10, fontFamily: "'Syne',sans-serif" }}>TODAY'S GAMES</div>
           {todayGames.map(g => (
             <div key={g.id} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", background: P.surface, border: `1px solid ${P.border}`, borderRadius: 6, marginBottom: 6 }}>
               <span style={{ ...codeBadge, marginRight: 0 }}>GRP {g.group}</span>
@@ -926,12 +876,12 @@ function IIHFView({ isMobile }) {
                 <img src={iihfFlagUrl(g.away)} alt={g.away} width={20} height={15} style={{ verticalAlign: "middle", borderRadius: 2 }} />
                 <span style={codeBadge}>{g.away}</span>
                 {g.awayScore != null && <span style={{ fontSize: 15, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>{g.awayScore}</span>}
-                <span style={{ fontSize: 9, color: P.dim }}>@</span>
+                <span style={{ fontSize: 12, color: P.dim }}>@</span>
                 {g.homeScore != null && <span style={{ fontSize: 15, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace" }}>{g.homeScore}</span>}
                 <img src={iihfFlagUrl(g.home)} alt={g.home} width={20} height={15} style={{ verticalAlign: "middle", borderRadius: 2 }} />
                 <span style={codeBadge}>{g.home}</span>
               </div>
-              <span style={{ fontSize: 9, fontFamily: "'Space Mono',monospace", color: g.state === "scheduled" ? P.casper : P.dove }}>
+              <span style={{ fontSize: 12, fontFamily: "'Space Mono',monospace", color: g.state === "scheduled" ? P.casper : P.dove }}>
                 {g.state === "final" ? "FINAL" : g.state === "final-ot" ? "FINAL/OT" : g.time}
               </span>
             </div>
@@ -946,7 +896,7 @@ function IIHFView({ isMobile }) {
 
       {/* Team roster cards */}
       <div style={{ marginBottom: 12 }}>
-        <div style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.14em", marginBottom: 12, fontFamily: "'Syne',sans-serif" }}>
+        <div style={{ fontSize: 12, fontWeight: 700, color: P.casper, letterSpacing: 0, marginBottom: 12, fontFamily: "'Syne',sans-serif" }}>
           ROSTERS — TAP A TEAM
         </div>
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(4,1fr)" : "repeat(8,1fr)", gap: 8 }}>
@@ -967,16 +917,16 @@ function IIHFView({ isMobile }) {
                 onMouseLeave={e => { e.currentTarget.style.borderColor = P.border; e.currentTarget.style.background = P.surface; }}
               >
                 <img src={iihfFlagUrl(t.code)} alt={t.code} width={32} height={24} style={{ borderRadius: 3, display: "block" }} />
-                <span style={{ fontSize: 9, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace", letterSpacing: "0.06em" }}>{t.code}</span>
-                <span style={{ fontSize: 8, color: P.dove, fontFamily: "'Space Mono',monospace" }}>{count}P</span>
-                <span style={{ position: "absolute", top: 5, right: 6, fontSize: 9, color: P.casper, lineHeight: 1 }}>›</span>
+                <span style={{ fontSize: 12, fontWeight: 700, color: P.white, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>{t.code}</span>
+                <span style={{ fontSize: 12, color: P.dove, fontFamily: "'Space Mono',monospace" }}>{count}P</span>
+                <span style={{ position: "absolute", top: 5, right: 6, fontSize: 12, color: P.casper, lineHeight: 1 }}>›</span>
               </button>
             );
           })}
         </div>
       </div>
 
-      <div style={{ fontSize: 9, color: P.dim, textAlign: "center", fontFamily: "'Space Mono',monospace", letterSpacing: "0.06em", marginTop: 16 }}>
+      <div style={{ fontSize: 12, color: P.dim, textAlign: "center", fontFamily: "'Space Mono',monospace", letterSpacing: 0, marginTop: 16 }}>
         POINT SYSTEM: W=3 · OTW=2 · OTL=1 · L=0 · UPDATED {IIHF_GROUPS_DATA.updatedAt}
       </div>
     </div>
@@ -1010,7 +960,7 @@ function GoalsAgainstView({ isMobile }) {
   const [search, setSearch] = useState("");
   const [viewFilter, setViewFilter] = useState("all");
 
-  const todayGames = useMemo(() => getTodayGames(), []);
+  const todayGames = useTodayGames();
   const todayAbbrs = useMemo(() => {
     const s = new Set();
     todayGames.forEach(g => {
@@ -1043,6 +993,7 @@ function GoalsAgainstView({ isMobile }) {
         total: data[totalKey],
       }))
       .sort((a, b) => {
+        if (sortCol === "abbr") return sortDir === "asc" ? a.abbr.localeCompare(b.abbr) : b.abbr.localeCompare(a.abbr);
         const aVal = sortCol === "total" ? a.total : (a[sortCol] || 0);
         const bVal = sortCol === "total" ? b.total : (b[sortCol] || 0);
         return sortDir === "desc" ? bVal - aVal : aVal - bVal;
@@ -1052,13 +1003,13 @@ function GoalsAgainstView({ isMobile }) {
   const colRanges = useMemo(() => {
     const ranges = {};
     positions.forEach(pos => {
-      const vals = rows.map(r => r[pos] || 0);
+      const vals = Object.values(GA_DATA.teams).map(r => r[splitKey]?.[pos] || 0);
       ranges[pos] = { min: Math.min(...vals), max: Math.max(...vals) };
     });
-    const totals = rows.map(r => r.total || 0);
+    const totals = Object.values(GA_DATA.teams).map(r => r[totalKey] || 0);
     ranges.total = { min: Math.min(...totals), max: Math.max(...totals) };
     return ranges;
-  }, [rows, positions]);
+  }, [splitKey, totalKey]);
 
   const handleSort = col => {
     if (sortCol === col) setSortDir(d => d === "desc" ? "asc" : "desc");
@@ -1068,7 +1019,7 @@ function GoalsAgainstView({ isMobile }) {
 
   const filterBtn = (label, value, setter, current) => (
     <button onClick={() => setter(value)}
-      style={{ background: current === value ? P.active : "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: current === value ? P.white : P.dove, fontSize: 9, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: "0.08em" }}>
+      style={{ background: current === value ? P.active : "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: current === value ? P.white : P.dove, fontSize: 12, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>
       {label}
     </button>
   );
@@ -1077,7 +1028,7 @@ function GoalsAgainstView({ isMobile }) {
     <div style={{ padding: "16px 24px", maxWidth: 900, margin: "0 auto" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search team..."
-          style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 10px", color: P.white, fontSize: 12, fontFamily: "inherit", width: 140 }} />
+          style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 10px", color: P.white, fontSize: 14, fontFamily: "inherit", width: 140 }} />
         <div style={{ width: 1, height: 20, background: P.border, margin: "0 4px" }} />
         {filterBtn("YTD", "ytd", setDuration, duration)}
         {filterBtn("L10", "l10", setDuration, duration)}
@@ -1096,14 +1047,14 @@ function GoalsAgainstView({ isMobile }) {
             {filterBtn("TODAY", "today", setViewFilter, viewFilter)}
           </>
         )}
-        <span style={{ fontSize: 9, color: P.dove, marginLeft: "auto", letterSpacing: "0.08em", fontFamily: "'Space Mono',monospace" }}>
+        <span style={{ fontSize: 12, color: P.dove, marginLeft: "auto", letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>
           UPDATED {GA_DATA.lastUpdated || "—"}
         </span>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 12 }}>
-        <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em", fontFamily: "'Space Mono',monospace" }}>GOALS AGAINST BY SCORER POSITION</span>
-        <span style={{ fontSize: 9, color: P.dim }}>·</span>
-        <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em", fontFamily: "'Space Mono',monospace" }}>
+        <span style={{ fontSize: 12, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>GOALS AGAINST BY SCORER POSITION ({GA_DATA.season})</span>
+        <span style={{ fontSize: 12, color: P.dim }}>·</span>
+        <span style={{ fontSize: 12, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>
           {duration === "l10" ? "LAST 10 GAMES" : location === "home" ? "HOME GAMES" : location === "away" ? "AWAY GAMES" : "FULL SEASON"}
         </span>
       </div>
@@ -1139,8 +1090,8 @@ function GoalsAgainstView({ isMobile }) {
                   <td>
                     <div style={{ display: "flex", alignItems: "center", gap: 8, paddingLeft: 4 }}>
                       {row.slug && <TeamLogo slug={row.slug} abbr={row.abbr} size={22} />}
-                      {!isMobile && <span style={{ fontSize: 12, fontWeight: 600, color: P.white }}>{t ? t.city : row.abbr}</span>}
-                      {isMobile && <span style={{ fontSize: 11, fontWeight: 700, color: P.casper, fontFamily: "'Space Mono',monospace" }}>{row.abbr}</span>}
+                      {!isMobile && <span style={{ fontSize: 14, fontWeight: 600, color: P.white }}>{t ? t.city : row.abbr}</span>}
+                      {isMobile && <span style={{ fontSize: 14, fontWeight: 700, color: P.casper, fontFamily: "'Space Mono',monospace" }}>{row.abbr}</span>}
                     </div>
                   </td>
                   {positions.map(pos => {
@@ -1161,7 +1112,7 @@ function GoalsAgainstView({ isMobile }) {
           </tbody>
         </table>
       </div>
-      <div style={{ marginTop: 12, fontSize: 9, color: P.dim, letterSpacing: "0.06em", textAlign: "center", fontFamily: "'Space Mono',monospace" }}>
+      <div style={{ marginTop: 12, fontSize: 12, color: P.dim, letterSpacing: 0, textAlign: "center", fontFamily: "'Space Mono',monospace" }}>
         POSITION DATA FROM NHL.COM ROSTERS · HIGHER VALUES = MORE GOALS ALLOWED TO THAT POSITION
       </div>
     </div>
@@ -1182,379 +1133,48 @@ function formatDate(dateStr) {
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
-function PlayerStatsView({ isMobile }) {
-  const [query, setQuery] = useState("");
-  const [gameType, setGameType] = useState("2");
-  const [suggestions, setSuggestions] = useState([]);
-  const [selectedPlayer, setSelectedPlayer] = useState(null);
-  const [gamelog, setGamelog] = useState([]);
+function PlayerStatsView() {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [sugLoading, setSugLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [activeIdx, setActiveIdx] = useState(-1);
-  const [showDrop, setShowDrop] = useState(false);
-  const debounceRef = useRef(null);
-  const inputRef = useRef(null);
-  const isSelectedRef = useRef(false);
-
+  const [error, setError] = useState('');
   useEffect(() => {
-    setSelectedPlayer(null);
-    setGamelog([]);
-    setError(null);
-  }, [gameType]);
-
-  const fetchSuggestions = useCallback(async (q) => {
-    if (isSelectedRef.current) return;
-    if (q.trim().length < 3) { setSuggestions([]); setShowDrop(false); return; }
-    setSugLoading(true);
-    try {
-      const res = await fetch(`https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=5&q=${encodeURIComponent(q)}&active=true`);
-      const data = await res.json();
-      const players = (Array.isArray(data) ? data : []).slice(0, 5).map(p => {
-        const nameParts = (p.name || "").split(" ");
-        const firstName = nameParts[0] || "";
-        const lastName = nameParts.slice(1).join(" ") || "";
-        return { id: String(p.playerId), firstName, lastName, team: p.teamAbbrev || "", pos: p.positionCode || "" };
-      });
-      setSuggestions(players);
-      setShowDrop(players.length > 0);
-      setActiveIdx(-1);
-    } catch {
-      setSuggestions([]);
-      setShowDrop(false);
-    } finally {
-      setSugLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => fetchSuggestions(query), 400);
-    return () => clearTimeout(debounceRef.current);
-  }, [query, fetchSuggestions]);
-
-  const selectPlayer = useCallback(async (player) => {
-    isSelectedRef.current = true;
-    setSelectedPlayer(player);
-    setShowDrop(false);
-    setSuggestions([]);
-    setQuery(`${player.firstName} ${player.lastName}`);
-    clearTimeout(debounceRef.current);
-    inputRef.current?.blur();
+    let active = true;
+    setResults([]); setError('');
+    if (query.trim().length < 3) { setLoading(false); return; }
     setLoading(true);
-    setError(null);
-    setGamelog([]);
-    try {
-      const cacheKey = `gamelog_${player.id}_gt${gameType}`;
-      const cached = sessionStorage.getItem(cacheKey);
-      let data;
-      if (cached) {
-        data = JSON.parse(cached);
-      } else {
-        const res = await fetch(`/api/gamelog?playerId=${player.id}&gameType=${gameType}`);
-        data = await res.json();
-        sessionStorage.setItem(cacheKey, JSON.stringify(data));
-      }
-      const games = (data.data || []).slice(0, 5).map(g => ({
-        gameDate: g.gameDate,
-        homeRoadFlag: g.homeRoad,
-        opponentAbbrev: g.opponentTeamAbbrev,
-        goals: g.goals,
-        assists: g.assists,
-        points: g.points,
-        plusMinus: g.plusMinus,
-        shots: g.shots,
-        toi: g.timeOnIcePerGame,
-      }));
-      setGamelog(games);
-      if (games.length === 0) setError(gameType === "3" ? "No playoff games found for this player." : "No recent games found for this player.");
-    } catch (err) {
-      setError(`Could not load stats (${err?.message || "network error"}). Please try again.`);
-    } finally {
-      setLoading(false);
-    }
-  }, [gameType]);
-
-  const handleKey = (e) => {
-    if (!showDrop || suggestions.length === 0) return;
-    if (e.key === "ArrowDown") { e.preventDefault(); setActiveIdx(i => Math.min(i + 1, suggestions.length - 1)); }
-    else if (e.key === "ArrowUp") { e.preventDefault(); setActiveIdx(i => Math.max(i - 1, 0)); }
-    else if (e.key === "Enter" && activeIdx >= 0) { e.preventDefault(); selectPlayer(suggestions[activeIdx]); }
-    else if (e.key === "Escape") { setShowDrop(false); }
-  };
-
-  const totals = useMemo(() => {
-    if (!gamelog.length) return null;
-    return {
-      g: gamelog.reduce((s, g) => s + (g.goals || 0), 0),
-      a: gamelog.reduce((s, g) => s + (g.assists || 0), 0),
-      pts: gamelog.reduce((s, g) => s + (g.points || 0), 0),
-      pm: gamelog.reduce((s, g) => s + (g.plusMinus || 0), 0),
-      sog: gamelog.reduce((s, g) => s + (g.shots || 0), 0),
-    };
-  }, [gamelog]);
-
-  const colW = isMobile
-    ? { date: 52, opp: 44, g: 28, a: 28, pts: 30, pm: 32, sog: 28, toi: 44 }
-    : { date: 72, opp: 56, g: 36, a: 36, pts: 44, pm: 44, sog: 40, toi: 60 };
-
-  const thStyle = { fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", color: P.dove, padding: "8px 6px", textAlign: "center", fontFamily: "'Space Mono',monospace", borderBottom: `1px solid ${P.border}` };
-  const tdStyle = { padding: "8px 6px", textAlign: "center", fontSize: isMobile ? 11 : 12, fontFamily: "'Space Mono',monospace", color: P.white, borderBottom: `1px solid ${P.border}` };
-
-  return (
-    <div style={{ padding: "16px 24px", maxWidth: 700, margin: "0 auto" }}>
-      <div style={{ display: "flex", gap: 6, marginBottom: 14 }}>
-        {[["2", "REG SEASON"], ["3", "PLAYOFFS"]].map(([val, label]) => (
-          <button key={val} onClick={() => setGameType(val)}
-            style={{ background: gameType === val ? P.active : "none", border: `1px solid ${gameType === val ? P.accent : P.border}`, borderRadius: 4, padding: "5px 12px", color: gameType === val ? P.white : P.dove, fontSize: 9, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: "0.08em", transition: "all 0.15s" }}>
-            {label}
-          </button>
-        ))}
-      </div>
-      <div style={{ position: "relative", marginBottom: 24 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <input
-            ref={inputRef}
-            value={query}
-            onChange={e => { isSelectedRef.current = false; setQuery(e.target.value); setSelectedPlayer(null); setGamelog([]); setError(null); }}
-            onKeyDown={handleKey}
-            onFocus={() => suggestions.length > 0 && setShowDrop(true)}
-            onBlur={() => setTimeout(() => setShowDrop(false), 150)}
-            placeholder="Type a player name..."
-            style={{ flex: 1, background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "9px 12px", color: P.white, fontSize: 13, fontFamily: "'Space Grotesk',sans-serif" }}
-          />
-          {sugLoading && <div className="spinner" />}
-          {query && <button onClick={() => { setQuery(""); setSelectedPlayer(null); setGamelog([]); setError(null); setSuggestions([]); setShowDrop(false); }} style={{ background: "none", border: "none", color: P.dove, cursor: "pointer", fontSize: 18, lineHeight: 1, padding: "0 4px" }}>×</button>}
-        </div>
-        {showDrop && suggestions.length > 0 && (
-          <div className="suggest-drop">
-            {suggestions.map((p, i) => (
-              <div key={p.id} className={`suggest-item${i === activeIdx ? " active" : ""}`}
-                onPointerDown={() => selectPlayer(p)}>
-                <span style={{ fontWeight: 600 }}>{p.firstName} {p.lastName}</span>
-                <span style={{ color: P.dove, fontSize: 10, marginLeft: 8, fontFamily: "'Space Mono',monospace" }}>{p.pos}{p.team ? ` · ${p.team}` : ""}</span>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {!selectedPlayer && !loading && (
-        <div style={{ textAlign: "center", padding: "48px 0", color: P.dove }}>
-          <div style={{ fontSize: 32, opacity: 0.1, marginBottom: 12 }}>⬆</div>
-          <div style={{ fontSize: 11, letterSpacing: "0.12em", fontFamily: "'Syne',sans-serif" }}>SEARCH FOR A PLAYER ABOVE</div>
-          <div style={{ fontSize: 10, color: P.dim, marginTop: 6, fontFamily: "'Space Mono',monospace" }}>LAST 5 GAMES · {gameType === "3" ? "PLAYOFFS" : "REGULAR SEASON"}</div>
-        </div>
-      )}
-
-      {loading && (
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "48px 0", gap: 10, color: P.dove }}>
-          <div className="spinner" />
-          <span style={{ fontSize: 10, letterSpacing: "0.12em", fontFamily: "'Space Mono',monospace" }}>LOADING STATS...</span>
-        </div>
-      )}
-
-      {error && !loading && (
-        <div style={{ textAlign: "center", padding: "32px 0", color: P.red, fontSize: 12, fontFamily: "'Space Mono',monospace", letterSpacing: "0.08em" }}>{error}</div>
-      )}
-
-      {selectedPlayer && gamelog.length > 0 && !loading && (
-        <div style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 6, overflow: "hidden" }}>
-          {/* Player header */}
-          <div style={{ padding: "16px 20px", borderBottom: `1px solid ${P.border}`, display: "flex", alignItems: "center", gap: 14 }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: isMobile ? 16 : 20, fontWeight: 800, color: P.white, letterSpacing: "0.04em", fontFamily: "'Syne',sans-serif", lineHeight: 1.1 }}>
-                {selectedPlayer.firstName.toUpperCase()} {selectedPlayer.lastName.toUpperCase()}
-              </div>
-              <div style={{ fontSize: 10, color: P.dove, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: "0.1em" }}>
-                {selectedPlayer.pos}{selectedPlayer.team ? ` · ${selectedPlayer.team}` : ""} · LAST 5 {gameType === "3" ? "PLAYOFF" : ""} GAMES
-              </div>
-            </div>
-          </div>
-
-          {/* Stats table */}
-          <div style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse" }}>
-              <thead>
-                <tr style={{ background: P.bg }}>
-                  <th style={{ ...thStyle, textAlign: "left", paddingLeft: 16, width: colW.date }}>DATE</th>
-                  <th style={{ ...thStyle, width: colW.opp }}>OPP</th>
-                  <th style={{ ...thStyle, width: colW.g }}>G</th>
-                  <th style={{ ...thStyle, width: colW.a }}>A</th>
-                  <th style={{ ...thStyle, width: colW.pts, color: P.casper }}>PTS</th>
-                  <th style={{ ...thStyle, width: colW.pm }}>+/-</th>
-                  <th style={{ ...thStyle, width: colW.sog }}>SOG</th>
-                  <th style={{ ...thStyle, width: colW.toi }}>TOI</th>
-                </tr>
-              </thead>
-              <tbody>
-                {gamelog.map((g, i) => {
-                  const isAway = g.homeRoadFlag === "R";
-                  const pm = g.plusMinus || 0;
-                  const pmColor = pm > 0 ? P.green : pm < 0 ? P.red : P.dove;
-                  return (
-                    <tr key={i} style={{ background: i % 2 === 0 ? "transparent" : `${P.bg}66` }}>
-                      <td style={{ ...tdStyle, textAlign: "left", paddingLeft: 16, color: P.casper }}>{formatDate(g.gameDate)}</td>
-                      <td style={{ ...tdStyle, color: P.dove }}>
-                        {isAway ? "@ " : ""}{g.opponentAbbrev || "—"}
-                      </td>
-                      <td style={{ ...tdStyle }}>{g.goals ?? 0}</td>
-                      <td style={{ ...tdStyle }}>{g.assists ?? 0}</td>
-                      <td style={{ ...tdStyle, fontWeight: 700, color: P.casper }}>{g.points ?? 0}</td>
-                      <td style={{ ...tdStyle, color: pmColor }}>{pm > 0 ? `+${pm}` : pm}</td>
-                      <td style={{ ...tdStyle, color: P.dove }}>{g.shots ?? 0}</td>
-                      <td style={{ ...tdStyle, color: P.dove }}>{formatTOI(g.toi)}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-              {totals && (
-                <tfoot>
-                  <tr style={{ borderTop: `2px solid ${P.border}` }}>
-                    <td style={{ ...tdStyle, textAlign: "left", paddingLeft: 16, fontSize: 9, letterSpacing: "0.1em", color: P.dove, borderBottom: "none" }}>L5 TOTAL</td>
-                    <td style={{ ...tdStyle, borderBottom: "none" }} />
-                    <td style={{ ...tdStyle, fontWeight: 700, borderBottom: "none" }}>{totals.g}</td>
-                    <td style={{ ...tdStyle, fontWeight: 700, borderBottom: "none" }}>{totals.a}</td>
-                    <td style={{ ...tdStyle, fontWeight: 700, color: P.casper, borderBottom: "none" }}>{totals.pts}</td>
-                    <td style={{ ...tdStyle, color: totals.pm > 0 ? P.green : totals.pm < 0 ? P.red : P.dove, fontWeight: 700, borderBottom: "none" }}>{totals.pm > 0 ? `+${totals.pm}` : totals.pm}</td>
-                    <td style={{ ...tdStyle, fontWeight: 700, borderBottom: "none" }}>{totals.sog}</td>
-                    <td style={{ ...tdStyle, borderBottom: "none" }}>—</td>
-                  </tr>
-                </tfoot>
-              )}
-            </table>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ── PLAYER MODAL ──────────────────────────────────────────────────────
-function PlayerModal({ modal, onClose }) {
-  if (!modal) return null;
-  const { player, gamelog, loading, error } = modal;
-
-  const totals = gamelog.length ? {
-    g:   gamelog.reduce((s, g) => s + (g.goals || 0), 0),
-    a:   gamelog.reduce((s, g) => s + (g.assists || 0), 0),
-    pts: gamelog.reduce((s, g) => s + (g.points || 0), 0),
-    pm:  gamelog.reduce((s, g) => s + (g.plusMinus || 0), 0),
-    sog: gamelog.reduce((s, g) => s + (g.shots || 0), 0),
-  } : null;
-
-  const maxPts = gamelog.length ? Math.max(...gamelog.map(g => g.points || 0), 1) : 1;
-
-  const thS = { fontFamily: "'Space Mono',monospace", fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", color: P.dove, padding: "10px 8px", textAlign: "center", borderBottom: `1px solid ${P.border}`, background: P.hover };
-  const tdS = { fontFamily: "'Space Mono',monospace", fontSize: 12, color: P.white, padding: "10px 8px", textAlign: "center", borderBottom: `1px solid ${P.border}` };
-
-  return (
-    <div className="modal-backdrop" onClick={e => e.target === e.currentTarget && onClose()}>
-      <div className="modal-card">
-        {/* Header */}
-        <div style={{ padding: "20px 20px 16px", borderBottom: `1px solid ${P.border}`, display: "flex", alignItems: "flex-start", gap: 14 }}>
-          <div style={{ width: 46, height: 46, borderRadius: 12, background: P.active, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Syne',sans-serif", fontSize: 15, fontWeight: 800, color: P.casper, flexShrink: 0, border: `1px solid ${P.border}` }}>
-            {player ? (player.firstName[0] || "") + (player.lastName[0] || "") : "??"}
-          </div>
-          <div style={{ flex: 1 }}>
-            <div style={{ fontFamily: "'Syne',sans-serif", fontSize: 20, fontWeight: 800, letterSpacing: "0.04em", lineHeight: 1.05, color: P.white }}>
-              {player ? `${player.firstName.toUpperCase()} ${player.lastName.toUpperCase()}` : ""}
-            </div>
-            <div style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, letterSpacing: "0.12em", color: P.dove, marginTop: 5 }}>
-              {player?.pos}{player?.team ? ` · ${player.team}` : ""} · LAST 5 GAMES
-            </div>
-          </div>
-          <button className="modal-close-btn" onClick={onClose}>×</button>
-        </div>
-
-        {/* Sparkline */}
-        {gamelog.length > 0 && (
-          <div style={{ display: "flex", gap: 4, padding: "12px 20px", borderBottom: `1px solid ${P.border}`, alignItems: "flex-end", height: 52 }}>
-            {gamelog.map((g, i) => {
-              const pct = Math.max((g.points || 0) / maxPts, 0.06);
-              const h = Math.round(pct * 26);
-              const hasGoal = (g.goals || 0) > 0;
-              return (
-                <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 3, height: "100%", justifyContent: "flex-end" }}>
-                  <div style={{ width: "100%", borderRadius: "2px 2px 0 0", background: hasGoal ? "linear-gradient(180deg,#4a9eff,#2a4a6b)" : P.accent, height: h, minHeight: 3 }} />
-                  <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 7, color: P.dim, letterSpacing: "0.04em" }}>
-                    {g.gameDate ? new Date(g.gameDate + "T12:00:00").toLocaleDateString("en-US", { month: "numeric", day: "numeric" }) : "—"}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        )}
-
-        {/* Loading */}
-        {loading && (
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "40px 0", color: P.dove }}>
-            <div className="spinner" />
-            <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, letterSpacing: "0.12em" }}>LOADING STATS...</span>
-          </div>
-        )}
-
-        {/* Error */}
-        {error && !loading && (
-          <div style={{ textAlign: "center", padding: "32px 0", color: P.red, fontSize: 11, fontFamily: "'Space Mono',monospace", letterSpacing: "0.08em" }}>{error}</div>
-        )}
-
-        {/* Stats table */}
-        {gamelog.length > 0 && !loading && (
-          <div style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse" }}>
-              <thead>
-                <tr>
-                  <th style={{ ...thS, textAlign: "left", paddingLeft: 20 }}>DATE</th>
-                  <th style={thS}>OPP</th>
-                  <th style={thS}>G</th>
-                  <th style={thS}>A</th>
-                  <th style={{ ...thS, color: P.casper }}>PTS</th>
-                  <th style={thS}>+/-</th>
-                  <th style={thS}>SOG</th>
-                  <th style={thS}>TOI</th>
-                </tr>
-              </thead>
-              <tbody>
-                {gamelog.map((g, i) => {
-                  const pm = g.plusMinus || 0;
-                  const pmColor = pm > 0 ? P.green : pm < 0 ? P.red : P.dove;
-                  return (
-                    <tr key={i} className="modal-stats-row">
-                      <td style={{ ...tdS, textAlign: "left", paddingLeft: 20, color: P.casper, fontSize: 11 }}>
-                        {g.gameDate ? new Date(g.gameDate + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "—"}
-                      </td>
-                      <td style={{ ...tdS, color: P.dove, fontSize: 11 }}>{g.homeRoadFlag === "R" ? "@ " : ""}{g.opponentAbbrev || "—"}</td>
-                      <td style={tdS}>{g.goals ?? 0}</td>
-                      <td style={tdS}>{g.assists ?? 0}</td>
-                      <td style={{ ...tdS, fontWeight: 700, color: P.casper }}>{g.points ?? 0}</td>
-                      <td style={{ ...tdS, color: pmColor }}>{pm > 0 ? `+${pm}` : pm}</td>
-                      <td style={{ ...tdS, color: P.dove }}>{g.shots ?? 0}</td>
-                      <td style={{ ...tdS, color: P.dove }}>{formatTOI(g.toi)}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-              {totals && (
-                <tfoot>
-                  <tr style={{ borderTop: `1px solid ${P.border}` }}>
-                    <td style={{ ...tdS, textAlign: "left", paddingLeft: 20, fontSize: 9, letterSpacing: "0.1em", color: P.dove }}>L5 TOTAL</td>
-                    <td style={tdS} />
-                    <td style={{ ...tdS, fontWeight: 700 }}>{totals.g}</td>
-                    <td style={{ ...tdS, fontWeight: 700 }}>{totals.a}</td>
-                    <td style={{ ...tdS, fontWeight: 700, color: P.casper }}>{totals.pts}</td>
-                    <td style={{ ...tdS, fontWeight: 700, color: totals.pm > 0 ? P.green : totals.pm < 0 ? P.red : P.dove }}>{totals.pm > 0 ? `+${totals.pm}` : totals.pm}</td>
-                    <td style={{ ...tdS, fontWeight: 700 }}>{totals.sog}</td>
-                    <td style={tdS}>—</td>
-                  </tr>
-                </tfoot>
-              )}
-            </table>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+    const timer = setTimeout(() => {
+      getJSON(`https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=15&q=${encodeURIComponent(query.trim())}`)
+        .then(data => {
+          if (!Array.isArray(data)) throw new Error('Player search is temporarily unavailable.');
+          if (active) setResults(data.map(p => {
+            const parts = p.name.split(' ');
+            return { id: String(p.playerId), firstName: parts.shift(), lastName: parts.join(' '), pos: p.positionCode, team: p.teamAbbrev };
+          }));
+        }).catch(err => { if (active) setError(err.message); })
+        .finally(() => { if (active) setLoading(false); });
+    }, 350);
+    return () => { active = false; clearTimeout(timer); };
+  }, [query]);
+  const featured = ['vancouver-canucks', 'edmonton-oilers', 'colorado-avalanche'].flatMap(slug =>
+    (TEAMS_DATA[slug]?.forwards?.[0] || []).map(name => {
+      const parts = name.split(' ');
+      return { firstName: parts.shift(), lastName: parts.join(' '), team: NHL_TEAMS[slug].abbr, snapshot: true };
+    }));
+  const players = query.trim().length >= 3 ? results : featured;
+  return <main className="player-search-page">
+    <h1>Players</h1>
+    <label className="team-search"><Search size={18} /><input aria-label="Search players" placeholder="Search players" value={query} onChange={event => setQuery(event.target.value)} /></label>
+    {loading && <p className="data-state" role="status">Searching players...</p>}
+    {error && <p className="data-state" role="alert">{error}</p>}
+    {!loading && !error && <div className="player-results">
+      {query.trim().length < 3 && <p className="muted">From the {seasonLabel(DATA_SEASON)} lineup archive</p>}
+      {players.map(player => <button key={player.id || player.firstName + player.lastName} onClick={() => triggerPlayerLookup?.(player.firstName + ' ' + player.lastName, player)}>
+        <span>{player.firstName} {player.lastName}</span><small>{player.pos} {player.team}</small>
+      </button>)}
+      {!players.length && <p className="data-state">No matching players.</p>}
+    </div>}
+  </main>;
 }
 
 // ── ERROR BOUNDARY ────────────────────────────────────────────────────
@@ -1566,7 +1186,7 @@ class ErrorBoundary extends React.Component {
       return (
         <div style={{ padding: "40px 24px", textAlign: "center", color: P.dove, fontFamily: "'Space Grotesk',sans-serif" }}>
           <div style={{ fontSize: 13, marginBottom: 8 }}>Something went wrong loading this view.</div>
-          <button onClick={() => this.setState({ hasError: false })} style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 14px", color: P.casper, cursor: "pointer", fontSize: 11, fontFamily: "'Space Mono',monospace" }}>RETRY</button>
+          <button onClick={() => this.setState({ hasError: false })} style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 14px", color: P.casper, cursor: "pointer", fontSize: 14, fontFamily: "'Space Mono',monospace" }}>RETRY</button>
         </div>
       );
     }
@@ -1576,14 +1196,16 @@ class ErrorBoundary extends React.Component {
 
 // ── ROOT ──────────────────────────────────────────────────────────────
 export default function App() {
-  const [tab, setTab] = useState(() => {
-    const m = new Date().getMonth() + 1; // 1–12
-    return m >= 4 && m <= 6 ? "playoffs" : "all";
-  });
-  const [expanded, setExpanded] = useState({});
-  const [search, setSearch] = useState("");
+  const [tab, setTab] = useState('all');
+
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [isDark, setIsDark] = useState(() => localStorage.getItem("theme") !== "light");
+  const [isDark, setIsDark] = useState(() => {
+    try { const saved = localStorage.getItem('theme'); return saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches; }
+    catch { return true; }
+  });
+  const [standingsError, setStandingsError] = useState(false);
+  useEffect(() => { window.scrollTo({ top: 0 }); }, [tab]);
+  const toggleTheme = () => { setIsDark(value => { const next = !value; try { localStorage.setItem('theme', next ? 'dark' : 'light'); } catch {} return next; }); };
   const [modal, setModal] = useState(null); // { player, gamelog, loading, error }
   const [standings, setStandings] = useState({}); // { [abbr]: "W-L-OT" }
 
@@ -1592,64 +1214,9 @@ export default function App() {
   Object.assign(STANDINGS, standings);
 
   // Wire up the module-level ref so PlayerCard can trigger the modal
-  triggerPlayerLookup = useCallback(async (fullName) => {
-    const nameParts = fullName.trim().split(" ");
-    const firstName = nameParts[0] || "";
-    const lastName = nameParts.slice(1).join(" ") || "";
-    const player = { firstName, lastName, pos: "", team: "", id: null };
-
-    // Open modal immediately in loading state, then look up the player id + stats
-    setModal({ player, gamelog: [], loading: true, error: null });
-
-    try {
-      // Search for the player to get their id
-      const res = await fetch(`https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=1&q=${encodeURIComponent(fullName)}&active=true`);
-      const data = await res.json();
-      const found = Array.isArray(data) && data[0];
-      if (!found) {
-        setModal(m => ({ ...m, loading: false, error: "Player not found." }));
-        return;
-      }
-      const pNameParts = (found.name || "").split(" ");
-      const resolvedPlayer = {
-        id: String(found.playerId),
-        firstName: pNameParts[0] || firstName,
-        lastName: pNameParts.slice(1).join(" ") || lastName,
-        pos: found.positionCode || "",
-        team: found.teamAbbrev || "",
-      };
-      setModal(m => ({ ...m, player: resolvedPlayer }));
-
-      const logCacheKey = `gamelog_${resolvedPlayer.id}`;
-      const logCached = sessionStorage.getItem(logCacheKey);
-      let logData;
-      if (logCached) {
-        logData = JSON.parse(logCached);
-      } else {
-        const logRes = await fetch(`/api/gamelog?playerId=${resolvedPlayer.id}`);
-        logData = await logRes.json();
-        sessionStorage.setItem(logCacheKey, JSON.stringify(logData));
-      }
-      const games = (logData.data || []).slice(0, 5).map(g => ({
-        gameDate: g.gameDate,
-        homeRoadFlag: g.homeRoad,
-        opponentAbbrev: g.opponentTeamAbbrev,
-        goals: g.goals,
-        assists: g.assists,
-        points: g.points,
-        plusMinus: g.plusMinus,
-        shots: g.shots,
-        toi: g.timeOnIcePerGame,
-      }));
-      setModal(m => ({
-        ...m,
-        gamelog: games,
-        loading: false,
-        error: games.length === 0 ? "No recent games found." : null,
-      }));
-    } catch (err) {
-      setModal(m => ({ ...m, loading: false, error: `Could not load stats (${err?.message || "network error"}).` }));
-    }
+  triggerPlayerLookup = useCallback((fullName, knownPlayer) => {
+    const parts = fullName.trim().split(' ');
+    setModal({ player: knownPlayer || { firstName: parts.shift(), lastName: parts.join(' '), pos: '', id: null }, season: DATA_SEASON });
   }, []);
 
   useEffect(() => {
@@ -1659,64 +1226,51 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    fetch("/api/standings")
-      .then(r => r.json())
+    getJSON("/api/standings")
       .then(data => {
         if (!Array.isArray(data)) return;
         const map = {};
-        data.forEach(t => { if (t.teamAbbrev) map[t.teamAbbrev] = `${t.wins}-${t.losses}-${t.otLosses}`; });
+        data.forEach(t => { if (t.teamAbbrev) map[t.teamAbbrev] = { record: `${t.wins}-${t.losses}-${t.otLosses}`, date: t.date }; });
         setStandings(map);
       })
-      .catch(() => {});
+      .catch(() => setStandingsError(true));
   }, []);
 
-  const slugs = useMemo(() => Object.keys(TEAMS_DATA).filter(slug => {
-    if (!search.trim()) return true;
-    const t = NHL_TEAMS[slug];
-    return `${t?.city} ${t?.name} ${t?.abbr}`.toLowerCase().includes(search.toLowerCase());
-  }), [search]);
-
-  const toggle = slug => setExpanded(prev => ({ ...prev, [slug]: !prev[slug] }));
-
   const TABS = ["all", "today", "playoffs", "iihf", "stats", "injuries", "player", "compare"];
-  const TAB_LABELS = { all: "ALL TEAMS", today: "TODAY", playoffs: "PLAYOFFS", iihf: "IIHF", stats: "STATS", injuries: "INJURIES", player: "PLAYER STATS", compare: "COMPARE" };
+  const TAB_LABELS = { all: "Teams", today: "Today", playoffs: "Playoffs", iihf: "IIHF", stats: "Matchups", injuries: "Injuries", player: "Players", compare: "Compare" };
 
   return (
-    <div style={{ fontFamily: "'Space Grotesk', sans-serif", background: P.bg, minHeight: "100vh", color: P.white }}>
+    <div className="app-shell" data-theme={isDark ? 'dark' : 'light'} style={{ fontFamily: "'Space Grotesk', sans-serif", background: P.bg, minHeight: "100vh", color: P.white, ...Object.fromEntries(Object.entries(P).map(([key, value]) => ['--' + key, value])) }}>
       <style>{makeCss(isDark ? DARK_PALETTE : LIGHT_PALETTE)}</style>
 
       {/* Header */}
-      <div style={{ borderTop: `3px solid ${P.casper}`, borderBottom: `1px solid ${P.border}`, padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "center", height: HEADER_H, position: "sticky", top: 0, zIndex: 50, background: P.bg }}>
+      <div className="app-header" style={{ borderTop: `3px solid ${P.casper}`, borderBottom: `1px solid ${P.border}`, padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "center", height: HEADER_H, position: "sticky", top: 0, zIndex: 50, background: P.bg }}>
         <div className="header-center">
-          <img src="/logo.png" alt="HG" className="header-logo" />
+          <span className="brand-monogram" aria-hidden="true">h.</span>
           <div className="header-divider" />
           <div>
             <div className="header-title-text">BETWEEN THE LINES</div>
-            <div className="header-sub">NHL · UPDATED {UPDATED_AT}</div>
+            <div className="header-sub">Hockey, in context.</div>
           </div>
         </div>
       </div>
 
+      <button className="icon-button theme-toggle" onClick={toggleTheme} aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'} title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>{isDark ? <Sun size={19} /> : <Moon size={19} />}</button>
       {/* Tabs */}
       <div className="tabs-bar" style={{ borderBottom: `1px solid ${P.border}`, display: "flex", height: TABS_H, position: "sticky", top: HEADER_H, zIndex: 49, background: P.bg, padding: "0 8px", overflowX: "auto", scrollbarWidth: "none" }}>
+        <select className="mobile-view-select" aria-label="View" value={tab} onChange={event => setTab(event.target.value)}>
+          {TABS.map(value => <option key={value} value={value}>{TAB_LABELS[value]}</option>)}
+        </select>
         {TABS.map(t => (
-          <button key={t} className={`tab-btn${tab === t ? " active" : ""}`} onClick={() => setTab(t)}>
+          <button key={t} className={`tab-btn${tab === t ? " active" : ""}`} aria-pressed={tab === t} onClick={() => setTab(t)}>
             {TAB_LABELS[t]}
           </button>
         ))}
       </div>
 
       {/* Content */}
-      {tab === "all" && !isMobile && (
-        <div style={{ overflowX: "auto" }}>
-          <div style={{ display: "flex", flexDirection: "row", alignItems: "stretch", minHeight: `calc(100vh - ${HEADER_H + TABS_H}px)` }}>
-            {slugs.map(slug => <TeamStrip key={slug} slug={slug} data={TEAMS_DATA[slug]} expanded={!!expanded[slug]} onToggle={() => toggle(slug)} />)}
-          </div>
-        </div>
-      )}
-      {tab === "all" && isMobile && (
-        <div>{slugs.map(slug => <MobileRow key={slug} slug={slug} data={TEAMS_DATA[slug]} expanded={!!expanded[slug]} onToggle={() => toggle(slug)} />)}</div>
-      )}
+      {standingsError && <p className="api-notice" role="status">Team records are temporarily unavailable.</p>}
+      {tab === "all" && <TeamBrowser />}
       {tab === "today" && <ErrorBoundary><TodayView isMobile={isMobile} /></ErrorBoundary>}
       {tab === "playoffs" && <ErrorBoundary><PlayoffsView isMobile={isMobile} /></ErrorBoundary>}
       {tab === "iihf" && <ErrorBoundary><IIHFView isMobile={isMobile} /></ErrorBoundary>}
@@ -1726,24 +1280,18 @@ export default function App() {
       {tab === "compare" && <ErrorBoundary><CompareView isMobile={isMobile} /></ErrorBoundary>}
 
       {/* Glass player modal */}
-      {modal && <PlayerModal modal={modal} onClose={() => setModal(null)} />}
+      {modal && <PlayerDetails modal={modal} onClose={() => setModal(null)} />}
 
       {/* Footer */}
       <div style={{ borderTop: `1px solid ${P.border}`, padding: "12px 24px", display: "flex", alignItems: "center", justifyContent: "center", gap: 16, flexWrap: "wrap" }}>
-        <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em", fontFamily: "'Space Mono',monospace" }}>DATA FROM</span>
-        <a href="https://www.dailyfaceoff.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.08em", textDecoration: "none", fontFamily: "'Space Mono',monospace" }}>DAILY FACEOFF</a>
-        <span style={{ fontSize: 9, color: P.dim }}>·</span>
-        <a href="https://www.nhl.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 9, fontWeight: 700, color: P.casper, letterSpacing: "0.08em", textDecoration: "none", fontFamily: "'Space Mono',monospace" }}>NHL.COM</a>
-        <span style={{ fontSize: 9, color: P.dim }}>·</span>
-        <span style={{ fontSize: 9, color: P.dove, letterSpacing: "0.08em", fontFamily: "'Space Mono',monospace" }}>HIMANK GOEL</span>
-        <span style={{ fontSize: 9, color: P.dim }}>·</span>
-        <button
-          onClick={() => { const next = !isDark; setIsDark(next); localStorage.setItem("theme", next ? "dark" : "light"); }}
-          style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 20, padding: "4px 10px", cursor: "pointer", color: P.casper, fontSize: 12, lineHeight: 1, fontFamily: "inherit", transition: "border-color 0.15s,color 0.15s" }}
-          title={isDark ? "Switch to light mode" : "Switch to dark mode"}
-        >
-          {isDark ? "☀ LIGHT" : "☽ DARK"}
-        </button>
+        <span style={{ fontSize: 12, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>DATA FROM</span>
+        <a href="https://www.dailyfaceoff.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, fontWeight: 700, color: P.casper, letterSpacing: 0, textDecoration: "none", fontFamily: "'Space Mono',monospace" }}>DAILY FACEOFF</a>
+        <span style={{ fontSize: 12, color: P.dim }}>·</span>
+        <a href="https://www.nhl.com" target="_blank" rel="noopener noreferrer" style={{ fontSize: 12, fontWeight: 700, color: P.casper, letterSpacing: 0, textDecoration: "none", fontFamily: "'Space Mono',monospace" }}>NHL.COM</a>
+        <span style={{ fontSize: 12, color: P.dim }}>·</span>
+        <span style={{ fontSize: 12, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>HIMANK GOEL</span>
+        <span style={{ fontSize: 12, color: P.dim }}>·</span>
+
       </div>
     </div>
   );

@@ -1,0 +1,161 @@
+/* Between the Lines: shared working interface, with restrained team identity. */
+.app-shell { font-size: 15px; line-height: 1.45; }
+.app-shell button, .app-shell input, .app-shell select { font: inherit; }
+.app-shell button { color: var(--white); cursor: pointer; }
+.app-shell :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.app-shell .muted { color: var(--dove); font-size: 12px; }
+.app-shell .app-header { justify-content: flex-start !important; padding-left: 28px !important; }
+.app-shell .header-center { gap: 12px; }
+.app-shell .header-title-text { font-size: 20px; }
+.app-shell .header-sub { font-size: 12px; margin-top: 5px; }
+.app-shell .header-logo { height: 32px; width: 24px; }
+.brand-monogram { font: 700 28px/1 Georgia, serif; color: var(--white); }
+.player-search-page { max-width: 900px; margin: auto; padding: 28px 24px; }
+.player-search-page h1 { font-size: 25px; margin-bottom: 20px; }
+.player-results { margin-top: 20px; }
+.player-results > p { padding: 12px 0; }
+.player-results button { background: none; border: 0; border-bottom: 1px solid var(--border); padding: 16px 4px; width: 100%; display: flex; gap: 16px; justify-content: space-between; text-align: left; text-transform: capitalize; }
+.player-results button:hover { background: var(--hover); }
+.player-results small { color: var(--dove); white-space: nowrap; }
+.schedule-page { max-width: 1050px; margin: auto; padding: 28px 24px; }
+.schedule-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+.schedule-heading h1 { font-size: 25px; }
+.schedule-heading label { font-size: 12px; color: var(--dove); }
+.schedule-heading input { margin-left: 10px; padding: 8px; min-height: 40px; background: var(--surface); color: var(--white); border: 1px solid var(--border); border-radius: 5px; }
+.schedule-game { padding: 20px; margin-bottom: 16px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
+.schedule-game-header { display: flex; justify-content: space-between; gap: 16px; }
+.matchup-teams { display: grid; gap: 12px; }
+.matchup-teams > div { display: flex; align-items: center; gap: 14px; }
+.matchup-teams strong { font-size: 16px; }
+.matchup-teams span { font-size: 22px; font-variant-numeric: tabular-nums; }
+.matchup-status { display: grid; justify-items: end; gap: 5px; }
+.matchup-status small { color: var(--dove); }
+.matchup-lineups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding-top: 20px; }
+.matchup-lineups h2 { font-size: 18px; }
+@media (max-width: 767px) {
+  .schedule-page { padding: 20px 16px; }
+  .schedule-heading { flex-wrap: wrap; }
+  .schedule-game { padding: 16px; }
+  .matchup-lineups { grid-template-columns: minmax(0, 1fr); }
+}
+.app-shell .header-divider { height: 32px; }
+.app-shell .tabs-bar { padding-left: 20px !important; }
+.app-shell .tab-btn { font-family: inherit; font-size: 14px; padding: 0 16px; }
+.app-shell .theme-toggle { position: fixed; top: 18px; right: 24px; z-index: 55; }
+.app-shell .icon-button { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex: 0 0 40px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
+.app-shell .icon-button:hover, .app-shell .text-button:hover { background: var(--hover); }
+.team-browser { display: grid; grid-template-columns: 240px minmax(0, 1fr); max-width: 1400px; margin: auto; min-height: calc(100vh - 124px); }
+.team-navigation { border-right: 1px solid var(--border); padding: 20px 12px; position: sticky; top: 124px; height: calc(100vh - 124px); overflow-y: auto; }
+.team-search { display: flex; gap: 8px; align-items: center; border: 1px solid var(--border); background: var(--surface); border-radius: 6px; padding: 0 10px; height: 40px; color: var(--dove); }
+.team-search input { width: 100%; min-width: 0; background: none; color: var(--white); border: 0; font-size: 14px; }
+.team-search input::placeholder { color: var(--dove); }
+.team-list { display: grid; gap: 4px; margin-top: 16px; }
+.team-list button { display: flex; align-items: center; gap: 10px; min-height: 54px; width: 100%; text-align: left; padding: 8px; border: 1px solid transparent; border-radius: 6px; background: transparent; }
+.team-list button:hover { background: var(--hover); }
+.team-list button.selected { background: var(--active); border-color: var(--border); }
+.team-list button span { font-size: 14px; line-height: 1.3; }
+.team-list button small { display: block; color: var(--dove); font-size: 12px; }
+.team-list .team-abbr { margin-left: auto; color: var(--dove); font-size: 11px; }
+.mobile-team-select { display: none; }
+.mobile-view-select { display: none; }
+.team-content { padding: 28px 36px 48px; min-width: 0; }
+.team-heading { display: flex; align-items: center; gap: 16px; padding-bottom: 20px; }
+.team-heading h1 { font-size: 26px; line-height: 1.25; font-weight: 650; margin-top: 3px; }
+.team-record { margin-left: auto; text-align: right; flex-shrink: 0; }
+.team-record span { display: block; font-size: 12px; color: var(--dove); }
+.team-record strong { display: block; margin-top: 4px; font-size: 20px; font-variant-numeric: tabular-nums; }
+.snapshot-notice { display: flex; gap: 9px; align-items: center; color: var(--dove); font-size: 13px; padding: 12px 0; border-block: 1px solid var(--border); }
+.snapshot-notice svg { flex-shrink: 0; color: var(--yellow); }
+.team-lineup { max-width: 940px; padding-top: 4px; }
+.app-shell .player-tile { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 14px 12px; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; position: relative; text-align: left; min-height: 82px; }
+.app-shell .player-tile:hover { background: var(--hover); border-color: var(--accent) !important; transform: none; box-shadow: none; }
+.player-jersey { position: relative; display: block; width: 52px; height: 56px; flex: 0 0 52px; color: color-mix(in srgb, var(--jersey-color), white 30%); }
+.player-jersey > span { position: absolute; left: 14px; right: 14px; top: 18px; text-align: center; color: white; font: 700 14px/1.2 'Space Grotesk', sans-serif; text-shadow: 0 1px 2px #111; }
+.player-name { min-width: 0; overflow-wrap: anywhere; line-height: 1.35; text-transform: capitalize; }
+.player-name > span { display: block; font-size: 13px; color: var(--dove); }
+.player-name strong { display: block; font-size: 15px; font-weight: 650; }
+.player-position { position: absolute; top: 6px; right: 7px; font-size: 11px; color: var(--dove); }
+.line-change { color: var(--yellow); font-size: 11px; }
+.powerplay-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.app-shell .ga-table { font-size: 14px; }
+.app-shell .ga-table th { font-size: 12px; padding: 0; }
+.app-shell .ga-table td { padding: 10px 8px; font-family: inherit; }
+.app-shell .ga-sort-btn { font-family: inherit; font-size: 12px; min-height: 42px; padding: 8px; }
+.app-shell .ga-table th:first-child { padding-left: 0; }
+.app-shell .ga-table .total-col { color: var(--white); }
+.app-shell .api-notice { color: var(--dove); font-size: 13px; padding: 10px 28px; border-bottom: 1px solid var(--border); }
+.app-shell .player-backdrop { position: fixed; inset: 0; background: rgb(0 0 0 / .62); z-index: 300; display: flex; align-items: center; justify-content: center; padding: 24px; animation: detail-in 120ms ease-out; }
+.player-dialog { background: var(--surface); color: var(--white); border: 1px solid var(--border); border-radius: 8px; width: 760px; max-width: 100%; max-height: calc(100dvh - 48px); overflow-y: auto; box-shadow: 0 16px 64px rgb(0 0 0 / .25); }
+.player-dialog-header { display: flex; gap: 16px; justify-content: space-between; align-items: center; padding: 24px; border-bottom: 1px solid var(--border); }
+.player-dialog-header > div { min-width: 0; }
+.player-dialog-header h2 { font-size: 24px; line-height: 1.25; margin-top: 4px; overflow-wrap: anywhere; text-transform: capitalize; }
+.player-filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px; padding: 20px 24px; }
+.player-filters label { display: grid; gap: 5px; color: var(--dove); font-size: 12px; }
+.app-shell select { padding: 8px 10px; border: 1px solid var(--border); border-radius: 5px; background: var(--bg); color: var(--white); min-height: 40px; font-size: 14px; }
+.segment { display: flex; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; }
+.segment button { min-height: 40px; min-width: 46px; padding: 7px 12px; background: none; border: 0; font-size: 13px; }
+.segment button[aria-pressed="true"] { background: var(--active); color: var(--white); }
+.segment button:hover { background: var(--hover); }
+.player-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 4px 24px 20px; }
+.player-metrics > div { border-right: 1px solid var(--border); }
+.player-metrics > div:last-child { border: 0; }
+.player-metrics span { display: block; font-size: 12px; color: var(--dove); }
+.player-metrics strong { display: block; font-size: 28px; font-weight: 600; font-variant-numeric: tabular-nums; margin-top: 3px; }
+.window-caption { padding: 12px 24px; color: var(--dove); font-size: 12px; border-top: 1px solid var(--border); }
+.player-table-scroll { overflow-x: auto; width: 100%; }
+.player-table { width: 100%; border-collapse: collapse; font-size: 14px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.player-table th { font-size: 12px; font-weight: 500; background: var(--bg); color: var(--dove); }
+.player-table th, .player-table td { padding: 12px 10px; text-align: right; border-bottom: 1px solid var(--border); }
+.player-table th:first-child, .player-table td:first-child { text-align: left; padding-left: 24px; }
+.player-table tbody tr:hover { background: var(--hover); }
+.player-detail-footer { padding: 16px 24px; font-size: 13px; color: var(--dove); display: flex; gap: 12px; justify-content: space-between; flex-wrap: wrap; }
+.data-state { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; min-height: 120px; padding: 24px; color: var(--dove); font-size: 14px; }
+.text-button { display: inline-flex; gap: 8px; align-items: center; padding: 10px 14px; border: 1px solid var(--border); border-radius: 5px; background: var(--bg); }
+@keyframes detail-in { from { opacity: 0; } to { opacity: 1; } }
+@media (max-width: 1100px) {
+  .team-browser { grid-template-columns: 200px minmax(0, 1fr); }
+  .team-content { padding: 24px 20px; }
+  .team-heading { flex-wrap: wrap; gap: 12px; }
+  .team-heading h1 { font-size: 23px; }
+  .team-record { margin-left: 0; text-align: left; }
+  .app-shell .player-tile { flex-direction: column; text-align: center; padding: 12px 6px; gap: 5px; }
+}
+@media (max-width: 767px) {
+  .app-shell .app-header { padding-left: 16px !important; padding-right: 65px !important; }
+  .app-shell .header-title-text { font-size: 16px; white-space: normal; line-height: 1.15; }
+  .app-shell .header-sub { font-size: 12px; }
+  .app-shell .theme-toggle { right: 12px; }
+  .app-shell .tabs-bar { padding-left: 4px !important; }
+  .app-shell .tab-btn { padding: 0 14px; }
+  .app-shell .tabs-bar { padding: 4px 16px !important; overflow: visible !important; }
+  .app-shell .tabs-bar .tab-btn { display: none; }
+  .app-shell .mobile-view-select { display: block; width: 100%; height: 40px; }
+  .team-browser { display: block; }
+  .team-navigation { position: static; height: auto; border-right: 0; padding: 16px 16px 0; }
+  .team-navigation .team-search, .team-list { display: none; }
+  .mobile-team-select { display: block; width: 100%; }
+  .team-content { padding: 20px 16px 32px; }
+  .team-heading { gap: 12px; }
+  .team-heading > img { width: 44px; height: 44px; }
+  .team-heading h1 { font-size: 21px; }
+  .team-record { display: none; }
+  .snapshot-notice { font-size: 12px; align-items: flex-start; }
+  .app-shell .player-tile { min-height: 126px; }
+  .player-name strong { font-size: 14px; }
+  .player-name > span { font-size: 12px; }
+  .app-shell .player-backdrop { padding: 8px; align-items: flex-end; }
+  .player-dialog { max-height: calc(100dvh - 16px); border-radius: 8px; }
+  .player-dialog-header { padding: 16px; }
+  .player-dialog-header h2 { font-size: 21px; }
+  .player-filters { padding: 16px; gap: 12px; }
+  .player-filters label { flex: 1; min-width: 110px; }
+  .player-filters select { width: 100%; }
+  .player-metrics { padding: 4px 16px 16px; gap: 10px; }
+  .player-metrics strong { font-size: 25px; }
+  .window-caption { padding: 12px 16px; }
+  .player-detail-footer { padding: 16px; }
+  .app-shell .ga-table td { padding: 10px 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .app-shell *, .app-shell *::before, .app-shell *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
