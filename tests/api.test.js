@@ -4,6 +4,7 @@ import gamelog, { currentSeason, normalizeGame, validSeason } from '../api/gamel
 import schedule from '../api/schedule.js';
 import standings from '../api/standings.js';
 import roster from '../api/roster.js';
+import news, { parseNewsHtml } from '../api/news.js';
 import { getJSON, normalizeName } from '../src/data-client.js';
 
 function response() {
@@ -95,4 +96,23 @@ test('client deduplicates concurrent requests but never caches an HTTP failure',
   const results = await Promise.all([getJSON('/test-retry'), getJSON('/test-retry')]);
   assert.equal(calls, 2);
   assert.deepEqual(results[0], { data: [1] });
+});
+
+test('news parser returns unique, safe NHL stories with metadata', () => {
+  const html = `<a class="nhl-c-card-wrap -story" href="/news/test-story"><article><img src="https://media.d3.nhle.com/image/test.jpg"><h3 class="fa-text__title"> Test headline </h3><div class="fa-text__body"><p> Useful   context. </p></div><time datetime="2026-09-14T12:00:00">Today</time></article></a>
+    <a class="nhl-c-card-wrap -story" href="/news/test-story"><h3 class="fa-text__title">Duplicate</h3></a>
+    <a class="nhl-c-card-wrap -story" href="https://example.com/news/bad"><h3 class="fa-text__title">Unsafe</h3></a>`;
+  assert.deepEqual(parseNewsHtml(html), [{
+    title: 'Test headline', summary: 'Useful context.', publishedAt: '2026-09-14T12:00:00',
+    image: 'https://media.d3.nhle.com/image/test.jpg', url: 'https://www.nhl.com/news/test-story',
+  }]);
+});
+
+test('news endpoint exposes parsed NHL stories and caches success', async t => {
+  t.mock.method(globalThis, 'fetch', async () => ({ ok: true, text: async () => '<a class="nhl-c-card-wrap -story" href="/news/one"><h3 class="fa-text__title">One</h3></a>' }));
+  const res = response();
+  await news({}, res);
+  assert.equal(res.code, 200);
+  assert.equal(res.body.stories[0].title, 'One');
+  assert.match(res.headers['Cache-Control'], /s-maxage=300/);
 });

@@ -6,11 +6,12 @@ import roster from './api/roster.js'
 import playoffSchedule from './api/playoff-schedule.js'
 import playoffBracket from './api/playoff-bracket.js'
 import schedule from './api/schedule.js'
+import news from './api/news.js'
 
 // Run the same public-data handlers locally that Vercel serves in production.
 function localApi() {
   const routes = { '/api/gamelog': gamelog, '/api/standings': standings, '/api/roster': roster,
-    '/api/playoff-schedule': playoffSchedule, '/api/playoff-bracket': playoffBracket, '/api/schedule': schedule };
+    '/api/playoff-schedule': playoffSchedule, '/api/playoff-bracket': playoffBracket, '/api/schedule': schedule, '/api/news': news };
   return {
     name: 'local-api',
     configureServer(server) {

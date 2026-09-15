@@ -614,6 +614,44 @@ function TodayView() {
   </main>;
 }
 
+function NewsView() {
+  const [stories, setStories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    let active = true;
+    getJSON('/api/news', 300000)
+      .then(data => { if (active) setStories(Array.isArray(data.stories) ? data.stories : []); })
+      .catch(err => { if (active) setError(err.message); })
+      .finally(() => { if (active) setLoading(false); });
+    return () => { active = false; };
+  }, []);
+
+  const formatNewsDate = value => value ? new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Latest';
+  const lead = stories[0];
+  const remaining = stories.slice(1);
+
+  return <main className="news-page">
+    <header className="news-heading"><div><span>FROM NHL.COM</span><h1>News</h1></div><a href="https://www.nhl.com/news/" target="_blank" rel="noopener noreferrer">ALL NHL NEWS</a></header>
+    {loading && <p className="data-state" role="status">Loading NHL News...</p>}
+    {error && <p className="data-state" role="alert">{error}</p>}
+    {!loading && !error && !lead && <p className="data-state">No news stories are available right now.</p>}
+    {lead && <>
+      <a className="news-lead" href={lead.url} target="_blank" rel="noopener noreferrer">
+        {lead.image && <img src={lead.image} alt="" />}
+        <div><time>{formatNewsDate(lead.publishedAt)}</time><h2>{lead.title}</h2>{lead.summary && <p>{lead.summary}</p>}<span>READ ON NHL.COM</span></div>
+      </a>
+      <section className="news-grid" aria-label="Latest NHL stories">
+        {remaining.map(story => <a className="news-story" href={story.url} target="_blank" rel="noopener noreferrer" key={story.url}>
+          {story.image && <img src={story.image} alt="" loading="lazy" />}
+          <div><time>{formatNewsDate(story.publishedAt)}</time><h2>{story.title}</h2>{story.summary && <p>{story.summary}</p>}</div>
+        </a>)}
+      </section>
+    </>}
+  </main>;
+}
+
 function PicksView() {
   const [date, setDate] = useState(localDate());
   const { games, loading, error } = useSchedule(date);
@@ -1284,8 +1322,8 @@ export default function App() {
       .catch(() => setStandingsError(true));
   }, []);
 
-  const TABS = ["all", "today", "injuries", "player", "picks", "playoffs", "stats", "compare"];
-  const TAB_LABELS = { all: "TEAMS", today: "TODAY", injuries: "INJURIES", player: "PLAYERS", picks: "PICKS", playoffs: "PLAYOFFS", stats: "MATCHUPS", compare: "COMPARE" };
+  const TABS = ["all", "today", "news", "injuries", "player", "picks", "playoffs", "stats", "compare"];
+  const TAB_LABELS = { all: "TEAMS", today: "TODAY", news: "NEWS", injuries: "INJURIES", player: "PLAYERS", picks: "PICKS", playoffs: "PLAYOFFS", stats: "MATCHUPS", compare: "COMPARE" };
 
   return (
     <div className="app-shell" data-theme={isDark ? 'dark' : 'light'} style={{ fontFamily: "'Space Grotesk', sans-serif", background: P.bg, minHeight: "100vh", color: P.white, ...Object.fromEntries(Object.entries(P).map(([key, value]) => ['--' + key, value])) }}>
@@ -1302,7 +1340,7 @@ export default function App() {
         <div className="header-center">
           <img src="/logo.png" alt="Himank Goel" className="header-logo" />
           <div className="header-divider" />
-          <div>
+          <div className="header-copy">
             <div className="header-title-text">BETWEEN THE LINES</div>
             <div className="header-sub">Hockey, in context.</div>
           </div>
@@ -1328,6 +1366,7 @@ export default function App() {
       {standingsError && <p className="api-notice" role="status">Team records are temporarily unavailable.</p>}
       {tab === "all" && <TeamsView isMobile={isMobile} mode={teamMode} />}
       {tab === "today" && <ErrorBoundary><TodayView isMobile={isMobile} /></ErrorBoundary>}
+      {tab === "news" && <ErrorBoundary><NewsView /></ErrorBoundary>}
       {tab === "picks" && <ErrorBoundary><PicksView /></ErrorBoundary>}
       {tab === "playoffs" && <ErrorBoundary><PlayoffsView isMobile={isMobile} /></ErrorBoundary>}
       {tab === "stats" && <ErrorBoundary><GoalsAgainstView isMobile={isMobile} /></ErrorBoundary>}
