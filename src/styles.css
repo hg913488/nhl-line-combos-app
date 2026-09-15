@@ -1,7 +1,7 @@
 /* Hallmark · pre-emit critique: P5 H4 E5 S5 R5 V4 */
 /* Between the Lines: shared working interface, with restrained team identity. */
 html, body { overflow-x: clip; }
-.app-shell { font-size: 14px; line-height: 1.45; }
+.app-shell { --header-height: 76px; --tabs-height: 48px; font-size: 14px; line-height: 1.45; }
 .app-shell button, .app-shell input, .app-shell select { font: inherit; }
 .app-shell button { color: var(--white); cursor: pointer; }
 .app-shell :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -88,6 +88,7 @@ html, body { overflow-x: clip; }
 .team-list button small { display: block; color: var(--dove); font-size: 11px; }
 .team-list .team-abbr { margin-left: auto; color: var(--dove); font-size: 11px; }
 .mobile-team-select { display: none; }
+.mobile-view-nav { display: none; }
 .mobile-view-select { display: none; }
 .compare-page { display: flex; flex-direction: column; }
 .compare-controls { flex-shrink: 0; padding: 12px 24px; border-bottom: 1px solid var(--border); background: var(--bg); }
@@ -241,15 +242,22 @@ html, body { overflow-x: clip; }
   .app-shell .player-tile { flex-direction: column; text-align: center; padding: 12px 6px; gap: 5px; }
 }
 @media (max-width: 767px) {
-  .app-shell .app-header { padding-inline: 58px !important; }
+  .app-shell { --header-height: 88px; --tabs-height: 74px; }
+  .app-shell .app-header { padding-inline: 16px !important; }
+  .app-shell .header-center { position: relative; width: 100%; height: 100%; justify-content: center; }
+  .app-shell .header-logo { position: absolute; left: 0; width: 34px; height: 48px; }
+  .app-shell .header-divider { display: none; }
+  .app-shell .header-copy { max-width: calc(100% - 104px); }
   .app-shell .header-title-text { font-size: 17px; white-space: normal; line-height: 1.15; }
-  .app-shell .header-sub { font-size: 11px; }
-  .app-shell .theme-toggle { right: 12px; }
+  .app-shell .header-sub { font-size: 11px; margin-top: 7px; }
+  .app-shell .theme-toggle { top: 24px; right: 12px; }
   .app-shell .tabs-bar { padding-left: 4px !important; }
   .app-shell .tab-btn { padding: 0 14px; }
-  .app-shell .tabs-bar { padding: 4px 16px !important; overflow: visible !important; }
+  .app-shell .tabs-bar { padding: 8px 16px 9px !important; overflow: visible !important; }
   .app-shell .tabs-bar .tab-btn { display: none; }
   .nav-menu { display: none; }
+  .app-shell .mobile-view-nav { display: grid; width: 100%; gap: 4px; }
+  .app-shell .mobile-view-nav > strong { font: 800 11px/1 'Syne', sans-serif; letter-spacing: .08em; }
   .app-shell .mobile-view-select { display: block; width: 100%; height: 40px; font-family: 'Syne', sans-serif; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
   .team-browser { display: block; }
   .team-navigation { position: static; height: auto; border-right: 0; padding: 16px 16px 0; }

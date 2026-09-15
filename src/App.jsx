@@ -1427,6 +1427,13 @@ export default function App() {
   }, []);
 
   const mobileNavValue = tab === 'all' ? 'teams-focus' : tab === 'news' ? `news-${newsSource}` : tab;
+  const mobileSectionLabel = ['all', 'compare'].includes(tab)
+    ? 'TEAMS'
+    : ['news', 'injuries'].includes(tab)
+      ? 'NEWS'
+      : ['player', 'stats', 'playoffs'].includes(tab)
+        ? 'STATS'
+        : tab.toUpperCase();
   const selectView = value => {
     if (value.startsWith('teams-')) { setTeamMode(value.replace('teams-', '')); setTab('all'); return; }
     if (value.startsWith('news-')) { setNewsSource(value.replace('news-', '')); setTab('news'); return; }
@@ -1451,7 +1458,7 @@ export default function App() {
       </div>}
 
       {/* Header */}
-      <div className="app-header" style={{ borderTop: `3px solid ${P.casper}`, borderBottom: `1px solid ${P.border}`, padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "center", height: HEADER_H, position: "sticky", top: 0, zIndex: 50, background: P.bg }}>
+      <div className="app-header" style={{ borderTop: `3px solid ${P.casper}`, borderBottom: `1px solid ${P.border}`, padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "center", height: "var(--header-height)", position: "sticky", top: 0, zIndex: 50, background: P.bg }}>
         <div className="header-center">
           <img src="/logo.png" alt="Himank Goel" className="header-logo" />
           <div className="header-divider" />
@@ -1464,14 +1471,17 @@ export default function App() {
 
       <button className="icon-button theme-toggle" onClick={toggleTheme} aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'} title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>{isDark ? <Sun size={19} /> : <Moon size={19} />}</button>
       {/* Tabs */}
-      <div className="tabs-bar" style={{ borderBottom: `1px solid ${P.border}`, display: "flex", height: TABS_H, position: "sticky", top: HEADER_H, zIndex: 49, background: P.bg, padding: "0 8px", overflow: "visible" }}>
-        <select className="mobile-view-select" aria-label="View" value={mobileNavValue} onChange={event => selectView(event.target.value)}>
-          <optgroup label="TEAMS"><option value="teams-focus">Team Lineups</option><option value="compare">Compare</option></optgroup>
-          <option value="today">TODAY</option>
-          <optgroup label="NEWS"><option value="news-nhl">NHL News</option><option value="news-reporters">Reporters</option><option value="injuries">Injuries</option></optgroup>
-          <optgroup label="STATS"><option value="player">Player Stats</option><option value="stats">Matchups</option><option value="playoffs">Playoffs</option></optgroup>
-          <option value="picks">PICKS</option>
-        </select>
+      <div className="tabs-bar" style={{ borderBottom: `1px solid ${P.border}`, display: "flex", height: "var(--tabs-height)", position: "sticky", top: "var(--header-height)", zIndex: 49, background: P.bg, padding: "0 8px", overflow: "visible" }}>
+        <div className="mobile-view-nav">
+          <strong>{mobileSectionLabel}</strong>
+          <select className="mobile-view-select" aria-label={`${mobileSectionLabel} view`} value={mobileNavValue} onChange={event => selectView(event.target.value)}>
+            <optgroup label="TEAMS"><option value="teams-focus">Team Lineups</option><option value="compare">Compare</option></optgroup>
+            <option value="today">TODAY</option>
+            <optgroup label="NEWS"><option value="news-nhl">NHL News</option><option value="news-reporters">Reporters</option><option value="injuries">Injuries</option></optgroup>
+            <optgroup label="STATS"><option value="player">Player Stats</option><option value="stats">Matchups</option><option value="playoffs">Playoffs</option></optgroup>
+            <option value="picks">PICKS</option>
+          </select>
+        </div>
         <div {...navMenuProps('teams')}>
           <button className={`tab-btn${['all', 'compare'].includes(tab) ? " active" : ""}`} onClick={() => { setTeamMode('quick'); setTab('all'); }}>TEAMS</button>
           <div className="nav-submenu" aria-label="Teams views">
