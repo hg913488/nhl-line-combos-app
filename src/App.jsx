@@ -525,7 +525,7 @@ function InjuriesView({ isMobile }) {
 
 // ── COMPARE VIEW ──────────────────────────────────────────────────────
 const COMPARE_ZOOM = [
-  { label: 'DETAIL', width: 320 },
+  { label: 'DETAIL', width: 560 },
   { label: 'COMPACT', width: 220 },
   { label: '10-UP', width: 112 },
 ];
@@ -591,8 +591,8 @@ function CompareView({ isMobile }) {
       <div className="compare-controls">
         <div className="compare-toolbar">
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Filter teams..."
-            style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.white, fontSize: 12, fontFamily: "inherit", width: 160 }} />
-          {selected.length > 0 && <button onClick={() => setSelected([])} style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.dove, fontSize: 10, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>CLEAR ALL</button>}
+            style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.white, fontSize: 13, fontFamily: "inherit", width: 160 }} />
+          {selected.length > 0 && <button onClick={() => setSelected([])} style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.dove, fontSize: 11, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>CLEAR ALL</button>}
           <div className="compare-zoom" aria-label="Lineup size">
             <button onClick={() => setZoom(value => Math.min(COMPARE_ZOOM.length - 1, value + 1))} disabled={zoom === COMPARE_ZOOM.length - 1} aria-label="Zoom out" title="Show more teams"><ZoomOut size={15} /></button>
             <span>{COMPARE_ZOOM[zoom].label}</span>
@@ -608,7 +608,7 @@ function CompareView({ isMobile }) {
             return (
               <button key={slug} className={`compare-chip${isSel ? " selected" : ""}`} onClick={() => toggle(slug)} disabled={disabled} aria-pressed={isSel}>
                 <TeamLogo slug={slug} abbr={t.abbr} size={20} />
-                <span style={{ fontSize: 12, fontWeight: 600, color: isSel ? P.white : P.casper, whiteSpace: "nowrap" }}>{t.abbr}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: isSel ? P.white : P.casper, whiteSpace: "nowrap" }}>{t.abbr}</span>
               </button>
             );
           })}
@@ -617,7 +617,7 @@ function CompareView({ isMobile }) {
       {selected.length === 0 ? (
         <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 10 }}>
           <span style={{ fontSize: 26, opacity: 0.15 }}>⬆</span>
-          <span style={{ fontSize: 12, color: P.dove, letterSpacing: 0, fontFamily: "'Syne',sans-serif" }}>SELECT TEAMS ABOVE TO COMPARE</span>
+          <span style={{ fontSize: 13, color: P.dove, letterSpacing: 0, fontFamily: "'Syne',sans-serif" }}>SELECT TEAMS ABOVE TO COMPARE</span>
         </div>
       ) : (
         <div className="compare-viewport">
@@ -1376,7 +1376,7 @@ class ErrorBoundary extends React.Component {
 
 // ── ROOT ──────────────────────────────────────────────────────────────
 export default function App() {
-  const [tab, setTab] = useState('all');
+  const [tab, setTab] = useState('news');
   const [teamMode, setTeamMode] = useState('quick');
   const [newsSource, setNewsSource] = useState('nhl');
   const [openNav, setOpenNav] = useState(null);
