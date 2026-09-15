@@ -554,6 +554,28 @@ function CompactLineup({ data, dense }) {
   </div>;
 }
 
+function CompareTeamColumn({ slug, zoom, showBorder, onRemove }) {
+  const team = NHL_TEAMS[slug];
+  const { roster } = useTeamRoster(team.abbr, zoom === 0);
+  const rosterPlayers = roster.team === team.abbr ? roster.players : {};
+
+  return <div className="compare-column" style={{ borderRight: showBorder ? `1px solid ${P.border}` : "none" }}>
+    <div className="compare-team-heading">
+      <TeamLogo slug={slug} abbr={team.abbr} size={zoom === 2 ? 24 : zoom === 1 ? 30 : 40} />
+      <div className="compare-team-name">
+        <div>{zoom === 2 ? team.abbr : team.city}</div>
+        {zoom < 2 && <small>{team.name}</small>}
+      </div>
+      <button className="rm-btn" aria-label={`Remove ${team.city} ${team.name}`} onClick={() => onRemove(slug)}>×</button>
+    </div>
+    <div className="compare-lineup">
+      {zoom === 0
+        ? <RosterContext.Provider value={{ players: rosterPlayers, team: team.abbr }}><LineupContent data={TEAMS_DATA[slug]} /></RosterContext.Provider>
+        : <CompactLineup data={TEAMS_DATA[slug]} dense={zoom === 2} />}
+    </div>
+  </div>;
+}
+
 function CompareView({ isMobile }) {
   const [selected, setSelected] = useState([]);
   const [search, setSearch] = useState("");
@@ -600,24 +622,7 @@ function CompareView({ isMobile }) {
       ) : (
         <div className="compare-viewport">
           <div className={`compare-columns zoom-${zoom}`} style={{ minWidth: selected.length * COMPARE_ZOOM[zoom].width }}>
-            {selected.map((slug, i) => {
-              const t = NHL_TEAMS[slug];
-              return (
-                <div className="compare-column" key={slug} style={{ borderRight: i < selected.length - 1 ? `1px solid ${P.border}` : "none" }}>
-                  <div className="compare-team-heading">
-                    <TeamLogo slug={slug} abbr={t.abbr} size={zoom === 2 ? 24 : zoom === 1 ? 30 : 40} />
-                    <div className="compare-team-name">
-                      <div>{zoom === 2 ? t.abbr : t.city}</div>
-                      {zoom < 2 && <small>{t.name}</small>}
-                    </div>
-                    <button className="rm-btn" aria-label={`Remove ${t.city} ${t.name}`} onClick={() => toggle(slug)}>×</button>
-                  </div>
-                  <div className="compare-lineup">
-                    {zoom === 0 ? <LineupContent data={TEAMS_DATA[slug]} /> : <CompactLineup data={TEAMS_DATA[slug]} dense={zoom === 2} />}
-                  </div>
-                </div>
-              );
-            })}
+            {selected.map((slug, i) => <CompareTeamColumn key={slug} slug={slug} zoom={zoom} showBorder={i < selected.length - 1} onRemove={toggle} />)}
           </div>
         </div>
       )}
