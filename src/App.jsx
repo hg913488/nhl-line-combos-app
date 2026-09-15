@@ -1374,12 +1374,22 @@ class ErrorBoundary extends React.Component {
   }
 }
 
+function HockeyMicroAnimation({ playKey }) {
+  return <div key={playKey} className={`hockey-micro${playKey ? ' play' : ''}`} aria-hidden="true">
+    <span className="hockey-stick" />
+    <span className="hockey-puck" />
+    <span className="hockey-ice-line" />
+    <span className="hockey-net"><i /><i /></span>
+  </div>;
+}
+
 // ── ROOT ──────────────────────────────────────────────────────────────
 export default function App() {
   const [tab, setTab] = useState('all');
   const [teamMode, setTeamMode] = useState('quick');
   const [newsSource, setNewsSource] = useState('nhl');
   const [openNav, setOpenNav] = useState(null);
+  const [hockeyPlay, setHockeyPlay] = useState(0);
   const [showIntro, setShowIntro] = useState(() => !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -1432,6 +1442,7 @@ export default function App() {
     if (value.startsWith('news-')) { setNewsSource(value.replace('news-', '')); setTab('news'); return; }
     setTab(value);
   };
+  const playHockey = () => setHockeyPlay(value => value + 1);
   const navMenuProps = name => ({
     className: `nav-menu${openNav === name ? ' open' : ''}`,
     onMouseEnter: () => setOpenNav(name),
@@ -1452,6 +1463,7 @@ export default function App() {
 
       {/* Header */}
       <div className="app-header" style={{ borderTop: `3px solid ${P.casper}`, borderBottom: `1px solid ${P.border}`, padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "center", height: HEADER_H, position: "sticky", top: 0, zIndex: 50, background: P.bg }}>
+        <HockeyMicroAnimation playKey={hockeyPlay} />
         <div className="header-center">
           <img src="/logo.png" alt="Himank Goel" className="header-logo" />
           <div className="header-divider" />
@@ -1473,16 +1485,16 @@ export default function App() {
           <option value="picks">PICKS</option>
         </select>
         <div {...navMenuProps('teams')}>
-          <button className={`tab-btn${['all', 'compare'].includes(tab) ? " active" : ""}`} onClick={() => { setTeamMode('quick'); setTab('all'); }}>TEAMS</button>
+          <button className={`tab-btn${['all', 'compare'].includes(tab) ? " active" : ""}`} onMouseEnter={playHockey} onFocus={playHockey} onClick={() => { setTeamMode('quick'); setTab('all'); }}>TEAMS</button>
           <div className="nav-submenu" aria-label="Teams views">
             <button aria-pressed={tab === 'all' && teamMode === 'quick'} onClick={() => { setTeamMode('quick'); setTab('all'); }}>QUICK SCAN</button>
             <button aria-pressed={tab === 'all' && teamMode === 'focus'} onClick={() => { setTeamMode('focus'); setTab('all'); }}>FOCUSED TEAM</button>
             <button aria-pressed={tab === 'compare'} onClick={() => setTab('compare')}>COMPARE</button>
           </div>
         </div>
-        <button className={`tab-btn${tab === 'today' ? " active" : ""}`} aria-pressed={tab === 'today'} onClick={() => setTab('today')}>TODAY</button>
+        <button className={`tab-btn${tab === 'today' ? " active" : ""}`} aria-pressed={tab === 'today'} onMouseEnter={playHockey} onFocus={playHockey} onClick={() => setTab('today')}>TODAY</button>
         <div {...navMenuProps('news')}>
-          <button className={`tab-btn${['news', 'injuries'].includes(tab) ? " active" : ""}`} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NEWS</button>
+          <button className={`tab-btn${['news', 'injuries'].includes(tab) ? " active" : ""}`} onMouseEnter={playHockey} onFocus={playHockey} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NEWS</button>
           <div className="nav-submenu" aria-label="News views">
             <button aria-pressed={tab === 'news' && newsSource === 'nhl'} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NHL NEWS</button>
             <button aria-pressed={tab === 'news' && newsSource === 'reporters'} onClick={() => { setNewsSource('reporters'); setTab('news'); }}>REPORTERS</button>
@@ -1490,14 +1502,14 @@ export default function App() {
           </div>
         </div>
         <div {...navMenuProps('stats')}>
-          <button className={`tab-btn${['player', 'stats', 'playoffs'].includes(tab) ? " active" : ""}`} onClick={() => setTab('player')}>STATS</button>
+          <button className={`tab-btn${['player', 'stats', 'playoffs'].includes(tab) ? " active" : ""}`} onMouseEnter={playHockey} onFocus={playHockey} onClick={() => setTab('player')}>STATS</button>
           <div className="nav-submenu" aria-label="Stats views">
             <button aria-pressed={tab === 'player'} onClick={() => setTab('player')}>PLAYER STATS</button>
             <button aria-pressed={tab === 'stats'} onClick={() => setTab('stats')}>MATCHUPS</button>
             <button aria-pressed={tab === 'playoffs'} onClick={() => setTab('playoffs')}>PLAYOFFS</button>
           </div>
         </div>
-        <button className={`tab-btn${tab === 'picks' ? " active" : ""}`} aria-pressed={tab === 'picks'} onClick={() => setTab('picks')}>PICKS</button>
+        <button className={`tab-btn${tab === 'picks' ? " active" : ""}`} aria-pressed={tab === 'picks'} onMouseEnter={playHockey} onFocus={playHockey} onClick={() => setTab('picks')}>PICKS</button>
       </div>
 
       {/* Content */}

@@ -13,6 +13,27 @@ html, body { overflow-x: clip; }
 .app-shell .header-sub { font-size: 10px; margin-top: 5px; text-align: center; }
 .app-shell .header-logo { display: block; height: 44px; width: 33px; object-fit: contain; filter: none; mix-blend-mode: multiply; }
 .app-shell[data-theme='dark'] .header-logo { filter: invert(1); mix-blend-mode: screen; }
+.hockey-micro { position: absolute; top: 17px; left: 18px; width: 104px; height: 38px; overflow: hidden; opacity: 0; color: var(--dove); pointer-events: none; }
+.hockey-micro.play { animation: hockey-scene 820ms ease-out both; }
+.hockey-stick { position: absolute; left: 5px; bottom: 10px; width: 31px; height: 1px; background: currentColor; transform: rotate(-58deg); transform-origin: right center; }
+.hockey-stick::after { content: ''; position: absolute; right: -5px; bottom: -3px; width: 11px; height: 4px; border-bottom: 1px solid currentColor; border-right: 1px solid currentColor; transform: skewX(-24deg); }
+.hockey-micro.play .hockey-stick { animation: hockey-stick-shot 430ms cubic-bezier(.4, 0, .2, 1) both; }
+.hockey-puck { position: absolute; left: 29px; bottom: 7px; width: 7px; height: 3px; border-radius: 50%; background: var(--white); opacity: 0; }
+.hockey-micro.play .hockey-puck { animation: hockey-puck-shot 560ms cubic-bezier(.3, .1, .2, 1) 170ms both; }
+.hockey-ice-line { position: absolute; left: 28px; right: 18px; bottom: 6px; height: 1px; background: var(--border); transform: scaleX(0); transform-origin: left; }
+.hockey-micro.play .hockey-ice-line { animation: hockey-line-pass 520ms ease-out 140ms both; }
+.hockey-net { position: absolute; right: 4px; bottom: 6px; width: 20px; height: 18px; border: 1px solid currentColor; border-left-width: 2px; transform: skewX(-8deg); }
+.hockey-net::before, .hockey-net::after, .hockey-net i { content: ''; position: absolute; background: var(--border); }
+.hockey-net::before { left: 5px; top: 0; bottom: 0; width: 1px; }
+.hockey-net::after { left: 12px; top: 0; bottom: 0; width: 1px; }
+.hockey-net i:first-child { left: 0; right: 0; top: 5px; height: 1px; }
+.hockey-net i:last-child { left: 0; right: 0; top: 11px; height: 1px; }
+.hockey-micro.play .hockey-net { animation: hockey-net-hit 180ms ease-out 590ms both; }
+@keyframes hockey-scene { 0% { opacity: 0; } 10%, 78% { opacity: .72; } 100% { opacity: 0; } }
+@keyframes hockey-stick-shot { 0% { transform: rotate(-58deg); } 55% { transform: rotate(-36deg); } 100% { transform: rotate(-48deg); } }
+@keyframes hockey-puck-shot { 0% { opacity: 0; transform: translateX(0); } 8%, 82% { opacity: 1; } 100% { opacity: 0; transform: translateX(61px); } }
+@keyframes hockey-line-pass { 0% { transform: scaleX(0); opacity: 0; } 30% { opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+@keyframes hockey-net-hit { 0%, 100% { transform: skewX(-8deg) translateX(0); } 45% { transform: skewX(-8deg) translateX(2px); } }
 .brand-intro { position: fixed; inset: 0; z-index: 500; display: grid; place-content: center; justify-items: center; gap: 18px; background: var(--bg); pointer-events: none; animation: intro-exit 1700ms ease forwards; }
 .brand-intro-line { display: block; width: min(560px, 72vw); height: 1px; background: var(--casper); transform: scaleX(0); transform-origin: center; }
 .brand-intro-line:first-child { animation: intro-line 650ms cubic-bezier(.22, 1, .36, 1) 120ms forwards, intro-close-top 420ms cubic-bezier(.65, 0, .35, 1) 1080ms forwards; }
@@ -242,6 +263,7 @@ html, body { overflow-x: clip; }
   .app-shell .header-title-text { font-size: 16px; white-space: normal; line-height: 1.15; }
   .app-shell .header-sub { font-size: 10px; }
   .app-shell .theme-toggle { right: 12px; }
+  .hockey-micro { display: none; }
   .app-shell .tabs-bar { padding-left: 4px !important; }
   .app-shell .tab-btn { padding: 0 14px; }
   .app-shell .tabs-bar { padding: 4px 16px !important; overflow: visible !important; }
@@ -296,4 +318,5 @@ html, body { overflow-x: clip; }
 }
 @media (prefers-reduced-motion: reduce) {
   .app-shell *, .app-shell *::before, .app-shell *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .hockey-micro { display: none; }
 }
