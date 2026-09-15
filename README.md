@@ -27,14 +27,16 @@ Dark/light mode. Fully responsive.
 
 ## How data stays fresh
 
-A companion scraper repo ([hg913488/nhl-line-combos](https://github.com/hg913488/nhl-line-combos)) runs Python scrapers on a GitHub Actions schedule and bot-commits JSON to `data/` here, which triggers a Vercel redeploy.
+Python scrapers in this repository run on a GitHub Actions schedule and commit refreshed JSON directly to `data/`. Those data commits trigger a Vercel redeploy without requiring a cross-repository access token.
 
 ```
-GitHub Actions (5×/day)
+GitHub Actions (5x/day)
   └── scrape_lines.py        → data/lines.json
   └── scrape_goalies.py      → data/goalies.json
   └── scrape_goals_against.py → data/goals_against_by_position.json
 ```
+
+The lineup and goals-against workflows share one publishing queue so simultaneous runs cannot race when committing data.
 
 Live player stats (gamelog, season totals) are fetched client-side from the NHL API at click time and cached in `sessionStorage`.
 

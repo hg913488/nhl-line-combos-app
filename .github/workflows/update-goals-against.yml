@@ -1,0 +1,44 @@
+name: Update Goals Against by Position
+
+on:
+  schedule:
+    - cron: '0 15 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nhl-data-publish
+  cancel-in-progress: false
+
+jobs:
+  update-goals-against:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout app repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Refresh goals against data
+        run: python scraper/scrape_goals_against.py
+
+      - name: Commit refreshed data
+        run: |
+          git config user.email "scraper@bot"
+          git config user.name "Scraper Bot"
+          git add data/goals_against_by_position.json
+          if git diff --cached --quiet; then
+            echo "No data changes to publish"
+          else
+            git commit -m "Update goals against by position $(date +%F)"
+            git push
+          fi

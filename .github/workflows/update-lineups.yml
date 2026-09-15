@@ -1,0 +1,57 @@
+name: Update NHL Line Combos
+
+on:
+  schedule:
+    - cron: '0 14 * * *'
+    - cron: '0 15 * * *'
+    - cron: '0 18 * * *'
+    - cron: '0 19 * * *'
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nhl-data-publish
+  cancel-in-progress: false
+
+jobs:
+  scrape-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout app repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Test injury fallback
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+
+      - name: Refresh lineups and injuries
+        run: python scraper/scrape_lines.py
+
+      - name: Refresh starting goalies
+        run: python scraper/scrape_goalies.py
+
+      - name: Refresh playoff bracket
+        run: python scraper/scrape_playoff_bracket.py
+
+      - name: Commit refreshed data
+        run: |
+          git config user.email "scraper@bot"
+          git config user.name "Scraper Bot"
+          git add data/lines.json data/goalies.json data/playoff_bracket.json
+          if git diff --cached --quiet; then
+            echo "No data changes to publish"
+          else
+            git commit -m "Update NHL data $(date +%F)"
+            git push
+          fi
