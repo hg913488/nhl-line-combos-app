@@ -12,6 +12,20 @@ html, body { overflow-x: clip; }
 .app-shell .header-sub { font-size: 10px; margin-top: 5px; }
 .app-shell .header-logo { display: block; height: 34px; width: 25px; object-fit: contain; filter: none; }
 .app-shell[data-theme='dark'] .header-logo { filter: invert(1); }
+.brand-intro { position: fixed; inset: 0; z-index: 500; display: grid; place-content: center; justify-items: center; gap: 18px; background: var(--bg); pointer-events: none; animation: intro-exit 1700ms ease forwards; }
+.brand-intro-line { display: block; width: min(560px, 72vw); height: 1px; background: var(--casper); transform: scaleX(0); transform-origin: center; }
+.brand-intro-line:first-child { animation: intro-line 650ms cubic-bezier(.22, 1, .36, 1) 120ms forwards, intro-close-top 420ms cubic-bezier(.65, 0, .35, 1) 1080ms forwards; }
+.brand-intro-line:last-child { animation: intro-line 650ms cubic-bezier(.22, 1, .36, 1) 120ms forwards, intro-close-bottom 420ms cubic-bezier(.65, 0, .35, 1) 1080ms forwards; }
+.brand-intro-lockup { display: flex; align-items: center; gap: 14px; opacity: 0; transform: translateY(5px); animation: intro-title 500ms ease 430ms forwards, intro-title-close 340ms cubic-bezier(.65, 0, .35, 1) 1110ms forwards; }
+.brand-intro-lockup img { width: 28px; height: 38px; object-fit: contain; }
+.app-shell[data-theme='dark'] .brand-intro-lockup img { filter: invert(1); }
+.brand-intro-lockup strong { color: var(--white); font: 800 20px/1.05 'Syne', sans-serif; letter-spacing: 0; white-space: nowrap; }
+@keyframes intro-line { to { transform: scaleX(1); } }
+@keyframes intro-title { to { opacity: 1; transform: translateY(0); } }
+@keyframes intro-close-top { from { transform: translateY(0) scaleX(1); } to { transform: translateY(37px) scaleX(.24); } }
+@keyframes intro-close-bottom { from { transform: translateY(0) scaleX(1); } to { transform: translateY(-37px) scaleX(.24); } }
+@keyframes intro-title-close { from { opacity: 1; clip-path: inset(0); transform: scaleY(1); } to { opacity: 0; clip-path: inset(50% 0); transform: scaleY(.08); } }
+@keyframes intro-exit { 0%, 88% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
 .player-search-page { max-width: 900px; margin: auto; padding: 28px 24px; }
 .player-search-page h1 { font-size: 23px; margin-bottom: 20px; }
 .player-results { margin-top: 20px; }

@@ -1238,6 +1238,7 @@ class ErrorBoundary extends React.Component {
 export default function App() {
   const [tab, setTab] = useState('all');
   const [teamMode, setTeamMode] = useState('quick');
+  const [showIntro, setShowIntro] = useState(() => !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isDark, setIsDark] = useState(() => {
@@ -1249,6 +1250,12 @@ export default function App() {
   const toggleTheme = () => { setIsDark(value => { const next = !value; try { localStorage.setItem('theme', next ? 'dark' : 'light'); } catch {} return next; }); };
   const [modal, setModal] = useState(null); // { player, gamelog, loading, error }
   const [standings, setStandings] = useState({}); // { [abbr]: "W-L-OT" }
+
+  useEffect(() => {
+    if (!showIntro) return undefined;
+    const timer = window.setTimeout(() => setShowIntro(false), 1700);
+    return () => window.clearTimeout(timer);
+  }, [showIntro]);
 
   // Synchronously update P before children render so all components see the correct palette
   Object.assign(P, isDark ? DARK_PALETTE : LIGHT_PALETTE);
@@ -1283,6 +1290,12 @@ export default function App() {
   return (
     <div className="app-shell" data-theme={isDark ? 'dark' : 'light'} style={{ fontFamily: "'Space Grotesk', sans-serif", background: P.bg, minHeight: "100vh", color: P.white, ...Object.fromEntries(Object.entries(P).map(([key, value]) => ['--' + key, value])) }}>
       <style>{makeCss(isDark ? DARK_PALETTE : LIGHT_PALETTE)}</style>
+
+      {showIntro && <div className="brand-intro" aria-hidden="true">
+        <span className="brand-intro-line" />
+        <div className="brand-intro-lockup"><img src="/logo.png" alt="" /><strong>BETWEEN THE LINES</strong></div>
+        <span className="brand-intro-line" />
+      </div>}
 
       {/* Header */}
       <div className="app-header" style={{ borderTop: `3px solid ${P.casper}`, borderBottom: `1px solid ${P.border}`, padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "center", height: HEADER_H, position: "sticky", top: 0, zIndex: 50, background: P.bg }}>
