@@ -63,8 +63,8 @@ html, body { overflow-x: clip; }
 .app-shell .icon-button:hover, .app-shell .text-button:hover { background: var(--hover); }
 .teams-view { min-width: 0; }
 .nav-menu { align-self: stretch; position: relative; display: flex; }
-.nav-submenu { position: absolute; top: calc(100% + 1px); left: 8px; z-index: 80; display: flex; width: max-content; padding: 3px; border: 1px solid var(--border); background: var(--surface); box-shadow: 0 8px 20px rgb(0 0 0 / .16); opacity: 0; visibility: hidden; transform: translateY(-3px); transition: opacity 100ms ease, transform 100ms ease, visibility 100ms; }
-.nav-menu:hover .nav-submenu, .nav-menu:focus-within .nav-submenu { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-submenu { position: absolute; top: calc(100% + 1px); left: 8px; z-index: 80; display: flex; width: max-content; padding: 3px; border: 1px solid var(--border); background: var(--surface); box-shadow: 0 8px 20px rgb(0 0 0 / .16); opacity: 0; visibility: hidden; transform: translateY(-3px); }
+.nav-menu.open .nav-submenu { opacity: 1; visibility: visible; transform: translateY(0); }
 .nav-submenu button { min-height: 24px; padding: 3px 7px; border: 0; background: transparent; color: var(--dove); font-family: 'Syne', sans-serif; font-size: 8px; font-weight: 700; letter-spacing: .06em; white-space: nowrap; }
 .nav-submenu button:hover, .nav-submenu button[aria-pressed='true'] { background: var(--active); color: var(--white); }
 .quick-scan { width: 100%; overflow-x: auto; border-top: 1px solid var(--border); }

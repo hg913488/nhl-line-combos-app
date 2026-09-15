@@ -1379,6 +1379,7 @@ export default function App() {
   const [tab, setTab] = useState('all');
   const [teamMode, setTeamMode] = useState('quick');
   const [newsSource, setNewsSource] = useState('nhl');
+  const [openNav, setOpenNav] = useState(null);
   const [showIntro, setShowIntro] = useState(() => !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -1431,6 +1432,13 @@ export default function App() {
     if (value.startsWith('news-')) { setNewsSource(value.replace('news-', '')); setTab('news'); return; }
     setTab(value);
   };
+  const navMenuProps = name => ({
+    className: `nav-menu${openNav === name ? ' open' : ''}`,
+    onMouseEnter: () => setOpenNav(name),
+    onMouseLeave: () => setOpenNav(null),
+    onFocus: () => setOpenNav(name),
+    onBlur: event => { if (!event.currentTarget.contains(event.relatedTarget)) setOpenNav(null); },
+  });
 
   return (
     <div className="app-shell" data-theme={isDark ? 'dark' : 'light'} style={{ fontFamily: "'Space Grotesk', sans-serif", background: P.bg, minHeight: "100vh", color: P.white, ...Object.fromEntries(Object.entries(P).map(([key, value]) => ['--' + key, value])) }}>
@@ -1464,7 +1472,7 @@ export default function App() {
           <optgroup label="STATS"><option value="player">Player Stats</option><option value="stats">Matchups</option><option value="playoffs">Playoffs</option></optgroup>
           <option value="picks">PICKS</option>
         </select>
-        <div className="nav-menu">
+        <div {...navMenuProps('teams')}>
           <button className={`tab-btn${['all', 'compare'].includes(tab) ? " active" : ""}`} onClick={() => { setTeamMode('quick'); setTab('all'); }}>TEAMS</button>
           <div className="nav-submenu" aria-label="Teams views">
             <button aria-pressed={tab === 'all' && teamMode === 'quick'} onClick={() => { setTeamMode('quick'); setTab('all'); }}>QUICK SCAN</button>
@@ -1473,7 +1481,7 @@ export default function App() {
           </div>
         </div>
         <button className={`tab-btn${tab === 'today' ? " active" : ""}`} aria-pressed={tab === 'today'} onClick={() => setTab('today')}>TODAY</button>
-        <div className="nav-menu">
+        <div {...navMenuProps('news')}>
           <button className={`tab-btn${['news', 'injuries'].includes(tab) ? " active" : ""}`} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NEWS</button>
           <div className="nav-submenu" aria-label="News views">
             <button aria-pressed={tab === 'news' && newsSource === 'nhl'} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NHL NEWS</button>
@@ -1481,7 +1489,7 @@ export default function App() {
             <button aria-pressed={tab === 'injuries'} onClick={() => setTab('injuries')}>INJURIES</button>
           </div>
         </div>
-        <div className="nav-menu">
+        <div {...navMenuProps('stats')}>
           <button className={`tab-btn${['player', 'stats', 'playoffs'].includes(tab) ? " active" : ""}`} onClick={() => setTab('player')}>STATS</button>
           <div className="nav-submenu" aria-label="Stats views">
             <button aria-pressed={tab === 'player'} onClick={() => setTab('player')}>PLAYER STATS</button>
