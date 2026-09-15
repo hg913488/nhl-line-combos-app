@@ -21,6 +21,7 @@ html, body { overflow-x: clip; }
 .brand-intro-lockup img { width: 34px; height: 48px; object-fit: contain; mix-blend-mode: multiply; }
 .app-shell[data-theme='dark'] .brand-intro-lockup img { filter: invert(1); mix-blend-mode: screen; }
 .brand-intro-lockup strong { color: var(--white); font: 800 21px/1.05 'Syne', sans-serif; letter-spacing: 0; white-space: nowrap; }
+.brand-intro-lockup strong span { display: inline; }
 @keyframes intro-line { to { transform: scaleX(1); } }
 @keyframes intro-title { to { opacity: 1; transform: translateY(0); } }
 @keyframes intro-close-top { from { transform: translateY(0) scaleX(1); } to { transform: translateY(37px) scaleX(.24); } }
@@ -242,6 +243,12 @@ html, body { overflow-x: clip; }
   .app-shell .player-tile { flex-direction: column; text-align: center; padding: 12px 6px; gap: 5px; }
 }
 @media (max-width: 767px) {
+  .brand-intro { padding: 24px 16px; gap: 15px; }
+  .brand-intro-line { width: min(280px, calc(100vw - 48px)); }
+  .brand-intro-lockup { width: 100%; justify-content: center; gap: 10px; }
+  .brand-intro-lockup img { width: 28px; height: 40px; }
+  .brand-intro-lockup strong { max-width: 205px; font-size: 17px; line-height: 1.08; white-space: normal; }
+  .brand-intro-lockup strong span { display: block; }
   .app-shell { --header-height: 88px; --tabs-height: 74px; }
   .app-shell .app-header { padding-inline: 16px !important; }
   .app-shell .header-center { position: relative; width: 100%; height: 100%; justify-content: center; }

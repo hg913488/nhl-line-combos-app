@@ -1453,7 +1453,7 @@ export default function App() {
 
       {showIntro && <div className="brand-intro" aria-hidden="true">
         <span className="brand-intro-line" />
-        <div className="brand-intro-lockup"><img src="/logo.png" alt="" /><strong>BETWEEN THE LINES</strong></div>
+        <div className="brand-intro-lockup"><img src="/logo.png" alt="" /><strong>BETWEEN THE <span>LINES</span></strong></div>
         <span className="brand-intro-line" />
       </div>}
 
