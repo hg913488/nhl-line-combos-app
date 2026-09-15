@@ -249,7 +249,7 @@ html, body { overflow-x: clip; }
   .brand-intro-lockup img { width: 28px; height: 40px; }
   .brand-intro-lockup strong { max-width: 205px; font-size: 17px; line-height: 1.08; white-space: normal; }
   .brand-intro-lockup strong span { display: block; }
-  .app-shell { --header-height: 88px; --tabs-height: 74px; }
+  .app-shell { --header-height: 104px; --tabs-height: 74px; }
   .app-shell .app-header { padding-inline: 16px !important; }
   .app-shell .header-center { position: relative; width: 100%; height: 100%; justify-content: center; }
   .app-shell .header-logo { position: absolute; left: 0; width: 34px; height: 48px; }
@@ -257,7 +257,7 @@ html, body { overflow-x: clip; }
   .app-shell .header-copy { max-width: calc(100% - 104px); }
   .app-shell .header-title-text { font-size: 17px; white-space: normal; line-height: 1.15; }
   .app-shell .header-sub { font-size: 11px; margin-top: 7px; }
-  .app-shell .theme-toggle { top: 24px; right: 12px; }
+  .app-shell .theme-toggle { top: 32px; right: 12px; }
   .app-shell .tabs-bar { padding-left: 4px !important; }
   .app-shell .tab-btn { padding: 0 14px; }
   .app-shell .tabs-bar { padding: 8px 16px 9px !important; overflow: visible !important; }
