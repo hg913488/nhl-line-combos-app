@@ -249,7 +249,7 @@ html, body { overflow-x: clip; }
   .brand-intro-lockup img { width: 28px; height: 40px; }
   .brand-intro-lockup strong { max-width: 205px; font-size: 17px; line-height: 1.08; white-space: normal; }
   .brand-intro-lockup strong span { display: block; }
-  .app-shell { --header-height: 104px; --tabs-height: 74px; }
+  .app-shell { --header-height: 104px; --tabs-height: 100px; }
   .app-shell .app-header { padding-inline: 16px !important; }
   .app-shell .header-center { position: relative; width: 100%; height: 100%; justify-content: center; }
   .app-shell .header-logo { position: absolute; left: 0; width: 34px; height: 48px; }
@@ -260,16 +260,25 @@ html, body { overflow-x: clip; }
   .app-shell .theme-toggle { top: 32px; right: 12px; }
   .app-shell .tabs-bar { padding-left: 4px !important; }
   .app-shell .tab-btn { padding: 0 14px; }
-  .app-shell .tabs-bar { padding: 8px 16px 9px !important; overflow: visible !important; }
+  .app-shell .tabs-bar { padding: 8px 16px 10px !important; overflow: visible !important; }
   .app-shell .tabs-bar .tab-btn { display: none; }
   .nav-menu { display: none; }
-  .app-shell .mobile-view-nav { display: grid; width: 100%; gap: 4px; }
-  .app-shell .mobile-view-nav > strong { font: 800 11px/1 'Syne', sans-serif; letter-spacing: .08em; }
+  .app-shell .mobile-view-nav { display: grid; width: 100%; gap: 7px; }
+  .app-shell .mobile-primary-nav { display: flex; align-items: stretch; justify-content: space-between; height: 34px; border-bottom: 1px solid var(--border); }
+  .app-shell .mobile-primary-nav button { position: relative; padding: 0 4px 8px; border: 0; background: transparent; color: var(--dove); font: 800 10px/1 'Syne', sans-serif; letter-spacing: .04em; }
+  .app-shell .mobile-primary-nav button[aria-pressed='true'] { color: var(--white); }
+  .app-shell .mobile-primary-nav button[aria-pressed='true']::after { content: ''; position: absolute; right: 3px; bottom: -1px; left: 3px; height: 2px; background: var(--casper); }
   .app-shell .mobile-view-select { display: block; width: 100%; height: 40px; font-family: 'Syne', sans-serif; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
   .team-browser { display: block; }
   .team-navigation { position: static; height: auto; border-right: 0; padding: 16px 16px 0; }
   .team-navigation .team-search, .team-list { display: none; }
   .mobile-team-select { display: block; width: 100%; font-family: 'Syne', sans-serif; font-weight: 700; text-transform: uppercase; }
+  .quick-scan-track, .quick-scan .strip { min-height: calc(100dvh - var(--header-height) - var(--tabs-height)); }
+  .app-shell .quick-scan .strip { width: 74px; }
+  .app-shell .quick-scan .strip.expanded { width: 300px; }
+  .app-shell .quick-scan .strip-collapsed { width: 74px !important; gap: 10px !important; padding-inline: 7px !important; }
+  .app-shell .quick-scan .strip-collapsed img { width: 40px !important; height: 40px !important; }
+  .app-shell .quick-scan .strip-expanded-content { min-width: 300px !important; max-height: calc(100dvh - var(--header-height) - var(--tabs-height)) !important; padding: 14px 14px 24px !important; }
   .team-content { padding: 20px 16px 32px; }
   .team-heading { gap: 12px; }
   .team-heading > img { width: 44px; height: 44px; }

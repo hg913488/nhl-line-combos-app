@@ -366,11 +366,11 @@ function TeamStrip({ slug, data, expanded, onToggle }) {
   const { roster } = useTeamRoster(t.abbr, expanded);
   return (
     <div className={`strip${expanded ? " expanded" : ""}`} onClick={onToggle}>
-      <div style={{ position: "absolute", top: "40%", left: 0, width: COLLAPSED_W, transform: "translateY(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 14, opacity: expanded ? 0 : 1, transition: "opacity 0.15s", pointerEvents: "none", padding: "0 10px" }}>
+      <div className="strip-collapsed" style={{ position: "absolute", top: "40%", left: 0, width: COLLAPSED_W, transform: "translateY(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 14, opacity: expanded ? 0 : 1, transition: "opacity 0.15s", pointerEvents: "none", padding: "0 10px" }}>
         <TeamLogo slug={slug} abbr={t.abbr} size={52} />
         <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize: 10, fontWeight: 700, color: P.casper, letterSpacing: 0, whiteSpace: "nowrap", fontFamily: "'Syne', sans-serif" }}>{t.city.toUpperCase()}</div>
       </div>
-      <div style={{ opacity: expanded ? 1 : 0, transition: "opacity 0.2s 0.15s", padding: "18px 20px", minWidth: EXPANDED_W, pointerEvents: expanded ? "auto" : "none", overflowY: "auto", maxHeight: `calc(100vh - ${HEADER_H + TABS_H}px)` }}>
+      <div className="strip-expanded-content" style={{ opacity: expanded ? 1 : 0, transition: "opacity 0.2s 0.15s", padding: "18px 20px", minWidth: EXPANDED_W, pointerEvents: expanded ? "auto" : "none", overflowY: "auto", maxHeight: `calc(100vh - ${HEADER_H + TABS_H}px)` }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, paddingBottom: 14, borderBottom: `1px solid ${P.border}` }}>
           <TeamLogo slug={slug} abbr={t.abbr} size={48} />
           <div>
@@ -396,8 +396,7 @@ function QuickScan() {
   </div>;
 }
 
-function TeamsView({ isMobile, mode }) {
-  if (isMobile) return <TeamBrowser />;
+function TeamsView({ mode }) {
   return <section className="teams-view">
     {mode === 'quick' ? <QuickScan /> : <TeamBrowser />}
   </section>;
@@ -1426,7 +1425,7 @@ export default function App() {
       .catch(() => setStandingsError(true));
   }, []);
 
-  const mobileNavValue = tab === 'all' ? 'teams-focus' : tab === 'news' ? `news-${newsSource}` : tab;
+  const mobileNavValue = tab === 'all' ? `teams-${teamMode}` : tab === 'news' ? `news-${newsSource}` : tab;
   const mobileSectionLabel = ['all', 'compare'].includes(tab)
     ? 'TEAMS'
     : ['news', 'injuries'].includes(tab)
@@ -1473,9 +1472,15 @@ export default function App() {
       {/* Tabs */}
       <div className="tabs-bar" style={{ borderBottom: `1px solid ${P.border}`, display: "flex", height: "var(--tabs-height)", position: "sticky", top: "var(--header-height)", zIndex: 49, background: P.bg, padding: "0 8px", overflow: "visible" }}>
         <div className="mobile-view-nav">
-          <strong>{mobileSectionLabel}</strong>
+          <nav className="mobile-primary-nav" aria-label="Primary navigation">
+            <button aria-pressed={tab === 'all' || tab === 'compare'} onClick={() => { setTeamMode('quick'); setTab('all'); }}>TEAMS</button>
+            <button aria-pressed={tab === 'today'} onClick={() => setTab('today')}>TODAY</button>
+            <button aria-pressed={tab === 'news' || tab === 'injuries'} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NEWS</button>
+            <button aria-pressed={['player', 'stats', 'playoffs'].includes(tab)} onClick={() => setTab('player')}>STATS</button>
+            <button aria-pressed={tab === 'picks'} onClick={() => setTab('picks')}>PICKS</button>
+          </nav>
           <select className="mobile-view-select" aria-label={`${mobileSectionLabel} view`} value={mobileNavValue} onChange={event => selectView(event.target.value)}>
-            <optgroup label="TEAMS"><option value="teams-focus">Team Lineups</option><option value="compare">Compare</option></optgroup>
+            <optgroup label="TEAMS"><option value="teams-quick">Quick Scan</option><option value="teams-focus">Focused Team</option><option value="compare">Compare</option></optgroup>
             <option value="today">TODAY</option>
             <optgroup label="NEWS"><option value="news-nhl">NHL News</option><option value="news-reporters">Reporters</option><option value="injuries">Injuries</option></optgroup>
             <optgroup label="STATS"><option value="player">Player Stats</option><option value="stats">Matchups</option><option value="playoffs">Playoffs</option></optgroup>
