@@ -1,6 +1,6 @@
 {
   "season": "20252026",
-  "updatedAt": "2026-06-05",
+  "updatedAt": "2026-09-15",
   "series": {
     "R1E-A-BUF-BOS": {
       "id": "R1E-A-BUF-BOS",
@@ -903,11 +903,11 @@
       "seriesLetter": "O",
       "topSeed": "CAR",
       "bottomSeed": "VGK",
-      "topWins": 1,
-      "bottomWins": 1,
-      "status": "in-progress",
-      "winnerAbbr": null,
-      "nextGameDate": "2026-06-06",
+      "topWins": 4,
+      "bottomWins": 2,
+      "status": "final",
+      "winnerAbbr": "CAR",
+      "nextGameDate": null,
       "games": [
         {
           "gameNumber": 1,
@@ -932,45 +932,36 @@
           "date": "2026-06-06",
           "awayAbbr": "CAR",
           "homeAbbr": "VGK",
-          "awayScore": null,
-          "homeScore": null,
-          "state": "scheduled"
+          "awayScore": 4,
+          "homeScore": 5,
+          "state": "final"
         },
         {
           "gameNumber": 4,
           "date": "2026-06-09",
           "awayAbbr": "CAR",
           "homeAbbr": "VGK",
-          "awayScore": null,
-          "homeScore": null,
-          "state": "scheduled"
+          "awayScore": 5,
+          "homeScore": 3,
+          "state": "final"
         },
         {
           "gameNumber": 5,
           "date": "2026-06-11",
           "awayAbbr": "VGK",
           "homeAbbr": "CAR",
-          "awayScore": null,
-          "homeScore": null,
-          "state": "scheduled"
+          "awayScore": 2,
+          "homeScore": 4,
+          "state": "final"
         },
         {
           "gameNumber": 6,
           "date": "2026-06-14",
           "awayAbbr": "CAR",
           "homeAbbr": "VGK",
-          "awayScore": null,
-          "homeScore": null,
-          "state": "scheduled"
-        },
-        {
-          "gameNumber": 7,
-          "date": "2026-06-17",
-          "awayAbbr": "VGK",
-          "homeAbbr": "CAR",
-          "awayScore": null,
-          "homeScore": null,
-          "state": "scheduled"
+          "awayScore": 3,
+          "homeScore": 0,
+          "state": "final"
         }
       ]
     }
