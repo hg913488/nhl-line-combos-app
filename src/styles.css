@@ -1,4 +1,6 @@
+/* Hallmark · pre-emit critique: P5 H4 E5 S5 R5 V4 */
 /* Between the Lines: shared working interface, with restrained team identity. */
+html, body { overflow-x: clip; }
 .app-shell { font-size: 15px; line-height: 1.45; }
 .app-shell button, .app-shell input, .app-shell select { font: inherit; }
 .app-shell button { color: var(--white); cursor: pointer; }
@@ -40,10 +42,21 @@
 }
 .app-shell .header-divider { height: 32px; }
 .app-shell .tabs-bar { padding-left: 20px !important; }
-.app-shell .tab-btn { font-family: inherit; font-size: 14px; padding: 0 16px; }
+.app-shell .tab-btn { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .08em; padding: 0 16px; text-transform: uppercase; }
 .app-shell .theme-toggle { position: fixed; top: 18px; right: 24px; z-index: 55; }
 .app-shell .icon-button { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex: 0 0 40px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
 .app-shell .icon-button:hover, .app-shell .text-button:hover { background: var(--hover); }
+.teams-view { min-width: 0; }
+.team-view-switcher { margin: 12px 20px; width: max-content; }
+.team-view-switcher button { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .07em; }
+.quick-scan { width: 100%; overflow-x: auto; border-top: 1px solid var(--border); }
+.quick-scan-track { display: flex; align-items: stretch; min-height: calc(100vh - 181px); width: max-content; min-width: 100%; }
+.quick-scan .strip { min-height: calc(100vh - 181px); }
+.quick-scan .player-tile { flex-direction: column; justify-content: flex-start; min-height: 118px; padding: 8px 5px; gap: 2px; text-align: center; }
+.quick-scan .player-name { text-align: center; width: 100%; }
+.quick-scan .player-name > span { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.quick-scan .player-name strong { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.quick-scan .jersey-icon { width: 47px; height: 43px; }
 .team-browser { display: grid; grid-template-columns: 240px minmax(0, 1fr); max-width: 1400px; margin: auto; min-height: calc(100vh - 124px); }
 .team-navigation { border-right: 1px solid var(--border); padding: 20px 12px; position: sticky; top: 124px; height: calc(100vh - 124px); overflow-y: auto; }
 .team-search { display: flex; gap: 8px; align-items: center; border: 1px solid var(--border); background: var(--surface); border-radius: 6px; padding: 0 10px; height: 40px; color: var(--dove); }
@@ -69,11 +82,11 @@
 .team-lineup { max-width: 940px; padding-top: 4px; }
 .app-shell .player-tile { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 14px 12px; display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; position: relative; text-align: left; min-height: 82px; }
 .app-shell .player-tile:hover { background: var(--hover); border-color: var(--accent) !important; transform: none; box-shadow: none; }
-.player-jersey { position: relative; display: block; width: 52px; height: 56px; flex: 0 0 52px; color: color-mix(in srgb, var(--jersey-color), white 30%); }
-.player-jersey > span { position: absolute; left: 14px; right: 14px; top: 18px; text-align: center; color: white; font: 700 14px/1.2 'Space Grotesk', sans-serif; text-shadow: 0 1px 2px #111; }
-.player-name { min-width: 0; overflow-wrap: anywhere; line-height: 1.35; text-transform: capitalize; }
-.player-name > span { display: block; font-size: 13px; color: var(--dove); }
-.player-name strong { display: block; font-size: 15px; font-weight: 650; }
+.jersey-icon { display: block; flex: 0 0 62px; color: color-mix(in srgb, var(--border), white 22%); overflow: visible; }
+.jersey-number { font: 800 25px/1 'Space Grotesk', sans-serif; letter-spacing: 0; }
+.player-name { min-width: 0; overflow-wrap: anywhere; line-height: 1.25; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; }
+.player-name > span { display: block; font-size: 12px; font-weight: 400; color: var(--dove); letter-spacing: 0; }
+.player-name strong { display: block; font-size: 15px; font-weight: 700; letter-spacing: 0; }
 .player-position { position: absolute; top: 6px; right: 7px; font-size: 11px; color: var(--dove); }
 .line-change { color: var(--yellow); font-size: 11px; }
 .powerplay-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
@@ -129,11 +142,11 @@
   .app-shell .tab-btn { padding: 0 14px; }
   .app-shell .tabs-bar { padding: 4px 16px !important; overflow: visible !important; }
   .app-shell .tabs-bar .tab-btn { display: none; }
-  .app-shell .mobile-view-select { display: block; width: 100%; height: 40px; }
+  .app-shell .mobile-view-select { display: block; width: 100%; height: 40px; font-family: 'Syne', sans-serif; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
   .team-browser { display: block; }
   .team-navigation { position: static; height: auto; border-right: 0; padding: 16px 16px 0; }
   .team-navigation .team-search, .team-list { display: none; }
-  .mobile-team-select { display: block; width: 100%; }
+  .mobile-team-select { display: block; width: 100%; font-family: 'Syne', sans-serif; font-weight: 700; text-transform: uppercase; }
   .team-content { padding: 20px 16px 32px; }
   .team-heading { gap: 12px; }
   .team-heading > img { width: 44px; height: 44px; }

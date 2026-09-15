@@ -1,7 +1,8 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback, createContext, useContext } from "react";
-import { Sun, Moon, Search, Shirt, AlertCircle } from 'lucide-react';
+import { Sun, Moon, Search, AlertCircle } from 'lucide-react';
 import useSchedule, { localDate } from './useSchedule.js';
 import PlayerDetails from './PlayerDetails.jsx';
+import JerseyIcon from './JerseyIcon.jsx';
 import { getJSON, normalizeName, seasonForDate, seasonLabel, seasonsFrom } from './data-client.js';
 import './styles.css';
 import lineups from '../data/lines.json';
@@ -234,32 +235,30 @@ function TeamLogo({ slug, abbr, size = 48 }) {
 
 const DATA_SEASON = seasonForDate(new Date(UPDATED_AT + 'T12:00:00Z'));
 const RosterContext = createContext(null);
-const TEAM_COLORS = {
-  ANA: '#B64D20', BOS: '#E5BC46', BUF: '#154E9B', CGY: '#C52E34', CAR: '#C8303C',
-  CHI: '#C7373C', COL: '#863C50', CBJ: '#234E80', DAL: '#17875E', DET: '#CB3540',
-  EDM: '#D96629', FLA: '#AE3844', LAK: '#454B52', MIN: '#267757', MTL: '#BE3340',
-  NSH: '#DFB632', NJD: '#BD3440', NYI: '#D06A2A', NYR: '#245CB1', OTT: '#B73640',
-  PHI: '#D46B29', PIT: '#DABB47', SJS: '#18858A', SEA: '#568F9D', STL: '#2764B3',
-  TBL: '#2B5DA6', TOR: '#2A62AE', UTA: '#719CBD', VAN: '#286691', VGK: '#AE9858',
-  WSH: '#BE3442', WPG: '#2B537C',
-};
+
+function useTeamRoster(team, enabled = true) {
+  const [roster, setRoster] = useState({});
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    if (!enabled) return undefined;
+    let active = true;
+    setError(false);
+    getJSON(`/api/roster?team=${team}&season=${DATA_SEASON}`, 3600000)
+      .then(data => {
+        const players = Object.fromEntries(data.players.map(player => [normalizeName(player.firstName + ' ' + player.lastName), { ...player, snapshot: true }]));
+        if (active) setRoster({ team, players });
+      })
+      .catch(() => { if (active) setError(true); });
+    return () => { active = false; };
+  }, [team, enabled]);
+  return { roster, error };
+}
 
 function TeamBrowser() {
   const [slug, setSlug] = useState('vancouver-canucks');
   const [query, setQuery] = useState('');
-  const [roster, setRoster] = useState({});
-  const [rosterError, setRosterError] = useState(false);
   const team = NHL_TEAMS[slug];
-  useEffect(() => {
-    let active = true;
-    setRoster({}); setRosterError(false);
-    getJSON(`/api/roster?team=${team.abbr}&season=${DATA_SEASON}`, 3600000)
-      .then(data => {
-        const players = Object.fromEntries(data.players.map(player => [normalizeName(player.firstName + ' ' + player.lastName), { ...player, snapshot: true }]));
-        if (active) setRoster({ team: team.abbr, players });
-      }).catch(() => { if (active) setRosterError(true); });
-    return () => { active = false; };
-  }, [team.abbr]);
+  const { roster, error: rosterError } = useTeamRoster(team.abbr);
   const visible = Object.entries(NHL_TEAMS).filter(([, t]) => (t.city + ' ' + t.name + ' ' + t.abbr).toLowerCase().includes(query.toLowerCase()));
   return <main className="team-browser">
     <aside className="team-navigation" aria-label="Teams">
@@ -278,7 +277,7 @@ function TeamBrowser() {
       </header>
       <p className="snapshot-notice"><AlertCircle size={17} /> Observed {UPDATED_AT}. Lineups may have changed since this snapshot.</p>
       {rosterError && <p className="muted">Jersey numbers are temporarily unavailable.</p>}
-      <RosterContext.Provider value={{ players: roster.team === team.abbr ? roster.players : {}, color: TEAM_COLORS[team.abbr], team: team.abbr }}>
+      <RosterContext.Provider value={{ players: roster.team === team.abbr ? roster.players : {}, team: team.abbr }}>
         <div className="team-lineup"><LineupContent data={TEAMS_DATA[slug]} /></div>
       </RosterContext.Provider>
     </section>
@@ -290,16 +289,13 @@ function PlayerCard({ name, pos, lineChangedTo }) {
   const player = roster?.players[normalizeName(name)];
   const isGoalie = pos === 'STR' || pos === 'BKP';
   const parts = name.split(' ');
-  const first = player?.firstName || parts.slice(0, -1).join(' ');
-  const last = player?.lastName || parts.slice(-1)[0];
+  const first = parts.slice(0, -1).join(' ');
+  const last = parts.slice(-1)[0];
   const label = isGoalie ? 'G' : pos;
   return <button type="button" className="player-card-clickable player-tile"
     aria-label={`View ${name} statistics`}
     onClick={event => { event.stopPropagation(); triggerPlayerLookup?.(name, player); }}>
-    {roster && <span className="player-jersey" aria-hidden="true" style={{ '--jersey-color': roster.color }}>
-      <Shirt size={52} strokeWidth={1.2} fill="var(--jersey-color)" />
-      <span>{player?.number ?? ''}</span>
-    </span>}
+    {roster && <JerseyIcon team={roster.team} number={player?.number} />}
     <span className="player-name"><span>{first}</span><strong>{last}</strong></span>
     <span className="player-position">{label}</span>
     {lineChangedTo != null && <span className="line-change">Line {lineChangedTo}</span>}
@@ -367,6 +363,7 @@ function LineupContent({ data }) {
 
 function TeamStrip({ slug, data, expanded, onToggle }) {
   const t = NHL_TEAMS[slug] || { city: slug, name: "", abbr: "?" };
+  const { roster } = useTeamRoster(t.abbr, expanded);
   return (
     <div className={`strip${expanded ? " expanded" : ""}`} onClick={onToggle}>
       <div style={{ position: "absolute", top: "40%", left: 0, width: COLLAPSED_W, transform: "translateY(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 14, opacity: expanded ? 0 : 1, transition: "opacity 0.15s", pointerEvents: "none", padding: "0 10px" }}>
@@ -382,10 +379,33 @@ function TeamStrip({ slug, data, expanded, onToggle }) {
             {STANDINGS[t.abbr] && <div style={{ fontSize: 12, color: P.casper, marginTop: 4, fontFamily: "'Space Mono',monospace", letterSpacing: 0 }}>{STANDINGS[t.abbr].record}</div>}
           </div>
         </div>
-        {expanded && <LineupContent data={data} />}
+        {expanded && <RosterContext.Provider value={{ players: roster.team === t.abbr ? roster.players : {}, team: t.abbr }}><LineupContent data={data} /></RosterContext.Provider>}
       </div>
     </div>
   );
+}
+
+function QuickScan() {
+  const [expanded, setExpanded] = useState({});
+  const slugs = Object.keys(TEAMS_DATA).sort((a, b) => NHL_TEAMS[a].city.localeCompare(NHL_TEAMS[b].city));
+  const toggle = slug => setExpanded(current => ({ ...current, [slug]: !current[slug] }));
+  return <div className="quick-scan" aria-label="Quick team scan">
+    <div className="quick-scan-track">
+      {slugs.map(slug => <TeamStrip key={slug} slug={slug} data={TEAMS_DATA[slug]} expanded={!!expanded[slug]} onToggle={() => toggle(slug)} />)}
+    </div>
+  </div>;
+}
+
+function TeamsView({ isMobile }) {
+  const [mode, setMode] = useState('quick');
+  if (isMobile) return <TeamBrowser />;
+  return <section className="teams-view">
+    <div className="team-view-switcher segment" aria-label="Team layout">
+      <button aria-pressed={mode === 'quick'} onClick={() => setMode('quick')}>QUICK SCAN</button>
+      <button aria-pressed={mode === 'focus'} onClick={() => setMode('focus')}>FOCUSED TEAM</button>
+    </div>
+    {mode === 'quick' ? <QuickScan /> : <TeamBrowser />}
+  </section>;
 }
 
 function MobileRow({ slug, data, expanded, onToggle }) {
@@ -1236,8 +1256,8 @@ export default function App() {
       .catch(() => setStandingsError(true));
   }, []);
 
-  const TABS = ["all", "today", "playoffs", "iihf", "stats", "injuries", "player", "compare"];
-  const TAB_LABELS = { all: "Teams", today: "Today", playoffs: "Playoffs", iihf: "IIHF", stats: "Matchups", injuries: "Injuries", player: "Players", compare: "Compare" };
+  const TABS = ["all", "today", "playoffs", "stats", "injuries", "player", "compare"];
+  const TAB_LABELS = { all: "TEAMS", today: "TODAY", playoffs: "PLAYOFFS", stats: "MATCHUPS", injuries: "INJURIES", player: "PLAYERS", compare: "COMPARE" };
 
   return (
     <div className="app-shell" data-theme={isDark ? 'dark' : 'light'} style={{ fontFamily: "'Space Grotesk', sans-serif", background: P.bg, minHeight: "100vh", color: P.white, ...Object.fromEntries(Object.entries(P).map(([key, value]) => ['--' + key, value])) }}>
@@ -1270,10 +1290,9 @@ export default function App() {
 
       {/* Content */}
       {standingsError && <p className="api-notice" role="status">Team records are temporarily unavailable.</p>}
-      {tab === "all" && <TeamBrowser />}
+      {tab === "all" && <TeamsView isMobile={isMobile} />}
       {tab === "today" && <ErrorBoundary><TodayView isMobile={isMobile} /></ErrorBoundary>}
       {tab === "playoffs" && <ErrorBoundary><PlayoffsView isMobile={isMobile} /></ErrorBoundary>}
-      {tab === "iihf" && <ErrorBoundary><IIHFView isMobile={isMobile} /></ErrorBoundary>}
       {tab === "stats" && <ErrorBoundary><GoalsAgainstView isMobile={isMobile} /></ErrorBoundary>}
       {tab === "injuries" && <ErrorBoundary><InjuriesView isMobile={isMobile} /></ErrorBoundary>}
       {tab === "player" && <ErrorBoundary><PlayerStatsView isMobile={isMobile} /></ErrorBoundary>}
