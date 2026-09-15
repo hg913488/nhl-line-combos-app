@@ -10,8 +10,8 @@ html, body { overflow-x: clip; }
 .app-shell .header-center { gap: 12px; }
 .app-shell .header-title-text { font-size: 20px; }
 .app-shell .header-sub { font-size: 10px; margin-top: 5px; }
-.app-shell .header-logo { height: 32px; width: 24px; }
-.brand-monogram { font: 700 28px/1 Georgia, serif; color: var(--white); }
+.app-shell .header-logo { display: block; height: 34px; width: 25px; object-fit: contain; filter: none; }
+.app-shell[data-theme='dark'] .header-logo { filter: invert(1); }
 .player-search-page { max-width: 900px; margin: auto; padding: 28px 24px; }
 .player-search-page h1 { font-size: 23px; margin-bottom: 20px; }
 .player-results { margin-top: 20px; }
@@ -42,13 +42,16 @@ html, body { overflow-x: clip; }
 }
 .app-shell .header-divider { height: 32px; }
 .app-shell .tabs-bar { padding-left: 20px !important; }
-.app-shell .tab-btn { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .08em; padding: 0 16px; text-transform: uppercase; }
+.app-shell .tab-btn { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .08em; padding: 0 14px; text-transform: uppercase; }
 .app-shell .theme-toggle { position: fixed; top: 18px; right: 24px; z-index: 55; }
 .app-shell .icon-button { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex: 0 0 40px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
 .app-shell .icon-button:hover, .app-shell .text-button:hover { background: var(--hover); }
 .teams-view { min-width: 0; }
-.team-view-switcher { margin: 12px 20px; width: max-content; }
-.team-view-switcher button { font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .07em; }
+.teams-tab-menu { align-self: stretch; position: relative; display: flex; }
+.team-view-switcher { position: absolute; top: calc(100% + 1px); left: 8px; z-index: 80; display: flex; width: max-content; padding: 3px; border: 1px solid var(--border); background: var(--surface); box-shadow: 0 8px 20px rgb(0 0 0 / .16); opacity: 0; visibility: hidden; transform: translateY(-3px); transition: opacity 100ms ease, transform 100ms ease, visibility 100ms; }
+.teams-tab-menu:hover .team-view-switcher, .teams-tab-menu:focus-within .team-view-switcher { opacity: 1; visibility: visible; transform: translateY(0); }
+.team-view-switcher button { min-height: 24px; padding: 3px 6px; border: 0; background: transparent; color: var(--dove); font-family: 'Syne', sans-serif; font-size: 8px; font-weight: 700; letter-spacing: .06em; white-space: nowrap; }
+.team-view-switcher button:hover, .team-view-switcher button[aria-pressed='true'] { background: var(--active); color: var(--white); }
 .quick-scan { width: 100%; overflow-x: auto; border-top: 1px solid var(--border); }
 .quick-scan-track { display: flex; align-items: stretch; min-height: calc(100vh - 181px); width: max-content; min-width: 100%; }
 .quick-scan .strip { min-height: calc(100vh - 181px); }
@@ -124,6 +127,20 @@ html, body { overflow-x: clip; }
 .player-detail-footer { padding: 16px 24px; font-size: 11px; color: var(--dove); display: flex; gap: 12px; justify-content: space-between; flex-wrap: wrap; }
 .data-state { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; min-height: 120px; padding: 24px; color: var(--dove); font-size: 12px; }
 .text-button { display: inline-flex; gap: 8px; align-items: center; padding: 10px 14px; border: 1px solid var(--border); border-radius: 5px; background: var(--bg); }
+.picks-page { max-width: 980px; margin: auto; padding: 24px; }
+.picks-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.pick-matchup { border: 1px solid var(--border); background: var(--surface); }
+.pick-matchup > header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.pick-matchup > header > div { display: flex; align-items: center; gap: 7px; }
+.pick-matchup > header span, .pick-matchup > header time { color: var(--dove); font: 10px/1.2 'Space Mono', monospace; }
+.pick-sides { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pick-sides section { min-width: 0; padding: 12px; }
+.pick-sides section + section { border-left: 1px solid var(--border); }
+.pick-sides p { color: var(--dove); font: 9px/1.2 'Space Mono', monospace; }
+.pick-watch { display: block; margin: 5px 0 8px; font: 700 11px/1.2 'Syne', sans-serif; }
+.pick-sides section > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+.pick-sides section > div span { display: flex; justify-content: space-between; gap: 4px; padding: 4px; background: var(--bg); color: var(--dove); font: 9px/1.2 'Space Mono', monospace; }
+.pick-sides b { color: var(--white); }
 @keyframes detail-in { from { opacity: 0; } to { opacity: 1; } }
 @media (max-width: 1100px) {
   .team-browser { grid-template-columns: 200px minmax(0, 1fr); }
@@ -142,6 +159,7 @@ html, body { overflow-x: clip; }
   .app-shell .tab-btn { padding: 0 14px; }
   .app-shell .tabs-bar { padding: 4px 16px !important; overflow: visible !important; }
   .app-shell .tabs-bar .tab-btn { display: none; }
+  .teams-tab-menu { display: none; }
   .app-shell .mobile-view-select { display: block; width: 100%; height: 40px; font-family: 'Syne', sans-serif; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
   .team-browser { display: block; }
   .team-navigation { position: static; height: auto; border-right: 0; padding: 16px 16px 0; }
@@ -168,6 +186,8 @@ html, body { overflow-x: clip; }
   .window-caption { padding: 12px 16px; }
   .player-detail-footer { padding: 16px; }
   .app-shell .ga-table td { padding: 10px 6px; }
+  .picks-page { padding: 18px 16px; }
+  .picks-list { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {
   .app-shell *, .app-shell *::before, .app-shell *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

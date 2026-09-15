@@ -396,14 +396,9 @@ function QuickScan() {
   </div>;
 }
 
-function TeamsView({ isMobile }) {
-  const [mode, setMode] = useState('quick');
+function TeamsView({ isMobile, mode }) {
   if (isMobile) return <TeamBrowser />;
   return <section className="teams-view">
-    <div className="team-view-switcher segment" aria-label="Team layout">
-      <button aria-pressed={mode === 'quick'} onClick={() => setMode('quick')}>QUICK SCAN</button>
-      <button aria-pressed={mode === 'focus'} onClick={() => setMode('focus')}>FOCUSED TEAM</button>
-    </div>
     {mode === 'quick' ? <QuickScan /> : <TeamBrowser />}
   </section>;
 }
@@ -616,6 +611,31 @@ function TodayView() {
       </div>
       {open[game.id] && <><p className="snapshot-notice">Lineup snapshot: {UPDATED_AT}. Not confirmed for this game.</p><div className="matchup-lineups">{[game.awayTeam, game.homeTeam].map(team => <section key={team.abbrev}><h2>{team.abbrev}</h2>{TEAMS_DATA[abbrToSlug(team.abbrev)] ? <LineupContent data={TEAMS_DATA[abbrToSlug(team.abbrev)]} /> : <p>No lineup available.</p>}</section>)}</div></>}
     </article>)}
+  </main>;
+}
+
+function PicksView() {
+  const [date, setDate] = useState(localDate());
+  const { games, loading, error } = useSchedule(date);
+  const positions = ['C', 'LW', 'RW', 'D'];
+  return <main className="picks-page">
+    <header className="schedule-heading"><div><h1>Picks</h1><p className="muted">Matchup signals from last season's goals allowed by position.</p></div><label>Date<input type="date" aria-label="Picks date" value={date} onChange={event => { if (event.target.value) setDate(event.target.value); }} /></label></header>
+    {loading && <p className="data-state" role="status">Loading matchups...</p>}
+    {error && <p className="data-state" role="alert">{error}</p>}
+    {!loading && !error && !games.length && <p className="data-state">No games scheduled for {date}.</p>}
+    <div className="picks-list">{games.map(game => <article className="pick-matchup" key={game.id}>
+      <header><div><TeamLogo slug={abbrToSlug(game.awayTeam.abbrev)} abbr={game.awayTeam.abbrev} size={28} /><strong>{game.awayTeam.abbrev}</strong><span>AT</span><TeamLogo slug={abbrToSlug(game.homeTeam.abbrev)} abbr={game.homeTeam.abbrev} size={28} /><strong>{game.homeTeam.abbrev}</strong></div><time>{new Date(game.startTimeUTC).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}</time></header>
+      <div className="pick-sides">{[
+        { offense: game.awayTeam.abbrev, defense: game.homeTeam.abbrev },
+        { offense: game.homeTeam.abbrev, defense: game.awayTeam.abbrev },
+      ].map(side => {
+        const allowed = GA_DATA.teams?.[side.defense]?.l10 || {};
+        const ranked = positions.map(position => ({ position, value: allowed[position] || 0 })).sort((a, b) => b.value - a.value);
+        return <section key={side.offense}><p>{side.offense} VS {side.defense}</p><strong className="pick-watch">WATCH {ranked[0]?.position || '—'}</strong>
+          <div>{ranked.map(item => <span key={item.position}><b>{item.position}</b>{item.value} GA</span>)}</div>
+        </section>;
+      })}</div>
+    </article>)}</div>
   </main>;
 }
 
@@ -1217,6 +1237,7 @@ class ErrorBoundary extends React.Component {
 // ── ROOT ──────────────────────────────────────────────────────────────
 export default function App() {
   const [tab, setTab] = useState('all');
+  const [teamMode, setTeamMode] = useState('quick');
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isDark, setIsDark] = useState(() => {
@@ -1256,8 +1277,8 @@ export default function App() {
       .catch(() => setStandingsError(true));
   }, []);
 
-  const TABS = ["all", "today", "playoffs", "stats", "injuries", "player", "compare"];
-  const TAB_LABELS = { all: "TEAMS", today: "TODAY", playoffs: "PLAYOFFS", stats: "MATCHUPS", injuries: "INJURIES", player: "PLAYERS", compare: "COMPARE" };
+  const TABS = ["all", "today", "injuries", "player", "picks", "playoffs", "stats", "compare"];
+  const TAB_LABELS = { all: "TEAMS", today: "TODAY", injuries: "INJURIES", player: "PLAYERS", picks: "PICKS", playoffs: "PLAYOFFS", stats: "MATCHUPS", compare: "COMPARE" };
 
   return (
     <div className="app-shell" data-theme={isDark ? 'dark' : 'light'} style={{ fontFamily: "'Space Grotesk', sans-serif", background: P.bg, minHeight: "100vh", color: P.white, ...Object.fromEntries(Object.entries(P).map(([key, value]) => ['--' + key, value])) }}>
@@ -1266,7 +1287,7 @@ export default function App() {
       {/* Header */}
       <div className="app-header" style={{ borderTop: `3px solid ${P.casper}`, borderBottom: `1px solid ${P.border}`, padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "center", height: HEADER_H, position: "sticky", top: 0, zIndex: 50, background: P.bg }}>
         <div className="header-center">
-          <span className="brand-monogram" aria-hidden="true">h.</span>
+          <img src="/logo.png" alt="Himank Goel" className="header-logo" />
           <div className="header-divider" />
           <div>
             <div className="header-title-text">BETWEEN THE LINES</div>
@@ -1277,21 +1298,24 @@ export default function App() {
 
       <button className="icon-button theme-toggle" onClick={toggleTheme} aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'} title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}>{isDark ? <Sun size={19} /> : <Moon size={19} />}</button>
       {/* Tabs */}
-      <div className="tabs-bar" style={{ borderBottom: `1px solid ${P.border}`, display: "flex", height: TABS_H, position: "sticky", top: HEADER_H, zIndex: 49, background: P.bg, padding: "0 8px", overflowX: "auto", scrollbarWidth: "none" }}>
+      <div className="tabs-bar" style={{ borderBottom: `1px solid ${P.border}`, display: "flex", height: TABS_H, position: "sticky", top: HEADER_H, zIndex: 49, background: P.bg, padding: "0 8px", overflow: "visible" }}>
         <select className="mobile-view-select" aria-label="View" value={tab} onChange={event => setTab(event.target.value)}>
           {TABS.map(value => <option key={value} value={value}>{TAB_LABELS[value]}</option>)}
         </select>
-        {TABS.map(t => (
-          <button key={t} className={`tab-btn${tab === t ? " active" : ""}`} aria-pressed={tab === t} onClick={() => setTab(t)}>
-            {TAB_LABELS[t]}
-          </button>
-        ))}
+        {TABS.map(t => t === 'all' ? <div className="teams-tab-menu" key={t}>
+          <button className={`tab-btn${tab === t ? " active" : ""}`} aria-pressed={tab === t} onClick={() => setTab(t)}>TEAMS</button>
+          <div className="team-view-switcher" aria-label="Team layout">
+            <button aria-pressed={teamMode === 'quick'} onClick={() => { setTeamMode('quick'); setTab('all'); }}>QUICK SCAN</button>
+            <button aria-pressed={teamMode === 'focus'} onClick={() => { setTeamMode('focus'); setTab('all'); }}>FOCUSED TEAM</button>
+          </div>
+        </div> : <button key={t} className={`tab-btn${tab === t ? " active" : ""}`} aria-pressed={tab === t} onClick={() => setTab(t)}>{TAB_LABELS[t]}</button>)}
       </div>
 
       {/* Content */}
       {standingsError && <p className="api-notice" role="status">Team records are temporarily unavailable.</p>}
-      {tab === "all" && <TeamsView isMobile={isMobile} />}
+      {tab === "all" && <TeamsView isMobile={isMobile} mode={teamMode} />}
       {tab === "today" && <ErrorBoundary><TodayView isMobile={isMobile} /></ErrorBoundary>}
+      {tab === "picks" && <ErrorBoundary><PicksView /></ErrorBoundary>}
       {tab === "playoffs" && <ErrorBoundary><PlayoffsView isMobile={isMobile} /></ErrorBoundary>}
       {tab === "stats" && <ErrorBoundary><GoalsAgainstView isMobile={isMobile} /></ErrorBoundary>}
       {tab === "injuries" && <ErrorBoundary><InjuriesView isMobile={isMobile} /></ErrorBoundary>}
