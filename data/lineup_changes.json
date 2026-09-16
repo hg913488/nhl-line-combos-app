@@ -1,11 +1,359 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-16T17:59:04Z",
+  "generated_at": "2026-09-16T18:30:34Z",
   "retention": {
     "max_age_days": 90,
     "max_events": 500
   },
   "events": [
+    {
+      "id": "a6d026feb47e39fc365a",
+      "occurred_at": "2026-09-16T18:30:34Z",
+      "player": "JARED MCCANN",
+      "team": "seattle-kraken",
+      "previous_team": "seattle-kraken",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "after": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 2,
+          "to": 3,
+          "direction": "demoted"
+        }
+      ]
+    },
+    {
+      "id": "a333dd2994f0ef48aca8",
+      "occurred_at": "2026-09-16T18:30:34Z",
+      "player": "RYKER EVANS",
+      "team": "seattle-kraken",
+      "previous_team": "seattle-kraken",
+      "event_types": [
+        "defense_pair"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 2,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 3,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "defense_pair",
+          "from": 2,
+          "to": 3,
+          "direction": "demoted"
+        }
+      ]
+    },
+    {
+      "id": "8e4343fef4e68596a577",
+      "occurred_at": "2026-09-16T18:30:34Z",
+      "player": "RYAN LINDGREN",
+      "team": "seattle-kraken",
+      "previous_team": "seattle-kraken",
+      "event_types": [
+        "defense_pair"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 3,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 2,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "defense_pair",
+          "from": 3,
+          "to": 2,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "8c4af2ca6a1a99042f0c",
+      "occurred_at": "2026-09-16T18:30:34Z",
+      "player": "BERKLY CATTON",
+      "team": "seattle-kraken",
+      "previous_team": "seattle-kraken",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 2,
+          "to": 3,
+          "direction": "demoted"
+        }
+      ]
+    },
+    {
+      "id": "89d673abfda720574ecc",
+      "occurred_at": "2026-09-16T18:30:34Z",
+      "player": "JONATAN BERGGREN",
+      "team": "st-louis-blues",
+      "previous_team": "st-louis-blues",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "st-louis-blues",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "st-louis-blues",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
+    {
+      "id": "82fc5ce84f45d23f17e5",
+      "occurred_at": "2026-09-16T18:30:34Z",
+      "player": "MACKIE SAMOSKEVICH",
+      "team": "seattle-kraken",
+      "previous_team": "seattle-kraken",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 3,
+          "to": 2,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "7fb37604997a79e7927e",
+      "occurred_at": "2026-09-16T18:30:34Z",
+      "player": "KAAPO KAKKO",
+      "team": "seattle-kraken",
+      "previous_team": "seattle-kraken",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 3,
+          "to": 2,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "5c5e2781a5cee380f8c2",
+      "occurred_at": "2026-09-16T18:30:34Z",
+      "player": "ROSS JOHNSTON",
+      "team": "st-louis-blues",
+      "previous_team": "st-louis-blues",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "st-louis-blues",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "st-louis-blues",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "2da6b8c251cd797acf3a",
+      "occurred_at": "2026-09-16T18:30:34Z",
+      "player": "CHANDLER STEPHENSON",
+      "team": "seattle-kraken",
+      "previous_team": "seattle-kraken",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "after": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 3,
+          "to": 2,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "233a7ea4ac11f3e5e58c",
+      "occurred_at": "2026-09-16T18:30:34Z",
+      "player": "SHANE WRIGHT",
+      "team": "seattle-kraken",
+      "previous_team": "seattle-kraken",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 2,
+          "to": 3,
+          "direction": "demoted"
+        }
+      ]
+    },
     {
       "id": "96f08fbfe1c7e7c2f6c9",
       "occurred_at": "2026-09-16T17:59:04Z",
