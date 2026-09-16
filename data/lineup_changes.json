@@ -1,9 +1,183 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-15T20:50:57Z",
+  "generated_at": "2026-09-16T17:59:04Z",
   "retention": {
     "max_age_days": 90,
     "max_events": 500
   },
-  "events": []
+  "events": [
+    {
+      "id": "96f08fbfe1c7e7c2f6c9",
+      "occurred_at": "2026-09-16T17:59:04Z",
+      "player": "COLE PERFETTI",
+      "team": "winnipeg-jets",
+      "previous_team": "winnipeg-jets",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "winnipeg-jets",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "after": {
+        "team": "winnipeg-jets",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 3,
+          "to": 2,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "62f256cc4050d6b60c31",
+      "occurred_at": "2026-09-16T17:59:04Z",
+      "player": "VLADISLAV NAMESTNIKOV",
+      "team": "winnipeg-jets",
+      "previous_team": "winnipeg-jets",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "winnipeg-jets",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "winnipeg-jets",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "5ebe235c66474f9a4041",
+      "occurred_at": "2026-09-16T17:59:04Z",
+      "player": "NINO NIEDERREITER",
+      "team": "winnipeg-jets",
+      "previous_team": "winnipeg-jets",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "winnipeg-jets",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "winnipeg-jets",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 2,
+          "to": 3,
+          "direction": "demoted"
+        }
+      ]
+    },
+    {
+      "id": "54b7ed5e54b52f437c6e",
+      "occurred_at": "2026-09-16T17:59:04Z",
+      "player": "VIGGO BJÖRCK",
+      "team": "winnipeg-jets",
+      "previous_team": "winnipeg-jets",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "winnipeg-jets",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "winnipeg-jets",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
+    {
+      "id": "4434e4dbb27acad15b4f",
+      "occurred_at": "2026-09-16T17:59:04Z",
+      "player": "ADAM LOWRY",
+      "team": "winnipeg-jets",
+      "previous_team": "winnipeg-jets",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "winnipeg-jets",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "winnipeg-jets",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 2,
+          "to": 3,
+          "direction": "demoted"
+        }
+      ]
+    }
+  ]
 }
