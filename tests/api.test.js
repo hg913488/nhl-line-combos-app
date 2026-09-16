@@ -5,6 +5,7 @@ import schedule from '../api/schedule.js';
 import standings from '../api/standings.js';
 import roster from '../api/roster.js';
 import news, { parseNewsHtml } from '../api/news.js';
+import playerSearch, { parsePlayerQuery } from '../api/player-search.js';
 import { getJSON, normalizeName } from '../src/data-client.js';
 
 function response() {
@@ -115,4 +116,39 @@ test('news endpoint exposes parsed NHL stories and caches success', async t => {
   assert.equal(res.code, 200);
   assert.equal(res.body.stories[0].title, 'One');
   assert.match(res.headers['Cache-Control'], /s-maxage=300/);
+});
+
+test('player search validates input and normalizes NHL results', async t => {
+  let requested;
+  t.mock.method(globalThis, 'fetch', async url => {
+    requested = url;
+    return { ok: true, json: async () => [{ playerId: '8478402', name: 'Connor McDavid', positionCode: 'C', teamAbbrev: 'EDM', active: true }] };
+  });
+  const invalid = response();
+  await playerSearch({ query: { q: 'M' } }, invalid);
+  assert.equal(invalid.code, 400);
+  const res = response();
+  await playerSearch({ query: { q: 'McDavid' } }, res);
+  assert.match(requested, /q=McDavid$/);
+  assert.deepEqual(res.body.players[0], { id: '8478402', firstName: 'Connor', lastName: 'McDavid', pos: 'C', team: 'EDM', active: true });
+});
+
+test('player search recognizes team names and filters current rosters by last name', async t => {
+  let requested;
+  t.mock.method(globalThis, 'fetch', async url => {
+    requested = url;
+    return { ok: true, json: async () => ({
+      forwards: [
+        { id: 1, firstName: { default: 'J.T.' }, lastName: { default: 'Miller' }, positionCode: 'C' },
+        { id: 2, firstName: { default: 'Elias' }, lastName: { default: 'Pettersson' }, positionCode: 'C' },
+      ],
+      defensemen: [], goalies: [],
+    }) };
+  });
+  assert.deepEqual(parsePlayerQuery('Miller Vancouver Canucks'), { name: 'miller', team: 'VAN' });
+  assert.deepEqual(parsePlayerQuery('EDM McDavid'), { name: 'mcdavid', team: 'EDM' });
+  const res = response();
+  await playerSearch({ query: { q: 'Miller VAN' } }, res);
+  assert.match(requested, /roster\/VAN\/current$/);
+  assert.deepEqual(res.body.players, [{ id: '1', firstName: 'J.T.', lastName: 'Miller', pos: 'C', team: 'VAN', active: true }]);
 });

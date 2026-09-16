@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback, createContext, useContext } from "react";
-import { Sun, Moon, Search, AlertCircle, ZoomIn, ZoomOut } from 'lucide-react';
+import { Sun, Moon, Search, AlertCircle, ZoomIn, ZoomOut, ArrowRight } from 'lucide-react';
 import useSchedule, { localDate } from './useSchedule.js';
 import PlayerDetails from './PlayerDetails.jsx';
 import JerseyIcon from './JerseyIcon.jsx';
@@ -7,6 +7,7 @@ import { getJSON, normalizeName, seasonForDate, seasonLabel, seasonsFrom } from 
 import './styles.css';
 import lineups from '../data/lines.json';
 import goalsAgainstData from '../data/goals_against_by_position.json';
+import lineupChanges from '../data/lineup_changes.json';
 
 import playoffBracket from '../data/playoff_bracket.json';
 import iihfGroups from '../data/iihf_groups.json';
@@ -17,6 +18,7 @@ const UPDATED_AT = lineups.updated_at.slice(0, 10);
 const TEAMS_DATA = lineups.teams;
 const INJURIES_DATA = lineups.injuries || {};
 const GA_DATA = goalsAgainstData;
+const LINEUP_CHANGE_EVENTS = lineupChanges.events || [];
 
 const BRACKET_DATA = playoffBracket;
 const IIHF_GROUPS_DATA = iihfGroups;
@@ -62,8 +64,6 @@ const LOGO_ABBR_OVERRIDE = { "los-angeles-kings": "LAK" };
 const LOGO_URL = (slug, abbr) => `https://assets.nhle.com/logos/nhl/svg/${LOGO_ABBR_OVERRIDE[slug] || abbr}_${P.bg === LIGHT_PALETTE.bg ? "light" : "dark"}.svg`;
 const COLLAPSED_W = 100;
 const EXPANDED_W = 320;
-const HEADER_H = 76;
-const TABS_H = 48;
 
 const DARK_PALETTE = {
   bg: "#17191D", surface: "#22262C", border: "#3B4149",
@@ -370,7 +370,7 @@ function TeamStrip({ slug, data, expanded, onToggle }) {
         <TeamLogo slug={slug} abbr={t.abbr} size={52} />
         <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize: 10, fontWeight: 700, color: P.casper, letterSpacing: 0, whiteSpace: "nowrap", fontFamily: "'Syne', sans-serif" }}>{t.city.toUpperCase()}</div>
       </div>
-      <div className="strip-expanded-content" style={{ opacity: expanded ? 1 : 0, transition: "opacity 0.2s 0.15s", padding: "18px 20px", minWidth: EXPANDED_W, pointerEvents: expanded ? "auto" : "none", overflowY: "auto", maxHeight: `calc(100vh - ${HEADER_H + TABS_H}px)` }}>
+      <div className="strip-expanded-content" style={{ opacity: expanded ? 1 : 0, transition: "opacity 0.2s 0.15s", padding: "18px 20px", minWidth: EXPANDED_W, pointerEvents: expanded ? "auto" : "none", overflowY: "auto", maxHeight: "calc(100vh - var(--header-height) - var(--tabs-height))" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, paddingBottom: 14, borderBottom: `1px solid ${P.border}` }}>
           <TeamLogo slug={slug} abbr={t.abbr} size={48} />
           <div>
@@ -387,11 +387,22 @@ function TeamStrip({ slug, data, expanded, onToggle }) {
 
 function QuickScan() {
   const [expanded, setExpanded] = useState({});
+  const [showScrollHint, setShowScrollHint] = useState(true);
   const slugs = Object.keys(TEAMS_DATA).sort((a, b) => NHL_TEAMS[a].city.localeCompare(NHL_TEAMS[b].city));
-  const toggle = slug => setExpanded(current => ({ ...current, [slug]: !current[slug] }));
-  return <div className="quick-scan" aria-label="Quick team scan">
-    <div className="quick-scan-track">
-      {slugs.map(slug => <TeamStrip key={slug} slug={slug} data={TEAMS_DATA[slug]} expanded={!!expanded[slug]} onToggle={() => toggle(slug)} />)}
+  const toggle = slug => {
+    setShowScrollHint(false);
+    setExpanded(current => ({ ...current, [slug]: !current[slug] }));
+  };
+  return <div className="quick-scan-shell">
+    <div className={`quick-scan-hint${showScrollHint ? '' : ' hidden'}`} aria-hidden="true">
+      <span>SCROLL</span><ArrowRight size={14} strokeWidth={1.5} />
+    </div>
+    <div className="quick-scan" aria-label="Quick team scan" onScroll={event => {
+      if (event.currentTarget.scrollLeft > 12) setShowScrollHint(false);
+    }}>
+      <div className="quick-scan-track">
+        {slugs.map(slug => <TeamStrip key={slug} slug={slug} data={TEAMS_DATA[slug]} expanded={!!expanded[slug]} onToggle={() => toggle(slug)} />)}
+      </div>
     </div>
   </div>;
 }
@@ -586,7 +597,7 @@ function CompareView({ isMobile }) {
   }), [search]);
 
   return (
-    <div className="compare-page" style={{ height: `calc(100vh - ${HEADER_H + TABS_H}px)` }}>
+    <div className="compare-page">
       <div className="compare-controls">
         <div className="compare-toolbar">
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Filter teams..."
@@ -1320,16 +1331,13 @@ function PlayerStatsView() {
   useEffect(() => {
     let active = true;
     setResults([]); setError('');
-    if (query.trim().length < 3) { setLoading(false); return; }
+    if (query.trim().length < 2) { setLoading(false); return; }
     setLoading(true);
     const timer = setTimeout(() => {
-      getJSON(`https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=15&q=${encodeURIComponent(query.trim())}`)
+      getJSON(`/api/player-search?q=${encodeURIComponent(query.trim())}`)
         .then(data => {
-          if (!Array.isArray(data)) throw new Error('Player search is temporarily unavailable.');
-          if (active) setResults(data.map(p => {
-            const parts = p.name.split(' ');
-            return { id: String(p.playerId), firstName: parts.shift(), lastName: parts.join(' '), pos: p.positionCode, team: p.teamAbbrev };
-          }));
+          if (!Array.isArray(data.players)) throw new Error('Player search is temporarily unavailable.');
+          if (active) setResults(data.players);
         }).catch(err => { if (active) setError(err.message); })
         .finally(() => { if (active) setLoading(false); });
     }, 350);
@@ -1340,19 +1348,54 @@ function PlayerStatsView() {
       const parts = name.split(' ');
       return { firstName: parts.shift(), lastName: parts.join(' '), team: NHL_TEAMS[slug].abbr, snapshot: true };
     }));
-  const players = query.trim().length >= 3 ? results : featured;
+  const players = query.trim().length >= 2 ? results : featured;
   return <main className="player-search-page">
     <h1>Players</h1>
-    <label className="team-search"><Search size={18} /><input aria-label="Search players" placeholder="Search players" value={query} onChange={event => setQuery(event.target.value)} /></label>
+    <label className="team-search"><Search size={18} /><input aria-label="Search players by name or team" placeholder="Last name, team, or both" value={query} onChange={event => setQuery(event.target.value)} /></label>
     {loading && <p className="data-state" role="status">Searching players...</p>}
     {error && <p className="data-state" role="alert">{error}</p>}
     {!loading && !error && <div className="player-results">
-      {query.trim().length < 3 && <p className="muted">From the {seasonLabel(DATA_SEASON)} lineup archive</p>}
+      {query.trim().length < 2 && <p className="muted">From the {seasonLabel(DATA_SEASON)} lineup archive</p>}
       {players.map(player => <button key={player.id || player.firstName + player.lastName} onClick={() => triggerPlayerLookup?.(player.firstName + ' ' + player.lastName, player)}>
         <span>{player.firstName} {player.lastName}</span><small>{player.pos} {player.team}</small>
       </button>)}
       {!players.length && <p className="data-state">No matching players.</p>}
     </div>}
+  </main>;
+}
+
+function changeText(change) {
+  const labels = { forward_line: 'Line', defense_pair: 'Pair', power_play: 'PP', team: 'Team', addition: 'Added', removal: 'Removed' };
+  if (change.type === 'addition') return 'Added to projected lineup';
+  if (change.type === 'removal') return 'Removed from projected lineup';
+  const from = change.from == null ? 'off' : change.from;
+  const to = change.to == null ? 'off' : change.to;
+  return `${labels[change.type] || change.type} ${from} to ${to}`;
+}
+
+function LineMovesView() {
+  const events = LINEUP_CHANGE_EVENTS.slice(0, 100);
+  return <main className="moves-page">
+    <header className="moves-heading">
+      <div><p className="muted">BTL PULSE</p><h1>Line Moves</h1></div>
+      <span>Tracking promotions, demotions, power-play roles, and team changes</span>
+    </header>
+    {!events.length && <div className="moves-empty">
+      <strong>Tracking is now active.</strong>
+      <p>The first verified changes will appear after the next lineup refresh. Current lineups remain available in Teams.</p>
+    </div>}
+    <div className="moves-feed">{events.map(event => {
+      const team = NHL_TEAMS[event.team];
+      const date = new Date(event.occurred_at);
+      return <article className={`move-event importance-${event.importance}`} key={event.id}>
+        <div className="move-team"><TeamLogo slug={event.team} abbr={team?.abbr || event.team?.slice(0, 3).toUpperCase()} size={34} /></div>
+        <div className="move-copy">
+          <div><button onClick={() => triggerPlayerLookup?.(event.player)}>{event.player}</button><span>{team ? `${team.city} ${team.name}` : event.team}</span></div>
+          <p>{event.changes.map(changeText).join(' / ')}</p>
+        </div>
+        <time dateTime={event.occurred_at}>{Number.isNaN(date.valueOf()) ? '' : date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</time>
+      </article>;
+    })}</div>
   </main>;
 }
 
@@ -1394,7 +1437,7 @@ export default function App() {
 
   useEffect(() => {
     if (!showIntro) return undefined;
-    const timer = window.setTimeout(() => setShowIntro(false), 1700);
+    const timer = window.setTimeout(() => setShowIntro(false), 2600);
     return () => window.clearTimeout(timer);
   }, [showIntro]);
 
@@ -1428,7 +1471,7 @@ export default function App() {
   const mobileNavValue = tab === 'all' ? `teams-${teamMode}` : tab === 'news' ? `news-${newsSource}` : tab;
   const mobileSectionLabel = ['all', 'compare'].includes(tab)
     ? 'TEAMS'
-    : ['news', 'injuries'].includes(tab)
+    : ['news', 'injuries', 'moves'].includes(tab)
       ? 'NEWS'
       : ['player', 'stats', 'playoffs'].includes(tab)
         ? 'STATS'
@@ -1451,20 +1494,22 @@ export default function App() {
       <style>{makeCss(isDark ? DARK_PALETTE : LIGHT_PALETTE)}</style>
 
       {showIntro && <div className="brand-intro" aria-hidden="true">
-        <span className="brand-intro-line" />
-        <div className="brand-intro-lockup"><img src="/logo.png" alt="" /><strong>BETWEEN THE <span>LINES</span></strong></div>
-        <span className="brand-intro-line" />
+        <div className="brand-intro-stage">
+          <span className="brand-intro-line brand-intro-line-top" />
+          <div className="brand-intro-lockup"><strong>BETWEEN THE <span>LINES</span></strong></div>
+          <img className="brand-intro-mark" src="/between-mark.png" alt="" />
+          <span className="brand-intro-line brand-intro-line-bottom" />
+        </div>
       </div>}
 
       {/* Header */}
       <div className="app-header" style={{ borderTop: `3px solid ${P.casper}`, borderBottom: `1px solid ${P.border}`, padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "center", height: "var(--header-height)", position: "sticky", top: 0, zIndex: 50, background: P.bg }}>
+        <img src="/between-mark.png" alt="" className="header-logo" />
         <div className="header-center">
-          <img src="/logo.png" alt="Himank Goel" className="header-logo" />
-          <div className="header-divider" />
-          <div className="header-copy">
+          <button className="header-copy header-home" aria-label="Open Teams Quick Scan" onClick={() => { setTeamMode('quick'); setTab('all'); }}>
             <div className="header-title-text">BETWEEN THE LINES</div>
             <div className="header-sub">Hockey, in context.</div>
-          </div>
+          </button>
         </div>
       </div>
 
@@ -1475,14 +1520,14 @@ export default function App() {
           <nav className="mobile-primary-nav" aria-label="Primary navigation">
             <button aria-pressed={tab === 'all' || tab === 'compare'} onClick={() => { setTeamMode('quick'); setTab('all'); }}>TEAMS</button>
             <button aria-pressed={tab === 'today'} onClick={() => setTab('today')}>TODAY</button>
-            <button aria-pressed={tab === 'news' || tab === 'injuries'} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NEWS</button>
+            <button aria-pressed={['news', 'injuries', 'moves'].includes(tab)} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NEWS</button>
             <button aria-pressed={['player', 'stats', 'playoffs'].includes(tab)} onClick={() => setTab('player')}>STATS</button>
             <button aria-pressed={tab === 'picks'} onClick={() => setTab('picks')}>PICKS</button>
           </nav>
           <select className="mobile-view-select" aria-label={`${mobileSectionLabel} view`} value={mobileNavValue} onChange={event => selectView(event.target.value)}>
             <optgroup label="TEAMS"><option value="teams-quick">Quick Scan</option><option value="teams-focus">Focused Team</option><option value="compare">Compare</option></optgroup>
             <option value="today">TODAY</option>
-            <optgroup label="NEWS"><option value="news-nhl">NHL News</option><option value="news-reporters">Reporters</option><option value="injuries">Injuries</option></optgroup>
+            <optgroup label="NEWS"><option value="news-nhl">NHL News</option><option value="news-reporters">Reporters</option><option value="moves">Line Moves</option><option value="injuries">Injuries</option></optgroup>
             <optgroup label="STATS"><option value="player">Player Stats</option><option value="stats">Matchups</option><option value="playoffs">Playoffs</option></optgroup>
             <option value="picks">PICKS</option>
           </select>
@@ -1497,10 +1542,11 @@ export default function App() {
         </div>
         <button className={`tab-btn${tab === 'today' ? " active" : ""}`} aria-pressed={tab === 'today'} onClick={() => setTab('today')}>TODAY</button>
         <div {...navMenuProps('news')}>
-          <button className={`tab-btn${['news', 'injuries'].includes(tab) ? " active" : ""}`} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NEWS</button>
+          <button className={`tab-btn${['news', 'injuries', 'moves'].includes(tab) ? " active" : ""}`} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NEWS</button>
           <div className="nav-submenu" aria-label="News views">
             <button aria-pressed={tab === 'news' && newsSource === 'nhl'} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NHL NEWS</button>
             <button aria-pressed={tab === 'news' && newsSource === 'reporters'} onClick={() => { setNewsSource('reporters'); setTab('news'); }}>REPORTERS</button>
+            <button aria-pressed={tab === 'moves'} onClick={() => setTab('moves')}>LINE MOVES</button>
             <button aria-pressed={tab === 'injuries'} onClick={() => setTab('injuries')}>INJURIES</button>
           </div>
         </div>
@@ -1516,28 +1562,43 @@ export default function App() {
       </div>
 
       {/* Content */}
-      {standingsError && <p className="api-notice" role="status">Team records are temporarily unavailable.</p>}
-      {tab === "all" && <TeamsView isMobile={isMobile} mode={teamMode} />}
-      {tab === "today" && <ErrorBoundary><TodayView isMobile={isMobile} /></ErrorBoundary>}
-      {tab === "news" && <ErrorBoundary><NewsView isDark={isDark} source={newsSource} onSourceChange={setNewsSource} /></ErrorBoundary>}
-      {tab === "picks" && <ErrorBoundary><PicksView /></ErrorBoundary>}
-      {tab === "playoffs" && <ErrorBoundary><PlayoffsView isMobile={isMobile} /></ErrorBoundary>}
-      {tab === "stats" && <ErrorBoundary><GoalsAgainstView isMobile={isMobile} /></ErrorBoundary>}
-      {tab === "injuries" && <ErrorBoundary><InjuriesView isMobile={isMobile} /></ErrorBoundary>}
-      {tab === "player" && <ErrorBoundary><PlayerStatsView isMobile={isMobile} /></ErrorBoundary>}
-      {tab === "compare" && <ErrorBoundary><CompareView isMobile={isMobile} /></ErrorBoundary>}
+      <div className="content-stage">
+        {standingsError && <p className="api-notice" role="status">Team records are temporarily unavailable.</p>}
+        {tab === "all" && <TeamsView isMobile={isMobile} mode={teamMode} />}
+        {tab === "today" && <ErrorBoundary><TodayView isMobile={isMobile} /></ErrorBoundary>}
+        {tab === "news" && <ErrorBoundary><NewsView isDark={isDark} source={newsSource} onSourceChange={setNewsSource} /></ErrorBoundary>}
+        {tab === "moves" && <ErrorBoundary><LineMovesView /></ErrorBoundary>}
+        {tab === "picks" && <ErrorBoundary><PicksView /></ErrorBoundary>}
+        {tab === "playoffs" && <ErrorBoundary><PlayoffsView isMobile={isMobile} /></ErrorBoundary>}
+        {tab === "stats" && <ErrorBoundary><GoalsAgainstView isMobile={isMobile} /></ErrorBoundary>}
+        {tab === "injuries" && <ErrorBoundary><InjuriesView isMobile={isMobile} /></ErrorBoundary>}
+        {tab === "player" && <ErrorBoundary><PlayerStatsView isMobile={isMobile} /></ErrorBoundary>}
+        {tab === "compare" && <ErrorBoundary><CompareView isMobile={isMobile} /></ErrorBoundary>}
+      </div>
 
       {/* Glass player modal */}
       {modal && <PlayerDetails modal={modal} onClose={() => setModal(null)} />}
 
       {/* Footer */}
       <footer className="site-footer">
-        <span>DATA FROM</span>
-        <a href="https://www.dailyfaceoff.com" target="_blank" rel="noopener noreferrer">DAILY FACEOFF</a>
-        <i aria-hidden="true">·</i>
-        <a href="https://www.nhl.com" target="_blank" rel="noopener noreferrer">NHL.COM</a>
-        <i aria-hidden="true">·</i>
-        <strong>BY GRAINXFORM</strong>
+        <div className="footer-main">
+          <div className="footer-lockup">
+            <img src="/between-mark-footer.svg" alt="" />
+            <div><strong>BETWEEN THE LINES</strong><span>Hockey, in context.</span></div>
+          </div>
+          <p className="footer-intro">Line combinations, player context, league news, and matchups in one focused view.</p>
+          <div className="footer-sources">
+            <span>DATA SOURCES</span>
+            <div>
+              <a href="https://www.dailyfaceoff.com" target="_blank" rel="noopener noreferrer">DAILY FACEOFF</a>
+              <a href="https://www.nhl.com" target="_blank" rel="noopener noreferrer">NHL.COM</a>
+            </div>
+          </div>
+        </div>
+        <div className="footer-meta">
+          <p>Between the Lines is an independent hockey editorial and statistics project. It is not affiliated with, endorsed by, or sponsored by the NHL or NHLPA.</p>
+          <strong>BY GRAINXFORM</strong>
+        </div>
       </footer>
     </div>
   );

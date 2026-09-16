@@ -9,7 +9,7 @@ export default function PlayerDetails({ modal, onClose }) {
   const [season, setSeason] = useState(modal.season);
   const [gameType, setGameType] = useState('2');
   const [windowSize, setWindowSize] = useState(5);
-  const [state, setState] = useState({ player: modal.player, games: [], loading: true, error: null });
+  const [state, setState] = useState({ player: modal.player, games: [], momentum: null, edge: null, loading: true, error: null });
   const [retry, setRetry] = useState(0);
   const dialogRef = useRef(null);
   const closeRef = useRef(onClose);
@@ -34,12 +34,18 @@ export default function PlayerDetails({ modal, onClose }) {
 
   useEffect(() => {
     let active = true;
-    setState(s => ({ ...s, loading: true, error: null, games: [] }));
+    setState(s => ({ ...s, loading: true, error: null, games: [], momentum: null, edge: null }));
     (async () => {
       const player = modal.player.id ? modal.player : await resolvePlayer(`${modal.player.firstName} ${modal.player.lastName}`);
-      const response = await getJSON(`/api/gamelog?playerId=${player.id}&season=${season}&gameType=${gameType}`);
+      const query = `playerId=${player.id}&season=${season}&gameType=${gameType}`;
+      const response = await getJSON(`/api/gamelog?${query}`);
       if (!Array.isArray(response.data)) throw new Error('Unexpected statistics response');
-      if (active) setState({ player, games: response.data, loading: false, error: null });
+      const isGoalie = player.pos === 'G' || response.data.some(game => game.shotsAgainst != null);
+      const [momentum, edge] = isGoalie ? [null, null] : await Promise.all([
+        getJSON(`/api/player-momentum?${query}`).catch(() => null),
+        getJSON(`/api/player-edge?${query}`, 900000).catch(() => null),
+      ]);
+      if (active) setState({ player, games: response.data, momentum, edge, loading: false, error: null });
     })().catch(error => { if (active) setState(s => ({ ...s, loading: false, error: error.message })); });
     return () => { active = false; };
   }, [modal.player, season, gameType, retry]);
@@ -56,6 +62,15 @@ export default function PlayerDetails({ modal, onClose }) {
   const columns = goalie
     ? [['Decision', 'decision'], ['Saves', 'saves'], ['Shots faced', 'shotsAgainst'], ['GA', 'goalsAgainst'], ['SV%', 'savePctg']]
     : [['G', 'goals'], ['A', 'assists'], ['PTS', 'points'], ['SOG', 'shots'], ['+/-', 'plusMinus']];
+  const momentum = state.momentum;
+  const edge = state.edge?.availability !== 'unavailable' ? state.edge : null;
+  const delta = value => value == null ? null : `${value > 0 ? '+' : ''}${value}`;
+  const edgeMetrics = edge ? [
+    ['Top shot', edge.headline?.topShotSpeed],
+    ['Top speed', edge.headline?.maxSkatingSpeed],
+    ['20+ bursts', edge.headline?.burstsOver20Mph],
+    ['O-zone time', edge.headline?.offensiveZoneShare],
+  ].filter(([, metric]) => metric?.value != null) : [];
 
   return <div className="player-backdrop" onClick={event => { if (event.target === event.currentTarget) onClose(); }}>
     <section className="player-dialog" role="dialog" aria-modal="true" aria-labelledby="player-dialog-title" ref={dialogRef}>
@@ -81,6 +96,22 @@ export default function PlayerDetails({ modal, onClose }) {
       {!loading && !error && !games.length && <div className="data-state">No appearances in {seasonLabel(season)} {gameType === '3' ? 'playoffs' : 'regular season'}.</div>}
       {!loading && !error && games.length > 0 && <>
         <div className="player-metrics">{metrics.map(([label, value]) => <div key={label}><span>{label}</span><strong>{value}</strong></div>)}</div>
+        {!goalie && momentum && <section className="player-context" aria-label="Recent player momentum">
+          <div className="context-heading"><span>MOMENTUM</span><small>Last 5 vs season</small></div>
+          {!!momentum.labels?.length && <div className="trend-labels">{momentum.labels.map(label => <span className={`trend-${label.type}`} key={label.type}>{label.label}</span>)}</div>}
+          <div className="context-grid">
+            <div><span>POINTS / GP</span><strong>{number(momentum.summaries?.last5?.perGame?.points)}</strong><small>{delta(momentum.summaries?.last5?.versusSeason?.pointsPerGame)} vs season</small></div>
+            <div><span>SHOTS / GP</span><strong>{number(momentum.summaries?.last5?.perGame?.shots)}</strong><small>{delta(momentum.summaries?.last5?.versusSeason?.shotsPerGame)} vs season</small></div>
+            <div><span>AVG TOI</span><strong>{momentum.summaries?.last5?.averageToi || '-'}</strong><small>{delta(momentum.summaries?.last5?.versusSeason?.averageToiSeconds)} sec vs season</small></div>
+          </div>
+        </section>}
+        {!goalie && edgeMetrics.length > 0 && <section className="player-context edge-context" aria-label="NHL Edge player tracking">
+          <div className="context-heading"><span>NHL EDGE</span><small>{edge.availability === 'partial' ? 'Partial tracking data' : 'Player tracking'}</small></div>
+          <div className="edge-grid">{edgeMetrics.map(([label, metric]) => <div key={label}>
+            <span>{label}</span><strong>{metric.value}<i>{metric.unit === 'percent' ? '%' : metric.unit === 'bursts' ? '' : ` ${metric.unit}`}</i></strong>
+            <small>{metric.percentile != null ? `Percentile ${metric.percentile}` : metric.rank != null ? `League rank ${metric.rank}` : 'NHL tracking'}</small>
+          </div>)}</div>
+        </section>}
         <p className="window-caption">{games.length} appearances / {dateLabel(games[games.length - 1].gameDate)} - {dateLabel(games[0].gameDate)} / {seasonLabel(season)}</p>
         <div className="player-table-scroll" tabIndex={0} aria-label="Game log, horizontally scrollable">
           <table className="player-table"><thead><tr><th>Date</th><th>Team</th><th>Opp</th>{columns.map(([label]) => <th key={label}>{label}</th>)}<th>TOI</th></tr></thead>

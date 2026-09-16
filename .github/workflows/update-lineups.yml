@@ -32,11 +32,21 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Test injury fallback
+      - name: Test scraper pipelines
         run: python -m unittest discover -s tests -p 'test_*.py' -v
+
+      - name: Preserve previous lineup snapshot
+        run: cp data/lines.json /tmp/lines.previous.json
 
       - name: Refresh lineups and injuries
         run: python scraper/scrape_lines.py
+
+      - name: Build lineup change history
+        run: |
+          python scraper/lineup_history.py \
+            --previous /tmp/lines.previous.json \
+            --current data/lines.json \
+            --history data/lineup_changes.json
 
       - name: Refresh starting goalies
         run: python scraper/scrape_goalies.py
@@ -48,7 +58,7 @@ jobs:
         run: |
           git config user.email "scraper@bot"
           git config user.name "Scraper Bot"
-          git add data/lines.json data/goalies.json data/playoff_bracket.json
+          git add data/lines.json data/lineup_changes.json data/goalies.json data/playoff_bracket.json
           if git diff --cached --quiet; then
             echo "No data changes to publish"
           else

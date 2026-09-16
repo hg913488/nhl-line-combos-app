@@ -27,10 +27,8 @@ export async function getJSON(url, ttl = 300000) {
 }
 
 export async function resolvePlayer(name) {
-  const results = await getJSON(`https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=10&q=${encodeURIComponent(name)}`);
-  const exact = Array.isArray(results) && results.filter(p => normalizeName(p.name) === normalizeName(name));
+  const response = await getJSON(`/api/player-search?q=${encodeURIComponent(name)}`);
+  const exact = Array.isArray(response.players) && response.players.filter(p => normalizeName(`${p.firstName} ${p.lastName}`) === normalizeName(name));
   if (!exact || exact.length !== 1) throw new Error('Could not uniquely identify this player. Try player search.');
-  const p = exact[0];
-  const parts = p.name.split(' ');
-  return { id: String(p.playerId), firstName: parts.shift(), lastName: parts.join(' '), pos: p.positionCode, team: p.teamAbbrev };
+  return exact[0];
 }
