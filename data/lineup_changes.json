@@ -1,11 +1,151 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-19T17:00:23Z",
+  "generated_at": "2026-09-19T17:31:16Z",
   "retention": {
     "max_age_days": 90,
     "max_events": 500
   },
   "events": [
+    {
+      "id": "ffa7a2a68f53b068e841",
+      "occurred_at": "2026-09-19T17:31:16Z",
+      "player": "LUKE HUGHES",
+      "team": "new-jersey-devils",
+      "previous_team": "new-jersey-devils",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "new-jersey-devils",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 2,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "new-jersey-devils",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 2,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": 2,
+          "to": 1,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "d8f13ece95b09fe182e9",
+      "occurred_at": "2026-09-19T17:31:16Z",
+      "player": "TIMO MEIER",
+      "team": "new-jersey-devils",
+      "previous_team": "new-jersey-devils",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "new-jersey-devils",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "after": {
+        "team": "new-jersey-devils",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": 1,
+          "to": 2,
+          "direction": "demoted"
+        }
+      ]
+    },
+    {
+      "id": "d8f0ef5aa89af12b0517",
+      "occurred_at": "2026-09-19T17:31:16Z",
+      "player": "LUKE EVANGELISTA",
+      "team": "new-jersey-devils",
+      "previous_team": "new-jersey-devils",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "new-jersey-devils",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "new-jersey-devils",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": 2,
+          "to": 1,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "8e1b3321ee0b19f9662e",
+      "occurred_at": "2026-09-19T17:31:16Z",
+      "player": "DOUGIE HAMILTON",
+      "team": "new-jersey-devils",
+      "previous_team": "new-jersey-devils",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "new-jersey-devils",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 1,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "after": {
+        "team": "new-jersey-devils",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 1,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": 1,
+          "to": 2,
+          "direction": "demoted"
+        }
+      ]
+    },
     {
       "id": "fb5640300d2e14df95c0",
       "occurred_at": "2026-09-19T17:00:23Z",
