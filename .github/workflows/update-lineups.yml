@@ -2,11 +2,22 @@ name: Update NHL Line Combos
 
 on:
   schedule:
-    - cron: '0 14 * * *'
-    - cron: '0 15 * * *'
-    - cron: '0 18 * * *'
-    - cron: '0 19 * * *'
-    - cron: '0 22 * * *'
+    # Cron is UTC. ET shown as EDT (Mar-Nov) / EST (Nov-Mar).
+    # Minutes avoid :00/:15/:30/:45: GitHub delays/drops top-of-hour schedules
+    # under load. Goals-against + first pick log run separately at 09:07 UTC.
+    # 07:23 UTC = 3:23 AM EDT / 2:23 AM EST - overnight catch-up: grade late
+    #             West Coast finals; picks are NOT logged (GA not refreshed yet).
+    - cron: '23 7 * * *'
+    # 16:11 UTC = 12:11 PM EDT / 11:11 AM EST - East/Central morning skate lines.
+    - cron: '11 16 * * *'
+    # 18:37 UTC = 2:37 PM EDT / 1:37 PM EST - West morning skates, matinee news.
+    - cron: '37 18 * * *'
+    # 22:23 UTC = 6:23 PM EDT / 5:23 PM EST - East warmups, starting goalies.
+    - cron: '23 22 * * *'
+    # 23:41 UTC = 7:41 PM EDT / 6:41 PM EST - Central warmups, late goalie news.
+    - cron: '41 23 * * *'
+    # 02:13 UTC = 10:13 PM EDT / 9:13 PM EST - West warmups, starting goalies.
+    - cron: '13 2 * * *'
   workflow_dispatch:
 
 permissions:
@@ -23,6 +34,10 @@ jobs:
     steps:
       - name: Checkout app repository
         uses: actions/checkout@v6
+        with:
+          # Branch tip at job start, not the SHA captured when the (possibly
+          # delayed or queued) event fired, so the push is not rejected.
+          ref: ${{ github.ref_name }}
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -54,11 +69,26 @@ jobs:
       - name: Refresh playoff bracket
         run: python scraper/scrape_playoff_bracket.py
 
+      # Catch-up only: picks are normally locked by the 09:07 UTC goals-against
+      # run. Idempotent and never logs a game that has started. Must match the
+      # overnight cron string above.
+      - name: Log any unlogged picks for today
+        if: github.event.schedule != '23 7 * * *'
+        run: python scraper/picks_log.py log
+
+      - name: Grade finished picks
+        run: python scraper/picks_log.py grade
+
+      # Roles, goalies and opponent context change through the day, so rebuild
+      # the sheet on every lineup refresh.
+      - name: Rebuild today's player prop sheet
+        run: python scraper/build_prop_sheet.py
+
       - name: Commit refreshed data
         run: |
           git config user.email "scraper@bot"
           git config user.name "Scraper Bot"
-          git add data/lines.json data/lineup_changes.json data/goalies.json data/playoff_bracket.json
+          git add data/lines.json data/lineup_changes.json data/goalies.json data/playoff_bracket.json data/picks_log.json data/prop_sheet.json
           if git diff --cached --quiet; then
             echo "No data changes to publish"
           else
