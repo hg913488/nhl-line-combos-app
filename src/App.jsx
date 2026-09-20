@@ -2,12 +2,20 @@ import React, { useState, useMemo, useEffect, useRef, useCallback, createContext
 import { Sun, Moon, Search, AlertCircle, ZoomIn, ZoomOut, ArrowRight } from 'lucide-react';
 import useSchedule, { localDate } from './useSchedule.js';
 import PlayerDetails from './PlayerDetails.jsx';
+import GameView from './GameView.jsx';
 import JerseyIcon from './JerseyIcon.jsx';
 import { getJSON, normalizeName, seasonForDate, seasonLabel, seasonsFrom } from './data-client.js';
+import { NHL_TEAMS, TEAM_COLORS } from './teams.js';
+import { rankPositions, formatIndex, POSITIONS } from './picks-signal.js';
+import { DEFAULT_VIEW, parseLocation, buildPath, routePattern } from './routes.js';
+import { pageTitle } from './page-meta.js';
+import { Analytics } from '@vercel/analytics/react';
 import './styles.css';
 import lineups from '../data/lines.json';
+import startingGoalies from '../data/goalies.json';
 import goalsAgainstData from '../data/goals_against_by_position.json';
 import lineupChanges from '../data/lineup_changes.json';
+import propSheetData from '../data/prop_sheet.json';
 
 import playoffBracket from '../data/playoff_bracket.json';
 import iihfGroups from '../data/iihf_groups.json';
@@ -19,46 +27,20 @@ const TEAMS_DATA = lineups.teams;
 const INJURIES_DATA = lineups.injuries || {};
 const GA_DATA = goalsAgainstData;
 const LINEUP_CHANGE_EVENTS = lineupChanges.events || [];
+const GOALIE_MATCHUPS = startingGoalies.matchups || [];
+const PROP_SHEET = propSheetData;
+const RECENT_MOVE_WINDOW_MS = 48 * 3600 * 1000;
 
 const BRACKET_DATA = playoffBracket;
 const IIHF_GROUPS_DATA = iihfGroups;
 const IIHF_SCHEDULE_DATA = iihfSchedule;
 const IIHF_ROSTERS = iihfRostersData.rosters;
 
-const NHL_TEAMS = {
-  "anaheim-ducks":        { city: "Anaheim",      name: "Ducks",         abbr: "ANA", id: 24 },
-  "boston-bruins":        { city: "Boston",       name: "Bruins",        abbr: "BOS", id: 6  },
-  "buffalo-sabres":       { city: "Buffalo",      name: "Sabres",        abbr: "BUF", id: 7  },
-  "calgary-flames":       { city: "Calgary",      name: "Flames",        abbr: "CGY", id: 20 },
-  "carolina-hurricanes":  { city: "Carolina",     name: "Hurricanes",    abbr: "CAR", id: 12 },
-  "chicago-blackhawks":   { city: "Chicago",      name: "Blackhawks",    abbr: "CHI", id: 16 },
-  "colorado-avalanche":   { city: "Colorado",     name: "Avalanche",     abbr: "COL", id: 21 },
-  "columbus-blue-jackets":{ city: "Columbus",     name: "Blue Jackets",  abbr: "CBJ", id: 29 },
-  "dallas-stars":         { city: "Dallas",       name: "Stars",         abbr: "DAL", id: 25 },
-  "detroit-red-wings":    { city: "Detroit",      name: "Red Wings",     abbr: "DET", id: 17 },
-  "edmonton-oilers":      { city: "Edmonton",     name: "Oilers",        abbr: "EDM", id: 22 },
-  "florida-panthers":     { city: "Florida",      name: "Panthers",      abbr: "FLA", id: 13 },
-  "los-angeles-kings":    { city: "Los Angeles",  name: "Kings",         abbr: "LAK", id: 26 },
-  "minnesota-wild":       { city: "Minnesota",    name: "Wild",          abbr: "MIN", id: 30 },
-  "montreal-canadiens":   { city: "Montréal",     name: "Canadiens",     abbr: "MTL", id: 8  },
-  "nashville-predators":  { city: "Nashville",    name: "Predators",     abbr: "NSH", id: 18 },
-  "new-jersey-devils":    { city: "New Jersey",   name: "Devils",        abbr: "NJD", id: 1  },
-  "new-york-islanders":   { city: "NY Isles",     name: "Islanders",     abbr: "NYI", id: 2  },
-  "new-york-rangers":     { city: "NY Rangers",   name: "Rangers",       abbr: "NYR", id: 3  },
-  "ottawa-senators":      { city: "Ottawa",       name: "Senators",      abbr: "OTT", id: 9  },
-  "philadelphia-flyers":  { city: "Philadelphia", name: "Flyers",        abbr: "PHI", id: 4  },
-  "pittsburgh-penguins":  { city: "Pittsburgh",   name: "Penguins",      abbr: "PIT", id: 5  },
-  "san-jose-sharks":      { city: "San Jose",     name: "Sharks",        abbr: "SJS", id: 28 },
-  "seattle-kraken":       { city: "Seattle",      name: "Kraken",        abbr: "SEA", id: 55 },
-  "st-louis-blues":       { city: "St. Louis",    name: "Blues",         abbr: "STL", id: 19 },
-  "tampa-bay-lightning":  { city: "Tampa Bay",    name: "Lightning",     abbr: "TBL", id: 14 },
-  "toronto-maple-leafs":  { city: "Toronto",      name: "Maple Leafs",   abbr: "TOR", id: 10 },
-  "utah-mammoth":         { city: "Utah",         name: "Mammoth",       abbr: "UTA", id: 59 },
-  "vancouver-canucks":    { city: "Vancouver",    name: "Canucks",       abbr: "VAN", id: 23 },
-  "vegas-golden-knights": { city: "Vegas",        name: "Golden Knights",abbr: "VGK", id: 54 },
-  "washington-capitals":  { city: "Washington",   name: "Capitals",      abbr: "WSH", id: 15 },
-  "winnipeg-jets":        { city: "Winnipeg",     name: "Jets",          abbr: "WPG", id: 52 },
-};
+
+const TEAM_SLUGS = Object.keys(NHL_TEAMS);
+const DEFAULT_FOCUS_TEAM = 'vancouver-canucks';
+// Sections whose mobile dropdown offers more than the page you are already on.
+const SECTIONS_WITH_SUBVIEWS = new Set(['all', 'compare', 'news', 'injuries', 'moves', 'player', 'stats', 'playoffs']);
 
 const LOGO_ABBR_OVERRIDE = { "los-angeles-kings": "LAK" };
 const LOGO_URL = (slug, abbr) => `https://assets.nhle.com/logos/nhl/svg/${LOGO_ABBR_OVERRIDE[slug] || abbr}_${P.bg === LIGHT_PALETTE.bg ? "light" : "dark"}.svg`;
@@ -254,8 +236,7 @@ function useTeamRoster(team, enabled = true) {
   return { roster, error };
 }
 
-function TeamBrowser() {
-  const [slug, setSlug] = useState('vancouver-canucks');
+function TeamBrowser({ slug, onSelect }) {
   const [query, setQuery] = useState('');
   const team = NHL_TEAMS[slug];
   const { roster, error: rosterError } = useTeamRoster(team.abbr);
@@ -263,12 +244,12 @@ function TeamBrowser() {
   return <main className="team-browser">
     <aside className="team-navigation" aria-label="Teams">
       <label className="team-search"><Search size={17} /><input aria-label="Search teams" placeholder="Find a team" value={query} onChange={event => setQuery(event.target.value)} /></label>
-      <select className="mobile-team-select" aria-label="Selected team" value={slug} onChange={event => setSlug(event.target.value)}>
+      <select className="mobile-team-select" aria-label="Selected team" value={slug} onChange={event => onSelect(event.target.value)}>
         {Object.entries(NHL_TEAMS).map(([key, t]) => <option value={key} key={key}>{t.city} {t.name}</option>)}
       </select>
-      <div className="team-list">{visible.map(([key, t]) => <button key={key} className={slug === key ? 'selected' : ''} aria-pressed={slug === key} onClick={() => setSlug(key)}>
+      <div className="team-list">{visible.map(([key, t]) => <NavLink key={key} to={`/teams/${key}`} className={slug === key ? 'selected' : undefined} current={slug === key} onNavigate={() => onSelect(key)}>
         <TeamLogo slug={key} abbr={t.abbr} size={26} /><span>{t.city}<small>{t.name}</small></span><span className="team-abbr">{t.abbr}</span>
-      </button>)}
+      </NavLink>)}
       {!visible.length && <p className="data-state">No matching teams.</p>}</div>
     </aside>
     <section className="team-content">
@@ -368,7 +349,7 @@ function TeamStrip({ slug, data, expanded, onToggle }) {
     <div className={`strip${expanded ? " expanded" : ""}`} onClick={onToggle}>
       <div className="strip-collapsed" style={{ position: "absolute", top: "40%", left: 0, width: COLLAPSED_W, transform: "translateY(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 14, opacity: expanded ? 0 : 1, transition: "opacity 0.15s", pointerEvents: "none", padding: "0 10px" }}>
         <TeamLogo slug={slug} abbr={t.abbr} size={52} />
-        <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize: 10, fontWeight: 700, color: P.casper, letterSpacing: 0, whiteSpace: "nowrap", fontFamily: "'Syne', sans-serif" }}>{t.city.toUpperCase()}</div>
+        <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", fontSize: 10, fontWeight: 700, color: P.casper, letterSpacing: 0, whiteSpace: "nowrap", fontFamily: "'Syne', sans-serif" }}>{(t.short || t.city).toUpperCase()}</div>
       </div>
       <div className="strip-expanded-content" style={{ opacity: expanded ? 1 : 0, transition: "opacity 0.2s 0.15s", padding: "18px 20px", minWidth: EXPANDED_W, pointerEvents: expanded ? "auto" : "none", overflowY: "auto", maxHeight: "calc(100vh - var(--header-height) - var(--tabs-height))" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12, paddingBottom: 14, borderBottom: `1px solid ${P.border}` }}>
@@ -407,9 +388,9 @@ function QuickScan() {
   </div>;
 }
 
-function TeamsView({ mode }) {
+function TeamsView({ mode, team, onSelectTeam }) {
   return <section className="teams-view">
-    {mode === 'quick' ? <QuickScan /> : <TeamBrowser />}
+    {mode === 'quick' ? <QuickScan /> : <TeamBrowser slug={team || DEFAULT_FOCUS_TEAM} onSelect={onSelectTeam} />}
   </section>;
 }
 
@@ -586,11 +567,10 @@ function CompareTeamColumn({ slug, zoom, showBorder, onRemove }) {
   </div>;
 }
 
-function CompareView({ isMobile }) {
-  const [selected, setSelected] = useState([]);
+function CompareView({ selected, onChange }) {
   const [search, setSearch] = useState("");
   const [zoom, setZoom] = useState(1);
-  const toggle = slug => setSelected(prev => prev.includes(slug) ? prev.filter(s => s !== slug) : prev.length < 10 ? [...prev, slug] : prev);
+  const toggle = slug => onChange(selected.includes(slug) ? selected.filter(s => s !== slug) : selected.length < 10 ? [...selected, slug] : selected);
   const filteredSlugs = useMemo(() => Object.keys(NHL_TEAMS).filter(slug => {
     const t = NHL_TEAMS[slug];
     return `${t.city} ${t.name} ${t.abbr}`.toLowerCase().includes(search.toLowerCase());
@@ -602,7 +582,7 @@ function CompareView({ isMobile }) {
         <div className="compare-toolbar">
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Filter teams..."
             style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.white, fontSize: 13, fontFamily: "inherit", width: 160 }} />
-          {selected.length > 0 && <button onClick={() => setSelected([])} style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.dove, fontSize: 11, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>CLEAR ALL</button>}
+          {selected.length > 0 && <button onClick={() => onChange([])} style={{ background: "none", border: `1px solid ${P.border}`, borderRadius: 4, padding: "5px 10px", color: P.dove, fontSize: 11, fontFamily: "'Syne',sans-serif", cursor: "pointer", letterSpacing: 0 }}>CLEAR ALL</button>}
           <div className="compare-zoom" aria-label="Lineup size">
             <button onClick={() => setZoom(value => Math.min(COMPARE_ZOOM.length - 1, value + 1))} disabled={zoom === COMPARE_ZOOM.length - 1} aria-label="Zoom out" title="Show more teams"><ZoomOut size={15} /></button>
             <span>{COMPARE_ZOOM[zoom].label}</span>
@@ -640,28 +620,192 @@ function CompareView({ isMobile }) {
   );
 }
 
-// ── TODAY VIEW ────────────────────────────────────────────────────────
-function TodayView() {
+// ── LINKS ─────────────────────────────────────────────────────────────
+// Let modified clicks (new tab/window) fall through to the browser.
+const isPlainClick = event => event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey;
+
+// Real link for navigation: copy/open-in-new-tab work; plain clicks stay in the SPA.
+function NavLink({ to, current, onNavigate, className, children }) {
+  return <a href={to} className={className} aria-current={current ? 'page' : undefined} onClick={event => {
+    if (!isPlainClick(event)) return;
+    event.preventDefault();
+    onNavigate();
+  }}>{children}</a>;
+}
+
+// ── TONIGHT VIEW ──────────────────────────────────────────────────────
+const LINES_UPDATED = new Date(lineups.updated_at.replace(' UTC', 'Z').replace(' ', 'T'));
+const STORY_LIMIT = 3;
+
+function recentMovesFor(slug, now) {
+  const rank = event => (event.importance === 'high' ? 0 : 1);
+  const seen = new Set();
+  // Events are newest first; keep each player's latest change so flip-flops don't show twice.
+  return LINEUP_CHANGE_EVENTS
+    .filter(event => event.team === slug && now - Date.parse(event.occurred_at) <= RECENT_MOVE_WINDOW_MS)
+    .filter(event => !seen.has(event.player) && seen.add(event.player))
+    .sort((a, b) => rank(a) - rank(b));
+}
+
+const titleCase = name => name.toLowerCase().replace(/(^|[\s'-])\p{L}/gu, match => match.toUpperCase());
+const surname = name => titleCase(name.split(' ').slice(-1)[0]);
+
+// One readable clause per lineup change, e.g. "drops to line 3", "joins PP1".
+function moveClause(change) {
+  const { type, from, to } = change;
+  if (type === 'addition') return 'enters the lineup';
+  if (type === 'removal') return 'is out of the lineup';
+  if (type === 'team') return 'joins from a new team';
+  const unit = type === 'forward_line' ? 'line' : type === 'defense_pair' ? 'pair' : 'PP';
+  const label = value => (unit === 'PP' ? `PP${value}` : `${unit} ${value}`);
+  if (from == null) return `slots onto ${label(to)}`;
+  if (to == null) return `comes off ${label(from)}`;
+  return to < from ? `moves up to ${label(to)}` : `drops to ${label(to)}`;
+}
+
+function starterFor(slug) {
+  const matchup = GOALIE_MATCHUPS.find(item => item.away?.team === slug || item.home?.team === slug);
+  const side = matchup && (matchup.away.team === slug ? matchup.away : matchup.home);
+  if (side?.goalie) return { name: side.goalie, status: side.status || 'Unconfirmed' };
+  const projected = TEAMS_DATA[slug]?.goalies?.[0]?.[0];
+  return projected ? { name: projected, status: 'Projected' } : null;
+}
+
+function gameStatus(game) {
+  const period = game.periodDescriptor;
+  const periodLabel = period?.periodType === 'OT' ? 'OT' : period?.periodType === 'SO' ? 'SO' : period?.number ? `P${period.number}` : '';
+  if (['FINAL', 'OFF'].includes(game.gameState)) {
+    const last = game.gameOutcome?.lastPeriodType;
+    return { phase: 'final', label: last && last !== 'REG' ? `Final/${last}` : 'Final' };
+  }
+  if (['LIVE', 'CRIT'].includes(game.gameState)) return { phase: 'live', label: periodLabel ? `Live · ${periodLabel}` : 'Live' };
+  const time = new Date(game.startTimeUTC).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' });
+  return { phase: 'pre', label: time };
+}
+
+// The standings endpoint keeps serving last season's table until games are played.
+const isCurrentRecord = date => !date || Date.now() - Date.parse(date) < 30 * 24 * 3600 * 1000;
+
+function SlateTeam({ team, side, showScore, onTeam }) {
+  const slug = abbrToSlug(team.abbrev);
+  const meta = NHL_TEAMS[slug];
+  const standing = STANDINGS[team.abbrev];
+  const record = standing && isCurrentRecord(standing.date) ? standing.record : null;
+  return <div className={`slate-team slate-team-${side}`}>
+    <TeamLogo slug={slug} abbr={team.abbrev} size={56} />
+    <div className="slate-team-copy">
+      <span className="slate-city">{meta?.city || team.placeName?.default}</span>
+      {slug ? <NavLink to={`/teams/${slug}`} className="slate-name" onNavigate={() => onTeam(slug)}>{meta?.name || team.abbrev}</NavLink> : <strong className="slate-name">{team.abbrev}</strong>}
+      {record && <span className="slate-record">{record}</span>}
+    </div>
+    {showScore && <strong className="slate-score">{team.score ?? 0}</strong>}
+  </div>;
+}
+
+function GoalieDuel({ away, home }) {
+  const starters = [away, home].map(team => ({ abbr: team.abbrev, starter: starterFor(abbrToSlug(team.abbrev)) }));
+  if (!starters.some(item => item.starter)) return null;
+  return <div className="slate-row slate-duel">
+    <span className="slate-kicker">Goalie duel</span>
+    <div className="duel-body">{starters.map(({ abbr, starter }, index) => <React.Fragment key={abbr}>
+      {index === 1 && <span className="duel-vs">vs</span>}
+      <span className="duel-goalie">
+        <span className="story-team duel-team">{abbr}</span>
+        {starter ? <button onClick={() => triggerPlayerLookup?.(starter.name)}>{titleCase(starter.name)}</button> : <em>TBD</em>}
+        {starter && <em className={`goalie-status status-${starter.status.toLowerCase().replace(/[^a-z]/g, '')}`}>{starter.status}</em>}
+      </span>
+    </React.Fragment>)}</div>
+  </div>;
+}
+
+function GameStory({ away, home, onOpenMoves }) {
+  const now = Date.now();
+  const byTeam = [away, home].map(team => recentMovesFor(abbrToSlug(team.abbrev), now)
+    .sort((a, b) => (a.importance === 'high' ? 0 : 1) - (b.importance === 'high' ? 0 : 1))
+    .map(event => ({ ...event, abbr: team.abbrev })));
+  const moves = byTeam.flat();
+  // Alternate between the teams so one busy roster can't crowd the other out.
+  const headline = [];
+  for (let slot = 0; headline.length < STORY_LIMIT && slot < Math.max(...byTeam.map(list => list.length), 0); slot += 1) {
+    for (const list of byTeam) if (list[slot] && headline.length < STORY_LIMIT) headline.push(list[slot]);
+  }
+  return <div className="slate-story">
+    <span className="slate-kicker">The story</span>
+    {headline.length
+      ? <ul>{headline.map(event => <li key={event.id}>
+          <span className="story-team">{event.abbr}</span>
+          <span><button onClick={() => triggerPlayerLookup?.(event.player)}>{surname(event.player)}</button> {event.changes.map(moveClause).join(', ')}</span>
+        </li>)}</ul>
+      : <p className="slate-quiet">No lineup changes in the last 48 hours.</p>}
+    {moves.length > headline.length && <a className="slate-more" href="/line-moves" onClick={event => { if (!isPlainClick(event)) return; event.preventDefault(); onOpenMoves(); }}>{moves.length - headline.length} more line {moves.length - headline.length === 1 ? 'move' : 'moves'}</a>}
+  </div>;
+}
+
+function GameWatch({ away, home }) {
+  const sides = [{ offense: away.abbrev, defense: home.abbrev }, { offense: home.abbrev, defense: away.abbrev }];
+  return <div className="slate-watch">
+    <span className="slate-kicker">Watch</span>
+    <ul>{sides.map(side => {
+      const top = rankPositions(GA_DATA.teams?.[side.defense]?.l10, GA_DATA.league?.l10_avg)[0];
+      return <li key={side.offense}>
+        <span className="story-team">{side.offense}</span>
+        <span><strong>{top?.position || '—'}</strong>{top?.index != null && <span className="watch-index">{formatIndex(top.index)} league rate</span>}</span>
+      </li>;
+    })}</ul>
+  </div>;
+}
+
+function SlateGame({ game, onOpenMoves, onOpenGame, onTeam }) {
+  const [showLineups, setShowLineups] = useState(false);
+  const status = gameStatus(game);
+  const showScore = status.phase !== 'pre';
+  const networks = (game.tvBroadcasts || []).map(item => item.network).filter(Boolean).slice(0, 3).join(' · ');
+  const tag = game.gameType === 1 ? (game.awayTeam.awaySplitSquad || game.homeTeam.homeSplitSquad ? 'Preseason · Split squad' : 'Preseason') : game.gameType === 3 ? 'Playoffs' : null;
+  return <article className={`slate-game phase-${status.phase}`} style={{ '--away-color': TEAM_COLORS[game.awayTeam.abbrev] || 'var(--dim)', '--home-color': TEAM_COLORS[game.homeTeam.abbrev] || 'var(--dim)' }}>
+    <div className="slate-matchup">
+      <SlateTeam team={game.awayTeam} side="away" showScore={showScore} onTeam={onTeam} />
+      <div className="slate-status">
+        <span className="slate-state">{status.label}</span>
+        {tag && <span className="slate-tag">{tag}</span>}
+        {networks && status.phase === 'pre' && <span className="slate-tag">{networks}</span>}
+      </div>
+      <SlateTeam team={game.homeTeam} side="home" showScore={showScore} onTeam={onTeam} />
+    </div>
+    <GoalieDuel away={game.awayTeam} home={game.homeTeam} />
+    <div className="slate-row slate-insight">
+      <GameStory away={game.awayTeam} home={game.homeTeam} onOpenMoves={onOpenMoves} />
+      <GameWatch away={game.awayTeam} home={game.homeTeam} />
+    </div>
+    <div className="slate-actions">
+      <NavLink to={`/games/${game.id}`} className="slate-link" onNavigate={() => onOpenGame(String(game.id))}>Game center <ArrowRight size={13} aria-hidden="true" /></NavLink>
+      <button className="slate-link" aria-expanded={showLineups} onClick={() => setShowLineups(value => !value)}>{showLineups ? 'Hide lineups' : 'Lineups'}</button>
+    </div>
+    {showLineups && <div className="slate-lineups">
+      <p className="snapshot-notice">Projected lineups as of {UPDATED_AT}. Not confirmed for this game.</p>
+      <div className="matchup-lineups">{[game.awayTeam, game.homeTeam].map(team => <section key={team.abbrev}><h2>{team.abbrev}</h2>{TEAMS_DATA[abbrToSlug(team.abbrev)] ? <LineupContent data={TEAMS_DATA[abbrToSlug(team.abbrev)]} /> : <p>No lineup available.</p>}</section>)}</div>
+    </div>}
+  </article>;
+}
+
+function TodayView({ onOpenMoves, onOpenGame, onTeam }) {
   const [date, setDate] = useState(localDate());
   const { games, loading, error } = useSchedule(date);
-  const [open, setOpen] = useState({});
-  return <main className="schedule-page">
-    <header className="schedule-heading"><h1>Schedule</h1><label>Date<input type="date" aria-label="Schedule date" value={date} onChange={event => { if (event.target.value) setDate(event.target.value); }} /></label></header>
-    {loading && <p className="data-state" role="status">Loading schedule...</p>}
-    {error && <p className="data-state" role="alert">{error}</p>}
-    {!loading && !error && !games.length && <p className="data-state">No games scheduled for {date}.</p>}
-    {games.map(game => <article className="schedule-game" key={game.id}>
-      <div className="schedule-game-header">
-        <div className="matchup-teams">{[game.awayTeam, game.homeTeam].map(team => <div key={team.abbrev}>
-          <TeamLogo slug={abbrToSlug(team.abbrev)} abbr={team.abbrev} size={36} /><strong>{team.abbrev}</strong><span>{team.score ?? '-'}</span>
-        </div>)}</div>
-        <div className="matchup-status"><span>{['FINAL', 'OFF'].includes(game.gameState) ? 'Final' : game.gameState === 'LIVE' || game.gameState === 'CRIT' ? 'Live' : new Date(game.startTimeUTC).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' })}</span>
-          <small>{game.gameType === 1 ? 'Preseason' : game.gameType === 3 ? 'Playoffs' : 'Regular season'}</small>
-          <button className="text-button" aria-expanded={!!open[game.id]} onClick={() => setOpen(value => ({ ...value, [game.id]: !value[game.id] }))}>{open[game.id] ? 'Close lineups' : 'Lineups'}</button>
-        </div>
+  const isToday = date === localDate();
+  const dayLabel = new Date(`${date}T12:00:00`).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+  const updated = Number.isNaN(LINES_UPDATED.valueOf()) ? UPDATED_AT : LINES_UPDATED.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+  return <main className="slate-page">
+    <header className="slate-heading">
+      <div>
+        <p className="slate-eyebrow">The slate · {dayLabel}</p>
+        <h1>{isToday ? 'Tonight' : 'Schedule'}</h1>
+        {!loading && !error && games.length > 0 && <p className="slate-summary">{games.length} {games.length === 1 ? 'game' : 'games'} · Lines updated {updated}</p>}
       </div>
-      {open[game.id] && <><p className="snapshot-notice">Lineup snapshot: {UPDATED_AT}. Not confirmed for this game.</p><div className="matchup-lineups">{[game.awayTeam, game.homeTeam].map(team => <section key={team.abbrev}><h2>{team.abbrev}</h2>{TEAMS_DATA[abbrToSlug(team.abbrev)] ? <LineupContent data={TEAMS_DATA[abbrToSlug(team.abbrev)]} /> : <p>No lineup available.</p>}</section>)}</div></>}
-    </article>)}
+      <label>Date<input type="date" aria-label="Schedule date" value={date} onChange={event => { if (event.target.value) setDate(event.target.value); }} /></label>
+    </header>
+    {loading && <p className="data-state" role="status">Loading the slate…</p>}
+    {error && <p className="data-state" role="alert">{error}</p>}
+    {!loading && !error && !games.length && <p className="data-state">No games scheduled for {dayLabel}.</p>}
+    <div className="slate-list">{games.map(game => <SlateGame key={game.id} game={game} onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onTeam={onTeam} />)}</div>
   </main>;
 }
 
@@ -764,12 +908,93 @@ function NewsView({ isDark, source, onSourceChange }) {
   </main>;
 }
 
+const SHEET_COLUMNS = [
+  { key: 'name', label: 'Player', align: 'left' },
+  { key: 'line', label: 'Role', align: 'left' },
+  { key: 'opp_index', label: 'Matchup', align: 'right', format: value => (value ? `${value.toFixed(2)}×` : '—') },
+  { key: 'sog', label: 'SOG/10', align: 'right' },
+  { key: 'p', label: 'P/10', align: 'right' },
+  { key: 'toi', label: 'TOI', align: 'right', format: value => formatClock(value) },
+  { key: 'pptoi', label: 'PP TOI', align: 'right', format: value => formatClock(value) },
+];
+
+const FLAG_LABELS = { PP1: 'PP1', ROLE_UP: 'Role up', HOT: 'Hot', B2B: 'Back-to-back', SOFT_MATCHUP: 'Soft matchup' };
+
+const formatClock = seconds => {
+  if (!Number.isFinite(seconds) || seconds <= 0) return '—';
+  const total = Math.round(seconds);
+  return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, '0')}`;
+};
+
+const sheetValue = (player, key) => {
+  if (['sog', 'p', 'toi', 'pptoi'].includes(key)) return player.last10?.[key] ?? 0;
+  if (key === 'opp_index') return player.opp_index ?? 0;
+  if (key === 'line') return `${player.line || ''}${player.pp ? ` PP${player.pp}` : ''}`;
+  return player[key] ?? '';
+};
+
+function PlayerSheet() {
+  const [sort, setSort] = useState({ key: 'sog', dir: 'desc' });
+  const [team, setTeam] = useState('all');
+  const [position, setPosition] = useState('all');
+  const [ppOnly, setPpOnly] = useState(false);
+  const players = PROP_SHEET.players || [];
+  const teams = useMemo(() => [...new Set(players.map(player => player.team))].sort(), [players]);
+
+  const rows = useMemo(() => players
+    .filter(player => (team === 'all' || player.team === team)
+      && (position === 'all' || player.pos === position)
+      && (!ppOnly || player.pp === 1))
+    .sort((a, b) => {
+      const [left, right] = [sheetValue(a, sort.key), sheetValue(b, sort.key)];
+      const compare = typeof left === 'string' ? left.localeCompare(right) : left - right;
+      return sort.dir === 'desc' ? -compare : compare;
+    }), [players, team, position, ppOnly, sort]);
+
+  const toggleSort = key => setSort(current => ({ key, dir: current.key === key && current.dir === 'desc' ? 'asc' : 'desc' }));
+
+  if (!players.length) return <section className="player-sheet">
+    <header className="sheet-heading"><div><span className="slate-kicker">Player sheet</span><h2>Skaters in tonight's lineups</h2></div></header>
+    <p className="data-state">The player sheet covers regular-season and playoff games. It fills in automatically once the regular season starts — tonight's projected lineups are on the <a href="/">Tonight</a> page.</p>
+  </section>;
+
+  return <section className="player-sheet">
+    <header className="sheet-heading">
+      <div><span className="slate-kicker">Player sheet</span><h2>{rows.length} skaters in tonight's lineups</h2></div>
+      <div className="sheet-filters">
+        <label>Team<select value={team} onChange={event => setTeam(event.target.value)}><option value="all">All teams</option>{teams.map(abbr => <option key={abbr} value={abbr}>{abbr}</option>)}</select></label>
+        <label>Position<select value={position} onChange={event => setPosition(event.target.value)}><option value="all">All</option>{POSITIONS.map(item => <option key={item} value={item}>{item}</option>)}</select></label>
+        <label className="sheet-toggle"><input type="checkbox" checked={ppOnly} onChange={event => setPpOnly(event.target.checked)} />First power-play unit only</label>
+      </div>
+    </header>
+    <div className="sheet-scroll">
+      <table className="sheet-table">
+        <caption className="visually-hidden">Skaters in tonight's lineups with last-10-game form and matchup context</caption>
+        <thead><tr>{SHEET_COLUMNS.map(column => <th key={column.key} scope="col" className={`align-${column.align}`} aria-sort={sort.key === column.key ? (sort.dir === 'desc' ? 'descending' : 'ascending') : 'none'}>
+          <button onClick={() => toggleSort(column.key)}>{column.label}{sort.key === column.key && <span aria-hidden="true">{sort.dir === 'desc' ? ' ↓' : ' ↑'}</span>}</button>
+        </th>)}</tr></thead>
+        <tbody>{rows.map(player => <tr key={`${player.game_id}-${player.name}`}>
+          <th scope="row" className="align-left">
+            <button className="sheet-player" onClick={() => triggerPlayerLookup?.(player.name)}>{titleCase(player.name)}</button>
+            <span className="sheet-context">{player.team} {player.home ? 'vs' : '@'} {player.opp}{player.opp_goalie ? ` · ${titleCase(player.opp_goalie.name)}` : ''}</span>
+            {player.flags?.length > 0 && <span className="sheet-flags">{player.flags.map(flag => <em key={flag}>{FLAG_LABELS[flag] || flag}</em>)}</span>}
+          </th>
+          {SHEET_COLUMNS.slice(1).map(column => <td key={column.key} className={`align-${column.align}`}>
+            {column.format ? column.format(sheetValue(player, column.key)) : sheetValue(player, column.key)}
+          </td>)}
+        </tr>)}</tbody>
+      </table>
+    </div>
+    <p className="sheet-note">Last 10 games per skater. Matchup compares the opponent's goals allowed to this position with the league average over its last 10 games.</p>
+  </section>;
+}
+
 function PicksView() {
   const [date, setDate] = useState(localDate());
   const { games, loading, error } = useSchedule(date);
-  const positions = ['C', 'LW', 'RW', 'D'];
+  const gaSeason = GA_DATA.season ? `${GA_DATA.season} ` : '';
   return <main className="picks-page">
-    <header className="schedule-heading"><div><h1>Picks</h1><p className="muted">Matchup signals from last season's goals allowed by position.</p></div><label>Date<input type="date" aria-label="Picks date" value={date} onChange={event => { if (event.target.value) setDate(event.target.value); }} /></label></header>
+    <header className="schedule-heading"><div><h1>Picks</h1><p className="muted">Which position each defense has allowed the most goals to over its last 10 games, measured against the {gaSeason}league average.</p></div><label>Date<input type="date" aria-label="Picks date" value={date} onChange={event => { if (event.target.value) setDate(event.target.value); }} /></label></header>
     {loading && <p className="data-state" role="status">Loading matchups...</p>}
     {error && <p className="data-state" role="alert">{error}</p>}
     {!loading && !error && !games.length && <p className="data-state">No games scheduled for {date}.</p>}
@@ -779,13 +1004,16 @@ function PicksView() {
         { offense: game.awayTeam.abbrev, defense: game.homeTeam.abbrev },
         { offense: game.homeTeam.abbrev, defense: game.awayTeam.abbrev },
       ].map(side => {
-        const allowed = GA_DATA.teams?.[side.defense]?.l10 || {};
-        const ranked = positions.map(position => ({ position, value: allowed[position] || 0 })).sort((a, b) => b.value - a.value);
-        return <section key={side.offense}><p>{side.offense} VS {side.defense}</p><strong className="pick-watch">WATCH {ranked[0]?.position || '—'}</strong>
-          <div>{ranked.map(item => <span key={item.position}><b>{item.position}</b>{item.value} GA</span>)}</div>
+        const ranked = rankPositions(GA_DATA.teams?.[side.defense]?.l10, GA_DATA.league?.l10_avg);
+        const top = ranked[0];
+        return <section key={side.offense}><p>{side.offense} VS {side.defense}</p>
+          <strong className="pick-watch">WATCH {top?.position || '—'}</strong>
+          {top?.index != null && <span className="pick-index">{formatIndex(top.index)} league rate</span>}
+          <div>{ranked.map(item => <span key={item.position}><b>{item.position}</b>{item.index != null ? formatIndex(item.index) : `${item.value} GA`}</span>)}</div>
         </section>;
       })}</div>
     </article>)}</div>
+    {date === localDate() && <PlayerSheet />}
   </main>;
 }
 
@@ -1418,9 +1646,12 @@ class ErrorBoundary extends React.Component {
 
 // ── ROOT ──────────────────────────────────────────────────────────────
 export default function App() {
-  const [tab, setTab] = useState('news');
-  const [teamMode, setTeamMode] = useState('quick');
-  const [newsSource, setNewsSource] = useState('nhl');
+  const [view, setView] = useState(() => parseLocation(window.location.pathname, window.location.search, TEAM_SLUGS));
+  const { tab, teamMode, newsSource } = view;
+  const navigate = useCallback(partial => setView(current => ({ ...current, ...partial })), []);
+  const setTab = useCallback(nextTab => navigate({ tab: nextTab }), [navigate]);
+  const openTeams = mode => navigate({ tab: 'all', teamMode: mode, team: mode === 'focus' ? view.team || DEFAULT_FOCUS_TEAM : view.team });
+  const openNews = source => navigate({ tab: 'news', newsSource: source });
   const [openNav, setOpenNav] = useState(null);
   const [showIntro, setShowIntro] = useState(() => !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
@@ -1431,6 +1662,25 @@ export default function App() {
   });
   const [standingsError, setStandingsError] = useState(false);
   useEffect(() => { window.scrollTo({ top: 0 }); }, [tab]);
+
+  // Keep the address bar, history, and tab title in sync with the view.
+  const lastPattern = useRef(null);
+  useEffect(() => {
+    const path = buildPath(view);
+    const pattern = routePattern(view);
+    if (path !== window.location.pathname + window.location.search) {
+      const sameSection = lastPattern.current === null || lastPattern.current === pattern;
+      window.history[sameSection ? 'replaceState' : 'pushState'](null, '', path);
+    }
+    lastPattern.current = pattern;
+    document.title = pageTitle(window.location.pathname, window.location.search);
+  }, [view]);
+
+  useEffect(() => {
+    const onPop = () => setView(parseLocation(window.location.pathname, window.location.search, TEAM_SLUGS));
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
   const toggleTheme = () => { setIsDark(value => { const next = !value; try { localStorage.setItem('theme', next ? 'dark' : 'light'); } catch {} return next; }); };
   const [modal, setModal] = useState(null); // { player, gamelog, loading, error }
   const [standings, setStandings] = useState({}); // { [abbr]: "W-L-OT" }
@@ -1477,8 +1727,8 @@ export default function App() {
         ? 'STATS'
         : tab.toUpperCase();
   const selectView = value => {
-    if (value.startsWith('teams-')) { setTeamMode(value.replace('teams-', '')); setTab('all'); return; }
-    if (value.startsWith('news-')) { setNewsSource(value.replace('news-', '')); setTab('news'); return; }
+    if (value.startsWith('teams-')) { openTeams(value.replace('teams-', '')); return; }
+    if (value.startsWith('news-')) { openNews(value.replace('news-', '')); return; }
     setTab(value);
   };
   const navMenuProps = name => ({
@@ -1490,7 +1740,7 @@ export default function App() {
   });
 
   return (
-    <div className="app-shell" data-theme={isDark ? 'dark' : 'light'} style={{ fontFamily: "'Space Grotesk', sans-serif", background: P.bg, minHeight: "100vh", color: P.white, ...Object.fromEntries(Object.entries(P).map(([key, value]) => ['--' + key, value])) }}>
+    <div className="app-shell" data-theme={isDark ? 'dark' : 'light'} data-subviews={SECTIONS_WITH_SUBVIEWS.has(tab) ? 'true' : 'false'} style={{ fontFamily: "'Space Grotesk', sans-serif", background: P.bg, minHeight: "100vh", color: P.white, ...Object.fromEntries(Object.entries(P).map(([key, value]) => ['--' + key, value])) }}>
       <style>{makeCss(isDark ? DARK_PALETTE : LIGHT_PALETTE)}</style>
 
       {showIntro && <div className="brand-intro" aria-hidden="true">
@@ -1506,10 +1756,10 @@ export default function App() {
       <div className="app-header" style={{ borderTop: `3px solid ${P.casper}`, borderBottom: `1px solid ${P.border}`, padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "center", height: "var(--header-height)", position: "sticky", top: 0, zIndex: 50, background: P.bg }}>
         <img src="/between-mark.png" alt="" className="header-logo" />
         <div className="header-center">
-          <button className="header-copy header-home" aria-label="Open Teams Quick Scan" onClick={() => { setTeamMode('quick'); setTab('all'); }}>
+          <a className="header-copy header-home" href="/" aria-label="Between the Lines — tonight's games" onClick={event => { if (!isPlainClick(event)) return; event.preventDefault(); setTab('today'); }}>
             <div className="header-title-text">BETWEEN THE LINES</div>
             <div className="header-sub">Hockey, in context.</div>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -1518,63 +1768,66 @@ export default function App() {
       <div className="tabs-bar" style={{ borderBottom: `1px solid ${P.border}`, display: "flex", height: "var(--tabs-height)", position: "sticky", top: "var(--header-height)", zIndex: 49, background: P.bg, padding: "0 8px", overflow: "visible" }}>
         <div className="mobile-view-nav">
           <nav className="mobile-primary-nav" aria-label="Primary navigation">
-            <button aria-pressed={tab === 'all' || tab === 'compare'} onClick={() => { setTeamMode('quick'); setTab('all'); }}>TEAMS</button>
-            <button aria-pressed={tab === 'today'} onClick={() => setTab('today')}>TODAY</button>
-            <button aria-pressed={['news', 'injuries', 'moves'].includes(tab)} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NEWS</button>
-            <button aria-pressed={['player', 'stats', 'playoffs'].includes(tab)} onClick={() => setTab('player')}>STATS</button>
-            <button aria-pressed={tab === 'picks'} onClick={() => setTab('picks')}>PICKS</button>
+            <NavLink to="/teams" current={tab === 'all' || tab === 'compare'} onNavigate={() => openTeams('quick')}>TEAMS</NavLink>
+            <NavLink to="/" current={tab === 'today' || tab === 'game'} onNavigate={() => setTab('today')}>TONIGHT</NavLink>
+            <NavLink to="/news" current={['news', 'injuries', 'moves'].includes(tab)} onNavigate={() => openNews('nhl')}>NEWS</NavLink>
+            <NavLink to="/players" current={['player', 'stats', 'playoffs'].includes(tab)} onNavigate={() => setTab('player')}>STATS</NavLink>
+            <NavLink to="/picks" current={tab === 'picks'} onNavigate={() => setTab('picks')}>PICKS</NavLink>
           </nav>
-          <select className="mobile-view-select" aria-label={`${mobileSectionLabel} view`} value={mobileNavValue} onChange={event => selectView(event.target.value)}>
+          {SECTIONS_WITH_SUBVIEWS.has(tab) && <select className="mobile-view-select" aria-label={`${mobileSectionLabel} view`} value={mobileNavValue} onChange={event => selectView(event.target.value)}>
             <optgroup label="TEAMS"><option value="teams-quick">Quick Scan</option><option value="teams-focus">Focused Team</option><option value="compare">Compare</option></optgroup>
-            <option value="today">TODAY</option>
+            <option value="today">Tonight</option>
             <optgroup label="NEWS"><option value="news-nhl">NHL News</option><option value="news-reporters">Reporters</option><option value="moves">Line Moves</option><option value="injuries">Injuries</option></optgroup>
             <optgroup label="STATS"><option value="player">Player Stats</option><option value="stats">Matchups</option><option value="playoffs">Playoffs</option></optgroup>
-            <option value="picks">PICKS</option>
-          </select>
+            <option value="picks">Picks</option>
+          </select>}
         </div>
         <div {...navMenuProps('teams')}>
-          <button className={`tab-btn${['all', 'compare'].includes(tab) ? " active" : ""}`} onClick={() => { setTeamMode('quick'); setTab('all'); }}>TEAMS</button>
+          <NavLink to="/teams" className={`tab-btn${['all', 'compare'].includes(tab) ? " active" : ""}`} onNavigate={() => openTeams('quick')}>TEAMS</NavLink>
           <div className="nav-submenu" aria-label="Teams views">
-            <button aria-pressed={tab === 'all' && teamMode === 'quick'} onClick={() => { setTeamMode('quick'); setTab('all'); }}>QUICK SCAN</button>
-            <button aria-pressed={tab === 'all' && teamMode === 'focus'} onClick={() => { setTeamMode('focus'); setTab('all'); }}>FOCUSED TEAM</button>
-            <button aria-pressed={tab === 'compare'} onClick={() => setTab('compare')}>COMPARE</button>
+            <NavLink to="/teams" current={tab === 'all' && teamMode === 'quick'} onNavigate={() => openTeams('quick')}>QUICK SCAN</NavLink>
+            <NavLink to={`/teams/${view.team || DEFAULT_FOCUS_TEAM}`} current={tab === 'all' && teamMode === 'focus'} onNavigate={() => openTeams('focus')}>FOCUSED TEAM</NavLink>
+            <NavLink to={buildPath({ tab: 'compare', compare: view.compare })} current={tab === 'compare'} onNavigate={() => setTab('compare')}>COMPARE</NavLink>
           </div>
         </div>
-        <button className={`tab-btn${tab === 'today' ? " active" : ""}`} aria-pressed={tab === 'today'} onClick={() => setTab('today')}>TODAY</button>
+        <NavLink to="/" className={`tab-btn${tab === 'today' || tab === 'game' ? " active" : ""}`} current={tab === 'today'} onNavigate={() => setTab('today')}>TONIGHT</NavLink>
         <div {...navMenuProps('news')}>
-          <button className={`tab-btn${['news', 'injuries', 'moves'].includes(tab) ? " active" : ""}`} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NEWS</button>
+          <NavLink to="/news" className={`tab-btn${['news', 'injuries', 'moves'].includes(tab) ? " active" : ""}`} onNavigate={() => openNews('nhl')}>NEWS</NavLink>
           <div className="nav-submenu" aria-label="News views">
-            <button aria-pressed={tab === 'news' && newsSource === 'nhl'} onClick={() => { setNewsSource('nhl'); setTab('news'); }}>NHL NEWS</button>
-            <button aria-pressed={tab === 'news' && newsSource === 'reporters'} onClick={() => { setNewsSource('reporters'); setTab('news'); }}>REPORTERS</button>
-            <button aria-pressed={tab === 'moves'} onClick={() => setTab('moves')}>LINE MOVES</button>
-            <button aria-pressed={tab === 'injuries'} onClick={() => setTab('injuries')}>INJURIES</button>
+            <NavLink to="/news" current={tab === 'news' && newsSource === 'nhl'} onNavigate={() => openNews('nhl')}>NHL NEWS</NavLink>
+            <NavLink to="/reporters" current={tab === 'news' && newsSource === 'reporters'} onNavigate={() => openNews('reporters')}>REPORTERS</NavLink>
+            <NavLink to="/line-moves" current={tab === 'moves'} onNavigate={() => setTab('moves')}>LINE MOVES</NavLink>
+            <NavLink to="/injuries" current={tab === 'injuries'} onNavigate={() => setTab('injuries')}>INJURIES</NavLink>
           </div>
         </div>
         <div {...navMenuProps('stats')}>
-          <button className={`tab-btn${['player', 'stats', 'playoffs'].includes(tab) ? " active" : ""}`} onClick={() => setTab('player')}>STATS</button>
+          <NavLink to="/players" className={`tab-btn${['player', 'stats', 'playoffs'].includes(tab) ? " active" : ""}`} onNavigate={() => setTab('player')}>STATS</NavLink>
           <div className="nav-submenu" aria-label="Stats views">
-            <button aria-pressed={tab === 'player'} onClick={() => setTab('player')}>PLAYER STATS</button>
-            <button aria-pressed={tab === 'stats'} onClick={() => setTab('stats')}>MATCHUPS</button>
-            <button aria-pressed={tab === 'playoffs'} onClick={() => setTab('playoffs')}>PLAYOFFS</button>
+            <NavLink to="/players" current={tab === 'player'} onNavigate={() => setTab('player')}>PLAYER STATS</NavLink>
+            <NavLink to="/matchups" current={tab === 'stats'} onNavigate={() => setTab('stats')}>MATCHUPS</NavLink>
+            <NavLink to="/playoffs" current={tab === 'playoffs'} onNavigate={() => setTab('playoffs')}>PLAYOFFS</NavLink>
           </div>
         </div>
-        <button className={`tab-btn${tab === 'picks' ? " active" : ""}`} aria-pressed={tab === 'picks'} onClick={() => setTab('picks')}>PICKS</button>
+        <NavLink to="/picks" className={`tab-btn${tab === 'picks' ? " active" : ""}`} current={tab === 'picks'} onNavigate={() => setTab('picks')}>PICKS</NavLink>
       </div>
 
       {/* Content */}
       <div className="content-stage">
         {standingsError && <p className="api-notice" role="status">Team records are temporarily unavailable.</p>}
-        {tab === "all" && <TeamsView isMobile={isMobile} mode={teamMode} />}
-        {tab === "today" && <ErrorBoundary><TodayView isMobile={isMobile} /></ErrorBoundary>}
-        {tab === "news" && <ErrorBoundary><NewsView isDark={isDark} source={newsSource} onSourceChange={setNewsSource} /></ErrorBoundary>}
+        {tab === "all" && <TeamsView mode={teamMode} team={view.team} onSelectTeam={slug => navigate({ tab: 'all', teamMode: 'focus', team: slug })} />}
+        {tab === "today" && <ErrorBoundary><TodayView onOpenMoves={() => setTab('moves')} onOpenGame={gameId => navigate({ tab: 'game', gameId })} onTeam={slug => navigate({ tab: 'all', teamMode: 'focus', team: slug })} /></ErrorBoundary>}
+        {tab === "news" && <ErrorBoundary><NewsView isDark={isDark} source={newsSource} onSourceChange={openNews} /></ErrorBoundary>}
         {tab === "moves" && <ErrorBoundary><LineMovesView /></ErrorBoundary>}
         {tab === "picks" && <ErrorBoundary><PicksView /></ErrorBoundary>}
         {tab === "playoffs" && <ErrorBoundary><PlayoffsView isMobile={isMobile} /></ErrorBoundary>}
         {tab === "stats" && <ErrorBoundary><GoalsAgainstView isMobile={isMobile} /></ErrorBoundary>}
         {tab === "injuries" && <ErrorBoundary><InjuriesView isMobile={isMobile} /></ErrorBoundary>}
         {tab === "player" && <ErrorBoundary><PlayerStatsView isMobile={isMobile} /></ErrorBoundary>}
-        {tab === "compare" && <ErrorBoundary><CompareView isMobile={isMobile} /></ErrorBoundary>}
+        {tab === "game" && <ErrorBoundary><GameView gameId={view.gameId} onBack={() => setTab('today')} onTeam={slug => navigate({ tab: 'all', teamMode: 'focus', team: slug })} onPlayer={name => triggerPlayerLookup?.(name)} /></ErrorBoundary>}
+        {tab === "compare" && <ErrorBoundary><CompareView selected={view.compare} onChange={compare => navigate({ compare })} /></ErrorBoundary>}
       </div>
+
+      <Analytics mode={import.meta.env.PROD ? 'production' : 'development'} route={routePattern(view)} path={buildPath(view).split('?')[0]} />
 
       {/* Glass player modal */}
       {modal && <PlayerDetails modal={modal} onClose={() => setModal(null)} />}
