@@ -165,7 +165,7 @@ const withStubbedFetch = async (impl, run) => {
 };
 
 const htmlRequest = (path, init = {}) =>
-  new Request(`https://nhl-between-the-lines-app.vercel.app${path}`, {
+  new Request(`https://www.betweenthelineshockey.com${path}`, {
     headers: { accept: 'text/html,application/xhtml+xml' },
     ...init,
   });

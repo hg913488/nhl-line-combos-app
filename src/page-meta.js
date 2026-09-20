@@ -7,7 +7,7 @@ import { NHL_TEAMS } from './teams.js';
 export const SITE_NAME = 'Between the Lines';
 export const SITE_TAGLINE = 'Hockey, in context.';
 // Flip this to the custom domain once it is live; every canonical/OG URL follows.
-export const SITE_URL = 'https://nhl-between-the-lines-app.vercel.app';
+export const SITE_URL = 'https://www.betweenthelineshockey.com';
 
 const DEFAULT_ALT = `${SITE_NAME} — ${SITE_TAGLINE}`;
 

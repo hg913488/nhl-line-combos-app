@@ -1663,6 +1663,14 @@ export default function App() {
   const [standingsError, setStandingsError] = useState(false);
   useEffect(() => { window.scrollTo({ top: 0 }); }, [tab]);
 
+  // Tell the browser which scheme the page is painted in. Without this, Chrome
+  // for Android applies Auto Dark Theme on top of our own dark palette.
+  useEffect(() => {
+    const palette = isDark ? DARK_PALETTE : LIGHT_PALETTE;
+    document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', palette.bg);
+  }, [isDark]);
+
   // Keep the address bar, history, and tab title in sync with the view.
   const lastPattern = useRef(null);
   useEffect(() => {
