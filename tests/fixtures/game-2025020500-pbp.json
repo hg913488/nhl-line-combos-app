@@ -1,0 +1,429 @@
+{
+ "id": 2025020500,
+ "season": 20252026,
+ "gameType": 2,
+ "gameDate": "2025-12-13",
+ "venue": {
+  "default": "Madison Square Garden"
+ },
+ "startTimeUTC": "2025-12-14T00:00:00Z",
+ "gameState": "OFF",
+ "periodDescriptor": {
+  "number": 4,
+  "periodType": "OT",
+  "maxRegulationPeriods": 3
+ },
+ "awayTeam": {
+  "id": 8,
+  "commonName": {
+   "default": "Canadiens"
+  },
+  "abbrev": "MTL",
+  "score": 4,
+  "sog": 18,
+  "placeName": {
+   "default": "Montréal"
+  }
+ },
+ "homeTeam": {
+  "id": 3,
+  "commonName": {
+   "default": "Rangers"
+  },
+  "abbrev": "NYR",
+  "score": 5,
+  "sog": 29,
+  "placeName": {
+   "default": "New York"
+  }
+ },
+ "clock": {
+  "timeRemaining": "02:04",
+  "secondsRemaining": 124,
+  "running": false,
+  "inIntermission": false
+ },
+ "plays": [
+  {
+   "eventId": 56,
+   "periodDescriptor": {
+    "number": 1,
+    "periodType": "REG",
+    "maxRegulationPeriods": 3
+   },
+   "timeInPeriod": "00:38",
+   "situationCode": "1551",
+   "homeTeamDefendingSide": "right",
+   "typeDescKey": "shot-on-goal",
+   "sortOrder": 13,
+   "details": {
+    "xCoord": -68,
+    "yCoord": 21,
+    "shotType": "snap",
+    "shootingPlayerId": 8482073,
+    "eventOwnerTeamId": 3
+   }
+  },
+  {
+   "eventId": 301,
+   "periodDescriptor": {
+    "number": 1,
+    "periodType": "REG",
+    "maxRegulationPeriods": 3
+   },
+   "timeInPeriod": "00:58",
+   "situationCode": "1551",
+   "homeTeamDefendingSide": "right",
+   "typeDescKey": "missed-shot",
+   "sortOrder": 22,
+   "details": {
+    "xCoord": -84,
+    "yCoord": -3,
+    "shotType": "snap",
+    "shootingPlayerId": 8476459,
+    "eventOwnerTeamId": 3,
+    "reason": "wide-right"
+   }
+  },
+  {
+   "eventId": 65,
+   "periodDescriptor": {
+    "number": 1,
+    "periodType": "REG",
+    "maxRegulationPeriods": 3
+   },
+   "timeInPeriod": "00:59",
+   "situationCode": "1551",
+   "homeTeamDefendingSide": "right",
+   "typeDescKey": "blocked-shot",
+   "sortOrder": 23,
+   "details": {
+    "xCoord": -79,
+    "yCoord": 9,
+    "shootingPlayerId": 8482109,
+    "eventOwnerTeamId": 3,
+    "reason": "blocked"
+   }
+  },
+  {
+   "eventId": 261,
+   "periodDescriptor": {
+    "number": 1,
+    "periodType": "REG",
+    "maxRegulationPeriods": 3
+   },
+   "timeInPeriod": "12:41",
+   "situationCode": "1551",
+   "homeTeamDefendingSide": "right",
+   "typeDescKey": "goal",
+   "sortOrder": 175,
+   "details": {
+    "xCoord": 83,
+    "yCoord": 1,
+    "shotType": "wrist",
+    "scoringPlayerId": 8482737,
+    "assist1PlayerId": 8480018,
+    "assist2PlayerId": 8481540,
+    "eventOwnerTeamId": 8,
+    "awayScore": 1,
+    "homeScore": 0
+   }
+  },
+  {
+   "eventId": 402,
+   "periodDescriptor": {
+    "number": 1,
+    "periodType": "REG",
+    "maxRegulationPeriods": 3
+   },
+   "timeInPeriod": "18:49",
+   "situationCode": "1451",
+   "homeTeamDefendingSide": "right",
+   "typeDescKey": "goal",
+   "sortOrder": 248,
+   "details": {
+    "xCoord": -83,
+    "yCoord": -2,
+    "shotType": "wrist",
+    "scoringPlayerId": 8483690,
+    "assist1PlayerId": 8482157,
+    "assist2PlayerId": 8477839,
+    "eventOwnerTeamId": 3,
+    "awayScore": 3,
+    "homeScore": 1
+   }
+  },
+  {
+   "eventId": 403,
+   "periodDescriptor": {
+    "number": 1,
+    "periodType": "REG",
+    "maxRegulationPeriods": 3
+   },
+   "timeInPeriod": "19:08",
+   "situationCode": "1010",
+   "homeTeamDefendingSide": "right",
+   "typeDescKey": "goal",
+   "sortOrder": 258,
+   "details": {
+    "xCoord": -79,
+    "yCoord": 0,
+    "shotType": "wrist",
+    "scoringPlayerId": 8478550,
+    "eventOwnerTeamId": 3,
+    "awayScore": 3,
+    "homeScore": 2
+   }
+  },
+  {
+   "eventId": 491,
+   "periodDescriptor": {
+    "number": 2,
+    "periodType": "REG",
+    "maxRegulationPeriods": 3
+   },
+   "timeInPeriod": "01:52",
+   "situationCode": "1541",
+   "homeTeamDefendingSide": "left",
+   "typeDescKey": "shot-on-goal",
+   "sortOrder": 300,
+   "details": {
+    "xCoord": -81,
+    "yCoord": 13,
+    "shotType": "snap",
+    "shootingPlayerId": 8482775,
+    "eventOwnerTeamId": 8
+   }
+  },
+  {
+   "eventId": 560,
+   "periodDescriptor": {
+    "number": 2,
+    "periodType": "REG",
+    "maxRegulationPeriods": 3
+   },
+   "timeInPeriod": "03:17",
+   "situationCode": "1551",
+   "homeTeamDefendingSide": "left",
+   "typeDescKey": "goal",
+   "sortOrder": 322,
+   "details": {
+    "xCoord": -61,
+    "yCoord": -4,
+    "shotType": "slap",
+    "scoringPlayerId": 8476981,
+    "assist1PlayerId": 8483457,
+    "assist2PlayerId": 8480018,
+    "eventOwnerTeamId": 8,
+    "awayScore": 4,
+    "homeScore": 2
+   }
+  },
+  {
+   "eventId": 1104,
+   "periodDescriptor": {
+    "number": 4,
+    "periodType": "OT",
+    "maxRegulationPeriods": 3
+   },
+   "timeInPeriod": "02:56",
+   "situationCode": "1341",
+   "homeTeamDefendingSide": "left",
+   "typeDescKey": "goal",
+   "sortOrder": 866,
+   "details": {
+    "xCoord": 63,
+    "yCoord": -20,
+    "shotType": "slap",
+    "scoringPlayerId": 8476468,
+    "assist1PlayerId": 8476459,
+    "assist2PlayerId": 8476389,
+    "eventOwnerTeamId": 3,
+    "awayScore": 4,
+    "homeScore": 5
+   }
+  }
+ ],
+ "rosterSpots": [
+  {
+   "teamId": 3,
+   "playerId": 8476389,
+   "firstName": {
+    "default": "Vincent"
+   },
+   "lastName": {
+    "default": "Trocheck"
+   },
+   "sweaterNumber": 16,
+   "positionCode": "C"
+  },
+  {
+   "teamId": 3,
+   "playerId": 8476459,
+   "firstName": {
+    "default": "Mika"
+   },
+   "lastName": {
+    "default": "Zibanejad"
+   },
+   "sweaterNumber": 93,
+   "positionCode": "C"
+  },
+  {
+   "teamId": 3,
+   "playerId": 8476468,
+   "firstName": {
+    "default": "J.T."
+   },
+   "lastName": {
+    "default": "Miller"
+   },
+   "sweaterNumber": 8,
+   "positionCode": "C"
+  },
+  {
+   "teamId": 8,
+   "playerId": 8476981,
+   "firstName": {
+    "default": "Josh"
+   },
+   "lastName": {
+    "default": "Anderson"
+   },
+   "sweaterNumber": 17,
+   "positionCode": "R"
+  },
+  {
+   "teamId": 3,
+   "playerId": 8477839,
+   "firstName": {
+    "default": "Conor"
+   },
+   "lastName": {
+    "default": "Sheary"
+   },
+   "sweaterNumber": 43,
+   "positionCode": "L"
+  },
+  {
+   "teamId": 3,
+   "playerId": 8478550,
+   "firstName": {
+    "default": "Artemi"
+   },
+   "lastName": {
+    "default": "Panarin"
+   },
+   "sweaterNumber": 10,
+   "positionCode": "L"
+  },
+  {
+   "teamId": 8,
+   "playerId": 8480018,
+   "firstName": {
+    "default": "Nick"
+   },
+   "lastName": {
+    "default": "Suzuki"
+   },
+   "sweaterNumber": 14,
+   "positionCode": "C"
+  },
+  {
+   "teamId": 8,
+   "playerId": 8481540,
+   "firstName": {
+    "default": "Cole"
+   },
+   "lastName": {
+    "default": "Caufield"
+   },
+   "sweaterNumber": 13,
+   "positionCode": "R"
+  },
+  {
+   "teamId": 3,
+   "playerId": 8482073,
+   "firstName": {
+    "default": "Braden"
+   },
+   "lastName": {
+    "default": "Schneider"
+   },
+   "sweaterNumber": 4,
+   "positionCode": "D"
+  },
+  {
+   "teamId": 3,
+   "playerId": 8482109,
+   "firstName": {
+    "default": "Alexis"
+   },
+   "lastName": {
+    "default": "Lafrenière"
+   },
+   "sweaterNumber": 13,
+   "positionCode": "L"
+  },
+  {
+   "teamId": 3,
+   "playerId": 8482157,
+   "firstName": {
+    "default": "Will"
+   },
+   "lastName": {
+    "default": "Cuylle"
+   },
+   "sweaterNumber": 50,
+   "positionCode": "L"
+  },
+  {
+   "teamId": 8,
+   "playerId": 8482737,
+   "firstName": {
+    "default": "Zachary"
+   },
+   "lastName": {
+    "default": "Bolduc"
+   },
+   "sweaterNumber": 76,
+   "positionCode": "R"
+  },
+  {
+   "teamId": 8,
+   "playerId": 8482775,
+   "firstName": {
+    "default": "Oliver"
+   },
+   "lastName": {
+    "default": "Kapanen"
+   },
+   "sweaterNumber": 91,
+   "positionCode": "C"
+  },
+  {
+   "teamId": 8,
+   "playerId": 8483457,
+   "firstName": {
+    "default": "Lane"
+   },
+   "lastName": {
+    "default": "Hutson"
+   },
+   "sweaterNumber": 48,
+   "positionCode": "D"
+  },
+  {
+   "teamId": 3,
+   "playerId": 8483690,
+   "firstName": {
+    "default": "Noah"
+   },
+   "lastName": {
+    "default": "Laba"
+   },
+   "sweaterNumber": 42,
+   "positionCode": "C"
+  }
+ ]
+}

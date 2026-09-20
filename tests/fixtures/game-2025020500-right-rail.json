@@ -1,0 +1,98 @@
+{
+ "shotsByPeriod": [
+  {
+   "periodDescriptor": {
+    "number": 1,
+    "periodType": "REG",
+    "maxRegulationPeriods": 3
+   },
+   "away": 7,
+   "home": 11
+  },
+  {
+   "periodDescriptor": {
+    "number": 2,
+    "periodType": "REG",
+    "maxRegulationPeriods": 3
+   },
+   "away": 4,
+   "home": 8
+  },
+  {
+   "periodDescriptor": {
+    "number": 3,
+    "periodType": "REG",
+    "maxRegulationPeriods": 3
+   },
+   "away": 6,
+   "home": 5
+  },
+  {
+   "periodDescriptor": {
+    "number": 4,
+    "periodType": "OT",
+    "maxRegulationPeriods": 3
+   },
+   "away": 1,
+   "home": 5
+  }
+ ],
+ "teamGameStats": [
+  {
+   "category": "sog",
+   "awayValue": 18,
+   "homeValue": 29
+  },
+  {
+   "category": "faceoffWinningPctg",
+   "awayValue": 0.469388,
+   "homeValue": 0.530612
+  },
+  {
+   "category": "faceoffWins",
+   "awayValue": "23/49",
+   "homeValue": "26/49"
+  },
+  {
+   "category": "powerPlay",
+   "awayValue": "0/1",
+   "homeValue": "2/2"
+  },
+  {
+   "category": "powerPlayPctg",
+   "awayValue": 0,
+   "homeValue": 1
+  },
+  {
+   "category": "pim",
+   "awayValue": 6,
+   "homeValue": 4
+  },
+  {
+   "category": "hits",
+   "awayValue": 21,
+   "homeValue": 32
+  },
+  {
+   "category": "blockedShots",
+   "awayValue": 23,
+   "homeValue": 18
+  },
+  {
+   "category": "giveaways",
+   "awayValue": 13,
+   "homeValue": 14
+  },
+  {
+   "category": "takeaways",
+   "awayValue": 7,
+   "homeValue": 4
+  }
+ ],
+ "linescore": {
+  "totals": {
+   "away": 4,
+   "home": 5
+  }
+ }
+}
