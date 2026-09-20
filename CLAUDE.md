@@ -85,8 +85,32 @@ Rules learned the hard way building the daily and recap sets. Templates live in
 - **Colours must be hex wherever an alpha suffix is appended** (`` `${wash(colour)}1F` ``). `lift()`/`wash()`
   in `ig-cards.js` return clamped hex for exactly this reason — returning `rgb()` renders the band solid black.
 - **NHL logos ship on a 3:2 canvas** (viewBox 960×640). Use `logoImg()`, which reads the real ratio; a square box skews the crest.
-- **Draw rules, don't type glyphs.** The score separator is a `div` (4×112), not a dash character — a glyph sits off-baseline.
+- **Draw rules, don't type glyphs.** The recap score separator is a `div` (46×10 dash), not a dash character — the
+  display face's dash sits badly against the huge numerals. `marginTop` drops it onto the digits' optical centre,
+  which is below the line box's centre.
+- **Satori does not clip — it overflows silently.** A fixed-width row whose children don't fit spills over them and
+  past the card edge with no error. Any row with a fixed width is a budget: on the recap final card the 968px inner
+  width is two 176-tall crests (264 wide each) + the 410 score row + two 16 gaps. Change one number and re-check
+  the others.
 - Primitives (rink, lines) are SVG data URIs — see `lib/og/rink.js`, which has a `plain: true` mode for faint backdrops.
+
+**Checking a card before you ship it**
+
+`npm run dev` mounts `/api/og` at :5173, so render and *look* rather than deploying blind:
+
+```bash
+curl -s -o out.png "http://localhost:5173/api/og?type=ig&recap=<gameId>&card=final&index=1&total=4"
+```
+
+- **Measure, don't eyeball.** Scan for ink with PIL to find element centres. Complaints about "spacing" have twice
+  turned out to be a whole block off the card's centre axis rather than uneven gaps.
+- **A label column with no counterweight pushes a grid off-centre.** The recap period table needs a matching gutter
+  on the right, or the numbers centre 48px right of the score and result line above them.
+- **After any width change, check the outer 8px columns for ink** — that is how crests running off the card get caught.
+- **`index` is 1-based when posting**; `/api/og` subtracts one. Rendering with `index=0` shows "00 of 04" — that is a
+  bad test parameter, not a bug.
+- **Back a data complaint with the data.** Goal marks that look misplaced are usually right: `api/game.js` already
+  normalises for teams switching ends, and goals really do cluster in the crease. Check `/api/game?id=` first.
 
 **Publishing**
 
@@ -98,6 +122,8 @@ Rules learned the hard way building the daily and recap sets. Templates live in
   carries a `kind`. They must never share a key — a daily would otherwise block that same night's recap.
   `IG_FORCE=true` reposts.
 - Test a card with `curl` against `/api/og?type=ig&...&format=jpg` before dispatching the workflow.
+- **Republish the review artifact whenever the cards change** — it is the user's review surface, not a local Preview
+  window. Both themes of both sets, with slide notes and the caption. Pass the existing URL so the link stays stable.
 
 ## Gotchas
 
