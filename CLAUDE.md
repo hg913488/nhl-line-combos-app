@@ -72,8 +72,9 @@ Rules learned the hard way building the daily and recap sets. Templates live in
   Large type at full ink weight reads as a black slab sitting *on* the gradient instead of belonging to it.
 - **Team colour is the accent** — hero surname, watch figures, bar fills. One colour per card, from `TEAM_COLORS`.
 - **Real photography over lists.** Headshots (`playerHeadshots`) and crests beat another column of names.
-- **Every card is slide-aware:** `slideMarker(index, total)` puts dots plus an "02 of 04" pill on each,
-  so a slide saved or reposted alone still says where it sat.
+- **Every card is slide-aware:** `slideMarker(index, total)` puts an "02 of 04" pill on each,
+  so a slide saved or reposted alone still says where it sat. **No dot row** — Instagram draws its own
+  dots under the carousel, and a second set on the artwork reads as duplicated app chrome.
 - **Don't set small Space Mono labels below 18px** at 1080 wide — the bold `W` closes up and reads as `M`.
 
 **Satori constraints** (it lays out, it does not draw)
