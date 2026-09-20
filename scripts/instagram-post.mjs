@@ -32,6 +32,13 @@ const THEME = process.env.IG_THEME === 'dark' ? 'dark' : 'light';
 const STATUS_ATTEMPTS = 20;
 const STATUS_DELAY_MS = 3000;
 
+const RECAP_CARDS = [
+  { card: 'final', alt: 'Final score with goals by period' },
+  { card: 'goals', alt: 'Every goal in order with scorers and assists' },
+  { card: 'shots', alt: 'Shot map of every attempt, and shots on goal by period' },
+  { card: 'metrics', alt: 'Team stats compared side by side' },
+];
+
 const CARDS = [
   { card: 'slate', alt: "Tonight's NHL games with puck drop times" },
   { card: 'moves', alt: 'Line moves from the last 24 hours' },
@@ -49,6 +56,45 @@ function readLog() {
 
 function writeLog(log) {
   writeFileSync(LOG_PATH, `${JSON.stringify(log, null, 2)}\n`);
+}
+
+export function recapUrl(card, gameId, origin = SITE_ORIGIN, options = {}) {
+  const { index, total, theme = THEME } = options;
+  const position = index && total ? `&index=${index}&total=${total}` : '';
+  const style = theme === 'dark' ? '&theme=dark' : '';
+  return `${origin}/api/og?type=ig&recap=${gameId}&card=${card}&format=jpg${position}${style}`;
+}
+
+/**
+ * The night's most watchable finished game: overtime first, then one-goal
+ * games, then the most combined shots.
+ */
+export function pickRecap(games) {
+  const done = games.filter(game => ['FINAL', 'OFF'].includes(game.gameState));
+  if (!done.length) return null;
+  const score = game => {
+    const margin = Math.abs((game.homeTeam.score ?? 0) - (game.awayTeam.score ?? 0));
+    const extra = game.gameOutcome?.lastPeriodType && game.gameOutcome.lastPeriodType !== 'REG' ? 1000 : 0;
+    const closeness = margin <= 1 ? 500 : 0;
+    const goals = (game.homeTeam.score ?? 0) + (game.awayTeam.score ?? 0);
+    return extra + closeness + goals;
+  };
+  return done.sort((a, b) => score(b) - score(a))[0];
+}
+
+export function recapCaption(game) {
+  const winner = (game.homeTeam.score ?? 0) > (game.awayTeam.score ?? 0) ? game.homeTeam : game.awayTeam;
+  const loser = winner === game.homeTeam ? game.awayTeam : game.homeTeam;
+  const extra = game.gameOutcome?.lastPeriodType && game.gameOutcome.lastPeriodType !== 'REG'
+    ? ` (${game.gameOutcome.lastPeriodType})` : '';
+  return [
+    `${winner.abbrev} ${winner.score}, ${loser.abbrev} ${loser.score}${extra}.`,
+    '',
+    'Every goal, every shot on the ice where it happened, and the numbers behind it.',
+    SITE_ORIGIN.replace(/^https:\/\//, ''),
+    '',
+    `#NHL #hockey #${winner.abbrev} #${loser.abbrev}`,
+  ].join('\n');
 }
 
 export function cardUrl(card, date, origin = SITE_ORIGIN, options = {}) {
@@ -115,11 +161,60 @@ async function downloadCards(cards, date, outDir) {
   }
 }
 
-export async function run({ date = etDate(), publish = process.env.IG_PUBLISH === 'true', includePreseason = process.env.IG_INCLUDE_PRESEASON === 'true', force = process.env.IG_FORCE === 'true', outDir = join(ROOT, 'ig-cards') } = {}) {
+export async function run({ date = (/^\d{4}-\d{2}-\d{2}$/.test(process.env.IG_DATE || '') ? process.env.IG_DATE : etDate()), publish = process.env.IG_PUBLISH === 'true', includePreseason = process.env.IG_INCLUDE_PRESEASON === 'true', force = process.env.IG_FORCE === 'true', outDir = join(ROOT, 'ig-cards') } = {}) {
   const log = readLog();
   if (!force && log.posts.some(post => post.date === date && post.published)) {
     console.log(`Already published for ${date}; nothing to do. Set IG_FORCE=true to post again.`);
     return { skipped: true };
+  }
+
+  // Recap mode: one finished game, four slides.
+  if (process.env.IG_MODE === 'recap') {
+    const data = await fetchJson(`https://api-web.nhle.com/v1/schedule/${date}`);
+    const games = data.gameWeek?.find(day => day.date === date)?.games || [];
+    const game = process.env.IG_GAME_ID
+      ? games.find(item => String(item.id) === process.env.IG_GAME_ID) || { id: Number(process.env.IG_GAME_ID) }
+      : pickRecap(games);
+    if (!game) {
+      console.log(`No finished games on ${date}; nothing to recap.`);
+      return { skipped: true };
+    }
+    const caption = game.awayTeam ? recapCaption(game) : 'Game recap.';
+    const cards = RECAP_CARDS;
+    console.log(`Recapping game ${game.id}; ${cards.length} cards; ${THEME} theme.`);
+    const urls = cards.map((item, i) => recapUrl(item.card, game.id, SITE_ORIGIN, { index: i + 1, total: cards.length }));
+
+    if (!publish) {
+      console.log('DRY RUN — downloading recap cards instead of posting.');
+      mkdirSync(outDir, { recursive: true });
+      for (const [i, url] of urls.entries()) {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Recap card ${cards[i].card} returned HTTP ${response.status}`);
+        const buffer = Buffer.from(await response.arrayBuffer());
+        writeFileSync(join(outDir, `${date}-recap-${cards[i].card}.jpg`), buffer);
+        console.log(`  saved ${cards[i].card} (${(buffer.length / 1024).toFixed(0)}KB)`);
+      }
+      console.log(`\n--- caption ---\n${caption}\n---------------`);
+      return { dryRun: true, cards: cards.length };
+    }
+
+    const igUserIdRecap = process.env.IG_USER_ID;
+    const tokenRecap = process.env.IG_ACCESS_TOKEN;
+    if (!igUserIdRecap || !tokenRecap) throw new Error('IG_USER_ID and IG_ACCESS_TOKEN are required to publish');
+    const children = [];
+    for (const [i, url] of urls.entries()) {
+      const container = await createContainer(igUserIdRecap, tokenRecap, { image_url: url, is_carousel_item: 'true', alt_text: cards[i].alt });
+      await waitForContainer(container.id, tokenRecap);
+      children.push(container.id);
+      console.log(`  container ready: ${cards[i].card}`);
+    }
+    const carousel = await createContainer(igUserIdRecap, tokenRecap, { media_type: 'CAROUSEL', children: children.join(','), caption });
+    await waitForContainer(carousel.id, tokenRecap);
+    const published = await fetchJson(`${GRAPH}/${igUserIdRecap}/media_publish`, { method: 'POST', body: new URLSearchParams({ creation_id: carousel.id, access_token: tokenRecap }) });
+    log.posts = [...log.posts, { date, kind: 'recap', game_id: game.id, published: true, media_id: published.id, theme: THEME, posted_at: new Date().toISOString() }].slice(-120);
+    writeLog(log);
+    console.log(`Published recap: ${published.id}`);
+    return { mediaId: published.id };
   }
 
   const allGames = await todaysGames(date);

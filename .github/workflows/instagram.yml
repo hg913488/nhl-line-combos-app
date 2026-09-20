@@ -25,6 +25,19 @@ on:
         description: 'Post again even if today already went out'
         type: boolean
         default: false
+      mode:
+        description: 'Which carousel'
+        type: choice
+        options: [daily, recap]
+        default: daily
+      date:
+        description: 'Date to use (YYYY-MM-DD, Eastern). Blank = today'
+        type: string
+        default: ''
+      game_id:
+        description: 'Recap this game id instead of picking the best one'
+        type: string
+        default: ''
 
 permissions:
   contents: write
@@ -60,6 +73,9 @@ jobs:
           IG_INCLUDE_PRESEASON: ${{ inputs.include_preseason }}
           IG_THEME: ${{ inputs.theme }}
           IG_FORCE: ${{ inputs.force }}
+          IG_MODE: ${{ inputs.mode }}
+          IG_GAME_ID: ${{ inputs.game_id }}
+          IG_DATE: ${{ inputs.date }}
           SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
           # graph.facebook.com (Facebook Login) or graph.instagram.com (Instagram Login)
           IG_GRAPH_HOST: ${{ vars.IG_GRAPH_HOST }}
