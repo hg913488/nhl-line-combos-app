@@ -16,6 +16,15 @@ on:
         description: 'Include preseason games (for testing)'
         type: boolean
         default: false
+      theme:
+        description: 'Card style'
+        type: choice
+        options: [light, dark]
+        default: light
+      force:
+        description: 'Post again even if today already went out'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -49,6 +58,8 @@ jobs:
           # to true (repository variable, or the checkbox on a manual run).
           IG_PUBLISH: ${{ inputs.publish || vars.IG_PUBLISH }}
           IG_INCLUDE_PRESEASON: ${{ inputs.include_preseason }}
+          IG_THEME: ${{ inputs.theme }}
+          IG_FORCE: ${{ inputs.force }}
           SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
           # graph.facebook.com (Facebook Login) or graph.instagram.com (Instagram Login)
           IG_GRAPH_HOST: ${{ vars.IG_GRAPH_HOST }}

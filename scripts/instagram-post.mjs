@@ -27,6 +27,8 @@ const GRAPH_HOST = process.env.IG_GRAPH_HOST || 'graph.facebook.com';
 const GRAPH = `https://${GRAPH_HOST}/${GRAPH_VERSION}`;
 const SITE_ORIGIN = (process.env.SITE_ORIGIN || 'https://www.betweenthelineshockey.com').replace(/\/$/, '');
 const MAX_CAROUSEL = 10;
+// Cards render ice white by default; IG_THEME=dark posts the charcoal set.
+const THEME = process.env.IG_THEME === 'dark' ? 'dark' : 'light';
 const STATUS_ATTEMPTS = 20;
 const STATUS_DELAY_MS = 3000;
 
@@ -49,8 +51,11 @@ function writeLog(log) {
   writeFileSync(LOG_PATH, `${JSON.stringify(log, null, 2)}\n`);
 }
 
-export function cardUrl(card, date, origin = SITE_ORIGIN) {
-  return `${origin}/api/og?type=ig&card=${card}&format=jpg&date=${date}`;
+export function cardUrl(card, date, origin = SITE_ORIGIN, options = {}) {
+  const { index, total, theme = THEME } = options;
+  const position = index && total ? `&index=${index}&total=${total}` : '';
+  const style = theme === 'dark' ? '&theme=dark' : '';
+  return `${origin}/api/og?type=ig&card=${card}&format=jpg&date=${date}${position}${style}`;
 }
 
 export function buildCaption(games, date) {
@@ -102,18 +107,18 @@ async function waitForContainer(containerId, token) {
 async function downloadCards(cards, date, outDir) {
   mkdirSync(outDir, { recursive: true });
   for (const item of cards) {
-    const response = await fetch(cardUrl(item.card, date));
+    const response = await fetch(cardUrl(item.card, date, SITE_ORIGIN, { index: cards.indexOf(item) + 1, total: cards.length }));
     if (!response.ok) throw new Error(`Card ${item.card} returned HTTP ${response.status}`);
     const buffer = Buffer.from(await response.arrayBuffer());
-    writeFileSync(join(outDir, `${date}-${item.card}.jpg`), buffer);
+    writeFileSync(join(outDir, `${date}-${THEME}-${item.card}.jpg`), buffer);
     console.log(`  saved ${item.card} (${(buffer.length / 1024).toFixed(0)}KB)`);
   }
 }
 
-export async function run({ date = etDate(), publish = process.env.IG_PUBLISH === 'true', includePreseason = process.env.IG_INCLUDE_PRESEASON === 'true', outDir = join(ROOT, 'ig-cards') } = {}) {
+export async function run({ date = etDate(), publish = process.env.IG_PUBLISH === 'true', includePreseason = process.env.IG_INCLUDE_PRESEASON === 'true', force = process.env.IG_FORCE === 'true', outDir = join(ROOT, 'ig-cards') } = {}) {
   const log = readLog();
-  if (log.posts.some(post => post.date === date && post.published)) {
-    console.log(`Already published for ${date}; nothing to do.`);
+  if (!force && log.posts.some(post => post.date === date && post.published)) {
+    console.log(`Already published for ${date}; nothing to do. Set IG_FORCE=true to post again.`);
     return { skipped: true };
   }
 
@@ -126,7 +131,7 @@ export async function run({ date = etDate(), publish = process.env.IG_PUBLISH ==
 
   const caption = buildCaption(games, date);
   const cards = CARDS.slice(0, MAX_CAROUSEL);
-  console.log(`${games.length} game(s) on ${date}; ${cards.length} cards.`);
+  console.log(`${games.length} game(s) on ${date}; ${cards.length} cards; ${THEME} theme.`);
 
   if (!publish) {
     console.log('DRY RUN — downloading cards instead of posting.');
@@ -141,7 +146,7 @@ export async function run({ date = etDate(), publish = process.env.IG_PUBLISH ==
 
   const children = [];
   for (const item of cards) {
-    const container = await createContainer(igUserId, token, { image_url: cardUrl(item.card, date), is_carousel_item: 'true', alt_text: item.alt });
+    const container = await createContainer(igUserId, token, { image_url: cardUrl(item.card, date, SITE_ORIGIN, { index: cards.indexOf(item) + 1, total: cards.length }), is_carousel_item: 'true', alt_text: item.alt });
     await waitForContainer(container.id, token);
     children.push(container.id);
     console.log(`  container ready: ${item.card}`);
@@ -151,7 +156,7 @@ export async function run({ date = etDate(), publish = process.env.IG_PUBLISH ==
   await waitForContainer(carousel.id, token);
   const published = await fetchJson(`${GRAPH}/${igUserId}/media_publish`, { method: 'POST', body: new URLSearchParams({ creation_id: carousel.id, access_token: token }) });
 
-  log.posts = [...log.posts.filter(post => post.date !== date), { date, published: true, media_id: published.id, cards: cards.map(item => item.card), posted_at: new Date().toISOString() }].slice(-120);
+  log.posts = [...log.posts.filter(post => post.date !== date), { date, published: true, media_id: published.id, theme: THEME, cards: cards.map(item => item.card), posted_at: new Date().toISOString() }].slice(-120);
   writeLog(log);
   console.log(`Published: ${published.id}`);
   return { mediaId: published.id };
