@@ -59,6 +59,45 @@ Deploy: push to `main`. CI (`.github/workflows/ci.yml`) builds and runs both tes
 
 
 
+## Instagram carousels
+
+Rules learned the hard way building the daily and recap sets. Templates live in
+`lib/og/ig-cards.js` (daily) and `lib/og/recap-cards.js` (recap); tokens in `lib/og/theme.js`.
+
+**House look**
+
+- **Ice white is the default.** `applyTheme` picks light unless `theme=dark`/`IG_THEME=dark`.
+  Hockey is played on white, headshots carry better on it, and it stands out in a feed of dark accounts.
+- **Never flat near-black on the pale ground.** Ink is `#1E2A38`, display type a step lighter at `#2C3D4E`.
+  Large type at full ink weight reads as a black slab sitting *on* the gradient instead of belonging to it.
+- **Team colour is the accent** — hero surname, watch figures, bar fills. One colour per card, from `TEAM_COLORS`.
+- **Real photography over lists.** Headshots (`playerHeadshots`) and crests beat another column of names.
+- **Every card is slide-aware:** `slideMarker(index, total)` puts dots plus an "02 of 04" pill on each,
+  so a slide saved or reposted alone still says where it sat.
+- **Don't set small Space Mono labels below 18px** at 1080 wide — the bold `W` closes up and reads as `M`.
+
+**Satori constraints** (it lays out, it does not draw)
+
+- Flexbox only. No filters, no `space-evenly` (use `space-around`), no CSS `color-mix`.
+- Any div with more than one child needs `display: flex` — the `h()` factory adds it, so build through `h`/`row`/`col`.
+- Images need explicit `width` and `height`. Never pass `fontWeight: undefined` or an empty text node.
+- **Colours must be hex wherever an alpha suffix is appended** (`` `${wash(colour)}1F` ``). `lift()`/`wash()`
+  in `ig-cards.js` return clamped hex for exactly this reason — returning `rgb()` renders the band solid black.
+- **NHL logos ship on a 3:2 canvas** (viewBox 960×640). Use `logoImg()`, which reads the real ratio; a square box skews the crest.
+- **Draw rules, don't type glyphs.** The score separator is a `div` (4×112), not a dash character — a glyph sits off-baseline.
+- Primitives (rink, lines) are SVG data URIs — see `lib/og/rink.js`, which has a `plain: true` mode for faint backdrops.
+
+**Publishing**
+
+- JPEG only, max 10 children, and each image must be a **public URL** — cards are fetched from the live site,
+  so **the Vercel deploy must be Ready before posting**, or containers fail on a stale route.
+- Flow is container per slide → poll `status_code` → carousel container → `media_publish`.
+- Every slide gets `alt_text`.
+- **Idempotency keys by kind:** dailies by `date`, recaps by `game_id`; each log entry in `data/instagram_log.json`
+  carries a `kind`. They must never share a key — a daily would otherwise block that same night's recap.
+  `IG_FORCE=true` reposts.
+- Test a card with `curl` against `/api/og?type=ig&...&format=jpg` before dispatching the workflow.
+
 ## Gotchas
 
 - **Module-level mutable state is intentional:** `P` (palette) and `triggerPlayerLookup` are assigned during render. Don't convert to React state.
