@@ -1,252 +1,371 @@
-"""
-Goals Against by Position Scraper
-Pulls goal-scoring game data from the NHL Stats API and aggregates
-goals against by defending team and scorer position.
+"""Goals against by scorer position, per team.
 
-Data source: api.nhle.com (NHL's public stats API)
+Source: the NHL stats API (api.nhle.com/stats/rest/en).
 Output: data/goals_against_by_position.json
+
+Rules this scraper follows
+--------------------------
+Season
+    The season is derived from today's date, never hard coded: a season that
+    starts in year Y is `Y * 10000 + (Y + 1)` and is considered current from
+    July 1 of year Y. `season_id`/`season` in the output name the season the
+    ytd/home/away splits come from. When the current season has no completed
+    regular-season games yet (July through opening night), those splits fall
+    back to the previous season and the label says so.
+
+L10
+    The team's last 10 regular-season games ACTUALLY PLAYED, not the last 10
+    dates it allowed a goal: a shutout counts as a game with zero goals
+    against. Completed games come from the stats API team summary, one row per
+    team per game. When the current season has fewer than 10 completed games
+    for a team, the window is filled with that team's most recent previous
+    season games; `l10_games` and `l10_seasons` record exactly which games
+    were used.
+
+League averages
+    `league.l10_avg` / `league.ytd_avg` are the mean team value per position
+    (sum over the 32 teams / 32). They are the denominator of the Picks index
+    in picks_log.py, so they are published with the splits that produced them.
+
+Paging
+    api.nhle.com caps `limit` at 100 rows per request but returns every row for
+    `limit=-1`. fetch_rows() asks for -1 and only falls back to paging (by the
+    number of rows actually returned, under a stable sort) if the response is
+    short.
 """
 
-import requests
+from __future__ import annotations
+
+import argparse
 import json
 import os
+import sys
+import tempfile
 import time
-from datetime import datetime, timedelta
-from collections import defaultdict
+from datetime import date as Date
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Iterable
 
-API_BASE = "https://api.nhle.com/stats/rest/en/skater/summary"
-SEASON_ID = 20252026
-GAME_TYPE = 2  # Regular season
-PAGE_SIZE = 500
-DELAY_BETWEEN_REQUESTS = 2  # seconds, be respectful to NHL API
+import requests
 
-# All 32 NHL teams
-NHL_TEAMS = [
+
+STATS_BASE = "https://api.nhle.com/stats/rest/en"
+SKATER_SUMMARY_URL = f"{STATS_BASE}/skater/summary"
+TEAM_SUMMARY_URL = f"{STATS_BASE}/team/summary"
+
+POSITIONS = ("C", "LW", "RW", "D")
+POSITION_LABELS = {"C": "C", "L": "LW", "R": "RW", "D": "D"}
+REGULAR_SEASON = 2
+PLAYOFFS = 3
+L10_GAMES = 10
+SEASON_START_MONTH = 7  # July: the new season id becomes current
+
+REQUEST_TIMEOUT = 30
+DELAY_BETWEEN_REQUESTS = 1  # seconds, be polite to the NHL API
+PAGE_FALLBACK_LIMIT = 100  # documented server cap, only used if limit=-1 is short
+STABLE_SORT = json.dumps([
+    {"property": "gameId", "direction": "ASC"},
+    {"property": "playerId", "direction": "ASC"},
+])
+
+NHL_TEAMS = (
     "ANA", "BOS", "BUF", "CAR", "CBJ", "CGY", "CHI", "COL",
     "DAL", "DET", "EDM", "FLA", "LAK", "MIN", "MTL", "NJD",
     "NSH", "NYI", "NYR", "OTT", "PHI", "PIT", "SEA", "SJS",
-    "STL", "TBL", "TOR", "UTA", "VAN", "VGK", "WPG", "WSH"
-]
+    "STL", "TBL", "TOR", "UTA", "VAN", "VGK", "WPG", "WSH",
+)
+
+DEFAULT_PATH = Path("data/goals_against_by_position.json")
 
 
-def fetch_goal_rows():
+# ── Season helpers ────────────────────────────────────────────────────
+def current_season_id(today: Date) -> int:
+    """Season id for `today`, e.g. 2026-09-19 -> 20262027, 2026-03-14 -> 20252026."""
+    start_year = today.year if today.month >= SEASON_START_MONTH else today.year - 1
+    return start_year * 10000 + (start_year + 1)
+
+
+def previous_season_id(season_id: int) -> int:
+    return season_id - 10001
+
+
+def season_label(season_id: int) -> str:
+    """20252026 -> '2025-26'."""
+    return f"{season_id // 10000}-{str(season_id % 10000)[-2:]}"
+
+
+# ── Stats API ─────────────────────────────────────────────────────────
+def _get(session: requests.Session, url: str, params: dict[str, Any]) -> dict[str, Any]:
+    response = session.get(url, params=params, timeout=REQUEST_TIMEOUT)
+    response.raise_for_status()
+    payload = response.json()
+    if not isinstance(payload, dict) or not isinstance(payload.get("data"), list):
+        raise ValueError(f"Unexpected stats response from {url}")
+    return payload
+
+
+def fetch_rows(
+    session: requests.Session, url: str, cayenne: str,
+    fact_cayenne: str | None = None, is_game: bool = True,
+) -> list[dict[str, Any]]:
+    """Fetch every row for a query.
+
+    `limit=-1` returns the full result set in one request. If the server ever
+    truncates it, fall back to paging by the number of rows actually returned
+    (never by an assumed page size) under a stable sort.
     """
-    Fetch all skater game rows where goals >= 1 for the current season.
-    Uses pagination to pull all rows in chunks of PAGE_SIZE.
-    """
-    all_rows = []
+    params = {
+        "isAggregate": "false",
+        "isGame": "true" if is_game else "false",
+        "start": 0,
+        "limit": -1,
+        "cayenneExp": cayenne,
+    }
+    if fact_cayenne:
+        params["factCayenneExp"] = fact_cayenne
+
+    payload = _get(session, url, params)
+    rows = list(payload["data"])
+    total = payload.get("total")
+    if not isinstance(total, int) or len(rows) >= total:
+        return rows
+
+    print(f"  limit=-1 returned {len(rows)}/{total} rows; paging for the rest")
+    rows = []
     start = 0
-
-    # First request to get total count
-    params = build_params(start)
-    print(f"Fetching initial page to get total count...")
-    resp = requests.get(API_BASE, params=params)
-    resp.raise_for_status()
-    data = resp.json()
-    total = data.get("total", 0)
-    all_rows.extend(data.get("data", []))
-    print(f"Total goal-scoring game rows: {total}")
-
-    # Paginate through remaining rows
-    start += PAGE_SIZE
     while start < total:
         time.sleep(DELAY_BETWEEN_REQUESTS)
-        params = build_params(start)
-        print(f"Fetching rows {start} - {start + PAGE_SIZE}...")
-        resp = requests.get(API_BASE, params=params)
-        resp.raise_for_status()
-        data = resp.json()
-        rows = data.get("data", [])
-        if not rows:
+        page = _get(session, url, {
+            **params, "start": start, "limit": PAGE_FALLBACK_LIMIT, "sort": STABLE_SORT,
+        })["data"]
+        if not page:
             break
-        all_rows.extend(rows)
-        start += PAGE_SIZE
-
-    print(f"Fetched {len(all_rows)} total rows")
-    return all_rows
+        rows.extend(page)
+        start += len(page)
+    return rows
 
 
-def build_params(start):
-    """Build query parameters for the NHL Stats API."""
-    return {
-        "isAggregate": "false",
-        "isGame": "true",
-        "sort": '[{"property":"goals","direction":"DESC"}]',
-        "start": start,
-        "limit": PAGE_SIZE,
-        "factCayenneExp": "goals>=1",
-        "cayenneExp": f"seasonId={SEASON_ID} and gameTypeId={GAME_TYPE}"
-    }
+def fetch_goal_rows(session: requests.Session, season_id: int) -> list[dict[str, Any]]:
+    """Per-game skater rows with at least one goal for a regular season."""
+    print(f"Fetching goal rows for {season_label(season_id)}...")
+    rows = fetch_rows(
+        session, SKATER_SUMMARY_URL,
+        cayenne=f"seasonId={season_id} and gameTypeId={REGULAR_SEASON}",
+        fact_cayenne="goals>=1",
+    )
+    print(f"  {len(rows)} goal rows ({sum(row.get('goals') or 0 for row in rows)} goals)")
+    return rows
 
 
-def get_team_game_counts(all_rows):
+def fetch_team_games(
+    session: requests.Session, season_id: int,
+    game_types: Iterable[int] = (REGULAR_SEASON,),
+) -> dict[str, list[dict[str, Any]]]:
+    """Completed games per team abbreviation, oldest first.
+
+    One team summary row exists per team per completed game, so a team's games
+    are the rows whose `opponentTeamAbbrev` is that team (that row's homeRoad
+    belongs to the opponent, so the team is home when the row says road).
     """
-    We also need total games played per team to calculate per-game averages.
-    Fetch all game rows (not just goals) to count unique games per team.
-    This uses the schedule approach instead — much fewer API calls.
-    """
-    # We'll calculate games played from the schedule endpoint instead
-    # For now, we can derive it from the data we have or fetch separately
-    pass
-
-
-def aggregate_goals_against(rows):
-    """
-    Aggregate goal data into goals against by position per team.
-
-    For each row: opponentTeamAbbrev gave up `goals` to positionCode.
-    """
-    # Structure: team -> split -> position -> count
-    # Splits: ytd, home, away
-    # We also track per-game-date for L10 calculation
-    team_data = {}
-
-    # Initialize all teams
-    for team in NHL_TEAMS:
-        team_data[team] = {
-            "ytd": defaultdict(int),
-            "home": defaultdict(int),   # goals against when team is HOME
-            "away": defaultdict(int),   # goals against when team is AWAY
-            "game_dates": defaultdict(set),  # track unique game dates per team
-            "games_by_date": defaultdict(lambda: defaultdict(int))  # date -> pos -> goals
-        }
-
+    types = ",".join(str(value) for value in game_types)
+    print(f"Fetching completed games for {season_label(season_id)} (types {types})...")
+    rows = fetch_rows(
+        session, TEAM_SUMMARY_URL,
+        cayenne=f"seasonId={season_id} and gameTypeId in ({types})",
+    )
+    games: dict[str, list[dict[str, Any]]] = {}
     for row in rows:
-        opponent = row.get("opponentTeamAbbrev")
-        pos = row.get("positionCode")
-        goals = row.get("goals", 0)
-        home_road = row.get("homeRoad")  # H or R — this is the SCORER's home/road
-        game_date = row.get("gameDate")
-
-        if not opponent or not pos or not goals:
+        team, game_id = row.get("opponentTeamAbbrev"), row.get("gameId")
+        date, opponent_venue = row.get("gameDate"), row.get("homeRoad")
+        if not team or not isinstance(game_id, int) or not date:
             continue
-
-        # Normalize position: L and R -> LW and RW for clarity, or keep as-is
-        # NHL API uses C, L, R, D
-        pos_label = normalize_position(pos)
-
-        # YTD totals
-        team_data[opponent]["ytd"][pos_label] += goals
-
-        # Home/Away splits (from defending team's perspective)
-        # If scorer is "H" (home), then the defending team is AWAY
-        # If scorer is "R" (road), then the defending team is HOME
-        if home_road == "H":
-            team_data[opponent]["away"][pos_label] += goals
-        elif home_road == "R":
-            team_data[opponent]["home"][pos_label] += goals
-
-        # Track by game date for L10 calculation
-        if game_date:
-            team_data[opponent]["game_dates"][game_date].add(row.get("gameId"))
-            team_data[opponent]["games_by_date"][game_date][pos_label] += goals
-
-    return team_data
+        games.setdefault(team, []).append({
+            "game_id": game_id,
+            "season": season_id,
+            "date": date,
+            "home": opponent_venue == "R",
+        })
+    for team_games in games.values():
+        team_games.sort(key=lambda game: (game["date"], game["game_id"]))
+    print(f"  {sum(len(value) for value in games.values())} team-games "
+          f"across {len(games)} teams")
+    return games
 
 
-def normalize_position(pos):
-    """Normalize position codes to readable labels."""
-    mapping = {
-        "C": "C",
-        "L": "LW",
-        "R": "RW",
-        "D": "D"
-    }
-    return mapping.get(pos, pos)
+# ── Aggregation ───────────────────────────────────────────────────────
+def goals_by_game(rows: Iterable[dict[str, Any]]) -> dict[int, dict[str, int]]:
+    """Map game id -> defending team -> position -> goals allowed.
 
-
-def calculate_l10(team_data):
+    Keyed by game id so splits can be summed over the team game list, which is
+    the only reliable record of games actually played (a shutout produces no
+    goal rows at all).
     """
-    Calculate last 10 games goals against by position for each team.
-    Uses the game_dates tracking to find the 10 most recent game dates.
-    """
-    l10_data = {}
-
-    for team in NHL_TEAMS:
-        data = team_data[team]
-        # Get all unique game dates where this team was scored against, sorted desc
-        all_dates = sorted(data["game_dates"].keys(), reverse=True)
-
-        # We need the last 10 unique GAME dates for this team
-        # Note: a team might not have been scored against in every game,
-        # but we want the last 10 games regardless. For simplicity,
-        # we use dates where goals were scored against them.
-        last_10_dates = all_dates[:10]
-
-        l10 = defaultdict(int)
-        for date in last_10_dates:
-            for pos, goals in data["games_by_date"][date].items():
-                l10[pos] += goals
-
-        l10_data[team] = dict(l10)
-
-    return l10_data
+    totals: dict[int, dict[str, dict[str, int]]] = {}
+    for row in rows:
+        defense = row.get("opponentTeamAbbrev")
+        position = POSITION_LABELS.get(row.get("positionCode"))
+        goals = row.get("goals") or 0
+        game_id = row.get("gameId")
+        if not defense or not position or not goals or not isinstance(game_id, int):
+            continue
+        team = totals.setdefault(game_id, {}).setdefault(
+            defense, {key: 0 for key in POSITIONS})
+        team[position] += goals
+    return totals
 
 
-def build_output(team_data, l10_data):
-    """Build the final JSON output structure."""
-    positions = ["C", "LW", "RW", "D"]
+def sum_games(
+    games: Iterable[dict[str, Any]], team: str,
+    goals: dict[int, dict[str, dict[str, int]]],
+) -> dict[str, int]:
+    totals = {position: 0 for position in POSITIONS}
+    for game in games:
+        allowed = goals.get(game["game_id"], {}).get(team)
+        if not allowed:
+            continue
+        for position in POSITIONS:
+            totals[position] += allowed[position]
+    return totals
 
-    output = {
-        "lastUpdated": datetime.utcnow().strftime("%Y-%m-%d"),
-        "season": "2025-26",
-        "positions": positions,
-        "teams": {}
+
+def select_l10(
+    current: list[dict[str, Any]], previous: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """The team's last 10 games played, filled from the previous season."""
+    window = current[-L10_GAMES:]
+    if len(window) < L10_GAMES:
+        fill = previous[-(L10_GAMES - len(window)):] if previous else []
+        window = fill + window
+    return window
+
+
+def league_average(teams: dict[str, dict[str, Any]], split: str) -> dict[str, float]:
+    count = len(teams) or 1
+    return {
+        position: round(
+            sum(team[split][position] for team in teams.values()) / count, 4)
+        for position in POSITIONS
     }
 
+
+def build_output(
+    season_games: dict[str, list[dict[str, Any]]],
+    l10_games: dict[str, list[dict[str, Any]]],
+    goals: dict[int, dict[str, dict[str, int]]],
+    stats_season: int,
+    generated_at: datetime,
+) -> dict[str, Any]:
+    teams: dict[str, dict[str, Any]] = {}
     for team in sorted(NHL_TEAMS):
-        data = team_data[team]
-        output["teams"][team] = {
-            "ytd": {pos: data["ytd"].get(pos, 0) for pos in positions},
-            "l10": {pos: l10_data[team].get(pos, 0) for pos in positions},
-            "home": {pos: data["home"].get(pos, 0) for pos in positions},
-            "away": {pos: data["away"].get(pos, 0) for pos in positions},
-            "ytdTotal": sum(data["ytd"].get(pos, 0) for pos in positions),
-            "l10Total": sum(l10_data[team].get(pos, 0) for pos in positions),
-            "homeTotal": sum(data["home"].get(pos, 0) for pos in positions),
-            "awayTotal": sum(data["away"].get(pos, 0) for pos in positions)
+        games = season_games.get(team, [])
+        window = l10_games.get(team, [])
+        splits = {
+            "ytd": sum_games(games, team, goals),
+            "l10": sum_games(window, team, goals),
+            "home": sum_games([g for g in games if g["home"]], team, goals),
+            "away": sum_games([g for g in games if not g["home"]], team, goals),
+        }
+        teams[team] = {
+            **splits,
+            "ytdTotal": sum(splits["ytd"].values()),
+            "l10Total": sum(splits["l10"].values()),
+            "homeTotal": sum(splits["home"].values()),
+            "awayTotal": sum(splits["away"].values()),
+            "l10_games": [{"game_id": game["game_id"], "season": game["season"]}
+                          for game in window],
+            "l10_seasons": sorted({game["season"] for game in window}),
         }
 
-    return output
+    return {
+        "lastUpdated": generated_at.astimezone(timezone.utc).strftime("%Y-%m-%d"),
+        "season": season_label(stats_season),
+        "season_id": stats_season,
+        "positions": list(POSITIONS),
+        "teams": teams,
+        "league": {
+            "l10_avg": league_average(teams, "l10"),
+            "ytd_avg": league_average(teams, "ytd"),
+        },
+    }
 
 
-def main():
-    print("=" * 60)
-    print("Goals Against by Position Scraper")
-    print(f"Season: {SEASON_ID}")
-    print("=" * 60)
+# ── Orchestration ─────────────────────────────────────────────────────
+def build(session: requests.Session, today: Date, generated_at: datetime) -> dict[str, Any]:
+    season_id = current_season_id(today)
+    previous_id = previous_season_id(season_id)
+    print(f"Current season {season_label(season_id)} ({season_id})")
 
-    # Step 1: Fetch all goal-scoring game rows
-    rows = fetch_goal_rows()
+    current_games = fetch_team_games(session, season_id)
+    needs_previous = any(
+        len(current_games.get(team, [])) < L10_GAMES for team in NHL_TEAMS)
+    previous_games = fetch_team_games(session, previous_id) if needs_previous else {}
 
-    # Step 2: Aggregate goals against by position
-    print("\nAggregating goals against by position...")
-    team_data = aggregate_goals_against(rows)
+    stats_season = season_id if any(current_games.values()) else previous_id
+    if stats_season != season_id:
+        print(f"No completed {season_label(season_id)} games yet; "
+              f"ytd/home/away fall back to {season_label(previous_id)}")
+    season_games = current_games if stats_season == season_id else previous_games
 
-    # Step 3: Calculate L10 splits
-    print("Calculating last 10 games splits...")
-    l10_data = calculate_l10(team_data)
+    l10_games = {
+        team: select_l10(current_games.get(team, []), previous_games.get(team, []))
+        for team in NHL_TEAMS
+    }
 
-    # Step 4: Build and save output
-    output = build_output(team_data, l10_data)
+    seasons = {stats_season} | {
+        game["season"] for games in l10_games.values() for game in games}
+    goals: dict[int, dict[str, dict[str, int]]] = {}
+    for season in sorted(seasons):
+        goals.update(goals_by_game(fetch_goal_rows(session, season)))
 
-    # Ensure output directory exists
-    os.makedirs("data", exist_ok=True)
-    output_path = os.path.join("data", "goals_against_by_position.json")
+    return build_output(season_games, l10_games, goals, stats_season, generated_at)
 
-    with open(output_path, "w") as f:
-        json.dump(output, f, indent=2)
 
-    print(f"\nOutput saved to {output_path}")
-    print(f"Total API calls made: ~{(len(rows) // PAGE_SIZE) + 1}")
+def write_atomic(path: Path, value: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    handle, temp_name = tempfile.mkstemp(dir=path.parent, prefix=f".{path.name}.")
+    try:
+        with os.fdopen(handle, "w", encoding="utf-8") as file:
+            file.write(json.dumps(value, indent=2, ensure_ascii=False) + "\n")
+            file.flush()
+            os.fsync(file.fileno())
+        os.replace(temp_name, path)
+    except BaseException:
+        Path(temp_name).unlink(missing_ok=True)
+        raise
 
-    # Print a quick summary
-    print("\n--- Quick Summary ---")
-    for team in sorted(NHL_TEAMS)[:5]:
-        t = output["teams"][team]
-        print(f"{team}: YTD total GA = {t['ytdTotal']} "
-              f"(C:{t['ytd']['C']} LW:{t['ytd']['LW']} RW:{t['ytd']['RW']} D:{t['ytd']['D']})")
-    print("... (showing first 5 teams)")
+
+def summarise(output: dict[str, Any]) -> None:
+    league_total = sum(team["ytdTotal"] for team in output["teams"].values())
+    print(f"\nSeason {output['season']} ({output['season_id']}): "
+          f"{league_total} goals allowed league-wide")
+    print(f"League L10 average: {output['league']['l10_avg']}")
+    for team in list(sorted(output["teams"]))[:5]:
+        data = output["teams"][team]
+        print(f"  {team}: YTD {data['ytdTotal']} {data['ytd']} | "
+              f"L10 {data['l10Total']} {data['l10']} "
+              f"({len(data['l10_games'])} games, seasons {data['l10_seasons']})")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--path", type=Path, default=DEFAULT_PATH)
+    parser.add_argument("--date", type=lambda value: Date.fromisoformat(value),
+                        help="Treat this date as today (YYYY-MM-DD)")
+    args = parser.parse_args()
+
+    now = datetime.now(timezone.utc)
+    today = args.date or now.date()
+    try:
+        with requests.Session() as session:
+            output = build(session, today, now)
+        write_atomic(args.path, output)
+    except (requests.RequestException, ValueError, OSError) as error:
+        print(f"ERROR: goals against refresh failed: {error}", file=sys.stderr)
+        sys.exit(1)
+    summarise(output)
+    print(f"\nSaved {args.path}")
 
 
 if __name__ == "__main__":
