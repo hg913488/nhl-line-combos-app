@@ -92,7 +92,7 @@ node scripts/instagram-post.mjs                 # dry run: saves cards to ig-car
 IG_PUBLISH=true node scripts/instagram-post.mjs # publishes
 ```
 
-Publishing needs a professional Instagram account and these repository secrets: `IG_USER_ID`, `IG_ACCESS_TOKEN`. Set the `IG_PUBLISH` repository variable to `true` to enable the daily schedule; `SITE_ORIGIN` overrides the site URL used for card links.
+Publishing needs a professional Instagram account and these repository secrets: `IG_USER_ID` (the app-scoped id from `GET /me`, not the app dashboard id) and `IG_ACCESS_TOKEN`. Set the `IG_PUBLISH` repository variable to `true` to enable the daily schedule; `SITE_ORIGIN` overrides the site URL used for card links.
 
 ---
 

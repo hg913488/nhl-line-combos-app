@@ -73,6 +73,7 @@ Deploy: push to `main`. CI (`.github/workflows/ci.yml`) builds and runs both tes
 - **Lineup data reflects real roster moves.** Before "fixing" a surprising name, check `api-web.nhle.com/v1/roster/{TEAM}/{season}` — several 2026 offseason moves look like bugs but are not.
 - **Share-card data files** are read at runtime in `lib/og/card-data.js` through literal `new URL(...)` paths so Vercel's file tracing bundles them. A computed path would ship an empty card.
 - **vite.config.js mounts both handler styles:** classic `(req, res)` handlers and web-standard `export default { fetch }` (used by `api/og.js`).
+- **Instagram publishing** uses the Instagram Login route (`IG_GRAPH_HOST=graph.instagram.com`); Facebook Login for Business demands advanced access to `public_profile`, which needs App Review. `IG_USER_ID` is the app-scoped id from `GET /me`, not the dashboard id — using the dashboard id fails only at `media_publish` ("Media ID is not available"). The token is an Instagram tester token and expires ~60 days after issue.
 - **Data licensing:** DF and NHL.com data are fine for the free tier with attribution; get licensing/legal review before putting them behind a paywall.
 
 ## Screenshots

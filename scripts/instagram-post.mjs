@@ -5,6 +5,11 @@
 //
 // Instagram accepts JPEG only and fetches each image from a public URL, so the
 // cards are served straight from /api/og on the deployed site.
+//
+// IG_USER_ID must be the app-scoped id that GET /me returns for this token, not
+// the id shown on the app dashboard. Containers are created against the token's
+// own account, so publishing under the dashboard id fails with
+// "Media ID is not available" after every child uploads successfully.
 // Flow (Graph API): create one container per image -> create the carousel
 // container -> poll status_code -> publish.
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
