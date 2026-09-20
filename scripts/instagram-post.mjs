@@ -163,13 +163,16 @@ async function downloadCards(cards, date, outDir) {
 
 export async function run({ date = (/^\d{4}-\d{2}-\d{2}$/.test(process.env.IG_DATE || '') ? process.env.IG_DATE : etDate()), publish = process.env.IG_PUBLISH === 'true', includePreseason = process.env.IG_INCLUDE_PRESEASON === 'true', force = process.env.IG_FORCE === 'true', outDir = join(ROOT, 'ig-cards') } = {}) {
   const log = readLog();
-  if (!force && log.posts.some(post => post.date === date && post.published)) {
-    console.log(`Already published for ${date}; nothing to do. Set IG_FORCE=true to post again.`);
+  const isRecap = process.env.IG_MODE === 'recap';
+  // The daily set is one per date; recaps are one per game, so they key
+  // differently — otherwise the day's daily post blocks that night's recap.
+  if (!force && !isRecap && log.posts.some(post => post.date === date && post.published && post.kind !== 'recap')) {
+    console.log(`Already published the daily set for ${date}; nothing to do. Set IG_FORCE=true to post again.`);
     return { skipped: true };
   }
 
   // Recap mode: one finished game, four slides.
-  if (process.env.IG_MODE === 'recap') {
+  if (isRecap) {
     const data = await fetchJson(`https://api-web.nhle.com/v1/schedule/${date}`);
     const games = data.gameWeek?.find(day => day.date === date)?.games || [];
     const game = process.env.IG_GAME_ID
@@ -177,6 +180,10 @@ export async function run({ date = (/^\d{4}-\d{2}-\d{2}$/.test(process.env.IG_DA
       : pickRecap(games);
     if (!game) {
       console.log(`No finished games on ${date}; nothing to recap.`);
+      return { skipped: true };
+    }
+    if (!force && log.posts.some(post => post.kind === 'recap' && String(post.game_id) === String(game.id) && post.published)) {
+      console.log(`Already recapped game ${game.id}; nothing to do. Set IG_FORCE=true to post again.`);
       return { skipped: true };
     }
     const caption = game.awayTeam ? recapCaption(game) : 'Game recap.';
@@ -251,7 +258,7 @@ export async function run({ date = (/^\d{4}-\d{2}-\d{2}$/.test(process.env.IG_DA
   await waitForContainer(carousel.id, token);
   const published = await fetchJson(`${GRAPH}/${igUserId}/media_publish`, { method: 'POST', body: new URLSearchParams({ creation_id: carousel.id, access_token: token }) });
 
-  log.posts = [...log.posts.filter(post => post.date !== date), { date, published: true, media_id: published.id, theme: THEME, cards: cards.map(item => item.card), posted_at: new Date().toISOString() }].slice(-120);
+  log.posts = [...log.posts.filter(post => post.date !== date || post.kind === 'recap'), { date, kind: 'daily', published: true, media_id: published.id, theme: THEME, cards: cards.map(item => item.card), posted_at: new Date().toISOString() }].slice(-120);
   writeLog(log);
   console.log(`Published: ${published.id}`);
   return { mediaId: published.id };
