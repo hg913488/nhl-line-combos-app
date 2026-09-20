@@ -1,0 +1,62 @@
+{
+  "description": "Parity cases for the Picks WATCH signal. index = team_l10[pos] / league_avg[pos]; positions are ranked by index descending with ties keeping C, LW, RW, D order. Shared by scraper/picks_log.rank_positions (Python) and PicksView (JS).",
+  "positions": ["C", "LW", "RW", "D"],
+  "cases": [
+    {
+      "name": "raw goals favour C but the index favours D",
+      "team_l10": { "C": 9, "LW": 5, "RW": 4, "D": 6 },
+      "league_avg": { "C": 10.0, "LW": 5.0, "RW": 5.0, "D": 4.0 },
+      "expected_index": { "C": 0.9, "LW": 1.0, "RW": 0.8, "D": 1.5 },
+      "expected_ranking": ["D", "LW", "C", "RW"],
+      "expected_watch": "D"
+    },
+    {
+      "name": "league average team indexes at 1.00 everywhere and keeps C first",
+      "team_l10": { "C": 10, "LW": 5, "RW": 5, "D": 4 },
+      "league_avg": { "C": 10.0, "LW": 5.0, "RW": 5.0, "D": 4.0 },
+      "expected_index": { "C": 1.0, "LW": 1.0, "RW": 1.0, "D": 1.0 },
+      "expected_ranking": ["C", "LW", "RW", "D"],
+      "expected_watch": "C"
+    },
+    {
+      "name": "ties break in C, LW, RW, D order",
+      "team_l10": { "C": 5, "LW": 6, "RW": 6, "D": 2 },
+      "league_avg": { "C": 10.0, "LW": 4.0, "RW": 4.0, "D": 4.0 },
+      "expected_index": { "C": 0.5, "LW": 1.5, "RW": 1.5, "D": 0.5 },
+      "expected_ranking": ["LW", "RW", "C", "D"],
+      "expected_watch": "LW"
+    },
+    {
+      "name": "zero league average is indexed 0, never infinity",
+      "team_l10": { "C": 3, "LW": 1, "RW": 0, "D": 2 },
+      "league_avg": { "C": 0, "LW": 0.5, "RW": 2.0, "D": 0 },
+      "expected_index": { "C": 0.0, "LW": 2.0, "RW": 0.0, "D": 0.0 },
+      "expected_ranking": ["LW", "C", "RW", "D"],
+      "expected_watch": "LW"
+    },
+    {
+      "name": "missing and non numeric values count as zero",
+      "team_l10": { "LW": null, "RW": "x", "D": 3 },
+      "league_avg": { "C": 4.0, "LW": 4.0, "RW": 4.0, "D": 2.0 },
+      "expected_index": { "C": 0.0, "LW": 0.0, "RW": 0.0, "D": 1.5 },
+      "expected_ranking": ["D", "C", "LW", "RW"],
+      "expected_watch": "D"
+    },
+    {
+      "name": "no data at all ranks every position at zero in C, LW, RW, D order",
+      "team_l10": {},
+      "league_avg": {},
+      "expected_index": { "C": 0.0, "LW": 0.0, "RW": 0.0, "D": 0.0 },
+      "expected_ranking": ["C", "LW", "RW", "D"],
+      "expected_watch": "C"
+    },
+    {
+      "name": "shutout heavy team indexes below one everywhere",
+      "team_l10": { "C": 4, "LW": 2, "RW": 1, "D": 1 },
+      "league_avg": { "C": 8.0, "LW": 5.0, "RW": 5.0, "D": 4.0 },
+      "expected_index": { "C": 0.5, "LW": 0.4, "RW": 0.2, "D": 0.25 },
+      "expected_ranking": ["C", "LW", "D", "RW"],
+      "expected_watch": "C"
+    }
+  ]
+}

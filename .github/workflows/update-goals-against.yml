@@ -2,7 +2,11 @@ name: Update Goals Against by Position
 
 on:
   schedule:
-    - cron: '0 15 * * *'
+    # Cron is UTC. ET shown as EDT (Mar-Nov) / EST (Nov-Mar).
+    # Off the top of the hour: GitHub delays/drops :00 schedules under load.
+    # 09:07 UTC = 5:07 AM EDT / 4:07 AM EST - refresh after last night's games
+    # (all final by ~1:30 AM ET), then lock today's picks from the fresh data.
+    - cron: '7 9 * * *'
   workflow_dispatch:
 
 permissions:
@@ -19,6 +23,10 @@ jobs:
     steps:
       - name: Checkout app repository
         uses: actions/checkout@v6
+        with:
+          # Branch tip at job start, not the SHA captured when the (possibly
+          # delayed or queued) event fired, so the push is not rejected.
+          ref: ${{ github.ref_name }}
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -31,11 +39,20 @@ jobs:
       - name: Refresh goals against data
         run: python scraper/scrape_goals_against.py
 
+      - name: Log today's picks from the refreshed data
+        run: python scraper/picks_log.py log
+
+      - name: Grade finished picks
+        run: python scraper/picks_log.py grade
+
+      - name: Build today's player prop sheet
+        run: python scraper/build_prop_sheet.py
+
       - name: Commit refreshed data
         run: |
           git config user.email "scraper@bot"
           git config user.name "Scraper Bot"
-          git add data/goals_against_by_position.json
+          git add data/goals_against_by_position.json data/picks_log.json data/prop_sheet.json
           if git diff --cached --quiet; then
             echo "No data changes to publish"
           else

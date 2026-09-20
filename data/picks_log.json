@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "method": {
+    "signal": "Positions C, LW, RW, D ranked by the defending team's last-10 goals allowed to each position (descending; ties keep C, LW, RW, D order). WATCH is the top position.",
+    "grading": "Hit when the offense team scored at least one goal by a skater listed at the watched position (NHL stats API skater summary). Empty-net goals count; shootout goals do not.",
+    "games": "Regular season and playoffs only. Picks are logged before puck drop and never changed afterwards."
+  },
+  "retention": {
+    "seasons": 2
+  },
+  "summary": {
+    "graded": 0,
+    "hits": 0,
+    "hit_rate": null,
+    "pending": 0,
+    "void": 0,
+    "baseline_hit_rate": null,
+    "by_position": {
+      "C": {
+        "graded": 0,
+        "hits": 0,
+        "hit_rate": null
+      },
+      "LW": {
+        "graded": 0,
+        "hits": 0,
+        "hit_rate": null
+      },
+      "RW": {
+        "graded": 0,
+        "hits": 0,
+        "hit_rate": null
+      },
+      "D": {
+        "graded": 0,
+        "hits": 0,
+        "hit_rate": null
+      }
+    },
+    "by_season": {}
+  },
+  "picks": []
+}

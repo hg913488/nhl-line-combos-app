@@ -1,0 +1,74 @@
+name: Post Instagram Cards
+
+on:
+  schedule:
+    # Cron is UTC, off the top of the hour (GitHub delays :00 schedules).
+    # 18:47 UTC = 2:47 PM EDT / 1:47 PM EST — after the morning-skate lineup
+    # refresh, before East Coast puck drop.
+    - cron: '47 18 * * *'
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Publish to Instagram (unchecked = render cards only)'
+        type: boolean
+        default: false
+      include_preseason:
+        description: 'Include preseason games (for testing)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nhl-data-publish
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout app repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      # The cards are rendered by /api/og on the deployed site, so this only
+      # needs the script itself — no build step.
+      - name: Build and post cards
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          # Publishing stays off until the secrets exist and IG_PUBLISH is set
+          # to true (repository variable, or the checkbox on a manual run).
+          IG_PUBLISH: ${{ inputs.publish || vars.IG_PUBLISH }}
+          IG_INCLUDE_PRESEASON: ${{ inputs.include_preseason }}
+          SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
+        run: node scripts/instagram-post.mjs
+
+      - name: Upload rendered cards
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instagram-cards
+          path: ig-cards/
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Commit the post log
+        run: |
+          git config user.email "scraper@bot"
+          git config user.name "Scraper Bot"
+          git add data/instagram_log.json
+          if git diff --cached --quiet; then
+            echo "Nothing published, so no log change"
+          else
+            git commit -m "Log Instagram post $(date +%F)"
+            git push
+          fi
