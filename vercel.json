@@ -1,5 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/og.js": {
+      "includeFiles": "{lib/og/fonts/**,assets/brand/**,data/*.json,node_modules/harfbuzzjs/**,node_modules/yoga-layout/**}"
+    }
+  },
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
