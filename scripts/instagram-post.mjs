@@ -14,7 +14,12 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const LOG_PATH = join(ROOT, 'data', 'instagram_log.json');
 const GRAPH_VERSION = process.env.GRAPH_VERSION || 'v26.0';
-const GRAPH = `https://graph.facebook.com/${GRAPH_VERSION}`;
+// Two supported setups:
+//   Facebook Login for Business -> graph.facebook.com (a Page token)
+//   Instagram Login             -> graph.instagram.com (an Instagram token)
+// Both expose the same publishing endpoints; only the host differs.
+const GRAPH_HOST = process.env.IG_GRAPH_HOST || 'graph.facebook.com';
+const GRAPH = `https://${GRAPH_HOST}/${GRAPH_VERSION}`;
 const SITE_ORIGIN = (process.env.SITE_ORIGIN || 'https://www.betweenthelineshockey.com').replace(/\/$/, '');
 const MAX_CAROUSEL = 10;
 const STATUS_ATTEMPTS = 20;

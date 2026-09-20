@@ -50,6 +50,8 @@ jobs:
           IG_PUBLISH: ${{ inputs.publish || vars.IG_PUBLISH }}
           IG_INCLUDE_PRESEASON: ${{ inputs.include_preseason }}
           SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
+          # graph.facebook.com (Facebook Login) or graph.instagram.com (Instagram Login)
+          IG_GRAPH_HOST: ${{ vars.IG_GRAPH_HOST }}
         run: node scripts/instagram-post.mjs
 
       - name: Upload rendered cards
