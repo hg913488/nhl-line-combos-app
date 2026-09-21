@@ -4,8 +4,13 @@ on:
   schedule:
     # Cron is UTC, off the top of the hour (GitHub delays :00 schedules).
     # 18:47 UTC = 2:47 PM EDT / 1:47 PM EST — after the morning-skate lineup
-    # refresh, before East Coast puck drop.
+    # refresh, before East Coast puck drop. This one posts the daily slate.
     - cron: '47 18 * * *'
+    # Recaps run twice: 1:47 AM ET posts whatever has finished, and 9:07 AM ET
+    # sweeps up West Coast games that were still live. The log keys recaps by
+    # game id, so the sweep cannot repost what the late run already covered.
+    - cron: '47 5 * * *'
+    - cron: '7 13 * * *'
   workflow_dispatch:
     inputs:
       publish:
@@ -61,6 +66,26 @@ jobs:
         with:
           node-version: '24'
 
+      # A scheduled run carries no inputs, so the cron that fired decides the
+      # mode. The late recap covers tonight's games (still "today" in ET at
+      # 1:47 AM); the morning sweep has to look back a day.
+      - name: Decide mode and date for scheduled runs
+        if: github.event_name == 'schedule'
+        run: |
+          case "${{ github.event.schedule }}" in
+            '47 5 * * *')
+              echo "SCHEDULED_MODE=recap" >> "$GITHUB_ENV"
+              echo "SCHEDULED_DATE=$(TZ=America/New_York date +%F)" >> "$GITHUB_ENV"
+              ;;
+            '7 13 * * *')
+              echo "SCHEDULED_MODE=recap" >> "$GITHUB_ENV"
+              echo "SCHEDULED_DATE=$(TZ=America/New_York date -d yesterday +%F)" >> "$GITHUB_ENV"
+              ;;
+            *)
+              echo "SCHEDULED_MODE=daily" >> "$GITHUB_ENV"
+              ;;
+          esac
+
       # The cards are rendered by /api/og on the deployed site, so this only
       # needs the script itself — no build step.
       - name: Build and post cards
@@ -73,9 +98,9 @@ jobs:
           IG_INCLUDE_PRESEASON: ${{ inputs.include_preseason }}
           IG_THEME: ${{ inputs.theme }}
           IG_FORCE: ${{ inputs.force }}
-          IG_MODE: ${{ inputs.mode }}
+          IG_MODE: ${{ inputs.mode || env.SCHEDULED_MODE }}
           IG_GAME_ID: ${{ inputs.game_id }}
-          IG_DATE: ${{ inputs.date }}
+          IG_DATE: ${{ inputs.date || env.SCHEDULED_DATE }}
           SITE_ORIGIN: ${{ vars.SITE_ORIGIN }}
           # graph.facebook.com (Facebook Login) or graph.instagram.com (Instagram Login)
           IG_GRAPH_HOST: ${{ vars.IG_GRAPH_HOST }}
