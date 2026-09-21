@@ -92,10 +92,14 @@ jobs:
         env:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
-          # Publishing stays off until the secrets exist and IG_PUBLISH is set
-          # to true (repository variable, or the checkbox on a manual run).
-          IG_PUBLISH: ${{ inputs.publish || vars.IG_PUBLISH }}
-          IG_INCLUDE_PRESEASON: ${{ inputs.include_preseason }}
+          # Scheduled runs take the repository variables; a manual run takes the
+          # form. format() matters here: a bare `inputs.publish || vars.X` falls
+          # through to the variable whenever the box is UNchecked, which would
+          # make "render cards only" publish anyway. Wrapping it yields the
+          # string "false", which is truthy to the expression and falsy to the
+          # script, so an explicit unchecked box still wins.
+          IG_PUBLISH: ${{ github.event_name == 'workflow_dispatch' && format('{0}', inputs.publish) || vars.IG_PUBLISH }}
+          IG_INCLUDE_PRESEASON: ${{ github.event_name == 'workflow_dispatch' && format('{0}', inputs.include_preseason) || vars.IG_INCLUDE_PRESEASON }}
           IG_THEME: ${{ inputs.theme }}
           IG_FORCE: ${{ inputs.force }}
           IG_MODE: ${{ inputs.mode || env.SCHEDULED_MODE }}
