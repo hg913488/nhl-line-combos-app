@@ -1,11 +1,460 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-22T19:42:48Z",
+  "generated_at": "2026-09-22T21:38:49Z",
   "retention": {
     "max_age_days": 90,
     "max_events": 500
   },
   "events": [
+    {
+      "id": "e98521a557bab42380f3",
+      "occurred_at": "2026-09-22T21:38:49Z",
+      "player": "A.J. GREER",
+      "team": "anaheim-ducks",
+      "previous_team": "anaheim-ducks",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "anaheim-ducks",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "anaheim-ducks",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "db976896bb5d09779710",
+      "occurred_at": "2026-09-22T21:38:49Z",
+      "player": "BOBBY MCMANN",
+      "team": "seattle-kraken",
+      "previous_team": "seattle-kraken",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": 2,
+          "to": 1,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "d9647342846d37c3abeb",
+      "occurred_at": "2026-09-22T21:38:49Z",
+      "player": "NIKITA NESTERENKO",
+      "team": "anaheim-ducks",
+      "previous_team": "anaheim-ducks",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "anaheim-ducks",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "anaheim-ducks",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
+    {
+      "id": "d2a3e3f8689ec1d2fe94",
+      "occurred_at": "2026-09-22T21:38:49Z",
+      "player": "MATTY BENIERS",
+      "team": "seattle-kraken",
+      "previous_team": "seattle-kraken",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 1,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "after": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 1,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": 1,
+          "to": 2,
+          "direction": "demoted"
+        }
+      ]
+    },
+    {
+      "id": "cb93be774328ca4d6928",
+      "occurred_at": "2026-09-22T21:38:49Z",
+      "player": "MACKIE SAMOSKEVICH",
+      "team": "seattle-kraken",
+      "previous_team": "seattle-kraken",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 1,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 1,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": 2,
+          "to": null
+        }
+      ]
+    },
+    {
+      "id": "9f44eb2386bf18450777",
+      "occurred_at": "2026-09-22T21:38:49Z",
+      "player": "TRISTAN LUNEAU",
+      "team": "anaheim-ducks",
+      "previous_team": "anaheim-ducks",
+      "event_types": [
+        "defense_pair"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "anaheim-ducks",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 2,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "anaheim-ducks",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 3,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "defense_pair",
+          "from": 2,
+          "to": 3,
+          "direction": "demoted"
+        }
+      ]
+    },
+    {
+      "id": "6ad6edbc423f7fa3f1bf",
+      "occurred_at": "2026-09-22T21:38:49Z",
+      "player": "ZACK OSTAPCHUK",
+      "team": "san-jose-sharks",
+      "previous_team": "san-jose-sharks",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "san-jose-sharks",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "san-jose-sharks",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "624198abfbbc0b7d27a6",
+      "occurred_at": "2026-09-22T21:38:49Z",
+      "player": "BARCLAY GOODROW",
+      "team": "san-jose-sharks",
+      "previous_team": "san-jose-sharks",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "san-jose-sharks",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "san-jose-sharks",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
+    {
+      "id": "586ddba5f5f2fd23649c",
+      "occurred_at": "2026-09-22T21:38:49Z",
+      "player": "RYAN LINDGREN",
+      "team": "seattle-kraken",
+      "previous_team": "seattle-kraken",
+      "event_types": [
+        "defense_pair"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 2,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 3,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "defense_pair",
+          "from": 2,
+          "to": 3,
+          "direction": "demoted"
+        }
+      ]
+    },
+    {
+      "id": "3bb8a2b67d54b87bfa36",
+      "occurred_at": "2026-09-22T21:38:49Z",
+      "player": "RYKER EVANS",
+      "team": "seattle-kraken",
+      "previous_team": "seattle-kraken",
+      "event_types": [
+        "defense_pair"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 3,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 2,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "defense_pair",
+          "from": 3,
+          "to": 2,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "193d795ac40afec124a6",
+      "occurred_at": "2026-09-22T21:38:49Z",
+      "player": "SAM COLANGELO",
+      "team": "anaheim-ducks",
+      "previous_team": "anaheim-ducks",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "anaheim-ducks",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "anaheim-ducks",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 4,
+          "to": 3,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "0f53f419a01764f9e023",
+      "occurred_at": "2026-09-22T21:38:49Z",
+      "player": "KAAPO KAKKO",
+      "team": "seattle-kraken",
+      "previous_team": "seattle-kraken",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "seattle-kraken",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": null,
+          "to": 2
+        }
+      ]
+    },
+    {
+      "id": "06e374d7675790391c30",
+      "occurred_at": "2026-09-22T21:38:49Z",
+      "player": "NICK JENSEN",
+      "team": "anaheim-ducks",
+      "previous_team": "anaheim-ducks",
+      "event_types": [
+        "defense_pair"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "anaheim-ducks",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 3,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "anaheim-ducks",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 2,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "defense_pair",
+          "from": 3,
+          "to": 2,
+          "direction": "promoted"
+        }
+      ]
+    },
     {
       "id": "f6d961c06a2cc4c99ec3",
       "occurred_at": "2026-09-22T19:42:48Z",
