@@ -1,11 +1,79 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-21T22:11:17Z",
+  "generated_at": "2026-09-22T00:55:46Z",
   "retention": {
     "max_age_days": 90,
     "max_events": 500
   },
   "events": [
+    {
+      "id": "a8eb9b671e3b49765112",
+      "occurred_at": "2026-09-22T00:55:46Z",
+      "player": "EELI TOLVANEN",
+      "team": "new-york-rangers",
+      "previous_team": "new-york-rangers",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "new-york-rangers",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "new-york-rangers",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": null,
+          "to": 2
+        }
+      ]
+    },
+    {
+      "id": "a71c71b900ce310a88fd",
+      "occurred_at": "2026-09-22T00:55:46Z",
+      "player": "NOAH LABA",
+      "team": "new-york-rangers",
+      "previous_team": "new-york-rangers",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "new-york-rangers",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "new-york-rangers",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": 2,
+          "to": null
+        }
+      ]
+    },
     {
       "id": "f3dee9962ce782663f22",
       "occurred_at": "2026-09-21T20:23:59Z",
