@@ -1848,13 +1848,6 @@ export default function App() {
             <div><strong>BETWEEN THE LINES</strong><span>Hockey, in context.</span></div>
           </div>
           <p className="footer-intro">Line combinations, player context, league news, and matchups in one focused view.</p>
-          <div className="footer-sources">
-            <span>DATA SOURCES</span>
-            <div>
-              <a href="https://www.dailyfaceoff.com" target="_blank" rel="noopener noreferrer">DAILY FACEOFF</a>
-              <a href="https://www.nhl.com" target="_blank" rel="noopener noreferrer">NHL.COM</a>
-            </div>
-          </div>
         </div>
         <div className="footer-meta">
           <p>Between the Lines is an independent hockey editorial and statistics project. It is not affiliated with, endorsed by, or sponsored by the NHL or NHLPA.</p>
