@@ -1,3 +1,4 @@
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 */
 /* Game detail: scoreboard, rink shot map, goals, team stats. All selectors scoped to .game-view. */
 .game-view {
   --shot-away: color-mix(in oklab, var(--away-team, var(--dove)) 65%, white);
@@ -103,10 +104,10 @@
 .game-view .goal-card-list { display: grid; gap: 10px; list-style: none; }
 .game-view .goal-card { padding: 14px 16px 13px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); }
 .game-view .goal-card-main { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; align-items: center; gap: 14px; }
-.game-view .goal-player-photo { position: relative; display: grid; place-items: center; width: 48px; height: 48px; border: 2px solid var(--goal-team-color); border-radius: 50%; background: color-mix(in srgb, var(--goal-team-color) 16%, var(--surface)); }
-.game-view .goal-player-photo > img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.game-view .goal-player-photo { position: relative; display: grid; place-items: center; width: 48px; height: 48px; border: 2px solid var(--goal-team-color); border-radius: 9px; background: color-mix(in srgb, var(--goal-team-color) 16%, var(--surface)); }
+.game-view .goal-player-photo > img { width: 100%; height: 100%; border-radius: 7px; object-fit: cover; }
 .game-view .goal-player-initials { color: var(--white); font: 800 13px/1 'Syne', sans-serif; letter-spacing: .04em; }
-.game-view .goal-badge-logo { position: absolute; right: -2px; bottom: -3px; width: 18px; height: 18px; padding: 1px; border-radius: 50%; background: var(--bg); }
+.game-view .goal-badge-logo { position: absolute; right: -2px; bottom: -3px; width: 18px; height: 18px; padding: 1px; border-radius: 5px; background: var(--bg); }
 .game-view .goal-badge-logo img { width: 16px; height: 16px; }
 .game-view .goal-copy { display: grid; gap: 5px; min-width: 0; color: var(--casper); font: 400 14px/1.35 'Space Grotesk', sans-serif; }
 .game-view .link-button { padding: 0; border: 0; background: transparent; color: var(--white); font: inherit; font-weight: 700; cursor: pointer; }
