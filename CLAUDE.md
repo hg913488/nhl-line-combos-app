@@ -74,6 +74,7 @@ Rules learned the hard way building the daily and recap sets. Templates live in
 **House look**
 
 - **Ice white is the default.** `applyTheme` picks light unless `theme=dark`/`IG_THEME=dark`.
+  Scheduled posts alternate by Eastern day (even epoch day light, odd dark), set in `instagram.yml`; a manual run's theme box overrides it.
   Hockey is played on white, headshots carry better on it, and it stands out in a feed of dark accounts.
 - **Never flat near-black on the pale ground.** Ink is `#1E2A38`, display type a step lighter at `#2C3D4E`.
   Large type at full ink weight reads as a black slab sitting *on* the gradient instead of belonging to it.

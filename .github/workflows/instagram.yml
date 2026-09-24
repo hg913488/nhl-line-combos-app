@@ -67,15 +67,20 @@ jobs:
           node-version: '24'
 
       # A scheduled run carries no inputs, so the cron that fired decides the
-      # mode. The late recap covers tonight's games (still "today" in ET at
-      # 1:47 AM); the morning sweep has to look back a day.
-      - name: Decide mode and date for scheduled runs
+      # mode. Both recap runs look back a day: at 1:47 AM ET the date has
+      # already rolled over, and GitHub often starts these runs hours late.
+      # The theme alternates by Eastern day (even day = light, odd = dark), so
+      # a day's recap and slate share a look and the next day flips it.
+      - name: Decide mode, date and theme for scheduled runs
         if: github.event_name == 'schedule'
         run: |
+          et_day=$(( $(date -u -d "$(TZ=America/New_York date +%F)" +%s) / 86400 ))
+          if [ $(( et_day % 2 )) -eq 1 ]; then theme=dark; else theme=light; fi
+          echo "SCHEDULED_THEME=$theme" >> "$GITHUB_ENV"
           case "${{ github.event.schedule }}" in
             '47 5 * * *')
               echo "SCHEDULED_MODE=recap" >> "$GITHUB_ENV"
-              echo "SCHEDULED_DATE=$(TZ=America/New_York date +%F)" >> "$GITHUB_ENV"
+              echo "SCHEDULED_DATE=$(TZ=America/New_York date -d yesterday +%F)" >> "$GITHUB_ENV"
               ;;
             '7 13 * * *')
               echo "SCHEDULED_MODE=recap" >> "$GITHUB_ENV"
@@ -100,7 +105,7 @@ jobs:
           # script, so an explicit unchecked box still wins.
           IG_PUBLISH: ${{ github.event_name == 'workflow_dispatch' && format('{0}', inputs.publish) || vars.IG_PUBLISH }}
           IG_INCLUDE_PRESEASON: ${{ github.event_name == 'workflow_dispatch' && format('{0}', inputs.include_preseason) || vars.IG_INCLUDE_PRESEASON }}
-          IG_THEME: ${{ inputs.theme }}
+          IG_THEME: ${{ inputs.theme || env.SCHEDULED_THEME }}
           IG_FORCE: ${{ inputs.force }}
           IG_MODE: ${{ inputs.mode || env.SCHEDULED_MODE }}
           IG_GAME_ID: ${{ inputs.game_id }}
