@@ -137,6 +137,8 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .slate-lineup-toggle svg { transition: transform .15s ease; }
 .slate-lineup-toggle[aria-expanded='true'] svg { transform: rotate(180deg); }
 .slate-lineups { padding: 18px 28px 26px; border-top: 1px solid var(--border); }
+.slate-lineups .player-name > span { font-size: 11px; }
+.slate-lineups .player-name strong { font-size: 14px; }
 .goalie-status { text-transform: uppercase; letter-spacing: .04em; }
 .app-shell .header-home { display: block; color: inherit; text-decoration: none; }
 @media (max-width: 767px) {
@@ -485,6 +487,8 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 }
 @media (max-width: 767px) {
   .app-shell { --type-page-size: 28px; --type-section-size: 17px; }
+  .slate-lineups .player-name > span { font-size: 10px; }
+  .slate-lineups .player-name strong { font-size: 12px; }
   .brand-intro { padding: 24px 16px; }
   .brand-intro-stage { width: min(280px, calc(100vw - 48px)); height: 100px; }
   .brand-intro-lockup strong { max-width: 240px; font-size: 17px; line-height: 1.08; white-space: normal; }
