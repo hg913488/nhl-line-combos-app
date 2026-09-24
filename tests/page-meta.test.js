@@ -19,6 +19,7 @@ const ROUTE_CASES = [
   ['/matchups', '', `NHL Matchups — ${SITE_NAME}`, `${SITE_URL}/matchups`, 'card=matchups'],
   ['/playoffs', '', `NHL Playoffs — ${SITE_NAME}`, `${SITE_URL}/playoffs`, 'card=playoffs'],
   ['/picks', '', `Picks — ${SITE_NAME}`, `${SITE_URL}/picks`, 'card=picks'],
+  ['/disclaimer', '', `Disclaimer — ${SITE_NAME}`, `${SITE_URL}/disclaimer`, 'card=disclaimer'],
 ];
 
 test('every static route has title, description, canonical and an OG image', () => {

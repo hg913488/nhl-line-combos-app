@@ -21,6 +21,7 @@ test('every static route round-trips through build and parse', () => {
     { tab: 'stats' },
     { tab: 'playoffs' },
     { tab: 'picks' },
+    { tab: 'disclaimer' },
   ];
   for (const view of views) {
     const url = new URL(buildPath(view), 'https://example.test');

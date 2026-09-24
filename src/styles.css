@@ -160,6 +160,8 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .footer-intro { max-width: 390px; color: var(--dove); font: 500 13px/1.55 'Space Grotesk', sans-serif; }
 .footer-meta { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; padding-top: 18px; border-top: 1px solid var(--border); }
 .footer-meta p { max-width: 760px; color: var(--dim); font: 400 8px/1.55 'Space Mono', monospace; }
+.footer-meta-links { display: flex; align-items: center; gap: 22px; flex-shrink: 0; }
+.footer-meta-links a { color: var(--dove); font: 700 8px/1.2 'Space Mono', monospace; letter-spacing: .08em; }
 .footer-meta strong { flex-shrink: 0; color: var(--dove); font: 700 8px/1.2 'Space Mono', monospace; letter-spacing: .08em; }
 .teams-view { min-width: 0; }
 .nav-menu { align-self: stretch; position: relative; display: flex; }
@@ -324,6 +326,8 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .data-state { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; min-height: 120px; padding: 24px; color: var(--dove); font-size: 13px; }
 .text-button { display: inline-flex; gap: 8px; align-items: center; padding: 10px 14px; border: 1px solid var(--border); border-radius: 5px; background: var(--bg); }
 .picks-page { max-width: 980px; margin: auto; padding: 24px; }
+.disclaimer-page { max-width: 680px; margin: auto; padding: 24px; }
+.disclaimer-page > p { margin-bottom: 18px; color: var(--dove); font: 400 15px/1.65 'Space Grotesk', sans-serif; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .player-sheet { margin-top: 40px; padding-top: 26px; border-top: 1px solid var(--border); }
 .sheet-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 18px; }

@@ -18,6 +18,7 @@ const STATIC_ROUTES = [
   ['matchups', { tab: 'stats' }],
   ['playoffs', { tab: 'playoffs' }],
   ['picks', { tab: 'picks' }],
+  ['disclaimer', { tab: 'disclaimer' }],
 ];
 
 

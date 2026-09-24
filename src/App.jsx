@@ -1644,6 +1644,17 @@ class ErrorBoundary extends React.Component {
   }
 }
 
+// ── DISCLAIMER ────────────────────────────────────────────────────────
+function DisclaimerView() {
+  return <main className="disclaimer-page">
+    <header className="schedule-heading"><div><h1>The fine print</h1><p className="muted">Last updated September 23, 2026</p></div></header>
+    <p>Between the Lines is a side project: one person, too much hockey, and a spreadsheet that got out of hand. It's not connected to the NHL, the NHLPA, or any club. None of them endorse it or pay for it. Team names, logos, and player names belong to their owners.</p>
+    <p>The picks and prop numbers are my read on the data. I'll be wrong a lot. Use them as a starting point for your own thinking. They aren't betting advice and they aren't guaranteed.</p>
+    <p>Lineups change constantly. A goalie gets swapped after morning skate, someone's a late scratch, and what I posted at noon is stale by seven. Check the team's official account before puck drop if it matters to you.</p>
+    <p>I don't take bets, and this isn't a sportsbook. If you bet, do it legally, at a licensed book, with a number you picked before the game started. And if it's stopped being fun, stop. Every state and province has a problem-gambling helpline, and they're worth calling.</p>
+  </main>;
+}
+
 // ── ROOT ──────────────────────────────────────────────────────────────
 export default function App() {
   const [view, setView] = useState(() => parseLocation(window.location.pathname, window.location.search, TEAM_SLUGS));
@@ -1827,6 +1838,7 @@ export default function App() {
         {tab === "news" && <ErrorBoundary><NewsView isDark={isDark} source={newsSource} onSourceChange={openNews} /></ErrorBoundary>}
         {tab === "moves" && <ErrorBoundary><LineMovesView /></ErrorBoundary>}
         {tab === "picks" && <ErrorBoundary><PicksView /></ErrorBoundary>}
+        {tab === "disclaimer" && <DisclaimerView />}
         {tab === "playoffs" && <ErrorBoundary><PlayoffsView isMobile={isMobile} /></ErrorBoundary>}
         {tab === "stats" && <ErrorBoundary><GoalsAgainstView isMobile={isMobile} /></ErrorBoundary>}
         {tab === "injuries" && <ErrorBoundary><InjuriesView isMobile={isMobile} /></ErrorBoundary>}
@@ -1845,13 +1857,13 @@ export default function App() {
         <div className="footer-main">
           <div className="footer-lockup">
             <img src="/between-mark-footer.svg" alt="" />
-            <div><strong>BETWEEN THE LINES</strong><span>Hockey, in context.</span></div>
+            <div><strong>BETWEEN THE LINES</strong></div>
           </div>
           <p className="footer-intro">Line combinations, player context, league news, and matchups in one focused view.</p>
         </div>
         <div className="footer-meta">
           <p>Between the Lines is an independent hockey editorial and statistics project. It is not affiliated with, endorsed by, or sponsored by the NHL or NHLPA.</p>
-          <strong>BY GRAINXFORM</strong>
+          <div className="footer-meta-links"><NavLink to="/disclaimer" current={tab === 'disclaimer'} onNavigate={() => setTab('disclaimer')}>DISCLAIMER</NavLink><strong>BY GRAINXFORM</strong></div>
         </div>
       </footer>
     </div>

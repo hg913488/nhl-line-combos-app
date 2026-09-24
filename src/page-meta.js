@@ -70,6 +70,11 @@ const ROUTES = {
     title: `Picks — ${SITE_NAME}`,
     description: 'The daily model picks log, graded honestly, with every result kept on the record.',
   },
+  disclaimer: {
+    path: '/disclaimer',
+    title: `Disclaimer — ${SITE_NAME}`,
+    description: 'The fine print: who runs Between the Lines, what the picks are and are not, and how to bet responsibly.',
+  },
   game: {
     path: '/games',
     title: `NHL Game — ${SITE_NAME}`,
@@ -94,6 +99,7 @@ const PATH_TO_CARD = new Map([
   ['matchups', 'matchups'],
   ['playoffs', 'playoffs'],
   ['picks', 'picks'],
+  ['disclaimer', 'disclaimer'],
 ]);
 
 const ET_DATE = new Intl.DateTimeFormat('en-US', {
