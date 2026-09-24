@@ -130,8 +130,12 @@ const segmentsOf = pathname => String(pathname || '').toLowerCase().split('/').f
 
 const absolute = (origin, path) => `${(origin || SITE_URL).replace(/\/$/, '')}${path}`;
 
+// Bump when the card designs change: X and Facebook cache previews by image
+// URL for days, so a new `v` is the only way to make them fetch the new art.
+const CARD_VERSION = '2';
+
 function ogImage(origin, params) {
-  const query = new URLSearchParams({ type: 'page', ...params });
+  const query = new URLSearchParams({ type: 'page', ...params, v: CARD_VERSION });
   return absolute(origin, `/api/og?${query}`);
 }
 
