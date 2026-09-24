@@ -57,6 +57,7 @@ Deploy: push to `main`. CI (`.github/workflows/ci.yml`) builds and runs both tes
 
 - Uppercase UI chrome through CSS `text-transform`, not typed all-caps in source: navigation, tabs, dropdown values, buttons, labels/eyebrows, tags/badges, and table headers. Use Syne or Space Mono at 8-10px with tracking.
 - Sentence case stays for page and section headings, body copy, notes, player names, and team names inside content.
+- Jersey-style lineup tiles are the one player-name exception: uppercase is part of the uniform treatment, while surrounding lineup headings still follow the standard hierarchy.
 - When touching existing UI, apply this rule to the changed surface and call out nearby mismatches instead of rewriting the whole site in the same pass.
 
 

@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback, createContext, useContext } from "react";
-import { Sun, Moon, Search, AlertCircle, ZoomIn, ZoomOut, ArrowRight } from 'lucide-react';
+import { Sun, Moon, Search, AlertCircle, ZoomIn, ZoomOut, ArrowRight, ChevronDown } from 'lucide-react';
 import useSchedule, { localDate } from './useSchedule.js';
 import PlayerDetails from './PlayerDetails.jsx';
 import GameView from './GameView.jsx';
@@ -288,7 +288,7 @@ function ForwardLine({ line, lineNum }) {
   const pos = line.length === 3 ? ["LW","C","RW"] : line.length === 2 ? ["C","RW"] : ["C"];
   return (
     <div style={{ marginBottom: 12 }}>
-      <div style={{ fontSize: 10, color: P.casper, fontWeight: 700, letterSpacing: 0, marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>LINE {lineNum}</div>
+      <div className="lineup-unit-label">Line {lineNum}</div>
       <div style={{ display: "flex", gap: 4 }}>{line.map((p, i) => <PlayerCard key={i} name={p} pos={pos[i]} lineChangedTo={LINE_CHANGES[p] ?? null} />)}</div>
     </div>
   );
@@ -297,7 +297,7 @@ function ForwardLine({ line, lineNum }) {
 function DefensePair({ pair, pairNum }) {
   return (
     <div style={{ marginBottom: 12 }}>
-      <div style={{ fontSize: 10, color: P.dove, fontWeight: 700, letterSpacing: 0, marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>PAIR {pairNum}</div>
+      <div className="lineup-unit-label lineup-unit-label-muted">Pair {pairNum}</div>
       <div style={{ display: "flex", gap: 4 }}>{pair.map((p, i) => <PlayerCard key={i} name={p} pos={i === 0 ? "LD" : "RD"} />)}</div>
     </div>
   );
@@ -307,7 +307,7 @@ function PPUnit({ unit, unitNum }) {
   if (!unit || unit.length === 0) return null;
   return (
     <div style={{ marginBottom: 12 }}>
-      <div style={{ fontSize: 10, color: "#e67e22", fontWeight: 700, letterSpacing: 0, marginBottom: 5, fontFamily: "'Syne', sans-serif" }}>PP{unitNum}</div>
+      <div className="lineup-unit-label lineup-unit-label-pp">PP{unitNum}</div>
       <div className="powerplay-grid">{unit.map((p, i) => <PlayerCard key={i} name={p} pos={`PP${unitNum}`} />)}</div>
     </div>
   );
@@ -315,9 +315,9 @@ function PPUnit({ unit, unitNum }) {
 
 function Divider({ label, color }) {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 8, margin: "16px 0 10px" }}>
-      <span style={{ fontSize: 10, fontWeight: 700, color: color || P.casper, letterSpacing: 0, whiteSpace: "nowrap", fontFamily: "'Syne', sans-serif" }}>{label}</span>
-      <div style={{ flex: 1, height: 1, background: P.border }} />
+    <div className="lineup-divider">
+      <span style={color ? { color } : undefined}>{label}</span>
+      <div />
     </div>
   );
 }
@@ -327,14 +327,14 @@ function LineupContent({ data }) {
   const pp1 = data.pp1 || [], pp2 = data.pp2 || [];
   return (
     <>
-      <Divider label="FORWARDS" />
+      <Divider label="Forwards" />
       {fwd.map((line, i) => <ForwardLine key={i} line={line} lineNum={i + 1} />)}
-      <Divider label="DEFENSE" />
+      <Divider label="Defense" />
       {def.map((pair, i) => <DefensePair key={i} pair={pair} pairNum={i + 1} />)}
-      {gol.length > 0 && (<><Divider label="GOALIES" /><div style={{ display: "flex", gap: 4 }}>{gol.map((g, i) => <PlayerCard key={i} name={g[0]} pos={i === 0 ? "STR" : "BKP"} />)}</div></>)}
+      {gol.length > 0 && (<><Divider label="Goalies" /><div style={{ display: "flex", gap: 4 }}>{gol.map((g, i) => <PlayerCard key={i} name={g[0]} pos={i === 0 ? "STR" : "BKP"} />)}</div></>)}
       {(pp1.length > 0 || pp2.length > 0) && (
         <>
-          <Divider label="POWER PLAY" color="#e67e22" />
+          <Divider label="Power play" color="#e67e22" />
           {pp1.length > 0 && <PPUnit unit={pp1} unitNum={1} />}
           {pp2.length > 0 && <PPUnit unit={pp2} unitNum={2} />}
         </>
@@ -793,7 +793,7 @@ function SlateGame({ game, onOpenMoves, onOpenGame, onTeam }) {
     </div>
     <div className="slate-actions">
       <NavLink to={`/games/${game.id}`} className="slate-link" onNavigate={() => onOpenGame(String(game.id))}>Game center <ArrowRight size={13} aria-hidden="true" /></NavLink>
-      <button className="slate-link" aria-expanded={showLineups} onClick={() => setShowLineups(value => !value)}>{showLineups ? 'Hide lineups' : 'Lineups'}</button>
+      <button className="slate-link slate-lineup-toggle" aria-expanded={showLineups} onClick={() => setShowLineups(value => !value)}>{showLineups ? 'Hide lineups' : 'Lineups'} <ChevronDown size={13} aria-hidden="true" /></button>
     </div>
     {showLineups && <div className="slate-lineups">
       <p className="snapshot-notice">Projected lineups as of {UPDATED_AT}. Not confirmed for this game.</p>
@@ -905,7 +905,7 @@ function NewsView({ isDark, source, onSourceChange }) {
   const remaining = stories.slice(1);
 
   return <main className="news-page">
-    <header className="news-heading"><div><span>NEWS DESK</span><h1>News</h1></div><div className="news-source-tabs" role="tablist" aria-label="News source"><button role="tab" aria-selected={source === 'nhl'} onClick={() => onSourceChange('nhl')}>NHL NEWS</button><button role="tab" aria-selected={source === 'reporters'} onClick={() => onSourceChange('reporters')}>REPORTERS</button></div></header>
+    <header className="news-heading"><div><span>News desk</span><h1>News</h1></div><div className="news-source-tabs" role="tablist" aria-label="News source"><button role="tab" aria-selected={source === 'nhl'} onClick={() => onSourceChange('nhl')}>NHL news</button><button role="tab" aria-selected={source === 'reporters'} onClick={() => onSourceChange('reporters')}>Reporters</button></div></header>
     {source === 'nhl' && <>
       {loading && <p className="data-state" role="status">Loading NHL News...</p>}
       {error && <p className="data-state" role="alert">{error}</p>}
@@ -913,7 +913,7 @@ function NewsView({ isDark, source, onSourceChange }) {
       {lead && <>
       <a className="news-lead" href={lead.url} target="_blank" rel="noopener noreferrer">
         {lead.image && <img src={lead.image} alt="" />}
-        <div><time>{formatNewsDate(lead.publishedAt)}</time><h2>{lead.title}</h2>{lead.summary && <p>{lead.summary}</p>}<span>READ ON NHL.COM</span></div>
+        <div><time>{formatNewsDate(lead.publishedAt)}</time><h2>{lead.title}</h2>{lead.summary && <p>{lead.summary}</p>}<span>Read on NHL.com</span></div>
       </a>
       <section className="news-grid" aria-label="Latest NHL stories">
         {remaining.map(story => <a className="news-story" href={story.url} target="_blank" rel="noopener noreferrer" key={story.url}>
@@ -923,7 +923,7 @@ function NewsView({ isDark, source, onSourceChange }) {
       </section>
       </>}
     </>}
-    {source === 'reporters' && <section className="reporters-feed" aria-label="NHL reporters on X"><header><div><span>CURATED X LIST</span><h2>NHL Reporters</h2></div><a href={REPORTERS_LIST_URL} target="_blank" rel="noopener noreferrer">OPEN ON X</a></header><ReporterTimeline isDark={isDark} /></section>}
+    {source === 'reporters' && <section className="reporters-feed" aria-label="NHL reporters on X"><header><div><span>Curated X list</span><h2>NHL Reporters</h2></div><a href={REPORTERS_LIST_URL} target="_blank" rel="noopener noreferrer">Open on X</a></header><ReporterTimeline isDark={isDark} /></section>}
   </main>;
 }
 
