@@ -17,13 +17,15 @@ function playerName(spot) {
 
 export function rosterIndex(rosterSpots) {
   const names = {};
+  const headshots = {};
   const teams = new Map();
   for (const spot of Array.isArray(rosterSpots) ? rosterSpots : []) {
     if (spot?.playerId == null) continue;
     names[spot.playerId] = playerName(spot);
+    if (spot.headshot) headshots[spot.playerId] = spot.headshot;
     teams.set(spot.playerId, spot.teamId);
   }
-  return { names, teams };
+  return { names, headshots, teams };
 }
 
 // situationCode is 4 digits: away goalie, away skaters, home skaters, home goalie.
@@ -107,6 +109,11 @@ function teamBlock(team) {
   };
 }
 
+function playerHeadshot(pbp, abbr, playerId, headshots) {
+  if (playerId == null || !abbr) return null;
+  return headshots[playerId] || `https://assets.nhle.com/mugs/nhl/${pbp?.season}/${abbr}/${playerId}.png`;
+}
+
 function shotsByPeriodFrom(rightRail, shots) {
   const rows = Array.isArray(rightRail?.shotsByPeriod) ? rightRail.shotsByPeriod : null;
   if (rows) {
@@ -143,7 +150,7 @@ export function buildGame(pbp, rightRail) {
   const awayTeam = pbp?.awayTeam || {};
   const homeTeam = pbp?.homeTeam || {};
   const plays = Array.isArray(pbp?.plays) ? pbp.plays : [];
-  const { names, teams } = rosterIndex(pbp?.rosterSpots);
+  const { names, headshots, teams } = rosterIndex(pbp?.rosterSpots);
   const sides = defendingSidesByPeriod(plays, homeTeam.id);
   const state = pbp?.gameState || 'FUT';
 
@@ -174,13 +181,17 @@ export function buildGame(pbp, rightRail) {
     };
     shots.push(shot);
     if (type === 'goal') {
+      const scorerId = details.scoringPlayerId ?? null;
       goals.push({
         period,
         periodType: shot.periodType,
         time: shot.time,
         team: abbr,
         side: shot.side,
-        scorer: names[details.scoringPlayerId] || null,
+        scorerId,
+        scorer: names[scorerId] || null,
+        headshot: playerHeadshot(pbp, abbr, scorerId, headshots),
+        goalNumber: Number.isFinite(details.scoringPlayerTotal) ? details.scoringPlayerTotal : null,
         assists: [details.assist1PlayerId, details.assist2PlayerId]
           .filter(id => id != null)
           .map(id => names[id])

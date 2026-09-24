@@ -53,6 +53,12 @@ Deploy: push to `main`. CI (`.github/workflows/ci.yml`) builds and runs both tes
 
 `/` Tonight · `/teams` · `/teams/:slug` · `/compare?teams=a,b` · `/news` · `/reporters` · `/line-moves` · `/injuries` · `/players` · `/matchups` · `/playoffs` · `/picks`. Unknown paths → `/`. App holds one `view` state; an effect pushes history (replace for same-section changes like compare toggles) and sets `document.title`; `popstate` re-parses. `<Analytics route path>` sends page views per route.
 
+## UI Copy Casing
+
+- Uppercase UI chrome through CSS `text-transform`, not typed all-caps in source: navigation, tabs, dropdown values, buttons, labels/eyebrows, tags/badges, and table headers. Use Syne or Space Mono at 8-10px with tracking.
+- Sentence case stays for page and section headings, body copy, notes, player names, and team names inside content.
+- When touching existing UI, apply this rule to the changed surface and call out nearby mismatches instead of rewriting the whole site in the same pass.
+
 
 
 

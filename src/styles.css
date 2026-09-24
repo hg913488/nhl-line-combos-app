@@ -9,6 +9,12 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .app-shell button, .app-shell input, .app-shell select { font: inherit; }
 .app-shell button { color: var(--white); cursor: pointer; }
 .app-shell :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.select-shell { position: relative; display: inline-flex; align-items: center; justify-content: space-between; gap: 8px; min-width: 118px; min-height: 36px; padding: 0 28px 0 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--white); cursor: pointer; }
+.select-shell:hover { background: var(--hover); }
+.select-shell:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
+.select-value { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 700 10px/1 'Syne', sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+.select-icon { position: absolute; right: 9px; color: var(--dove); pointer-events: none; }
+.select-shell select { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0; padding: 0; border: 0; opacity: 0; color: inherit; cursor: pointer; font-size: 16px !important; }
 .app-shell .muted { color: var(--dove); font-size: 11px; }
 .app-shell .app-header { justify-content: center !important; padding-inline: 88px !important; }
 .app-shell .header-center { gap: 12px; }
@@ -272,7 +278,7 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .player-dialog-header h2 { font-size: 23px; line-height: 1.25; margin-top: 4px; overflow-wrap: anywhere; text-transform: capitalize; }
 .player-filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px; padding: 20px 24px; }
 .player-filters label { display: grid; gap: 5px; color: var(--dove); font-size: 11px; }
-.app-shell select { padding: 8px 10px; border: 1px solid var(--border); border-radius: 5px; background: var(--bg); color: var(--white); min-height: 40px; font-size: 13px; }
+.app-shell select { color: var(--white); }
 .segment { display: flex; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; }
 .segment button { min-height: 40px; min-width: 46px; padding: 7px 12px; background: none; border: 0; font-size: 12px; }
 .segment button[aria-pressed="true"] { background: var(--active); color: var(--white); }
@@ -334,7 +340,7 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .sheet-heading h2 { margin-top: 8px; font: 700 20px/1.2 'Space Grotesk', sans-serif; }
 .sheet-filters { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .sheet-filters label { display: inline-flex; align-items: center; gap: 8px; color: var(--dove); font-size: 11px; }
-.sheet-filters select { min-height: 36px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--white); }
+.sheet-filters .select-shell { min-width: 104px; }
 .sheet-toggle input { width: 16px; height: 16px; accent-color: var(--accent); }
 .sheet-scroll { overflow-x: auto; }
 .sheet-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
@@ -436,7 +442,7 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
   .app-shell .zoom-0 .player-name strong { font-size: 11px; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .app-shell .zoom-0 .player-position { top: 4px; right: 5px; font-size: 9px; }
   .app-shell .zoom-0 .line-change { font-size: 9px; }
-  .app-shell .ga-table, .player-table, .app-shell select, .data-state, .news-lead p { font-size: 14px; }
+  .app-shell .ga-table, .player-table, .data-state, .news-lead p { font-size: 14px; }
   .app-shell .ga-table th, .app-shell .ga-sort-btn { font-size: 12px; }
   .player-dialog-header h2 { font-size: 24px; }
   .segment button { font-size: 13px; }
@@ -469,10 +475,11 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
   .app-shell .mobile-primary-nav a { display: flex; align-items: center; text-decoration: none; position: relative; padding: 0 4px 8px; border: 0; background: transparent; color: var(--dove); font: 800 10px/1 'Syne', sans-serif; letter-spacing: .04em; }
   .app-shell .mobile-primary-nav a[aria-current='page'] { color: var(--white); }
   .app-shell .mobile-primary-nav a[aria-current='page']::after { content: ''; position: absolute; right: 3px; bottom: -1px; left: 3px; height: 2px; background: var(--casper); }
-  .app-shell .mobile-view-select { display: block; width: 100%; height: 40px; font: 600 16px/1.2 'Space Grotesk', sans-serif; letter-spacing: 0; }
+  .app-shell .select-shell { min-height: 44px; }
+  .app-shell .mobile-view-select { display: flex; width: 100%; min-height: 44px; }
   /* iOS zooms into focused fields under 16px now that pinch-zoom is enabled;
-     !important beats the inline font sizes on the filter inputs. */
-  .app-shell input, .app-shell select, .app-shell textarea { font-size: 16px !important; }
+     !important beats the inline font sizes on text filters. */
+  .app-shell input, .app-shell textarea { font-size: 16px !important; }
   .site-footer { padding: 26px 18px 22px; }
   .footer-main { grid-template-columns: minmax(0, 1fr); gap: 24px; padding-bottom: 24px; }
   .footer-lockup img { width: 52px; height: 40px; }
@@ -482,7 +489,7 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
   .team-browser { display: block; }
   .team-navigation { position: static; height: auto; border-right: 0; padding: 16px 16px 0; }
   .team-navigation .team-search, .team-list { display: none; }
-  .mobile-team-select { display: block; width: 100%; font-family: 'Syne', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+  .mobile-team-select { display: flex; width: 100%; min-height: 44px; }
   .quick-scan-hint { top: 10px; right: 10px; font-size: 7px; }
   .quick-scan-track, .quick-scan .strip { min-height: calc(100dvh - var(--header-height) - var(--tabs-height)); }
   .app-shell .quick-scan .strip { width: 74px; }
@@ -506,7 +513,7 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
   .player-dialog-header h2 { font-size: 20px; }
   .player-filters { padding: 16px; gap: 12px; }
   .player-filters label { flex: 1; min-width: 110px; }
-  .player-filters select { width: 100%; }
+  .player-filters .select-shell { width: 100%; }
   .player-metrics { padding: 4px 16px 16px; gap: 10px; }
   .player-metrics strong { font-size: 24px; }
   .window-caption { padding: 12px 16px; }

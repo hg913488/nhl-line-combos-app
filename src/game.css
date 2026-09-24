@@ -53,8 +53,7 @@
 
 .game-view .game-filters { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .game-view .game-filters label { display: inline-flex; align-items: center; gap: 8px; color: var(--dim); font: 700 10px/1 'Syne', sans-serif; letter-spacing: .1em; text-transform: uppercase; }
-.game-view .game-filters select { min-height: 36px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); color: var(--white); font: 400 12px/1.2 'Space Grotesk', sans-serif; }
-.game-view .game-filters select:hover { background: var(--hover); }
+.game-view .game-filters .select-shell { background: var(--bg); }
 
 /* ── Rink ────────────────────────────────────────────────────────── */
 .game-view .rink-wrap { margin-top: 14px; }
@@ -98,20 +97,33 @@
 .game-view .sog-table tbody tr:last-child th, .game-view .sog-table tbody tr:last-child td { border-bottom: 0; }
 
 /* ── Goals ───────────────────────────────────────────────────────── */
-.game-view .goal-list { display: grid; margin-top: 6px; list-style: none; }
-.game-view .goal-row { display: grid; grid-template-columns: 92px 42px minmax(0, 1fr) auto; align-items: baseline; gap: 12px; padding: 13px 2px; border-bottom: 1px solid var(--border); }
-.game-view .goal-row:last-child { border-bottom: 0; }
-.game-view .goal-time { color: var(--dove); font: 400 11px/1.3 'Space Mono', monospace; font-variant-numeric: tabular-nums; }
-.game-view .goal-team { color: var(--dim); font: 700 11px/1.3 'Syne', sans-serif; letter-spacing: .06em; }
-.game-view .goal-copy { color: var(--casper); font: 400 14px/1.45 'Space Grotesk', sans-serif; }
+.game-view .goal-list { display: grid; gap: 18px; margin-top: 16px; list-style: none; }
+.game-view .goal-period-group { display: grid; gap: 9px; }
+.game-view .goal-period-group h3 { color: var(--dove); font: 700 10px/1 'Space Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+.game-view .goal-card-list { display: grid; gap: 10px; list-style: none; }
+.game-view .goal-card { padding: 14px 16px 13px; border: 1px solid var(--border); border-radius: 4px; background: var(--bg); }
+.game-view .goal-card-main { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; align-items: center; gap: 14px; }
+.game-view .goal-player-photo { position: relative; display: grid; place-items: center; width: 48px; height: 48px; border: 2px solid var(--goal-team-color); border-radius: 50%; background: color-mix(in srgb, var(--goal-team-color) 16%, var(--surface)); }
+.game-view .goal-player-photo > img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.game-view .goal-player-initials { color: var(--white); font: 800 13px/1 'Syne', sans-serif; letter-spacing: .04em; }
+.game-view .goal-badge-logo { position: absolute; right: -2px; bottom: -3px; width: 18px; height: 18px; padding: 1px; border-radius: 50%; background: var(--bg); }
+.game-view .goal-badge-logo img { width: 16px; height: 16px; }
+.game-view .goal-copy { display: grid; gap: 5px; min-width: 0; color: var(--casper); font: 400 14px/1.35 'Space Grotesk', sans-serif; }
 .game-view .link-button { padding: 0; border: 0; background: transparent; color: var(--white); font: inherit; font-weight: 700; cursor: pointer; }
 .game-view .link-button:hover { color: var(--accent); }
-.game-view .goal-assists { color: var(--dove); }
-.game-view .goal-assists .link-button { color: var(--casper); font-weight: 500; }
-.game-view .goal-shot-type { margin-left: 10px; color: var(--dim); font: 400 10px/1 'Space Mono', monospace; text-transform: uppercase; }
-.game-view .goal-score { display: inline-flex; align-items: baseline; gap: 10px; white-space: nowrap; }
-.game-view .goal-strength { color: var(--yellow); font: 700 10px/1 'Syne', sans-serif; letter-spacing: .1em; }
-.game-view .goal-running { color: var(--dove); font: 400 12px/1 'Space Mono', monospace; font-variant-numeric: tabular-nums; }
+.game-view .goal-scorer { justify-self: start; max-width: 100%; overflow-wrap: anywhere; color: var(--white); font: 700 17px/1.1 'Space Grotesk', sans-serif; }
+.game-view .goal-meta { color: var(--dove); font: 400 11px/1.2 'Space Mono', monospace; }
+.game-view .goal-scoreboard { display: grid; grid-template-columns: repeat(2, 28px); gap: 8px; align-items: start; }
+.game-view .goal-score-team { display: grid; justify-items: center; gap: 4px; color: var(--dim); font-variant-numeric: tabular-nums; }
+.game-view .goal-score-logo { width: 22px; height: 22px; }
+.game-view .goal-score-logo img { width: 22px; height: 22px; }
+.game-view .goal-score-team strong { color: var(--dim); font: 700 17px/1 'Space Mono', monospace; }
+.game-view .goal-score-team strong.is-scoring { color: var(--white); }
+.game-view .goal-footer { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 13px; padding-top: 12px; border-top: 1px solid var(--border); }
+.game-view .goal-assists { min-width: 0; color: var(--dove); font: 600 12px/1.45 'Space Grotesk', sans-serif; }
+.game-view .goal-assist-button { color: var(--casper); font-weight: 600; }
+.game-view .goal-strength { display: inline-flex; margin-right: 8px; color: var(--yellow); font: 700 10px/1 'Syne', sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.game-view .goal-time { flex-shrink: 0; color: var(--dove); font: 700 12px/1 'Space Mono', monospace; font-variant-numeric: tabular-nums; }
 
 /* ── Team stats ──────────────────────────────────────────────────── */
 .game-view .stat-list { display: grid; gap: 14px; margin-top: 18px; list-style: none; }
@@ -136,12 +148,14 @@
   .game-view .game-score-dash { display: none; }
   .game-view .game-panel { padding: 18px 16px 20px; }
   .game-view .game-panel-head { align-items: flex-start; flex-direction: column; gap: 12px; }
-  .game-view .game-filters select { min-height: 44px; font-size: 16px; }
-  .game-view .goal-row { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; }
-  .game-view .goal-time { grid-column: 1; }
-  .game-view .goal-team { grid-column: 2; text-align: right; }
-  .game-view .goal-copy { grid-column: 1 / -1; }
-  .game-view .goal-score { grid-column: 1 / -1; }
+  .game-view .goal-list { gap: 16px; }
+  .game-view .goal-card { padding: 12px; }
+  .game-view .goal-card-main { grid-template-columns: 52px minmax(0, 1fr) auto; gap: 10px; }
+  .game-view .goal-player-photo { width: 46px; height: 46px; }
+  .game-view .goal-scoreboard { grid-template-columns: repeat(2, 24px); gap: 6px; }
+  .game-view .goal-score-logo, .game-view .goal-score-logo img { width: 20px; height: 20px; }
+  .game-view .goal-scorer { font-size: 16px; }
+  .game-view .goal-footer { gap: 10px; }
   .game-view .stat-row { grid-template-columns: 54px minmax(0, 1fr) 54px; gap: 10px; }
   .game-view .sog-table th, .game-view .sog-table td { padding: 8px 6px; }
 }

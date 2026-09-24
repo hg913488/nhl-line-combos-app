@@ -4,6 +4,7 @@ import useSchedule, { localDate } from './useSchedule.js';
 import PlayerDetails from './PlayerDetails.jsx';
 import GameView from './GameView.jsx';
 import JerseyIcon from './JerseyIcon.jsx';
+import Select from './Select.jsx';
 import { getJSON, normalizeName, seasonForDate, seasonLabel, seasonsFrom } from './data-client.js';
 import { NHL_TEAMS, TEAM_COLORS } from './teams.js';
 import { rankPositions, formatIndex, POSITIONS } from './picks-signal.js';
@@ -244,9 +245,9 @@ function TeamBrowser({ slug, onSelect }) {
   return <main className="team-browser">
     <aside className="team-navigation" aria-label="Teams">
       <label className="team-search"><Search size={17} /><input aria-label="Search teams" placeholder="Find a team" value={query} onChange={event => setQuery(event.target.value)} /></label>
-      <select className="mobile-team-select" aria-label="Selected team" value={slug} onChange={event => onSelect(event.target.value)}>
+      <Select className="mobile-team-select" aria-label="Selected team" value={slug} onChange={event => onSelect(event.target.value)}>
         {Object.entries(NHL_TEAMS).map(([key, t]) => <option value={key} key={key}>{t.city} {t.name}</option>)}
-      </select>
+      </Select>
       <div className="team-list">{visible.map(([key, t]) => <NavLink key={key} to={`/teams/${key}`} className={slug === key ? 'selected' : undefined} current={slug === key} onNavigate={() => onSelect(key)}>
         <TeamLogo slug={key} abbr={t.abbr} size={26} /><span>{t.city}<small>{t.name}</small></span><span className="team-abbr">{t.abbr}</span>
       </NavLink>)}
@@ -962,8 +963,8 @@ function PlayerSheet() {
     <header className="sheet-heading">
       <div><span className="slate-kicker">Player sheet</span><h2>{rows.length} skaters in tonight's lineups</h2></div>
       <div className="sheet-filters">
-        <label>Team<select value={team} onChange={event => setTeam(event.target.value)}><option value="all">All teams</option>{teams.map(abbr => <option key={abbr} value={abbr}>{abbr}</option>)}</select></label>
-        <label>Position<select value={position} onChange={event => setPosition(event.target.value)}><option value="all">All</option>{POSITIONS.map(item => <option key={item} value={item}>{item}</option>)}</select></label>
+        <label>Team<Select value={team} onChange={event => setTeam(event.target.value)}><option value="all">All teams</option>{teams.map(abbr => <option key={abbr} value={abbr}>{abbr}</option>)}</Select></label>
+        <label>Position<Select value={position} onChange={event => setPosition(event.target.value)}><option value="all">All</option>{POSITIONS.map(item => <option key={item} value={item}>{item}</option>)}</Select></label>
         <label className="sheet-toggle"><input type="checkbox" checked={ppOnly} onChange={event => setPpOnly(event.target.checked)} />First power-play unit only</label>
       </div>
     </header>
@@ -1793,13 +1794,13 @@ export default function App() {
             <NavLink to="/players" current={['player', 'stats', 'playoffs'].includes(tab)} onNavigate={() => setTab('player')}>STATS</NavLink>
             <NavLink to="/picks" current={tab === 'picks'} onNavigate={() => setTab('picks')}>PICKS</NavLink>
           </nav>
-          {SECTIONS_WITH_SUBVIEWS.has(tab) && <select className="mobile-view-select" aria-label={`${mobileSectionLabel} view`} value={mobileNavValue} onChange={event => selectView(event.target.value)}>
+          {SECTIONS_WITH_SUBVIEWS.has(tab) && <Select className="mobile-view-select" aria-label={`${mobileSectionLabel} view`} value={mobileNavValue} onChange={event => selectView(event.target.value)}>
             <optgroup label="TEAMS"><option value="teams-quick">Quick Scan</option><option value="teams-focus">Focused Team</option><option value="compare">Compare</option></optgroup>
             <option value="today">Tonight</option>
             <optgroup label="NEWS"><option value="news-nhl">NHL News</option><option value="news-reporters">Reporters</option><option value="moves">Line Moves</option><option value="injuries">Injuries</option></optgroup>
             <optgroup label="STATS"><option value="player">Player Stats</option><option value="stats">Matchups</option><option value="playoffs">Playoffs</option></optgroup>
             <option value="picks">Picks</option>
-          </select>}
+          </Select>}
         </div>
         <div {...navMenuProps('teams')}>
           <NavLink to="/teams" className={`tab-btn${['all', 'compare'].includes(tab) ? " active" : ""}`} onNavigate={() => openTeams('quick')}>TEAMS</NavLink>

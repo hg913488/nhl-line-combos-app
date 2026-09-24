@@ -61,7 +61,10 @@ test('handler returns a trimmed game payload from a real completed game', async 
   const opener = body.goals[0];
   assert.equal(opener.team, 'MTL');
   assert.equal(opener.time, '12:41');
+  assert.equal(opener.scorerId, 8482737);
   assert.equal(opener.scorer, 'Zachary Bolduc');
+  assert.equal(opener.headshot, 'https://assets.nhle.com/mugs/nhl/20252026/MTL/8482737.png');
+  assert.equal(opener.goalNumber, null);
   assert.deepEqual(opener.assists, ['Nick Suzuki', 'Cole Caufield']);
   assert.equal(opener.strength, 'EV');
   assert.equal(opener.shotType, 'wrist');

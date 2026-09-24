@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { X, RotateCw } from 'lucide-react';
 import { getJSON, resolvePlayer, seasonLabel, seasonsFrom } from './data-client.js';
+import Select from './Select.jsx';
 
 const dateLabel = value => new Date(`${value}T12:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 const number = value => value == null ? '-' : value;
@@ -82,12 +83,12 @@ export default function PlayerDetails({ modal, onClose }) {
         <button className="icon-button" onClick={onClose} aria-label="Close player details" title="Close"><X size={20} /></button>
       </header>
       <div className="player-filters">
-        <label>Season<select value={season} onChange={event => setSeason(event.target.value)}>
+        <label>Season<Select value={season} onChange={event => setSeason(event.target.value)}>
           {[...new Set([...seasonsFrom(), modal.season])].sort().reverse().map(value => <option value={value} key={value}>{seasonLabel(value)}</option>)}
-        </select></label>
-        <label>Competition<select value={gameType} onChange={event => setGameType(event.target.value)}>
+        </Select></label>
+        <label>Competition<Select value={gameType} onChange={event => setGameType(event.target.value)}>
           <option value="2">Regular season</option><option value="3">Playoffs</option>
-        </select></label>
+        </Select></label>
         <div className="segment" aria-label="Game window">{[[5, 'L5'], [10, 'L10'], [0, 'Season']].map(([value, label]) =>
           <button key={value} aria-pressed={windowSize === value} onClick={() => setWindowSize(value)}>{label}</button>)}</div>
       </div>

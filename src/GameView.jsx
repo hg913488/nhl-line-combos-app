@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import RinkShotMap from './RinkShotMap.jsx';
+import Select from './Select.jsx';
 import { NHL_TEAMS, TEAM_COLORS } from './teams.js';
 import './game.css';
 
@@ -59,9 +60,9 @@ function periodLabel(period, periodType) {
   return `P${period}`;
 }
 
-function TeamLogo({ abbr }) {
+function TeamLogo({ abbr, className = '' }) {
   if (!abbr) return null;
-  return <span className="game-logo" aria-hidden="true">
+  return <span className={`game-logo${className ? ` ${className}` : ''}`} aria-hidden="true">
     <img className="logo-dark" src={`https://assets.nhle.com/logos/nhl/svg/${abbr}_dark.svg`} alt="" width="44" height="44" loading="lazy" />
     <img className="logo-light" src={`https://assets.nhle.com/logos/nhl/svg/${abbr}_light.svg`} alt="" width="44" height="44" loading="lazy" />
   </span>;
@@ -104,27 +105,80 @@ function StatusLine({ game }) {
   </div>;
 }
 
-function GoalRow({ goal, onPlayer }) {
+function titleCase(value) {
+  return value ? value.charAt(0).toUpperCase() + value.slice(1) : '';
+}
+
+function initials(name) {
+  return String(name || '?').split(/\s+/).filter(Boolean).slice(0, 2).map(part => part[0]).join('').toUpperCase() || '?';
+}
+
+function assistText(assists, onPlayer) {
+  if (!assists.length) return 'Unassisted';
+  return <>
+    Assisted by {assists.map((assist, index) => <React.Fragment key={assist}>
+      {index > 0 ? (index === assists.length - 1 ? ' and ' : ', ') : ''}
+      <button type="button" className="link-button goal-assist-button" onClick={() => onPlayer?.(assist)}>{assist}</button>
+    </React.Fragment>)}
+  </>;
+}
+
+function GoalHeadshot({ goal }) {
+  const [failed, setFailed] = useState(false);
+  const color = TEAM_COLORS[goal.team] || 'var(--casper)';
+  return <span className="goal-player-photo" style={{ '--goal-team-color': color }}>
+    {!failed && goal.headshot
+      ? <img src={goal.headshot} alt="" width="48" height="48" loading="lazy" onError={() => setFailed(true)} />
+      : <span className="goal-player-initials" aria-hidden="true">{initials(goal.scorer)}</span>}
+    <TeamLogo abbr={goal.team} className="goal-badge-logo" />
+  </span>;
+}
+
+function GoalCard({ goal, awayAbbr, homeAbbr, onPlayer }) {
   const strength = goal.strength && goal.strength !== 'EV' ? goal.strength : null;
-  return <li className="goal-row">
-    <span className="goal-time">{periodLabel(goal.period, goal.periodType)} · {goal.time}</span>
-    <span className="goal-team">{goal.team}</span>
-    <span className="goal-copy">
-      {goal.scorer
-        ? <button type="button" className="link-button" onClick={() => onPlayer?.(goal.scorer)}>{goal.scorer}</button>
-        : <strong>Unknown scorer</strong>}
-      {goal.assists.length > 0 && <span className="goal-assists">
-        {goal.assists.map((assist, index) => <React.Fragment key={assist}>
-          {index === 0 ? ' from ' : ', '}
-          <button type="button" className="link-button" onClick={() => onPlayer?.(assist)}>{assist}</button>
-        </React.Fragment>)}
-      </span>}
-      {goal.shotType && <span className="goal-shot-type">{goal.shotType}</span>}
-    </span>
-    <span className="goal-score">
-      {strength && <span className="goal-strength" title={STRENGTH_LABELS[strength]}>{strength}</span>}
-      {goal.awayScore != null && goal.homeScore != null && <span className="goal-running">{goal.awayScore}–{goal.homeScore}</span>}
-    </span>
+  const goalMeta = [
+    goal.goalNumber != null ? `Goal ${goal.goalNumber}` : 'Goal',
+    titleCase(goal.shotType),
+  ].filter(Boolean).join(' · ');
+  return <li className="goal-card">
+    <div className="goal-card-main">
+      <GoalHeadshot goal={goal} />
+      <div className="goal-copy">
+        {goal.scorer
+          ? <button type="button" className="link-button goal-scorer" onClick={() => onPlayer?.(goal.scorer)}>{goal.scorer}</button>
+          : <strong className="goal-scorer">Unknown scorer</strong>}
+        <span className="goal-meta">{goalMeta}</span>
+      </div>
+      <div className="goal-scoreboard" aria-label={`${awayAbbr} ${goal.awayScore ?? 0}, ${homeAbbr} ${goal.homeScore ?? 0}`}>
+        <span className="goal-score-team">
+          <TeamLogo abbr={awayAbbr} className="goal-score-logo" />
+          <strong className={goal.side === 'away' ? 'is-scoring' : undefined}>{goal.awayScore ?? '-'}</strong>
+        </span>
+        <span className="goal-score-team">
+          <TeamLogo abbr={homeAbbr} className="goal-score-logo" />
+          <strong className={goal.side === 'home' ? 'is-scoring' : undefined}>{goal.homeScore ?? '-'}</strong>
+        </span>
+      </div>
+    </div>
+    <div className="goal-footer">
+      <span className="goal-assists">
+        {strength && <span className="goal-strength" title={STRENGTH_LABELS[strength]}>{strength}</span>}
+        {assistText(goal.assists, onPlayer)}
+      </span>
+      <time className="goal-time">{goal.time}</time>
+    </div>
+  </li>;
+}
+
+function GoalGroup({ group, awayAbbr, homeAbbr, onPlayer }) {
+  const label = group.periodType === 'OT' || group.periodType === 'SO'
+    ? periodLabel(group.period, group.periodType)
+    : `${periodLabel(group.period, group.periodType)} Period`;
+  return <li className="goal-period-group">
+    <h3>{label}</h3>
+    <ul className="goal-card-list">
+      {group.goals.map((goal, index) => <GoalCard key={`${goal.period}-${goal.time}-${index}`} goal={goal} awayAbbr={awayAbbr} homeAbbr={homeAbbr} onPlayer={onPlayer} />)}
+    </ul>
   </li>;
 }
 
@@ -209,6 +263,19 @@ export default function GameView({ gameId, onBack, onTeam, onPlayer }) {
     return STAT_ORDER.map(category => byCategory.get(category)).filter(Boolean);
   }, [game]);
 
+  const goalGroups = useMemo(() => {
+    const groups = [];
+    for (const goal of game?.goals || []) {
+      let group = groups.find(item => item.period === goal.period && item.periodType === goal.periodType);
+      if (!group) {
+        group = { period: goal.period, periodType: goal.periodType, goals: [] };
+        groups.push(group);
+      }
+      group.goals.push(goal);
+    }
+    return groups;
+  }, [game]);
+
   const backLink = <a className="game-back" href="/" onClick={event => { if (!isPlainClick(event)) return; event.preventDefault(); onBack?.(); }}>← Back to Tonight</a>;
 
   if (status === 'loading' && !game) {
@@ -263,18 +330,18 @@ export default function GameView({ gameId, onBack, onTeam, onPlayer }) {
           <h2 id="game-shotmap-heading">Shot map</h2>
           <div className="game-filters">
             <label htmlFor={`${shotFilterId}-team`}>Team
-              <select id={`${shotFilterId}-team`} value={filter.team} onChange={event => setFilter(current => ({ ...current, team: event.target.value }))}>
+              <Select id={`${shotFilterId}-team`} value={filter.team} onChange={event => setFilter(current => ({ ...current, team: event.target.value }))}>
                 <option value="both">Both teams</option>
                 <option value="away">{game.away.abbr}</option>
                 <option value="home">{game.home.abbr}</option>
-              </select>
+              </Select>
             </label>
             <label htmlFor={`${shotFilterId}-period`}>Period
-              <select id={`${shotFilterId}-period`} value={filter.period} onChange={event => setFilter(current => ({ ...current, period: event.target.value }))}>
+              <Select id={`${shotFilterId}-period`} value={filter.period} onChange={event => setFilter(current => ({ ...current, period: event.target.value }))}>
                 <option value="all">All periods</option>
                 {periods.numbers.map(period => <option key={period} value={String(period)}>{periodLabel(period, 'REG')}</option>)}
                 {periods.hasOvertime && <option value="OT">OT</option>}
-              </select>
+              </Select>
             </label>
           </div>
         </div>
@@ -313,7 +380,7 @@ export default function GameView({ gameId, onBack, onTeam, onPlayer }) {
       <section className="game-panel" aria-labelledby="game-goals-heading">
         <h2 id="game-goals-heading">Goals</h2>
         {game.goals.length
-          ? <ul className="goal-list">{game.goals.map((goal, index) => <GoalRow key={`${goal.period}-${goal.time}-${index}`} goal={goal} onPlayer={onPlayer} />)}</ul>
+          ? <ul className="goal-list">{goalGroups.map(group => <GoalGroup key={`${group.period}-${group.periodType}`} group={group} awayAbbr={game.away.abbr} homeAbbr={game.home.abbr} onPlayer={onPlayer} />)}</ul>
           : <p className="game-panel-note">No goals yet.</p>}
       </section>
 
