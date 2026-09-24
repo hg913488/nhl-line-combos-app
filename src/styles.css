@@ -138,7 +138,8 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .slate-lineup-toggle[aria-expanded='true'] svg { transform: rotate(180deg); }
 .slate-lineups { padding: 18px 28px 26px; border-top: 1px solid var(--border); }
 .slate-lineups .player-name > span { font-size: 11px; }
-.slate-lineups .player-name strong { font-size: 14px; }
+.slate-lineups .player-name strong { font-size: 13px; }
+.slate-lineups .player-name { overflow-wrap: normal; word-break: normal; }
 .goalie-status { text-transform: uppercase; letter-spacing: .04em; }
 .app-shell .header-home { display: block; color: inherit; text-decoration: none; }
 @media (max-width: 767px) {
@@ -452,6 +453,14 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
   .team-heading h1 { font-size: 22px; }
   .team-record { margin-left: 0; text-align: left; }
   .app-shell .player-tile { flex-direction: column; text-align: center; padding: 12px 6px; gap: 5px; }
+  .slate-lineups .player-name { width: 100%; text-align: center; }
+}
+@media (min-width: 1101px) {
+  .app-shell .slate-lineups .player-tile { min-height: 76px; padding: 10px 8px; gap: 6px; }
+  .slate-lineups .jersey-icon { width: 46px; height: auto; flex-basis: 46px; }
+  .slate-lineups .player-name > span { font-size: 10px; }
+  .slate-lineups .player-name-long strong { font-size: 11px; }
+  .slate-lineups .player-name-extra-long strong { font-size: 10.5px; }
 }
 @media (min-width: 768px) {
   .app-shell { --header-height: 96px; }

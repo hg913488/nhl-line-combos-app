@@ -278,7 +278,7 @@ function PlayerCard({ name, pos, lineChangedTo }) {
     aria-label={`View ${name} statistics`}
     onClick={event => { event.stopPropagation(); triggerPlayerLookup?.(name, player); }}>
     {roster && <JerseyIcon team={roster.team} number={player?.number} />}
-    <span className="player-name"><span>{first}</span><strong>{last}</strong></span>
+    <span className={`player-name${last.length > 11 ? ' player-name-extra-long' : last.length > 10 ? ' player-name-long' : ''}`}><span>{first}</span><strong>{last}</strong></span>
     <span className="player-position">{label}</span>
     {lineChangedTo != null && <span className="line-change">Line {lineChangedTo}</span>}
   </button>;
