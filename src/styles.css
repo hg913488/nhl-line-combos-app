@@ -137,7 +137,7 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .slate-lineup-toggle svg { transition: transform .15s ease; }
 .slate-lineup-toggle[aria-expanded='true'] svg { transform: rotate(180deg); }
 .slate-lineups { padding: 18px 28px 26px; border-top: 1px solid var(--border); }
-.app-shell .slate-lineups .player-tile { min-height: 112px; padding: 8px 5px; gap: 2px; flex-direction: column; justify-content: flex-start; text-align: center; }
+.app-shell .slate-lineups .player-tile { min-height: 104px; padding: 8px 5px; gap: 2px; flex-direction: column; justify-content: center; text-align: center; }
 .slate-lineups .jersey-icon { width: 50px; height: 46px; flex: 0 0 auto; }
 .slate-lineups .player-name > span { font-size: 11px; }
 .slate-lineups .player-name strong { font-size: 13px; }
