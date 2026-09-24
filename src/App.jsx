@@ -756,6 +756,20 @@ function GameWatch({ away, home }) {
   </div>;
 }
 
+function SlateLineupTeam({ team }) {
+  const { roster, error } = useTeamRoster(team.abbrev);
+  const data = TEAMS_DATA[abbrToSlug(team.abbrev)];
+  return <section>
+    <h2>{team.abbrev}</h2>
+    {error && <p className="muted">Jersey numbers are temporarily unavailable.</p>}
+    {data
+      ? <RosterContext.Provider value={{ players: roster.team === team.abbrev ? roster.players : {}, team: team.abbrev }}>
+          <LineupContent data={data} />
+        </RosterContext.Provider>
+      : <p>No lineup available.</p>}
+  </section>;
+}
+
 function SlateGame({ game, onOpenMoves, onOpenGame, onTeam }) {
   const [showLineups, setShowLineups] = useState(false);
   const status = gameStatus(game);
@@ -783,7 +797,7 @@ function SlateGame({ game, onOpenMoves, onOpenGame, onTeam }) {
     </div>
     {showLineups && <div className="slate-lineups">
       <p className="snapshot-notice">Projected lineups as of {UPDATED_AT}. Not confirmed for this game.</p>
-      <div className="matchup-lineups">{[game.awayTeam, game.homeTeam].map(team => <section key={team.abbrev}><h2>{team.abbrev}</h2>{TEAMS_DATA[abbrToSlug(team.abbrev)] ? <LineupContent data={TEAMS_DATA[abbrToSlug(team.abbrev)]} /> : <p>No lineup available.</p>}</section>)}</div>
+      <div className="matchup-lineups">{[game.awayTeam, game.homeTeam].map(team => <SlateLineupTeam key={team.abbrev} team={team} />)}</div>
     </div>}
   </article>;
 }
