@@ -876,7 +876,11 @@ function ReporterTimeline({ isDark }) {
   }, [isDark]);
 
   return <div className="reporter-timeline-wrap" data-status={status}>
-    {status === 'loading' && <p className="reporter-status" role="status">Loading reporter feed...</p>}
+    {status === 'loading' && <div className="reporter-loader" role="status">
+      <span className="reporter-loader-rink" aria-hidden="true"><span className="reporter-loader-puck" /></span>
+      <strong>Reporters taking warmups</strong>
+      <span>Loading the live feed</span>
+    </div>}
     <div className="reporter-timeline" ref={containerRef} />
     {status === 'error' && <p className="reporter-status">The embedded feed was blocked. <a href={REPORTERS_LIST_URL} target="_blank" rel="noopener noreferrer">Open NHL Reporters on X</a></p>}
   </div>;

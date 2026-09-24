@@ -78,14 +78,14 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .slate-team-home { flex-direction: row-reverse; text-align: right; }
 .slate-team-copy { display: grid; gap: 5px; min-width: 0; flex: 1; }
 .slate-city { color: var(--dove); font: 700 10px/1 'Syne', sans-serif; letter-spacing: .12em; text-transform: uppercase; }
-.slate-name { color: var(--white); font: 800 clamp(17px, 1.6vw, 20px)/1.1 'Syne', sans-serif; letter-spacing: -.01em; text-decoration: none; text-transform: uppercase; overflow-wrap: break-word; }
+.slate-name { color: var(--white); font: 800 18px/1.15 'Syne', sans-serif; letter-spacing: -.01em; text-decoration: none; text-transform: uppercase; overflow-wrap: break-word; }
 .slate-team-away a.slate-name:hover { color: var(--away-c); }
 .slate-team-home a.slate-name:hover { color: var(--home-c); }
 .slate-record { color: var(--dim); font: 400 11px/1 'Space Mono', monospace; font-variant-numeric: tabular-nums; }
-.slate-score { margin-left: auto; color: var(--white); font: 800 30px/1 'Syne', sans-serif; font-variant-numeric: tabular-nums; }
+.slate-score { margin-left: auto; color: var(--white); font: 800 36px/1 'Syne', sans-serif; font-variant-numeric: tabular-nums; }
 .slate-team-home .slate-score { margin-right: auto; margin-left: 0; }
 .slate-status { display: grid; justify-items: center; gap: 6px; min-width: 112px; text-align: center; }
-.slate-state { color: var(--white); font: 600 14px/1.2 'Space Grotesk', sans-serif; white-space: nowrap; }
+.slate-state { color: var(--white); font: 600 13px/1.2 'Space Grotesk', sans-serif; white-space: nowrap; }
 .phase-live .slate-state { color: var(--red); }
 .phase-final .slate-state { color: var(--dove); }
 .slate-tag { color: var(--dim); font: 500 10px/1.3 'Syne', sans-serif; letter-spacing: .08em; text-transform: uppercase; }
@@ -104,15 +104,15 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .goalie-status.status-likely, .goalie-status.status-expected { color: var(--yellow); }
 .slate-insight { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 28px; padding-block: 18px 20px; }
 .slate-story ul, .slate-watch ul { display: grid; gap: 9px; margin-top: 13px; list-style: none; }
-.slate-story li, .slate-watch li { display: grid; grid-template-columns: 38px minmax(0, 1fr); align-items: baseline; gap: 10px; color: var(--casper); font: 400 14px/1.45 'Space Grotesk', sans-serif; }
+.slate-story li, .slate-watch li { display: grid; grid-template-columns: 38px minmax(0, 1fr); align-items: baseline; gap: 10px; color: var(--casper); font: 400 13px/1.45 'Space Grotesk', sans-serif; }
 .story-team { color: var(--dim); font: 700 11px/1 'Syne', sans-serif; letter-spacing: .06em; }
 .slate-story button { padding: 0; border: 0; background: transparent; color: var(--white); font: inherit; font-weight: 700; cursor: pointer; }
 .slate-quiet { margin-top: 13px; color: var(--dove); font-size: 13px; }
 .slate-more { display: inline-flex; align-items: center; min-height: 32px; margin-top: 6px; color: var(--casper); font: 700 10px/1 'Syne', sans-serif; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
 .slate-more:hover, .slate-link:hover { color: var(--white); }
 .slate-watch { padding-left: 28px; border-left: 1px solid var(--border); }
-.slate-watch strong { margin-right: 10px; color: var(--white); font: 800 16px/1 'Syne', sans-serif; }
-.watch-index { color: var(--dove); font: 400 11px/1 'Space Mono', monospace; }
+.slate-watch strong { margin-right: 10px; color: var(--white); font: 800 15px/1 'Syne', sans-serif; }
+.watch-index { color: var(--dove); font: 400 10px/1 'Space Mono', monospace; }
 .slate-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 18px; border-top: 1px solid var(--border); }
 .slate-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 10px; border: 0; background: transparent; color: var(--casper); font: 700 10px/1 'Syne', sans-serif; letter-spacing: .1em; text-decoration: none; text-transform: uppercase; cursor: pointer; }
 .slate-lineups { padding: 18px 28px 26px; border-top: 1px solid var(--border); }
@@ -402,9 +402,20 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .reporter-timeline { min-height: 420px; }
 .reporter-timeline iframe { color-scheme: normal; }
 .reporter-status { position: absolute; inset: 0; display: grid; place-content: center; color: var(--dove); font-size: 12px; text-align: center; }
+.reporter-loader { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 8px; color: var(--dove); text-align: center; }
+.reporter-loader-rink { position: relative; display: block; width: 176px; height: 46px; overflow: hidden; border: 1px solid var(--border); border-radius: 23px; background: var(--surface); }
+.reporter-loader-rink::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--red); opacity: .72; }
+.reporter-loader-rink::after { content: ''; position: absolute; top: 0; bottom: 0; left: 33%; width: 1px; background: var(--accent); box-shadow: 58px 0 0 var(--accent); opacity: .62; }
+.reporter-loader-puck { position: absolute; top: 19px; left: 13px; z-index: 1; width: 14px; height: 7px; border-radius: 50%; background: var(--white); animation: reporter-puck 1.35s ease-in-out infinite alternate; }
+.reporter-loader strong { color: var(--casper); font: 700 10px/1.2 'Syne', sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.reporter-loader > span:last-child { font: 400 10px/1.2 'Space Mono', monospace; }
 .reporter-timeline-wrap[data-status='error'] { min-height: 180px; }
 .reporter-timeline-wrap[data-status='error'] .reporter-timeline { display: none; }
+@keyframes reporter-puck { to { transform: translateX(136px); } }
 @keyframes detail-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .reporter-loader-puck { animation: none; transform: translateX(68px); }
+}
 @media (max-width: 1100px) {
   .team-browser { grid-template-columns: 200px minmax(0, 1fr); }
   .team-content { padding: 24px 20px; }
