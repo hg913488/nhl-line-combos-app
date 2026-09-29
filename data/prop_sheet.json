@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-29T20:42:49Z",
+  "generated_at": "2026-09-29T22:36:04Z",
   "date": "2026-09-29",
   "window": {
     "games": 10,
@@ -279,12 +279,12 @@
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 2,
-        "a": 5,
-        "p": 7,
+        "g": 1,
+        "a": 3,
+        "p": 4,
         "sog": 15,
-        "toi": 715.5,
-        "pptoi": 60.9
+        "toi": 816.3,
+        "pptoi": 62.7
       },
       "season": {
         "gp": 73,
@@ -300,8 +300,7 @@
         "source": "confirmed"
       },
       "flags": [
-        "ROLE_UP",
-        "HOT"
+        "ROLE_UP"
       ]
     },
     {
@@ -750,8 +749,8 @@
         "a": 5,
         "p": 7,
         "sog": 20,
-        "toi": 953.8,
-        "pptoi": 172.2
+        "toi": 839.7,
+        "pptoi": 146.4
       },
       "season": {
         "gp": 79,
@@ -1380,8 +1379,8 @@
         "a": 4,
         "p": 5,
         "sog": 8,
-        "toi": 337.1,
-        "pptoi": 35.5
+        "toi": 427.1,
+        "pptoi": 52.6
       },
       "season": {
         "gp": 75,
@@ -1982,11 +1981,11 @@
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 1,
+        "g": 0,
         "a": 0,
-        "p": 1,
-        "sog": 8,
-        "toi": 592.5,
+        "p": 0,
+        "sog": 9,
+        "toi": 499.7,
         "pptoi": 2.9
       },
       "season": {
@@ -2056,10 +2055,10 @@
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 2,
-        "a": 2,
+        "g": 1,
+        "a": 3,
         "p": 4,
-        "sog": 20,
+        "sog": 19,
         "toi": 458.1,
         "pptoi": 42.9
       },
@@ -2492,8 +2491,8 @@
         "a": 1,
         "p": 4,
         "sog": 13,
-        "toi": 726.5,
-        "pptoi": 41.4
+        "toi": 620.7,
+        "pptoi": 34.8
       },
       "season": {
         "gp": 78,
@@ -2669,8 +2668,8 @@
         "a": 1,
         "p": 1,
         "sog": 6,
-        "toi": 652.8,
-        "pptoi": 0.6
+        "toi": 540.7,
+        "pptoi": 0.4
       },
       "season": {
         "gp": 64,
@@ -2886,12 +2885,12 @@
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 6,
+        "g": 5,
         "a": 1,
-        "p": 7,
-        "sog": 25,
-        "toi": 937.7,
-        "pptoi": 194.9
+        "p": 6,
+        "sog": 22,
+        "toi": 906.5,
+        "pptoi": 186.4
       },
       "season": {
         "gp": 82,
@@ -2928,8 +2927,8 @@
         "a": 2,
         "p": 5,
         "sog": 20,
-        "toi": 922.4,
-        "pptoi": 51.9
+        "toi": 849.9,
+        "pptoi": 50.1
       },
       "season": {
         "gp": 82,
@@ -2998,7 +2997,7 @@
         "a": 2,
         "p": 2,
         "sog": 21,
-        "toi": 715.5,
+        "toi": 612.9,
         "pptoi": 43.9
       },
       "season": {
@@ -3245,9 +3244,9 @@
         "g": 0,
         "a": 3,
         "p": 3,
-        "sog": 14,
-        "toi": 360.5,
-        "pptoi": 0.3
+        "sog": 15,
+        "toi": 419.0,
+        "pptoi": 6.0
       },
       "season": {
         "gp": 60,
@@ -3316,7 +3315,7 @@
         "a": 2,
         "p": 2,
         "sog": 11,
-        "toi": 880.9,
+        "toi": 762.8,
         "pptoi": 12.8
       },
       "season": {
@@ -3719,7 +3718,7 @@
         "a": 1,
         "p": 2,
         "sog": 10,
-        "toi": 493.9,
+        "toi": 560.8,
         "pptoi": 2.8
       },
       "season": {
@@ -4311,13 +4310,48 @@
       "flags": []
     },
     {
+      "id": 8483395,
+      "name": "ARSHDEEP BAINS",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "LW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 28,
+        "g": 1,
+        "a": 4,
+        "p": 5,
+        "sog": 18
+      },
+      "opp_index": 0.6751,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": []
+    },
+    {
       "id": 8481032,
       "name": "PAUL COTTER",
       "team": "VAN",
       "opp": "EDM",
       "game_id": 2026020004,
       "home": false,
-      "pos": "LW",
+      "pos": "C",
       "line": "L4",
       "pp": null,
       "b2b": false,
@@ -4336,41 +4370,6 @@
         "a": 6,
         "p": 15,
         "sog": 61
-      },
-      "opp_index": 0.6751,
-      "opp_goalie": {
-        "name": "TRISTAN JARRY",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": []
-    },
-    {
-      "id": 8482691,
-      "name": "AATU RATY",
-      "team": "VAN",
-      "opp": "EDM",
-      "game_id": 2026020004,
-      "home": false,
-      "pos": "C",
-      "line": "L4",
-      "pp": null,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 11,
-        "toi": 260.1,
-        "pptoi": 9.3
-      },
-      "season": {
-        "gp": 66,
-        "g": 4,
-        "a": 10,
-        "p": 14,
-        "sog": 65
       },
       "opp_index": 0.6667,
       "opp_goalie": {
@@ -5176,7 +5175,7 @@
         "a": 4,
         "p": 4,
         "sog": 17,
-        "toi": 780.9,
+        "toi": 900.7,
         "pptoi": 19.0
       },
       "season": {
@@ -5249,8 +5248,8 @@
         "g": 2,
         "a": 3,
         "p": 5,
-        "sog": 9,
-        "toi": 864.3,
+        "sog": 10,
+        "toi": 770.2,
         "pptoi": 1.0
       },
       "season": {
@@ -5433,11 +5432,11 @@
       "last10": {
         "gp": 10,
         "g": 3,
-        "a": 3,
-        "p": 6,
+        "a": 2,
+        "p": 5,
         "sog": 22,
-        "toi": 1022.1,
-        "pptoi": 193.8
+        "toi": 1147.1,
+        "pptoi": 212.1
       },
       "season": {
         "gp": 79,
@@ -5473,8 +5472,8 @@
         "a": 5,
         "p": 7,
         "sog": 21,
-        "toi": 678.0,
-        "pptoi": 144.6
+        "toi": 551.8,
+        "pptoi": 113.1
       },
       "season": {
         "gp": 12,
@@ -5898,11 +5897,11 @@
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 1,
+        "g": 0,
         "a": 4,
-        "p": 5,
-        "sog": 8,
-        "toi": 658.7,
+        "p": 4,
+        "sog": 10,
+        "toi": 529.4,
         "pptoi": 0.8
       },
       "season": {
@@ -6124,8 +6123,8 @@
         "a": 5,
         "p": 8,
         "sog": 14,
-        "toi": 666.9,
-        "pptoi": 27.0
+        "toi": 522.0,
+        "pptoi": 26.7
       },
       "season": {
         "gp": 14,
@@ -6236,9 +6235,9 @@
         "g": 4,
         "a": 5,
         "p": 9,
-        "sog": 18,
-        "toi": 272.4,
-        "pptoi": 78.0
+        "sog": 17,
+        "toi": 343.6,
+        "pptoi": 95.1
       },
       "season": {
         "gp": 82,

@@ -1,11 +1,79 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-29T20:41:32Z",
+  "generated_at": "2026-09-29T22:34:44Z",
   "retention": {
     "max_age_days": 90,
     "max_events": 500
   },
   "events": [
+    {
+      "id": "c99d82a1ac9479fb12e9",
+      "occurred_at": "2026-09-29T22:34:44Z",
+      "player": "AATU RATY",
+      "team": "vancouver-canucks",
+      "previous_team": "vancouver-canucks",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "vancouver-canucks",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "vancouver-canucks",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "b48704bc2ef8890bdcac",
+      "occurred_at": "2026-09-29T22:34:44Z",
+      "player": "ARSHDEEP BAINS",
+      "team": "vancouver-canucks",
+      "previous_team": "vancouver-canucks",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "vancouver-canucks",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "vancouver-canucks",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
     {
       "id": "fd8dd951b12caf3c7c33",
       "occurred_at": "2026-09-29T20:41:32Z",
@@ -17284,76 +17352,6 @@
           "type": "removal",
           "from": true,
           "to": false
-        }
-      ]
-    },
-    {
-      "id": "0f093f1ff1a363faa1ba",
-      "occurred_at": "2026-09-19T17:00:23Z",
-      "player": "JACK ROSLOVIC",
-      "team": "toronto-maple-leafs",
-      "previous_team": "toronto-maple-leafs",
-      "event_types": [
-        "power_play"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "toronto-maple-leafs",
-        "rostered": true,
-        "forward_line": 1,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "toronto-maple-leafs",
-        "rostered": true,
-        "forward_line": 1,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 1
-      },
-      "changes": [
-        {
-          "type": "power_play",
-          "from": 2,
-          "to": 1,
-          "direction": "promoted"
-        }
-      ]
-    },
-    {
-      "id": "e16c53926c65c0ea5a37",
-      "occurred_at": "2026-09-18T20:22:44Z",
-      "player": "TREVOR MOORE",
-      "team": "los-angeles-kings",
-      "previous_team": "los-angeles-kings",
-      "event_types": [
-        "forward_line"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "los-angeles-kings",
-        "rostered": true,
-        "forward_line": 2,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "los-angeles-kings",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "changes": [
-        {
-          "type": "forward_line",
-          "from": 2,
-          "to": 3,
-          "direction": "demoted"
         }
       ]
     }
