@@ -1,11 +1,6629 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-29T02:44:03Z",
-  "date": "2026-09-28",
+  "generated_at": "2026-09-29T08:33:47Z",
+  "date": "2026-09-29",
   "window": {
     "games": 10,
-    "seasons": []
+    "seasons": [
+      20252026
+    ]
   },
-  "games": [],
-  "players": []
+  "games": [
+    {
+      "game_id": 2026020001,
+      "start": "2026-09-29T21:00:00Z",
+      "away": "FLA",
+      "home": "CAR"
+    },
+    {
+      "game_id": 2026020002,
+      "start": "2026-09-29T23:00:00Z",
+      "away": "MTL",
+      "home": "TOR"
+    },
+    {
+      "game_id": 2026020003,
+      "start": "2026-09-30T00:00:00Z",
+      "away": "NYR",
+      "home": "BOS"
+    },
+    {
+      "game_id": 2026020004,
+      "start": "2026-09-30T02:00:00Z",
+      "away": "VAN",
+      "home": "EDM"
+    },
+    {
+      "game_id": 2026020005,
+      "start": "2026-09-30T02:30:00Z",
+      "away": "CHI",
+      "home": "VGK"
+    }
+  ],
+  "players": [
+    {
+      "id": 8480801,
+      "name": "BRADY TKACHUK",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "LW",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 6,
+        "p": 8,
+        "sog": 28,
+        "toi": 793.4,
+        "pptoi": 141.9
+      },
+      "season": {
+        "gp": 60,
+        "g": 22,
+        "a": 37,
+        "p": 59,
+        "sog": 221
+      },
+      "opp_index": 0.4051,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8477493,
+      "name": "ALEKSANDER BARKOV",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "C",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
+      },
+      "opp_index": 1.25,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8477933,
+      "name": "SAM REINHART",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "RW",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 64,
+        "g": 29,
+        "a": 32,
+        "p": 61,
+        "sog": 166
+      },
+      "opp_index": 0.7164,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1"
+      ]
+    },
+    {
+      "id": 8477409,
+      "name": "CARTER VERHAEGHE",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "LW",
+      "line": "L2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 5,
+        "a": 4,
+        "p": 9,
+        "sog": 23,
+        "toi": 843.6,
+        "pptoi": 109.4
+      },
+      "season": {
+        "gp": 77,
+        "g": 25,
+        "a": 30,
+        "p": 55,
+        "sog": 187
+      },
+      "opp_index": 0.4051,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "HOT"
+      ]
+    },
+    {
+      "id": 8477935,
+      "name": "SAM BENNETT",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "C",
+      "line": "L2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 6,
+        "g": 2,
+        "a": 3,
+        "p": 5,
+        "sog": 19,
+        "toi": 1083.2,
+        "pptoi": 203.5
+      },
+      "season": {
+        "gp": 76,
+        "g": 26,
+        "a": 32,
+        "p": 58,
+        "sog": 201
+      },
+      "opp_index": 1.25,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8479314,
+      "name": "MATTHEW TKACHUK",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "RW",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 9,
+        "g": 4,
+        "a": 5,
+        "p": 9,
+        "sog": 26,
+        "toi": 769.8,
+        "pptoi": 105.8
+      },
+      "season": {
+        "gp": 31,
+        "g": 13,
+        "a": 21,
+        "p": 34,
+        "sog": 88
+      },
+      "opp_index": 0.7164,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8480185,
+      "name": "EETU LUOSTARINEN",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "LW",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 5,
+        "p": 7,
+        "sog": 15,
+        "toi": 715.5,
+        "pptoi": 60.9
+      },
+      "season": {
+        "gp": 73,
+        "g": 11,
+        "a": 22,
+        "p": 33,
+        "sog": 107
+      },
+      "opp_index": 0.4051,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "ROLE_UP",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8482113,
+      "name": "ANTON LUNDELL",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "C",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 4,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 6,
+        "toi": 556.0,
+        "pptoi": 65.8
+      },
+      "season": {
+        "gp": 64,
+        "g": 18,
+        "a": 26,
+        "p": 44,
+        "sog": 138
+      },
+      "opp_index": 1.25,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8483771,
+      "name": "SANDIS VILMANIS",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "RW",
+      "line": "L3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 19,
+        "g": 3,
+        "a": 2,
+        "p": 5,
+        "sog": 15
+      },
+      "opp_index": 0.7164,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8478147,
+      "name": "BOKONDJI IMAMA",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "LW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 2,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 2
+      },
+      "opp_index": 0.4051,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8474189,
+      "name": "LARS ELLER",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "C",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 8,
+        "toi": 324.7,
+        "pptoi": 3.6
+      },
+      "season": {
+        "gp": 68,
+        "g": 5,
+        "a": 10,
+        "p": 15,
+        "sog": 67
+      },
+      "opp_index": 1.25,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8477903,
+      "name": "GARNET HATHAWAY",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "RW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 9,
+        "toi": 596.5,
+        "pptoi": 6.7
+      },
+      "season": {
+        "gp": 66,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 34
+      },
+      "opp_index": 0.7164,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8478055,
+      "name": "GUSTAV FORSLING",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "D",
+      "line": "D1",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 4,
+        "p": 4,
+        "sog": 18,
+        "toi": 1222.6,
+        "pptoi": 18.9
+      },
+      "season": {
+        "gp": 80,
+        "g": 2,
+        "a": 26,
+        "p": 28,
+        "sog": 112
+      },
+      "opp_index": 0.4539,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8477932,
+      "name": "AARON EKBLAD",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "D",
+      "line": "D1",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 9,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 15,
+        "toi": 464.2,
+        "pptoi": 33.2
+      },
+      "season": {
+        "gp": 72,
+        "g": 4,
+        "a": 22,
+        "p": 26,
+        "sog": 97
+      },
+      "opp_index": 0.4539,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8478859,
+      "name": "NIKO MIKKOLA",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "D",
+      "line": "D2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 5,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 7,
+        "toi": 1186.8,
+        "pptoi": 4.8
+      },
+      "season": {
+        "gp": 68,
+        "g": 3,
+        "a": 8,
+        "p": 11,
+        "sog": 68
+      },
+      "opp_index": 0.4539,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8477495,
+      "name": "SETH JONES",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "D",
+      "line": "D2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 8,
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 7,
+        "toi": 1100.4,
+        "pptoi": 90.4
+      },
+      "season": {
+        "gp": 52,
+        "g": 7,
+        "a": 25,
+        "p": 32,
+        "sog": 88
+      },
+      "opp_index": 0.4539,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "ROLE_UP"
+      ]
+    },
+    {
+      "id": 8475179,
+      "name": "DMITRY KULIKOV",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 6,
+        "toi": 850.8,
+        "pptoi": 1.9
+      },
+      "season": {
+        "gp": 19,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 15
+      },
+      "opp_index": 0.4539,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8475462,
+      "name": "RADKO GUDAS",
+      "team": "FLA",
+      "opp": "CAR",
+      "game_id": 2026020001,
+      "home": false,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 3,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 4,
+        "toi": 664.3,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 56,
+        "g": 2,
+        "a": 11,
+        "p": 13,
+        "sog": 63
+      },
+      "opp_index": 0.4539,
+      "opp_goalie": {
+        "name": "BRANDON BUSSI",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8480830,
+      "name": "ANDREI SVECHNIKOV",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "LW",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 2,
+        "p": 5,
+        "sog": 27,
+        "toi": 859.0,
+        "pptoi": 170.4
+      },
+      "season": {
+        "gp": 79,
+        "g": 31,
+        "a": 39,
+        "p": 70,
+        "sog": 203
+      },
+      "opp_index": 0.8101,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1"
+      ]
+    },
+    {
+      "id": 8478427,
+      "name": "SEBASTIAN AHO",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "C",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 5,
+        "p": 7,
+        "sog": 20,
+        "toi": 839.7,
+        "pptoi": 146.4
+      },
+      "season": {
+        "gp": 79,
+        "g": 27,
+        "a": 53,
+        "p": 80,
+        "sog": 195
+      },
+      "opp_index": 0.6667,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8480762,
+      "name": "ERIC ROBINSON",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "RW",
+      "line": "L1",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 1,
+        "p": 4,
+        "sog": 17,
+        "toi": 492.3,
+        "pptoi": 6.8
+      },
+      "season": {
+        "gp": 67,
+        "g": 12,
+        "a": 6,
+        "p": 18,
+        "sog": 84
+      },
+      "opp_index": 1.5522,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8475791,
+      "name": "TAYLOR HALL",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "LW",
+      "line": "L2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 2,
+        "p": 5,
+        "sog": 24,
+        "toi": 702.6,
+        "pptoi": 112.2
+      },
+      "season": {
+        "gp": 80,
+        "g": 18,
+        "a": 30,
+        "p": 48,
+        "sog": 137
+      },
+      "opp_index": 0.8101,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8482702,
+      "name": "LOGAN STANKOVEN",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "C",
+      "line": "L2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 4,
+        "a": 3,
+        "p": 7,
+        "sog": 26,
+        "toi": 503.0,
+        "pptoi": 66.0
+      },
+      "season": {
+        "gp": 81,
+        "g": 21,
+        "a": 23,
+        "p": 44,
+        "sog": 166
+      },
+      "opp_index": 0.6667,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "HOT"
+      ]
+    },
+    {
+      "id": 8482809,
+      "name": "JACKSON BLAKE",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "RW",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 4,
+        "p": 7,
+        "sog": 17,
+        "toi": 936.9,
+        "pptoi": 127.7
+      },
+      "season": {
+        "gp": 81,
+        "g": 22,
+        "a": 31,
+        "p": 53,
+        "sog": 174
+      },
+      "opp_index": 1.5522,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8477940,
+      "name": "NIKOLAJ EHLERS",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "LW",
+      "line": "L3",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 6,
+        "a": 5,
+        "p": 11,
+        "sog": 25,
+        "toi": 395.0,
+        "pptoi": 81.0
+      },
+      "season": {
+        "gp": 82,
+        "g": 26,
+        "a": 45,
+        "p": 71,
+        "sog": 207
+      },
+      "opp_index": 0.8101,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8473533,
+      "name": "JORDAN STAAL",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "C",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 6,
+        "a": 1,
+        "p": 7,
+        "sog": 20,
+        "toi": 580.4,
+        "pptoi": 46.9
+      },
+      "season": {
+        "gp": 75,
+        "g": 20,
+        "a": 16,
+        "p": 36,
+        "sog": 107
+      },
+      "opp_index": 0.6667,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "ROLE_UP",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8476921,
+      "name": "JORDAN MARTINOOK",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "RW",
+      "line": "L3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 19,
+        "toi": 630.0,
+        "pptoi": 14.4
+      },
+      "season": {
+        "gp": 77,
+        "g": 12,
+        "a": 17,
+        "p": 29,
+        "sog": 109
+      },
+      "opp_index": 1.5522,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8475235,
+      "name": "NICOLAS DESLAURIERS",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "LW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 6,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 4,
+        "toi": 380.5,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 31,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 18
+      },
+      "opp_index": 0.8101,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8476873,
+      "name": "MARK JANKOWSKI",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "C",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 7,
+        "toi": 525.5,
+        "pptoi": 22.3
+      },
+      "season": {
+        "gp": 68,
+        "g": 11,
+        "a": 10,
+        "p": 21,
+        "sog": 63
+      },
+      "opp_index": 0.6667,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8477478,
+      "name": "WILLIAM CARRIER",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "RW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 3,
+        "p": 3,
+        "sog": 8,
+        "toi": 410.1,
+        "pptoi": 8.0
+      },
+      "season": {
+        "gp": 70,
+        "g": 7,
+        "a": 11,
+        "p": 18,
+        "sog": 80
+      },
+      "opp_index": 1.5522,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8476958,
+      "name": "JACCOB SLAVIN",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "D",
+      "line": "D1",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 3,
+        "p": 3,
+        "sog": 14,
+        "toi": 898.0,
+        "pptoi": 1.4
+      },
+      "season": {
+        "gp": 39,
+        "g": 1,
+        "a": 7,
+        "p": 8,
+        "sog": 63
+      },
+      "opp_index": 1.5887,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8478970,
+      "name": "JALEN CHATFIELD",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "D",
+      "line": "D1",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 18,
+        "toi": 1089.7,
+        "pptoi": 11.4
+      },
+      "season": {
+        "gp": 72,
+        "g": 2,
+        "a": 15,
+        "p": 17,
+        "sog": 100
+      },
+      "opp_index": 1.5887,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8480817,
+      "name": "K'ANDRE MILLER",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "D",
+      "line": "D2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 4,
+        "p": 4,
+        "sog": 8,
+        "toi": 1005.4,
+        "pptoi": 122.2
+      },
+      "season": {
+        "gp": 72,
+        "g": 8,
+        "a": 29,
+        "p": 37,
+        "sog": 123
+      },
+      "opp_index": 1.5887,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8480336,
+      "name": "SEAN WALKER",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "D",
+      "line": "D2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 14,
+        "toi": 984.3,
+        "pptoi": 18.6
+      },
+      "season": {
+        "gp": 81,
+        "g": 9,
+        "a": 22,
+        "p": 31,
+        "sog": 179
+      },
+      "opp_index": 1.5887,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8476906,
+      "name": "SHAYNE GOSTISBEHERE",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "D",
+      "line": "D3",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 7,
+        "p": 9,
+        "sog": 12,
+        "toi": 901.2,
+        "pptoi": 259.9
+      },
+      "season": {
+        "gp": 55,
+        "g": 13,
+        "a": 37,
+        "p": 50,
+        "sog": 116
+      },
+      "opp_index": 1.5887,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8484428,
+      "name": "CHARLES-ALEXIS LEGAULT",
+      "team": "CAR",
+      "opp": "FLA",
+      "game_id": 2026020001,
+      "home": true,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 3,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 2,
+        "toi": 1020.3,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 12,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 12
+      },
+      "opp_index": 1.5887,
+      "opp_goalie": {
+        "name": "JACOB MARKSTROM",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8475184,
+      "name": "CHRIS KREIDER",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "LW",
+      "line": "L1",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 4,
+        "p": 5,
+        "sog": 8,
+        "toi": 427.1,
+        "pptoi": 52.6
+      },
+      "season": {
+        "gp": 75,
+        "g": 22,
+        "a": 28,
+        "p": 50,
+        "sog": 139
+      },
+      "opp_index": 1.6203,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8480018,
+      "name": "NICK SUZUKI",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "C",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 5,
+        "p": 8,
+        "sog": 24,
+        "toi": 896.9,
+        "pptoi": 176.6
+      },
+      "season": {
+        "gp": 82,
+        "g": 29,
+        "a": 72,
+        "p": 101,
+        "sog": 183
+      },
+      "opp_index": 1.4167,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8481540,
+      "name": "COLE CAUFIELD",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "RW",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 4,
+        "a": 3,
+        "p": 7,
+        "sog": 25,
+        "toi": 760.2,
+        "pptoi": 184.3
+      },
+      "season": {
+        "gp": 81,
+        "g": 51,
+        "a": 37,
+        "p": 88,
+        "sog": 258
+      },
+      "opp_index": 1.4328,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8483515,
+      "name": "JURAJ SLAFKOVSKY",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "LW",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 6,
+        "p": 8,
+        "sog": 25,
+        "toi": 717.7,
+        "pptoi": 162.8
+      },
+      "season": {
+        "gp": 82,
+        "g": 30,
+        "a": 43,
+        "p": 73,
+        "sog": 180
+      },
+      "opp_index": 1.6203,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8481618,
+      "name": "ALEX NEWHOOK",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "C",
+      "line": "L2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 5,
+        "a": 1,
+        "p": 6,
+        "sog": 21,
+        "toi": 776.7,
+        "pptoi": 39.7
+      },
+      "season": {
+        "gp": 42,
+        "g": 13,
+        "a": 12,
+        "p": 25,
+        "sog": 61
+      },
+      "opp_index": 1.4167,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "ROLE_UP",
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8484984,
+      "name": "IVAN DEMIDOV",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "RW",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 3,
+        "p": 5,
+        "sog": 23,
+        "toi": 481.6,
+        "pptoi": 80.3
+      },
+      "season": {
+        "gp": 82,
+        "g": 19,
+        "a": 43,
+        "p": 62,
+        "sog": 127
+      },
+      "opp_index": 1.4328,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8480074,
+      "name": "ALEXANDRE TEXIER",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "LW",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 9,
+        "toi": 567.0,
+        "pptoi": 44.1
+      },
+      "season": {
+        "gp": 51,
+        "g": 8,
+        "a": 13,
+        "p": 21,
+        "sog": 74
+      },
+      "opp_index": 1.6203,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8476479,
+      "name": "PHILLIP DANAULT",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "C",
+      "line": "L3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 5,
+        "p": 7,
+        "sog": 10,
+        "toi": 457.6,
+        "pptoi": 4.9
+      },
+      "season": {
+        "gp": 75,
+        "g": 6,
+        "a": 11,
+        "p": 17,
+        "sog": 91
+      },
+      "opp_index": 1.4167,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "ROLE_UP",
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8481523,
+      "name": "KIRBY DACH",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "RW",
+      "line": "L3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 1,
+        "p": 3,
+        "sog": 9,
+        "toi": 509.0,
+        "pptoi": 60.8
+      },
+      "season": {
+        "gp": 37,
+        "g": 8,
+        "a": 7,
+        "p": 15,
+        "sog": 47
+      },
+      "opp_index": 1.4328,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8482737,
+      "name": "ZACK BOLDUC",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "LW",
+      "line": "L4",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 9,
+        "toi": 511.5,
+        "pptoi": 43.5
+      },
+      "season": {
+        "gp": 78,
+        "g": 12,
+        "a": 18,
+        "p": 30,
+        "sog": 101
+      },
+      "opp_index": 1.6203,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8478133,
+      "name": "JAKE EVANS",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "C",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 5,
+        "p": 7,
+        "sog": 16,
+        "toi": 717.2,
+        "pptoi": 11.4
+      },
+      "season": {
+        "gp": 68,
+        "g": 12,
+        "a": 12,
+        "p": 24,
+        "sog": 75
+      },
+      "opp_index": 1.4167,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8476981,
+      "name": "JOSH ANDERSON",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "RW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 2,
+        "p": 5,
+        "sog": 14,
+        "toi": 641.3,
+        "pptoi": 0.6
+      },
+      "season": {
+        "gp": 72,
+        "g": 14,
+        "a": 9,
+        "p": 23,
+        "sog": 89
+      },
+      "opp_index": 1.4328,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8476875,
+      "name": "MIKE MATHESON",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "D",
+      "line": "D1",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 9,
+        "toi": 623.7,
+        "pptoi": 9.1
+      },
+      "season": {
+        "gp": 78,
+        "g": 7,
+        "a": 30,
+        "p": 37,
+        "sog": 114
+      },
+      "opp_index": 1.3617,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8480865,
+      "name": "NOAH DOBSON",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "D",
+      "line": "D1",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 19,
+        "toi": 814.5,
+        "pptoi": 51.6
+      },
+      "season": {
+        "gp": 80,
+        "g": 12,
+        "a": 35,
+        "p": 47,
+        "sog": 158
+      },
+      "opp_index": 1.3617,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8483457,
+      "name": "LANE HUTSON",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "D",
+      "line": "D2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 8,
+        "p": 9,
+        "sog": 13,
+        "toi": 1456.7,
+        "pptoi": 203.7
+      },
+      "season": {
+        "gp": 82,
+        "g": 12,
+        "a": 66,
+        "p": 78,
+        "sog": 124
+      },
+      "opp_index": 1.3617,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8478851,
+      "name": "ALEXANDRE CARRIER",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "D",
+      "line": "D2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 2,
+        "toi": 893.5,
+        "pptoi": 11.6
+      },
+      "season": {
+        "gp": 73,
+        "g": 7,
+        "a": 15,
+        "p": 22,
+        "sog": 56
+      },
+      "opp_index": 1.3617,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8481593,
+      "name": "JAYDEN STRUBLE",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 8,
+        "toi": 592.5,
+        "pptoi": 2.9
+      },
+      "season": {
+        "gp": 59,
+        "g": 2,
+        "a": 10,
+        "p": 12,
+        "sog": 26
+      },
+      "opp_index": 1.3617,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8482964,
+      "name": "ARBER XHEKAJ",
+      "team": "MTL",
+      "opp": "TOR",
+      "game_id": 2026020002,
+      "home": false,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 5,
+        "toi": 264.4,
+        "pptoi": 4.2
+      },
+      "season": {
+        "gp": 65,
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 40
+      },
+      "opp_index": 1.3617,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8478458,
+      "name": "JACK ROSLOVIC",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "LW",
+      "line": "L1",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 2,
+        "p": 4,
+        "sog": 20,
+        "toi": 458.1,
+        "pptoi": 42.9
+      },
+      "season": {
+        "gp": 69,
+        "g": 21,
+        "a": 15,
+        "p": 36,
+        "sog": 141
+      },
+      "opp_index": 0.4051,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8479318,
+      "name": "AUSTON MATTHEWS",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "C",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 4,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 14,
+        "toi": 937.8,
+        "pptoi": 116.8
+      },
+      "season": {
+        "gp": 60,
+        "g": 27,
+        "a": 26,
+        "p": 53,
+        "sog": 227
+      },
+      "opp_index": 0.9167,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1"
+      ]
+    },
+    {
+      "id": 8477939,
+      "name": "WILLIAM NYLANDER",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "RW",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 5,
+        "a": 4,
+        "p": 9,
+        "sog": 28,
+        "toi": 744.4,
+        "pptoi": 59.3
+      },
+      "season": {
+        "gp": 65,
+        "g": 30,
+        "a": 49,
+        "p": 79,
+        "sog": 156
+      },
+      "opp_index": 0.8358,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "ROLE_UP",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8486067,
+      "name": "GAVIN MCKENNA",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "LW",
+      "line": "L2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
+      },
+      "opp_index": 0.4051,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8475166,
+      "name": "JOHN TAVARES",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "C",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 7,
+        "a": 4,
+        "p": 11,
+        "sog": 20,
+        "toi": 837.9,
+        "pptoi": 123.5
+      },
+      "season": {
+        "gp": 82,
+        "g": 31,
+        "a": 40,
+        "p": 71,
+        "sog": 192
+      },
+      "opp_index": 0.9167,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": null,
+      "name": "KIRILL MARCHENKO",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "RW",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
+      },
+      "opp_index": 0.8358,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1"
+      ]
+    },
+    {
+      "id": 8484158,
+      "name": "EASTON COWAN",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "LW",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 3,
+        "p": 5,
+        "sog": 12,
+        "toi": 529.5,
+        "pptoi": 60.5
+      },
+      "season": {
+        "gp": 66,
+        "g": 11,
+        "a": 18,
+        "p": 29,
+        "sog": 92
+      },
+      "opp_index": 0.4051,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8477426,
+      "name": "NICK PAUL",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "C",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 9,
+        "toi": 327.7,
+        "pptoi": 16.3
+      },
+      "season": {
+        "gp": 51,
+        "g": 7,
+        "a": 8,
+        "p": 15,
+        "sog": 68
+      },
+      "opp_index": 0.9167,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8476925,
+      "name": "COLTON SISSONS",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "RW",
+      "line": "L3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 11,
+        "toi": 464.4,
+        "pptoi": 0.2
+      },
+      "season": {
+        "gp": 66,
+        "g": 6,
+        "a": 5,
+        "p": 11,
+        "sog": 74
+      },
+      "opp_index": 0.8358,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8479520,
+      "name": "BRANDON DUHAIME",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "LW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 8,
+        "toi": 335.2,
+        "pptoi": 0.8
+      },
+      "season": {
+        "gp": 82,
+        "g": 4,
+        "a": 5,
+        "p": 9,
+        "sog": 64
+      },
+      "opp_index": 0.4051,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8476927,
+      "name": "TEDDY BLUEGER",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "C",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 7,
+        "toi": 507.9,
+        "pptoi": 0.9
+      },
+      "season": {
+        "gp": 35,
+        "g": 9,
+        "a": 8,
+        "p": 17,
+        "sog": 51
+      },
+      "opp_index": 0.9167,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8479772,
+      "name": "ZACK MACEWEN",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "RW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 3,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 4
+      },
+      "opp_index": 0.8358,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8476853,
+      "name": "MORGAN RIELLY",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "D",
+      "line": "D1",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 1,
+        "p": 4,
+        "sog": 13,
+        "toi": 726.5,
+        "pptoi": 41.4
+      },
+      "season": {
+        "gp": 78,
+        "g": 11,
+        "a": 25,
+        "p": 36,
+        "sog": 141
+      },
+      "opp_index": 0.6809,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8478178,
+      "name": "DARREN RADDYSH",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "D",
+      "line": "D1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 4,
+        "p": 6,
+        "sog": 32,
+        "toi": 868.8,
+        "pptoi": 171.9
+      },
+      "season": {
+        "gp": 73,
+        "g": 22,
+        "a": 48,
+        "p": 70,
+        "sog": 212
+      },
+      "opp_index": 0.6809,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1"
+      ]
+    },
+    {
+      "id": 8476931,
+      "name": "JAKE MCCABE",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "D",
+      "line": "D2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 1,
+        "p": 3,
+        "sog": 13,
+        "toi": 1066.5,
+        "pptoi": 24.5
+      },
+      "season": {
+        "gp": 80,
+        "g": 5,
+        "a": 20,
+        "p": 25,
+        "sog": 77
+      },
+      "opp_index": 0.6809,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8475690,
+      "name": "CHRIS TANEV",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "D",
+      "line": "D2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 11,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 8
+      },
+      "opp_index": 0.6809,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8475171,
+      "name": "OLIVER EKMAN-LARSSON",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 4,
+        "p": 4,
+        "sog": 12,
+        "toi": 709.9,
+        "pptoi": 85.4
+      },
+      "season": {
+        "gp": 78,
+        "g": 8,
+        "a": 31,
+        "p": 39,
+        "sog": 108
+      },
+      "opp_index": 0.6809,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8479442,
+      "name": "TROY STECHER",
+      "team": "TOR",
+      "opp": "MTL",
+      "game_id": 2026020002,
+      "home": true,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 6,
+        "toi": 652.8,
+        "pptoi": 0.6
+      },
+      "season": {
+        "gp": 64,
+        "g": 3,
+        "a": 11,
+        "p": 14,
+        "sog": 64
+      },
+      "opp_index": 0.6809,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8484210,
+      "name": "GABRIEL PERREAULT",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "LW",
+      "line": "L1",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 4,
+        "a": 3,
+        "p": 7,
+        "sog": 19,
+        "toi": 607.8,
+        "pptoi": 73.7
+      },
+      "season": {
+        "gp": 49,
+        "g": 12,
+        "a": 15,
+        "p": 27,
+        "sog": 73
+      },
+      "opp_index": 0.9452,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "HOT"
+      ]
+    },
+    {
+      "id": 8476459,
+      "name": "MIKA ZIBANEJAD",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "C",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 5,
+        "a": 4,
+        "p": 9,
+        "sog": 30,
+        "toi": 979.0,
+        "pptoi": 170.4
+      },
+      "season": {
+        "gp": 81,
+        "g": 34,
+        "a": 44,
+        "p": 78,
+        "sog": 215
+      },
+      "opp_index": 0.6667,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8482109,
+      "name": "ALEXIS LAFRENIÈRE",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "RW",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 4,
+        "a": 5,
+        "p": 9,
+        "sog": 26,
+        "toi": 790.7,
+        "pptoi": 139.6
+      },
+      "season": {
+        "gp": 82,
+        "g": 24,
+        "a": 33,
+        "p": 57,
+        "sog": 164
+      },
+      "opp_index": 0.7164,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8477416,
+      "name": "OLIVER BJORKSTRAND",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "LW",
+      "line": "L2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 12,
+        "toi": 306.6,
+        "pptoi": 31.8
+      },
+      "season": {
+        "gp": 80,
+        "g": 12,
+        "a": 20,
+        "p": 32,
+        "sog": 130
+      },
+      "opp_index": 0.9452,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8476468,
+      "name": "J.T. MILLER",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "C",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 6,
+        "p": 9,
+        "sog": 18,
+        "toi": 889.6,
+        "pptoi": 155.9
+      },
+      "season": {
+        "gp": 68,
+        "g": 17,
+        "a": 36,
+        "p": 53,
+        "sog": 144
+      },
+      "opp_index": 0.6667,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8481604,
+      "name": "PAVEL DOROFEYEV",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "RW",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 6,
+        "a": 1,
+        "p": 7,
+        "sog": 25,
+        "toi": 937.7,
+        "pptoi": 194.9
+      },
+      "season": {
+        "gp": 82,
+        "g": 37,
+        "a": 27,
+        "p": 64,
+        "sog": 230
+      },
+      "opp_index": 0.7164,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8482157,
+      "name": "WILL CUYLLE",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "LW",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 2,
+        "p": 5,
+        "sog": 20,
+        "toi": 922.4,
+        "pptoi": 51.9
+      },
+      "season": {
+        "gp": 82,
+        "g": 20,
+        "a": 18,
+        "p": 38,
+        "sog": 157
+      },
+      "opp_index": 0.9452,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8483690,
+      "name": "NOAH LABA",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "C",
+      "line": "L3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 9,
+        "toi": 421.2,
+        "pptoi": 16.7
+      },
+      "season": {
+        "gp": 74,
+        "g": 9,
+        "a": 15,
+        "p": 24,
+        "sog": 73
+      },
+      "opp_index": 0.6667,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8480009,
+      "name": "EELI TOLVANEN",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "RW",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 21,
+        "toi": 612.9,
+        "pptoi": 43.9
+      },
+      "season": {
+        "gp": 78,
+        "g": 12,
+        "a": 24,
+        "p": 36,
+        "sog": 141
+      },
+      "opp_index": 0.7164,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8481789,
+      "name": "TYE KARTYE",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "LW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 11,
+        "toi": 585.0,
+        "pptoi": 4.2
+      },
+      "season": {
+        "gp": 64,
+        "g": 8,
+        "a": 14,
+        "p": 22,
+        "sog": 56
+      },
+      "opp_index": 0.9452,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8480813,
+      "name": "JOE VELENO",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "C",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 3,
+        "toi": 366.3,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 61,
+        "g": 2,
+        "a": 3,
+        "p": 5,
+        "sog": 52
+      },
+      "opp_index": 0.6667,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8482460,
+      "name": "MATT REMPE",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "RW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 26,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 15
+      },
+      "opp_index": 0.7164,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8478882,
+      "name": "VLADISLAV GAVRIKOV",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "D",
+      "line": "D1",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 3,
+        "p": 3,
+        "sog": 13,
+        "toi": 810.9,
+        "pptoi": 44.7
+      },
+      "season": {
+        "gp": 82,
+        "g": 14,
+        "a": 21,
+        "p": 35,
+        "sog": 119
+      },
+      "opp_index": 1.1348,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8479323,
+      "name": "ADAM FOX",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "D",
+      "line": "D1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 11,
+        "p": 13,
+        "sog": 14,
+        "toi": 983.6,
+        "pptoi": 145.6
+      },
+      "season": {
+        "gp": 55,
+        "g": 9,
+        "a": 44,
+        "p": 53,
+        "sog": 91
+      },
+      "opp_index": 1.1348,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8477969,
+      "name": "MARCUS PETTERSSON",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "D",
+      "line": "D2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 5,
+        "toi": 764.2,
+        "pptoi": 0.7
+      },
+      "season": {
+        "gp": 82,
+        "g": 3,
+        "a": 15,
+        "p": 18,
+        "sog": 66
+      },
+      "opp_index": 1.1348,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8480434,
+      "name": "SEAN DURZI",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "D",
+      "line": "D2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 3,
+        "p": 3,
+        "sog": 14,
+        "toi": 360.5,
+        "pptoi": 0.3
+      },
+      "season": {
+        "gp": 60,
+        "g": 5,
+        "a": 22,
+        "p": 27,
+        "sog": 84
+      },
+      "opp_index": 1.1348,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8485957,
+      "name": "ALBERTS SMITS",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
+      },
+      "opp_index": 1.1348,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8482073,
+      "name": "BRADEN SCHNEIDER",
+      "team": "NYR",
+      "opp": "BOS",
+      "game_id": 2026020003,
+      "home": false,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 11,
+        "toi": 880.9,
+        "pptoi": 12.8
+      },
+      "season": {
+        "gp": 82,
+        "g": 2,
+        "a": 16,
+        "p": 18,
+        "sog": 102
+      },
+      "opp_index": 1.1348,
+      "opp_goalie": {
+        "name": "JEREMY SWAYMAN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8482175,
+      "name": "JJ PETERKA",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "LW",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 0,
+        "p": 3,
+        "sog": 19,
+        "toi": 684.1,
+        "pptoi": 73.5
+      },
+      "season": {
+        "gp": 82,
+        "g": 25,
+        "a": 22,
+        "p": 47,
+        "sog": 159
+      },
+      "opp_index": 1.3502,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8477496,
+      "name": "ELIAS LINDHOLM",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "C",
+      "line": "L1",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 11,
+        "toi": 824.2,
+        "pptoi": 97.4
+      },
+      "season": {
+        "gp": 69,
+        "g": 17,
+        "a": 31,
+        "p": 48,
+        "sog": 114
+      },
+      "opp_index": 0.1667,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8477956,
+      "name": "DAVID PASTRNAK",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "RW",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 6,
+        "p": 8,
+        "sog": 31,
+        "toi": 1042.9,
+        "pptoi": 110.9
+      },
+      "season": {
+        "gp": 77,
+        "g": 29,
+        "a": 71,
+        "p": 100,
+        "sog": 261
+      },
+      "opp_index": 0.9552,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8479999,
+      "name": "CASEY MITTELSTADT",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "LW",
+      "line": "L2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 7,
+        "toi": 448.6,
+        "pptoi": 41.3
+      },
+      "season": {
+        "gp": 71,
+        "g": 15,
+        "a": 27,
+        "p": 42,
+        "sog": 80
+      },
+      "opp_index": 1.3502,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8478401,
+      "name": "PAVEL ZACHA",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "C",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 6,
+        "p": 9,
+        "sog": 13,
+        "toi": 525.6,
+        "pptoi": 104.3
+      },
+      "season": {
+        "gp": 78,
+        "g": 30,
+        "a": 35,
+        "p": 65,
+        "sog": 131
+      },
+      "opp_index": 0.1667,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8479987,
+      "name": "MORGAN GEEKIE",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "RW",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 5,
+        "a": 2,
+        "p": 7,
+        "sog": 19,
+        "toi": 648.7,
+        "pptoi": 119.3
+      },
+      "season": {
+        "gp": 81,
+        "g": 39,
+        "a": 29,
+        "p": 68,
+        "sog": 181
+      },
+      "opp_index": 0.9552,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8485395,
+      "name": "JAMES HAGENS",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "LW",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 3,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 3,
+        "toi": 715.0,
+        "pptoi": 53.7
+      },
+      "season": {
+        "gp": 2,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 2
+      },
+      "opp_index": 1.3502,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8483489,
+      "name": "FRASER MINTEN",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "C",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 11,
+        "toi": 500.7,
+        "pptoi": 44.3
+      },
+      "season": {
+        "gp": 82,
+        "g": 17,
+        "a": 18,
+        "p": 35,
+        "sog": 116
+      },
+      "opp_index": 0.1667,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8482177,
+      "name": "MARAT KHUSNUTDINOV",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "RW",
+      "line": "L3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 4,
+        "toi": 535.6,
+        "pptoi": 4.6
+      },
+      "season": {
+        "gp": 77,
+        "g": 15,
+        "a": 18,
+        "p": 33,
+        "sog": 78
+      },
+      "opp_index": 0.9552,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8479661,
+      "name": "TANNER JEANNOT",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "LW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 12,
+        "toi": 422.1,
+        "pptoi": 2.8
+      },
+      "season": {
+        "gp": 77,
+        "g": 6,
+        "a": 16,
+        "p": 22,
+        "sog": 78
+      },
+      "opp_index": 1.3502,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8476374,
+      "name": "SEAN KURALY",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "C",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 10,
+        "toi": 560.8,
+        "pptoi": 2.8
+      },
+      "season": {
+        "gp": 82,
+        "g": 6,
+        "a": 16,
+        "p": 22,
+        "sog": 110
+      },
+      "opp_index": 0.1667,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8480355,
+      "name": "MARK KASTELIC",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "RW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 12,
+        "toi": 620.6,
+        "pptoi": 2.2
+      },
+      "season": {
+        "gp": 82,
+        "g": 12,
+        "a": 10,
+        "p": 22,
+        "sog": 100
+      },
+      "opp_index": 0.9552,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8476854,
+      "name": "HAMPUS LINDHOLM",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "D",
+      "line": "D1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 12,
+        "toi": 1045.6,
+        "pptoi": 49.8
+      },
+      "season": {
+        "gp": 67,
+        "g": 5,
+        "a": 21,
+        "p": 26,
+        "sog": 100
+      },
+      "opp_index": 0.0,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1"
+      ]
+    },
+    {
+      "id": 8478840,
+      "name": "WILL BORGEN",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "D",
+      "line": "D1",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 9,
+        "toi": 804.3,
+        "pptoi": 0.4
+      },
+      "season": {
+        "gp": 75,
+        "g": 5,
+        "a": 10,
+        "p": 15,
+        "sog": 69
+      },
+      "opp_index": 0.0,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8477507,
+      "name": "NIKITA ZADOROV",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "D",
+      "line": "D2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 11,
+        "toi": 764.1,
+        "pptoi": 6.0
+      },
+      "season": {
+        "gp": 81,
+        "g": 2,
+        "a": 20,
+        "p": 22,
+        "sog": 107
+      },
+      "opp_index": 0.0,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8477365,
+      "name": "CONNOR CLIFTON",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "D",
+      "line": "D2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 6,
+        "toi": 722.4,
+        "pptoi": 1.7
+      },
+      "season": {
+        "gp": 50,
+        "g": 2,
+        "a": 4,
+        "p": 6,
+        "sog": 35
+      },
+      "opp_index": 0.0,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8481219,
+      "name": "JONATHAN ASPIROT",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 11,
+        "toi": 623.4,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 61,
+        "g": 3,
+        "a": 10,
+        "p": 13,
+        "sog": 47
+      },
+      "opp_index": 0.0,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8482511,
+      "name": "MASON LOHREI",
+      "team": "BOS",
+      "opp": "NYR",
+      "game_id": 2026020003,
+      "home": true,
+      "pos": "D",
+      "line": "D3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 7,
+        "toi": 354.3,
+        "pptoi": 10.9
+      },
+      "season": {
+        "gp": 73,
+        "g": 7,
+        "a": 19,
+        "p": 26,
+        "sog": 72
+      },
+      "opp_index": 0.0,
+      "opp_goalie": {
+        "name": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8478498,
+      "name": "JAKE DEBRUSK",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "LW",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 6,
+        "a": 1,
+        "p": 7,
+        "sog": 25,
+        "toi": 799.3,
+        "pptoi": 122.2
+      },
+      "season": {
+        "gp": 81,
+        "g": 23,
+        "a": 19,
+        "p": 42,
+        "sog": 219
+      },
+      "opp_index": 0.6751,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8483678,
+      "name": "ELIAS PETTERSSON",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "C",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 6,
+        "toi": 459.5,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 70,
+        "g": 3,
+        "a": 7,
+        "p": 10,
+        "sog": 46
+      },
+      "opp_index": 0.6667,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1"
+      ]
+    },
+    {
+      "id": 8483476,
+      "name": "JONATHAN LEKKERIMAKI",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "RW",
+      "line": "L1",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 13,
+        "g": 2,
+        "a": 1,
+        "p": 3,
+        "sog": 10
+      },
+      "opp_index": 0.7164,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": []
+    },
+    {
+      "id": 8483499,
+      "name": "LIAM OHGREN",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "LW",
+      "line": "L2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 10,
+        "toi": 987.0,
+        "pptoi": 20.2
+      },
+      "season": {
+        "gp": 69,
+        "g": 8,
+        "a": 10,
+        "p": 18,
+        "sog": 87
+      },
+      "opp_index": 0.6751,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": []
+    },
+    {
+      "id": 8482079,
+      "name": "MARCO ROSSI",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "C",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 4,
+        "a": 6,
+        "p": 10,
+        "sog": 16,
+        "toi": 677.6,
+        "pptoi": 88.5
+      },
+      "season": {
+        "gp": 50,
+        "g": 12,
+        "a": 23,
+        "p": 35,
+        "sog": 66
+      },
+      "opp_index": 0.6667,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8478444,
+      "name": "BROCK BOESER",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "RW",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 5,
+        "a": 8,
+        "p": 13,
+        "sog": 27,
+        "toi": 973.6,
+        "pptoi": 184.2
+      },
+      "season": {
+        "gp": 75,
+        "g": 22,
+        "a": 26,
+        "p": 48,
+        "sog": 166
+      },
+      "opp_index": 0.7164,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8482055,
+      "name": "DREW O'CONNOR",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "LW",
+      "line": "L3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 20,
+        "toi": 933.1,
+        "pptoi": 55.6
+      },
+      "season": {
+        "gp": 82,
+        "g": 17,
+        "a": 12,
+        "p": 29,
+        "sog": 136
+      },
+      "opp_index": 0.6751,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": []
+    },
+    {
+      "id": 8484136,
+      "name": "MAX SASSON",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "C",
+      "line": "L3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 2,
+        "p": 4,
+        "sog": 10,
+        "toi": 458.1,
+        "pptoi": 1.0
+      },
+      "season": {
+        "gp": 66,
+        "g": 13,
+        "a": 6,
+        "p": 19,
+        "sog": 62
+      },
+      "opp_index": 0.6667,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": []
+    },
+    {
+      "id": 8481024,
+      "name": "LINUS KARLSSON",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "RW",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 9,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 12,
+        "toi": 361.9,
+        "pptoi": 22.9
+      },
+      "season": {
+        "gp": 79,
+        "g": 15,
+        "a": 20,
+        "p": 35,
+        "sog": 116
+      },
+      "opp_index": 0.7164,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": []
+    },
+    {
+      "id": 8481032,
+      "name": "PAUL COTTER",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "LW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 0,
+        "p": 3,
+        "sog": 8,
+        "toi": 462.0,
+        "pptoi": 3.8
+      },
+      "season": {
+        "gp": 79,
+        "g": 9,
+        "a": 6,
+        "p": 15,
+        "sog": 61
+      },
+      "opp_index": 0.6751,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": []
+    },
+    {
+      "id": 8482691,
+      "name": "AATU RATY",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "C",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 11,
+        "toi": 260.1,
+        "pptoi": 9.3
+      },
+      "season": {
+        "gp": 66,
+        "g": 4,
+        "a": 10,
+        "p": 14,
+        "sog": 65
+      },
+      "opp_index": 0.6667,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": []
+    },
+    {
+      "id": 8475848,
+      "name": "BRENDAN GALLAGHER",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "RW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 14,
+        "toi": 275.4,
+        "pptoi": 28.9
+      },
+      "season": {
+        "gp": 77,
+        "g": 7,
+        "a": 16,
+        "p": 23,
+        "sog": 121
+      },
+      "opp_index": 0.7164,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": []
+    },
+    {
+      "id": 8484798,
+      "name": "ZEEV BUIUM",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "D",
+      "line": "D1",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 11,
+        "toi": 1064.9,
+        "pptoi": 48.4
+      },
+      "season": {
+        "gp": 76,
+        "g": 6,
+        "a": 20,
+        "p": 26,
+        "sog": 73
+      },
+      "opp_index": 0.6809,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": []
+    },
+    {
+      "id": 8479425,
+      "name": "FILIP HRONEK",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "D",
+      "line": "D1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 8,
+        "p": 8,
+        "sog": 26,
+        "toi": 789.8,
+        "pptoi": 85.7
+      },
+      "season": {
+        "gp": 82,
+        "g": 8,
+        "a": 41,
+        "p": 49,
+        "sog": 137
+      },
+      "opp_index": 0.6809,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8476467,
+      "name": "JAMIE OLEKSIAK",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "D",
+      "line": "D2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 13,
+        "toi": 463.3,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 78,
+        "g": 5,
+        "a": 10,
+        "p": 15,
+        "sog": 77
+      },
+      "opp_index": 0.6809,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": []
+    },
+    {
+      "id": 8484240,
+      "name": "TOM WILLANDER",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "D",
+      "line": "D2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 9,
+        "toi": 870.1,
+        "pptoi": 40.3
+      },
+      "season": {
+        "gp": 70,
+        "g": 5,
+        "a": 16,
+        "p": 21,
+        "sog": 59
+      },
+      "opp_index": 0.6809,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": []
+    },
+    {
+      "id": null,
+      "name": "ELIAS NILS PETTERSSON",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
+      },
+      "opp_index": 0.6809,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": []
+    },
+    {
+      "id": 8474568,
+      "name": "LUKE SCHENN",
+      "team": "VAN",
+      "opp": "EDM",
+      "game_id": 2026020004,
+      "home": false,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 3,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 3,
+        "toi": 474.3,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 50,
+        "g": 1,
+        "a": 6,
+        "p": 7,
+        "sog": 35
+      },
+      "opp_index": 0.6809,
+      "opp_goalie": {
+        "name": "TRISTAN JARRY",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": []
+    },
+    {
+      "id": 8481617,
+      "name": "VASILY PODKOLZIN",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "LW",
+      "line": "L1",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 5,
+        "a": 2,
+        "p": 7,
+        "sog": 21,
+        "toi": 578.1,
+        "pptoi": 72.4
+      },
+      "season": {
+        "gp": 82,
+        "g": 19,
+        "a": 18,
+        "p": 37,
+        "sog": 139
+      },
+      "opp_index": 1.3502,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8478402,
+      "name": "CONNOR MCDAVID",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "C",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 6,
+        "a": 11,
+        "p": 17,
+        "sog": 41,
+        "toi": 1217.2,
+        "pptoi": 160.0
+      },
+      "season": {
+        "gp": 82,
+        "g": 48,
+        "a": 90,
+        "p": 138,
+        "sog": 306
+      },
+      "opp_index": 0.9167,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8477934,
+      "name": "LEON DRAISAITL",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "RW",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 9,
+        "g": 3,
+        "a": 10,
+        "p": 13,
+        "sog": 19,
+        "toi": 837.4,
+        "pptoi": 142.8
+      },
+      "season": {
+        "gp": 65,
+        "g": 35,
+        "a": 62,
+        "p": 97,
+        "sog": 186
+      },
+      "opp_index": 1.9104,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8475786,
+      "name": "ZACH HYMAN",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "LW",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 4,
+        "a": 3,
+        "p": 7,
+        "sog": 18,
+        "toi": 697.8,
+        "pptoi": 130.3
+      },
+      "season": {
+        "gp": 58,
+        "g": 31,
+        "a": 21,
+        "p": 52,
+        "sog": 159
+      },
+      "opp_index": 1.3502,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8476454,
+      "name": "RYAN NUGENT-HOPKINS",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "C",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 3,
+        "p": 5,
+        "sog": 17,
+        "toi": 529.5,
+        "pptoi": 70.2
+      },
+      "season": {
+        "gp": 72,
+        "g": 20,
+        "a": 36,
+        "p": 56,
+        "sog": 133
+      },
+      "opp_index": 0.9167,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1"
+      ]
+    },
+    {
+      "id": 8477953,
+      "name": "KASPERI KAPANEN",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "RW",
+      "line": "L2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 1,
+        "p": 4,
+        "sog": 13,
+        "toi": 638.0,
+        "pptoi": 8.9
+      },
+      "season": {
+        "gp": 41,
+        "g": 8,
+        "a": 9,
+        "p": 17,
+        "sog": 65
+      },
+      "opp_index": 1.9104,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "ROLE_UP",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8480029,
+      "name": "ALEX FORMENTON",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "LW",
+      "line": "L3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
+      },
+      "opp_index": 1.3502,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "ROLE_UP",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8482703,
+      "name": "COLTON DACH",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "C",
+      "line": "L3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 7,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 7,
+        "toi": 366.9,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 61,
+        "g": 5,
+        "a": 8,
+        "p": 13,
+        "sog": 58
+      },
+      "opp_index": 0.9167,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "ROLE_UP"
+      ]
+    },
+    {
+      "id": 8478472,
+      "name": "MATHIEU JOSEPH",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "RW",
+      "line": "L3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 6,
+        "toi": 348.4,
+        "pptoi": 0.5
+      },
+      "season": {
+        "gp": 51,
+        "g": 2,
+        "a": 9,
+        "p": 11,
+        "sog": 36
+      },
+      "opp_index": 1.9104,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "ROLE_UP",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8483455,
+      "name": "ISAAC HOWARD",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "LW",
+      "line": "L4",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 29,
+        "g": 2,
+        "a": 3,
+        "p": 5,
+        "sog": 36
+      },
+      "opp_index": 1.3502,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8486161,
+      "name": "OWEN MICHAELS",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "C",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
+      },
+      "opp_index": 0.9167,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8479365,
+      "name": "TRENT FREDERIC",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "RW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 11,
+        "toi": 504.4,
+        "pptoi": 1.1
+      },
+      "season": {
+        "gp": 74,
+        "g": 4,
+        "a": 3,
+        "p": 7,
+        "sog": 77
+      },
+      "opp_index": 1.9104,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8475218,
+      "name": "MATTIAS EKHOLM",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "D",
+      "line": "D1",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 3,
+        "p": 3,
+        "sog": 8,
+        "toi": 708.0,
+        "pptoi": 14.3
+      },
+      "season": {
+        "gp": 82,
+        "g": 6,
+        "a": 35,
+        "p": 41,
+        "sog": 131
+      },
+      "opp_index": 1.3617,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8480803,
+      "name": "EVAN BOUCHARD",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "D",
+      "line": "D1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 8,
+        "p": 9,
+        "sog": 18,
+        "toi": 1230.3,
+        "pptoi": 187.2
+      },
+      "season": {
+        "gp": 82,
+        "g": 21,
+        "a": 74,
+        "p": 95,
+        "sog": 221
+      },
+      "opp_index": 1.3617,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8478013,
+      "name": "JAKE WALMAN",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "D",
+      "line": "D2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 4,
+        "p": 4,
+        "sog": 17,
+        "toi": 780.9,
+        "pptoi": 19.0
+      },
+      "season": {
+        "gp": 53,
+        "g": 8,
+        "a": 12,
+        "p": 20,
+        "sog": 96
+      },
+      "opp_index": 1.3617,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8476473,
+      "name": "CONNOR MURPHY",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "D",
+      "line": "D2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 15,
+        "toi": 622.5,
+        "pptoi": 0.3
+      },
+      "season": {
+        "gp": 80,
+        "g": 5,
+        "a": 12,
+        "p": 17,
+        "sog": 70
+      },
+      "opp_index": 1.3617,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8478854,
+      "name": "RYAN SHEA",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 3,
+        "p": 5,
+        "sog": 9,
+        "toi": 864.3,
+        "pptoi": 1.0
+      },
+      "season": {
+        "gp": 80,
+        "g": 6,
+        "a": 29,
+        "p": 35,
+        "sog": 72
+      },
+      "opp_index": 1.3617,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8482166,
+      "name": "SHAKIR MUKHAMADULLIN",
+      "team": "EDM",
+      "opp": "VAN",
+      "game_id": 2026020004,
+      "home": true,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 14,
+        "toi": 997.8,
+        "pptoi": 7.5
+      },
+      "season": {
+        "gp": 50,
+        "g": 5,
+        "a": 7,
+        "p": 12,
+        "sog": 49
+      },
+      "opp_index": 1.3617,
+      "opp_goalie": {
+        "name": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8484197,
+      "name": "OLIVER MOORE",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "LW",
+      "line": "L1",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 2,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 2,
+        "toi": 54.5,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 51,
+        "g": 5,
+        "a": 14,
+        "p": 19,
+        "sog": 57
+      },
+      "opp_index": 0.6751,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "ROLE_UP"
+      ]
+    },
+    {
+      "id": 8484390,
+      "name": "ROMAN KANTSEROV",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "C",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
+      },
+      "opp_index": 1.0,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1"
+      ]
+    },
+    {
+      "id": 8474141,
+      "name": "PATRICK KANE",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "RW",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 6,
+        "g": 3,
+        "a": 5,
+        "p": 8,
+        "sog": 14,
+        "toi": 871.2,
+        "pptoi": 133.0
+      },
+      "season": {
+        "gp": 67,
+        "g": 16,
+        "a": 41,
+        "p": 57,
+        "sog": 169
+      },
+      "opp_index": 0.2388,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8477479,
+      "name": "TYLER BERTUZZI",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "LW",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 3,
+        "p": 6,
+        "sog": 22,
+        "toi": 1022.1,
+        "pptoi": 193.8
+      },
+      "season": {
+        "gp": 79,
+        "g": 32,
+        "a": 26,
+        "p": 58,
+        "sog": 164
+      },
+      "opp_index": 0.6751,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1"
+      ]
+    },
+    {
+      "id": 8485391,
+      "name": "ANTON FRONDELL",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "C",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 8,
+        "g": 2,
+        "a": 5,
+        "p": 7,
+        "sog": 21,
+        "toi": 678.0,
+        "pptoi": 144.6
+      },
+      "season": {
+        "gp": 12,
+        "g": 3,
+        "a": 6,
+        "p": 9,
+        "sog": 36
+      },
+      "opp_index": 1.0,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8478233,
+      "name": "ANDREW MANGIAPANE",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "RW",
+      "line": "L2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 8,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 7,
+        "toi": 534.1,
+        "pptoi": 0.4
+      },
+      "season": {
+        "gp": 62,
+        "g": 8,
+        "a": 8,
+        "p": 16,
+        "sog": 58
+      },
+      "opp_index": 0.2388,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "ROLE_UP"
+      ]
+    },
+    {
+      "id": 8477987,
+      "name": "RYAN DONATO",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "LW",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 13,
+        "toi": 351.9,
+        "pptoi": 41.5
+      },
+      "season": {
+        "gp": 82,
+        "g": 15,
+        "a": 15,
+        "p": 30,
+        "sog": 122
+      },
+      "opp_index": 0.6751,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8483493,
+      "name": "FRANK NAZAR",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "C",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 3,
+        "p": 5,
+        "sog": 17,
+        "toi": 813.2,
+        "pptoi": 172.4
+      },
+      "season": {
+        "gp": 66,
+        "g": 15,
+        "a": 26,
+        "p": 41,
+        "sog": 138
+      },
+      "opp_index": 1.0,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8484185,
+      "name": "NICK LARDIS",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "RW",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 4,
+        "a": 2,
+        "p": 6,
+        "sog": 16,
+        "toi": 338.6,
+        "pptoi": 16.1
+      },
+      "season": {
+        "gp": 41,
+        "g": 10,
+        "a": 5,
+        "p": 15,
+        "sog": 57
+      },
+      "opp_index": 0.2388,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "HOT"
+      ]
+    },
+    {
+      "id": 8482062,
+      "name": "COLE SMITH",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "LW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 5,
+        "toi": 355.7,
+        "pptoi": 2.1
+      },
+      "season": {
+        "gp": 63,
+        "g": 8,
+        "a": 4,
+        "p": 12,
+        "sog": 69
+      },
+      "opp_index": 0.6751,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8483450,
+      "name": "RYAN GREENE",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "C",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 8,
+        "toi": 724.1,
+        "pptoi": 60.6
+      },
+      "season": {
+        "gp": 81,
+        "g": 12,
+        "a": 17,
+        "p": 29,
+        "sog": 109
+      },
+      "opp_index": 1.0,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8478413,
+      "name": "JORDAN GREENWAY",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "RW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 6,
+        "toi": 476.0,
+        "pptoi": 1.4
+      },
+      "season": {
+        "gp": 40,
+        "g": 1,
+        "a": 5,
+        "p": 6,
+        "sog": 32
+      },
+      "opp_index": 0.2388,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8481568,
+      "name": "ALEX VLASIC",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "D",
+      "line": "D1",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 3,
+        "p": 3,
+        "sog": 13,
+        "toi": 515.5,
+        "pptoi": 5.2
+      },
+      "season": {
+        "gp": 81,
+        "g": 2,
+        "a": 19,
+        "p": 21,
+        "sog": 86
+      },
+      "opp_index": 0.9078,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8481524,
+      "name": "BOWEN BYRAM",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "D",
+      "line": "D1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 3,
+        "p": 6,
+        "sog": 20,
+        "toi": 651.7,
+        "pptoi": 59.1
+      },
+      "season": {
+        "gp": 82,
+        "g": 11,
+        "a": 31,
+        "p": 42,
+        "sog": 109
+      },
+      "opp_index": 0.9078,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1"
+      ]
+    },
+    {
+      "id": 8482176,
+      "name": "WYATT KAISER",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "D",
+      "line": "D2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 10,
+        "toi": 1034.6,
+        "pptoi": 9.4
+      },
+      "season": {
+        "gp": 77,
+        "g": 6,
+        "a": 11,
+        "p": 17,
+        "sog": 75
+      },
+      "opp_index": 0.9078,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8484783,
+      "name": "ARTYOM LEVSHUNOV",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "D",
+      "line": "D2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 13,
+        "toi": 636.9,
+        "pptoi": 76.8
+      },
+      "season": {
+        "gp": 68,
+        "g": 2,
+        "a": 22,
+        "p": 24,
+        "sog": 84
+      },
+      "opp_index": 0.9078,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8474013,
+      "name": "IAN COLE",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 4,
+        "p": 5,
+        "sog": 8,
+        "toi": 658.7,
+        "pptoi": 0.8
+      },
+      "season": {
+        "gp": 82,
+        "g": 3,
+        "a": 20,
+        "p": 23,
+        "sog": 62
+      },
+      "opp_index": 0.9078,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8483506,
+      "name": "SAM RINZEL",
+      "team": "CHI",
+      "opp": "VGK",
+      "game_id": 2026020005,
+      "home": false,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 12,
+        "toi": 702.6,
+        "pptoi": 58.6
+      },
+      "season": {
+        "gp": 54,
+        "g": 4,
+        "a": 10,
+        "p": 14,
+        "sog": 83
+      },
+      "opp_index": 0.9078,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8477964,
+      "name": "IVAN BARBASHEV",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "LW",
+      "line": "L1",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 23,
+        "toi": 651.8,
+        "pptoi": 39.0
+      },
+      "season": {
+        "gp": 82,
+        "g": 23,
+        "a": 38,
+        "p": 61,
+        "sog": 133
+      },
+      "opp_index": 1.2152,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8478403,
+      "name": "JACK EICHEL",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "C",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 6,
+        "p": 7,
+        "sog": 13,
+        "toi": 918.7,
+        "pptoi": 137.5
+      },
+      "season": {
+        "gp": 74,
+        "g": 27,
+        "a": 63,
+        "p": 90,
+        "sog": 260
+      },
+      "opp_index": 1.3333,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8475913,
+      "name": "MARK STONE",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "RW",
+      "line": "L1",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 4,
+        "a": 2,
+        "p": 6,
+        "sog": 24,
+        "toi": 849.7,
+        "pptoi": 148.1
+      },
+      "season": {
+        "gp": 60,
+        "g": 28,
+        "a": 45,
+        "p": 73,
+        "sog": 130
+      },
+      "opp_index": 1.0746,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8479353,
+      "name": "BRETT HOWDEN",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "LW",
+      "line": "L2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 5,
+        "a": 2,
+        "p": 7,
+        "sog": 15,
+        "toi": 777.4,
+        "pptoi": 49.1
+      },
+      "season": {
+        "gp": 58,
+        "g": 12,
+        "a": 10,
+        "p": 22,
+        "sog": 66
+      },
+      "opp_index": 1.2152,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8476448,
+      "name": "WILLIAM KARLSSON",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "C",
+      "line": "L2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 5,
+        "p": 8,
+        "sog": 14,
+        "toi": 522.0,
+        "pptoi": 26.7
+      },
+      "season": {
+        "gp": 14,
+        "g": 4,
+        "a": 3,
+        "p": 7,
+        "sog": 30
+      },
+      "opp_index": 1.3333,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8478483,
+      "name": "MITCH MARNER",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "RW",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 4,
+        "a": 4,
+        "p": 8,
+        "sog": 25,
+        "toi": 772.1,
+        "pptoi": 115.1
+      },
+      "season": {
+        "gp": 81,
+        "g": 24,
+        "a": 56,
+        "p": 80,
+        "sog": 165
+      },
+      "opp_index": 1.0746,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ]
+    },
+    {
+      "id": 8484803,
+      "name": "TREVOR CONNELLY",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "LW",
+      "line": "L3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
+      },
+      "opp_index": 1.2152,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8476881,
+      "name": "TOMAS HERTL",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "C",
+      "line": "L3",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 4,
+        "a": 5,
+        "p": 9,
+        "sog": 18,
+        "toi": 272.4,
+        "pptoi": 78.0
+      },
+      "season": {
+        "gp": 82,
+        "g": 24,
+        "a": 34,
+        "p": 58,
+        "sog": 202
+      },
+      "opp_index": 1.3333,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8478109,
+      "name": "VICTOR OLOFSSON",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "RW",
+      "line": "L3",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 18,
+        "toi": 747.4,
+        "pptoi": 72.6
+      },
+      "season": {
+        "gp": 78,
+        "g": 13,
+        "a": 18,
+        "p": 31,
+        "sog": 147
+      },
+      "opp_index": 1.0746,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "ROLE_UP"
+      ]
+    },
+    {
+      "id": 8483553,
+      "name": "MARC GATCOMB",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "LW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 8,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 12,
+        "toi": 611.6,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 49,
+        "g": 3,
+        "a": 4,
+        "p": 7,
+        "sog": 55
+      },
+      "opp_index": 1.2152,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8475343,
+      "name": "NIC DOWD",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "C",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 7,
+        "toi": 685.0,
+        "pptoi": 4.1
+      },
+      "season": {
+        "gp": 75,
+        "g": 5,
+        "a": 16,
+        "p": 21,
+        "sog": 66
+      },
+      "opp_index": 1.3333,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8483890,
+      "name": "BRAEDEN BOWMAN",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "RW",
+      "line": "L4",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 7,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 10,
+        "toi": 515.4,
+        "pptoi": 65.9
+      },
+      "season": {
+        "gp": 54,
+        "g": 8,
+        "a": 18,
+        "p": 26,
+        "sog": 75
+      },
+      "opp_index": 1.0746,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": []
+    },
+    {
+      "id": 8475188,
+      "name": "BRAYDEN MCNABB",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "D",
+      "line": "D1",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 7,
+        "p": 8,
+        "sog": 4,
+        "toi": 787.9,
+        "pptoi": 2.6
+      },
+      "season": {
+        "gp": 63,
+        "g": 5,
+        "a": 7,
+        "p": 12,
+        "sog": 81
+      },
+      "opp_index": 1.8156,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8477447,
+      "name": "SHEA THEODORE",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "D",
+      "line": "D1",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 7,
+        "p": 10,
+        "sog": 18,
+        "toi": 768.2,
+        "pptoi": 49.7
+      },
+      "season": {
+        "gp": 70,
+        "g": 10,
+        "a": 29,
+        "p": 39,
+        "sog": 130
+      },
+      "opp_index": 1.8156,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "HOT",
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8478450,
+      "name": "PARKER WOTHERSPOON",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "D",
+      "line": "D2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 3,
+        "p": 3,
+        "sog": 8,
+        "toi": 602.5,
+        "pptoi": 1.5
+      },
+      "season": {
+        "gp": 80,
+        "g": 3,
+        "a": 27,
+        "p": 30,
+        "sog": 70
+      },
+      "opp_index": 1.8156,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8478397,
+      "name": "RASMUS ANDERSSON",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "D",
+      "line": "D2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 3,
+        "p": 3,
+        "sog": 20,
+        "toi": 1131.8,
+        "pptoi": 51.5
+      },
+      "season": {
+        "gp": 81,
+        "g": 17,
+        "a": 30,
+        "p": 47,
+        "sog": 178
+      },
+      "opp_index": 1.8156,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8478468,
+      "name": "JEREMY LAUZON",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 6,
+        "toi": 489.8,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 68,
+        "g": 1,
+        "a": 12,
+        "p": 13,
+        "sog": 73
+      },
+      "opp_index": 1.8156,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    },
+    {
+      "id": 8478396,
+      "name": "NOAH HANIFIN",
+      "team": "VGK",
+      "opp": "CHI",
+      "game_id": 2026020005,
+      "home": true,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 10,
+        "toi": 1248.4,
+        "pptoi": 27.7
+      },
+      "season": {
+        "gp": 71,
+        "g": 3,
+        "a": 25,
+        "p": 28,
+        "sog": 135
+      },
+      "opp_index": 1.8156,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ]
+    }
+  ]
 }
