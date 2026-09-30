@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import playerMomentum, { buildLabels, parseToi, summarizeGames } from '../api/player-momentum.js';
+import playerMomentum, { buildContext, buildLabels, parseToi, summarizeGames } from '../api/player-momentum.js';
 
 function response() {
   return {
@@ -70,6 +70,52 @@ test('trend labels require a complete recent window and meaningful season sample
   assert.ok(!smallLabels.some(label => label.type === 'shots-up'));
 });
 
+test('summaries track power-play points and shooting percentage', () => {
+  const summary = summarizeGames([
+    game(1, { goals: 1, points: 2, assists: 1, shots: 4, powerPlayPoints: 1, powerPlayGoals: 1 }),
+    game(2, { goals: 0, points: 1, assists: 1, shots: 3, powerPlayPoints: 1 }),
+  ]);
+  assert.equal(summary.powerPlayPoints, 2);
+  assert.equal(summary.powerPlayGoals, 1);
+  assert.equal(summary.shootingPct, 14.3);
+  assert.equal(summarizeGames([game(1, { shots: 0 })]).shootingPct, null);
+});
+
+test('context compares season shooting with career and measures PP share', () => {
+  const season = summarizeGames([
+    game(1, { goals: 2, points: 3, assists: 1, shots: 10, powerPlayPoints: 2 }),
+    game(2, { goals: 1, points: 1, shots: 10 }),
+  ]);
+  const context = buildContext(season, season, season, {
+    careerTotals: { regularSeason: { gamesPlayed: 200, points: 150, shootingPctg: 0.1135 } },
+  });
+  assert.equal(context.shooting.season, 15);
+  assert.equal(context.shooting.career, 11.4);
+  assert.equal(context.shooting.delta, 3.6);
+  assert.equal(context.career.pointsPerGame, 0.75);
+  assert.equal(context.powerPlay.seasonShare, 50);
+  assert.equal(context.powerPlay.last5Points, 2);
+
+  const noCareer = buildContext(summarizeGames([]), summarizeGames([]), summarizeGames([]), {});
+  assert.equal(noCareer.career, null);
+  assert.equal(noCareer.shooting.delta, null);
+  assert.equal(noCareer.powerPlay.seasonShare, null);
+});
+
+test('droughts are labelled even in an early sample', () => {
+  const scoreless = Array.from({ length: 4 }, (_, index) => game(index + 1)).reverse();
+  const season = summarizeGames(scoreless);
+  const labels = buildLabels(scoreless, season, summarizeGames(scoreless, season));
+  assert.ok(labels.some(label => label.type === 'point-drought' && label.label === 'No points in 4 games'));
+  assert.ok(labels.some(label => label.type === 'small-sample'));
+
+  const assistsOnly = Array.from({ length: 6 }, (_, index) => game(index + 1, { assists: 1, points: 1 })).reverse();
+  const assistSeason = summarizeGames(assistsOnly);
+  const assistLabels = buildLabels(assistsOnly, assistSeason, summarizeGames(assistsOnly, assistSeason));
+  assert.ok(assistLabels.some(label => label.type === 'goal-drought' && label.sampleSize === 6));
+  assert.ok(!assistLabels.some(label => label.type === 'point-drought'));
+});
+
 test('handler validates input without fetching', async t => {
   const fetch = t.mock.method(globalThis, 'fetch', () => { throw new Error('must not fetch'); });
   const res = response();
@@ -103,6 +149,9 @@ test('handler fetches landing and game log and returns sorted recent momentum', 
   assert.ok(requested.some(url => url.endsWith('/player/8478402/landing')));
   assert.ok(requested.some(url => url.endsWith('/player/8478402/game-log/20252026/2')));
   assert.equal(res.body.player.fullName, 'Connor McDavid');
+  assert.equal(res.body.shooting.season, 25);
+  assert.equal(res.body.shooting.career, null);
+  assert.equal(res.body.powerPlay.seasonShare, 0);
   assert.deepEqual(res.body.recentGames.map(item => item.gameId), [2, 1]);
   assert.equal(res.body.summaries.last5.games, 2);
   assert.ok(res.body.labels.some(label => label.type === 'small-sample'));

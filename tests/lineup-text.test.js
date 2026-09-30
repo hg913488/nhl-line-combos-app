@@ -1,0 +1,36 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { latestMove, moveClause, playerRole, titleCase } from '../src/lineup-text.js';
+
+const team = {
+  forwards: [['A ONE', 'B TWO', 'C THREE'], ['D FOUR', 'ÉMILE FIVE', 'F SIX']],
+  defense: [['G SEVEN', 'H EIGHT']],
+  goalies: [['I NINE'], ['J TEN']],
+  pp1: ['A ONE', 'G SEVEN'],
+  pp2: ['ÉMILE FIVE'],
+};
+
+test('role finds line, pair, goalie slot and PP unit, accent-insensitive', () => {
+  assert.deepEqual(playerRole(team, 'A One'), { slot: 'Line 1', pp: 'PP1' });
+  assert.deepEqual(playerRole(team, 'Emile Five'), { slot: 'Line 2', pp: 'PP2' });
+  assert.deepEqual(playerRole(team, 'G Seven'), { slot: 'Pair 1', pp: 'PP1' });
+  assert.deepEqual(playerRole(team, 'J Ten'), { slot: 'Backup', pp: null });
+  assert.equal(playerRole(team, 'Nobody Here'), null);
+  assert.equal(playerRole(undefined, 'A One'), null);
+});
+
+test('latest move matches team and name, newest first', () => {
+  const events = [
+    { team: 'toronto-maple-leafs', player: 'A ONE', changes: [{ type: 'forward_line', from: 2, to: 1 }] },
+    { team: 'toronto-maple-leafs', player: 'A ONE', changes: [{ type: 'forward_line', from: 1, to: 2 }] },
+    { team: 'ottawa-senators', player: 'A ONE', changes: [] },
+  ];
+  assert.equal(latestMove(events, 'toronto-maple-leafs', 'A One'), events[0]);
+  assert.equal(latestMove(events, 'boston-bruins', 'A One'), null);
+});
+
+test('move clauses and title case read naturally', () => {
+  assert.equal(moveClause({ type: 'forward_line', from: 2, to: 1 }), 'moves up to line 1');
+  assert.equal(moveClause({ type: 'power_play', from: null, to: 2 }), 'slots onto PP2');
+  assert.equal(titleCase("RYAN O'REILLY"), "Ryan O'Reilly");
+});

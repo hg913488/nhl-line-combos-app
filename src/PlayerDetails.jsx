@@ -3,22 +3,49 @@ import { X, RotateCw, Info } from 'lucide-react';
 import { getJSON, resolvePlayer, seasonLabel, seasonsFrom } from './data-client.js';
 import Select from './Select.jsx';
 import JerseyIcon, { HOME_UNIFORMS } from './JerseyIcon.jsx';
+import Sparkline from './Sparkline.jsx';
+import { moveClause, playerRole, latestMove } from './lineup-text.js';
+import { NHL_TEAMS } from './teams.js';
+import lineups from '../data/lines.json';
+import lineupChanges from '../data/lineup_changes.json';
 
 const dateLabel = value => new Date(`${value}T12:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 const number = value => value == null ? '-' : value;
 const edgeUnit = unit => unit === 'percent' ? '%' : unit === 'bursts' ? '' : ` ${unit}`;
-const EDGE_INFO = {
+const MOVE_WINDOW_MS = 14 * 24 * 3600 * 1000;
+const SLUG_BY_ABBR = Object.fromEntries(Object.entries(NHL_TEAMS).map(([slug, team]) => [team.abbr, slug]));
+const toiMinutes = toi => {
+  const [minutes, seconds] = String(toi || '').split(':').map(Number);
+  return Number.isFinite(minutes) && Number.isFinite(seconds) ? minutes + seconds / 60 : null;
+};
+const INFO = {
+  'Shooting %': 'Goals divided by shots this season, next to his career rate. Well above career usually means the goals will slow down; well below means they should come.',
+  'PP share': 'How much of his scoring comes on the power play. A high share means his points depend on keeping his PP spot.',
   'Top shot': 'His hardest shot this season, clocked by the chip inside the puck.',
   'Top speed': 'The fastest he has skated at any moment this season, from the tracking chip in his jersey.',
   '32+ km/h bursts': 'How many times this season he hit 32 km/h (20 mph) or faster. It counts separate sprints, not time at speed, so it shows how often he goes all out.',
   'O-zone time': "The share of his ice time spent in the offensive zone, the opponent's end. Higher usually means his line keeps the puck and drives play.",
 };
 
+function InfoButton({ label, open, onToggle }) {
+  return <button className="edge-info-button" aria-expanded={open} aria-controls="context-info" aria-label={`What is ${label}?`} title={`What is ${label}?`}
+    onClick={() => onToggle(label)}><Info size={13} /></button>;
+}
+
+function InfoPanel({ label, children }) {
+  return <div className="edge-info" id="context-info" role="region" aria-label={`About ${label}`}>
+    <strong>{label}</strong>
+    <p>{INFO[label]}</p>
+    {children}
+  </div>;
+}
+
 export default function PlayerDetails({ modal, onClose }) {
   const [season, setSeason] = useState(modal.season);
   const [gameType, setGameType] = useState('2');
   const [windowSize, setWindowSize] = useState(5);
-  const [edgeInfo, setEdgeInfo] = useState(null);
+  const [info, setInfo] = useState(null);
+  const toggleInfo = label => setInfo(open => open === label ? null : label);
   const [failedHeadshot, setFailedHeadshot] = useState(null);
   const [state, setState] = useState({ player: modal.player, games: [], momentum: null, edge: null, loading: true, error: null });
   const [retry, setRetry] = useState(0);
@@ -82,6 +109,17 @@ export default function PlayerDetails({ modal, onClose }) {
   const headshot = momentum?.player?.headshot || edge?.player?.headshot
     || (player.id && headshotTeam ? `https://assets.nhle.com/mugs/nhl/${modal.season}/${headshotTeam}/${player.id}.png` : null);
   const uniform = HOME_UNIFORMS[headshotTeam];
+  const trend = [...(momentum?.recentGames || [])].reverse();
+  const { shooting, powerPlay } = momentum || {};
+  const seasonShots = momentum?.summaries?.season?.shots || 0;
+  // Under ~30 shots a couple of goals swing the rate by several points, so don't call it hot or cold.
+  const shootingRead = shooting?.delta == null ? '' : seasonShots < 30 ? 'small sample'
+    : shooting.delta >= 3 ? 'running hot' : shooting.delta <= -3 ? 'running cold' : 'in line';
+  // Lineup role is today's, so only show it against the current season.
+  const teamSlug = SLUG_BY_ABBR[headshotTeam];
+  const role = season === modal.season ? playerRole(lineups.teams?.[teamSlug], `${player.firstName} ${player.lastName}`) : null;
+  const recentMove = role && latestMove(lineupChanges.events || [], teamSlug, `${player.firstName} ${player.lastName}`);
+  const move = recentMove && Date.now() - Date.parse(recentMove.occurred_at) <= MOVE_WINDOW_MS ? recentMove : null;
   const sweaterNumber = modal.player.number ?? momentum?.player?.sweaterNumber ?? edge?.player?.sweaterNumber;
   const teamStyle = uniform && { '--team-body': uniform.body, '--team-stripe': uniform.stripe, '--team-ink': uniform.number };
   const edgeMetrics = edge ? [
@@ -121,29 +159,46 @@ export default function PlayerDetails({ modal, onClose }) {
         <div className="player-metrics">{metrics.map(([label, value]) => <div key={label}><span>{label}</span><strong>{value}</strong></div>)}</div>
         {!goalie && momentum && <section className="player-context" aria-label="Recent player momentum">
           <div className="context-heading"><span>MOMENTUM</span><small>Last 5 vs season</small></div>
+          {role && <p className="role-strip">
+            <strong>{[role.slot, role.pp].filter(Boolean).join(' · ')}</strong>
+            {move && <span>{move.changes.map(moveClause).join(', ').replace(/^./, c => c.toUpperCase())} · {dateLabel(move.occurred_at.slice(0, 10))}</span>}
+          </p>}
           {!!momentum.labels?.length && <div className="trend-labels">{momentum.labels.map(label => <span className={`trend-${label.type}`} key={label.type}>{label.label}</span>)}</div>}
           <div className="context-grid">
-            <div><span>POINTS / GP</span><strong>{number(momentum.summaries?.last5?.perGame?.points)}</strong><small>{delta(momentum.summaries?.last5?.versusSeason?.pointsPerGame)} vs season</small></div>
-            <div><span>SHOTS / GP</span><strong>{number(momentum.summaries?.last5?.perGame?.shots)}</strong><small>{delta(momentum.summaries?.last5?.versusSeason?.shotsPerGame)} vs season</small></div>
-            <div><span>AVG TOI</span><strong>{momentum.summaries?.last5?.averageToi || '-'}</strong><small>{delta(momentum.summaries?.last5?.versusSeason?.averageToiSeconds)} sec vs season</small></div>
+            <div><span>POINTS / GP</span><strong>{number(momentum.summaries?.last5?.perGame?.points)}</strong><small>{delta(momentum.summaries?.last5?.versusSeason?.pointsPerGame)} vs season</small>
+              <Sparkline values={trend.map(game => game.points ?? 0)} average={momentum.summaries?.season?.perGame?.points} label={`Points in each of the last ${trend.length} games`} /></div>
+            <div><span>SHOTS / GP</span><strong>{number(momentum.summaries?.last5?.perGame?.shots)}</strong><small>{delta(momentum.summaries?.last5?.versusSeason?.shotsPerGame)} vs season</small>
+              <Sparkline values={trend.map(game => game.shots ?? 0)} average={momentum.summaries?.season?.perGame?.shots} label={`Shots in each of the last ${trend.length} games: ${trend.map(game => game.shots ?? 0).join(', ')}`} /></div>
+            <div><span>AVG TOI</span><strong>{momentum.summaries?.last5?.averageToi || '-'}</strong><small>{delta(momentum.summaries?.last5?.versusSeason?.averageToiSeconds)} sec vs season</small>
+              <Sparkline values={trend.map(game => toiMinutes(game.toi))} average={momentum.summaries?.season?.averageToiSeconds / 60} label={`Ice time in each of the last ${trend.length} games`} /></div>
           </div>
+          {(shooting?.season != null || powerPlay?.seasonShare != null) && <div className="context-grid context-grid-2">
+            {shooting?.season != null && <div><InfoButton label="Shooting %" open={info === 'Shooting %'} onToggle={toggleInfo} />
+              <span>SHOOTING %</span><strong>{shooting.season}<i>%</i></strong>
+              <small>{shooting.career != null ? `Career ${shooting.career}% · ${shootingRead}` : 'Season to date'}</small></div>}
+            {powerPlay?.seasonShare != null && <div><InfoButton label="PP share" open={info === 'PP share'} onToggle={toggleInfo} />
+              <span>PP SHARE</span><strong>{Math.round(powerPlay.seasonShare)}<i>%</i></strong>
+              <small>{powerPlay.seasonPoints} of {momentum.summaries?.season?.points} {momentum.summaries?.season?.points === 1 ? 'point' : 'points'} on the PP</small></div>}
+          </div>}
+          {info === 'Shooting %' && shooting && <InfoPanel label="Shooting %">
+            {shooting.delta != null && <p>He is {Math.abs(shooting.delta)} percentage points {shooting.delta >= 0 ? 'above' : 'below'} his career rate{seasonShots < 30 ? `, but on only ${seasonShots} shots, so it is too early to read much into it` : ''}.</p>}
+          </InfoPanel>}
+          {info === 'PP share' && <InfoPanel label="PP share" />}
         </section>}
         {!goalie && edgeMetrics.length > 0 && <section className="player-context edge-context" aria-label="NHL Edge player tracking">
           <div className="context-heading"><span>NHL EDGE</span><small>{edge.availability === 'partial' ? 'Partial tracking data' : 'Player tracking'}</small></div>
           <div className="edge-grid">{edgeMetrics.map(([label, metric]) => <div key={label}>
-            <button className="edge-info-button" aria-expanded={edgeInfo === label} aria-controls="edge-info" aria-label={`What is ${label}?`} title={`What is ${label}?`}
-              onClick={() => setEdgeInfo(open => open === label ? null : label)}><Info size={13} /></button>
+            <InfoButton label={label} open={info === label} onToggle={toggleInfo} />
             <span>{label}</span><strong>{metric.value}<i>{edgeUnit(metric.unit)}</i></strong>
             <small>{metric.percentile != null ? `Percentile ${metric.percentile}` : metric.rank != null ? `League rank ${metric.rank}` : 'NHL tracking'}</small>
           </div>)}</div>
           {(() => {
-            const metric = edgeMetrics.find(([label]) => label === edgeInfo)?.[1];
+            const metric = edgeMetrics.find(([label]) => label === info)?.[1];
             if (!metric) return null;
-            return <div className="edge-info" id="edge-info" role="region" aria-label={`About ${edgeInfo}`}>
-              <strong>{edgeInfo}</strong>
-              <p>{EDGE_INFO[edgeInfo]}{metric.leagueAverage != null && ` League average: ${metric.leagueAverage}${edgeUnit(metric.unit)}.`}</p>
+            return <InfoPanel label={info}>
+              {metric.leagueAverage != null && <p>League average: {metric.leagueAverage}{edgeUnit(metric.unit)}.</p>}
               {metric.percentile != null && <p>Percentile {metric.percentile} means he ranks ahead of {Math.round(metric.percentile)}% of NHL skaters. Season to date, so it moves a lot early on.</p>}
-            </div>;
+            </InfoPanel>;
           })()}
         </section>}
         <p className="window-caption">{games.length} appearances / {dateLabel(games[games.length - 1].gameDate)} - {dateLabel(games[0].gameDate)} / {seasonLabel(season)}</p>

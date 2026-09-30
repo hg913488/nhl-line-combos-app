@@ -10,6 +10,7 @@ import { NHL_TEAMS, TEAM_COLORS } from './teams.js';
 import { rankPositions, formatIndex, POSITIONS } from './picks-signal.js';
 import { DEFAULT_VIEW, parseLocation, buildPath, routePattern } from './routes.js';
 import { pageTitle } from './page-meta.js';
+import { titleCase, surname, moveClause } from './lineup-text.js';
 import { Analytics } from '@vercel/analytics/react';
 import './styles.css';
 import lineups from '../data/lines.json';
@@ -648,21 +649,6 @@ function recentMovesFor(slug, now) {
     .sort((a, b) => rank(a) - rank(b));
 }
 
-const titleCase = name => name.toLowerCase().replace(/(^|[\s'-])\p{L}/gu, match => match.toUpperCase());
-const surname = name => titleCase(name.split(' ').slice(-1)[0]);
-
-// One readable clause per lineup change, e.g. "drops to line 3", "joins PP1".
-function moveClause(change) {
-  const { type, from, to } = change;
-  if (type === 'addition') return 'enters the lineup';
-  if (type === 'removal') return 'is out of the lineup';
-  if (type === 'team') return 'joins from a new team';
-  const unit = type === 'forward_line' ? 'line' : type === 'defense_pair' ? 'pair' : 'PP';
-  const label = value => (unit === 'PP' ? `PP${value}` : `${unit} ${value}`);
-  if (from == null) return `slots onto ${label(to)}`;
-  if (to == null) return `comes off ${label(from)}`;
-  return to < from ? `moves up to ${label(to)}` : `drops to ${label(to)}`;
-}
 
 function starterFor(slug) {
   const matchup = GOALIE_MATCHUPS.find(item => item.away?.team === slug || item.home?.team === slug);
