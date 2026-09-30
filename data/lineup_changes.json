@@ -1,11 +1,81 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-29T22:34:44Z",
+  "generated_at": "2026-09-30T01:21:07Z",
   "retention": {
     "max_age_days": 90,
     "max_events": 500
   },
   "events": [
+    {
+      "id": "e91929a9007610448c6f",
+      "occurred_at": "2026-09-30T01:21:07Z",
+      "player": "KIRILL MARCHENKO",
+      "team": "toronto-maple-leafs",
+      "previous_team": "toronto-maple-leafs",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "toronto-maple-leafs",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "after": {
+        "team": "toronto-maple-leafs",
+        "rostered": true,
+        "forward_line": 1,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 2,
+          "to": 1,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "4f8081f6689a257556b4",
+      "occurred_at": "2026-09-30T01:21:07Z",
+      "player": "WILLIAM NYLANDER",
+      "team": "toronto-maple-leafs",
+      "previous_team": "toronto-maple-leafs",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "toronto-maple-leafs",
+        "rostered": true,
+        "forward_line": 1,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "after": {
+        "team": "toronto-maple-leafs",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 1,
+          "to": 2,
+          "direction": "demoted"
+        }
+      ]
+    },
     {
       "id": "c99d82a1ac9479fb12e9",
       "occurred_at": "2026-09-29T22:34:44Z",
@@ -17283,75 +17353,6 @@
           "type": "addition",
           "from": false,
           "to": true
-        }
-      ]
-    },
-    {
-      "id": "37230284f69959771c65",
-      "occurred_at": "2026-09-19T17:00:23Z",
-      "player": "PIERRE-LUC DUBOIS",
-      "team": "washington-capitals",
-      "previous_team": "washington-capitals",
-      "event_types": [
-        "power_play"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "washington-capitals",
-        "rostered": true,
-        "forward_line": 1,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "washington-capitals",
-        "rostered": true,
-        "forward_line": 1,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 1
-      },
-      "changes": [
-        {
-          "type": "power_play",
-          "from": 2,
-          "to": 1,
-          "direction": "promoted"
-        }
-      ]
-    },
-    {
-      "id": "31e2d8d216a87a4023fb",
-      "occurred_at": "2026-09-19T17:00:23Z",
-      "player": "BRANDON TANEV",
-      "team": "utah-mammoth",
-      "previous_team": "utah-mammoth",
-      "event_types": [
-        "removal"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "utah-mammoth",
-        "rostered": true,
-        "forward_line": 4,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "utah-mammoth",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "removal",
-          "from": true,
-          "to": false
         }
       ]
     }
