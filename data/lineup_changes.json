@@ -1,11 +1,81 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-30T02:20:17Z",
+  "generated_at": "2026-09-30T08:35:38Z",
   "retention": {
     "max_age_days": 90,
     "max_events": 500
   },
   "events": [
+    {
+      "id": "ccfe325a40368a03b51b",
+      "occurred_at": "2026-09-30T08:35:38Z",
+      "player": "SHEA THEODORE",
+      "team": "vegas-golden-knights",
+      "previous_team": "vegas-golden-knights",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "vegas-golden-knights",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 1,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "vegas-golden-knights",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 1,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": 2,
+          "to": 1,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "b72766871e57f4c625f0",
+      "occurred_at": "2026-09-30T08:35:38Z",
+      "player": "VICTOR OLOFSSON",
+      "team": "vegas-golden-knights",
+      "previous_team": "vegas-golden-knights",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "vegas-golden-knights",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "after": {
+        "team": "vegas-golden-knights",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": 1,
+          "to": 2,
+          "direction": "demoted"
+        }
+      ]
+    },
     {
       "id": "9293933485b0885a8bca",
       "occurred_at": "2026-09-30T02:20:17Z",
@@ -17288,74 +17358,6 @@
           "from": 2,
           "to": 1,
           "direction": "promoted"
-        }
-      ]
-    },
-    {
-      "id": "75ff76a38bd1167a5f2e",
-      "occurred_at": "2026-09-19T17:00:23Z",
-      "player": "IAN MOORE",
-      "team": "anaheim-ducks",
-      "previous_team": "anaheim-ducks",
-      "event_types": [
-        "removal"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "anaheim-ducks",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 2,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "anaheim-ducks",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "removal",
-          "from": true,
-          "to": false
-        }
-      ]
-    },
-    {
-      "id": "6b2c9af25b081e564b80",
-      "occurred_at": "2026-09-19T17:00:23Z",
-      "player": "JAKOB PELLETIER",
-      "team": "tampa-bay-lightning",
-      "previous_team": "tampa-bay-lightning",
-      "event_types": [
-        "removal"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "tampa-bay-lightning",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "tampa-bay-lightning",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "removal",
-          "from": true,
-          "to": false
         }
       ]
     }
