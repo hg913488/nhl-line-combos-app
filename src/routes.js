@@ -15,6 +15,7 @@ const STATIC_ROUTES = [
   ['line-moves', { tab: 'moves' }],
   ['injuries', { tab: 'injuries' }],
   ['players', { tab: 'player' }],
+  ['spotlight', { tab: 'spotlight' }],
   ['matchups', { tab: 'stats' }],
   ['playoffs', { tab: 'playoffs' }],
   ['picks', { tab: 'picks' }],

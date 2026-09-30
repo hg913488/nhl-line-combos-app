@@ -3,6 +3,8 @@ import { Sun, Moon, Search, AlertCircle, ZoomIn, ZoomOut, ArrowRight, ChevronDow
 import useSchedule, { localDate } from './useSchedule.js';
 import PlayerDetails from './PlayerDetails.jsx';
 import GameView from './GameView.jsx';
+// Lazy so data/spotlight.json (every skater) only downloads when the page is opened.
+const SpotlightView = React.lazy(() => import('./SpotlightView.jsx'));
 import JerseyIcon from './JerseyIcon.jsx';
 import Select from './Select.jsx';
 import { getJSON, normalizeName, seasonForDate, seasonLabel, seasonsFrom } from './data-client.js';
@@ -42,7 +44,7 @@ const IIHF_ROSTERS = iihfRostersData.rosters;
 const TEAM_SLUGS = Object.keys(NHL_TEAMS);
 const DEFAULT_FOCUS_TEAM = 'vancouver-canucks';
 // Sections whose mobile dropdown offers more than the page you are already on.
-const SECTIONS_WITH_SUBVIEWS = new Set(['all', 'compare', 'news', 'injuries', 'moves', 'player', 'stats', 'playoffs']);
+const SECTIONS_WITH_SUBVIEWS = new Set(['all', 'compare', 'news', 'injuries', 'moves', 'player', 'spotlight', 'stats', 'playoffs']);
 
 const LOGO_ABBR_OVERRIDE = { "los-angeles-kings": "LAK" };
 const LOGO_URL = (slug, abbr) => `https://assets.nhle.com/logos/nhl/svg/${LOGO_ABBR_OVERRIDE[slug] || abbr}_${P.bg === LIGHT_PALETTE.bg ? "light" : "dark"}.svg`;
@@ -1747,7 +1749,7 @@ export default function App() {
     ? 'TEAMS'
     : ['news', 'injuries', 'moves'].includes(tab)
       ? 'NEWS'
-      : ['player', 'stats', 'playoffs'].includes(tab)
+      : ['player', 'spotlight', 'stats', 'playoffs'].includes(tab)
         ? 'STATS'
         : tab.toUpperCase();
   const selectView = value => {
@@ -1795,14 +1797,14 @@ export default function App() {
             <NavLink to="/teams" current={tab === 'all' || tab === 'compare'} onNavigate={() => openTeams('quick')}>TEAMS</NavLink>
             <NavLink to="/" current={tab === 'today' || tab === 'game'} onNavigate={() => setTab('today')}>TONIGHT</NavLink>
             <NavLink to="/news" current={['news', 'injuries', 'moves'].includes(tab)} onNavigate={() => openNews('nhl')}>NEWS</NavLink>
-            <NavLink to="/players" current={['player', 'stats', 'playoffs'].includes(tab)} onNavigate={() => setTab('player')}>STATS</NavLink>
+            <NavLink to="/players" current={['player', 'spotlight', 'stats', 'playoffs'].includes(tab)} onNavigate={() => setTab('player')}>STATS</NavLink>
             <NavLink to="/picks" current={tab === 'picks'} onNavigate={() => setTab('picks')}>PICKS</NavLink>
           </nav>
           {SECTIONS_WITH_SUBVIEWS.has(tab) && <Select className="mobile-view-select" aria-label={`${mobileSectionLabel} view`} value={mobileNavValue} onChange={event => selectView(event.target.value)}>
             <optgroup label="TEAMS"><option value="teams-quick">Quick Scan</option><option value="teams-focus">Focused Team</option><option value="compare">Compare</option></optgroup>
             <option value="today">Tonight</option>
             <optgroup label="NEWS"><option value="news-nhl">NHL News</option><option value="news-reporters">Reporters</option><option value="moves">Line Moves</option><option value="injuries">Injuries</option></optgroup>
-            <optgroup label="STATS"><option value="player">Player Stats</option><option value="stats">Matchups</option><option value="playoffs">Playoffs</option></optgroup>
+            <optgroup label="STATS"><option value="player">Player Stats</option><option value="spotlight">Spotlight</option><option value="stats">Matchups</option><option value="playoffs">Playoffs</option></optgroup>
             <option value="picks">Picks</option>
           </Select>}
         </div>
@@ -1825,9 +1827,10 @@ export default function App() {
           </div>
         </div>
         <div {...navMenuProps('stats')}>
-          <NavLink to="/players" className={`tab-btn${['player', 'stats', 'playoffs'].includes(tab) ? " active" : ""}`} onNavigate={() => setTab('player')}>STATS</NavLink>
+          <NavLink to="/players" className={`tab-btn${['player', 'spotlight', 'stats', 'playoffs'].includes(tab) ? " active" : ""}`} onNavigate={() => setTab('player')}>STATS</NavLink>
           <div className="nav-submenu" aria-label="Stats views">
             <NavLink to="/players" current={tab === 'player'} onNavigate={() => setTab('player')}>PLAYER STATS</NavLink>
+            <NavLink to="/spotlight" current={tab === 'spotlight'} onNavigate={() => setTab('spotlight')}>SPOTLIGHT</NavLink>
             <NavLink to="/matchups" current={tab === 'stats'} onNavigate={() => setTab('stats')}>MATCHUPS</NavLink>
             <NavLink to="/playoffs" current={tab === 'playoffs'} onNavigate={() => setTab('playoffs')}>PLAYOFFS</NavLink>
           </div>
@@ -1848,6 +1851,7 @@ export default function App() {
         {tab === "stats" && <ErrorBoundary><GoalsAgainstView isMobile={isMobile} /></ErrorBoundary>}
         {tab === "injuries" && <ErrorBoundary><InjuriesView isMobile={isMobile} /></ErrorBoundary>}
         {tab === "player" && <ErrorBoundary><PlayerStatsView isMobile={isMobile} /></ErrorBoundary>}
+        {tab === "spotlight" && <ErrorBoundary><React.Suspense fallback={<p className="data-state" role="status">Loading spotlight...</p>}><SpotlightView onPlayer={(name, player) => triggerPlayerLookup?.(name, player)} /></React.Suspense></ErrorBoundary>}
         {tab === "game" && <ErrorBoundary><GameView gameId={view.gameId} onBack={() => setTab('today')} onTeam={slug => navigate({ tab: 'all', teamMode: 'focus', team: slug })} onPlayer={name => triggerPlayerLookup?.(name)} /></ErrorBoundary>}
         {tab === "compare" && <ErrorBoundary><CompareView selected={view.compare} onChange={compare => navigate({ compare })} /></ErrorBoundary>}
       </div>

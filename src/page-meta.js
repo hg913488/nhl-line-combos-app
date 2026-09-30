@@ -55,6 +55,11 @@ const ROUTES = {
     title: `NHL Player Stats — ${SITE_NAME}`,
     description: 'Look up any NHL skater or goalie and see recent form next to their current lineup role.',
   },
+  spotlight: {
+    path: '/spotlight',
+    title: `NHL Player Spotlight — ${SITE_NAME}`,
+    description: 'Who is heating up and cooling down across the NHL: last five games against the season, streaks, droughts and line promotions.',
+  },
   matchups: {
     path: '/matchups',
     title: `NHL Matchups — ${SITE_NAME}`,
@@ -96,6 +101,7 @@ const PATH_TO_CARD = new Map([
   ['line-moves', 'moves'],
   ['injuries', 'injuries'],
   ['players', 'players'],
+  ['spotlight', 'spotlight'],
   ['matchups', 'matchups'],
   ['playoffs', 'playoffs'],
   ['picks', 'picks'],

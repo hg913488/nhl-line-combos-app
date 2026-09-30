@@ -48,11 +48,14 @@ jobs:
       - name: Build today's player prop sheet
         run: python scraper/build_prop_sheet.py
 
+      - name: Build the player spotlight feed
+        run: python scraper/build_spotlight.py
+
       - name: Commit refreshed data
         run: |
           git config user.email "scraper@bot"
           git config user.name "Scraper Bot"
-          git add data/goals_against_by_position.json data/picks_log.json data/prop_sheet.json
+          git add data/goals_against_by_position.json data/picks_log.json data/prop_sheet.json data/spotlight.json
           if git diff --cached --quiet; then
             echo "No data changes to publish"
           else

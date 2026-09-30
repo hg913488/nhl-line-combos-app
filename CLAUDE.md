@@ -48,10 +48,11 @@ Deploy: push to `main`. CI (`.github/workflows/ci.yml`) builds and runs both tes
 | `api/og.js` + `lib/og/`                                                   | Share cards (1200×630 PNG) and Instagram cards (1080×1350 JPEG) via Satori + resvg                                                                                     |
 | `scripts/instagram-post.mjs`                                              | Daily carousel post; dry-run unless `IG_PUBLISH=true`                                                                                                                  |
 | `scraper/build_prop_sheet.py` → `data/prop_sheet.json`                    | Player sheet: role, PP unit, last-10 form, opponent index, opposing goalie, flags                                                                                      |
+| `scraper/build_spotlight.py` → `data/spotlight.json`                      | League-wide skater momentum (last 5 vs season, streaks, droughts, line moves); minified, lazy-loaded by `src/SpotlightView.jsx`                                        |
 
 ## Routing
 
-`/` Tonight · `/teams` · `/teams/:slug` · `/compare?teams=a,b` · `/news` · `/reporters` · `/line-moves` · `/injuries` · `/players` · `/matchups` · `/playoffs` · `/picks`. Unknown paths → `/`. App holds one `view` state; an effect pushes history (replace for same-section changes like compare toggles) and sets `document.title`; `popstate` re-parses. `<Analytics route path>` sends page views per route.
+`/` Tonight · `/teams` · `/teams/:slug` · `/compare?teams=a,b` · `/news` · `/reporters` · `/line-moves` · `/injuries` · `/players` · `/spotlight` · `/matchups` · `/playoffs` · `/picks`. Unknown paths → `/`. App holds one `view` state; an effect pushes history (replace for same-section changes like compare toggles) and sets `document.title`; `popstate` re-parses. `<Analytics route path>` sends page views per route.
 
 ## UI Copy Casing
 
@@ -144,6 +145,7 @@ curl -s -o out.png "http://localhost:5173/api/og?type=ig&recap=<gameId>&card=fin
 - **Bot data commits** land on `main` several times a day — pull before pushing.
 - **Picks signal must stay in sync** across `src/picks-signal.js` and `scraper/picks_log.py`; both run against `tests/fixtures/picks_index_cases.json`.
 - **NHL stats API caps pages at 100 rows.** Use `limit=-1`. Paging by a larger page size silently skips rows (this was live for months and undercounted goals by \~75%).
+- **…and caps any query at 10,000 rows, reporting `total: 10000`**, so the truncation is invisible. `fetch_rows` now raises at the cap; query skater game rows through `ga.fetch_rows_by_date` (10-day windows). A full season is ~47k skater-game rows.
 - **Lineup data reflects real roster moves.** Before "fixing" a surprising name, check `api-web.nhle.com/v1/roster/{TEAM}/{season}` — several 2026 offseason moves look like bugs but are not.
 - **Share-card data files** are read at runtime in `lib/og/card-data.js` through literal `new URL(...)` paths so Vercel's file tracing bundles them. A computed path would ship an empty card.
 - **vite.config.js mounts both handler styles:** classic `(req, res)` handlers and web-standard `export default { fetch }` (used by `api/og.js`).
