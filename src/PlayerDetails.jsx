@@ -1,15 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { X, RotateCw } from 'lucide-react';
+import { X, RotateCw, Info } from 'lucide-react';
 import { getJSON, resolvePlayer, seasonLabel, seasonsFrom } from './data-client.js';
 import Select from './Select.jsx';
+import JerseyIcon, { HOME_UNIFORMS } from './JerseyIcon.jsx';
 
 const dateLabel = value => new Date(`${value}T12:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 const number = value => value == null ? '-' : value;
+const edgeUnit = unit => unit === 'percent' ? '%' : unit === 'bursts' ? '' : ` ${unit}`;
+const EDGE_INFO = {
+  'Top shot': 'His hardest shot this season, clocked by the chip inside the puck.',
+  'Top speed': 'The fastest he has skated at any moment this season, from the tracking chip in his jersey.',
+  '32+ km/h bursts': 'How many times this season he hit 32 km/h (20 mph) or faster. It counts separate sprints, not time at speed, so it shows how often he goes all out.',
+  'O-zone time': "The share of his ice time spent in the offensive zone, the opponent's end. Higher usually means his line keeps the puck and drives play.",
+};
 
 export default function PlayerDetails({ modal, onClose }) {
   const [season, setSeason] = useState(modal.season);
   const [gameType, setGameType] = useState('2');
   const [windowSize, setWindowSize] = useState(5);
+  const [edgeInfo, setEdgeInfo] = useState(null);
+  const [failedHeadshot, setFailedHeadshot] = useState(null);
   const [state, setState] = useState({ player: modal.player, games: [], momentum: null, edge: null, loading: true, error: null });
   const [retry, setRetry] = useState(0);
   const dialogRef = useRef(null);
@@ -42,9 +52,9 @@ export default function PlayerDetails({ modal, onClose }) {
       const response = await getJSON(`/api/gamelog?${query}`);
       if (!Array.isArray(response.data)) throw new Error('Unexpected statistics response');
       const isGoalie = player.pos === 'G' || response.data.some(game => game.shotsAgainst != null);
-      const [momentum, edge] = isGoalie ? [null, null] : await Promise.all([
+      const [momentum, edge] = await Promise.all([
         getJSON(`/api/player-momentum?${query}`).catch(() => null),
-        getJSON(`/api/player-edge?${query}`, 900000).catch(() => null),
+        isGoalie ? null : getJSON(`/api/player-edge?${query}`, 900000).catch(() => null),
       ]);
       if (active) setState({ player, games: response.data, momentum, edge, loading: false, error: null });
     })().catch(error => { if (active) setState(s => ({ ...s, loading: false, error: error.message })); });
@@ -66,20 +76,32 @@ export default function PlayerDetails({ modal, onClose }) {
   const momentum = state.momentum;
   const edge = state.edge?.availability !== 'unavailable' ? state.edge : null;
   const delta = value => value == null ? null : `${value > 0 ? '+' : ''}${value}`;
+  // Landing/Edge give the canonical headshot; before they load (and for goalies, who skip both)
+  // build the NHL mugs URL from the roster team, which is what those feeds point at anyway.
+  const headshotTeam = modal.player.team || player.team;
+  const headshot = momentum?.player?.headshot || edge?.player?.headshot
+    || (player.id && headshotTeam ? `https://assets.nhle.com/mugs/nhl/${modal.season}/${headshotTeam}/${player.id}.png` : null);
+  const uniform = HOME_UNIFORMS[headshotTeam];
+  const sweaterNumber = modal.player.number ?? momentum?.player?.sweaterNumber ?? edge?.player?.sweaterNumber;
+  const teamStyle = uniform && { '--team-body': uniform.body, '--team-stripe': uniform.stripe, '--team-ink': uniform.number };
   const edgeMetrics = edge ? [
     ['Top shot', edge.headline?.topShotSpeed],
     ['Top speed', edge.headline?.maxSkatingSpeed],
-    ['20+ bursts', edge.headline?.burstsOver20Mph],
+    ['32+ km/h bursts', edge.headline?.burstsOver20Mph],
     ['O-zone time', edge.headline?.offensiveZoneShare],
   ].filter(([, metric]) => metric?.value != null) : [];
 
   return <div className="player-backdrop" onClick={event => { if (event.target === event.currentTarget) onClose(); }}>
     <section className="player-dialog" role="dialog" aria-modal="true" aria-labelledby="player-dialog-title" ref={dialogRef}>
-      <header className="player-dialog-header">
-        <div>
+      <header className={`player-dialog-header${uniform ? ' team-header' : ''}`} style={teamStyle || undefined}>
+        <div className="player-identity">
+          {headshot && headshot !== failedHeadshot && <img className="player-headshot" src={headshot} alt="" width="64" height="64" onError={() => setFailedHeadshot(headshot)} />}
+          <div>
           <p className="muted">{player.pos || 'Player'} {modal.player.team ? ` / ${modal.player.team}${modal.player.snapshot ? ' lineup snapshot' : ' current roster'}` : ''}</p>
           <h2 id="player-dialog-title">{player.firstName} {player.lastName}</h2>
+          </div>
         </div>
+        {uniform && sweaterNumber != null && <div className="player-jersey"><JerseyIcon team={headshotTeam} number={sweaterNumber} size={84} /></div>}
         <button className="icon-button" onClick={onClose} aria-label="Close player details" title="Close"><X size={20} /></button>
       </header>
       <div className="player-filters">
@@ -109,9 +131,20 @@ export default function PlayerDetails({ modal, onClose }) {
         {!goalie && edgeMetrics.length > 0 && <section className="player-context edge-context" aria-label="NHL Edge player tracking">
           <div className="context-heading"><span>NHL EDGE</span><small>{edge.availability === 'partial' ? 'Partial tracking data' : 'Player tracking'}</small></div>
           <div className="edge-grid">{edgeMetrics.map(([label, metric]) => <div key={label}>
-            <span>{label}</span><strong>{metric.value}<i>{metric.unit === 'percent' ? '%' : metric.unit === 'bursts' ? '' : ` ${metric.unit}`}</i></strong>
+            <button className="edge-info-button" aria-expanded={edgeInfo === label} aria-controls="edge-info" aria-label={`What is ${label}?`} title={`What is ${label}?`}
+              onClick={() => setEdgeInfo(open => open === label ? null : label)}><Info size={13} /></button>
+            <span>{label}</span><strong>{metric.value}<i>{edgeUnit(metric.unit)}</i></strong>
             <small>{metric.percentile != null ? `Percentile ${metric.percentile}` : metric.rank != null ? `League rank ${metric.rank}` : 'NHL tracking'}</small>
           </div>)}</div>
+          {(() => {
+            const metric = edgeMetrics.find(([label]) => label === edgeInfo)?.[1];
+            if (!metric) return null;
+            return <div className="edge-info" id="edge-info" role="region" aria-label={`About ${edgeInfo}`}>
+              <strong>{edgeInfo}</strong>
+              <p>{EDGE_INFO[edgeInfo]}{metric.leagueAverage != null && ` League average: ${metric.leagueAverage}${edgeUnit(metric.unit)}.`}</p>
+              {metric.percentile != null && <p>Percentile {metric.percentile} means he ranks ahead of {Math.round(metric.percentile)}% of NHL skaters. Season to date, so it moves a lot early on.</p>}
+            </div>;
+          })()}
         </section>}
         <p className="window-caption">{games.length} appearances / {dateLabel(games[games.length - 1].gameDate)} - {dateLabel(games[0].gameDate)} / {seasonLabel(season)}</p>
         <div className="player-table-scroll" tabIndex={0} aria-label="Game log, horizontally scrollable">

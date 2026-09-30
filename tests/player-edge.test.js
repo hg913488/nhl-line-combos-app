@@ -23,24 +23,24 @@ const fixtures = {
       headshot: 'https://assets.nhle.com/mug.png',
       team: { abbrev: 'EDM' },
     },
-    topShotSpeed: { imperial: 82.05, percentile: 0.3098, leagueAvg: { imperial: 83.62 } },
+    topShotSpeed: { imperial: 82.05, metric: 132.0463, percentile: 0.3098, leagueAvg: { imperial: 83.62, metric: 134.5729 } },
     skatingSpeed: {
-      speedMax: { imperial: 24.6119, percentile: 0.9967, leagueAvg: { imperial: 22.1684 } },
+      speedMax: { imperial: 24.6119, metric: 39.6089, percentile: 0.9967, leagueAvg: { imperial: 22.1684, metric: 35.6765 } },
       burstsOver20: { value: 681, percentile: 1, leagueAvg: { value: 75.2 } },
     },
-    totalDistanceSkated: { imperial: 330.2671, percentile: 1, leagueAvg: { imperial: 123.5454 } },
+    totalDistanceSkated: { imperial: 330.2671, metric: 531.5192, percentile: 1, leagueAvg: { imperial: 123.5454, metric: 198.8266 } },
     sogSummary: [{ locationCode: 'high', shots: 120, goals: 26, shootingPctg: 0.2167, shotsPercentile: 0.9984, goalsPercentile: 0.9951 }],
     zoneTimeDetails: { offensiveZonePctg: 0.47687929, offensiveZonePercentile: 0.9788, offensiveZoneLeagueAvg: 0.43087924 },
   },
   'skater-comparison': {
-    shotSpeedDetails: { avgShotSpeed: { imperial: 48.3919 } },
+    shotSpeedDetails: { avgShotSpeed: { imperial: 48.3919, metric: 77.8792 } },
     skatingSpeedDetails: { burstsOver22: 151, bursts20To22: 530, bursts18To20: 922 },
   },
   'skater-shot-speed-detail': {
-    hardestShots: [{ gameDate: '2026-01-01', playerOnHomeTeam: false, shotSpeed: { imperial: 82.05 }, homeTeam: { abbrev: 'VAN' }, gameCenterLink: '/gamecenter/test' }],
+    hardestShots: [{ gameDate: '2026-01-01', playerOnHomeTeam: false, shotSpeed: { imperial: 82.05, metric: 132.0463 }, homeTeam: { abbrev: 'VAN' }, gameCenterLink: '/gamecenter/test' }],
   },
   'skater-skating-speed-detail': {
-    topSkatingSpeeds: [{ gameDate: '2026-01-02', playerOnHomeTeam: true, skatingSpeed: { imperial: 24.6119 }, awayTeam: { abbrev: 'CGY' } }],
+    topSkatingSpeeds: [{ gameDate: '2026-01-02', playerOnHomeTeam: true, skatingSpeed: { imperial: 24.6119, metric: 39.6089 }, awayTeam: { abbrev: 'CGY' } }],
   },
   'skater-zone-time': {
     zoneTimeDetails: [{ strengthCode: 'all', offensiveZonePctg: 0.4769, offensiveZonePercentile: 0.9788, offensiveZoneLeagueAvg: 0.4309, neutralZonePctg: 0.1692, defensiveZonePctg: 0.3539 }],
@@ -85,11 +85,13 @@ test('fetches Edge sections in parallel and returns a compact stable response', 
     sweaterNumber: 97, headshot: 'https://assets.nhle.com/mug.png',
   });
   assert.deepEqual(res.body.headline.maxSkatingSpeed, {
-    value: 24.61, unit: 'mph', percentile: 99.7, rank: null, leagueAverage: 22.17,
+    value: 39.6, unit: 'km/h', percentile: 99.7, rank: null, leagueAverage: 35.7,
   });
   assert.equal(res.body.headline.offensiveZoneShare.value, 47.7);
-  assert.equal(res.body.sections.comparison.averageShotSpeed.value, 48.39);
+  assert.equal(res.body.sections.comparison.averageShotSpeed.value, 77.9);
   assert.equal(res.body.sections.shotSpeed.hardest[0].opponent, 'VAN');
+  assert.equal(res.body.sections.shotSpeed.hardest[0].unit, 'km/h');
+  assert.equal(res.body.headline.totalDistanceSkated.unit, 'km');
   assert.equal(res.body.sections.zoneTime.strengths[0].offensive.percentile, 97.9);
   assert.deepEqual(res.body.source.successfulSections, ['details', 'comparison', 'shotSpeed', 'skatingSpeed', 'zoneTime']);
   assert.match(res.headers['Cache-Control'], /s-maxage=900/);
@@ -111,7 +113,7 @@ test('degrades individual sections without failing the response', async t => {
   assert.equal(res.body.sections.shotSpeed.available, false);
   assert.deepEqual(res.body.sections.shotSpeed.hardest, []);
   assert.equal(res.body.sections.zoneTime.available, false);
-  assert.equal(res.body.headline.topShotSpeed.value, 82.05);
+  assert.equal(res.body.headline.topShotSpeed.value, 132);
 });
 
 test('returns an unavailable contract and short cache when every upstream fails', async t => {
@@ -129,7 +131,7 @@ test('returns an unavailable contract and short cache when every upstream fails'
 
 test('normalizer preserves an upstream rank when Edge supplies one', () => {
   const body = normalizeEdgeResponse('1', '20252026', '2', {
-    details: { ok: true, data: { topShotSpeed: { imperial: 100, percentile: 99, rank: 2 } } },
+    details: { ok: true, data: { topShotSpeed: { imperial: 100, metric: 160.9344, percentile: 99, rank: 2 } } },
   }, '2026-09-15T00:00:00.000Z');
   assert.equal(body.headline.topShotSpeed.rank, 2);
   assert.equal(body.headline.topShotSpeed.percentile, 99);
@@ -139,13 +141,13 @@ test('normalizer preserves an upstream rank when Edge supplies one', () => {
 test('comparison and zone feeds can backfill headlines without inventing zeroes', () => {
   const body = normalizeEdgeResponse('1', '20252026', '2', {
     comparison: { ok: true, data: {
-      shotSpeedDetails: { topShotSpeed: { imperial: 91.4, percentile: 0.8 } },
-      skatingSpeedDetails: { maxSkatingSpeed: { imperial: 22.7 } },
+      shotSpeedDetails: { topShotSpeed: { imperial: 91.4, metric: 147.0940, percentile: 0.8 } },
+      skatingSpeedDetails: { maxSkatingSpeed: { imperial: 22.7, metric: 36.5321 } },
     } },
     zoneTime: { ok: true, data: { zoneTimeDetails: [{ strengthCode: 'all', offensiveZonePctg: 0.45 }] } },
   });
-  assert.equal(body.headline.topShotSpeed.value, 91.4);
-  assert.equal(body.headline.maxSkatingSpeed.value, 22.7);
+  assert.equal(body.headline.topShotSpeed.value, 147.1);
+  assert.equal(body.headline.maxSkatingSpeed.value, 36.5);
   assert.equal(body.headline.offensiveZoneShare.value, 45);
   assert.equal(body.headline.offensiveZoneShare.rank, null);
   assert.equal(body.headline.totalDistanceSkated, null);

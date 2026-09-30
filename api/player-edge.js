@@ -24,18 +24,20 @@ const percentile = value => {
 };
 const localized = value => value?.default || (typeof value === 'string' ? value : '');
 
-function metric(source, unit, valueKey = 'value', averageKey = valueKey) {
+function metric(source, unit, valueKey = 'value', averageKey = valueKey, places = 2) {
   if (!source || typeof source !== 'object') return null;
   const value = number(source[valueKey]);
   if (value == null) return null;
   return {
-    value: rounded(value),
+    value: rounded(value, places),
     unit,
     percentile: percentile(source.percentile),
     rank: number(source.rank),
-    leagueAverage: rounded(source.leagueAvg?.[averageKey] ?? source.leagueAverage?.[averageKey]),
+    leagueAverage: rounded(source.leagueAvg?.[averageKey] ?? source.leagueAverage?.[averageKey], places),
   };
 }
+// Edge reports speeds and distance in both units; the site shows metric.
+const metricUnits = (source, unit) => metric(source, unit, 'metric', 'metric', 1);
 
 function normalizePlayer(player, fallbackId) {
   if (!player || typeof player !== 'object') return null;
@@ -51,7 +53,7 @@ function normalizePlayer(player, fallbackId) {
 }
 
 function normalizeEvent(event, valueKey, unit) {
-  const value = metric(event?.[valueKey], unit, 'imperial', 'imperial');
+  const value = metricUnits(event?.[valueKey], unit);
   if (!value) return null;
   return {
     date: typeof event.gameDate === 'string' ? event.gameDate : null,
@@ -111,7 +113,7 @@ export function normalizeEdgeResponse(playerId, season, gameType, payloads, fetc
     },
     comparison: {
       available: available('comparison'),
-      averageShotSpeed: metric(comparison?.shotSpeedDetails?.avgShotSpeed, 'mph', 'imperial', 'imperial'),
+      averageShotSpeed: metricUnits(comparison?.shotSpeedDetails?.avgShotSpeed, 'km/h'),
       bursts: comparison?.skatingSpeedDetails ? {
         over22Mph: number(comparison.skatingSpeedDetails.burstsOver22),
         from20To22Mph: number(comparison.skatingSpeedDetails.bursts20To22),
@@ -121,13 +123,13 @@ export function normalizeEdgeResponse(playerId, season, gameType, payloads, fetc
     shotSpeed: {
       available: available('shotSpeed'),
       hardest: Array.isArray(data('shotSpeed')?.hardestShots)
-        ? data('shotSpeed').hardestShots.slice(0, 5).map(event => normalizeEvent(event, 'shotSpeed', 'mph')).filter(Boolean)
+        ? data('shotSpeed').hardestShots.slice(0, 5).map(event => normalizeEvent(event, 'shotSpeed', 'km/h')).filter(Boolean)
         : [],
     },
     skatingSpeed: {
       available: available('skatingSpeed'),
       fastest: Array.isArray(data('skatingSpeed')?.topSkatingSpeeds)
-        ? data('skatingSpeed').topSkatingSpeeds.slice(0, 5).map(event => normalizeEvent(event, 'skatingSpeed', 'mph')).filter(Boolean)
+        ? data('skatingSpeed').topSkatingSpeeds.slice(0, 5).map(event => normalizeEvent(event, 'skatingSpeed', 'km/h')).filter(Boolean)
         : [],
     },
     zoneTime: {
@@ -153,10 +155,10 @@ export function normalizeEdgeResponse(playerId, season, gameType, payloads, fetc
     gameType: Number(gameType),
     player: normalizePlayer(detail?.player || comparison?.player, playerId),
     headline: {
-      topShotSpeed: metric(detail?.topShotSpeed || comparison?.shotSpeedDetails?.topShotSpeed, 'mph', 'imperial', 'imperial'),
-      maxSkatingSpeed: metric(detail?.skatingSpeed?.speedMax || comparison?.skatingSpeedDetails?.maxSkatingSpeed, 'mph', 'imperial', 'imperial'),
+      topShotSpeed: metricUnits(detail?.topShotSpeed || comparison?.shotSpeedDetails?.topShotSpeed, 'km/h'),
+      maxSkatingSpeed: metricUnits(detail?.skatingSpeed?.speedMax || comparison?.skatingSpeedDetails?.maxSkatingSpeed, 'km/h'),
       burstsOver20Mph: metric(detail?.skatingSpeed?.burstsOver20, 'bursts'),
-      totalDistanceSkated: metric(detail?.totalDistanceSkated, 'mi', 'imperial', 'imperial'),
+      totalDistanceSkated: metricUnits(detail?.totalDistanceSkated, 'km'),
       offensiveZoneShare: zoneSummary ? {
         value: percentile(zoneSummary.offensiveZonePctg),
         unit: 'percent',
