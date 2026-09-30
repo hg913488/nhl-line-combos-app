@@ -82,6 +82,8 @@ VOID_SCHEDULE_STATES = {"PPD", "CNCL"}
 
 SCHEDULE_URL = "https://api-web.nhle.com/v1/schedule/{date}"
 ROSTER_URL = "https://api-web.nhle.com/v1/roster/{team}/{season}"
+LANDING_URL = "https://api-web.nhle.com/v1/player/{player_id}/landing"
+LANDING_FALLBACK_LIMIT = 40  # new arrivals are often listed on a roster without a number
 TIMEONICE_URL = f"{ga.STATS_BASE}/skater/timeonice"
 REQUEST_TIMEOUT = 30
 
@@ -315,11 +317,57 @@ def fetch_schedule_day(session: requests.Session, game_date: str) -> list[dict[s
     return day.get("games", []) if day else []
 
 
-def fetch_roster(session: requests.Session, team: str, season_id: int) -> list[tuple[str, str, int]]:
+def fetch_roster_payload(session: requests.Session, team: str, season_id: int) -> dict[str, Any]:
     response = session.get(ROSTER_URL.format(team=team, season=season_id),
                            timeout=REQUEST_TIMEOUT)
     response.raise_for_status()
     payload = response.json()
+    if not isinstance(payload, dict):
+        raise ValueError(f"Unexpected roster response for {team}")
+    return payload
+
+
+def fetch_rosters(session: requests.Session, teams: Iterable[str], season_id: int) -> dict[str, dict[str, Any]]:
+    """Club rosters for the teams playing today; a failed team is simply absent."""
+    rosters = {}
+    for team in teams:
+        try:
+            rosters[team] = fetch_roster_payload(session, team, season_id)
+        except (requests.RequestException, ValueError) as error:
+            print(f"  roster fetch failed for {team}: {error}")
+    return rosters
+
+
+def sweater_numbers(rosters: dict[str, dict[str, Any]]) -> dict[int, int]:
+    numbers = {}
+    for payload in rosters.values():
+        for key in ("forwards", "defensemen"):
+            for player in payload.get(key) or []:
+                if isinstance(player.get("id"), int) and isinstance(player.get("sweaterNumber"), int):
+                    numbers[player["id"]] = player["sweaterNumber"]
+    return numbers
+
+
+def fill_missing_numbers(session: requests.Session, player_ids: Iterable[int],
+                         numbers: dict[int, int]) -> dict[int, int]:
+    """Player landing pages for ids the rosters listed without a sweater number."""
+    missing = sorted({pid for pid in player_ids if isinstance(pid, int) and pid not in numbers})
+    for player_id in missing[:LANDING_FALLBACK_LIMIT]:
+        try:
+            response = session.get(LANDING_URL.format(player_id=player_id), timeout=REQUEST_TIMEOUT)
+            response.raise_for_status()
+            number = (response.json() or {}).get("sweaterNumber")
+        except (requests.RequestException, ValueError, AttributeError) as error:
+            print(f"  landing fetch failed for {player_id}: {error}")
+            continue
+        if isinstance(number, int):
+            numbers[player_id] = number
+    return numbers
+
+
+def fetch_roster(session: requests.Session, team: str, season_id: int,
+                 payload: dict[str, Any] | None = None) -> list[tuple[str, str, int]]:
+    payload = payload if payload is not None else fetch_roster_payload(session, team, season_id)
     entries = []
     for key in ("forwards", "defensemen"):
         for player in payload.get(key) or []:
@@ -498,11 +546,15 @@ def build(
     players, unmatched = build_players(games, lines, goalies, promoted, played_yesterday,
                                        ga_data, directory, by_player, toi, season_rows)
 
+    rosters = fetch_rosters(session, playing, season_id)
     if unmatched:
-        directory = add_rosters(session, directory, unmatched, season_id)
+        directory = add_rosters(session, directory, unmatched, season_id, rosters)
         players, unmatched = build_players(games, lines, goalies, promoted,
                                            played_yesterday, ga_data, directory,
                                            by_player, toi, season_rows)
+    numbers = fill_missing_numbers(session, (player["id"] for player in players), sweater_numbers(rosters))
+    for player in players:
+        player["number"] = numbers.get(player["id"])
     for name in unmatched:
         print(f"WARNING: no playerId for {name}")
     print(f"{len(players)} player rows, {len(unmatched)} unmatched")
@@ -511,7 +563,7 @@ def build(
 
 def add_rosters(
     session: requests.Session, directory: dict[str, Any], unmatched: list[str],
-    season_id: int,
+    season_id: int, rosters: dict[str, dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Second pass: club rosters for the teams whose lineup names did not match."""
     teams = sorted({name.split(" ", 1)[0] for name in unmatched})
@@ -520,7 +572,7 @@ def add_rosters(
     entries: list[tuple[str, str, int]] = []
     for team in teams:
         try:
-            entries.extend(fetch_roster(session, team, season_id))
+            entries.extend(fetch_roster(session, team, season_id, (rosters or {}).get(team)))
         except (requests.RequestException, ValueError) as error:
             print(f"  roster fetch failed for {team}: {error}")
     extra = index_players(entries)

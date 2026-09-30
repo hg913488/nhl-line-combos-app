@@ -406,7 +406,11 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .sheet-filters label { display: inline-flex; align-items: center; gap: 8px; color: var(--dove); font-size: 11px; }
 .sheet-filters .select-shell { min-width: 104px; }
 .sheet-toggle input { width: 16px; height: 16px; accent-color: var(--accent); }
-.sheet-scroll { overflow-x: auto; }
+/* No overflow wrapper on desktop: an overflow box becomes the sticky header's scroll
+   container, and the header then sticks ~130px down inside the table, over the rows. */
+.sheet-scroll { overflow: visible; }
+.sheet-identity { display: flex; align-items: flex-start; gap: 12px; }
+.sheet-identity .jersey-icon { flex: 0 0 44px; width: 44px; height: 37px; margin-top: 1px; }
 .sheet-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
 .sheet-table th, .sheet-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); font-weight: 400; vertical-align: top; }
 .sheet-table thead th { position: sticky; top: calc(var(--header-height) + var(--tabs-height)); z-index: 2; padding: 0; border-bottom: 1px solid var(--casper); background: var(--bg); }
@@ -611,6 +615,11 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
   .picks-list { grid-template-columns: minmax(0, 1fr); }
   .player-sheet { margin-top: 28px; }
   .sheet-table th, .sheet-table td { padding: 9px 10px; white-space: nowrap; }
+  /* Mobile scrolls the table sideways, so the header can't also stick to the page. */
+  .sheet-scroll { overflow-x: auto; }
+  .sheet-table thead th { position: static; }
+  .sheet-identity { gap: 9px; }
+  .sheet-identity .jersey-icon { flex-basis: 36px; width: 36px; height: 30px; }
   .sheet-context { white-space: nowrap; }
   .news-page { padding: 20px 16px 36px; }
   .news-lead { grid-template-columns: minmax(0, 1fr); }

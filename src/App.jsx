@@ -982,9 +982,14 @@ function PlayerSheet() {
         </th>)}</tr></thead>
         <tbody>{rows.map(player => <tr key={`${player.game_id}-${player.name}`}>
           <th scope="row" className="align-left">
-            <button className="sheet-player" onClick={() => triggerPlayerLookup?.(player.name)}>{titleCase(player.name)}</button>
-            <span className="sheet-context">{player.team} {player.home ? 'vs' : '@'} {player.opp}{player.opp_goalie ? ` · ${titleCase(player.opp_goalie.name)}` : ''}</span>
-            {player.flags?.length > 0 && <span className="sheet-flags">{player.flags.map(flag => <em key={flag}>{FLAG_LABELS[flag] || flag}</em>)}</span>}
+            <div className="sheet-identity">
+              <JerseyIcon team={player.team} number={player.number} size={44} />
+              <div>
+                <button className="sheet-player" onClick={() => triggerPlayerLookup?.(player.name)}>{titleCase(player.name)}</button>
+                <span className="sheet-context">{player.team} {player.home ? 'vs' : '@'} {player.opp}{player.opp_goalie ? ` · ${titleCase(player.opp_goalie.name)}` : ''}</span>
+                {player.flags?.length > 0 && <span className="sheet-flags">{player.flags.map(flag => <em key={flag}>{FLAG_LABELS[flag] || flag}</em>)}</span>}
+              </div>
+            </div>
           </th>
           {SHEET_COLUMNS.slice(1).map(column => <td key={column.key} className={`align-${column.align}`}>
             {column.format ? column.format(sheetValue(player, column.key)) : sheetValue(player, column.key)}

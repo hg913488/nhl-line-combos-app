@@ -296,6 +296,7 @@ class FakeSession:
                  rosters=None):
         self.schedules = schedules
         self.rosters = rosters or {}
+        self.landing_numbers = {8480018: 14}  # Suzuki: absent from the served rosters
         self.team_rows = team_rows
         self.summary_rows = summary_rows
         self.toi_rows = toi_rows
@@ -309,6 +310,9 @@ class FakeSession:
             date = url.rsplit("/", 1)[-1]
             return FakeResponse({"gameWeek": [{"date": date,
                                                "games": self.schedules.get(date, [])}]})
+        if url.startswith("https://api-web.nhle.com/v1/player/"):
+            player_id = int(url.split("/")[-2])
+            return FakeResponse({"sweaterNumber": self.landing_numbers.get(player_id)})
         if url.startswith("https://api-web.nhle.com/v1/roster/"):
             team = url.split("/")[-2]
             return FakeResponse(self.rosters.get(team, {"forwards": [], "defensemen": []}))
@@ -364,9 +368,12 @@ class BuildTests(unittest.TestCase):
         season = [{"playerId": 8479318, "skaterFullName": "Auston Matthews",
                    "teamAbbrevs": "TOR", "gamesPlayed": 60, "goals": 40, "assists": 30,
                    "points": 70, "shots": 250}]
-        rosters = {"TOR": {"forwards": [{"id": 8478483,
+        rosters = {"TOR": {"forwards": [{"id": 8478483, "sweaterNumber": 16,
                                          "firstName": {"default": "Mitchell"},
-                                         "lastName": {"default": "Marner"}}],
+                                         "lastName": {"default": "Marner"}},
+                                        {"id": 8479318, "sweaterNumber": 34,
+                                         "firstName": {"default": "Auston"},
+                                         "lastName": {"default": "Matthews"}}],
                            "defensemen": []}}
         return FakeSession(schedules if schedules is not None else
                            {DATE: [game()], YESTERDAY: [game(2025021042, away="TOR",
@@ -393,7 +400,10 @@ class BuildTests(unittest.TestCase):
         matthews = players["AUSTON MATTHEWS"]
         self.assertEqual(list(matthews), ["id", "name", "team", "opp", "game_id", "home",
                                           "pos", "line", "pp", "b2b", "last10", "season",
-                                          "opp_index", "opp_goalie", "flags"])
+                                          "opp_index", "opp_goalie", "flags", "number"])
+        self.assertEqual(matthews["number"], 34)
+        # MTL's roster isn't served, so Suzuki's number comes from his landing page.
+        self.assertEqual(players["NICK SUZUKI"]["number"], 14)
         self.assertEqual((matthews["id"], matthews["team"], matthews["opp"]),
                          (8479318, "TOR", "MTL"))
         self.assertTrue(matthews["home"])
