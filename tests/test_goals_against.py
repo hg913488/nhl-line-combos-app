@@ -107,6 +107,31 @@ class FetchRowsTests(unittest.TestCase):
             ga.fetch_rows(Broken(lambda *_: []), ga.SKATER_SUMMARY_URL, "x")
 
 
+class RowCapTests(unittest.TestCase):
+    def setUp(self):
+        patcher = patch.object(ga, "DELAY_BETWEEN_REQUESTS", 0)
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def test_a_result_at_the_server_cap_is_rejected_not_silently_truncated(self):
+        capped = [goal_row(index, "TOR", "C", player_id=index) for index in range(3)]
+        with patch.object(ga, "ROW_CAP", 3):
+            with self.assertRaises(ValueError):
+                ga.fetch_rows(FakeAPI(lambda *_: capped), ga.SKATER_SUMMARY_URL, "x")
+            self.assertEqual(len(ga.fetch_rows(FakeAPI(lambda *_: capped[:2]), ga.SKATER_SUMMARY_URL, "x")), 2)
+
+    def test_date_windows_cover_the_range_once_each(self):
+        api = FakeAPI(lambda url, cayenne, fact: [goal_row(len(cayenne), "TOR", "C")])
+        rows = ga.fetch_rows_by_date(api, ga.SKATER_SUMMARY_URL, "seasonId=20262027",
+                                     Date(2026, 10, 1), Date(2026, 10, 25), window_days=10)
+        cayennes = [call[1] for call in api.calls]
+        self.assertEqual(len(rows), 3)
+        self.assertEqual(cayennes[0], 'seasonId=20262027 and gameDate>="2026-10-01" and gameDate<="2026-10-10"')
+        self.assertIn('gameDate>="2026-10-11" and gameDate<="2026-10-20"', cayennes[1])
+        self.assertIn('gameDate>="2026-10-21" and gameDate<="2026-10-25"', cayennes[2])
+        self.assertEqual(ga.fetch_rows_by_date(api, ga.SKATER_SUMMARY_URL, "x", Date(2026, 10, 2), Date(2026, 10, 1)), [])
+
+
 class TeamGameTests(unittest.TestCase):
     def test_team_games_come_from_the_opponent_rows_and_flip_venue(self):
         rows = [team_row(1, "TOR", "H", "2026-03-02"), team_row(1, "MTL", "R", "2026-03-02"),

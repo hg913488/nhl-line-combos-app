@@ -326,6 +326,9 @@ class FakeSession:
 
 class BuildTests(unittest.TestCase):
     def setUp(self):
+        delay = patch.object(ps.ga, "DELAY_BETWEEN_REQUESTS", 0)
+        delay.start()
+        self.addCleanup(delay.stop)
         self.directory = tempfile.TemporaryDirectory()
         self.addCleanup(self.directory.cleanup)
         root = Path(self.directory.name)

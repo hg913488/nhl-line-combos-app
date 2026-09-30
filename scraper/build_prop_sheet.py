@@ -333,11 +333,11 @@ def fetch_window_rows(
     session: requests.Session, start: str, end: str,
 ) -> tuple[list[dict[str, Any]], dict[tuple[int, int], dict[str, Any]]]:
     types = ",".join(str(value) for value in PROP_GAME_TYPES)
-    cayenne = (f'gameDate>="{start}" and gameDate<="{end}" '
-               f"and gameTypeId in ({types})")
+    cayenne = f"gameTypeId in ({types})"  # fetch_rows_by_date adds the date bounds
     print(f"Fetching skater games {start} to {end}...")
-    summary = ga.fetch_rows(session, ga.SKATER_SUMMARY_URL, cayenne)
-    ice = ga.fetch_rows(session, TIMEONICE_URL, cayenne)
+    first, last = Date.fromisoformat(start), Date.fromisoformat(end)
+    summary = ga.fetch_rows_by_date(session, ga.SKATER_SUMMARY_URL, cayenne, first, last)
+    ice = ga.fetch_rows_by_date(session, TIMEONICE_URL, cayenne, first, last)
     print(f"  {len(summary)} summary rows, {len(ice)} time-on-ice rows")
     return summary, {(row.get("playerId"), row.get("gameId")): row for row in ice}
 

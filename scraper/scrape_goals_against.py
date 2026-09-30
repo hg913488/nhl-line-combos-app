@@ -43,7 +43,7 @@ import sys
 import tempfile
 import time
 from datetime import date as Date
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -64,6 +64,10 @@ SEASON_START_MONTH = 7  # July: the new season id becomes current
 REQUEST_TIMEOUT = 30
 DELAY_BETWEEN_REQUESTS = 1  # seconds, be polite to the NHL API
 PAGE_FALLBACK_LIMIT = 100  # documented server cap, only used if limit=-1 is short
+# Hard server cap per query: past it the API returns exactly this many rows AND
+# reports total=10000, so the truncation is invisible. Split by date instead.
+ROW_CAP = 10000
+DATE_WINDOW_DAYS = 10  # ~250 skater rows per game day keeps a window near 2,500
 STABLE_SORT = json.dumps([
     {"property": "gameId", "direction": "ASC"},
     {"property": "playerId", "direction": "ASC"},
@@ -129,7 +133,7 @@ def fetch_rows(
     rows = list(payload["data"])
     total = payload.get("total")
     if not isinstance(total, int) or len(rows) >= total:
-        return rows
+        return _within_cap(rows, cayenne)
 
     print(f"  limit=-1 returned {len(rows)}/{total} rows; paging for the rest")
     rows = []
@@ -143,6 +147,31 @@ def fetch_rows(
             break
         rows.extend(page)
         start += len(page)
+    return _within_cap(rows, cayenne)
+
+
+def _within_cap(rows: list[dict[str, Any]], cayenne: str) -> list[dict[str, Any]]:
+    if len(rows) >= ROW_CAP:
+        raise ValueError(f"stats API returned its {ROW_CAP}-row cap for `{cayenne}`; "
+                         "the result is truncated, query a narrower date range")
+    return rows
+
+
+def fetch_rows_by_date(
+    session: requests.Session, url: str, cayenne: str, start: Date, end: Date,
+    window_days: int = DATE_WINDOW_DAYS,
+) -> list[dict[str, Any]]:
+    """fetch_rows over [start, end] in date windows, so no query nears ROW_CAP."""
+    rows: list[dict[str, Any]] = []
+    window_start = start
+    while window_start <= end:
+        window_end = min(window_start + timedelta(days=window_days - 1), end)
+        if rows:
+            time.sleep(DELAY_BETWEEN_REQUESTS)
+        rows.extend(fetch_rows(session, url, (
+            f'{cayenne} and gameDate>="{window_start.isoformat()}" '
+            f'and gameDate<="{window_end.isoformat()}"')))
+        window_start = window_end + timedelta(days=1)
     return rows
 
 
