@@ -52,7 +52,7 @@ Deploy: push to `main`. CI (`.github/workflows/ci.yml`) builds and runs both tes
 
 ## Routing
 
-`/` Tonight · `/teams` · `/teams/:slug` · `/compare?teams=a,b` · `/news` · `/reporters` · `/line-moves` · `/injuries` · `/players` · `/spotlight` · `/matchups` · `/playoffs` · `/picks`. Unknown paths → `/`. App holds one `view` state; an effect pushes history (replace for same-section changes like compare toggles) and sets `document.title`; `popstate` re-parses. `<Analytics route path>` sends page views per route.
+`/` Tonight · `/teams` · `/teams/:slug` · `/compare?teams=a,b` · `/news` · `/reporters` · `/line-moves` · `/injuries` · `/players` · `/spotlight` · `/goals-allowed` (old `/matchups` 301s there) · `/playoffs` · `/picks`. Unknown paths → `/`. App holds one `view` state; an effect pushes history (replace for same-section changes like compare toggles) and sets `document.title`; `popstate` re-parses. `<Analytics route path>` sends page views per route.
 
 ## UI Copy Casing
 

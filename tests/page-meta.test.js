@@ -17,7 +17,7 @@ const ROUTE_CASES = [
   ['/injuries', '', `NHL Injuries — ${SITE_NAME}`, `${SITE_URL}/injuries`, 'card=injuries'],
   ['/players', '', `NHL Player Stats — ${SITE_NAME}`, `${SITE_URL}/players`, 'card=players'],
   ['/spotlight', '', `NHL Player Spotlight — ${SITE_NAME}`, `${SITE_URL}/spotlight`, 'card=spotlight'],
-  ['/matchups', '', `NHL Matchups — ${SITE_NAME}`, `${SITE_URL}/matchups`, 'card=matchups'],
+  ['/goals-allowed', '', `NHL Goals Allowed by Position — ${SITE_NAME}`, `${SITE_URL}/goals-allowed`, 'card=matchups'],
   ['/playoffs', '', `NHL Playoffs — ${SITE_NAME}`, `${SITE_URL}/playoffs`, 'card=playoffs'],
   ['/picks', '', `Picks — ${SITE_NAME}`, `${SITE_URL}/picks`, 'card=picks'],
   ['/disclaimer', '', `Disclaimer — ${SITE_NAME}`, `${SITE_URL}/disclaimer`, 'card=disclaimer'],
@@ -33,6 +33,12 @@ test('every static route has title, description, canonical and an OG image', () 
     assert.ok(meta.image.includes(imageQuery), `${pathname} -> ${meta.image}`);
     assert.ok(meta.imageAlt.length > 0, pathname);
   }
+});
+
+test('the old /matchups path keeps working and points search engines at /goals-allowed', () => {
+  const meta = pageMeta('/matchups', '', { origin: ORIGIN });
+  assert.equal(meta.canonical, `${SITE_URL}/goals-allowed`);
+  assert.equal(meta.title, `NHL Goals Allowed by Position — ${SITE_NAME}`);
 });
 
 test('titles are unique across routes', () => {

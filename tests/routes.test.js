@@ -30,6 +30,11 @@ test('every static route round-trips through build and parse', () => {
   }
 });
 
+test('goals allowed has a new canonical path and the old matchups link still opens it', () => {
+  assert.equal(buildPath({ tab: 'stats' }), '/goals-allowed');
+  assert.deepEqual(parseLocation('/matchups', '', TEAMS), { ...DEFAULT_VIEW, tab: 'stats' });
+});
+
 test('focused team route carries a valid team slug', () => {
   const view = { tab: 'all', teamMode: 'focus', team: 'edmonton-oilers' };
   assert.equal(buildPath(view), '/teams/edmonton-oilers');

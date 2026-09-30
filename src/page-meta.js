@@ -61,9 +61,9 @@ const ROUTES = {
     description: 'Who is heating up and cooling down across the NHL: last five games against the season, streaks, droughts and line promotions.',
   },
   matchups: {
-    path: '/matchups',
-    title: `NHL Matchups — ${SITE_NAME}`,
-    description: 'Goals against by position, matchup edges, and the numbers behind tonight’s NHL slate.',
+    path: '/goals-allowed',
+    title: `NHL Goals Allowed by Position — ${SITE_NAME}`,
+    description: 'Goals each NHL defense has allowed to centers, wingers and defensemen, this season or last, full season or last 10 games.',
   },
   playoffs: {
     path: '/playoffs',
@@ -102,6 +102,7 @@ const PATH_TO_CARD = new Map([
   ['injuries', 'injuries'],
   ['players', 'players'],
   ['spotlight', 'spotlight'],
+  ['goals-allowed', 'matchups'],
   ['matchups', 'matchups'],
   ['playoffs', 'playoffs'],
   ['picks', 'picks'],

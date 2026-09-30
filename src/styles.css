@@ -677,3 +677,6 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .spot-up { color: var(--green); }
 .spot-down { color: var(--red); }
 .spot-stat { font-size: 12px; text-transform: uppercase; }
+.ga-heading { margin: 12px 0 18px; }
+.ga-heading p { margin-top: 6px; }
+.ga-carry-note { margin: 0 0 12px; }

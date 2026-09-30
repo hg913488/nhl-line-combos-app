@@ -326,9 +326,8 @@ def build(session: requests.Session, today: Date, generated_at: datetime) -> dic
     print(f"Current season {season_label(season_id)} ({season_id})")
 
     current_games = fetch_team_games(session, season_id)
-    needs_previous = any(
-        len(current_games.get(team, [])) < L10_GAMES for team in NHL_TEAMS)
-    previous_games = fetch_team_games(session, previous_id) if needs_previous else {}
+    # Always needed now: it fills early L10 windows and is the site's "last season" view.
+    previous_games = fetch_team_games(session, previous_id)
 
     stats_season = season_id if any(current_games.values()) else previous_id
     if stats_season != season_id:
@@ -341,13 +340,24 @@ def build(session: requests.Session, today: Date, generated_at: datetime) -> dic
         for team in NHL_TEAMS
     }
 
+    has_previous_view = stats_season == season_id and any(previous_games.values())
     seasons = {stats_season} | {
         game["season"] for games in l10_games.values() for game in games}
+    if has_previous_view:
+        seasons.add(previous_id)
     goals: dict[int, dict[str, dict[str, int]]] = {}
     for season in sorted(seasons):
         goals.update(goals_by_game(fetch_goal_rows(session, season)))
 
-    return build_output(season_games, l10_games, goals, stats_season, generated_at)
+    output = build_output(season_games, l10_games, goals, stats_season, generated_at)
+    # The full previous season on its own terms, for the page's season toggle. The
+    # top-level shape stays as is: Picks, picks_log.py and build_prop_sheet.py read it.
+    output["previous"] = None
+    if has_previous_view:
+        previous_l10 = {team: select_l10(previous_games.get(team, []), []) for team in NHL_TEAMS}
+        previous = build_output(previous_games, previous_l10, goals, previous_id, generated_at)
+        output["previous"] = {key: previous[key] for key in ("season", "season_id", "teams", "league")}
+    return output
 
 
 def write_atomic(path: Path, value: dict[str, Any]) -> None:

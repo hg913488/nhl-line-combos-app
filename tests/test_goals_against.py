@@ -263,6 +263,8 @@ class BuildTests(unittest.TestCase):
         self.assertEqual(team["l10_seasons"], [20252026])
         # Two team-summary calls, one goal-row call: the empty season is not fetched.
         self.assertEqual(len(api.calls), 3)
+        # Top level already is last season, so there is no separate previous view.
+        self.assertIsNone(output["previous"])
 
     def test_mid_season_window_crosses_into_the_previous_season(self):
         current = [team_row(2026020000 + index, "TOR", "R", f"2026-10-{index + 1:02d}")
@@ -277,6 +279,15 @@ class BuildTests(unittest.TestCase):
         team = output["teams"]["TOR"]
         self.assertEqual((output["season_id"], team["ytdTotal"]), (20262027, 1))
         self.assertEqual(team["l10_seasons"], [20252026, 20262027])
+
+        previous = output["previous"]
+        self.assertEqual((previous["season"], previous["season_id"]), ("2025-26", 20252026))
+        self.assertEqual(set(previous), {"season", "season_id", "teams", "league"})
+        last_season = previous["teams"]["TOR"]
+        self.assertEqual(last_season["ytdTotal"], 2)
+        self.assertEqual(last_season["l10_seasons"], [20252026])
+        self.assertEqual(len(last_season["l10_games"]), 10)
+        self.assertIn("l10_avg", previous["league"])
         self.assertEqual(team["l10"], {"C": 1, "LW": 2, "RW": 0, "D": 0})
         self.assertEqual(team["homeTotal"], 1)
         self.assertEqual(team["awayTotal"], 0)

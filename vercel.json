@@ -6,6 +6,16 @@
     }
   },
   "rewrites": [
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/matchups",
+      "destination": "/goals-allowed",
+      "permanent": true
+    }
   ]
 }

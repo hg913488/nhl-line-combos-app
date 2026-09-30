@@ -1384,6 +1384,12 @@ function GoalsAgainstView({ isMobile }) {
   const [sortDir, setSortDir] = useState("desc");
   const [search, setSearch] = useState("");
   const [viewFilter, setViewFilter] = useState("all");
+  const [seasonView, setSeasonView] = useState("current");
+  const data = seasonView === "previous" && GA_DATA.previous ? GA_DATA.previous : GA_DATA;
+  // Early in a season the current Last 10 reaches back into last season's games.
+  const carriedGames = seasonView === "current"
+    ? Math.max(0, ...Object.values(GA_DATA.teams || {}).map(team => (team.l10_games || []).filter(game => game.season !== GA_DATA.season_id).length))
+    : 0;
 
   const todayGames = useTodayGames();
   const todayAbbrs = useMemo(() => {
@@ -1399,10 +1405,10 @@ function GoalsAgainstView({ isMobile }) {
 
   const splitKey = duration === "l10" ? "l10" : (location === "home" ? "home" : location === "away" ? "away" : "ytd");
   const totalKey = duration === "l10" ? "l10Total" : (location === "home" ? "homeTotal" : location === "away" ? "awayTotal" : "ytdTotal");
-  const positions = GA_DATA.positions || ["C", "LW", "RW", "D"];
+  const positions = data.positions || GA_DATA.positions || ["C", "LW", "RW", "D"];
 
   const rows = useMemo(() => {
-    const teams = GA_DATA.teams || {};
+    const teams = data.teams || {};
     return Object.entries(teams)
       .filter(([abbr]) => {
         if (viewFilter === "today" && todayAbbrs.size > 0 && !todayAbbrs.has(abbr)) return false;
@@ -1423,18 +1429,18 @@ function GoalsAgainstView({ isMobile }) {
         const bVal = sortCol === "total" ? b.total : (b[sortCol] || 0);
         return sortDir === "desc" ? bVal - aVal : aVal - bVal;
       });
-  }, [splitKey, totalKey, sortCol, sortDir, search, viewFilter, todayAbbrs]);
+  }, [data, splitKey, totalKey, sortCol, sortDir, search, viewFilter, todayAbbrs]);
 
   const colRanges = useMemo(() => {
     const ranges = {};
     positions.forEach(pos => {
-      const vals = Object.values(GA_DATA.teams).map(r => r[splitKey]?.[pos] || 0);
+      const vals = Object.values(data.teams).map(r => r[splitKey]?.[pos] || 0);
       ranges[pos] = { min: Math.min(...vals), max: Math.max(...vals) };
     });
-    const totals = Object.values(GA_DATA.teams).map(r => r[totalKey] || 0);
+    const totals = Object.values(data.teams).map(r => r[totalKey] || 0);
     ranges.total = { min: Math.min(...totals), max: Math.max(...totals) };
     return ranges;
-  }, [splitKey, totalKey]);
+  }, [data, splitKey, totalKey]);
 
   const handleSort = col => {
     if (sortCol === col) setSortDir(d => d === "desc" ? "asc" : "desc");
@@ -1451,7 +1457,18 @@ function GoalsAgainstView({ isMobile }) {
 
   return (
     <div style={{ padding: "16px 24px", maxWidth: 900, margin: "0 auto" }}>
+      <header className="schedule-heading ga-heading">
+        <div>
+          <h1>Goals allowed by position</h1>
+          <p className="muted">How many goals each defense has given up to centers, wingers and defensemen.</p>
+        </div>
+      </header>
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
+        {GA_DATA.previous && <>
+          {filterBtn(GA_DATA.season, "current", setSeasonView, seasonView)}
+          {filterBtn(GA_DATA.previous.season, "previous", setSeasonView, seasonView)}
+          <div style={{ width: 1, height: 20, background: P.border, margin: "0 4px" }} />
+        </>}
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search team..."
           style={{ background: P.surface, border: `1px solid ${P.border}`, borderRadius: 4, padding: "6px 10px", color: P.white, fontSize: 12, fontFamily: "inherit", width: 140 }} />
         <div style={{ width: 1, height: 20, background: P.border, margin: "0 4px" }} />
@@ -1476,13 +1493,16 @@ function GoalsAgainstView({ isMobile }) {
           UPDATED {GA_DATA.lastUpdated || "—"}
         </span>
       </div>
-      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 12 }}>
-        <span style={{ fontSize: 10, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>GOALS AGAINST BY SCORER POSITION ({GA_DATA.season})</span>
+      <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "2px 6px", marginBottom: 12 }}>
+        <span style={{ fontSize: 10, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>GOALS AGAINST BY SCORER POSITION <span style={{ whiteSpace: "nowrap" }}>({data.season})</span></span>
         <span style={{ fontSize: 10, color: P.dim }}>·</span>
         <span style={{ fontSize: 10, color: P.dove, letterSpacing: 0, fontFamily: "'Space Mono',monospace" }}>
           {duration === "l10" ? "LAST 10 GAMES" : location === "home" ? "HOME GAMES" : location === "away" ? "AWAY GAMES" : "FULL SEASON"}
         </span>
       </div>
+      {duration === "l10" && carriedGames > 0 && <p className="sheet-note ga-carry-note">
+        Early in the season, a team’s last 10 still includes up to {carriedGames} games from {GA_DATA.previous?.season || "last season"}.
+      </p>}
       <div style={{ overflowX: "auto", background: P.surface, borderRadius: 6, border: `1px solid ${P.border}` }}>
         <table className="ga-table">
           <thead>
@@ -1804,7 +1824,7 @@ export default function App() {
             <optgroup label="TEAMS"><option value="teams-quick">Quick Scan</option><option value="teams-focus">Focused Team</option><option value="compare">Compare</option></optgroup>
             <option value="today">Tonight</option>
             <optgroup label="NEWS"><option value="news-nhl">NHL News</option><option value="news-reporters">Reporters</option><option value="moves">Line Moves</option><option value="injuries">Injuries</option></optgroup>
-            <optgroup label="STATS"><option value="player">Player Stats</option><option value="spotlight">Spotlight</option><option value="stats">Matchups</option><option value="playoffs">Playoffs</option></optgroup>
+            <optgroup label="STATS"><option value="player">Player Stats</option><option value="spotlight">Spotlight</option><option value="stats">Goals Allowed</option><option value="playoffs">Playoffs</option></optgroup>
             <option value="picks">Picks</option>
           </Select>}
         </div>
@@ -1831,7 +1851,7 @@ export default function App() {
           <div className="nav-submenu" aria-label="Stats views">
             <NavLink to="/players" current={tab === 'player'} onNavigate={() => setTab('player')}>PLAYER STATS</NavLink>
             <NavLink to="/spotlight" current={tab === 'spotlight'} onNavigate={() => setTab('spotlight')}>SPOTLIGHT</NavLink>
-            <NavLink to="/matchups" current={tab === 'stats'} onNavigate={() => setTab('stats')}>MATCHUPS</NavLink>
+            <NavLink to="/goals-allowed" current={tab === 'stats'} onNavigate={() => setTab('stats')}>GOALS ALLOWED</NavLink>
             <NavLink to="/playoffs" current={tab === 'playoffs'} onNavigate={() => setTab('playoffs')}>PLAYOFFS</NavLink>
           </div>
         </div>

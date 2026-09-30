@@ -16,7 +16,8 @@ const STATIC_ROUTES = [
   ['injuries', { tab: 'injuries' }],
   ['players', { tab: 'player' }],
   ['spotlight', { tab: 'spotlight' }],
-  ['matchups', { tab: 'stats' }],
+  ['goals-allowed', { tab: 'stats' }],
+  ['matchups', { tab: 'stats' }], // legacy path; buildPath takes the first match above
   ['playoffs', { tab: 'playoffs' }],
   ['picks', { tab: 'picks' }],
   ['disclaimer', { tab: 'disclaimer' }],
