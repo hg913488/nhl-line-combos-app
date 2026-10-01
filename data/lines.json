@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-10-01 17:05:22 UTC",
+  "updated_at": "2026-10-01 20:59:04 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -36,7 +36,7 @@
         ],
         [
           "TYSON HINDS",
-          "NICK JENSEN"
+          "NOAH WARREN"
         ]
       ],
       "goalies": [
@@ -495,12 +495,13 @@
         ],
         [
           "JOEL KIVIRANTA",
-          "SAM STEEL",
+          "ARTTU HYRY",
           "JAMIE BENN"
         ],
         [
           "OSKAR BACK",
-          "RADEK FAKSA"
+          "RADEK FAKSA",
+          "SAM STEEL"
         ]
       ],
       "defense": [
@@ -603,23 +604,23 @@
     "edmonton-oilers": {
       "forwards": [
         [
-          "ALEX FORMENTON",
-          "CONNOR MCDAVID",
-          "ZACH HYMAN"
-        ],
-        [
           "VASILY PODKOLZIN",
-          "LEON DRAISAITL",
-          "KASPERI KAPANEN"
+          "CONNOR MCDAVID",
+          "LEON DRAISAITL"
         ],
         [
           "MAX JONES",
           "COLTON DACH",
+          "KASPERI KAPANEN"
+        ],
+        [
+          "ALEX FORMENTON",
+          "OWEN MICHAELS",
           "MATHIEU JOSEPH"
         ],
         [
           "ISAAC HOWARD",
-          "OWEN MICHAELS",
+          "JOSH SAMANSKI",
           "TRENT FREDERIC"
         ]
       ],
@@ -629,11 +630,11 @@
           "EVAN BOUCHARD"
         ],
         [
-          "JAKE WALMAN",
+          "RYAN SHEA",
           "CONNOR MURPHY"
         ],
         [
-          "RYAN SHEA",
+          "JAKE WALMAN",
           "SHAKIR MUKHAMADULLIN"
         ]
       ],
@@ -646,16 +647,16 @@
         ]
       ],
       "pp1": [
-        "ZACH HYMAN",
         "VASILY PODKOLZIN",
+        "ISAAC HOWARD",
         "LEON DRAISAITL",
         "EVAN BOUCHARD",
         "CONNOR MCDAVID"
       ],
       "pp2": [
         "TRENT FREDERIC",
+        "COLTON DACH",
         "KASPERI KAPANEN",
-        "ISAAC HOWARD",
         "RYAN SHEA",
         "JAKE WALMAN"
       ]
@@ -1122,7 +1123,7 @@
           "IGOR SHESTERKIN"
         ],
         [
-          "JOONAS KORPISALO"
+          "DYLAN GARAND"
         ]
       ],
       "pp1": [
@@ -1279,7 +1280,7 @@
         ],
         [
           "CONNOR DEWAR",
-          "BLAKE LIZOTTE",
+          "BEN KINDEL",
           "ELMER SODERBLOM"
         ]
       ],
@@ -1393,14 +1394,14 @@
           "JORDAN EBERLE"
         ],
         [
-          "SHANE WRIGHT",
+          "RYAN WINTERTON",
           "BERKLY CATTON",
-          "RYAN WINTERTON"
+          "SHANE WRIGHT"
         ],
         [
-          "JACOB MELANSON",
+          "CURTIS DOUGLAS",
           "FREDERICK GAUDREAU",
-          "CURTIS DOUGLAS"
+          "JACOB MELANSON"
         ]
       ],
       "defense": [
@@ -1638,7 +1639,7 @@
           "JACK MCBAIN"
         ],
         [
-          "LIAM O'BRIEN",
+          "MICHAEL CARCONE",
           "KEVIN STENLUND",
           "DANIIL BUT"
         ]
@@ -1666,17 +1667,17 @@
         ]
       ],
       "pp1": [
-        "DYLAN GUENTHER",
-        "LOGAN COOLEY",
         "NICK SCHMALTZ",
+        "LOGAN COOLEY",
         "CLAYTON KELLER",
+        "DYLAN GUENTHER",
         "MIKHAIL SERGACHEV"
       ],
       "pp2": [
         "ANDERS LEE",
         "VINCENT TROCHECK",
+        "MICHAEL CARCONE",
         "DANIIL BUT",
-        "BARRETT HAYTON",
         "JOHN MARINO"
       ]
     },
@@ -1758,9 +1759,9 @@
           "VICTOR OLOFSSON"
         ],
         [
-          "MARC GATCOMB",
+          "BRAEDEN BOWMAN",
           "NIC DOWD",
-          "BRAEDEN BOWMAN"
+          "MARC GATCOMB"
         ]
       ],
       "defense": [
@@ -2043,12 +2044,12 @@
         "name": "ISAC LUNDESTROM",
         "pos": "C",
         "status": "Injured Reserve",
-        "desc": ""
+        "desc": "Achilles"
       },
       {
-        "name": "MIKAEL PYYHTIA",
-        "pos": "LW",
-        "status": "Out",
+        "name": "IVAN PROVOROV",
+        "pos": "D",
+        "status": "Injured Reserve",
         "desc": "Lower body"
       },
       {
@@ -2058,9 +2059,9 @@
         "desc": "Hand"
       },
       {
-        "name": "IVAN PROVOROV",
-        "pos": "D",
-        "status": "Day-To-Day",
+        "name": "MIKAEL PYYHTIA",
+        "pos": "LW",
+        "status": "Out",
         "desc": "Lower body"
       }
     ],
@@ -2122,6 +2123,12 @@
         "pos": "C",
         "status": "Out",
         "desc": "Lower body"
+      },
+      {
+        "name": "ZACH HYMAN",
+        "pos": "LW",
+        "status": "Out",
+        "desc": "Undisclosed"
       }
     ],
     "florida-panthers": [
@@ -2208,6 +2215,14 @@
         "desc": "Knee"
       }
     ],
+    "new-york-rangers": [
+      {
+        "name": "JOONAS KORPISALO",
+        "pos": "G",
+        "status": "Out",
+        "desc": ""
+      }
+    ],
     "ottawa-senators": [
       {
         "name": "ARTEM ZUB",
@@ -2250,6 +2265,12 @@
     ],
     "pittsburgh-penguins": [
       {
+        "name": "BLAKE LIZOTTE",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "Lower body"
+      },
+      {
         "name": "BRYAN RUST",
         "pos": "RW",
         "status": "Out",
@@ -2287,7 +2308,7 @@
         "name": "MACKIE SAMOSKEVICH",
         "pos": "RW",
         "status": "Day-To-Day",
-        "desc": ""
+        "desc": "Upper body"
       }
     ],
     "st-louis-blues": [
@@ -2378,6 +2399,6 @@
   "injuries_meta": {
     "source": "dailyfaceoff.com",
     "status": "fresh",
-    "updated_at": "2026-10-01 17:05:22 UTC"
+    "updated_at": "2026-10-01 20:59:04 UTC"
   }
 }
