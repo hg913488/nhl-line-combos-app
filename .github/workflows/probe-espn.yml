@@ -6,18 +6,24 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install requests
+      - name: Probe with the scraper's headers
+        shell: python
         run: |
-          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-          for u in \
-            "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/teams" \
-            "https://site.web.api.espn.com/apis/site/v2/sports/hockey/nhl/teams" \
-            "https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/teams/26/injuries?limit=100" \
-            "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/injuries" \
-            "https://site.web.api.espn.com/apis/site/v2/sports/hockey/nhl/injuries" \
-            "https://www.espn.com/nhl/injuries"; do
-            for agent in "python-requests/2.32" "$UA"; do
-              code=$(curl -s -o /tmp/body -w "%{http_code}" -A "$agent" "$u")
-              echo "$code $(wc -c </tmp/body)B [$(echo "$agent" | cut -c1-12)] $u"
-            done
-          done
+          import requests
+          UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+          variants = {
+            "scraper headers": {"User-Agent": UA, "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "Accept-Language": "en-US,en;q=0.5"},
+            "browser UA + json accept": {"User-Agent": UA, "Accept": "application/json"},
+            "requests default": {},
+          }
+          urls = ["https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/teams",
+                  "https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/teams/26/injuries?limit=100",
+                  "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/injuries"]
+          for label, headers in variants.items():
+              s = requests.Session(); s.headers.update(headers)
+              for u in urls:
+                  r = s.get(u, timeout=15)
+                  print(f"{r.status_code} {len(r.content)}B [{label}] {u}")
