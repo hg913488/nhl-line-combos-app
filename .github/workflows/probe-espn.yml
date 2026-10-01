@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix: { n: [1, 2, 3, 4] }
+      matrix: { n: [1, 2] }
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
@@ -20,6 +20,9 @@ jobs:
           import time
           from scraper import scrape_lines as s
           start = time.time()
+          for team in s.TEAMS:
+              s.scrape_team(team); time.sleep(1)
+          print(f"DF done in {time.time()-start:.0f}s; cookies: {[ (c.domain, c.name) for c in s.SESSION.cookies]}")
           try:
               ids = s.fetch_espn_team_ids()
               inj = s.scrape_espn_injuries(ids)
