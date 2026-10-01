@@ -1,5 +1,8 @@
 import json
+import re
 import time
+import unicodedata
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
@@ -33,6 +36,15 @@ HEADERS = {
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)
 
+# Daily Faceoff injury codes -> the labels the Injuries page shows (InjuryBadge).
+DF_INJURY_STATUS = {"out": "Out", "ir": "Injured Reserve", "ltir": "Long-Term IR",
+                    "dtd": "Day-To-Day"}
+DF_POSITIONS = {"lw": "LW", "c": "C", "rw": "RW", "ld": "D", "rd": "D", "g": "G"}
+NHL_POSITIONS = {"L": "LW", "R": "RW", "C": "C", "D": "D", "G": "G"}
+NHL_ROSTER_URL = "https://api-web.nhle.com/v1/roster/{abbr}/current"
+NHL_SEARCH_URL = "https://search.d3.nhle.com/api/v1/search/player"
+NEWS_MAX_AGE_DAYS = 90  # older news may describe an earlier injury
+
 
 def scrape_team(team_slug):
     url = f"https://www.dailyfaceoff.com/teams/{team_slug}/line-combinations"
@@ -44,12 +56,8 @@ def scrape_team(team_slug):
         return {"forwards": [], "defense": [], "goalies": [], "pp1": [], "pp2": []}
 
     data = json.loads(script.string)
-    players = (
-        data.get("props", {})
-            .get("pageProps", {})
-            .get("combinations", {})
-            .get("players", [])
-    )
+    combinations = data.get("props", {}).get("pageProps", {}).get("combinations", {})
+    players = combinations.get("players", [])
 
     ev_groups = {}
     pp_groups = {}
@@ -81,7 +89,108 @@ def scrape_team(team_slug):
         "goalies":  goalies,
         "pp1":      pp1,
         "pp2":      pp2,
+        # Popped by main() into the injuries block; None when the page has no player list.
+        "injured":  df_injuries(players) if isinstance(players, list) and players else None,
+        "abbr":     combinations.get("teamAbbreviation"),
     }
+
+
+def plain(value):
+    """Uppercase without accents: "Isac Lundeström" -> "ISAC LUNDESTROM"."""
+    text = unicodedata.normalize("NFKD", str(value or ""))
+    return "".join(ch for ch in text if not unicodedata.combining(ch)).upper().strip()
+
+
+def injury_type(news, name, now=None):
+    """'Leg' from recent news like "Kevin Fiala (leg) could rejoin...", else ''.
+
+    Only brackets right after the player's surname count: other brackets in
+    the news are contract notes and the like ("Expires 2031 (UFA)").
+    """
+    if not isinstance(news, dict) or not name.split():
+        return ""
+    try:
+        created = datetime.fromisoformat(str(news.get("createdAt", "")))
+    except ValueError:
+        return ""
+    if created.tzinfo is None:
+        created = created.replace(tzinfo=timezone.utc)
+    if (now or datetime.now(timezone.utc)) - created > timedelta(days=NEWS_MAX_AGE_DAYS):
+        return ""
+    surname = re.escape(plain(name).split()[-1])
+    match = re.search(rf"{surname}\s*\(([^)]{{2,30}})\)", plain(news.get("details")))
+    return match.group(1).replace("-", " ").strip().capitalize() if match else ""
+
+
+def df_injuries(players, now=None):
+    """Injured players from a Daily Faceoff line-combinations page.
+
+    Everyone on the page carries injuryStatus: null when healthy, or a code
+    ('out', 'ir', 'dtd', ...). That includes day-to-day players still in a line.
+    """
+    injured, seen = [], set()
+    for player in players:
+        code = str(player.get("injuryStatus") or "").lower()
+        name = str(player.get("name") or "").upper()
+        if not code or not name or name in seen:
+            continue
+        seen.add(name)
+        injured.append({
+            "name": name,
+            "pos": DF_POSITIONS.get(str(player.get("positionIdentifier") or "").lower(), "?"),
+            "status": DF_INJURY_STATUS.get(code, code.upper()),
+            "desc": injury_type(player.get("latestNews"), name, now),
+        })
+    return injured
+
+
+def fill_positions(injuries, abbrs):
+    """Injured-reserve rows have no position on Daily Faceoff; take it from the NHL roster."""
+    for slug, players in injuries.items():
+        if not abbrs.get(slug) or all(player["pos"] != "?" for player in players):
+            continue
+        try:
+            resp = SESSION.get(NHL_ROSTER_URL.format(abbr=abbrs[slug]), timeout=15)
+            resp.raise_for_status()
+            roster = resp.json()
+        except (requests.RequestException, ValueError) as e:
+            print(f"  NHL roster fetch failed for {slug}: {e}")
+            continue
+        positions = {}
+        for group in ("forwards", "defensemen", "goalies"):
+            for entry in roster.get(group) or []:
+                first = (entry.get("firstName") or {}).get("default", "")
+                last = (entry.get("lastName") or {}).get("default", "")
+                positions[plain(f"{first} {last}")] = NHL_POSITIONS.get(entry.get("positionCode"), "?")
+        for player in players:
+            if player["pos"] == "?":
+                # The current roster leaves out injured reserve; search finds them.
+                player["pos"] = positions.get(plain(player["name"])) or search_position(player["name"], abbrs[slug])
+        time.sleep(0.2)
+
+
+def search_position(name, abbr):
+    try:
+        # Search by surname: full-name queries can rank the right player out of the results.
+        resp = SESSION.get(NHL_SEARCH_URL, params={"culture": "en-us", "limit": 50,
+                                                   "q": name.split()[-1]},
+                           timeout=15)
+        resp.raise_for_status()
+        results = resp.json()
+    except (requests.RequestException, ValueError) as e:
+        print(f"  NHL player search failed for {name}: {e}")
+        return "?"
+    rows = [row for row in results if isinstance(row, dict)
+            and abbr in (row.get("teamAbbrev"), row.get("lastTeamAbbrev"))]
+    # Full name first; then same surname and initial on the team ("Matt" for "Matthew").
+    for same in (lambda other: other == plain(name),
+                 lambda other: other.split()[-1:] == plain(name).split()[-1:]
+                 and other[:1] == plain(name)[:1]):
+        matches = {NHL_POSITIONS.get(row.get("positionCode"), "?")
+                   for row in rows if same(plain(row.get("name")))}
+        if matches:
+            break
+    return matches.pop() if len(matches) == 1 else "?"
 
 
 def fetch_espn_team_ids():
@@ -240,10 +349,20 @@ def main():
         "injuries":   {},
     }
 
+    # Injuries come from the same Daily Faceoff pages. ESPN is the fallback; it
+    # answers 403 to GitHub Actions, which left the list frozen for weeks.
+    df_injured, df_missing, abbrs = {}, [], {}
+
     for team in TEAMS:
         try:
             print(f"Scraping {team}...")
             data = scrape_team(team)
+            injured = data.pop("injured", None)
+            abbrs[team] = data.pop("abbr", None)
+            if injured is None:
+                df_missing.append(team)
+            elif injured:
+                df_injured[team] = injured
             all_data["teams"][team] = data
             print(f"  -> {len(data['forwards'])} fwd lines, {len(data['defense'])} def pairs, "
                   f"{len(data['goalies'])} goalies, "
@@ -252,7 +371,28 @@ def main():
         except Exception as e:
             print(f"  FAILED {team}: {e}")
             all_data["teams"][team] = {"forwards": [], "defense": [], "goalies": [], "pp1": [], "pp2": []}
+            df_missing.append(team)
 
+    if not df_missing:
+        fill_positions(df_injured, abbrs)
+        all_data["injuries"] = df_injured
+        all_data["injuries_meta"] = {
+            "source": "dailyfaceoff.com", "status": "fresh",
+            "updated_at": all_data["updated_at"],
+        }
+        print(f"Injury data for {len(df_injured)} teams (Daily Faceoff).")
+    else:
+        print(f"\nDaily Faceoff injuries missing for {', '.join(df_missing)}; trying ESPN.")
+        refresh_espn_injuries(all_data, previous)
+
+    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
+        json.dump(all_data, f, indent=2, ensure_ascii=False)
+
+    populated = sum(1 for t in all_data["teams"].values() if t["forwards"])
+    print(f"\nDone - {populated}/{len(TEAMS)} teams have forward data.")
+
+
+def refresh_espn_injuries(all_data, previous):
     try:
         print("\nFetching ESPN team IDs...")
         espn_team_ids = fetch_espn_team_ids()
@@ -268,18 +408,12 @@ def main():
         # Legacy snapshots did not record a separate injury refresh timestamp.
         meta = previous.get("injuries_meta") or {}
         all_data["injuries_meta"] = {
-            "source": "espn.com",
+            "source": meta.get("source", "espn.com"),
             "status": "stale" if isinstance(saved, dict) else "unavailable",
             "updated_at": meta.get("updated_at"),
         }
         print(f"::warning::Injuries could not refresh; preserving prior data: {e}")
     print(f"Injury data for {len(all_data['injuries'])} teams.")
-
-    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        json.dump(all_data, f, indent=2, ensure_ascii=False)
-
-    populated = sum(1 for t in all_data["teams"].values() if t["forwards"])
-    print(f"\nDone - {populated}/{len(TEAMS)} teams have forward data.")
 
 
 if __name__ == "__main__":
