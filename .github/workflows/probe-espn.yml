@@ -5,25 +5,25 @@ on:
 jobs:
   probe:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: { n: [1, 2, 3, 4] }
     steps:
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with: { python-version: "3.11" }
-      - run: pip install requests
-      - name: Probe with the scraper's headers
-        shell: python
+      - run: pip install -r requirements.txt
+      - name: Real ESPN injury code
         run: |
-          import requests
-          UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-          variants = {
-            "scraper headers": {"User-Agent": UA, "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "Accept-Language": "en-US,en;q=0.5"},
-            "browser UA + json accept": {"User-Agent": UA, "Accept": "application/json"},
-            "requests default": {},
-          }
-          urls = ["https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/teams",
-                  "https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/teams/26/injuries?limit=100",
-                  "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/injuries"]
-          for label, headers in variants.items():
-              s = requests.Session(); s.headers.update(headers)
-              for u in urls:
-                  r = s.get(u, timeout=15)
-                  print(f"{r.status_code} {len(r.content)}B [{label}] {u}")
+          curl -s https://api.ipify.org; echo
+          python - <<'PY'
+          import time
+          from scraper import scrape_lines as s
+          start = time.time()
+          try:
+              ids = s.fetch_espn_team_ids()
+              inj = s.scrape_espn_injuries(ids)
+              print(f"RESULT ok {len(inj)} teams {sum(map(len, inj.values()))} players in {time.time()-start:.0f}s")
+          except Exception as e:
+              print(f"RESULT fail after {time.time()-start:.0f}s: {e}")
+          PY
