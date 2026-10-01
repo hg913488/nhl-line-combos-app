@@ -1,17 +1,45 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-09-30 22:36:10 UTC",
+  "updated_at": "2026-10-01 01:21:14 UTC",
   "matchups": [
+    {
+      "away": {
+        "team": "pittsburgh-penguins",
+        "goalie": "ARTURS SILOVS",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/31270/Silovs-Arturs_PIT-2026_.png",
+        "stats": {
+          "record": "0-0-0",
+          "gaa": "0.0",
+          "svpct": "1.0",
+          "so": 0
+        }
+      },
+      "home": {
+        "team": "philadelphia-flyers",
+        "goalie": "DAN VLADAR",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/3831/Vladar-Dan_PHI-11_30_25_.png",
+        "stats": {
+          "record": "0-0-0",
+          "gaa": "6.32",
+          "svpct": "0.8",
+          "so": 0
+        }
+      },
+      "date": "2026-09-30",
+      "time": "19:30"
+    },
     {
       "away": {
         "team": "new-york-islanders",
         "goalie": "ILYA SOROKIN",
-        "status": "Likely",
+        "status": "Confirmed",
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/25264/Sorokin-Ilya_NYI-2023_.png",
         "stats": {
           "record": "0-0-0",
-          "gaa": "0.0",
-          "svpct": "0.0",
+          "gaa": "10.0",
+          "svpct": "0.6",
           "so": 0
         }
       },
@@ -23,35 +51,7 @@
         "stats": {
           "record": "0-0-0",
           "gaa": "0.0",
-          "svpct": "0.0",
-          "so": 0
-        }
-      },
-      "date": "2026-09-30",
-      "time": "19:30"
-    },
-    {
-      "away": {
-        "team": "pittsburgh-penguins",
-        "goalie": "ARTURS SILOVS",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/31270/Silovs-Arturs_PIT-2026_.png",
-        "stats": {
-          "record": "0-0-0",
-          "gaa": "0.0",
-          "svpct": "0.0",
-          "so": 0
-        }
-      },
-      "home": {
-        "team": "philadelphia-flyers",
-        "goalie": "DAN VLADAR",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/3831/Vladar-Dan_PHI-11_30_25_.png",
-        "stats": {
-          "record": "0-0-0",
-          "gaa": "0.0",
-          "svpct": "0.0",
+          "svpct": "1.0",
           "so": 0
         }
       },

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-30T22:37:03Z",
+  "generated_at": "2026-10-01T01:22:08Z",
   "date": "2026-09-30",
   "window": {
     "games": 10,
@@ -550,78 +550,6 @@
       "number": 65
     },
     {
-      "id": 8477845,
-      "name": "TREVOR VAN RIEMSDYK",
-      "team": "PIT",
-      "opp": "PHI",
-      "game_id": 2026020006,
-      "home": false,
-      "pos": "D",
-      "line": "D2",
-      "pp": null,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 1,
-        "a": 2,
-        "p": 3,
-        "sog": 9,
-        "toi": 1152.3,
-        "pptoi": 1.2
-      },
-      "season": {
-        "gp": 0,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 0
-      },
-      "opp_index": 0.6761,
-      "opp_goalie": {
-        "name": "DAN VLADAR",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": [],
-      "number": 57
-    },
-    {
-      "id": 8471724,
-      "name": "KRIS LETANG",
-      "team": "PIT",
-      "opp": "PHI",
-      "game_id": 2026020006,
-      "home": false,
-      "pos": "D",
-      "line": "D2",
-      "pp": 2,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 2,
-        "a": 1,
-        "p": 3,
-        "sog": 13,
-        "toi": 1305.5,
-        "pptoi": 106.3
-      },
-      "season": {
-        "gp": 0,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 0
-      },
-      "opp_index": 0.6761,
-      "opp_goalie": {
-        "name": "DAN VLADAR",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": [],
-      "number": 58
-    },
-    {
       "id": 8479398,
       "name": "SAMUEL GIRARD",
       "team": "PIT",
@@ -629,7 +557,7 @@
       "game_id": 2026020006,
       "home": false,
       "pos": "D",
-      "line": "D3",
+      "line": "D2",
       "pp": 2,
       "b2b": false,
       "last10": {
@@ -667,7 +595,7 @@
       "game_id": 2026020006,
       "home": false,
       "pos": "D",
-      "line": "D3",
+      "line": "D2",
       "pp": null,
       "b2b": false,
       "last10": {
@@ -692,8 +620,82 @@
         "status": "Confirmed",
         "source": "confirmed"
       },
-      "flags": [],
+      "flags": [
+        "ROLE_UP"
+      ],
       "number": 6
+    },
+    {
+      "id": 8477845,
+      "name": "TREVOR VAN RIEMSDYK",
+      "team": "PIT",
+      "opp": "PHI",
+      "game_id": 2026020006,
+      "home": false,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 9,
+        "toi": 1152.3,
+        "pptoi": 1.2
+      },
+      "season": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
+      },
+      "opp_index": 0.6761,
+      "opp_goalie": {
+        "name": "DAN VLADAR",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [],
+      "number": 57
+    },
+    {
+      "id": 8471724,
+      "name": "KRIS LETANG",
+      "team": "PIT",
+      "opp": "PHI",
+      "game_id": 2026020006,
+      "home": false,
+      "pos": "D",
+      "line": "D3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 1,
+        "p": 3,
+        "sog": 13,
+        "toi": 1305.5,
+        "pptoi": 106.3
+      },
+      "season": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
+      },
+      "opp_index": 0.6761,
+      "opp_goalie": {
+        "name": "DAN VLADAR",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [],
+      "number": 58
     },
     {
       "id": 8480015,
@@ -2086,8 +2088,8 @@
       "opp_index": 0.824,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2127,8 +2129,8 @@
       "opp_index": 0.6719,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2166,8 +2168,8 @@
       "opp_index": 1.8963,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B",
@@ -2205,8 +2207,8 @@
       "opp_index": 0.824,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -2243,8 +2245,8 @@
       "opp_index": 0.6719,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2283,8 +2285,8 @@
       "opp_index": 1.8963,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2325,8 +2327,8 @@
       "opp_index": 0.824,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "HOT",
@@ -2364,8 +2366,8 @@
       "opp_index": 0.6719,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -2402,8 +2404,8 @@
       "opp_index": 1.8963,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B",
@@ -2441,8 +2443,8 @@
       "opp_index": 0.824,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -2479,8 +2481,8 @@
       "opp_index": 0.6719,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -2517,8 +2519,8 @@
       "opp_index": 1.8963,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B",
@@ -2556,8 +2558,8 @@
       "opp_index": 1.1268,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -2594,8 +2596,8 @@
       "opp_index": 1.1268,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2633,8 +2635,8 @@
       "opp_index": 1.1268,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -2671,8 +2673,8 @@
       "opp_index": 1.1268,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -2709,8 +2711,8 @@
       "opp_index": 1.1268,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -2747,8 +2749,8 @@
       "opp_index": 1.1268,
       "opp_goalie": {
         "name": "ILYA SOROKIN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
