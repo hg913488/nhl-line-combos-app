@@ -89,6 +89,32 @@ class NameTests(unittest.TestCase):
         directory = ps.index_players([("TOR", "Sebastian Aho", 1), ("TOR", "Sean Aho", 2)])
         self.assertIsNone(ps.match_player(directory, "TOR", "S. AHO"))
 
+    def test_teammates_with_the_same_name_split_by_position(self):
+        # Vancouver: Elias Pettersson the centre and Elias Pettersson the defenceman.
+        directory = ps.index_players([
+            ("VAN", "Elias Pettersson", 8483678, "D"),
+            ("VAN", "Elias Pettersson", 8480012, "C"),
+        ])
+        self.assertEqual(ps.match_player(directory, "VAN", "ELIAS PETTERSSON", "C"), 8480012)
+        self.assertEqual(ps.match_player(directory, "VAN", "ELIAS PETTERSSON", "D"), 8483678)
+        self.assertEqual(ps.match_player(directory, "VAN", "ELIAS NILS PETTERSSON", "D"), 8483678)
+        self.assertIsNone(ps.match_player(directory, "VAN", "ELIAS PETTERSSON"))
+
+    def test_middle_name_falls_back_to_first_and_last(self):
+        directory = ps.index_players([("TOR", "Matthew Knies", 8482720, "L")])
+        self.assertEqual(ps.match_player(directory, "TOR", "MATTHEW JAMES KNIES", "LW"), 8482720)
+
+    def test_roster_pass_merges_without_losing_positions(self):
+        directory = ps.index_players([("VAN", "Elias Pettersson", 8480012, "C")])
+        payload = {"forwards": [], "defensemen": [
+            {"id": 8483678, "firstName": {"default": "Elias"}, "lastName": {"default": "Pettersson"},
+             "positionCode": "D"}]}
+        with patch("builtins.print"):
+            merged = ps.add_rosters(None, directory, ["VAN ELIAS NILS PETTERSSON"], 20262027,
+                                    {"VAN": payload})
+        self.assertEqual(ps.match_player(merged, "VAN", "ELIAS NILS PETTERSSON", "D"), 8483678)
+        self.assertEqual(ps.match_player(merged, "VAN", "ELIAS PETTERSSON", "C"), 8480012)
+
     def test_override_wins(self):
         directory = ps.index_players([("TOR", "Someone Else", 1)])
         key = ("TOR", ps.normalize_name("ALEX NEWGUY"))

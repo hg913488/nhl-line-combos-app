@@ -129,28 +129,56 @@ def loose_name(value: str) -> str:
     return f"{parts[0][0]} {' '.join(parts[1:])}" if len(parts) > 1 else ""
 
 
-def index_players(entries: Iterable[tuple[str, str, int]]) -> dict[str, Any]:
-    """Build the lookup from (team, full name, player id) triples."""
-    exact: dict[tuple[str, str], int] = {}
-    loose: dict[tuple[str, str], set[int]] = defaultdict(set)
-    for team, name, player_id in entries:
+def short_name(value: str) -> str:
+    """First and last name only: matches "Elias Nils Pettersson" to "Elias Pettersson"."""
+    parts = normalize_name(value).split()
+    return f"{parts[0]} {parts[-1]}" if len(parts) > 2 else ""
+
+
+def position_group(position: Any) -> str | None:
+    """'F' or 'D' from a position code (C, L, R, LW, RW, D)."""
+    code = str(position or "").upper()
+    return "D" if code == "D" else "F" if code in ("C", "L", "R", "LW", "RW", "F") else None
+
+
+def index_players(entries: Iterable[tuple]) -> dict[str, Any]:
+    """Build the lookup from (team, full name, player id[, position]) tuples.
+
+    Each name maps to every matching player with his position group, so two
+    teammates who share a name (Vancouver's two Elias Petterssons) can be told
+    apart by position instead of one silently taking the other's id.
+    """
+    exact: dict[tuple[str, str], dict[int, str | None]] = defaultdict(dict)
+    loose: dict[tuple[str, str], dict[int, str | None]] = defaultdict(dict)
+    for team, name, player_id, *rest in entries:
         if not team or not name or not isinstance(player_id, int):
             continue
-        exact.setdefault((team, normalize_name(name)), player_id)
-        key = loose_name(name)
-        if key:
-            loose[(team, key)].add(player_id)
+        group = position_group(rest[0]) if rest else None
+        for index, key in ((exact, normalize_name(name)), (loose, loose_name(name))):
+            if key and (group or player_id not in index[(team, key)]):
+                index[(team, key)][player_id] = group
     return {"exact": exact, "loose": loose}
 
 
-def match_player(directory: dict[str, Any], team: str, name: str) -> int | None:
+def _pick(candidates: dict[int, str | None], position: Any) -> int | None:
+    """The one candidate, or the one in the right position group; never a guess."""
+    if len(candidates) > 1 and position_group(position):
+        candidates = {pid: group for pid, group in candidates.items()
+                      if group in (None, position_group(position))}
+    return next(iter(candidates)) if len(candidates) == 1 else None
+
+
+def match_player(directory: dict[str, Any], team: str, name: str,
+                 position: Any = None) -> int | None:
     key = (team, normalize_name(name))
     if key in NAME_OVERRIDES:
         return NAME_OVERRIDES[key]
-    if key in directory["exact"]:
-        return directory["exact"][key]
-    candidates = directory["loose"].get((team, loose_name(name)), set())
-    return next(iter(candidates)) if len(candidates) == 1 else None
+    for index, lookup in (("exact", normalize_name(name)), ("exact", short_name(name)),
+                          ("loose", loose_name(name))):
+        candidates = directory[index].get((team, lookup)) if lookup else None
+        if candidates:
+            return _pick(candidates, position)
+    return None
 
 
 # ── Roles from lines.json ─────────────────────────────────────────────
@@ -373,7 +401,7 @@ def fetch_roster(session: requests.Session, team: str, season_id: int,
         for player in payload.get(key) or []:
             first = (player.get("firstName") or {}).get("default", "")
             last = (player.get("lastName") or {}).get("default", "")
-            entries.append((team, f"{first} {last}", player.get("id")))
+            entries.append((team, f"{first} {last}", player.get("id"), player.get("positionCode")))
     return entries
 
 
@@ -446,7 +474,7 @@ def build_players(
             b2b = team in played_yesterday
 
             for role in team_roles(teams.get(slug)):
-                player_id = match_player(directory, team, role["name"])
+                player_id = match_player(directory, team, role["name"], role["pos"])
                 if player_id is None:
                     unmatched.append(f"{team} {role['name']}")
                 last10 = last10_stats(window_rows.get(player_id, []), toi)
@@ -537,9 +565,10 @@ def build(
     season_rows = fetch_season_rows(session, stats_season, window_end)
 
     directory = index_players(
-        [(row.get("teamAbbrev"), row.get("skaterFullName"), row.get("playerId"))
+        [(row.get("teamAbbrev"), row.get("skaterFullName"), row.get("playerId"),
+          row.get("positionCode"))
          for row in summary_rows]
-        + [(team, row.get("skaterFullName"), row.get("playerId"))
+        + [(team, row.get("skaterFullName"), row.get("playerId"), row.get("positionCode"))
            for row in season_rows.values()
            for team in str(row.get("teamAbbrevs") or "").split(",") if team]
     )
@@ -576,11 +605,14 @@ def add_rosters(
         except (requests.RequestException, ValueError) as error:
             print(f"  roster fetch failed for {team}: {error}")
     extra = index_players(entries)
-    merged_loose = defaultdict(set, {key: set(value)
-                                     for key, value in directory["loose"].items()})
-    for key, value in extra["loose"].items():
-        merged_loose[key] |= value
-    return {"exact": {**extra["exact"], **directory["exact"]}, "loose": merged_loose}
+    merged: dict[str, Any] = {}
+    for index in ("exact", "loose"):
+        merged[index] = defaultdict(dict, {key: dict(value) for key, value in directory[index].items()})
+        for key, value in extra[index].items():
+            for player_id, group in value.items():
+                if group or player_id not in merged[index][key]:
+                    merged[index][key][player_id] = group
+    return merged
 
 
 # ── IO ────────────────────────────────────────────────────────────────
