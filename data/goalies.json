@@ -1,69 +1,41 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-10-01 02:22:12 UTC",
+  "updated_at": "2026-10-01 08:58:34 UTC",
   "matchups": [
     {
       "away": {
-        "team": "pittsburgh-penguins",
-        "goalie": "ARTURS SILOVS",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/31270/Silovs-Arturs_PIT-2026_.png",
-        "stats": {
-          "record": "0-0-0",
-          "gaa": "0.0",
-          "svpct": "1.0",
-          "so": 0
-        }
-      },
-      "home": {
         "team": "philadelphia-flyers",
         "goalie": "DAN VLADAR",
-        "status": "Confirmed",
+        "status": "Unconfirmed",
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/3831/Vladar-Dan_PHI-11_30_25_.png",
         "stats": {
-          "record": "0-0-0",
-          "gaa": "7.69",
-          "svpct": "0.8",
-          "so": 0
-        }
-      },
-      "date": "2026-09-30",
-      "time": "19:30"
-    },
-    {
-      "away": {
-        "team": "new-york-islanders",
-        "goalie": "ILYA SOROKIN",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/25264/Sorokin-Ilya_NYI-2023_.png",
-        "stats": {
-          "record": "0-0-0",
-          "gaa": "3.33",
-          "svpct": "0.895",
+          "record": "0-1-0",
+          "gaa": "7.0",
+          "svpct": "0.816",
           "so": 0
         }
       },
       "home": {
-        "team": "toronto-maple-leafs",
-        "goalie": "ANTHONY STOLARZ",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2432/Stolarz-Anthony_TOR-2024_-2.png",
+        "team": "new-jersey-devils",
+        "goalie": "JAKE ALLEN",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/1305/Allen-Jake_NJD-2_.png",
         "stats": {
           "record": "0-0-0",
           "gaa": "0.0",
-          "svpct": "1.0",
+          "svpct": "0.0",
           "so": 0
         }
       },
-      "date": "2026-09-30",
-      "time": "19:30"
+      "date": "2026-10-01",
+      "time": "19:00"
     },
     {
       "away": {
-        "team": "los-angeles-kings",
-        "goalie": "DARCY KUEMPER",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/1692/Kuemper-Darcy_LAK-2024-3_.png",
+        "team": "tampa-bay-lightning",
+        "goalie": "ANDREI VASILEVSKIY",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2413/Vasilevskiy-Andrei_TBL-2024_.png",
         "stats": {
           "record": "0-0-0",
           "gaa": "0.0",
@@ -72,10 +44,26 @@
         }
       },
       "home": {
-        "team": "colorado-avalanche",
-        "goalie": "MACKENZIE BLACKWOOD",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/3792/Blackwood-Mackenzie_COL-2025_.png",
+        "team": "new-york-rangers",
+        "goalie": "IGOR SHESTERKIN",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/25267/Shesterkin-Igor_NYR-2024-2_.png",
+        "stats": {
+          "record": "0-1-0",
+          "gaa": "2.0",
+          "svpct": "0.909",
+          "so": 0
+        }
+      },
+      "date": "2026-10-01",
+      "time": "19:00"
+    },
+    {
+      "away": {
+        "team": "buffalo-sabres",
+        "goalie": "UKKO-PEKKA LUUKKONEN",
+        "status": "Likely",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/4783/Luukkonen-Ukko-Pekka-BUF-2024.png",
         "stats": {
           "record": "0-0-0",
           "gaa": "0.0",
@@ -83,7 +71,159 @@
           "so": 0
         }
       },
-      "date": "2026-09-30",
+      "home": {
+        "team": "columbus-blue-jackets",
+        "goalie": "JET GREAVES",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/29751/Greaves-Jet_CBJ-2024_-2.png",
+        "stats": {
+          "record": "0-0-0",
+          "gaa": "0.0",
+          "svpct": "0.0",
+          "so": 0
+        }
+      },
+      "date": "2026-10-01",
+      "time": "19:00"
+    },
+    {
+      "away": {
+        "team": "minnesota-wild",
+        "goalie": "JESPER WALLSTEDT",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/31763/Wallstedt-Jesper_MIN-2024_.png",
+        "stats": {
+          "record": "0-0-0",
+          "gaa": "0.0",
+          "svpct": "0.0",
+          "so": 0
+        }
+      },
+      "home": {
+        "team": "nashville-predators",
+        "goalie": "JUUSE SAROS",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2557/Saros-Juuse_NSH-2026_.png",
+        "stats": {
+          "record": "0-0-0",
+          "gaa": "0.0",
+          "svpct": "0.0",
+          "so": 0
+        }
+      },
+      "date": "2026-10-01",
+      "time": "20:00"
+    },
+    {
+      "away": {
+        "team": "seattle-kraken",
+        "goalie": "JOEY DACCORD",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/23589/Daccord-Joey_SEA-Oct2024_.png",
+        "stats": {
+          "record": "0-0-0",
+          "gaa": "0.0",
+          "svpct": "0.0",
+          "so": 0
+        }
+      },
+      "home": {
+        "team": "calgary-flames",
+        "goalie": "DUSTIN WOLF",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/29507/Wolf-Dustin_CGY-2023_.png",
+        "stats": {
+          "record": "0-0-0",
+          "gaa": "0.0",
+          "svpct": "0.0",
+          "so": 0
+        }
+      },
+      "date": "2026-10-01",
+      "time": "21:00"
+    },
+    {
+      "away": {
+        "team": "chicago-blackhawks",
+        "goalie": "SPENCER KNIGHT",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/30475/Knight-Spencer_CHI-2_.png",
+        "stats": {
+          "record": "0-1-0",
+          "gaa": "4.0",
+          "svpct": "0.889",
+          "so": 0
+        }
+      },
+      "home": {
+        "team": "utah-mammoth",
+        "goalie": "KAREL VEJMELKA",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/26614/Vejmelka-Karel_Utah-2025_.png",
+        "stats": {
+          "record": "0-0-0",
+          "gaa": "0.0",
+          "svpct": "0.0",
+          "so": 0
+        }
+      },
+      "date": "2026-10-01",
+      "time": "21:30"
+    },
+    {
+      "away": {
+        "team": "florida-panthers",
+        "goalie": "AKIRA SCHMID",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/29148/Schmid-Akira_VGK-2025_.png",
+        "stats": {
+          "record": "0-0-0",
+          "gaa": "0.0",
+          "svpct": "0.0",
+          "so": 0
+        }
+      },
+      "home": {
+        "team": "san-jose-sharks",
+        "goalie": "YAROSLAV ASKAROV",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/33018/Askarov-Yaroslav_SJS-11_30_25_.png",
+        "stats": {
+          "record": "0-0-0",
+          "gaa": "0.0",
+          "svpct": "0.0",
+          "so": 0
+        }
+      },
+      "date": "2026-10-01",
+      "time": "22:00"
+    },
+    {
+      "away": {
+        "team": "edmonton-oilers",
+        "goalie": "DEVON LEVI",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/33010/Levi-Devon_BUF-2024_.png",
+        "stats": {
+          "record": "0-0-0",
+          "gaa": "0.0",
+          "svpct": "0.0",
+          "so": 0
+        }
+      },
+      "home": {
+        "team": "vancouver-canucks",
+        "goalie": "KEVIN LANKINEN",
+        "status": "Unconfirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/4757/Lankinen-Kevin_VAN-2024_.png",
+        "stats": {
+          "record": "1-0-0",
+          "gaa": "4.84",
+          "svpct": "0.865",
+          "so": 0
+        }
+      },
+      "date": "2026-10-01",
       "time": "22:00"
     }
   ]
