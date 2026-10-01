@@ -1,0 +1,23 @@
+name: Probe ESPN reachability
+on:
+  push:
+    branches: [probe-espn]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe
+        run: |
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+          for u in \
+            "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/teams" \
+            "https://site.web.api.espn.com/apis/site/v2/sports/hockey/nhl/teams" \
+            "https://sports.core.api.espn.com/v2/sports/hockey/leagues/nhl/teams/26/injuries?limit=100" \
+            "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/injuries" \
+            "https://site.web.api.espn.com/apis/site/v2/sports/hockey/nhl/injuries" \
+            "https://www.espn.com/nhl/injuries"; do
+            for agent in "python-requests/2.32" "$UA"; do
+              code=$(curl -s -o /tmp/body -w "%{http_code}" -A "$agent" "$u")
+              echo "$code $(wc -c </tmp/body)B [$(echo "$agent" | cut -c1-12)] $u"
+            done
+          done
