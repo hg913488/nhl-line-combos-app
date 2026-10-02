@@ -273,7 +273,7 @@ export async function diagnose({ igUserId = process.env.IG_USER_ID, token = proc
   console.log(`  ${JSON.stringify(limit.error ? { error: limit.error } : limit)}`);
   const media = await probe('recent media', `${igUserId}/media?fields=id,caption,timestamp,permalink&limit=25`);
   if (media.error) console.log(`  ${JSON.stringify({ error: media.error })}`);
-  for (const item of media.data || []) console.log(`  ${item.timestamp}  ${item.permalink}  ${(item.caption || '').split('\n')[0].slice(0, 70)}`);
+  for (const item of media.data || []) console.log(`  ${item.id}  ${item.timestamp}  ${item.permalink}  ${(item.caption || '').split('\n')[0].slice(0, 70)}`);
   return { diagnosed: true };
 }
 
