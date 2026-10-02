@@ -15,6 +15,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { selectWatch, picksCaption, PICKS_DEEP } from '../lib/og/picks-select.js';
 import { isFinal, goalsIn, marginIn, wentPast60, recapSlots, claimRecaps, scoreboardDue, scoreboardPages, scoreboardCaption, shiftDate } from './lib/recap-queue.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -376,16 +377,66 @@ async function recapNight(date, { log, publish, includePreseason, force, outDir,
   }
 }
 
+const readData = name => {
+  try { return JSON.parse(readFileSync(join(ROOT, 'data', name), 'utf8')); } catch { return null; }
+};
+
+const picksUrl = (date, ids, card, rank, theme = THEME, origin = SITE_ORIGIN) =>
+  `${origin}/api/og?type=ig&picks=${date}&ids=${ids.join(',')}&card=${card}${rank ? `&rank=${rank}` : ''}&format=jpg${theme === 'dark' ? '&theme=dark' : ''}`;
+
+// Midday "players to watch": one list slide plus a slide each for the top three.
+// One per ET day. Skipped, not failed, when the prop sheet is stale or thin.
+async function runPicks({ date, log, publish, force, outDir }) {
+  if (!force && log.posts.some(post => post.kind === 'picks' && post.date === date && post.published)) {
+    console.log(`Already published the players-to-watch post for ${date}; nothing to do. Set IG_FORCE=true to post again.`);
+    return { skipped: true };
+  }
+  const sheet = readData('prop_sheet.json');
+  const players = selectWatch(sheet, { date, now: process.env.IG_NOW ? new Date(process.env.IG_NOW) : new Date(), ga: readData('goals_against_by_position.json'), spotlight: readData('spotlight.json') });
+  if (!players.length) {
+    console.log(`No players worth featuring for ${date} (prop sheet is for ${sheet?.date ?? 'nothing'}); nothing to post.`);
+    return { skipped: true };
+  }
+
+  const deep = Math.min(PICKS_DEEP, players.length);
+  const ids = players.map(player => player.id);
+  const urls = [picksUrl(date, ids, 'list'), ...Array.from({ length: deep }, (_, i) => picksUrl(date, ids, 'player', i + 1))];
+  const alts = [
+    `Players to watch tonight: ${players.map(player => player.display).join(', ')}`,
+    ...players.slice(0, deep).map(player => `${player.display} of ${player.team}: ${player.clauses.slice(0, 2).join(', ')}`),
+  ];
+  const caption = picksCaption(players, date, SITE_ORIGIN.replace(/^https:\/\//, ''));
+  console.log(`Players to watch for ${date}: ${players.map(player => player.display).join(', ')}; ${urls.length} slides; ${THEME} theme.`);
+
+  if (!publish) {
+    console.log('DRY RUN — downloading cards instead of posting.');
+    await saveCards(urls, urls.map((_, i) => `${date}-picks-${i + 1}`), outDir);
+    console.log(`\n--- caption ---\n${caption}\n---------------`);
+    return { dryRun: true };
+  }
+  const igUserId = process.env.IG_USER_ID;
+  const token = process.env.IG_ACCESS_TOKEN;
+  if (!igUserId || !token) throw new Error('IG_USER_ID and IG_ACCESS_TOKEN are required to publish');
+  const { id, recovered } = await postCarousel({ key: `picks:${date}`, urls, alts, caption, log, igUserId, token, force });
+  log.posts = [...log.posts, { date, kind: 'picks', published: true, media_id: id, theme: THEME, players: ids, posted_at: new Date().toISOString() }].slice(-120);
+  writeLog(log);
+  console.log(`${recovered ? 'Recovered (already live)' : 'Published'} players to watch: ${id}`);
+  return { mediaId: id };
+}
+
 export async function run({ date = (/^\d{4}-\d{2}-\d{2}$/.test(process.env.IG_DATE || '') ? process.env.IG_DATE : etDate()), publish = process.env.IG_PUBLISH === 'true', includePreseason = process.env.IG_INCLUDE_PRESEASON === 'true', force = process.env.IG_FORCE === 'true', outDir = join(ROOT, 'ig-cards') } = {}) {
   if (process.env.IG_MODE === 'diagnose') return diagnose();
   const log = readLog();
   const isRecap = process.env.IG_MODE === 'recap';
+  const isPicks = process.env.IG_MODE === 'picks';
   // The daily set is one per date; recaps are one per game, so they key
   // differently — otherwise the day's daily post blocks that night's recap.
-  if (!force && !isRecap && log.posts.some(post => post.date === date && post.published && post.kind !== 'recap')) {
+  if (!force && !isRecap && !isPicks && log.posts.some(post => post.date === date && post.published && (post.kind || 'daily') === 'daily')) {
     console.log(`Already published the daily set for ${date}; nothing to do. Set IG_FORCE=true to post again.`);
     return { skipped: true };
   }
+
+  if (isPicks) return runPicks({ date, log, publish, force, outDir });
 
   // Recap mode: claim slots for games as they finish, then the night's roundup.
   if (isRecap) {
@@ -432,7 +483,7 @@ export async function run({ date = (/^\d{4}-\d{2}-\d{2}$/.test(process.env.IG_DA
   const urls = cards.map((item, i) => cardUrl(item.card, date, SITE_ORIGIN, { index: i + 1, total: cards.length }));
   const { id, recovered } = await postCarousel({ key: `daily:${date}`, urls, alts: cards.map(item => item.alt), caption, log, igUserId, token, force });
 
-  log.posts = [...log.posts.filter(post => post.date !== date || post.kind === 'recap'), { date, kind: 'daily', published: true, media_id: id, theme: THEME, cards: cards.map(item => item.card), posted_at: new Date().toISOString() }].slice(-120);
+  log.posts = [...log.posts.filter(post => post.date !== date || (post.kind || 'daily') !== 'daily'), { date, kind: 'daily', published: true, media_id: id, theme: THEME, cards: cards.map(item => item.card), posted_at: new Date().toISOString() }].slice(-120);
   writeLog(log);
   console.log(`${recovered ? 'Recovered (already live)' : 'Published'}: ${id}`);
   return { mediaId: id };

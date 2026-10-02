@@ -139,10 +139,15 @@ curl -s -o out.png "http://localhost:5173/api/og?type=ig&recap=<gameId>&card=fin
   for OT/SO or 9+ goals. The count comes from the log, so a rerun cannot claim a second batch.
 - **Final-scores roundup:** one carousel per night (`kind: scoreboard`, keyed by date), up to 8 games a slide, posted when every game
   is final or at 9 AM ET next morning. Card route: `/api/og?type=ig&scores=<date>&ids=<id,id>&page=<n>`.
+- **Players to watch (`mode=picks`, midday):** one carousel per ET day (`kind: picks`, keyed by date): a list slide, then a slide each for the
+  top 3. `lib/og/picks-select.js` ranks `data/prop_sheet.json` players (PP1, soft matchup, hot, role up; one per team, max two per game,
+  only games not yet started) and writes every reason from a real field, no pronouns, no wagering words. It skips, not fails, when the sheet
+  is for another day or fewer than 3 players clear the bar. Cards: `/api/og?type=ig&picks=<date>&ids=<id,..>&card=list|player&rank=n`;
+  the poster passes `ids` so every slide shows the same players. `IG_NOW=<iso>` replays a past noon in a dry run.
 - **Poller:** GitHub `schedule` runs 3-7h late, so "as games finish" needs an external caller (cron-job.org) POSTing to
   `/repos/hg913488/nhl-line-combos-app/actions/workflows/instagram.yml/dispatches` with a fine-grained token (this repo, Actions
   read/write) and body `{"ref":"main","inputs":{"mode":"recap","publish":"true","include_preseason":"true"}}`. Leave `date` blank:
-  a recap run then checks last night and tonight. Dispatch inputs do **not** read the `IG_PUBLISH` repo variable, so `publish` must be sent.
+  a recap run then checks last night and tonight. Send `mode=picks` the same way every 30 min from 11 AM to 2 PM ET and `mode=daily` from 2 PM to 6 PM ET; both are once-a-day, so repeats are skipped. Dispatch inputs do **not** read the `IG_PUBLISH` repo variable, so `publish` must be sent.
   The token lives in the poller, never in the repo. Theme `auto` alternates by ET day like the scheduled runs.
 - Test a card with `curl` against `/api/og?type=ig&...&format=jpg` before dispatching the workflow. Dry-run the whole night against
   the dev server with `IG_LOG_PATH=<empty json> SITE_ORIGIN=http://localhost:5173 IG_MODE=recap IG_DATE=<date> node scripts/instagram-post.mjs`.

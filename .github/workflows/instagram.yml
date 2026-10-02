@@ -33,7 +33,7 @@ on:
       mode:
         description: 'Which carousel'
         type: choice
-        options: [daily, recap, diagnose]
+        options: [daily, recap, picks, diagnose]
         default: daily
       date:
         description: 'Date to use (YYYY-MM-DD, Eastern). Blank = today'

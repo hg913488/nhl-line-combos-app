@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync } from 'node:fs';
+import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 // Set before the script loads: its log path is read at import. Without this the
 // publish-safety tests below would overwrite the real data/instagram_log.json.
 process.env.IG_LOG_PATH = join(mkdtempSync(join(tmpdir(), 'ig-log-')), 'log.json');
-const { buildCaption, cardUrl, postCarousel } = await import('../scripts/instagram-post.mjs');
+const { buildCaption, cardUrl, postCarousel, run } = await import('../scripts/instagram-post.mjs');
 
 const GAMES = [
   { away: 'DAL', home: 'STL', gameType: 2 },
@@ -112,4 +112,19 @@ test('a later run records a post that went live after an earlier failure', async
   assert.deepEqual(await postCarousel(args(log)), { id: 'LATE', recovered: true });
   assert.equal(log.attempts['recap:1'], undefined);
   assert.ok(!calls.some(call => call.endsWith('/media_publish')));
+});
+
+test("a picks or scoreboard entry for a date does not block that date's daily slate", async t => {
+  const realFetch = globalThis.fetch;
+  t.after(() => { globalThis.fetch = realFetch; });
+  writeFileSync(process.env.IG_LOG_PATH, JSON.stringify({ schema_version: 1, posts: [
+    { date: '2026-10-08', kind: 'picks', published: true },
+    { date: '2026-10-08', kind: 'scoreboard', published: true },
+  ] }));
+  globalThis.fetch = async url => String(url).includes('api-web.nhle.com')
+    ? { ok: true, status: 200, json: async () => ({ gameWeek: [{ date: '2026-10-08', games: [{ awayTeam: { abbrev: 'DAL' }, homeTeam: { abbrev: 'STL' }, gameType: 2 }] }] }) }
+    : { ok: true, status: 200, arrayBuffer: async () => new ArrayBuffer(8) };
+  const result = await run({ date: '2026-10-08', publish: false, outDir: mkdtempSync(join(tmpdir(), 'ig-cards-')) });
+  assert.equal(result.skipped, undefined, 'the daily set was skipped');
+  assert.equal(result.dryRun, true);
 });
