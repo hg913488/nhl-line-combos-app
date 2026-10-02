@@ -46,7 +46,7 @@ Deploy: push to `main`. CI (`.github/workflows/ci.yml`) builds and runs both tes
 | `src/page-meta.js`                                                        | Single source of page titles/descriptions/share images; used by the client and by `middleware.js`                                                                      |
 | `middleware.js`                                                           | Vercel Routing Middleware: injects per-route `<head>` metadata into the SPA shell. Fails open — any error serves the untouched page                                    |
 | `api/og.js` + `lib/og/`                                                   | Share cards (1200×630 PNG) and Instagram cards (1080×1350 JPEG) via Satori + resvg                                                                                     |
-| `scripts/instagram-post.mjs`                                              | Daily carousel post; dry-run unless `IG_PUBLISH=true`                                                                                                                  |
+| `scripts/instagram-post.mjs` + `scripts/lib/recap-queue.mjs`              | Daily slate, per-game recaps and final-scores carousel; dry-run unless `IG_PUBLISH=true`                                                                              |
 | `scraper/build_prop_sheet.py` → `data/prop_sheet.json`                    | Player sheet: role, PP unit, last-10 form, opponent index, opposing goalie, flags                                                                                      |
 | `scraper/build_spotlight.py` → `data/spotlight.json`                      | League-wide skater momentum (last 5 vs season, streaks, droughts, line moves); minified, lazy-loaded by `src/SpotlightView.jsx`                                        |
 
@@ -130,7 +130,22 @@ curl -s -o out.png "http://localhost:5173/api/og?type=ig&recap=<gameId>&card=fin
 - **Idempotency keys by kind:** dailies by `date`, recaps by `game_id`; each log entry in `data/instagram_log.json`
   carries a `kind`. They must never share a key — a daily would otherwise block that same night's recap.
   `IG_FORCE=true` reposts.
-- Test a card with `curl` against `/api/og?type=ig&...&format=jpg` before dispatching the workflow.
+- **Never trust a `media_publish` error.** Instagram can answer `Application request limit reached` *after* the post is live
+  (it caused four duplicated recaps, 2026-09-26 to 10-01). `postCarousel()` in `scripts/instagram-post.mjs` looks the caption up
+  in `GET /{id}/media` before any retry, blocks retries it cannot verify, and tracks in-flight publishes under `attempts` in the log.
+  `mode=diagnose` (workflow dispatch) prints token identity, quota, usage headers and recent posts with ids.
+- **Recap slots (`scripts/lib/recap-queue.mjs`):** up to `IG_RECAP_SLOTS` (default 4) per ET night, claimed in the order games
+  finish and never re-ranked. A game qualifies on OT/SO, a one-goal result, 7+ goals or a 4+ goal margin; the last slot is held
+  for OT/SO or 9+ goals. The count comes from the log, so a rerun cannot claim a second batch.
+- **Final-scores roundup:** one carousel per night (`kind: scoreboard`, keyed by date), up to 8 games a slide, posted when every game
+  is final or at 9 AM ET next morning. Card route: `/api/og?type=ig&scores=<date>&ids=<id,id>&page=<n>`.
+- **Poller:** GitHub `schedule` runs 3-7h late, so "as games finish" needs an external caller (cron-job.org) POSTing to
+  `/repos/hg913488/nhl-line-combos-app/actions/workflows/instagram.yml/dispatches` with a fine-grained token (this repo, Actions
+  read/write) and body `{"ref":"main","inputs":{"mode":"recap","publish":"true","include_preseason":"true"}}`. Leave `date` blank:
+  a recap run then checks last night and tonight. Dispatch inputs do **not** read the `IG_PUBLISH` repo variable, so `publish` must be sent.
+  The token lives in the poller, never in the repo. Theme `auto` alternates by ET day like the scheduled runs.
+- Test a card with `curl` against `/api/og?type=ig&...&format=jpg` before dispatching the workflow. Dry-run the whole night against
+  the dev server with `IG_LOG_PATH=<empty json> SITE_ORIGIN=http://localhost:5173 IG_MODE=recap IG_DATE=<date> node scripts/instagram-post.mjs`.
 - **Republish the review artifact whenever the cards change** — it is the user's review surface, not a local Preview
   window. Both themes of both sets, with slide notes and the caption. Pass the existing URL so the link stays stable.
 

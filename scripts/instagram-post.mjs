@@ -15,6 +15,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isFinal, goalsIn, marginIn, wentPast60, recapSlots, claimRecaps, scoreboardDue, scoreboardPages, scoreboardCaption, shiftDate } from './lib/recap-queue.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const LOG_PATH = process.env.IG_LOG_PATH || join(ROOT, 'data', 'instagram_log.json');
@@ -82,12 +83,6 @@ export function recapUrl(card, gameId, origin = SITE_ORIGIN, options = {}) {
  * The night's most watchable finished game: overtime first, then one-goal
  * games, then the most combined shots.
  */
-const goalsIn = game => (game.homeTeam?.score ?? 0) + (game.awayTeam?.score ?? 0);
-const marginIn = game => Math.abs((game.homeTeam?.score ?? 0) - (game.awayTeam?.score ?? 0));
-// OT and shootout games are as close as a game can finish, so they lead the
-// closeness order ahead of any regulation result.
-const wentPast60 = game => Boolean(game.gameOutcome?.lastPeriodType && game.gameOutcome.lastPeriodType !== 'REG');
-
 /**
  * The games worth recapping: the night's highest-scoring game, then its
  * closest. Two separate criteria rather than one blended score, so the pair
@@ -288,6 +283,99 @@ async function downloadCards(cards, date, outDir) {
   }
 }
 
+export const scoresUrl = (date, ids, page, theme = THEME, origin = SITE_ORIGIN) =>
+  `${origin}/api/og?type=ig&scores=${date}&ids=${ids.join(',')}&page=${page}&format=jpg${theme === 'dark' ? '&theme=dark' : ''}`;
+
+async function saveCards(urls, names, outDir) {
+  mkdirSync(outDir, { recursive: true });
+  for (const [i, url] of urls.entries()) {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Card ${names[i]} returned HTTP ${response.status}`);
+    writeFileSync(join(outDir, `${names[i]}.jpg`), Buffer.from(await response.arrayBuffer()));
+    console.log(`  saved ${names[i]}`);
+  }
+}
+
+// One ET night: recap the games that have earned a slot, then post the
+// final-scores roundup when it is due. Failures are collected, not thrown, so
+// one bad game cannot lose another game's log entry.
+async function recapNight(date, { log, publish, includePreseason, force, outDir, mediaIds, failures }) {
+  const data = await fetchJson(`https://api-web.nhle.com/v1/schedule/${date}`);
+  const allNight = data.gameWeek?.find(day => day.date === date)?.games || [];
+  // Match the daily set's rule, or a scheduled recap would post preseason
+  // games on nights the daily run deliberately stays quiet.
+  const games = includePreseason ? allNight : allNight.filter(item => item.gameType !== 1);
+  const livePosts = log.posts.filter(post => post.published);
+  const recapped = new Set(livePosts.filter(post => post.kind === 'recap').map(post => String(post.game_id)));
+  const used = livePosts.filter(post => post.kind === 'recap' && post.date === date).length;
+
+  const chosen = process.env.IG_GAME_ID
+    ? [games.find(item => String(item.id) === process.env.IG_GAME_ID) || { id: Number(process.env.IG_GAME_ID) }]
+    : claimRecaps({ games, recapped, used, slots: recapSlots() });
+  console.log(`${date}: ${games.filter(isFinal).length}/${games.length} final, ${used} recapped, ${chosen.length} to recap now.`);
+
+  for (const game of chosen) {
+    if (!force && recapped.has(String(game.id))) {
+      console.log(`Already recapped game ${game.id}; skipping. Set IG_FORCE=true to post again.`);
+      continue;
+    }
+    const caption = game.awayTeam ? recapCaption(game) : 'Game recap.';
+    console.log(`Recapping game ${game.id}; ${RECAP_CARDS.length} cards; ${THEME} theme.`);
+    const urls = RECAP_CARDS.map((item, i) => recapUrl(item.card, game.id, SITE_ORIGIN, { index: i + 1, total: RECAP_CARDS.length }));
+
+    if (!publish) {
+      console.log('DRY RUN — downloading recap cards instead of posting.');
+      await saveCards(urls, RECAP_CARDS.map(item => `${date}-recap-${game.id}-${item.card}`), outDir);
+      console.log(`\n--- caption ---\n${caption}\n---------------`);
+      continue;
+    }
+
+    const igUserId = process.env.IG_USER_ID;
+    const token = process.env.IG_ACCESS_TOKEN;
+    if (!igUserId || !token) throw new Error('IG_USER_ID and IG_ACCESS_TOKEN are required to publish');
+    try {
+      const { id, recovered } = await postCarousel({ key: `recap:${game.id}`, urls, alts: RECAP_CARDS.map(item => item.alt), caption, log, igUserId, token, force });
+      log.posts = [...log.posts, { date, kind: 'recap', game_id: game.id, published: true, media_id: id, theme: THEME, posted_at: new Date().toISOString() }].slice(-120);
+      writeLog(log);
+      mediaIds.push(id);
+      console.log(`${recovered ? 'Recovered (already live)' : 'Published'} recap: ${id}`);
+    } catch (error) {
+      failures.push(`game ${game.id}: ${error.message}`);
+      console.error(`  recap ${game.id} failed: ${error.message}`);
+      if (/request limit/i.test(error.message)) return;
+    }
+  }
+
+  if (process.env.IG_GAME_ID) return;
+  const posted = livePosts.some(post => post.kind === 'scoreboard' && post.date === date);
+  if (!force && (posted || !scoreboardDue({ games, date }))) return;
+  const finished = games.filter(isFinal);
+  const ids = finished.map(game => game.id);
+  const pages = scoreboardPages(finished.length);
+  const urls = Array.from({ length: pages }, (_, i) => scoresUrl(date, ids, i + 1));
+  const caption = scoreboardCaption(games, date, SITE_ORIGIN.replace(/^https:\/\//, ''));
+  console.log(`Final scores for ${date}: ${finished.length} games, ${pages} slide${pages === 1 ? '' : 's'}.`);
+
+  if (!publish) {
+    await saveCards(urls, urls.map((_, i) => `${date}-scores-${i + 1}`), outDir);
+    console.log(`\n--- caption ---\n${caption}\n---------------`);
+    return;
+  }
+  const igUserId = process.env.IG_USER_ID;
+  const token = process.env.IG_ACCESS_TOKEN;
+  if (!igUserId || !token) throw new Error('IG_USER_ID and IG_ACCESS_TOKEN are required to publish');
+  try {
+    const { id, recovered } = await postCarousel({ key: `scoreboard:${date}`, urls, alts: urls.map((_, i) => `Final scores, slide ${i + 1} of ${pages}`), caption, log, igUserId, token, force });
+    log.posts = [...log.posts, { date, kind: 'scoreboard', published: true, media_id: id, theme: THEME, games: finished.length, posted_at: new Date().toISOString() }].slice(-120);
+    writeLog(log);
+    mediaIds.push(id);
+    console.log(`${recovered ? 'Recovered (already live)' : 'Published'} scoreboard: ${id}`);
+  } catch (error) {
+    failures.push(`scoreboard ${date}: ${error.message}`);
+    console.error(`  scoreboard ${date} failed: ${error.message}`);
+  }
+}
+
 export async function run({ date = (/^\d{4}-\d{2}-\d{2}$/.test(process.env.IG_DATE || '') ? process.env.IG_DATE : etDate()), publish = process.env.IG_PUBLISH === 'true', includePreseason = process.env.IG_INCLUDE_PRESEASON === 'true', force = process.env.IG_FORCE === 'true', outDir = join(ROOT, 'ig-cards') } = {}) {
   if (process.env.IG_MODE === 'diagnose') return diagnose();
   const log = readLog();
@@ -299,69 +387,23 @@ export async function run({ date = (/^\d{4}-\d{2}-\d{2}$/.test(process.env.IG_DA
     return { skipped: true };
   }
 
-  // Recap mode: the night's two best games, four slides each.
+  // Recap mode: claim slots for games as they finish, then the night's roundup.
   if (isRecap) {
-    const data = await fetchJson(`https://api-web.nhle.com/v1/schedule/${date}`);
-    const allNight = data.gameWeek?.find(day => day.date === date)?.games || [];
-    // Match the daily set's rule, or a scheduled recap would post preseason
-    // games on nights the daily run deliberately stays quiet.
-    const games = includePreseason ? allNight : allNight.filter(item => item.gameType !== 1);
-    const wanted = Number(process.env.IG_RECAP_COUNT) > 0 ? Number(process.env.IG_RECAP_COUNT) : 2;
-    const chosen = process.env.IG_GAME_ID
-      ? [games.find(item => String(item.id) === process.env.IG_GAME_ID) || { id: Number(process.env.IG_GAME_ID) }]
-      : pickRecaps(games, wanted);
-    if (!chosen.length) {
-      console.log(`No finished games on ${date}; nothing to recap.`);
-      return { skipped: true };
-    }
-
+    // Pollers send no date: look at last night (late games finish after midnight
+    // ET) and tonight. The fixed crons pass an explicit date.
+    const dates = /^\d{4}-\d{2}-\d{2}$/.test(process.env.IG_DATE || '') ? [date] : [shiftDate(etDate(), -1), etDate()];
     const mediaIds = [];
     const failures = [];
-    for (const game of chosen) {
-      if (!force && log.posts.some(post => post.kind === 'recap' && String(post.game_id) === String(game.id) && post.published)) {
-        console.log(`Already recapped game ${game.id}; skipping. Set IG_FORCE=true to post again.`);
-        continue;
-      }
-      const caption = game.awayTeam ? recapCaption(game) : 'Game recap.';
-      const cards = RECAP_CARDS;
-      console.log(`Recapping game ${game.id}; ${cards.length} cards; ${THEME} theme.`);
-      const urls = cards.map((item, i) => recapUrl(item.card, game.id, SITE_ORIGIN, { index: i + 1, total: cards.length }));
-
-      if (!publish) {
-        console.log('DRY RUN — downloading recap cards instead of posting.');
-        mkdirSync(outDir, { recursive: true });
-        for (const [i, url] of urls.entries()) {
-          const response = await fetch(url);
-          if (!response.ok) throw new Error(`Recap card ${cards[i].card} returned HTTP ${response.status}`);
-          const buffer = Buffer.from(await response.arrayBuffer());
-          writeFileSync(join(outDir, `${date}-recap-${game.id}-${cards[i].card}.jpg`), buffer);
-          console.log(`  saved ${cards[i].card} (${(buffer.length / 1024).toFixed(0)}KB)`);
-        }
-        console.log(`\n--- caption ---\n${caption}\n---------------`);
-        continue;
-      }
-
-      const igUserIdRecap = process.env.IG_USER_ID;
-      const tokenRecap = process.env.IG_ACCESS_TOKEN;
-      if (!igUserIdRecap || !tokenRecap) throw new Error('IG_USER_ID and IG_ACCESS_TOKEN are required to publish');
-      // One game's failure must not lose another game's log entry, and an
-      // app-wide rate limit means the next game would only fail the same way.
-      try {
-        const { id, recovered } = await postCarousel({ key: `recap:${game.id}`, urls, alts: cards.map(item => item.alt), caption, log, igUserId: igUserIdRecap, token: tokenRecap, force });
-        log.posts = [...log.posts, { date, kind: 'recap', game_id: game.id, published: true, media_id: id, theme: THEME, posted_at: new Date().toISOString() }].slice(-120);
-        writeLog(log);
-        mediaIds.push(id);
-        console.log(`${recovered ? 'Recovered (already live)' : 'Published'} recap: ${id}`);
-      } catch (error) {
-        failures.push(`game ${game.id}: ${error.message}`);
-        console.error(`  recap ${game.id} failed: ${error.message}`);
-        if (/request limit/i.test(error.message)) break;
-      }
+    for (const night of dates) {
+      await recapNight(night, { log, publish, includePreseason, force, outDir, mediaIds, failures });
+      if (failures.some(item => /request limit/i.test(item))) break;
     }
-
     if (failures.length) throw new Error(failures.join(' | '));
-    if (!publish) return { dryRun: true, recaps: chosen.length };
-    if (!mediaIds.length) return { skipped: true };
+    if (!publish) return { dryRun: true };
+    if (!mediaIds.length) {
+      console.log('Nothing new to recap.');
+      return { skipped: true };
+    }
     return { mediaIds };
   }
 
