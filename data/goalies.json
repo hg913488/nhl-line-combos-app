@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-10-01 22:54:22 UTC",
+  "updated_at": "2026-10-02 01:44:13 UTC",
   "matchups": [
     {
       "away": {
@@ -11,7 +11,7 @@
         "stats": {
           "record": "0-0-0",
           "gaa": "0.0",
-          "svpct": "0.0",
+          "svpct": "1.0",
           "so": 0
         }
       },
@@ -22,36 +22,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/1305/Allen-Jake_NJD-2_.png",
         "stats": {
           "record": "0-0-0",
-          "gaa": "0.0",
-          "svpct": "0.0",
-          "so": 0
-        }
-      },
-      "date": "2026-10-01",
-      "time": "19:00"
-    },
-    {
-      "away": {
-        "team": "tampa-bay-lightning",
-        "goalie": "ANDREI VASILEVSKIY",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2413/Vasilevskiy-Andrei_TBL-2024_.png",
-        "stats": {
-          "record": "0-0-0",
-          "gaa": "0.0",
-          "svpct": "0.0",
-          "so": 0
-        }
-      },
-      "home": {
-        "team": "new-york-rangers",
-        "goalie": "IGOR SHESTERKIN",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/25267/Shesterkin-Igor_NYR-2024-2_.png",
-        "stats": {
-          "record": "0-1-0",
-          "gaa": "2.0",
-          "svpct": "0.909",
+          "gaa": "2.61",
+          "svpct": "0.857",
           "so": 0
         }
       },
@@ -66,8 +38,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/4783/Luukkonen-Ukko-Pekka-BUF-2024.png",
         "stats": {
           "record": "0-0-0",
-          "gaa": "0.0",
-          "svpct": "0.0",
+          "gaa": "9.0",
+          "svpct": "0.625",
           "so": 0
         }
       },
@@ -78,8 +50,36 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/29751/Greaves-Jet_CBJ-2024_-2.png",
         "stats": {
           "record": "0-0-0",
-          "gaa": "0.0",
-          "svpct": "0.0",
+          "gaa": "3.0",
+          "svpct": "0.833",
+          "so": 0
+        }
+      },
+      "date": "2026-10-01",
+      "time": "19:00"
+    },
+    {
+      "away": {
+        "team": "tampa-bay-lightning",
+        "goalie": "ANDREI VASILEVSKIY",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2413/Vasilevskiy-Andrei_TBL-2024_.png",
+        "stats": {
+          "record": "0-0-0",
+          "gaa": "6.0",
+          "svpct": "0.714",
+          "so": 0
+        }
+      },
+      "home": {
+        "team": "new-york-rangers",
+        "goalie": "IGOR SHESTERKIN",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/25267/Shesterkin-Igor_NYR-2024-2_.png",
+        "stats": {
+          "record": "0-1-0",
+          "gaa": "1.5",
+          "svpct": "0.933",
           "so": 0
         }
       },
@@ -118,7 +118,7 @@
       "away": {
         "team": "seattle-kraken",
         "goalie": "JOEY DACCORD",
-        "status": "Unconfirmed",
+        "status": "Confirmed",
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/23589/Daccord-Joey_SEA-Oct2024_.png",
         "stats": {
           "record": "0-0-0",
@@ -145,20 +145,20 @@
     {
       "away": {
         "team": "chicago-blackhawks",
-        "goalie": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/30475/Knight-Spencer_CHI-2_.png",
+        "goalie": "ARVID SODERBLOM",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/34603/Soderblom-Arvid_CHI-2023_.png",
         "stats": {
-          "record": "0-1-0",
-          "gaa": "4.0",
-          "svpct": "0.889",
+          "record": "0-0-0",
+          "gaa": "0.0",
+          "svpct": "0.0",
           "so": 0
         }
       },
       "home": {
         "team": "utah-mammoth",
         "goalie": "KAREL VEJMELKA",
-        "status": "Likely",
+        "status": "Confirmed",
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/26614/Vejmelka-Karel_Utah-2025_.png",
         "stats": {
           "record": "0-0-0",
@@ -214,7 +214,7 @@
       "home": {
         "team": "vancouver-canucks",
         "goalie": "KEVIN LANKINEN",
-        "status": "Likely",
+        "status": "Confirmed",
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/4757/Lankinen-Kevin_VAN-2024_.png",
         "stats": {
           "record": "1-0-0",
