@@ -33,7 +33,7 @@ on:
       mode:
         description: 'Which carousel'
         type: choice
-        options: [daily, recap]
+        options: [daily, recap, diagnose]
         default: daily
       date:
         description: 'Date to use (YYYY-MM-DD, Eastern). Blank = today'
@@ -124,7 +124,10 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
+      # always(): a run that publishes one carousel and then fails on the next
+      # must still record the first, or the next run posts it a second time.
       - name: Commit the post log
+        if: always()
         run: |
           git config user.email "scraper@bot"
           git config user.name "Scraper Bot"
@@ -133,5 +136,12 @@ jobs:
             echo "Nothing published, so no log change"
           else
             git commit -m "Log Instagram post $(date +%F)"
-            git push
+            # Data commits land on this branch all day; rebase over them.
+            pushed=""
+            for attempt in 1 2 3; do
+              if git pull --rebase origin "${{ github.ref_name }}" && git push; then pushed=1; break; fi
+              echo "push attempt $attempt failed; retrying"
+              sleep 5
+            done
+            [ -n "$pushed" ] || { echo "::error::could not push the Instagram log"; exit 1; }
           fi
