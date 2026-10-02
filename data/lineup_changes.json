@@ -1,11 +1,147 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-02T08:33:25Z",
+  "generated_at": "2026-10-02T13:56:52Z",
   "retention": {
     "max_age_days": 90,
     "max_events": 500
   },
   "events": [
+    {
+      "id": "aaaff28c7212d67a2911",
+      "occurred_at": "2026-10-02T13:56:52Z",
+      "player": "JAROSLAV CHMELAR",
+      "team": "new-york-rangers",
+      "previous_team": "new-york-rangers",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "new-york-rangers",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "new-york-rangers",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
+    {
+      "id": "4bdaeb4e9005342eee2a",
+      "occurred_at": "2026-10-02T13:56:52Z",
+      "player": "MATT REMPE",
+      "team": "new-york-rangers",
+      "previous_team": "new-york-rangers",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "new-york-rangers",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "new-york-rangers",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "3167129629ef8774d6c9",
+      "occurred_at": "2026-10-02T13:56:52Z",
+      "player": "CHRISTIAN DVORAK",
+      "team": "philadelphia-flyers",
+      "previous_team": "philadelphia-flyers",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "philadelphia-flyers",
+        "rostered": true,
+        "forward_line": 1,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "philadelphia-flyers",
+        "rostered": true,
+        "forward_line": 1,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": null,
+          "to": 2
+        }
+      ]
+    },
+    {
+      "id": "201fab347e4b46d110f8",
+      "occurred_at": "2026-10-02T13:56:52Z",
+      "player": "NOAH CATES",
+      "team": "philadelphia-flyers",
+      "previous_team": "philadelphia-flyers",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "philadelphia-flyers",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "philadelphia-flyers",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": 2,
+          "to": null
+        }
+      ]
+    },
     {
       "id": "f5428344d8a966c94762",
       "occurred_at": "2026-10-02T01:43:29Z",
@@ -17223,144 +17359,6 @@
           "from": 1,
           "to": 2,
           "direction": "demoted"
-        }
-      ]
-    },
-    {
-      "id": "60a4bde9381f89ed25a7",
-      "occurred_at": "2026-09-23T21:45:27Z",
-      "player": "NICK COUSINS",
-      "team": "ottawa-senators",
-      "previous_team": "ottawa-senators",
-      "event_types": [
-        "addition"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "ottawa-senators",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "ottawa-senators",
-        "rostered": true,
-        "forward_line": 4,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "addition",
-          "from": false,
-          "to": true
-        }
-      ]
-    },
-    {
-      "id": "3d9ec6503bfa6f9e6567",
-      "occurred_at": "2026-09-23T21:45:27Z",
-      "player": "FREDERIC BRUNET",
-      "team": "boston-bruins",
-      "previous_team": "boston-bruins",
-      "event_types": [
-        "removal"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "boston-bruins",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 3,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "boston-bruins",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "removal",
-          "from": true,
-          "to": false
-        }
-      ]
-    },
-    {
-      "id": "2a81db7e0cc6c7922d2a",
-      "occurred_at": "2026-09-23T21:45:27Z",
-      "player": "JJ PETERKA",
-      "team": "boston-bruins",
-      "previous_team": "boston-bruins",
-      "event_types": [
-        "forward_line"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "boston-bruins",
-        "rostered": true,
-        "forward_line": 2,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 1
-      },
-      "after": {
-        "team": "boston-bruins",
-        "rostered": true,
-        "forward_line": 1,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 1
-      },
-      "changes": [
-        {
-          "type": "forward_line",
-          "from": 2,
-          "to": 1,
-          "direction": "promoted"
-        }
-      ]
-    },
-    {
-      "id": "241531b0d698af86a500",
-      "occurred_at": "2026-09-23T21:45:27Z",
-      "player": "NOAH CATES",
-      "team": "philadelphia-flyers",
-      "previous_team": "philadelphia-flyers",
-      "event_types": [
-        "forward_line"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "philadelphia-flyers",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "philadelphia-flyers",
-        "rostered": true,
-        "forward_line": 1,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "changes": [
-        {
-          "type": "forward_line",
-          "from": 3,
-          "to": 1,
-          "direction": "promoted"
         }
       ]
     }
