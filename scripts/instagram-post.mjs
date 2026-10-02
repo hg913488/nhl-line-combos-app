@@ -17,7 +17,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const LOG_PATH = join(ROOT, 'data', 'instagram_log.json');
+const LOG_PATH = process.env.IG_LOG_PATH || join(ROOT, 'data', 'instagram_log.json');
 const GRAPH_VERSION = process.env.GRAPH_VERSION || 'v26.0';
 // Two supported setups:
 //   Facebook Login for Business -> graph.facebook.com (a Page token)
@@ -49,13 +49,26 @@ const CARDS = [
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const etDate = (date = new Date()) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' }).format(date);
 
+// `attempts` tracks a publish that started but has not been logged as a post:
+// key -> { n, status: 'publishing' | 'failed' | 'unknown', creation_id, first_at, at, error }.
+// It is what stops a retry from posting something Instagram already published.
+const MAX_ATTEMPTS = 3;
+const ATTEMPT_TTL_MS = 3 * 24 * 60 * 60 * 1000;
+
 function readLog() {
-  try { return JSON.parse(readFileSync(LOG_PATH, 'utf8')); }
-  catch { return { schema_version: 1, posts: [] }; }
+  try {
+    const log = JSON.parse(readFileSync(LOG_PATH, 'utf8'));
+    return { ...log, posts: log.posts || [], attempts: log.attempts || {} };
+  } catch { return { schema_version: 1, posts: [], attempts: {} }; }
 }
 
 function writeLog(log) {
+  for (const [key, item] of Object.entries(log.attempts || {})) {
+    if (Date.now() - Date.parse(item.at) > ATTEMPT_TTL_MS) delete log.attempts[key];
+  }
+  if (!Object.keys(log.attempts || {}).length) delete log.attempts;
   writeFileSync(LOG_PATH, `${JSON.stringify(log, null, 2)}\n`);
+  log.attempts ||= {};
 }
 
 export function recapUrl(card, gameId, origin = SITE_ORIGIN, options = {}) {
@@ -171,6 +184,99 @@ async function waitForContainer(containerId, token) {
   throw new Error(`Container ${containerId} was not ready after ${STATUS_ATTEMPTS} checks`);
 }
 
+// Has this caption already gone live? Instagram can return an error from
+// media_publish after the post is up, so a retry has to look before it leaps.
+export async function findPublished(igUserId, token, caption, since) {
+  const { data = [] } = await fetchJson(`${GRAPH}/${igUserId}/media?fields=id,caption,timestamp&limit=25&access_token=${token}`);
+  const floor = Date.parse(since) - 5 * 60 * 1000;
+  return data.find(item => (item.caption || '').trim() === caption.trim() && Date.parse(item.timestamp) >= floor) || null;
+}
+
+/**
+ * One carousel from image URLs to a live post, safe to call again after a
+ * failure. Returns { id, recovered }. Throws when the post is not live:
+ *   - a prior attempt that could not be verified blocks retries until forced,
+ *   - a verified-not-published failure retries up to MAX_ATTEMPTS, reusing the
+ *     finished carousel container so a retry costs two calls, not ten.
+ */
+export async function postCarousel({ key, urls, alts, caption, log, igUserId, token, force = false }) {
+  const prior = log.attempts[key];
+  if (prior) {
+    // A previous run may have published after all (or been unable to say).
+    const live = await findPublished(igUserId, token, caption, prior.first_at);
+    if (live) {
+      delete log.attempts[key];
+      return { id: live.id, recovered: true };
+    }
+    if (!force && prior.status === 'unknown') throw new Error(`${key}: an earlier publish could not be verified; check Instagram, then rerun with force`);
+    if (!force && prior.n >= MAX_ATTEMPTS) throw new Error(`${key}: gave up after ${prior.n} failed attempts`);
+  }
+
+  const firstAt = prior?.first_at || new Date().toISOString();
+  let creationId = prior?.creation_id;
+  if (creationId) {
+    const ready = await fetchJson(`${GRAPH}/${creationId}?fields=status_code&access_token=${token}`).catch(() => ({}));
+    if (ready.status_code !== 'FINISHED') creationId = null;
+  }
+  if (!creationId) {
+    const children = [];
+    for (const [i, url] of urls.entries()) {
+      const container = await createContainer(igUserId, token, { image_url: url, is_carousel_item: 'true', alt_text: alts[i] });
+      await waitForContainer(container.id, token);
+      children.push(container.id);
+      console.log(`  container ready: ${i + 1}/${urls.length}`);
+    }
+    const carousel = await createContainer(igUserId, token, { media_type: 'CAROUSEL', children: children.join(','), caption });
+    await waitForContainer(carousel.id, token);
+    creationId = carousel.id;
+  }
+
+  log.attempts[key] = { ...prior, key, n: (prior?.n || 0) + 1, status: 'publishing', creation_id: creationId, first_at: firstAt, at: new Date().toISOString() };
+  writeLog(log);
+  try {
+    const published = await fetchJson(`${GRAPH}/${igUserId}/media_publish`, { method: 'POST', body: new URLSearchParams({ creation_id: creationId, access_token: token }) });
+    delete log.attempts[key];
+    return { id: published.id, recovered: false };
+  } catch (error) {
+    let status = 'unknown';
+    try {
+      const live = await findPublished(igUserId, token, caption, firstAt);
+      if (live) {
+        delete log.attempts[key];
+        return { id: live.id, recovered: true };
+      }
+      status = 'failed';
+    } catch { /* could not check: stay 'unknown' so nothing reposts blind */ }
+    log.attempts[key] = { ...log.attempts[key], status, error: error.message };
+    writeLog(log);
+    throw error;
+  }
+}
+
+// Read-only probe: who the token is, what Instagram says the publishing quota
+// and app usage are, and what is actually on the account right now.
+export async function diagnose({ igUserId = process.env.IG_USER_ID, token = process.env.IG_ACCESS_TOKEN } = {}) {
+  if (!igUserId || !token) throw new Error('IG_USER_ID and IG_ACCESS_TOKEN are required');
+  const probe = async (label, path) => {
+    const response = await fetch(`${GRAPH}/${path}${path.includes('?') ? '&' : '?'}access_token=${token}`);
+    const body = await response.json().catch(() => ({}));
+    console.log(`\n${label}: HTTP ${response.status}`);
+    for (const name of ['x-app-usage', 'x-business-use-case-usage', 'x-ig-app-usage']) {
+      if (response.headers.get(name)) console.log(`  ${name}: ${response.headers.get(name)}`);
+    }
+    return body;
+  };
+  const me = await probe('me', 'me?fields=id,username,account_type');
+  console.log(`  ${JSON.stringify(me.error ? { error: me.error } : me)}`);
+  console.log(`  configured IG_USER_ID matches /me: ${String(me.id) === String(igUserId)}`);
+  const limit = await probe('content_publishing_limit', `${igUserId}/content_publishing_limit?fields=config,quota_usage`);
+  console.log(`  ${JSON.stringify(limit.error ? { error: limit.error } : limit)}`);
+  const media = await probe('recent media', `${igUserId}/media?fields=id,caption,timestamp,permalink&limit=25`);
+  if (media.error) console.log(`  ${JSON.stringify({ error: media.error })}`);
+  for (const item of media.data || []) console.log(`  ${item.timestamp}  ${item.permalink}  ${(item.caption || '').split('\n')[0].slice(0, 70)}`);
+  return { diagnosed: true };
+}
+
 async function downloadCards(cards, date, outDir) {
   mkdirSync(outDir, { recursive: true });
   for (const item of cards) {
@@ -183,6 +289,7 @@ async function downloadCards(cards, date, outDir) {
 }
 
 export async function run({ date = (/^\d{4}-\d{2}-\d{2}$/.test(process.env.IG_DATE || '') ? process.env.IG_DATE : etDate()), publish = process.env.IG_PUBLISH === 'true', includePreseason = process.env.IG_INCLUDE_PRESEASON === 'true', force = process.env.IG_FORCE === 'true', outDir = join(ROOT, 'ig-cards') } = {}) {
+  if (process.env.IG_MODE === 'diagnose') return diagnose();
   const log = readLog();
   const isRecap = process.env.IG_MODE === 'recap';
   // The daily set is one per date; recaps are one per game, so they key
@@ -209,6 +316,7 @@ export async function run({ date = (/^\d{4}-\d{2}-\d{2}$/.test(process.env.IG_DA
     }
 
     const mediaIds = [];
+    const failures = [];
     for (const game of chosen) {
       if (!force && log.posts.some(post => post.kind === 'recap' && String(post.game_id) === String(game.id) && post.published)) {
         console.log(`Already recapped game ${game.id}; skipping. Set IG_FORCE=true to post again.`);
@@ -236,22 +344,22 @@ export async function run({ date = (/^\d{4}-\d{2}-\d{2}$/.test(process.env.IG_DA
       const igUserIdRecap = process.env.IG_USER_ID;
       const tokenRecap = process.env.IG_ACCESS_TOKEN;
       if (!igUserIdRecap || !tokenRecap) throw new Error('IG_USER_ID and IG_ACCESS_TOKEN are required to publish');
-      const children = [];
-      for (const [i, url] of urls.entries()) {
-        const container = await createContainer(igUserIdRecap, tokenRecap, { image_url: url, is_carousel_item: 'true', alt_text: cards[i].alt });
-        await waitForContainer(container.id, tokenRecap);
-        children.push(container.id);
-        console.log(`  container ready: ${cards[i].card}`);
+      // One game's failure must not lose another game's log entry, and an
+      // app-wide rate limit means the next game would only fail the same way.
+      try {
+        const { id, recovered } = await postCarousel({ key: `recap:${game.id}`, urls, alts: cards.map(item => item.alt), caption, log, igUserId: igUserIdRecap, token: tokenRecap, force });
+        log.posts = [...log.posts, { date, kind: 'recap', game_id: game.id, published: true, media_id: id, theme: THEME, posted_at: new Date().toISOString() }].slice(-120);
+        writeLog(log);
+        mediaIds.push(id);
+        console.log(`${recovered ? 'Recovered (already live)' : 'Published'} recap: ${id}`);
+      } catch (error) {
+        failures.push(`game ${game.id}: ${error.message}`);
+        console.error(`  recap ${game.id} failed: ${error.message}`);
+        if (/request limit/i.test(error.message)) break;
       }
-      const carousel = await createContainer(igUserIdRecap, tokenRecap, { media_type: 'CAROUSEL', children: children.join(','), caption });
-      await waitForContainer(carousel.id, tokenRecap);
-      const published = await fetchJson(`${GRAPH}/${igUserIdRecap}/media_publish`, { method: 'POST', body: new URLSearchParams({ creation_id: carousel.id, access_token: tokenRecap }) });
-      log.posts = [...log.posts, { date, kind: 'recap', game_id: game.id, published: true, media_id: published.id, theme: THEME, posted_at: new Date().toISOString() }].slice(-120);
-      writeLog(log);
-      mediaIds.push(published.id);
-      console.log(`Published recap: ${published.id}`);
     }
 
+    if (failures.length) throw new Error(failures.join(' | '));
     if (!publish) return { dryRun: true, recaps: chosen.length };
     if (!mediaIds.length) return { skipped: true };
     return { mediaIds };
@@ -279,22 +387,13 @@ export async function run({ date = (/^\d{4}-\d{2}-\d{2}$/.test(process.env.IG_DA
   const token = process.env.IG_ACCESS_TOKEN;
   if (!igUserId || !token) throw new Error('IG_USER_ID and IG_ACCESS_TOKEN are required to publish');
 
-  const children = [];
-  for (const item of cards) {
-    const container = await createContainer(igUserId, token, { image_url: cardUrl(item.card, date, SITE_ORIGIN, { index: cards.indexOf(item) + 1, total: cards.length }), is_carousel_item: 'true', alt_text: item.alt });
-    await waitForContainer(container.id, token);
-    children.push(container.id);
-    console.log(`  container ready: ${item.card}`);
-  }
+  const urls = cards.map((item, i) => cardUrl(item.card, date, SITE_ORIGIN, { index: i + 1, total: cards.length }));
+  const { id, recovered } = await postCarousel({ key: `daily:${date}`, urls, alts: cards.map(item => item.alt), caption, log, igUserId, token, force });
 
-  const carousel = await createContainer(igUserId, token, { media_type: 'CAROUSEL', children: children.join(','), caption });
-  await waitForContainer(carousel.id, token);
-  const published = await fetchJson(`${GRAPH}/${igUserId}/media_publish`, { method: 'POST', body: new URLSearchParams({ creation_id: carousel.id, access_token: token }) });
-
-  log.posts = [...log.posts.filter(post => post.date !== date || post.kind === 'recap'), { date, kind: 'daily', published: true, media_id: published.id, theme: THEME, cards: cards.map(item => item.card), posted_at: new Date().toISOString() }].slice(-120);
+  log.posts = [...log.posts.filter(post => post.date !== date || post.kind === 'recap'), { date, kind: 'daily', published: true, media_id: id, theme: THEME, cards: cards.map(item => item.card), posted_at: new Date().toISOString() }].slice(-120);
   writeLog(log);
-  console.log(`Published: ${published.id}`);
-  return { mediaId: published.id };
+  console.log(`${recovered ? 'Recovered (already live)' : 'Published'}: ${id}`);
+  return { mediaId: id };
 }
 
 const invokedDirectly = process.argv[1] && import.meta.url === `file://${process.argv[1]}`;
