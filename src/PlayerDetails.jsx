@@ -4,7 +4,7 @@ import { getJSON, resolvePlayer, seasonLabel, seasonsFrom } from './data-client.
 import Select from './Select.jsx';
 import JerseyIcon, { HOME_UNIFORMS } from './JerseyIcon.jsx';
 import Sparkline from './Sparkline.jsx';
-import { moveClause, playerRole, latestMove } from './lineup-text.js';
+import { moveClause, playerRole, latestMove, lineupName } from './lineup-text.js';
 import { NHL_TEAMS } from './teams.js';
 import lineups from '../data/lines.json';
 import lineupChanges from '../data/lineup_changes.json';
@@ -74,7 +74,8 @@ export default function PlayerDetails({ modal, onClose }) {
     let active = true;
     setState(s => ({ ...s, loading: true, error: null, games: [], momentum: null, edge: null }));
     (async () => {
-      const player = modal.player.id ? modal.player : await resolvePlayer(`${modal.player.firstName} ${modal.player.lastName}`);
+      const player = modal.player.id ? modal.player : await resolvePlayer(`${modal.player.firstName} ${modal.player.lastName}`,
+        { team: modal.player.team, pos: modal.player.pos || modal.player.group });
       const query = `playerId=${player.id}&season=${season}&gameType=${gameType}`;
       const response = await getJSON(`/api/gamelog?${query}`);
       if (!Array.isArray(response.data)) throw new Error('Unexpected statistics response');
@@ -117,8 +118,9 @@ export default function PlayerDetails({ modal, onClose }) {
     : shooting.delta >= 3 ? 'running hot' : shooting.delta <= -3 ? 'running cold' : 'in line';
   // Lineup role is today's, so only show it against the current season.
   const teamSlug = SLUG_BY_ABBR[headshotTeam];
-  const role = season === modal.season ? playerRole(lineups.teams?.[teamSlug], `${player.firstName} ${player.lastName}`) : null;
-  const recentMove = role && latestMove(lineupChanges.events || [], teamSlug, `${player.firstName} ${player.lastName}`);
+  const fullName = `${player.firstName} ${player.lastName}`;
+  const role = season === modal.season ? playerRole(lineups.teams?.[teamSlug], fullName, player.pos) : null;
+  const recentMove = role && latestMove(lineupChanges.events || [], teamSlug, lineupName(lineups.teams?.[teamSlug], fullName, player.pos));
   const move = recentMove && Date.now() - Date.parse(recentMove.occurred_at) <= MOVE_WINDOW_MS ? recentMove : null;
   const sweaterNumber = modal.player.number ?? momentum?.player?.sweaterNumber ?? edge?.player?.sweaterNumber;
   const teamStyle = uniform && { '--team-body': uniform.body, '--team-stripe': uniform.stripe, '--team-ink': uniform.number };

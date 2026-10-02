@@ -66,6 +66,12 @@ def normalize_name(value: Any) -> str:
     return "".join(ch for ch in text if ch.isalnum() and not unicodedata.combining(ch)).lower()
 
 
+def first_and_last(value: Any) -> str:
+    """normalize_name of first + last word only: "Elias Nils Pettersson" -> "eliaspettersson"."""
+    parts = str(value or "").split()
+    return normalize_name(f"{parts[0]} {parts[-1]}") if len(parts) > 2 else ""
+
+
 # ── Per-player maths ──────────────────────────────────────────────────
 def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
     """Totals and per-game rates for a list of game rows."""
@@ -161,7 +167,21 @@ def move_direction(change: dict[str, Any]) -> str | None:
 def role_changes(changes: dict[str, Any] | None, players: list[dict[str, Any]],
                  now: datetime) -> list[dict[str, Any]]:
     cutoff = now - timedelta(days=ROLE_WINDOW_DAYS)
-    ids = {normalize_name(player["name"]): player["id"] for player in players}
+    # Keyed by name and F/D: teammates can share a name (VAN's two Elias Petterssons).
+    ids: dict[tuple[str, str], set[int]] = defaultdict(set)
+    for player in players:
+        group = "D" if player["pos"] == "D" else "F"
+        for key in {normalize_name(player["name"]), first_and_last(player["name"])} - {""}:
+            ids[(key, group)].add(player["id"])
+
+    def player_id(name: Any, moves: list[dict[str, Any]]) -> int | None:
+        group = "D" if any(change.get("type") == "defense_pair" for change in moves) else "F"
+        for key in (normalize_name(name), first_and_last(name)):
+            found = ids.get((key, group)) if key else None
+            if found:
+                return next(iter(found)) if len(found) == 1 else None
+        return None
+
     seen: set[tuple[str, str]] = set()
     out = []
     for event in (changes or {}).get("events") or []:  # newest first
@@ -183,7 +203,7 @@ def role_changes(changes: dict[str, Any] | None, players: list[dict[str, Any]],
         directions = {move_direction(change) for change in moves}
         out.append({
             "player": event.get("player"),
-            "id": ids.get(normalize_name(event.get("player"))),
+            "id": player_id(event.get("player"), moves),
             "team": event.get("team"),
             "occurred_at": event.get("occurred_at"),
             "direction": "up" if directions == {"up"} else "down" if directions == {"down"} else "mixed",

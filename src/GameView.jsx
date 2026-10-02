@@ -113,12 +113,12 @@ function initials(name) {
   return String(name || '?').split(/\s+/).filter(Boolean).slice(0, 2).map(part => part[0]).join('').toUpperCase() || '?';
 }
 
-function assistText(assists, onPlayer) {
+function assistText(assists, onPlayer, team) {
   if (!assists.length) return 'Unassisted';
   return <>
     Assisted by {assists.map((assist, index) => <React.Fragment key={assist}>
       {index > 0 ? (index === assists.length - 1 ? ' and ' : ', ') : ''}
-      <button type="button" className="link-button goal-assist-button" onClick={() => onPlayer?.(assist)}>{assist}</button>
+      <button type="button" className="link-button goal-assist-button" onClick={() => onPlayer?.(assist, undefined, { team })}>{assist}</button>
     </React.Fragment>)}
   </>;
 }
@@ -145,7 +145,7 @@ function GoalCard({ goal, awayAbbr, homeAbbr, onPlayer }) {
       <GoalHeadshot goal={goal} />
       <div className="goal-copy">
         {goal.scorer
-          ? <button type="button" className="link-button goal-scorer" onClick={() => onPlayer?.(goal.scorer)}>{goal.scorer}</button>
+          ? <button type="button" className="link-button goal-scorer" onClick={() => onPlayer?.(goal.scorer, goal.scorerId != null ? { id: String(goal.scorerId), firstName: goal.scorer.split(' ')[0], lastName: goal.scorer.split(' ').slice(1).join(' '), pos: '', team: goal.team } : undefined)}>{goal.scorer}</button>
           : <strong className="goal-scorer">Unknown scorer</strong>}
         <span className="goal-meta">{goalMeta}</span>
       </div>
@@ -163,7 +163,7 @@ function GoalCard({ goal, awayAbbr, homeAbbr, onPlayer }) {
     <div className="goal-footer">
       <span className="goal-assists">
         {strength && <span className="goal-strength" title={STRENGTH_LABELS[strength]}>{strength}</span>}
-        {assistText(goal.assists, onPlayer)}
+        {assistText(goal.assists, onPlayer, goal.team)}
       </span>
       <time className="goal-time">{goal.time}</time>
     </div>

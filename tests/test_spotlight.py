@@ -89,6 +89,18 @@ class RoleChangeTests(unittest.TestCase):
         self.assertEqual(out[0]["direction"], "up")
         self.assertEqual(sp.role_changes(None, players, NOW), [])
 
+    def test_same_name_teammates_get_their_own_ids(self):
+        players = [sp.player_entry([row(8480012, 1, name="Elias Pettersson", team="VAN", pos="C")]),
+                   sp.player_entry([row(8483678, 1, name="Elias Pettersson", team="VAN", pos="D")])]
+        changes = {"events": [
+            {"player": "ELIAS NILS PETTERSSON", "team": "vancouver-canucks", "occurred_at": "2026-11-19T10:00:00Z",
+             "changes": [{"type": "defense_pair", "from": 3, "to": 2}]},
+            {"player": "ELIAS PETTERSSON", "team": "vancouver-canucks", "occurred_at": "2026-11-19T09:00:00Z",
+             "changes": [{"type": "forward_line", "from": 2, "to": 1}]},
+        ]}
+        out = sp.role_changes(changes, players, NOW)
+        self.assertEqual([move["id"] for move in out], [8483678, 8480012])
+
 
 if __name__ == "__main__":
     unittest.main()

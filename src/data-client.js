@@ -26,9 +26,41 @@ export async function getJSON(url, ttl = 300000) {
   return request;
 }
 
-export async function resolvePlayer(name) {
+// 'F', 'D' or 'G' from a position code (C, L, R, LW, RW, LD, RD, D, G) or lineup slot.
+export function positionGroup(pos) {
+  const code = String(pos || '').toUpperCase();
+  if (['G', 'STR', 'BKP'].includes(code)) return 'G';
+  if (['D', 'LD', 'RD'].includes(code)) return 'D';
+  return ['C', 'L', 'R', 'LW', 'RW', 'F'].includes(code) ? 'F' : null;
+}
+
+// "Elias Nils Pettersson" -> "eliaspettersson": lineup sources sometimes carry middle names.
+export const firstAndLast = name => {
+  const parts = name.trim().split(/\s+/);
+  return parts.length > 2 ? normalizeName(`${parts[0]} ${parts[parts.length - 1]}`) : null;
+};
+
+// Narrow same-name candidates by team, then position group, then active status. Never guesses.
+export function pickPlayer(players, name, hints = {}) {
+  const full = p => normalizeName(`${p.firstName} ${p.lastName}`);
+  let matches = players.filter(p => full(p) === normalizeName(name));
+  if (!matches.length && firstAndLast(name)) matches = players.filter(p => full(p) === firstAndLast(name));
+  const narrow = test => { const kept = matches.filter(test); if (kept.length) matches = kept; };
+  if (matches.length > 1 && hints.team) narrow(p => p.team === hints.team);
+  if (matches.length > 1 && positionGroup(hints.pos)) narrow(p => positionGroup(p.pos) === positionGroup(hints.pos));
+  if (matches.length > 1) narrow(p => p.active);
+  return matches.length === 1 ? matches[0] : null;
+}
+
+export async function resolvePlayer(name, hints = {}) {
   const response = await getJSON(`/api/player-search?q=${encodeURIComponent(name)}`);
-  const exact = Array.isArray(response.players) && response.players.filter(p => normalizeName(`${p.firstName} ${p.lastName}`) === normalizeName(name));
-  if (!exact || exact.length !== 1) throw new Error('Could not uniquely identify this player. Try player search.');
-  return exact[0];
+  let player = Array.isArray(response.players) ? pickPlayer(response.players, name, hints) : null;
+  if (!player && firstAndLast(name)) {
+    // The search may not return anyone for the middle-name spelling; retry with first + last.
+    const parts = name.trim().split(/\s+/);
+    const retry = await getJSON(`/api/player-search?q=${encodeURIComponent(`${parts[0]} ${parts[parts.length - 1]}`)}`);
+    player = Array.isArray(retry.players) ? pickPlayer(retry.players, name, hints) : null;
+  }
+  if (!player) throw new Error('Could not uniquely identify this player. Try player search.');
+  return player;
 }

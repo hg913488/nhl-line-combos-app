@@ -7,12 +7,12 @@ import GameView from './GameView.jsx';
 const SpotlightView = React.lazy(() => import('./SpotlightView.jsx'));
 import JerseyIcon from './JerseyIcon.jsx';
 import Select from './Select.jsx';
-import { getJSON, normalizeName, seasonForDate, seasonLabel, seasonsFrom } from './data-client.js';
+import { getJSON, normalizeName, positionGroup, seasonForDate, seasonLabel, seasonsFrom } from './data-client.js';
 import { NHL_TEAMS, TEAM_COLORS } from './teams.js';
 import { rankPositions, formatIndex, POSITIONS } from './picks-signal.js';
 import { DEFAULT_VIEW, parseLocation, buildPath, routePattern } from './routes.js';
 import { pageTitle } from './page-meta.js';
-import { titleCase, surname, moveClause } from './lineup-text.js';
+import { titleCase, surname, moveClause, movePosition } from './lineup-text.js';
 import { Analytics } from '@vercel/analytics/react';
 import './styles.css';
 import lineups from '../data/lines.json';
@@ -231,7 +231,14 @@ function useTeamRoster(team, enabled = true) {
     setError(false);
     getJSON(`/api/roster?team=${team}&season=${DATA_SEASON}`, 3600000)
       .then(data => {
-        const players = Object.fromEntries(data.players.map(player => [normalizeName(player.firstName + ' ' + player.lastName), { ...player, snapshot: true }]));
+        const players = {};
+        data.players.forEach(player => {
+          const key = normalizeName(player.firstName + ' ' + player.lastName);
+          const entry = { ...player, snapshot: true };
+          players[`${key}|${positionGroup(player.pos)}`] = entry;
+          // Two teammates can share a name (VAN's Elias Petterssons): the bare name then matches neither.
+          players[key] = key in players ? null : entry;
+        });
         if (active) setRoster({ team, players });
       })
       .catch(() => { if (active) setError(true); });
@@ -269,9 +276,21 @@ function TeamBrowser({ slug, onSelect }) {
   </main>;
 }
 
+// Roster entry for a lineup name: name + position group first, then the name, then first + last.
+function rosterPlayer(roster, name, pos) {
+  if (!roster?.players) return undefined;
+  const parts = name.trim().split(/\s+/);
+  const keys = [normalizeName(name), parts.length > 2 ? normalizeName(`${parts[0]} ${parts[parts.length - 1]}`) : null].filter(Boolean);
+  for (const key of keys) {
+    const hit = roster.players[`${key}|${positionGroup(pos)}`] || roster.players[key];
+    if (hit) return hit;
+  }
+  return undefined;
+}
+
 function PlayerCard({ name, pos, lineChangedTo }) {
   const roster = useContext(RosterContext);
-  const player = roster?.players[normalizeName(name)];
+  const player = rosterPlayer(roster, name, pos);
   const isGoalie = pos === 'STR' || pos === 'BKP';
   const parts = name.split(' ');
   const first = parts.slice(0, -1).join(' ');
@@ -279,7 +298,7 @@ function PlayerCard({ name, pos, lineChangedTo }) {
   const label = isGoalie ? 'G' : pos;
   return <button type="button" className="player-card-clickable player-tile"
     aria-label={`View ${name} statistics`}
-    onClick={event => { event.stopPropagation(); triggerPlayerLookup?.(name, player); }}>
+    onClick={event => { event.stopPropagation(); triggerPlayerLookup?.(name, player, { team: roster?.team, pos }); }}>
     {roster && <JerseyIcon team={roster.team} number={player?.number} />}
     <span className="player-name"><span>{first}</span><strong>{last}</strong></span>
     <span className="player-position">{label}</span>
@@ -531,10 +550,11 @@ function compactName(name) {
 }
 
 function CompactLineup({ data, dense }) {
+  const roster = useContext(RosterContext);
   const groups = [
-    { label: 'FORWARDS', prefix: 'L', units: data.forwards || [] },
-    { label: 'DEFENSE', prefix: 'D', units: data.defense || [] },
-    { label: 'GOALIES', prefix: 'G', units: (data.goalies || []).map(goalie => [goalie[0]]) },
+    { label: 'FORWARDS', prefix: 'L', pos: 'F', units: data.forwards || [] },
+    { label: 'DEFENSE', prefix: 'D', pos: 'D', units: data.defense || [] },
+    { label: 'GOALIES', prefix: 'G', pos: 'G', units: (data.goalies || []).map(goalie => [goalie[0]]) },
     { label: 'POWER PLAY', prefix: 'PP', units: [data.pp1 || [], data.pp2 || []].filter(unit => unit.length) },
   ];
 
@@ -543,7 +563,7 @@ function CompactLineup({ data, dense }) {
       <h3>{group.label}</h3>
       {group.units.map((unit, index) => <div className="compact-unit" key={`${group.label}-${index}`}>
         <span>{group.prefix}{index + 1}</span>
-        <div>{unit.map(player => <button key={player} onClick={() => triggerPlayerLookup?.(player)} title={player}>{dense ? compactName(player) : player}</button>)}</div>
+        <div>{unit.map(player => <button key={player} onClick={() => triggerPlayerLookup?.(player, rosterPlayer(roster, player, group.pos), { team: roster?.team, pos: group.pos })} title={player}>{dense ? compactName(player) : player}</button>)}</div>
       </div>)}
     </section>)}
   </div>;
@@ -700,7 +720,7 @@ function GoalieDuel({ away, home }) {
       {index === 1 && <span className="duel-vs">vs</span>}
       <span className="duel-goalie">
         <span className="story-team duel-team">{abbr}</span>
-        {starter ? <button onClick={() => triggerPlayerLookup?.(starter.name)}>{titleCase(starter.name)}</button> : <em>TBD</em>}
+        {starter ? <button onClick={() => triggerPlayerLookup?.(starter.name, undefined, { team: abbr, pos: 'G' })}>{titleCase(starter.name)}</button> : <em>TBD</em>}
         {starter && <em className={`goalie-status status-${starter.status.toLowerCase().replace(/[^a-z]/g, '')}`}>{starter.status}</em>}
       </span>
     </React.Fragment>)}</div>
@@ -723,7 +743,7 @@ function GameStory({ away, home, onOpenMoves }) {
     {headline.length
       ? <ul>{headline.map(event => <li key={event.id}>
           <span className="story-team">{event.abbr}</span>
-          <span><button onClick={() => triggerPlayerLookup?.(event.player)}>{surname(event.player)}</button> {event.changes.map(moveClause).join(', ')}</span>
+          <span><button onClick={() => triggerPlayerLookup?.(event.player, undefined, { team: event.abbr, pos: movePosition(event) })}>{surname(event.player)}</button> {event.changes.map(moveClause).join(', ')}</span>
         </li>)}</ul>
       : <p className="slate-quiet">No lineup changes in the last 48 hours.</p>}
     {moves.length > headline.length && <a className="slate-more" href="/line-moves" onClick={event => { if (!isPlainClick(event)) return; event.preventDefault(); onOpenMoves(); }}>{moves.length - headline.length} more line {moves.length - headline.length === 1 ? 'move' : 'moves'}</a>}
@@ -940,6 +960,13 @@ const sheetValue = (player, key) => {
   return player[key] ?? '';
 };
 
+// Sheet rows carry the NHL id, so the card can skip the name search.
+function sheetPlayer(player) {
+  if (!player.id) return undefined;
+  const parts = titleCase(player.name).split(' ');
+  return { id: String(player.id), firstName: parts.shift(), lastName: parts.join(' '), pos: player.pos, team: player.team };
+}
+
 function PlayerSheet() {
   const [sort, setSort] = useState({ key: 'sog', dir: 'desc' });
   const [team, setTeam] = useState('all');
@@ -985,7 +1012,7 @@ function PlayerSheet() {
             <div className="sheet-identity">
               <JerseyIcon team={player.team} number={player.number} size={44} />
               <div>
-                <button className="sheet-player" onClick={() => triggerPlayerLookup?.(player.name)}>{titleCase(player.name)}</button>
+                <button className="sheet-player" onClick={() => triggerPlayerLookup?.(player.name, sheetPlayer(player), { team: player.team, pos: player.pos })}>{titleCase(player.name)}</button>
                 <span className="sheet-context">{player.team} {player.home ? 'vs' : '@'} {player.opp}{player.opp_goalie ? ` · ${titleCase(player.opp_goalie.name)}` : ''}</span>
                 {player.flags?.length > 0 && <span className="sheet-flags">{player.flags.map(flag => <em key={flag}>{FLAG_LABELS[flag] || flag}</em>)}</span>}
               </div>
@@ -1606,7 +1633,7 @@ function PlayerStatsView() {
   const featured = ['vancouver-canucks', 'edmonton-oilers', 'colorado-avalanche'].flatMap(slug =>
     (TEAMS_DATA[slug]?.forwards?.[0] || []).map(name => {
       const parts = name.split(' ');
-      return { firstName: parts.shift(), lastName: parts.join(' '), team: NHL_TEAMS[slug].abbr, snapshot: true };
+      return { firstName: parts.shift(), lastName: parts.join(' '), team: NHL_TEAMS[slug].abbr, group: 'F', snapshot: true };
     }));
   const players = query.trim().length >= 2 ? results : featured;
   return <main className="player-search-page">
@@ -1650,7 +1677,7 @@ function LineMovesView() {
       return <article className={`move-event importance-${event.importance}`} key={event.id}>
         <div className="move-team"><TeamLogo slug={event.team} abbr={team?.abbr || event.team?.slice(0, 3).toUpperCase()} size={34} /></div>
         <div className="move-copy">
-          <div><button onClick={() => triggerPlayerLookup?.(event.player)}>{event.player}</button><span>{team ? `${team.city} ${team.name}` : event.team}</span></div>
+          <div><button onClick={() => triggerPlayerLookup?.(event.player, undefined, { team: team?.abbr, pos: movePosition(event) })}>{event.player}</button><span>{team ? `${team.city} ${team.name}` : event.team}</span></div>
           <p>{event.changes.map(changeText).join(' / ')}</p>
         </div>
         <time dateTime={event.occurred_at}>{Number.isNaN(date.valueOf()) ? '' : date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</time>
@@ -1747,9 +1774,10 @@ export default function App() {
   Object.assign(STANDINGS, standings);
 
   // Wire up the module-level ref so PlayerCard can trigger the modal
-  triggerPlayerLookup = useCallback((fullName, knownPlayer) => {
+  // hints: { team, pos } that a caller knows, used to tell same-name players apart.
+  triggerPlayerLookup = useCallback((fullName, knownPlayer, hints = {}) => {
     const parts = fullName.trim().split(' ');
-    setModal({ player: knownPlayer || { firstName: parts.shift(), lastName: parts.join(' '), pos: '', id: null }, season: DATA_SEASON });
+    setModal({ player: knownPlayer || { firstName: parts.shift(), lastName: parts.join(' '), pos: '', id: null, team: hints.team, group: hints.pos }, season: DATA_SEASON });
   }, []);
 
   useEffect(() => {
@@ -1876,8 +1904,8 @@ export default function App() {
         {tab === "stats" && <ErrorBoundary><GoalsAgainstView isMobile={isMobile} /></ErrorBoundary>}
         {tab === "injuries" && <ErrorBoundary><InjuriesView isMobile={isMobile} /></ErrorBoundary>}
         {tab === "player" && <ErrorBoundary><PlayerStatsView isMobile={isMobile} /></ErrorBoundary>}
-        {tab === "spotlight" && <ErrorBoundary><React.Suspense fallback={<p className="data-state" role="status">Loading spotlight...</p>}><SpotlightView onPlayer={(name, player) => triggerPlayerLookup?.(name, player)} /></React.Suspense></ErrorBoundary>}
-        {tab === "game" && <ErrorBoundary><GameView gameId={view.gameId} onBack={() => setTab('today')} onTeam={slug => navigate({ tab: 'all', teamMode: 'focus', team: slug })} onPlayer={name => triggerPlayerLookup?.(name)} /></ErrorBoundary>}
+        {tab === "spotlight" && <ErrorBoundary><React.Suspense fallback={<p className="data-state" role="status">Loading spotlight...</p>}><SpotlightView onPlayer={(name, player, hints) => triggerPlayerLookup?.(name, player, hints)} /></React.Suspense></ErrorBoundary>}
+        {tab === "game" && <ErrorBoundary><GameView gameId={view.gameId} onBack={() => setTab('today')} onTeam={slug => navigate({ tab: 'all', teamMode: 'focus', team: slug })} onPlayer={(name, player, hints) => triggerPlayerLookup?.(name, player, hints)} /></ErrorBoundary>}
         {tab === "compare" && <ErrorBoundary><CompareView selected={view.compare} onChange={compare => navigate({ compare })} /></ErrorBoundary>}
       </div>
 

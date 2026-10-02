@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { latestMove, moveClause, playerRole, titleCase } from '../src/lineup-text.js';
+import { latestMove, lineupName, moveClause, playerRole, titleCase } from '../src/lineup-text.js';
 
 const team = {
   forwards: [['A ONE', 'B TWO', 'C THREE'], ['D FOUR', 'ÉMILE FIVE', 'F SIX']],
@@ -33,4 +33,16 @@ test('move clauses and title case read naturally', () => {
   assert.equal(moveClause({ type: 'forward_line', from: 2, to: 1 }), 'moves up to line 1');
   assert.equal(moveClause({ type: 'power_play', from: null, to: 2 }), 'slots onto PP2');
   assert.equal(titleCase("RYAN O'REILLY"), "Ryan O'Reilly");
+});
+
+test('same-name teammates keep their own slots', () => {
+  const van = {
+    forwards: [['JAKE DEBRUSK', 'ELIAS PETTERSSON', 'JONATHAN LEKKERIMAKI']],
+    defense: [['QUINN HUGHES', 'FILIP HRONEK'], ['MARCUS X', 'ELIAS NILS PETTERSSON']],
+    goalies: [], pp1: ['ELIAS PETTERSSON', 'QUINN HUGHES'], pp2: ['ELIAS NILS PETTERSSON'],
+  };
+  assert.deepEqual(playerRole(van, 'Elias Pettersson', 'C'), { slot: 'Line 1', pp: 'PP1' });
+  assert.deepEqual(playerRole(van, 'Elias Pettersson', 'D'), { slot: 'Pair 2', pp: 'PP2' });
+  assert.equal(lineupName(van, 'Elias Pettersson', 'D'), 'ELIAS NILS PETTERSSON');
+  assert.equal(lineupName(van, 'Elias Pettersson'), 'ELIAS PETTERSSON');
 });

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import Select from './Select.jsx';
 import useSchedule, { localDate } from './useSchedule.js';
 import { NHL_TEAMS } from './teams.js';
-import { titleCase, moveClause } from './lineup-text.js';
+import { titleCase, moveClause, movePosition } from './lineup-text.js';
 import spotlight from '../data/spotlight.json';
 
 const LIST_SIZE = 10;
@@ -27,7 +27,10 @@ function Row({ player, stat, detail, onPlayer, tone }) {
   return <li className="spot-row">
     <img src={headshot(player)} alt="" width="36" height="36" loading="lazy" onError={event => { event.currentTarget.style.visibility = 'hidden'; }} />
     <div className="spot-who">
-      <button onClick={() => onPlayer(player.name, { id: String(player.id), firstName: first, lastName: rest.join(' '), pos: player.pos, team: player.team })}>{player.name}</button>
+      <button onClick={() => onPlayer(player.name,
+        // Line moves for players without a game yet have no id: let the card search by name and team.
+        player.id != null ? { id: String(player.id), firstName: first, lastName: rest.join(' '), pos: player.pos, team: player.team } : undefined,
+        { team: player.team, pos: player.pos || player.group })}>{player.name}</button>
       <small>{[player.team, posLabel(player.pos), detail].filter(Boolean).join(' · ')}</small>
     </div>
     <strong className={`spot-stat${tone ? ` spot-${tone}` : ''}`}>{stat}</strong>
@@ -115,7 +118,7 @@ export default function SpotlightView({ onPlayer }) {
       <Section title="Line moves" note="Promotions and demotions, last 7 days" empty="No line moves for these filters.">
         {moves.map(move => {
           const known = byId.get(move.id);
-          const player = known || { id: move.id, name: titleCase(move.player), team: ABBR_BY_SLUG[move.team], pos: '' };
+          const player = known || { id: move.id, name: titleCase(move.player), team: ABBR_BY_SLUG[move.team], pos: '', group: movePosition(move) };
           return <Row key={`${move.team}-${move.player}`} player={{ ...player, name: titleCase(move.player) }} onPlayer={onPlayer}
             stat={move.direction === 'up' ? '▲ Up' : move.direction === 'down' ? '▼ Down' : '↕ Mixed'} tone={move.direction}
             detail={`${move.changes.map(moveClause).join(', ')} · ${new Date(move.occurred_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`} />;
