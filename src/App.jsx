@@ -778,8 +778,8 @@ function SlateLineupTeam({ team }) {
   </section>;
 }
 
-function SlateGame({ game, onOpenMoves, onOpenGame, onTeam }) {
-  const [showLineups, setShowLineups] = useState(false);
+function SlateGame({ game, onOpenMoves, onOpenGame, onTeam, lineupsOpen = false }) {
+  const [showLineups, setShowLineups] = useState(lineupsOpen);
   const status = gameStatus(game);
   const showScore = status.phase !== 'pre';
   const networks = (game.tvBroadcasts || []).map(item => item.network).filter(Boolean).slice(0, 3).join(' · ');
@@ -810,6 +810,98 @@ function SlateGame({ game, onOpenMoves, onOpenGame, onTeam }) {
   </article>;
 }
 
+function SlateTab({ game, index, open, onToggle }) {
+  const status = gameStatus(game);
+  const showScore = status.phase !== 'pre';
+  const { awayTeam: away, homeTeam: home } = game;
+  const awaySlug = abbrToSlug(away.abbrev), homeSlug = abbrToSlug(home.abbrev);
+  return <button type="button" className="slate-tab" id={`slate-tab-${game.id}`} aria-expanded={open} aria-controls={`slate-panel-${game.id}`} onClick={onToggle}
+    aria-label={`${away.abbrev} at ${home.abbrev}, ${status.label}`}>
+    <span className="slate-tab-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+    <span className="slate-tab-logos" aria-hidden="true">
+      <TeamLogo slug={awaySlug} abbr={away.abbrev} size={40} />
+      <span className="slate-tab-at">@</span>
+      <TeamLogo slug={homeSlug} abbr={home.abbrev} size={40} />
+    </span>
+    <span className="slate-tab-label" aria-hidden="true">
+      <span>{away.abbrev}{showScore ? ` ${away.score ?? 0}` : ''}</span>
+      <span className="slate-tab-dash">{showScore ? '–' : '@'}</span>
+      <span>{home.abbrev}{showScore ? ` ${home.score ?? 0}` : ''}</span>
+    </span>
+    <span className="slate-tab-state" aria-hidden="true">{status.phase === 'live' && <i className="slate-live-dot" />}{status.label}</span>
+  </button>;
+}
+
+function SlateRailSkeleton() {
+  return <div className="slate-rail" aria-hidden="true"><div className="slate-track">
+    {[0, 1, 2].map(i => <div key={i} className="slate-strip slate-skeleton"><span /><span /><span /></div>)}
+  </div></div>;
+}
+
+function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
+  // undefined = default (first game open); null = the user closed everything.
+  const [picked, setPicked] = useState(undefined);
+  const [showHint, setShowHint] = useState(false);
+  const railRef = useRef(null);
+  const touched = useRef(false);
+  useEffect(() => { setPicked(undefined); touched.current = false; }, [date]);
+  const openId = picked === undefined ? games[0]?.id : picked;
+  // Panels mount on first open so lineup/roster fetches only run for games the reader looks at.
+  const [seen, setSeen] = useState(() => new Set());
+  useEffect(() => { if (openId != null) setSeen(prev => prev.has(openId) ? prev : new Set(prev).add(openId)); }, [openId]);
+
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return undefined;
+    const measure = () => setShowHint(!touched.current && rail.scrollWidth - rail.clientWidth > 12);
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [games, openId]);
+
+  const toggle = (id, index) => {
+    touched.current = true;
+    setShowHint(false);
+    const next = openId === id ? null : id;
+    setPicked(next);
+    const rail = railRef.current;
+    if (next !== null && rail) {
+      // Earlier strips collapse as this one opens, so aim for where it will land.
+      const tabWidth = (rail.querySelector('.slate-tab')?.getBoundingClientRect().width || 0) + 1;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      rail.scrollTo({ left: Math.max(0, index * tabWidth - 8), behavior: reduce ? 'auto' : 'smooth' });
+    }
+  };
+
+  const onKeyDown = event => {
+    const tabs = [...railRef.current.querySelectorAll('.slate-tab')];
+    const at = tabs.indexOf(document.activeElement);
+    if (at < 0) return;
+    const target = { ArrowRight: tabs[at + 1], ArrowLeft: tabs[at - 1], Home: tabs[0], End: tabs[tabs.length - 1] }[event.key];
+    if (target) { event.preventDefault(); target.focus(); }
+    else if (['ArrowRight', 'ArrowLeft'].includes(event.key)) event.preventDefault();
+  };
+
+  return <div className="slate-rail-shell">
+    <div className={`quick-scan-hint${showHint ? '' : ' hidden'}`} aria-hidden="true"><span>SCROLL</span><ArrowRight size={14} strokeWidth={1.5} /></div>
+    <div className="slate-rail" ref={railRef} aria-label="Games" onKeyDown={onKeyDown} onScroll={event => { if (event.currentTarget.scrollLeft > 12) { touched.current = true; setShowHint(false); } }}>
+      <div className="slate-track">
+        {games.map((game, index) => {
+          const open = openId === game.id;
+          const status = gameStatus(game);
+          return <div key={game.id} className={`slate-strip${open ? ' open' : ''} phase-${status.phase}`}
+            style={{ '--away-color': TEAM_COLORS[game.awayTeam.abbrev] || 'var(--dim)', '--home-color': TEAM_COLORS[game.homeTeam.abbrev] || 'var(--dim)' }}>
+            <SlateTab game={game} index={index} open={open} onToggle={() => toggle(game.id, index)} />
+            <div className="slate-panel" id={`slate-panel-${game.id}`} role="region" aria-labelledby={`slate-tab-${game.id}`} inert={open ? undefined : ''}>
+              {(open || seen.has(game.id)) && <SlateGame game={game} lineupsOpen onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onTeam={onTeam} />}
+            </div>
+          </div>;
+        })}
+      </div>
+    </div>
+  </div>;
+}
+
 function TodayView({ onOpenMoves, onOpenGame, onTeam }) {
   const [date, setDate] = useState(localDate());
   const { games, loading, error } = useSchedule(date);
@@ -817,18 +909,20 @@ function TodayView({ onOpenMoves, onOpenGame, onTeam }) {
   const dayLabel = new Date(`${date}T12:00:00`).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
   const updated = Number.isNaN(LINES_UPDATED.valueOf()) ? UPDATED_AT : LINES_UPDATED.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
   return <main className="slate-page">
-    <header className="slate-heading">
-      <div>
-        <p className="slate-eyebrow">The slate · {dayLabel}</p>
-        <h1>{isToday ? 'Tonight' : 'Schedule'}</h1>
-        {!loading && !error && games.length > 0 && <p className="slate-summary">{games.length} {games.length === 1 ? 'game' : 'games'} · Lines updated {updated}</p>}
-      </div>
-      <label>Date<input type="date" aria-label="Schedule date" value={date} onChange={event => { if (event.target.value) setDate(event.target.value); }} /></label>
-    </header>
-    {loading && <p className="data-state" role="status">Loading the slate…</p>}
-    {error && <p className="data-state" role="alert">{error}</p>}
-    {!loading && !error && !games.length && <p className="data-state">No games scheduled for {dayLabel}.</p>}
-    <div className="slate-list">{games.map(game => <SlateGame key={game.id} game={game} onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onTeam={onTeam} />)}</div>
+    <div className="slate-inner">
+      <header className="slate-heading">
+        <div>
+          <p className="slate-eyebrow">The slate · {dayLabel}</p>
+          <h1>{isToday ? 'Tonight' : 'Schedule'}</h1>
+          {!loading && !error && games.length > 0 && <p className="slate-summary">{games.length} {games.length === 1 ? 'game' : 'games'} · Lines updated {updated}</p>}
+        </div>
+        <label>Date<input type="date" aria-label="Schedule date" value={date} onChange={event => { if (event.target.value) setDate(event.target.value); }} /></label>
+      </header>
+      {error && <p className="data-state" role="alert">{error}</p>}
+      {!loading && !error && !games.length && <p className="data-state">No games scheduled for {dayLabel}.</p>}
+    </div>
+    {loading && <><span className="sr-only" role="status">Loading the slate…</span><SlateRailSkeleton /></>}
+    {!loading && games.length > 0 && <SlateRail games={games} date={date} onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onTeam={onTeam} />}
   </main>;
 }
 
@@ -1723,7 +1817,6 @@ export default function App() {
   const openTeams = mode => navigate({ tab: 'all', teamMode: mode, team: mode === 'focus' ? view.team || DEFAULT_FOCUS_TEAM : view.team });
   const openNews = source => navigate({ tab: 'news', newsSource: source });
   const [openNav, setOpenNav] = useState(null);
-  const [showIntro, setShowIntro] = useState(() => !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isDark, setIsDark] = useState(() => {
@@ -1762,12 +1855,6 @@ export default function App() {
   const toggleTheme = () => { setIsDark(value => { const next = !value; try { localStorage.setItem('theme', next ? 'dark' : 'light'); } catch {} return next; }); };
   const [modal, setModal] = useState(null); // { player, gamelog, loading, error }
   const [standings, setStandings] = useState({}); // { [abbr]: "W-L-OT" }
-
-  useEffect(() => {
-    if (!showIntro) return undefined;
-    const timer = window.setTimeout(() => setShowIntro(false), 2600);
-    return () => window.clearTimeout(timer);
-  }, [showIntro]);
 
   // Synchronously update P before children render so all components see the correct palette
   Object.assign(P, isDark ? DARK_PALETTE : LIGHT_PALETTE);
@@ -1821,15 +1908,6 @@ export default function App() {
   return (
     <div className="app-shell" data-theme={isDark ? 'dark' : 'light'} data-subviews={SECTIONS_WITH_SUBVIEWS.has(tab) ? 'true' : 'false'} style={{ fontFamily: "'Space Grotesk', sans-serif", background: P.bg, minHeight: "100vh", color: P.white, ...Object.fromEntries(Object.entries(P).map(([key, value]) => ['--' + key, value])) }}>
       <style>{makeCss(isDark ? DARK_PALETTE : LIGHT_PALETTE)}</style>
-
-      {showIntro && <div className="brand-intro" aria-hidden="true">
-        <div className="brand-intro-stage">
-          <span className="brand-intro-line brand-intro-line-top" />
-          <div className="brand-intro-lockup"><strong>BETWEEN THE <span>LINES</span></strong></div>
-          <img className="brand-intro-mark" src="/between-mark.png" alt="" />
-          <span className="brand-intro-line brand-intro-line-bottom" />
-        </div>
-      </div>}
 
       {/* Header */}
       <div className="app-header" style={{ borderTop: `3px solid ${P.casper}`, borderBottom: `1px solid ${P.border}`, padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "center", height: "var(--header-height)", position: "sticky", top: 0, zIndex: 50, background: P.bg }}>
