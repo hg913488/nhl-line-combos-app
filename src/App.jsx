@@ -843,6 +843,8 @@ function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
   const [picked, setPicked] = useState(null);
   const [showHint, setShowHint] = useState(false);
   const railRef = useRef(null);
+  // Phones start with lineups folded: an open lineup makes the panel several screens tall.
+  const [wideScreen] = useState(() => window.innerWidth >= 768);
   const touched = useRef(false);
   useEffect(() => { setPicked(null); touched.current = false; }, [date]);
   const openIds = useMemo(() => picked ?? new Set(games[0] ? [games[0].id] : []), [picked, games]);
@@ -870,7 +872,7 @@ function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
     const strip = rail?.querySelector(`[data-game="${id}"]`);
     if (opening && strip) {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      rail.scrollTo({ left: Math.max(0, strip.offsetLeft - 8), behavior: reduce ? 'auto' : 'smooth' });
+      rail.scrollTo({ left: Math.max(0, strip.offsetLeft - (window.innerWidth < 768 ? 0 : 8)), behavior: reduce ? 'auto' : 'smooth' });
     }
   };
 
@@ -894,7 +896,7 @@ function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
             style={{ '--away-color': TEAM_COLORS[game.awayTeam.abbrev] || 'var(--dim)', '--home-color': TEAM_COLORS[game.homeTeam.abbrev] || 'var(--dim)' }}>
             <SlateTab game={game} index={index} open={open} onToggle={() => toggle(game.id)} />
             <div className="slate-panel" id={`slate-panel-${game.id}`} role="region" aria-labelledby={`slate-tab-${game.id}`} inert={open ? undefined : ''}>
-              {(open || seen.has(game.id)) && <SlateGame game={game} lineupsOpen onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onTeam={onTeam} />}
+              {(open || seen.has(game.id)) && <SlateGame game={game} lineupsOpen={wideScreen} onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onTeam={onTeam} />}
             </div>
           </div>;
         })}

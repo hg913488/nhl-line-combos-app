@@ -130,7 +130,7 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 @media (max-width: 767px) {
   .schedule-heading { flex-wrap: wrap; }
   .matchup-lineups { grid-template-columns: minmax(0, 1fr); }
-  .slate-page { --tab-w: 72px; --panel-w: min(720px, calc(100vw - var(--tab-w) - 12px)); padding-top: 22px; }
+  .slate-page { --tab-w: 60px; --panel-w: min(720px, calc(100vw - var(--tab-w))); padding-top: 22px; }
   .slate-inner { padding-inline: 16px; }
   .slate-heading { flex-direction: column; align-items: flex-start; gap: 18px; margin-bottom: 18px; }
   .slate-list { gap: 14px; }
@@ -708,9 +708,14 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 @keyframes live-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
 @keyframes skeleton-pulse { 0%, 100% { opacity: .35; } 50% { opacity: .8; } }
 @media (max-width: 767px) {
-  .slate-tab-logos img { width: 34px; height: 34px; }
-  .slate-tab { gap: 12px; padding-top: 14px; }
-  .slate-track { min-height: calc(100dvh - var(--header-height) - var(--tabs-height) - 120px); }
+  .slate-rail { scroll-snap-type: x proximity; }
+  .slate-strip { scroll-snap-align: start; }
+  .slate-tab-index { display: none; }
+  .slate-tab-logos img { width: 30px; height: 30px; }
+  .slate-tab { gap: 10px; padding: 16px 0 16px 3px; }
+  .slate-tab-label { font-size: 12px; gap: 6px; }
+  .slate-tab-state { font-size: 8px; }
+  .slate-track { min-height: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .slate-strip, .slate-panel, .slate-tab-logos img { transition: none; }
