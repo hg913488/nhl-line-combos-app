@@ -10,6 +10,9 @@ import Select from './Select.jsx';
 import { formatET, getJSON, normalizeName, positionGroup, seasonForDate, seasonLabel, seasonsFrom } from './data-client.js';
 import { NHL_TEAMS, TEAM_COLORS } from './teams.js';
 import { rankPositions, formatIndex, POSITIONS } from './picks-signal.js';
+import { buildIndex } from './matchup-index.js';
+import MatchupButterfly from './MatchupButterfly.jsx';
+import RankBoard from './RankBoard.jsx';
 import { DEFAULT_VIEW, parseLocation, buildPath, routePattern } from './routes.js';
 import { pageTitle } from './page-meta.js';
 import { titleCase, surname, moveClause, moveGlyph, movePosition } from './lineup-text.js';
@@ -30,6 +33,7 @@ const UPDATED_AT = lineups.updated_at.slice(0, 10);
 const TEAMS_DATA = lineups.teams;
 const INJURIES_DATA = lineups.injuries || {};
 const GA_DATA = goalsAgainstData;
+const GA_INDEX = buildIndex(GA_DATA);
 const LINEUP_CHANGE_EVENTS = lineupChanges.events || [];
 const GOALIE_MATCHUPS = startingGoalies.matchups || [];
 const PROP_SHEET = propSheetData;
@@ -799,7 +803,7 @@ function SlateCompact({ game, status, showScore, networks, tag }) {
   </div>;
 }
 
-function SlateGame({ game, onOpenMoves, onOpenGame, onTeam, lineupsOpen = false }) {
+function SlateGame({ game, onOpenMoves, onOpenGame, onOpenBoard, onTeam, lineupsOpen = false }) {
   const [showLineups, setShowLineups] = useState(lineupsOpen);
   const status = gameStatus(game);
   const showScore = status.phase !== 'pre';
@@ -817,10 +821,11 @@ function SlateGame({ game, onOpenMoves, onOpenGame, onTeam, lineupsOpen = false 
       <SlateTeam team={game.homeTeam} side="home" showScore={showScore} onTeam={onTeam} />
     </div>
     <GoalieDuel away={game.awayTeam} home={game.homeTeam} />
-    <div className="slate-row slate-insight">
+    <div className="slate-row slate-story-row">
       <GameStory away={game.awayTeam} home={game.homeTeam} onOpenMoves={onOpenMoves} />
-      <GameWatch away={game.awayTeam} home={game.homeTeam} />
     </div>
+    <MatchupButterfly built={GA_INDEX} away={game.awayTeam.abbrev} home={game.homeTeam.abbrev}
+      boardLink={<NavLink to="/goals-allowed" className="slate-more" onNavigate={onOpenBoard}>All 32 teams →</NavLink>} />
     <div className="slate-actions">
       <NavLink to={`/games/${game.id}`} className="slate-link" onNavigate={() => onOpenGame(String(game.id))}>Game center <ArrowRight size={13} aria-hidden="true" /></NavLink>
       <button className="slate-link slate-lineup-toggle" aria-expanded={showLineups} onClick={() => setShowLineups(value => !value)}>{showLineups ? 'Hide lineups' : 'Lineups'} <ChevronDown size={13} aria-hidden="true" /></button>
@@ -860,7 +865,7 @@ function SlateRailSkeleton() {
   </div></div>;
 }
 
-function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
+function SlateRail({ games, date, onOpenMoves, onOpenGame, onOpenBoard, onTeam }) {
   // Every game starts folded so the whole slate is visible; the reader opens what they want.
   const [picked, setPicked] = useState(() => new Set());
   const [showHint, setShowHint] = useState(false);
@@ -945,7 +950,7 @@ function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
             <SlateTab game={game} index={index} open={open} onToggle={() => toggle(game.id)} />
             <div className="slate-panel" id={`slate-panel-${game.id}`} role="region" aria-labelledby={`slate-tab-${game.id}`} inert={open ? undefined : ''}>
               {open && games[index + 1] && <button type="button" className="slate-next" onClick={() => openNext(game.id, games[index + 1].id)}>Next game <ArrowRight size={11} aria-hidden="true" /></button>}
-              {(open || seen.has(game.id)) && <SlateGame game={game} lineupsOpen onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onTeam={onTeam} />}
+              {(open || seen.has(game.id)) && <SlateGame game={game} lineupsOpen onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onOpenBoard={onOpenBoard} onTeam={onTeam} />}
             </div>
           </div>;
         })}
@@ -954,7 +959,7 @@ function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
   </div>;
 }
 
-function TodayView({ onOpenMoves, onOpenGame, onTeam }) {
+function TodayView({ onOpenMoves, onOpenGame, onOpenBoard, onTeam }) {
   const [date, setDate] = useState(localDate());
   const { games, loading, error } = useSchedule(date);
   const isToday = date === localDate();
@@ -974,7 +979,7 @@ function TodayView({ onOpenMoves, onOpenGame, onTeam }) {
       {!loading && !error && !games.length && <p className="data-state">No games scheduled for {dayLabel}.</p>}
     </div>
     {loading && <><span className="sr-only" role="status">Loading the slate…</span><SlateRailSkeleton /></>}
-    {!loading && games.length > 0 && <SlateRail games={games} date={date} onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onTeam={onTeam} />}
+    {!loading && games.length > 0 && <SlateRail games={games} date={date} onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onOpenBoard={onOpenBoard} onTeam={onTeam} />}
   </main>;
 }
 
@@ -1633,6 +1638,10 @@ function GoalsAgainstView({ isMobile }) {
     </button>
   );
 
+  const boardGames = useMemo(() => todayGames
+    .map(game => ({ away: NHL_TEAMS[game.away]?.abbr, home: NHL_TEAMS[game.home]?.abbr }))
+    .filter(game => game.away && game.home), [todayGames]);
+
   return (
     <div style={{ padding: "16px 24px", maxWidth: 900, margin: "0 auto" }}>
       <header className="schedule-heading ga-heading">
@@ -1641,6 +1650,7 @@ function GoalsAgainstView({ isMobile }) {
           <p className="muted">How many goals each defense has given up to centers, wingers and defensemen.</p>
         </div>
       </header>
+      <RankBoard built={GA_INDEX} games={boardGames} renderLogo={(abbr, size) => <TeamLogo slug={abbrToSlug(abbr)} abbr={abbr} size={size} />} />
       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
         {GA_DATA.previous && <>
           {filterBtn(GA_DATA.season, "current", setSeasonView, seasonView)}
@@ -2025,7 +2035,7 @@ export default function App() {
       <div className="content-stage">
         {standingsError && <p className="api-notice" role="status">Team records are temporarily unavailable.</p>}
         {tab === "all" && <TeamsView mode={teamMode} team={view.team} onSelectTeam={slug => navigate({ tab: 'all', teamMode: 'focus', team: slug })} />}
-        {tab === "today" && <ErrorBoundary><TodayView onOpenMoves={() => setTab('moves')} onOpenGame={gameId => navigate({ tab: 'game', gameId })} onTeam={slug => navigate({ tab: 'all', teamMode: 'focus', team: slug })} /></ErrorBoundary>}
+        {tab === "today" && <ErrorBoundary><TodayView onOpenMoves={() => setTab('moves')} onOpenBoard={() => setTab('stats')} onOpenGame={gameId => navigate({ tab: 'game', gameId })} onTeam={slug => navigate({ tab: 'all', teamMode: 'focus', team: slug })} /></ErrorBoundary>}
         {tab === "news" && <ErrorBoundary><NewsView isDark={isDark} source={newsSource} onSourceChange={openNews} /></ErrorBoundary>}
         {tab === "moves" && <ErrorBoundary><LineMovesView /></ErrorBoundary>}
         {tab === "picks" && <ErrorBoundary><PicksView /></ErrorBoundary>}
