@@ -7,7 +7,7 @@ import GameView from './GameView.jsx';
 const SpotlightView = React.lazy(() => import('./SpotlightView.jsx'));
 import JerseyIcon from './JerseyIcon.jsx';
 import Select from './Select.jsx';
-import { getJSON, normalizeName, positionGroup, seasonForDate, seasonLabel, seasonsFrom } from './data-client.js';
+import { formatET, getJSON, normalizeName, positionGroup, seasonForDate, seasonLabel, seasonsFrom } from './data-client.js';
 import { NHL_TEAMS, TEAM_COLORS } from './teams.js';
 import { rankPositions, formatIndex, POSITIONS } from './picks-signal.js';
 import { DEFAULT_VIEW, parseLocation, buildPath, routePattern } from './routes.js';
@@ -688,7 +688,7 @@ function gameStatus(game) {
     return { phase: 'final', label: last && last !== 'REG' ? `Final/${last}` : 'Final' };
   }
   if (['LIVE', 'CRIT'].includes(game.gameState)) return { phase: 'live', label: periodLabel ? `Live · ${periodLabel}` : 'Live' };
-  const time = new Date(game.startTimeUTC).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' });
+  const time = formatET(game.startTimeUTC);
   return { phase: 'pre', label: time };
 }
 
@@ -839,16 +839,18 @@ function SlateRailSkeleton() {
 }
 
 function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
-  // undefined = default (first game open); null = the user closed everything.
-  const [picked, setPicked] = useState(undefined);
+  // null = default (first game open); otherwise the set of game ids the reader has open.
+  const [picked, setPicked] = useState(null);
   const [showHint, setShowHint] = useState(false);
   const railRef = useRef(null);
+  // Phones start with lineups folded: an open lineup makes the panel several screens tall.
+  const [wideScreen] = useState(() => window.innerWidth >= 768);
   const touched = useRef(false);
-  useEffect(() => { setPicked(undefined); touched.current = false; }, [date]);
-  const openId = picked === undefined ? games[0]?.id : picked;
+  useEffect(() => { setPicked(null); touched.current = false; }, [date]);
+  const openIds = useMemo(() => picked ?? new Set(games[0] ? [games[0].id] : []), [picked, games]);
   // Panels mount on first open so lineup/roster fetches only run for games the reader looks at.
   const [seen, setSeen] = useState(() => new Set());
-  useEffect(() => { if (openId != null) setSeen(prev => prev.has(openId) ? prev : new Set(prev).add(openId)); }, [openId]);
+  useEffect(() => { setSeen(prev => [...openIds].every(id => prev.has(id)) ? prev : new Set([...prev, ...openIds])); }, [openIds]);
 
   useEffect(() => {
     const rail = railRef.current;
@@ -857,19 +859,20 @@ function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
     measure();
     window.addEventListener('resize', measure);
     return () => window.removeEventListener('resize', measure);
-  }, [games, openId]);
+  }, [games, openIds]);
 
-  const toggle = (id, index) => {
+  const toggle = id => {
     touched.current = true;
     setShowHint(false);
-    const next = openId === id ? null : id;
+    const next = new Set(openIds);
+    const opening = !next.delete(id);
+    if (opening) next.add(id);
     setPicked(next);
     const rail = railRef.current;
-    if (next !== null && rail) {
-      // Earlier strips collapse as this one opens, so aim for where it will land.
-      const tabWidth = (rail.querySelector('.slate-tab')?.getBoundingClientRect().width || 0) + 1;
+    const strip = rail?.querySelector(`[data-game="${id}"]`);
+    if (opening && strip) {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      rail.scrollTo({ left: Math.max(0, index * tabWidth - 8), behavior: reduce ? 'auto' : 'smooth' });
+      rail.scrollTo({ left: Math.max(0, strip.offsetLeft - (window.innerWidth < 768 ? 0 : 8)), behavior: reduce ? 'auto' : 'smooth' });
     }
   };
 
@@ -887,13 +890,13 @@ function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
     <div className="slate-rail" ref={railRef} aria-label="Games" onKeyDown={onKeyDown} onScroll={event => { if (event.currentTarget.scrollLeft > 12) { touched.current = true; setShowHint(false); } }}>
       <div className="slate-track">
         {games.map((game, index) => {
-          const open = openId === game.id;
+          const open = openIds.has(game.id);
           const status = gameStatus(game);
-          return <div key={game.id} className={`slate-strip${open ? ' open' : ''} phase-${status.phase}`}
+          return <div key={game.id} data-game={game.id} className={`slate-strip${open ? ' open' : ''} phase-${status.phase}`}
             style={{ '--away-color': TEAM_COLORS[game.awayTeam.abbrev] || 'var(--dim)', '--home-color': TEAM_COLORS[game.homeTeam.abbrev] || 'var(--dim)' }}>
-            <SlateTab game={game} index={index} open={open} onToggle={() => toggle(game.id, index)} />
+            <SlateTab game={game} index={index} open={open} onToggle={() => toggle(game.id)} />
             <div className="slate-panel" id={`slate-panel-${game.id}`} role="region" aria-labelledby={`slate-tab-${game.id}`} inert={open ? undefined : ''}>
-              {(open || seen.has(game.id)) && <SlateGame game={game} lineupsOpen onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onTeam={onTeam} />}
+              {(open || seen.has(game.id)) && <SlateGame game={game} lineupsOpen={wideScreen} onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onTeam={onTeam} />}
             </div>
           </div>;
         })}
@@ -907,7 +910,7 @@ function TodayView({ onOpenMoves, onOpenGame, onTeam }) {
   const { games, loading, error } = useSchedule(date);
   const isToday = date === localDate();
   const dayLabel = new Date(`${date}T12:00:00`).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-  const updated = Number.isNaN(LINES_UPDATED.valueOf()) ? UPDATED_AT : LINES_UPDATED.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+  const updated = Number.isNaN(LINES_UPDATED.valueOf()) ? UPDATED_AT : formatET(LINES_UPDATED, true);
   return <main className="slate-page">
     <div className="slate-inner">
       <header className="slate-heading">
