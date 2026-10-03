@@ -64,3 +64,12 @@ export async function resolvePlayer(name, hints = {}) {
   if (!player) throw new Error('Could not uniquely identify this player. Try player search.');
   return player;
 }
+
+// Every clock time on the site reads in Eastern, whatever the viewer's zone is.
+export function formatET(value, withDate = false) {
+  const date = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(date.valueOf())) return '';
+  const opts = { timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit' };
+  if (withDate) Object.assign(opts, { month: 'short', day: 'numeric' });
+  return `${date.toLocaleString('en-US', opts)} ET`;
+}

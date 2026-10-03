@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import RinkShotMap from './RinkShotMap.jsx';
 import Select from './Select.jsx';
+import { formatET } from './data-client.js';
 import { NHL_TEAMS, TEAM_COLORS } from './teams.js';
 import './game.css';
 
@@ -42,13 +43,13 @@ function statText(category, value) {
 function startTimeText(startTimeUTC) {
   const time = Date.parse(startTimeUTC || '');
   if (!Number.isFinite(time)) return 'Time TBD';
-  return new Date(time).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' });
+  return formatET(time);
 }
 
 function startDateText(startTimeUTC) {
   const time = Date.parse(startTimeUTC || '');
   if (!Number.isFinite(time)) return '';
-  return new Date(time).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  return new Date(time).toLocaleDateString('en-US', { timeZone: 'America/New_York', weekday: 'short', month: 'short', day: 'numeric' });
 }
 
 function periodLabel(period, periodType) {

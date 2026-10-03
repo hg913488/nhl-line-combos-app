@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import Select from './Select.jsx';
+import { formatET } from './data-client.js';
 import useSchedule, { localDate } from './useSchedule.js';
 import { NHL_TEAMS } from './teams.js';
 import { titleCase, moveClause, movePosition } from './lineup-text.js';
@@ -74,7 +75,7 @@ export default function SpotlightView({ onPlayer }) {
   }).slice(0, LIST_SIZE);
 
   const trendDetail = player => `${signed(player.last5.p_pg - player.season.p_pg)} pts/GP · ${signed(player.last5.sog_pg - player.season.sog_pg, 1)} shots · ${clock(player.last5.toi - player.season.toi)} TOI`;
-  const updated = spotlight.generated_at ? new Date(spotlight.generated_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : null;
+  const updated = spotlight.generated_at ? formatET(spotlight.generated_at, true) : null;
 
   return <main className="spotlight-page">
     <header className="schedule-heading spot-heading">
