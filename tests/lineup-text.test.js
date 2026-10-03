@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { latestMove, lineupName, moveClause, playerRole, titleCase } from '../src/lineup-text.js';
+import { latestMove, lineupName, moveClause, moveGlyph, playerRole, titleCase } from '../src/lineup-text.js';
 
 const team = {
   forwards: [['A ONE', 'B TWO', 'C THREE'], ['D FOUR', 'ÉMILE FIVE', 'F SIX']],
@@ -45,4 +45,11 @@ test('same-name teammates keep their own slots', () => {
   assert.deepEqual(playerRole(van, 'Elias Pettersson', 'D'), { slot: 'Pair 2', pp: 'PP2' });
   assert.equal(lineupName(van, 'Elias Pettersson', 'D'), 'ELIAS NILS PETTERSSON');
   assert.equal(lineupName(van, 'Elias Pettersson'), 'ELIAS PETTERSSON');
+});
+
+test('moveGlyph pairs a symbol with the destination', () => {
+  assert.deepEqual(moveGlyph({ type: 'forward_line', from: 2, to: 1 }), { mark: '↑', kind: 'up', text: 'line 1' });
+  assert.deepEqual(moveGlyph({ type: 'forward_line', from: 1, to: 3 }), { mark: '↓', kind: 'down', text: 'line 3' });
+  assert.deepEqual(moveGlyph({ type: 'removal' }), { mark: '✕', kind: 'out', text: 'out' });
+  assert.deepEqual(moveGlyph({ type: 'power_play', from: 1, to: null }), { mark: '✕', kind: 'out', text: 'off PP1' });
 });

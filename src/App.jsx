@@ -12,7 +12,7 @@ import { NHL_TEAMS, TEAM_COLORS } from './teams.js';
 import { rankPositions, formatIndex, POSITIONS } from './picks-signal.js';
 import { DEFAULT_VIEW, parseLocation, buildPath, routePattern } from './routes.js';
 import { pageTitle } from './page-meta.js';
-import { titleCase, surname, moveClause, movePosition } from './lineup-text.js';
+import { titleCase, surname, moveClause, moveGlyph, movePosition } from './lineup-text.js';
 import { Analytics } from '@vercel/analytics/react';
 import './styles.css';
 import lineups from '../data/lines.json';
@@ -743,7 +743,10 @@ function GameStory({ away, home, onOpenMoves }) {
     {headline.length
       ? <ul>{headline.map(event => <li key={event.id}>
           <span className="story-team">{event.abbr}</span>
-          <span><button onClick={() => triggerPlayerLookup?.(event.player, undefined, { team: event.abbr, pos: movePosition(event) })}>{surname(event.player)}</button> {event.changes.map(moveClause).join(', ')}</span>
+          <span><button onClick={() => triggerPlayerLookup?.(event.player, undefined, { team: event.abbr, pos: movePosition(event) })}>{surname(event.player)}</button> {event.changes.map((change, i) => {
+            const glyph = moveGlyph(change);
+            return <span key={i} className={`story-move move-${glyph.kind}`} title={moveClause(change)}><b aria-hidden="true">{glyph.mark}</b> <span>{glyph.text}</span><span className="sr-only"> ({moveClause(change)})</span>{i < event.changes.length - 1 && ', '}</span>;
+          })}</span>
         </li>)}</ul>
       : <p className="slate-quiet">No lineup changes in the last 48 hours.</p>}
     {moves.length > headline.length && <a className="slate-more" href="/line-moves" onClick={event => { if (!isPlainClick(event)) return; event.preventDefault(); onOpenMoves(); }}>{moves.length - headline.length} more line {moves.length - headline.length === 1 ? 'move' : 'moves'}</a>}
@@ -753,12 +756,12 @@ function GameStory({ away, home, onOpenMoves }) {
 function GameWatch({ away, home }) {
   const sides = [{ offense: away.abbrev, defense: home.abbrev }, { offense: home.abbrev, defense: away.abbrev }];
   return <div className="slate-watch">
-    <span className="slate-kicker">Watch</span>
+    <span className="slate-kicker">Edge</span>
     <ul>{sides.map(side => {
       const top = rankPositions(GA_DATA.teams?.[side.defense]?.l10, GA_DATA.league?.l10_avg)[0];
       return <li key={side.offense}>
         <span className="story-team">{side.offense}</span>
-        <span><strong>{top?.position || '—'}</strong>{top?.index != null && <span className="watch-index">{formatIndex(top.index)} league rate</span>}</span>
+        <span><strong>{top?.position || '—'}</strong>{top?.index != null && <span className="watch-index">{formatIndex(top.index)}<span className="watch-unit"> league rate</span></span>}</span>
       </li>;
     })}</ul>
   </div>;
@@ -778,6 +781,24 @@ function SlateLineupTeam({ team }) {
   </section>;
 }
 
+// Phone header: both team names on one line, the small print underneath.
+function SlateCompact({ game, status, showScore, networks, tag }) {
+  const sides = [game.awayTeam, game.homeTeam].map(team => {
+    const standing = STANDINGS[team.abbrev];
+    return { team, name: NHL_TEAMS[abbrToSlug(team.abbrev)]?.name || team.abbrev, record: standing && isCurrentRecord(standing.date) ? standing.record : null };
+  });
+  const [away, home] = sides;
+  const info = [status.label, tag, status.phase === 'pre' && networks, ...sides.map(side => side.record && `${side.team.abbrev} ${side.record}`)].filter(Boolean);
+  return <div className="slate-compact">
+    <h3 className="compact-line">
+      <span>{away.name}{showScore && <b>{away.team.score ?? 0}</b>}</span>
+      <i aria-hidden="true">{showScore ? '–' : '@'}</i>
+      <span>{showScore && <b>{home.team.score ?? 0}</b>}{home.name}</span>
+    </h3>
+    <p className="compact-info">{info.join(' · ')}</p>
+  </div>;
+}
+
 function SlateGame({ game, onOpenMoves, onOpenGame, onTeam, lineupsOpen = false }) {
   const [showLineups, setShowLineups] = useState(lineupsOpen);
   const status = gameStatus(game);
@@ -785,6 +806,7 @@ function SlateGame({ game, onOpenMoves, onOpenGame, onTeam, lineupsOpen = false 
   const networks = (game.tvBroadcasts || []).map(item => item.network).filter(Boolean).slice(0, 3).join(' · ');
   const tag = game.gameType === 1 ? (game.awayTeam.awaySplitSquad || game.homeTeam.homeSplitSquad ? 'Preseason · Split squad' : 'Preseason') : game.gameType === 3 ? 'Playoffs' : null;
   return <article className={`slate-game phase-${status.phase}`} style={{ '--away-color': TEAM_COLORS[game.awayTeam.abbrev] || 'var(--dim)', '--home-color': TEAM_COLORS[game.homeTeam.abbrev] || 'var(--dim)' }}>
+    <SlateCompact game={game} status={status} showScore={showScore} networks={networks} tag={tag} />
     <div className="slate-matchup">
       <SlateTeam team={game.awayTeam} side="away" showScore={showScore} onTeam={onTeam} />
       <div className="slate-status">
@@ -839,15 +861,15 @@ function SlateRailSkeleton() {
 }
 
 function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
-  // null = default (first game open); otherwise the set of game ids the reader has open.
-  const [picked, setPicked] = useState(null);
+  // Every game starts folded so the whole slate is visible; the reader opens what they want.
+  const [picked, setPicked] = useState(() => new Set());
   const [showHint, setShowHint] = useState(false);
   const railRef = useRef(null);
-  // Phones start with lineups folded: an open lineup makes the panel several screens tall.
-  const [wideScreen] = useState(() => window.innerWidth >= 768);
   const touched = useRef(false);
-  useEffect(() => { setPicked(null); touched.current = false; }, [date]);
-  const openIds = useMemo(() => picked ?? new Set(games[0] ? [games[0].id] : []), [picked, games]);
+  const settleTimer = useRef(0);
+  useEffect(() => () => window.clearTimeout(settleTimer.current), []);
+  useEffect(() => { setPicked(new Set()); touched.current = false; }, [date]);
+  const openIds = picked;
   // Panels mount on first open so lineup/roster fetches only run for games the reader looks at.
   const [seen, setSeen] = useState(() => new Set());
   useEffect(() => { setSeen(prev => [...openIds].every(id => prev.has(id)) ? prev : new Set([...prev, ...openIds])); }, [openIds]);
@@ -861,6 +883,26 @@ function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
     return () => window.removeEventListener('resize', measure);
   }, [games, openIds]);
 
+  // Where a strip will sit once `closingId` has folded: earlier strips are tabs unless still open.
+  const scrollToGame = (id, closingId) => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const strips = [...rail.querySelectorAll('[data-game]')];
+    const at = strips.findIndex(strip => strip.dataset.game === String(id));
+    if (at < 0) return;
+    const tabWidth = (rail.querySelector('.slate-tab')?.getBoundingClientRect().width || 0) + 1;
+    const left = strips.slice(0, at).reduce((sum, strip) => sum + (strip.classList.contains('open') && strip.dataset.game !== String(closingId) ? strip.offsetWidth : tabWidth), 0);
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const inset = window.innerWidth < 768 ? 0 : 8;
+    rail.scrollTo({ left: Math.max(0, left - inset), behavior: reduce ? 'auto' : 'smooth' });
+    // The strips are still resizing, so settle on the real position once they stop.
+    window.clearTimeout(settleTimer.current);
+    settleTimer.current = window.setTimeout(() => {
+      const strip = rail.querySelector(`[data-game="${id}"]`);
+      if (strip) rail.scrollTo({ left: Math.max(0, strip.offsetLeft - inset), behavior: reduce ? 'auto' : 'smooth' });
+    }, 560);
+  };
+
   const toggle = id => {
     touched.current = true;
     setShowHint(false);
@@ -868,12 +910,18 @@ function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
     const opening = !next.delete(id);
     if (opening) next.add(id);
     setPicked(next);
-    const rail = railRef.current;
-    const strip = rail?.querySelector(`[data-game="${id}"]`);
-    if (opening && strip) {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      rail.scrollTo({ left: Math.max(0, strip.offsetLeft - (window.innerWidth < 768 ? 0 : 8)), behavior: reduce ? 'auto' : 'smooth' });
-    }
+    if (opening) scrollToGame(id);
+  };
+
+  // Swap this game for the one after it.
+  const openNext = (id, nextId) => {
+    touched.current = true;
+    setShowHint(false);
+    const next = new Set(openIds);
+    next.delete(id);
+    next.add(nextId);
+    setPicked(next);
+    scrollToGame(nextId, id);
   };
 
   const onKeyDown = event => {
@@ -886,7 +934,7 @@ function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
   };
 
   return <div className="slate-rail-shell">
-    <div className={`quick-scan-hint${showHint ? '' : ' hidden'}`} aria-hidden="true"><span>SCROLL</span><ArrowRight size={14} strokeWidth={1.5} /></div>
+    <div className={`slate-hint${showHint ? '' : ' hidden'}`} aria-hidden="true"><div><span>Scroll</span><ArrowRight size={12} strokeWidth={1.5} /></div></div>
     <div className="slate-rail" ref={railRef} aria-label="Games" onKeyDown={onKeyDown} onScroll={event => { if (event.currentTarget.scrollLeft > 12) { touched.current = true; setShowHint(false); } }}>
       <div className="slate-track">
         {games.map((game, index) => {
@@ -896,7 +944,8 @@ function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
             style={{ '--away-color': TEAM_COLORS[game.awayTeam.abbrev] || 'var(--dim)', '--home-color': TEAM_COLORS[game.homeTeam.abbrev] || 'var(--dim)' }}>
             <SlateTab game={game} index={index} open={open} onToggle={() => toggle(game.id)} />
             <div className="slate-panel" id={`slate-panel-${game.id}`} role="region" aria-labelledby={`slate-tab-${game.id}`} inert={open ? undefined : ''}>
-              {(open || seen.has(game.id)) && <SlateGame game={game} lineupsOpen={wideScreen} onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onTeam={onTeam} />}
+              {open && games[index + 1] && <button type="button" className="slate-next" onClick={() => openNext(game.id, games[index + 1].id)}>Next game <ArrowRight size={11} aria-hidden="true" /></button>}
+              {(open || seen.has(game.id)) && <SlateGame game={game} lineupsOpen onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onTeam={onTeam} />}
             </div>
           </div>;
         })}

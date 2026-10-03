@@ -17,6 +17,19 @@ export function moveClause(change) {
   return to < from ? `moves up to ${label(to)}` : `drops to ${label(to)}`;
 }
 
+// Symbol-first version of moveClause for tight spaces; callers keep the full clause as a tooltip.
+export function moveGlyph(change) {
+  const { type, from, to } = change;
+  if (type === 'addition') return { mark: '+', kind: 'in', text: 'in' };
+  if (type === 'removal') return { mark: '✕', kind: 'out', text: 'out' };
+  if (type === 'team') return { mark: '→', kind: 'in', text: 'new team' };
+  const unit = type === 'forward_line' ? 'line' : type === 'defense_pair' ? 'pair' : 'PP';
+  const label = value => (unit === 'PP' ? `PP${value}` : `${unit} ${value}`);
+  if (from == null) return { mark: '→', kind: 'up', text: label(to) };
+  if (to == null) return { mark: '✕', kind: 'out', text: `off ${label(from)}` };
+  return to < from ? { mark: '↑', kind: 'up', text: label(to) } : { mark: '↓', kind: 'down', text: label(to) };
+}
+
 // The spelling a team's lineup uses for this player, or null. Searches only the player's own
 // group when the position is known, and accepts a lineup middle name ("Elias Nils Pettersson"),
 // so two teammates who share a name don't take each other's slot.
