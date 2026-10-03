@@ -778,6 +778,24 @@ function SlateLineupTeam({ team }) {
   </section>;
 }
 
+// Phone header: both team names on one line, the small print underneath.
+function SlateCompact({ game, status, showScore, networks, tag }) {
+  const sides = [game.awayTeam, game.homeTeam].map(team => {
+    const standing = STANDINGS[team.abbrev];
+    return { team, name: NHL_TEAMS[abbrToSlug(team.abbrev)]?.name || team.abbrev, record: standing && isCurrentRecord(standing.date) ? standing.record : null };
+  });
+  const [away, home] = sides;
+  const info = [status.label, tag, status.phase === 'pre' && networks, ...sides.map(side => side.record && `${side.team.abbrev} ${side.record}`)].filter(Boolean);
+  return <div className="slate-compact">
+    <h3 className="compact-line">
+      <span>{away.name}{showScore && <b>{away.team.score ?? 0}</b>}</span>
+      <i aria-hidden="true">{showScore ? '–' : '@'}</i>
+      <span>{showScore && <b>{home.team.score ?? 0}</b>}{home.name}</span>
+    </h3>
+    <p className="compact-info">{info.join(' · ')}</p>
+  </div>;
+}
+
 function SlateGame({ game, onOpenMoves, onOpenGame, onTeam, lineupsOpen = false }) {
   const [showLineups, setShowLineups] = useState(lineupsOpen);
   const status = gameStatus(game);
@@ -785,6 +803,7 @@ function SlateGame({ game, onOpenMoves, onOpenGame, onTeam, lineupsOpen = false 
   const networks = (game.tvBroadcasts || []).map(item => item.network).filter(Boolean).slice(0, 3).join(' · ');
   const tag = game.gameType === 1 ? (game.awayTeam.awaySplitSquad || game.homeTeam.homeSplitSquad ? 'Preseason · Split squad' : 'Preseason') : game.gameType === 3 ? 'Playoffs' : null;
   return <article className={`slate-game phase-${status.phase}`} style={{ '--away-color': TEAM_COLORS[game.awayTeam.abbrev] || 'var(--dim)', '--home-color': TEAM_COLORS[game.homeTeam.abbrev] || 'var(--dim)' }}>
+    <SlateCompact game={game} status={status} showScore={showScore} networks={networks} tag={tag} />
     <div className="slate-matchup">
       <SlateTeam team={game.awayTeam} side="away" showScore={showScore} onTeam={onTeam} />
       <div className="slate-status">
@@ -843,8 +862,6 @@ function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
   const [picked, setPicked] = useState(null);
   const [showHint, setShowHint] = useState(false);
   const railRef = useRef(null);
-  // Phones start with lineups folded: an open lineup makes the panel several screens tall.
-  const [wideScreen] = useState(() => window.innerWidth >= 768);
   const touched = useRef(false);
   useEffect(() => { setPicked(null); touched.current = false; }, [date]);
   const openIds = useMemo(() => picked ?? new Set(games[0] ? [games[0].id] : []), [picked, games]);
@@ -896,7 +913,7 @@ function SlateRail({ games, date, onOpenMoves, onOpenGame, onTeam }) {
             style={{ '--away-color': TEAM_COLORS[game.awayTeam.abbrev] || 'var(--dim)', '--home-color': TEAM_COLORS[game.homeTeam.abbrev] || 'var(--dim)' }}>
             <SlateTab game={game} index={index} open={open} onToggle={() => toggle(game.id)} />
             <div className="slate-panel" id={`slate-panel-${game.id}`} role="region" aria-labelledby={`slate-tab-${game.id}`} inert={open ? undefined : ''}>
-              {(open || seen.has(game.id)) && <SlateGame game={game} lineupsOpen={wideScreen} onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onTeam={onTeam} />}
+              {(open || seen.has(game.id)) && <SlateGame game={game} lineupsOpen onOpenMoves={onOpenMoves} onOpenGame={onOpenGame} onTeam={onTeam} />}
             </div>
           </div>;
         })}
