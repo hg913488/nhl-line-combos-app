@@ -189,7 +189,7 @@ export async function findPublished(igUserId, token, caption, since) {
 }
 
 /**
- * One carousel from image URLs to a live post, safe to call again after a
+ * One carousel (or a single image, for one URL) to a live post, safe to call again after a
  * failure. Returns { id, recovered }. Throws when the post is not live:
  *   - a prior attempt that could not be verified blocks retries until forced,
  *   - a verified-not-published failure retries up to MAX_ATTEMPTS, reusing the
@@ -213,6 +213,13 @@ export async function postCarousel({ key, urls, alts, caption, log, igUserId, to
   if (creationId) {
     const ready = await fetchJson(`${GRAPH}/${creationId}?fields=status_code&access_token=${token}`).catch(() => ({}));
     if (ready.status_code !== 'FINISHED') creationId = null;
+  }
+  if (!creationId && urls.length === 1) {
+    // Instagram rejects a one-item carousel; a night of eight games or fewer
+    // gives a one-slide roundup, which has to go up as a plain image post.
+    const single = await createContainer(igUserId, token, { image_url: urls[0], caption, alt_text: alts[0] });
+    await waitForContainer(single.id, token);
+    creationId = single.id;
   }
   if (!creationId) {
     const children = [];

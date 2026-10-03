@@ -128,3 +128,24 @@ test("a picks or scoreboard entry for a date does not block that date's daily sl
   assert.equal(result.skipped, undefined, 'the daily set was skipped');
   assert.equal(result.dryRun, true);
 });
+
+test('a single image goes up as a plain post, not a one-item carousel', async t => {
+  const realFetch = globalThis.fetch;
+  t.after(() => { globalThis.fetch = realFetch; });
+  const bodies = [];
+  globalThis.fetch = async (url, init = {}) => {
+    const path = String(url).replace(/^https:\/\/[^/]+\/v[\d.]+/, '').split('?')[0];
+    const json = body => ({ ok: true, status: 200, json: async () => body });
+    if (init.method === 'POST') bodies.push(`${path} ${init.body}`);
+    if (path.endsWith('/media_publish')) return json({ id: 'POST1' });
+    if (init.method === 'POST') return json({ id: 'C1' });
+    return json({ status_code: 'FINISHED' });
+  };
+  const result = await postCarousel({ ...args(freshLog()), key: 'scoreboard:x', urls: ['https://x/only.jpg'], alts: ['only'] });
+  assert.deepEqual(result, { id: 'POST1', recovered: false });
+  const creates = bodies.filter(body => body.startsWith('/u/media '));
+  assert.equal(creates.length, 1, 'one container, no carousel wrapper');
+  assert.match(creates[0], /image_url=/);
+  assert.match(creates[0], /caption=CAP/);
+  assert.doesNotMatch(creates[0], /CAROUSEL|is_carousel_item/);
+});
