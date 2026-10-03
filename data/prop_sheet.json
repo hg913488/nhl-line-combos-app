@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-03T01:16:14Z",
+  "generated_at": "2026-10-03T02:19:22Z",
   "date": "2026-10-02",
   "window": {
     "games": 10,
@@ -6457,31 +6457,31 @@
       "number": 95
     },
     {
-      "id": 8483890,
-      "name": "BRAEDEN BOWMAN",
+      "id": 8483553,
+      "name": "MARC GATCOMB",
       "team": "VGK",
       "opp": "ANA",
       "game_id": 2026020021,
       "home": true,
       "pos": "LW",
       "line": "L4",
-      "pp": 2,
+      "pp": null,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 0,
-        "a": 3,
-        "p": 3,
-        "sog": 15,
-        "toi": 802.2,
-        "pptoi": 88.9
+        "g": 2,
+        "a": 2,
+        "p": 4,
+        "sog": 18,
+        "toi": 596.2,
+        "pptoi": 0.2
       },
       "season": {
         "gp": 1,
         "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 1
+        "a": 1,
+        "p": 1,
+        "sog": 3
       },
       "opp_index": 1.5238,
       "opp_goalie": {
@@ -6492,7 +6492,7 @@
       "flags": [
         "SOFT_MATCHUP"
       ],
-      "number": 42
+      "number": 17
     },
     {
       "id": 8475343,
@@ -6533,31 +6533,31 @@
       "number": 26
     },
     {
-      "id": 8483553,
-      "name": "MARC GATCOMB",
+      "id": 8483890,
+      "name": "BRAEDEN BOWMAN",
       "team": "VGK",
       "opp": "ANA",
       "game_id": 2026020021,
       "home": true,
       "pos": "RW",
       "line": "L4",
-      "pp": null,
+      "pp": 2,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 2,
-        "a": 2,
-        "p": 4,
-        "sog": 18,
-        "toi": 596.2,
-        "pptoi": 0.2
+        "g": 0,
+        "a": 3,
+        "p": 3,
+        "sog": 15,
+        "toi": 802.2,
+        "pptoi": 88.9
       },
       "season": {
         "gp": 1,
         "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 3
+        "a": 0,
+        "p": 0,
+        "sog": 1
       },
       "opp_index": 0.597,
       "opp_goalie": {
@@ -6566,7 +6566,7 @@
         "source": "confirmed"
       },
       "flags": [],
-      "number": 17
+      "number": 42
     },
     {
       "id": 8475188,
