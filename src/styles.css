@@ -327,7 +327,18 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .player-table th:first-child, .player-table td:first-child { text-align: left; padding-left: 24px; }
 .player-table tbody tr:hover { background: var(--hover); }
 .player-detail-footer { padding: 16px 24px; font-size: 12px; color: var(--dove); display: flex; gap: 12px; justify-content: space-between; flex-wrap: wrap; }
-.player-context { padding: 17px 24px 20px; border-top: 1px solid var(--border); }
+.player-context { border-top: 1px solid var(--border); }
+.app-shell .context-toggle { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 48px; padding: 10px 24px; border: 0; background: transparent; color: var(--white); text-align: left; cursor: pointer; transition: background-color .15s ease; }
+.app-shell .context-toggle:hover { background: var(--hover); }
+.context-title { flex: 0 0 auto; color: var(--casper); font: 800 10px/1 'Syne', sans-serif; letter-spacing: .06em; }
+.context-summary { min-width: 0; flex: 1; overflow: hidden; color: var(--dove); font: 400 12px/1.3 'Space Mono', monospace; text-overflow: ellipsis; white-space: nowrap; }
+.context-toggle svg { flex: 0 0 auto; color: var(--dove); transition: transform .25s ease; }
+.player-context.open .context-toggle svg { transform: rotate(180deg); }
+.context-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s cubic-bezier(.16, 1, .3, 1); }
+.player-context.open .context-body { grid-template-rows: 1fr; }
+.context-inner { min-height: 0; overflow: hidden; padding: 0 24px; }
+.player-context.open .context-inner { padding-bottom: 20px; }
+@media (prefers-reduced-motion: reduce) { .context-body, .context-toggle svg { transition: none; } }
 .context-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
 .context-heading > span { color: var(--casper); font: 800 10px/1 'Syne', sans-serif; letter-spacing: .06em; }
 .context-heading small { color: var(--dove); font: 10px/1.2 'Space Mono', monospace; }
@@ -578,7 +589,10 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
   .player-metrics strong { font-size: 24px; }
   .window-caption { padding: 12px 16px; }
   .player-detail-footer { padding: 16px; }
-  .player-context { padding: 15px 16px 18px; }
+  .app-shell .context-toggle { padding-inline: 16px; gap: 10px; }
+  .context-inner { padding-inline: 16px; }
+  .context-summary { font-size: 10.5px; }
+  .context-title { font-size: 9px; }
   .edge-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .context-grid { gap: 7px; }
   .context-grid > div, .edge-grid > div { padding-left: 7px; }
@@ -675,16 +689,14 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .slate-rail { width: 100%; overflow-x: auto; overscroll-behavior-x: contain; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); scrollbar-color: color-mix(in srgb, var(--dove) 38%, transparent) transparent; }
 .slate-track { display: flex; align-items: stretch; width: max-content; min-width: 100%; min-height: 460px; }
 .slate-track::after { content: ''; flex: 1 0 0; background: repeating-linear-gradient(90deg, transparent 0 79px, color-mix(in srgb, var(--border) 55%, transparent) 79px 80px); }
-.slate-strip { --away-c: var(--away-color); --home-c: var(--home-color); position: relative; display: flex; flex: 0 0 auto; width: var(--tab-w); overflow: hidden; border-right: 1px solid var(--border); background: var(--surface); transition: width .5s cubic-bezier(.16, 1, .3, 1), background-color .2s ease; }
+.app-shell[data-theme='dark'] .slate-strip { --panel-bg: #1D2126; }
+.slate-strip { --panel-bg: #EEF1F5; --away-c: var(--away-color); --home-c: var(--home-color); position: relative; display: flex; flex: 0 0 auto; width: var(--tab-w); overflow: hidden; border-right: 1px solid var(--border); background: var(--surface); transition: width .5s cubic-bezier(.16, 1, .3, 1), background-color .2s ease; }
 @supports (color: color-mix(in oklab, #fff 70%, #000)) {
   .app-shell[data-theme='dark'] .slate-strip { --away-c: color-mix(in oklab, var(--away-color) 70%, white); --home-c: color-mix(in oklab, var(--home-color) 70%, white); }
 }
 .slate-strip::before { content: ''; position: absolute; inset: 0 auto 0 0; z-index: 2; width: 3px; background: linear-gradient(180deg, var(--away-c) 0 50%, var(--home-c) 50% 100%); opacity: .55; transition: opacity .25s ease, width .25s ease; pointer-events: none; }
 .slate-strip:hover::before, .slate-strip.open::before { opacity: 1; }
-.slate-strip.open { width: calc(var(--tab-w) + var(--panel-w)); background: var(--active); }
-@supports (color: color-mix(in srgb, red 10%, blue)) {
-  .slate-strip.open { background: color-mix(in srgb, var(--home-c) 12%, var(--active)); }
-}
+.slate-strip.open { width: calc(var(--tab-w) + var(--panel-w)); background: var(--panel-bg); }
 .slate-tab { position: relative; flex: 0 0 var(--tab-w); width: var(--tab-w); display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 18px 0 20px 3px; border: 0; border-right: 1px solid transparent; background: transparent; color: var(--white); cursor: pointer; text-align: center; transition: background-color .2s ease, border-color .2s ease; }
 .slate-tab:hover { background: var(--hover); }
 .slate-strip.open .slate-tab { border-right-color: var(--border); background: transparent; }

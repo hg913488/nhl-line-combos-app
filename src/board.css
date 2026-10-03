@@ -1,9 +1,19 @@
 /* Matchup butterfly + The Board. Tokens come from the .app-shell palette variables. */
 
 /* ── Butterfly ── */
-.fly { padding: 14px 28px 16px; border-top: 1px solid var(--border); }
-.fly-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-.fly-kicker { color: var(--dim); font: 700 var(--type-label-size)/1 var(--font-display); letter-spacing: .14em; text-transform: uppercase; }
+.fly { border-top: 1px solid var(--border); }
+.app-shell .fly-toggle { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; padding: 8px 28px; border: 0; background: transparent; color: var(--white); text-align: left; cursor: pointer; transition: background-color .15s ease; }
+.app-shell .fly-toggle:hover { background: color-mix(in srgb, var(--white) 5%, transparent); }
+.fly-toggle svg { flex: 0 0 auto; margin-left: auto; color: var(--dove); transition: transform .25s ease; }
+.fly.open .fly-toggle svg { transform: rotate(180deg); }
+.fly-kicker { flex: 0 0 auto; color: var(--dim); font: 700 var(--type-label-size)/1 var(--font-display); letter-spacing: .14em; text-transform: uppercase; }
+.fly-line { min-width: 0; color: var(--casper); font: 400 13px/1.35 var(--font-body); }
+.fly-line strong { color: var(--white); font-weight: 700; }
+.fly-line em { color: var(--red); font-style: normal; font-weight: 700; font-variant-numeric: tabular-nums; }
+.fly-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s cubic-bezier(.16, 1, .3, 1); }
+.fly.open .fly-body { grid-template-rows: 1fr; }
+.fly-inner { min-height: 0; overflow: hidden; padding: 0 28px; }
+.fly.open .fly-inner { padding-bottom: 16px; }
 .fly-scale { color: var(--dim); font: 400 9px/1 var(--font-data); letter-spacing: .04em; text-transform: uppercase; }
 .fly-grid { display: grid; grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr); row-gap: 10px; align-items: center; margin-top: 14px; }
 .fly-col { color: var(--dove); font: 700 8px/1.4 var(--font-data); letter-spacing: .1em; text-transform: uppercase; }
@@ -19,9 +29,6 @@
 .fly-bar span { color: var(--bg); font: 700 10px/1 var(--font-data); font-variant-numeric: tabular-nums; }
 .fly-bar:not(.hot) span { color: var(--white); }
 .fly-pos { text-align: center; color: var(--white); font: 800 12px/1 var(--font-display); }
-.fly-verdict { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); color: var(--casper); font: 500 13px/1.45 var(--font-body); }
-.fly-verdict strong { color: var(--white); }
-.fly-verdict em { color: var(--red); font-style: normal; font-weight: 700; font-variant-numeric: tabular-nums; }
 .fly-foot { display: flex; align-items: center; gap: 10px; margin-top: 10px; color: var(--dove); font: 400 11px/1.45 var(--font-body); }
 .fly-meter { flex: 0 0 56px; height: 4px; border-radius: 2px; background: var(--border); overflow: hidden; }
 .fly-meter i { display: block; width: var(--p); height: 100%; background: var(--white); }
@@ -56,12 +63,15 @@
 .rb-note { margin-top: 12px; color: var(--dim); font: 400 10px/1.5 var(--font-data); }
 
 @media (max-width: 767px) {
-  .slate-panel .fly { padding: 10px 16px 14px; }
+  .app-shell .slate-panel .fly-toggle { padding-inline: 16px; gap: 10px; }
+  .slate-panel .fly-inner { padding-inline: 16px; }
   .slate-panel .fly-scale { font-size: 8px; }
+  .slate-panel .fly-line { font-size: 12px; }
   .rb-tonight { grid-template-columns: minmax(0, 1fr); }
   .rb-team em { font-size: 10px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .fly-bar { animation: none; }
+  .fly-body, .fly-toggle svg { transition: none; }
   .app-shell .rb-dot, .rb-tag { transition: none; }
 }

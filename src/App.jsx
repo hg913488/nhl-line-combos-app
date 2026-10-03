@@ -831,8 +831,8 @@ function SlateGame({ game, onOpenMoves, onOpenGame, onOpenBoard, onTeam, lineups
       <button className="slate-link slate-lineup-toggle" aria-expanded={showLineups} onClick={() => setShowLineups(value => !value)}>{showLineups ? 'Hide lineups' : 'Lineups'} <ChevronDown size={13} aria-hidden="true" /></button>
     </div>
     {showLineups && <div className="slate-lineups">
-      <p className="snapshot-notice">Projected lineups as of {UPDATED_AT}. Not confirmed for this game.</p>
       <div className="matchup-lineups">{[game.awayTeam, game.homeTeam].map(team => <SlateLineupTeam key={team.abbrev} team={team} />)}</div>
+      <p className="snapshot-notice">Projected lineups as of {UPDATED_AT}. Not confirmed for this game.</p>
     </div>}
   </article>;
 }
