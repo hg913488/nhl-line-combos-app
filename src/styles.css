@@ -713,11 +713,29 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .slate-compact { display: none; }
 @media (max-width: 767px) {
   .slate-panel .slate-game { display: flex; flex-direction: column; }
-  .slate-panel .slate-game > * { order: 2; }
+  .slate-panel .slate-game > * { order: 1; }
   .slate-panel .slate-matchup { display: none; }
   .slate-panel .slate-compact { display: block; order: 0; padding: 18px 16px 14px; }
-  .slate-panel .slate-lineups { order: 1; padding: 14px 16px 20px; border-top: 1px solid var(--border); }
-  .slate-panel .slate-actions { order: 3; }
+  .slate-panel .slate-lineups { order: 2; padding: 10px 16px 20px; border-top: 1px solid var(--border); }
+  .slate-panel .slate-actions { order: 1; }
+  .slate-panel .slate-row { padding: 10px 16px; }
+  .slate-panel .slate-kicker { font-size: 8px; }
+  .slate-panel .slate-story ul, .slate-panel .slate-watch ul { gap: 6px; margin-top: 9px; }
+  .slate-panel .slate-story li, .slate-panel .slate-watch li { grid-template-columns: 30px minmax(0, 1fr); gap: 8px; font-size: 12px; line-height: 1.4; }
+  .slate-panel .duel-goalie button { font-size: 13px; }
+  .slate-panel .slate-insight { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 0; padding-block: 10px 12px; }
+  .slate-panel .slate-watch { margin-top: 0; padding: 0 0 0 12px; border-top: 0; border-left: 1px solid var(--border); }
+  .slate-panel .slate-story { padding-right: 12px; }
+  .slate-panel .slate-story ul, .slate-panel .slate-watch ul { gap: 5px; margin-top: 8px; }
+  .slate-panel .slate-story li, .slate-panel .slate-watch li { grid-template-columns: 26px minmax(0, 1fr); gap: 5px; font-size: 10.5px; line-height: 1.35; }
+  .slate-panel .story-team { font-size: 8.5px; letter-spacing: .04em; }
+  .slate-panel .slate-story li, .slate-panel .slate-watch li { grid-template-columns: 28px minmax(0, 1fr); }
+  .slate-panel .slate-watch .watch-index { display: inline; font-size: 8.5px; white-space: nowrap; }
+  .slate-panel .slate-watch strong { margin-right: 3px; font-size: 10.5px; }
+  .slate-panel .slate-more { min-height: 24px; margin-top: 2px; font-size: 8px; }
+  .slate-panel .slate-quiet { margin-top: 8px; font-size: 11px; }
+  .slate-panel .slate-actions { padding: 0 8px; }
+  .app-shell .slate-panel .slate-link { min-height: 36px; }
   .compact-line { display: flex; align-items: baseline; justify-content: flex-start; gap: 10px; font: 800 clamp(13px, 4.1vw, 17px)/1.15 var(--font-display); letter-spacing: 0; text-transform: none; white-space: nowrap; color: var(--white); }
   .compact-line span { display: inline-flex; align-items: baseline; gap: 6px; min-width: 0; }
   .compact-line b { font-variant-numeric: tabular-nums; }
@@ -734,7 +752,7 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
   .app-shell .slate-heading input { min-height: 28px; margin-left: 6px; padding: 2px 6px; font-size: 12px !important; }
   .slate-panel .snapshot-notice { font-size: 10px; padding-block: 8px; }
   .slate-rail-shell .quick-scan-hint { top: 5px; right: 8px; font-size: 7px; padding: 0; }
-  .slate-panel .slate-compact { padding-top: 24px; }
+  .slate-panel .slate-compact { padding-top: 36px; }
   .slate-summary { order: 5; flex: 1 0 100%; margin-top: 0; font-size: 8px; }
   .slate-rail { scroll-snap-type: x proximity; }
   .slate-strip { scroll-snap-align: start; }
@@ -748,4 +766,47 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 @media (prefers-reduced-motion: reduce) {
   .slate-strip, .slate-panel, .slate-tab-logos img { transition: none; }
   .slate-live-dot, .slate-skeleton span { animation: none; }
+}
+
+/* Phone lineups: the same jersey cards, scaled down. */
+@media (max-width: 767px) {
+  .slate-panel .snapshot-notice { padding-block: 6px; font-size: 9px; border-block: 0; }
+  .slate-panel .matchup-lineups { gap: 6px; padding-top: 6px; }
+  .slate-panel .matchup-lineups h2 { margin: 12px 0 0; font-size: 15px; }
+  .slate-panel .lineup-divider { margin: 10px 0 6px; }
+  .slate-panel .slate-lineups section > div[style*='margin-bottom'] { margin-bottom: 7px !important; }
+  .slate-panel .lineup-unit-label { margin-bottom: 3px; font-size: 8px; }
+  .slate-panel .slate-lineups section div[style*='display: flex'] { gap: 3px !important; }
+  .slate-panel .powerplay-grid { gap: 3px; }
+  .app-shell .slate-panel .slate-lineups .player-tile { min-height: 74px; padding: 5px 3px; gap: 1px; }
+  .slate-panel .slate-lineups .jersey-icon { width: 36px; height: 33px; }
+  .slate-panel .slate-lineups .player-name > span { font-size: 8.5px; }
+  .slate-panel .slate-lineups .player-name strong { font-size: 10.5px; letter-spacing: -.01em; }
+  .slate-panel .slate-lineups .player-position { top: 3px; right: 4px; font-size: 7.5px; }
+}
+
+/* Next-game button sits in the corner the scroll hint used to occupy. The hint only shows while every
+   game is folded, so it floats over the bottom edge of the tab row instead. */
+.slate-panel { position: relative; }
+/* hit area stays 24px; only the label is visible */
+.app-shell .slate-next { position: absolute; top: 4px; right: 6px; z-index: 3; display: inline-flex; align-items: center; gap: 3px; min-height: 24px; padding: 0 6px; border: 0; background: transparent; color: var(--dove); font: 700 6.5px/1 'Space Mono', monospace; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; transition: color .15s ease; }
+.slate-next svg { width: 8px; height: 8px; }
+.slate-next:hover { color: var(--white); }
+.slate-next:active { transform: translateY(1px); }
+/* Zero-height sticky row so the pill stays just under the page header instead of scrolling behind it. */
+.slate-hint { position: sticky; top: calc(var(--header-height) + var(--tabs-height) + 8px); z-index: 20; height: 0; overflow: visible; display: flex; justify-content: flex-end; padding-right: 8px; pointer-events: none; transition: opacity .25s ease; }
+.slate-hint.hidden { opacity: 0; }
+.slate-hint > div { display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 4px; color: var(--dove); font: 700 6.5px/1 'Space Mono', monospace; letter-spacing: .1em; text-transform: uppercase; }
+.slate-hint svg { animation: scan-hint 1.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .slate-hint svg { animation: none; } }
+@media (max-width: 767px) {
+  .slate-next { top: 4px; right: 6px; }
+}
+
+.story-move b { font-weight: 800; }
+.story-move.move-up b, .story-move.move-in b { color: var(--green); }
+.story-move.move-down b, .story-move.move-out b { color: var(--red); }
+@media (max-width: 767px) {
+  .slate-panel .watch-unit { display: none; }
+  .slate-panel .slate-watch .watch-index { font-size: 9.5px; }
 }
