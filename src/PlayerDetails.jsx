@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { X, RotateCw, Info } from 'lucide-react';
+import { X, RotateCw, Info, ChevronDown } from 'lucide-react';
 import { getJSON, resolvePlayer, seasonLabel, seasonsFrom } from './data-client.js';
 import Select from './Select.jsx';
 import JerseyIcon, { HOME_UNIFORMS } from './JerseyIcon.jsx';
 import Sparkline from './Sparkline.jsx';
 import { moveClause, playerRole, latestMove, lineupName } from './lineup-text.js';
+import { edgeLine, edgeUnit, momentumLine } from './summary-lines.js';
 import { NHL_TEAMS } from './teams.js';
 import lineups from '../data/lines.json';
 import lineupChanges from '../data/lineup_changes.json';
 
 const dateLabel = value => new Date(`${value}T12:00:00`).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 const number = value => value == null ? '-' : value;
-const edgeUnit = unit => unit === 'percent' ? '%' : unit === 'bursts' ? '' : ` ${unit}`;
 const MOVE_WINDOW_MS = 14 * 24 * 3600 * 1000;
 const SLUG_BY_ABBR = Object.fromEntries(Object.entries(NHL_TEAMS).map(([slug, team]) => [team.abbr, slug]));
 const toiMinutes = toi => {
@@ -26,6 +26,18 @@ const INFO = {
   '32+ km/h bursts': 'How many times this season he hit 32 km/h (20 mph) or faster. It counts separate sprints, not time at speed, so it shows how often he goes all out.',
   'O-zone time': "The share of his ice time spent in the offensive zone, the opponent's end. Higher usually means his line keeps the puck and drives play.",
 };
+
+// A section that shows one summary line and drops open to the full detail.
+function ContextSection({ id, className = '', title, summary, label, open, onToggle, children }) {
+  return <section className={`player-context ${className}${open ? ' open' : ''}`} aria-label={label}>
+    <button type="button" className="context-toggle" aria-expanded={open} aria-controls={id} onClick={onToggle}>
+      <span className="context-title">{title}</span>
+      <span className="context-summary">{summary}</span>
+      <ChevronDown size={14} aria-hidden="true" />
+    </button>
+    <div className="context-body" id={id} inert={open ? undefined : ''}><div className="context-inner">{children}</div></div>
+  </section>;
+}
 
 function InfoButton({ label, open, onToggle }) {
   return <button className="edge-info-button" aria-expanded={open} aria-controls="context-info" aria-label={`What is ${label}?`} title={`What is ${label}?`}
@@ -45,6 +57,8 @@ export default function PlayerDetails({ modal, onClose }) {
   const [gameType, setGameType] = useState('2');
   const [windowSize, setWindowSize] = useState(5);
   const [info, setInfo] = useState(null);
+  const [openSection, setOpenSection] = useState(null); // 'momentum' | 'edge' | null
+  const toggleSection = name => setOpenSection(current => current === name ? null : name);
   const toggleInfo = label => setInfo(open => open === label ? null : label);
   const [failedHeadshot, setFailedHeadshot] = useState(null);
   const [state, setState] = useState({ player: modal.player, games: [], momentum: null, edge: null, loading: true, error: null });
@@ -159,8 +173,9 @@ export default function PlayerDetails({ modal, onClose }) {
       {!loading && !error && !games.length && <div className="data-state">No appearances in {seasonLabel(season)} {gameType === '3' ? 'playoffs' : 'regular season'}.</div>}
       {!loading && !error && games.length > 0 && <>
         <div className="player-metrics">{metrics.map(([label, value]) => <div key={label}><span>{label}</span><strong>{value}</strong></div>)}</div>
-        {!goalie && momentum && <section className="player-context" aria-label="Recent player momentum">
-          <div className="context-heading"><span>MOMENTUM</span><small>Last 5 vs season</small></div>
+        {!goalie && momentum && <ContextSection id="ctx-momentum" title="MOMENTUM" label="Recent player momentum" summary={momentumLine({ momentum, role })}
+          open={openSection === 'momentum'} onToggle={() => toggleSection('momentum')}>
+          <div className="context-heading"><span>LAST 5 VS SEASON</span></div>
           {role && <p className="role-strip">
             <strong>{[role.slot, role.pp].filter(Boolean).join(' · ')}</strong>
             {move && <span>{move.changes.map(moveClause).join(', ').replace(/^./, c => c.toUpperCase())} · {dateLabel(move.occurred_at.slice(0, 10))}</span>}
@@ -186,9 +201,10 @@ export default function PlayerDetails({ modal, onClose }) {
             {shooting.delta != null && <p>He is {Math.abs(shooting.delta)} percentage points {shooting.delta >= 0 ? 'above' : 'below'} his career rate{seasonShots < 30 ? `, but on only ${seasonShots} shots, so it is too early to read much into it` : ''}.</p>}
           </InfoPanel>}
           {info === 'PP share' && <InfoPanel label="PP share" />}
-        </section>}
-        {!goalie && edgeMetrics.length > 0 && <section className="player-context edge-context" aria-label="NHL Edge player tracking">
-          <div className="context-heading"><span>NHL EDGE</span><small>{edge.availability === 'partial' ? 'Partial tracking data' : 'Player tracking'}</small></div>
+        </ContextSection>}
+        {!goalie && edgeMetrics.length > 0 && <ContextSection id="ctx-edge" className="edge-context" title="NHL EDGE" label="NHL Edge player tracking" summary={edgeLine(edgeMetrics)}
+          open={openSection === 'edge'} onToggle={() => toggleSection('edge')}>
+          <div className="context-heading"><span>{edge.availability === 'partial' ? 'PARTIAL TRACKING DATA' : 'PLAYER TRACKING'}</span></div>
           <div className="edge-grid">{edgeMetrics.map(([label, metric]) => <div key={label}>
             <InfoButton label={label} open={info === label} onToggle={toggleInfo} />
             <span>{label}</span><strong>{metric.value}<i>{edgeUnit(metric.unit)}</i></strong>
@@ -202,7 +218,7 @@ export default function PlayerDetails({ modal, onClose }) {
               {metric.percentile != null && <p>Percentile {metric.percentile} means he ranks ahead of {Math.round(metric.percentile)}% of NHL skaters. Season to date, so it moves a lot early on.</p>}
             </InfoPanel>;
           })()}
-        </section>}
+        </ContextSection>}
         <p className="window-caption">{games.length} appearances / {dateLabel(games[games.length - 1].gameDate)} - {dateLabel(games[0].gameDate)} / {seasonLabel(season)}</p>
         <div className="player-table-scroll" tabIndex={0} aria-label="Game log, horizontally scrollable">
           <table className="player-table"><thead><tr><th>Date</th><th>Team</th><th>Opp</th>{columns.map(([label]) => <th key={label}>{label}</th>)}<th>TOI</th></tr></thead>
