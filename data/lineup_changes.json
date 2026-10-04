@@ -1,11 +1,155 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-04T19:32:29Z",
+  "generated_at": "2026-10-04T21:54:25Z",
   "retention": {
     "max_age_days": 90,
     "max_events": 500
   },
   "events": [
+    {
+      "id": "df1b9731d6df036ad5ce",
+      "occurred_at": "2026-10-04T21:54:25Z",
+      "player": "SAM LAFFERTY",
+      "team": "florida-panthers",
+      "previous_team": "florida-panthers",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "florida-panthers",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "florida-panthers",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "b82b448f446e25bb1e61",
+      "occurred_at": "2026-10-04T21:54:25Z",
+      "player": "BRAD MARCHAND",
+      "team": "florida-panthers",
+      "previous_team": "florida-panthers",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "florida-panthers",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "florida-panthers",
+        "rostered": true,
+        "forward_line": 1,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
+    {
+      "id": "8eda26f2ac4c0e695a03",
+      "occurred_at": "2026-10-04T21:54:25Z",
+      "player": "LARS ELLER",
+      "team": "florida-panthers",
+      "previous_team": "florida-panthers",
+      "event_types": [
+        "forward_line",
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "florida-panthers",
+        "rostered": true,
+        "forward_line": 1,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "florida-panthers",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 1,
+          "to": 4,
+          "direction": "demoted"
+        },
+        {
+          "type": "power_play",
+          "from": 2,
+          "to": null
+        }
+      ]
+    },
+    {
+      "id": "017fe294d872193947b7",
+      "occurred_at": "2026-10-04T21:54:25Z",
+      "player": "SAM BENNETT",
+      "team": "florida-panthers",
+      "previous_team": "florida-panthers",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "florida-panthers",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 1
+      },
+      "after": {
+        "team": "florida-panthers",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": 1,
+          "to": 2,
+          "direction": "demoted"
+        }
+      ]
+    },
     {
       "id": "70e19f4d07f2b2206d03",
       "occurred_at": "2026-10-04T19:32:29Z",
@@ -17235,144 +17379,6 @@
           "from": 2,
           "to": 1,
           "direction": "promoted"
-        }
-      ]
-    },
-    {
-      "id": "42bbf00e905f759bf879",
-      "occurred_at": "2026-09-28T15:37:06Z",
-      "player": "ELVIS MERZLIKINS",
-      "team": "columbus-blue-jackets",
-      "previous_team": "columbus-blue-jackets",
-      "event_types": [
-        "removal"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "columbus-blue-jackets",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": 2,
-        "power_play": null
-      },
-      "after": {
-        "team": "columbus-blue-jackets",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "removal",
-          "from": true,
-          "to": false
-        }
-      ]
-    },
-    {
-      "id": "3ee592a68ba2a6ce9d4f",
-      "occurred_at": "2026-09-28T15:37:06Z",
-      "player": "CLAUDE GIROUX",
-      "team": "ottawa-senators",
-      "previous_team": "ottawa-senators",
-      "event_types": [
-        "forward_line"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "ottawa-senators",
-        "rostered": true,
-        "forward_line": 4,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "ottawa-senators",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "changes": [
-        {
-          "type": "forward_line",
-          "from": 4,
-          "to": 3,
-          "direction": "promoted"
-        }
-      ]
-    },
-    {
-      "id": "3386a68cfe00f86a6a4b",
-      "occurred_at": "2026-09-28T15:37:06Z",
-      "player": "ANDREW MANGIAPANE",
-      "team": "chicago-blackhawks",
-      "previous_team": "chicago-blackhawks",
-      "event_types": [
-        "forward_line"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "chicago-blackhawks",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "chicago-blackhawks",
-        "rostered": true,
-        "forward_line": 2,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "forward_line",
-          "from": 3,
-          "to": 2,
-          "direction": "promoted"
-        }
-      ]
-    },
-    {
-      "id": "29dfb8ac752e7404a629",
-      "occurred_at": "2026-09-28T15:37:06Z",
-      "player": "BRYAN RUST",
-      "team": "pittsburgh-penguins",
-      "previous_team": "pittsburgh-penguins",
-      "event_types": [
-        "removal"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "pittsburgh-penguins",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 1
-      },
-      "after": {
-        "team": "pittsburgh-penguins",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "removal",
-          "from": true,
-          "to": false
         }
       ]
     }
