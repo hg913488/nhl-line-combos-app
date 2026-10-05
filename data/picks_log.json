@@ -10,22 +10,22 @@
     "seasons": 2
   },
   "summary": {
-    "graded": 70,
-    "hits": 31,
-    "hit_rate": 0.4429,
-    "pending": 8,
+    "graded": 72,
+    "hits": 32,
+    "hit_rate": 0.4444,
+    "pending": 6,
     "void": 0,
-    "baseline_hit_rate": 0.475,
+    "baseline_hit_rate": 0.4792,
     "by_position": {
       "C": {
-        "graded": 17,
-        "hits": 9,
-        "hit_rate": 0.5294
+        "graded": 18,
+        "hits": 10,
+        "hit_rate": 0.5556
       },
       "LW": {
-        "graded": 13,
+        "graded": 14,
         "hits": 4,
-        "hit_rate": 0.3077
+        "hit_rate": 0.2857
       },
       "RW": {
         "graded": 21,
@@ -40,9 +40,9 @@
     },
     "by_season": {
       "20262027": {
-        "graded": 70,
-        "hits": 31,
-        "hit_rate": 0.4429
+        "graded": 72,
+        "hits": 32,
+        "hit_rate": 0.4444
       }
     }
   },
@@ -3868,8 +3868,18 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-04T08:29:09Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": false,
+        "goals_by_position": {
+          "C": 1,
+          "LW": 0,
+          "RW": 0,
+          "D": 1
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-05T02:22:48Z"
+      }
     },
     {
       "id": "2026020036-NYR",
@@ -3912,8 +3922,18 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-04T08:29:09Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "goals_by_position": {
+          "C": 1,
+          "LW": 0,
+          "RW": 2,
+          "D": 1
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-05T02:22:48Z"
+      }
     },
     {
       "id": "2026020037-FLA",
