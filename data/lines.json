@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-10-05 16:10:10 UTC",
+  "updated_at": "2026-10-05 22:33:28 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -327,16 +327,16 @@
       ],
       "defense": [
         [
+          "BOWEN BYRAM",
+          "ARTYOM LEVSHUNOV"
+        ],
+        [
           "ALEX VLASIC",
           "IAN COLE"
         ],
         [
           "WYATT KAISER",
-          "ARTYOM LEVSHUNOV"
-        ],
-        [
-          "KEVIN KORCHINSKI",
-          "ETHAN DEL MASTRO"
+          "SAM RINZEL"
         ]
       ],
       "goalies": [
@@ -352,14 +352,14 @@
         "ROMAN KANTSEROV",
         "FRANK NAZAR",
         "PATRICK KANE",
-        "ARTYOM LEVSHUNOV"
+        "BOWEN BYRAM"
       ],
       "pp2": [
         "RYAN DONATO",
         "ANTON FRONDELL",
         "NICK LARDIS",
         "OLIVER MOORE",
-        "KEVIN KORCHINSKI"
+        "ARTYOM LEVSHUNOV"
       ]
     },
     "colorado-avalanche": {
@@ -431,7 +431,7 @@
         [
           "VALERI NICHUSHKIN",
           "SEAN MONAHAN",
-          "CONOR GARLAND"
+          "DMITRI VORONKOV"
         ],
         [
           "COLE SILLINGER",
@@ -441,20 +441,20 @@
         [
           "RYAN LOMBERG",
           "DANTON HEINEN",
-          "DMITRI VORONKOV"
+          "CONOR GARLAND"
         ]
       ],
       "defense": [
         [
           "ZACH WERENSKI",
+          "DAMON SEVERSON"
+        ],
+        [
+          "EMIL ANDRAE",
           "DENTON MATEYCHUK"
         ],
         [
           "CARSON SOUCY",
-          "EMIL ANDRAE"
-        ],
-        [
-          "JAKE CHRISTIANSEN",
           "ERIK GUDBRANSON"
         ]
       ],
@@ -923,8 +923,8 @@
       ],
       "defense": [
         [
-          "ROMAN JOSI",
-          "NICOLAS HAGUE"
+          "NICOLAS HAGUE",
+          "ROMAN JOSI"
         ],
         [
           "BRADY SKJEI",
@@ -938,6 +938,9 @@
       "goalies": [
         [
           "JUUSE SAROS"
+        ],
+        [
+          "JUSTUS ANNUNEN"
         ]
       ],
       "pp1": [
@@ -1094,8 +1097,8 @@
         ],
         [
           "OLIVER BJORKSTRAND",
-          "JOE VELENO",
-          "JAROSLAV CHMELAR"
+          "JAROSLAV CHMELAR",
+          "MATT REMPE"
         ]
       ],
       "defense": [
@@ -1160,16 +1163,16 @@
       ],
       "defense": [
         [
-          "JAKE SANDERSON",
-          "NIKOLAS MATINPALO"
-        ],
-        [
           "THOMAS CHABOT",
           "JORDAN SPENCE"
         ],
         [
           "TYLER KLEVEN",
           "CARTER YAKEMCHUK"
+        ],
+        [
+          "CAMERON CROTTY",
+          "NIKOLAS MATINPALO"
         ]
       ],
       "goalies": [
@@ -1185,14 +1188,14 @@
         "TIM STÜTZLE",
         "DYLAN COZENS",
         "DRAKE BATHERSON",
-        "JAKE SANDERSON"
+        "THOMAS CHABOT"
       ],
       "pp2": [
         "CLAUDE GIROUX",
         "SHANE PINTO",
         "FABIAN ZETTERLUND",
         "CARTER YAKEMCHUK",
-        "THOMAS CHABOT"
+        "JORDAN SPENCE"
       ]
     },
     "philadelphia-flyers": {
@@ -1213,7 +1216,7 @@
           "PORTER MARTONE"
         ],
         [
-          "ALEX BUMP",
+          "DENVER BARKEY",
           "SEAN COUTURIER",
           "NOEL ACCIARI"
         ]
@@ -1250,7 +1253,7 @@
       "pp2": [
         "PORTER MARTONE",
         "NOAH CATES",
-        "ALEX BUMP",
+        "DENVER BARKEY",
         "OWEN TIPPETT",
         "CAM YORK"
       ]
@@ -1344,7 +1347,7 @@
           "MICHAEL KESSELRING"
         ],
         [
-          "NOLAN ALLAN",
+          "SAM DICKINSON",
           "JACOB TROUBA"
         ],
         [
@@ -1991,7 +1994,7 @@
         "name": "CONNOR BEDARD",
         "pos": "C",
         "status": "Out",
-        "desc": ""
+        "desc": "Shoulder"
       },
       {
         "name": "ANDREW MANGIAPANE",
@@ -2164,6 +2167,12 @@
         "pos": "G",
         "status": "Out",
         "desc": ""
+      },
+      {
+        "name": "DANILA YUROV",
+        "pos": "RW",
+        "status": "Day-To-Day",
+        "desc": "Upper body"
       }
     ],
     "montreal-canadiens": [
@@ -2270,10 +2279,10 @@
     ],
     "philadelphia-flyers": [
       {
-        "name": "DENVER BARKEY",
-        "pos": "C",
+        "name": "NIKITA GREBENKIN",
+        "pos": "RW",
         "status": "Injured Reserve",
-        "desc": "Lower body"
+        "desc": "Upper body"
       },
       {
         "name": "RASMUS RISTOLAINEN",
@@ -2416,6 +2425,6 @@
   "injuries_meta": {
     "source": "dailyfaceoff.com",
     "status": "fresh",
-    "updated_at": "2026-10-05 16:10:10 UTC"
+    "updated_at": "2026-10-05 22:33:28 UTC"
   }
 }
