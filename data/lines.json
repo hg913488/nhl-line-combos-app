@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-10-04 21:54:25 UTC",
+  "updated_at": "2026-10-05 01:03:06 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -17,7 +17,7 @@
         [
           "NIKITA NESTERENKO",
           "RYAN POEHLING",
-          "FRANK VATRANO"
+          "SAM COLANGELO"
         ],
         [
           "JEFF MALOTT",
@@ -185,19 +185,19 @@
     "calgary-flames": {
       "forwards": [
         [
-          "MATVEI GRIDIN",
+          "YEGOR SHARANGOVICH",
           "MORGAN FROST",
           "MATT CORONATO"
         ],
         [
           "SAMUEL HONZEK",
-          "MIKAEL BACKLUND",
-          "JOEL FARABEE"
+          "RYAN STROME",
+          "CONNOR ZARY"
         ],
         [
-          "BRENNAN OTHMANN",
-          "RYAN STROME",
-          "YEGOR SHARANGOVICH"
+          "MATVEI GRIDIN",
+          "MIKAEL BACKLUND",
+          "JOEL FARABEE"
         ],
         [
           "MAXIM TSYPLAKOV",
@@ -211,7 +211,7 @@
           "ZACH WHITECLOUD"
         ],
         [
-          "JOEL HANLEY",
+          "YAN KUZNETSOV",
           "SIMON NEMEC"
         ],
         [
@@ -237,7 +237,7 @@
       "pp2": [
         "MAXIM TSYPLAKOV",
         "RYAN STROME",
-        "BRENNAN OTHMANN",
+        "CONNOR ZARY",
         "SIMON NEMEC",
         "YEGOR SHARANGOVICH"
       ]
@@ -647,8 +647,8 @@
       ],
       "pp1": [
         "VASILY PODKOLZIN",
-        "LEON DRAISAITL",
         "KASPERI KAPANEN",
+        "LEON DRAISAITL",
         "EVAN BOUCHARD",
         "CONNOR MCDAVID"
       ],
@@ -686,14 +686,14 @@
       "defense": [
         [
           "GUSTAV FORSLING",
-          "AARON EKBLAD"
+          "DMITRY KULIKOV"
         ],
         [
           "NIKO MIKKOLA",
           "SETH JONES"
         ],
         [
-          "DMITRY KULIKOV",
+          "UVIS BALINSKIS",
           "RADKO GUDAS"
         ]
       ],
@@ -716,7 +716,7 @@
         "ANTON LUNDELL",
         "SAM BENNETT",
         "CARTER VERHAEGHE",
-        "AARON EKBLAD",
+        "UVIS BALINSKIS",
         "GUSTAV FORSLING"
       ]
     },
@@ -1396,7 +1396,7 @@
           "SHANE WRIGHT"
         ],
         [
-          "BEN MEYERS",
+          "CURTIS DOUGLAS",
           "FREDERICK GAUDREAU",
           "MACKIE SAMOSKEVICH"
         ]
@@ -1412,7 +1412,7 @@
         ],
         [
           "RYAN LINDGREN",
-          "CALE FLEURY"
+          "VILLE OTTAVAINEN"
         ]
       ],
       "goalies": [
@@ -1424,18 +1424,18 @@
         ]
       ],
       "pp1": [
-        "JORDAN EBERLE",
-        "BOBBY MCMANN",
-        "JARED MCCANN",
-        "CHANDLER STEPHENSON",
-        "VINCE DUNN"
-      ],
-      "pp2": [
         "KAAPO KAKKO",
         "SHANE WRIGHT",
         "BERKLY CATTON",
         "MATTY BENIERS",
         "BRANDON MONTOUR"
+      ],
+      "pp2": [
+        "JORDAN EBERLE",
+        "BOBBY MCMANN",
+        "JARED MCCANN",
+        "CHANDLER STEPHENSON",
+        "VINCE DUNN"
       ]
     },
     "st-louis-blues": {
@@ -2087,37 +2087,37 @@
       {
         "name": "ALEC REGULA",
         "pos": "D",
-        "status": "Out",
+        "status": "Injured Reserve",
         "desc": "Undisclosed"
       },
       {
         "name": "FREDERIK ANDERSEN",
         "pos": "G",
-        "status": "Out",
+        "status": "Injured Reserve",
         "desc": "Undisclosed"
       },
       {
         "name": "MATTIAS JANMARK",
         "pos": "C",
-        "status": "Out",
+        "status": "Injured Reserve",
         "desc": "Undisclosed"
       },
       {
         "name": "MATTHEW SAVOIE",
         "pos": "C",
-        "status": "Out",
+        "status": "Injured Reserve",
         "desc": "Undisclosed"
       },
       {
         "name": "JASON DICKINSON",
         "pos": "C",
-        "status": "Out",
+        "status": "Injured Reserve",
         "desc": "Undisclosed"
       },
       {
         "name": "RYAN NUGENT-HOPKINS",
         "pos": "C",
-        "status": "Out",
+        "status": "Injured Reserve",
         "desc": "Lower body"
       },
       {
@@ -2141,10 +2141,10 @@
         "desc": ""
       },
       {
-        "name": "GUSTAV FORSLING",
+        "name": "AARON EKBLAD",
         "pos": "D",
         "status": "Day-To-Day",
-        "desc": "Upper body"
+        "desc": "Undisclosed"
       }
     ],
     "los-angeles-kings": [
@@ -2231,6 +2231,12 @@
         "pos": "G",
         "status": "Out",
         "desc": ""
+      },
+      {
+        "name": "JOE VELENO",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "Lower body"
       }
     ],
     "ottawa-senators": [
@@ -2407,6 +2413,6 @@
   "injuries_meta": {
     "source": "dailyfaceoff.com",
     "status": "fresh",
-    "updated_at": "2026-10-04 21:54:25 UTC"
+    "updated_at": "2026-10-05 01:03:06 UTC"
   }
 }
