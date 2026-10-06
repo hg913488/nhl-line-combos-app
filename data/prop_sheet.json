@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-06T09:01:26Z",
+  "generated_at": "2026-10-06T14:17:59Z",
   "date": "2026-10-06",
   "window": {
     "games": 10,
@@ -2838,7 +2838,7 @@
       "home": false,
       "pos": "LW",
       "line": "L2",
-      "pp": 1,
+      "pp": 2,
       "b2b": true,
       "last10": {
         "gp": 10,
@@ -2863,7 +2863,6 @@
         "source": "projected"
       },
       "flags": [
-        "PP1",
         "HOT",
         "B2B",
         "SOFT_MATCHUP"
@@ -3035,7 +3034,7 @@
       "home": false,
       "pos": "RW",
       "line": "L3",
-      "pp": 2,
+      "pp": 1,
       "b2b": true,
       "last10": {
         "gp": 10,
@@ -3060,6 +3059,8 @@
         "source": "projected"
       },
       "flags": [
+        "PP1",
+        "ROLE_UP",
         "B2B",
         "SOFT_MATCHUP"
       ],
@@ -3190,7 +3191,7 @@
       "home": false,
       "pos": "D",
       "line": "D1",
-      "pp": 1,
+      "pp": 2,
       "b2b": true,
       "last10": {
         "gp": 10,
@@ -3215,7 +3216,6 @@
         "source": "projected"
       },
       "flags": [
-        "PP1",
         "ROLE_UP",
         "B2B"
       ],
@@ -3308,7 +3308,7 @@
       "home": false,
       "pos": "D",
       "line": "D2",
-      "pp": 2,
+      "pp": 1,
       "b2b": true,
       "last10": {
         "gp": 7,
@@ -3333,6 +3333,7 @@
         "source": "projected"
       },
       "flags": [
+        "PP1",
         "ROLE_UP",
         "B2B"
       ],
@@ -8851,8 +8852,7 @@
         "source": "projected"
       },
       "flags": [
-        "PP1",
-        "ROLE_UP"
+        "PP1"
       ],
       "number": 91
     },
