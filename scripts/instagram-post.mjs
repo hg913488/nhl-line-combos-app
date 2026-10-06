@@ -240,9 +240,19 @@ async function guardedPublish({ key, caption, log, igUserId, token, force = fals
   }
 }
 
-/** One carousel from image URLs to a live post, safe to call again after a failure. */
+/**
+ * One carousel from image URLs to a live post, safe to call again after a failure.
+ * Instagram rejects a carousel with fewer than two items ("Unsupported post type"), so a single
+ * card (a quiet night's one-slide roundup) goes out as a plain image post instead.
+ */
 export async function postCarousel({ key, urls, alts, caption, log, igUserId, token, force = false }) {
   return guardedPublish({ key, caption, log, igUserId, token, force }, async () => {
+    if (urls.length === 1) {
+      const image = await createContainer(igUserId, token, { image_url: urls[0], caption, alt_text: alts[0] });
+      await waitForContainer(image.id, token);
+      console.log('  single image container ready');
+      return image.id;
+    }
     const children = [];
     for (const [i, url] of urls.entries()) {
       const container = await createContainer(igUserId, token, { image_url: url, is_carousel_item: 'true', alt_text: alts[i] });

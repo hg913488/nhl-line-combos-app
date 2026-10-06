@@ -194,3 +194,16 @@ test('reel mode dry run checks the video and prints the caption without posting'
   process.env.IG_REEL = '../etc/passwd';
   await assert.rejects(run({ publish: false }), /must be a slug/);
 });
+
+test('a single card posts as a plain image, not a one-item carousel', async t => {
+  const realFetch = globalThis.fetch;
+  t.after(() => { globalThis.fetch = realFetch; });
+  const bodies = [];
+  fakeGraph({ publish: () => ({ ok: true, status: 200, json: async () => ({ id: 'IMG1' }) }) });
+  const graph = globalThis.fetch;
+  globalThis.fetch = async (url, init = {}) => { if (init.body) bodies.push(String(init.body)); return graph(url, init); };
+  const result = await postCarousel({ key: 'scoreboard:1', urls: ['https://x/1.jpg'], alts: ['Final scores'], caption: 'CAP', log: freshLog(), igUserId: 'u', token: 't' });
+  assert.deepEqual(result, { id: 'IMG1', recovered: false });
+  assert.equal(bodies.filter(body => body.includes('media_type=CAROUSEL')).length, 0, 'no carousel container');
+  assert.ok(bodies.some(body => body.includes('image_url=') && body.includes('caption=CAP') && !body.includes('is_carousel_item')));
+});
