@@ -149,6 +149,12 @@ curl -s -o out.png "http://localhost:5173/api/og?type=ig&recap=<gameId>&card=fin
   read/write) and body `{"ref":"main","inputs":{"mode":"recap","publish":"true","include_preseason":"true"}}`. Leave `date` blank:
   a recap run then checks last night and tonight. Send `mode=picks` the same way every 30 min from 11 AM to 2 PM ET and `mode=daily` from 2 PM to 6 PM ET; both are once-a-day, so repeats are skipped. Dispatch inputs do **not** read the `IG_PUBLISH` repo variable, so `publish` must be sent.
   The token lives in the poller, never in the repo. Theme `auto` alternates by ET day like the scheduled runs.
+- **Reels (`mode=reel`):** a finished vertical video at `public/reels/<slug>.mp4` plus `<slug>.txt` (the caption) goes out as a Reel.
+  Dispatch `instagram.yml` with `mode=reel`, `reel=<slug>`, `publish=true`. The mp4 is fetched by Instagram from
+  `${SITE_ORIGIN}/reels/<slug>.mp4`, so **merge and let Vercel deploy first**; a dry run (`publish=false`) HEADs that URL
+  (must be `200`, `video/*`, < 100 MB) and prints the caption. Same safety as carousels (`guardedPublish`: caption lookup
+  before any retry, attempt cap); the container wait is up to 5 min for video. Idempotency key `reel:<slug>`, log kind `reel`.
+  Video sources and the render pipeline live in `video/` (not on the deploy path); only the finished mp4 is committed to `public/reels/`.
 - Test a card with `curl` against `/api/og?type=ig&...&format=jpg` before dispatching the workflow. Dry-run the whole night against
   the dev server with `IG_LOG_PATH=<empty json> SITE_ORIGIN=http://localhost:5173 IG_MODE=recap IG_DATE=<date> node scripts/instagram-post.mjs`.
 - **Republish the review artifact whenever the cards change** — it is the user's review surface, not a local Preview

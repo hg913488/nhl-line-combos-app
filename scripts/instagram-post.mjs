@@ -170,14 +170,14 @@ async function createContainer(igUserId, token, params) {
   return fetchJson(`${GRAPH}/${igUserId}/media`, { method: 'POST', body });
 }
 
-async function waitForContainer(containerId, token) {
-  for (let attempt = 0; attempt < STATUS_ATTEMPTS; attempt += 1) {
+async function waitForContainer(containerId, token, { attempts = STATUS_ATTEMPTS, delayMs = STATUS_DELAY_MS } = {}) {
+  for (let attempt = 0; attempt < attempts; attempt += 1) {
     const { status_code: status, status: detail } = await fetchJson(`${GRAPH}/${containerId}?fields=status_code,status&access_token=${token}`);
     if (status === 'FINISHED') return;
     if (status === 'ERROR' || status === 'EXPIRED') throw new Error(`Container ${containerId} ${status}: ${detail || 'no detail'}`);
-    await sleep(STATUS_DELAY_MS);
+    await sleep(delayMs);
   }
-  throw new Error(`Container ${containerId} was not ready after ${STATUS_ATTEMPTS} checks`);
+  throw new Error(`Container ${containerId} was not ready after ${attempts} checks`);
 }
 
 // Has this caption already gone live? Instagram can return an error from
@@ -189,13 +189,15 @@ export async function findPublished(igUserId, token, caption, since) {
 }
 
 /**
- * One carousel from image URLs to a live post, safe to call again after a
- * failure. Returns { id, recovered }. Throws when the post is not live:
+ * The safe-publish core shared by carousels and Reels. `makeContainer()` builds a finished
+ * container and returns its id; everything around it is the same guard:
  *   - a prior attempt that could not be verified blocks retries until forced,
  *   - a verified-not-published failure retries up to MAX_ATTEMPTS, reusing the
- *     finished carousel container so a retry costs two calls, not ten.
+ *     finished container so a retry costs a couple of calls, not a re-upload,
+ *   - an error from media_publish is checked against what is actually live.
+ * Returns { id, recovered }. Throws when the post is not live.
  */
-export async function postCarousel({ key, urls, alts, caption, log, igUserId, token, force = false }) {
+async function guardedPublish({ key, caption, log, igUserId, token, force = false }, makeContainer) {
   const prior = log.attempts[key];
   if (prior) {
     // A previous run may have published after all (or been unable to say).
@@ -214,18 +216,7 @@ export async function postCarousel({ key, urls, alts, caption, log, igUserId, to
     const ready = await fetchJson(`${GRAPH}/${creationId}?fields=status_code&access_token=${token}`).catch(() => ({}));
     if (ready.status_code !== 'FINISHED') creationId = null;
   }
-  if (!creationId) {
-    const children = [];
-    for (const [i, url] of urls.entries()) {
-      const container = await createContainer(igUserId, token, { image_url: url, is_carousel_item: 'true', alt_text: alts[i] });
-      await waitForContainer(container.id, token);
-      children.push(container.id);
-      console.log(`  container ready: ${i + 1}/${urls.length}`);
-    }
-    const carousel = await createContainer(igUserId, token, { media_type: 'CAROUSEL', children: children.join(','), caption });
-    await waitForContainer(carousel.id, token);
-    creationId = carousel.id;
-  }
+  if (!creationId) creationId = await makeContainer();
 
   log.attempts[key] = { ...prior, key, n: (prior?.n || 0) + 1, status: 'publishing', creation_id: creationId, first_at: firstAt, at: new Date().toISOString() };
   writeLog(log);
@@ -247,6 +238,81 @@ export async function postCarousel({ key, urls, alts, caption, log, igUserId, to
     writeLog(log);
     throw error;
   }
+}
+
+/** One carousel from image URLs to a live post, safe to call again after a failure. */
+export async function postCarousel({ key, urls, alts, caption, log, igUserId, token, force = false }) {
+  return guardedPublish({ key, caption, log, igUserId, token, force }, async () => {
+    const children = [];
+    for (const [i, url] of urls.entries()) {
+      const container = await createContainer(igUserId, token, { image_url: url, is_carousel_item: 'true', alt_text: alts[i] });
+      await waitForContainer(container.id, token);
+      children.push(container.id);
+      console.log(`  container ready: ${i + 1}/${urls.length}`);
+    }
+    const carousel = await createContainer(igUserId, token, { media_type: 'CAROUSEL', children: children.join(','), caption });
+    await waitForContainer(carousel.id, token);
+    return carousel.id;
+  });
+}
+
+// Video takes Instagram a while to process: allow up to five minutes.
+const REEL_WAIT = { attempts: 60, delayMs: 5000 };
+
+/** One Reel from a public video URL to a live post, with the same retry safety as a carousel. */
+export async function postReel({ key, videoUrl, caption, log, igUserId, token, force = false, wait = REEL_WAIT }) {
+  return guardedPublish({ key, caption, log, igUserId, token, force }, async () => {
+    const reel = await createContainer(igUserId, token, { media_type: 'REELS', video_url: videoUrl, caption, share_to_feed: 'true' });
+    await waitForContainer(reel.id, token, wait);
+    console.log('  reel container ready');
+    return reel.id;
+  });
+}
+
+// ── Reels: a finished video served from /reels on the site, plus its caption ──────────────────
+const REEL_DIR = process.env.IG_REEL_DIR || join(ROOT, 'public', 'reels');
+const MAX_REEL_BYTES = 100 * 1024 * 1024;
+const REEL_SLUG = /^[a-z0-9][a-z0-9-]*$/;
+
+export const reelUrl = (slug, origin = SITE_ORIGIN) => `${origin}/reels/${slug}.mp4`;
+
+/** Instagram fetches the file itself, so it must already be public, an mp4, and a sane size. */
+export async function checkVideo(url) {
+  const response = await fetch(url, { method: 'HEAD' });
+  const type = response.headers?.get?.('content-type') || '';
+  const size = Number(response.headers?.get?.('content-length') || 0);
+  if (!response.ok) throw new Error(`${url} answered HTTP ${response.status}; the video is not public yet`);
+  if (!/^video\//.test(type)) throw new Error(`${url} is served as "${type || 'unknown'}", not a video`);
+  if (size > MAX_REEL_BYTES) throw new Error(`${url} is ${(size / 1048576).toFixed(0)} MB; Reels over 100 MB are rejected`);
+  return { type, size };
+}
+
+async function runReel({ log, publish, force }) {
+  const slug = process.env.IG_REEL || '';
+  if (!REEL_SLUG.test(slug)) throw new Error('IG_REEL must be a slug like ep03-nine-seconds (lowercase letters, digits, dashes)');
+  const caption = readFileSync(join(REEL_DIR, `${slug}.txt`), 'utf8').trim();
+  if (!caption) throw new Error(`public/reels/${slug}.txt is empty`);
+  if (caption.length > 2200) throw new Error(`caption is ${caption.length} characters; Instagram allows 2,200`);
+  if (!force && log.posts.some(post => post.kind === 'reel' && post.slug === slug && post.published)) {
+    console.log(`Reel ${slug} is already published; nothing to do. Set IG_FORCE=true to post again.`);
+    return { skipped: true };
+  }
+  const url = reelUrl(slug);
+  const { type, size } = await checkVideo(url);
+  console.log(`Reel ${slug}: ${url} (${type}, ${(size / 1048576).toFixed(1)} MB)`);
+  console.log(`\n--- caption ---\n${caption}\n---------------`);
+  if (!publish) {
+    console.log('DRY RUN — the video is reachable and the caption reads as above; nothing was posted.');
+    return { dryRun: true };
+  }
+  const igUserId = process.env.IG_USER_ID;
+  const token = process.env.IG_ACCESS_TOKEN;
+  if (!igUserId || !token) throw new Error('IG_USER_ID and IG_ACCESS_TOKEN are required to publish');
+  const { id, recovered } = await postReel({ key: `reel:${slug}`, videoUrl: url, caption, log, igUserId, token, force });
+  log.posts = [...log.posts, { date: etDate(), kind: 'reel', slug, published: true, media_id: id, posted_at: new Date().toISOString() }].slice(-120);
+  writeLog(log);
+  console.log(`${recovered ? 'Recovered (already live)' : 'Published'} reel: ${id}`);
+  return { mediaId: id };
 }
 
 // Read-only probe: who the token is, what Instagram says the publishing quota
@@ -427,6 +493,7 @@ async function runPicks({ date, log, publish, force, outDir }) {
 export async function run({ date = (/^\d{4}-\d{2}-\d{2}$/.test(process.env.IG_DATE || '') ? process.env.IG_DATE : etDate()), publish = process.env.IG_PUBLISH === 'true', includePreseason = process.env.IG_INCLUDE_PRESEASON === 'true', force = process.env.IG_FORCE === 'true', outDir = join(ROOT, 'ig-cards') } = {}) {
   if (process.env.IG_MODE === 'diagnose') return diagnose();
   const log = readLog();
+  if (process.env.IG_MODE === 'reel') return runReel({ log, publish, force });
   const isRecap = process.env.IG_MODE === 'recap';
   const isPicks = process.env.IG_MODE === 'picks';
   // The daily set is one per date; recaps are one per game, so they key

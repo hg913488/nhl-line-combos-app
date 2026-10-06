@@ -7,7 +7,9 @@ import { join } from 'node:path';
 // Set before the script loads: its log path is read at import. Without this the
 // publish-safety tests below would overwrite the real data/instagram_log.json.
 process.env.IG_LOG_PATH = join(mkdtempSync(join(tmpdir(), 'ig-log-')), 'log.json');
-const { buildCaption, cardUrl, postCarousel, run } = await import('../scripts/instagram-post.mjs');
+const REEL_DIR = mkdtempSync(join(tmpdir(), 'ig-reels-'));
+process.env.IG_REEL_DIR = REEL_DIR;
+const { buildCaption, cardUrl, checkVideo, postCarousel, postReel, reelUrl, run } = await import('../scripts/instagram-post.mjs');
 
 const GAMES = [
   { away: 'DAL', home: 'STL', gameType: 2 },
@@ -127,4 +129,68 @@ test("a picks or scoreboard entry for a date does not block that date's daily sl
   const result = await run({ date: '2026-10-08', publish: false, outDir: mkdtempSync(join(tmpdir(), 'ig-cards-')) });
   assert.equal(result.skipped, undefined, 'the daily set was skipped');
   assert.equal(result.dryRun, true);
+});
+
+// --- Reels ---
+
+test('reel URLs live under /reels on the site', () => {
+  assert.equal(reelUrl('ep03-nine-seconds', 'https://example.test'), 'https://example.test/reels/ep03-nine-seconds.mp4');
+});
+
+test('checkVideo accepts a public mp4 and rejects missing, non-video and oversized files', async t => {
+  const realFetch = globalThis.fetch;
+  t.after(() => { globalThis.fetch = realFetch; });
+  const head = (status, type, length) => async () => ({ ok: status < 400, status, headers: { get: name => ({ 'content-type': type, 'content-length': String(length) })[name] } });
+  globalThis.fetch = head(200, 'video/mp4', 3_500_000);
+  assert.deepEqual(await checkVideo('https://x/r.mp4'), { type: 'video/mp4', size: 3_500_000 });
+  globalThis.fetch = head(404, 'text/html', 0);
+  await assert.rejects(checkVideo('https://x/r.mp4'), /not public yet/);
+  globalThis.fetch = head(200, 'text/html', 100);
+  await assert.rejects(checkVideo('https://x/r.mp4'), /not a video/);
+  globalThis.fetch = head(200, 'video/mp4', 200 * 1024 * 1024);
+  await assert.rejects(checkVideo('https://x/r.mp4'), /over 100 MB/);
+});
+
+test('postReel creates a REELS container from the video URL and publishes it', async t => {
+  const realFetch = globalThis.fetch;
+  t.after(() => { globalThis.fetch = realFetch; });
+  const bodies = [];
+  const calls = fakeGraph({ publish: () => ({ ok: true, status: 200, json: async () => ({ id: 'REEL1' }) }) });
+  const graph = globalThis.fetch;
+  globalThis.fetch = async (url, init = {}) => { if (init.body) bodies.push(String(init.body)); return graph(url, init); };
+  const result = await postReel({ key: 'reel:demo', videoUrl: 'https://x/demo.mp4', caption: 'CAP', log: freshLog(), igUserId: 'u', token: 't', wait: { attempts: 2, delayMs: 1 } });
+  assert.deepEqual(result, { id: 'REEL1', recovered: false });
+  const create = bodies.find(body => body.includes('media_type=REELS'));
+  assert.ok(create, 'a REELS container was created');
+  assert.match(create, /video_url=https%3A%2F%2Fx%2Fdemo\.mp4/);
+  assert.match(create, /share_to_feed=true/);
+  assert.ok(calls.some(call => call.endsWith('/media_publish')));
+});
+
+test('a reel publish error is not retried when the reel is already live', async t => {
+  const realFetch = globalThis.fetch;
+  t.after(() => { globalThis.fetch = realFetch; });
+  const calls = fakeGraph({ publish: rateLimited, live: [{ id: 'LIVEREEL', caption: 'CAP', timestamp: new Date().toISOString() }] });
+  const log = freshLog();
+  const result = await postReel({ key: 'reel:demo', videoUrl: 'https://x/demo.mp4', caption: 'CAP', log, igUserId: 'u', token: 't', wait: { attempts: 2, delayMs: 1 } });
+  assert.deepEqual(result, { id: 'LIVEREEL', recovered: true });
+  assert.equal(calls.filter(call => call.endsWith('/media_publish')).length, 1);
+});
+
+test('reel mode dry run checks the video and prints the caption without posting', async t => {
+  const realFetch = globalThis.fetch;
+  const env = { ...process.env };
+  t.after(() => { globalThis.fetch = realFetch; process.env = env; });
+  writeFileSync(join(REEL_DIR, 'demo.txt'), 'Demo caption\n');
+  process.env.IG_MODE = 'reel';
+  process.env.IG_REEL = 'demo';
+  const posts = [];
+  globalThis.fetch = async (url, init = {}) => {
+    posts.push(`${init.method || 'GET'} ${url}`);
+    return { ok: true, status: 200, headers: { get: name => ({ 'content-type': 'video/mp4', 'content-length': '1000' })[name] } };
+  };
+  assert.deepEqual(await run({ publish: false }), { dryRun: true });
+  assert.deepEqual(posts, ['HEAD https://www.betweenthelineshockey.com/reels/demo.mp4']);
+  process.env.IG_REEL = '../etc/passwd';
+  await assert.rejects(run({ publish: false }), /must be a slug/);
 });
