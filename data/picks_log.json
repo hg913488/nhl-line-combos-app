@@ -10,17 +10,17 @@
     "seasons": 2
   },
   "summary": {
-    "graded": 78,
-    "hits": 36,
-    "hit_rate": 0.4615,
-    "pending": 8,
+    "graded": 80,
+    "hits": 38,
+    "hit_rate": 0.475,
+    "pending": 6,
     "void": 0,
-    "baseline_hit_rate": 0.4808,
+    "baseline_hit_rate": 0.4813,
     "by_position": {
       "C": {
-        "graded": 20,
-        "hits": 12,
-        "hit_rate": 0.6
+        "graded": 21,
+        "hits": 13,
+        "hit_rate": 0.619
       },
       "LW": {
         "graded": 15,
@@ -28,9 +28,9 @@
         "hit_rate": 0.3333
       },
       "RW": {
-        "graded": 24,
-        "hits": 11,
-        "hit_rate": 0.4583
+        "graded": 25,
+        "hits": 12,
+        "hit_rate": 0.48
       },
       "D": {
         "graded": 19,
@@ -40,9 +40,9 @@
     },
     "by_season": {
       "20262027": {
-        "graded": 78,
-        "hits": 36,
-        "hit_rate": 0.4615
+        "graded": 80,
+        "hits": 38,
+        "hit_rate": 0.475
       }
     }
   },
@@ -4300,8 +4300,18 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-05T09:07:13Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 1,
+          "D": 0
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-06T02:23:04Z"
+      }
     },
     {
       "id": "2026020040-TBL",
@@ -4344,8 +4354,18 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-05T09:07:13Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "goals_by_position": {
+          "C": 1,
+          "LW": 1,
+          "RW": 2,
+          "D": 0
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-06T02:23:04Z"
+      }
     },
     {
       "id": "2026020041-OTT",
