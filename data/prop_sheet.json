@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-07T01:41:18Z",
+  "generated_at": "2026-10-07T02:42:26Z",
   "date": "2026-10-06",
   "window": {
     "games": 10,
@@ -295,7 +295,6 @@
         "source": "confirmed"
       },
       "flags": [
-        "ROLE_UP",
         "SOFT_MATCHUP"
       ],
       "number": 21
@@ -7014,7 +7013,6 @@
         "source": "confirmed"
       },
       "flags": [
-        "ROLE_UP",
         "SOFT_MATCHUP"
       ],
       "number": 92
@@ -10802,119 +10800,6 @@
       "number": 8
     },
     {
-      "id": 8480801,
-      "name": "BRADY TKACHUK",
-      "team": "FLA",
-      "opp": "LAK",
-      "game_id": 2026020052,
-      "home": false,
-      "pos": "LW",
-      "line": "L1",
-      "pp": 1,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 0,
-        "a": 5,
-        "p": 5,
-        "sog": 25,
-        "toi": 1095.4,
-        "pptoi": 278.2
-      },
-      "season": {
-        "gp": 3,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 9
-      },
-      "opp_index": 2.018,
-      "opp_goalie": {
-        "name": "DARCY KUEMPER",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": [
-        "PP1",
-        "SOFT_MATCHUP"
-      ],
-      "number": 8
-    },
-    {
-      "id": 8477933,
-      "name": "SAM REINHART",
-      "team": "FLA",
-      "opp": "LAK",
-      "game_id": 2026020052,
-      "home": false,
-      "pos": "C",
-      "line": "L1",
-      "pp": 1,
-      "b2b": false,
-      "last10": {
-        "gp": 4,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 10,
-        "toi": 1270.2,
-        "pptoi": 366.0
-      },
-      "season": {
-        "gp": 3,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 7
-      },
-      "opp_index": 1.1366,
-      "opp_goalie": {
-        "name": "DARCY KUEMPER",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": [
-        "PP1"
-      ],
-      "number": 13
-    },
-    {
-      "id": 8473419,
-      "name": "BRAD MARCHAND",
-      "team": "FLA",
-      "opp": "LAK",
-      "game_id": 2026020052,
-      "home": false,
-      "pos": "RW",
-      "line": "L1",
-      "pp": 2,
-      "b2b": false,
-      "last10": {
-        "gp": 1,
-        "g": 1,
-        "a": 0,
-        "p": 1,
-        "sog": 3,
-        "toi": 790.0,
-        "pptoi": 53.0
-      },
-      "season": {
-        "gp": 1,
-        "g": 1,
-        "a": 0,
-        "p": 1,
-        "sog": 3
-      },
-      "opp_index": 0.253,
-      "opp_goalie": {
-        "name": "DARCY KUEMPER",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": [],
-      "number": 63
-    },
-    {
       "id": 8477409,
       "name": "CARTER VERHAEGHE",
       "team": "FLA",
@@ -10922,7 +10807,7 @@
       "game_id": 2026020052,
       "home": false,
       "pos": "LW",
-      "line": "L2",
+      "line": "L1",
       "pp": 2,
       "b2b": false,
       "last10": {
@@ -10948,6 +10833,7 @@
         "source": "confirmed"
       },
       "flags": [
+        "ROLE_UP",
         "HOT",
         "SOFT_MATCHUP"
       ],
@@ -10961,7 +10847,7 @@
       "game_id": 2026020052,
       "home": false,
       "pos": "C",
-      "line": "L2",
+      "line": "L1",
       "pp": 1,
       "b2b": false,
       "last10": {
@@ -11001,7 +10887,7 @@
       "game_id": 2026020052,
       "home": false,
       "pos": "RW",
-      "line": "L2",
+      "line": "L1",
       "pp": 1,
       "b2b": false,
       "last10": {
@@ -11028,9 +10914,123 @@
       },
       "flags": [
         "PP1",
+        "ROLE_UP",
         "HOT"
       ],
       "number": 19
+    },
+    {
+      "id": 8480801,
+      "name": "BRADY TKACHUK",
+      "team": "FLA",
+      "opp": "LAK",
+      "game_id": 2026020052,
+      "home": false,
+      "pos": "LW",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 5,
+        "p": 5,
+        "sog": 25,
+        "toi": 1095.4,
+        "pptoi": 278.2
+      },
+      "season": {
+        "gp": 3,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 9
+      },
+      "opp_index": 2.018,
+      "opp_goalie": {
+        "name": "DARCY KUEMPER",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1",
+        "SOFT_MATCHUP"
+      ],
+      "number": 8
+    },
+    {
+      "id": 8477933,
+      "name": "SAM REINHART",
+      "team": "FLA",
+      "opp": "LAK",
+      "game_id": 2026020052,
+      "home": false,
+      "pos": "C",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 4,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 10,
+        "toi": 1270.2,
+        "pptoi": 366.0
+      },
+      "season": {
+        "gp": 3,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 7
+      },
+      "opp_index": 1.1366,
+      "opp_goalie": {
+        "name": "DARCY KUEMPER",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1"
+      ],
+      "number": 13
+    },
+    {
+      "id": 8473419,
+      "name": "BRAD MARCHAND",
+      "team": "FLA",
+      "opp": "LAK",
+      "game_id": 2026020052,
+      "home": false,
+      "pos": "RW",
+      "line": "L2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 1,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 3,
+        "toi": 790.0,
+        "pptoi": 53.0
+      },
+      "season": {
+        "gp": 1,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 3
+      },
+      "opp_index": 0.253,
+      "opp_goalie": {
+        "name": "DARCY KUEMPER",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [],
+      "number": 63
     },
     {
       "id": 8480185,
@@ -11603,31 +11603,31 @@
       "number": 9
     },
     {
-      "id": 8475692,
-      "name": "MATS ZUCCARELLO",
+      "id": 8482155,
+      "name": "ALEX LAFERRIERE",
       "team": "LAK",
       "opp": "FLA",
       "game_id": 2026020052,
       "home": true,
       "pos": "LW",
       "line": "L2",
-      "pp": 1,
+      "pp": 2,
       "b2b": false,
       "last10": {
         "gp": 10,
         "g": 2,
-        "a": 8,
-        "p": 10,
-        "sog": 16,
-        "toi": 1104.9,
-        "pptoi": 219.7
+        "a": 9,
+        "p": 11,
+        "sog": 31,
+        "toi": 1232.9,
+        "pptoi": 161.9
       },
       "season": {
         "gp": 2,
         "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 1
+        "a": 2,
+        "p": 2,
+        "sog": 2
       },
       "opp_index": 1.009,
       "opp_goalie": {
@@ -11636,10 +11636,9 @@
         "source": "confirmed"
       },
       "flags": [
-        "PP1",
         "HOT"
       ],
-      "number": 36
+      "number": 14
     },
     {
       "id": 8481532,
@@ -11678,31 +11677,31 @@
       "number": 15
     },
     {
-      "id": 8482155,
-      "name": "ALEX LAFERRIERE",
+      "id": 8475692,
+      "name": "MATS ZUCCARELLO",
       "team": "LAK",
       "opp": "FLA",
       "game_id": 2026020052,
       "home": true,
       "pos": "RW",
       "line": "L2",
-      "pp": 2,
+      "pp": 1,
       "b2b": false,
       "last10": {
         "gp": 10,
         "g": 2,
-        "a": 9,
-        "p": 11,
-        "sog": 31,
-        "toi": 1232.9,
-        "pptoi": 161.9
+        "a": 8,
+        "p": 10,
+        "sog": 16,
+        "toi": 1104.9,
+        "pptoi": 219.7
       },
       "season": {
         "gp": 2,
         "g": 0,
-        "a": 2,
-        "p": 2,
-        "sog": 2
+        "a": 1,
+        "p": 1,
+        "sog": 1
       },
       "opp_index": 1.3913,
       "opp_goalie": {
@@ -11711,10 +11710,11 @@
         "source": "confirmed"
       },
       "flags": [
+        "PP1",
         "HOT",
         "SOFT_MATCHUP"
       ],
-      "number": 14
+      "number": 36
     },
     {
       "id": 8479675,
