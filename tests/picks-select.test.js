@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { scorePlayer, selectWatch, picksByIds, picksCaption, titleCase } from '../lib/og/picks-select.js';
+import { scorePlayer, selectWatch, picksByIds, picksCaption, titleCase, selectRisers, latestPromotion, risersCaption } from '../lib/og/picks-select.js';
 
 const DATE = '2026-10-08';
 const FUTURE = '2026-10-08T23:00:00Z';
@@ -88,4 +88,68 @@ test('caption lists players with reasons, tags teams once, and avoids betting la
 test('titleCase handles apostrophes and hyphens', () => {
   assert.equal(titleCase("JEAN-GABRIEL PAGEAU"), 'Jean-Gabriel Pageau');
   assert.equal(titleCase("RYAN O'REILLY"), "Ryan O'Reilly");
+});
+
+// --- Moving up ---
+
+const NOW = new Date('2026-10-08T16:00:00Z');
+const SLUG = { ANA: 'anaheim-ducks', BOS: 'boston-bruins', BUF: 'buffalo-sabres', CGY: 'calgary-flames' };
+const event = (team, name, change, hoursAgo = 5) => ({
+  team: SLUG[team], player: name, occurred_at: new Date(NOW.getTime() - hoursAgo * 3600000).toISOString(), changes: [change],
+});
+const promoted = (type, from, to) => ({ type, from, to, direction: 'promoted' });
+const riser = (team, over = {}) => player(team, { name: `RISER ${team}`, flags: ['ROLE_UP'], pp: null, line: 'L1', ...over });
+const TEAM_CODES = ['ANA', 'BOS', 'BUF', 'CGY'];
+
+test('latestPromotion picks the biggest recent promotion and ignores demotions, old moves and bottom-line shuffles', () => {
+  const changes = { events: [
+    event('ANA', 'RISER ANA', promoted('forward_line', 4, 1)),
+    event('ANA', 'RISER ANA', { type: 'forward_line', from: 1, to: 4, direction: 'demoted' }, 2),
+    event('BOS', 'RISER BOS', promoted('forward_line', 4, 3)),           // bottom-six shuffle: not notable
+    event('BUF', 'RISER BUF', promoted('forward_line', 4, 1), 60),       // outside 48 h
+  ] };
+  const move = latestPromotion(changes, { team: 'ANA', name: 'riser ana', now: NOW });
+  assert.deepEqual([move.type, move.from, move.to, move.jump, move.hoursAgo], ['forward_line', 4, 1, 3, 5]);
+  assert.equal(latestPromotion(changes, { team: 'BOS', name: 'RISER BOS', now: NOW }), null);
+  assert.equal(latestPromotion(changes, { team: 'BUF', name: 'RISER BUF', now: NOW }), null);
+});
+
+test('a newly gained PP1 slot counts, and reads as an addition', () => {
+  const changes = { events: [event('ANA', 'RISER ANA', { type: 'power_play', from: null, to: 1, direction: 'promoted' })] };
+  const move = latestPromotion(changes, { team: 'ANA', name: 'RISER ANA', now: NOW });
+  assert.equal(move.jump, 3);
+});
+
+test('selectRisers needs ROLE_UP, a notable promotion and a game that has not started', () => {
+  const players = [riser('ANA'), riser('BOS', { game_id: 2 }), riser('BUF', { flags: [] }), riser('CGY', { game_id: 3 })];
+  const changes = { events: TEAM_CODES.map(team => event(team, `RISER ${team}`, promoted('forward_line', 4, 1))) };
+  const games = [
+    { game_id: 1, start: FUTURE }, { game_id: 2, start: FUTURE }, { game_id: 3, start: '2026-10-08T15:00:00Z' },   // game 3 already started
+  ];
+  const picked = selectRisers(sheetOf(players, games), changes, { date: DATE, now: NOW, min: 1 });
+  assert.deepEqual(picked.map(p => p.team).sort(), ['ANA', 'BOS']);          // BUF lacks the flag, CGY's game is under way
+  assert.match(picked[0].clauses[0], /Moved up from line 4 to line 1, 5 hours ago/);
+  assert.ok(picked.every(p => !p.clauses.some(c => /^Recently moved up/.test(c))), 'the generic flag clause is replaced by the real move');
+});
+
+test('selectRisers keeps one per team, honours exclude, and skips below the minimum', () => {
+  const players = [riser('ANA'), riser('ANA', { name: 'RISER ANA' }), riser('BOS'), riser('BUF')];
+  const changes = { events: ['ANA', 'BOS', 'BUF'].map(team => event(team, `RISER ${team}`, promoted('forward_line', 4, 1))) };
+  const sheet = sheetOf(players, [{ game_id: 1, start: FUTURE }]);
+  const all = selectRisers(sheet, changes, { date: DATE, now: NOW, min: 1, maxPerGame: 5 });
+  assert.equal(new Set(all.map(p => p.team)).size, all.length);
+  const without = selectRisers(sheet, changes, { date: DATE, now: NOW, min: 1, maxPerGame: 5, exclude: [players[2].id] });
+  assert.ok(!without.some(p => p.team === 'BOS'));
+  assert.deepEqual(selectRisers(sheet, changes, { date: DATE, now: NOW, min: 5 }), []);                       // too thin: skip
+  assert.deepEqual(selectRisers({ ...sheet, date: '2026-10-07' }, changes, { date: DATE, now: NOW, min: 1 }), []); // stale sheet
+});
+
+test('the risers caption names players and the move, tags teams once and avoids betting language', () => {
+  const changes = { events: ['ANA', 'BOS', 'BUF'].map(team => event(team, `RISER ${team}`, promoted('forward_line', 3, 1))) };
+  const picked = selectRisers(sheetOf([riser('ANA'), riser('BOS', { game_id: 2 }), riser('BUF', { game_id: 3 })], [1, 2, 3].map(game_id => ({ game_id, start: FUTURE }))), changes, { date: DATE, now: NOW });
+  const caption = risersCaption(picked, DATE, 'example.test');
+  assert.match(caption, /Moving up the lineup, Thursday, October 8\./);
+  assert.match(caption, /Moved up from line 3 to line 1/);
+  assert.ok(caption.length < 2200);
+  assert.doesNotMatch(caption, /\b(bet|odds|parlay|wager)\b/i);
 });
