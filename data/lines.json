@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-10-07 14:35:38 UTC",
+  "updated_at": "2026-10-07 21:13:53 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -65,24 +65,24 @@
     "boston-bruins": {
       "forwards": [
         [
-          "JJ PETERKA",
-          "ELIAS LINDHOLM",
+          "MORGAN GEEKIE",
+          "PAVEL ZACHA",
           "DAVID PASTRNAK"
         ],
         [
-          "CASEY MITTELSTADT",
-          "PAVEL ZACHA",
-          "MORGAN GEEKIE"
+          "MARAT KHUSNUTDINOV",
+          "FRASER MINTEN",
+          "JJ PETERKA"
         ],
         [
-          "MARK KASTELIC",
-          "FRASER MINTEN",
-          "MARAT KHUSNUTDINOV"
+          "CASEY MITTELSTADT",
+          "ELIAS LINDHOLM",
+          "JAMES HAGENS"
         ],
         [
           "TANNER JEANNOT",
           "MATTHEW POITRAS",
-          "JAMES HAGENS"
+          "MARK KASTELIC"
         ]
       ],
       "defense": [
@@ -200,8 +200,8 @@
           "MARTIN POSPISIL"
         ],
         [
-          "MAXIM TSYPLAKOV",
-          "BRENNAN OTHMANN",
+          "AYDAR SUNIEV",
+          "JONATHAN CASTAGNA",
           "ADAM KLAPKA"
         ]
       ],
@@ -235,9 +235,9 @@
         "ZAYNE PAREKH"
       ],
       "pp2": [
-        "MAXIM TSYPLAKOV",
+        "ADAM KLAPKA",
         "RYAN STROME",
-        "BRENNAN OTHMANN",
+        "AYDAR SUNIEV",
         "SIMON NEMEC",
         "YEGOR SHARANGOVICH"
       ]
@@ -305,18 +305,18 @@
     "chicago-blackhawks": {
       "forwards": [
         [
-          "ROMAN KANTSEROV",
+          "OLIVER MOORE",
           "FRANK NAZAR",
           "PATRICK KANE"
         ],
         [
           "TYLER BERTUZZI",
           "ANTON FRONDELL",
-          "TEUVO TERAVAINEN"
+          "ROMAN KANTSEROV"
         ],
         [
           "RYAN DONATO",
-          "OLIVER MOORE",
+          "DOMINIC TONINATO",
           "NICK LARDIS"
         ],
         [
@@ -615,12 +615,12 @@
         ],
         [
           "JOSH SAMANSKI",
-          "COLTON DACH",
+          "OWEN MICHAELS",
           "ISAAC HOWARD"
         ],
         [
           "ALEX FORMENTON",
-          "OWEN MICHAELS",
+          "MAX JONES",
           "MATHIEU JOSEPH"
         ]
       ],
@@ -655,7 +655,7 @@
       ],
       "pp2": [
         "TRENT FREDERIC",
-        "COLTON DACH",
+        "OWEN MICHAELS",
         "ISAAC HOWARD",
         "RYAN SHEA",
         "JAKE WALMAN"
@@ -1298,10 +1298,10 @@
       ],
       "goalies": [
         [
-          "SERGEI MURASHOV"
+          "ARTURS SILOVS"
         ],
         [
-          "ARTURS SILOVS"
+          "SERGEI MURASHOV"
         ]
       ],
       "pp1": [
@@ -1468,7 +1468,7 @@
           "ADAM  JIŘÍČEK"
         ],
         [
-          "THEO LINDSTEIN",
+          "JUSTIN BARRON",
           "COLTON PARAYKO"
         ],
         [
@@ -1527,12 +1527,12 @@
           "JOHN CARLSON"
         ],
         [
-          "VICTOR HEDMAN",
-          "MAXWELL CROZIER"
-        ],
-        [
           "RYAN MCDONAGH",
           "ERIK CERNAK"
+        ],
+        [
+          "CHARLE-EDOUARD D'ASTOUS",
+          "MAXWELL CROZIER"
         ]
       ],
       "goalies": [
@@ -1547,15 +1547,15 @@
         "JAKE GUENTZEL",
         "BRAYDEN POINT",
         "NIKITA KUCHEROV",
-        "BRANDON HAGEL",
-        "JOHN CARLSON"
+        "JOHN CARLSON",
+        "CHARLE-EDOUARD D'ASTOUS"
       ],
       "pp2": [
-        "PONTUS HOLMBERG",
-        "ANTHONY CIRELLI",
         "GAGE GONCALVES",
+        "ANTHONY CIRELLI",
         "CONOR GEEKIE",
-        "CHARLE-EDOUARD D'ASTOUS"
+        "BRANDON HAGEL",
+        "J.J. MOSER"
       ]
     },
     "toronto-maple-leafs": {
@@ -1873,22 +1873,22 @@
         [
           "MORGAN BARRON",
           "ADAM LOWRY",
-          "BRAD LAMBERT"
+          "ALEX IAFALLO"
         ],
         [
           "COLE KOEPKE",
           "VLADISLAV NAMESTNIKOV",
-          "ALEX IAFALLO"
+          "BRAD LAMBERT"
         ]
       ],
       "defense": [
         [
           "JOSH MORRISSEY",
-          "DYLAN DEMELO"
+          "NEAL PIONK"
         ],
         [
           "DYLAN SAMBERG",
-          "NEAL PIONK"
+          "DYLAN DEMELO"
         ],
         [
           "MARIO FERRARO",
@@ -1962,6 +1962,12 @@
         "desc": "Lower body"
       },
       {
+        "name": "JOSH DOAN",
+        "pos": "RW",
+        "status": "Day-To-Day",
+        "desc": ""
+      },
+      {
         "name": "ALEX LYON",
         "pos": "G",
         "status": "Day-To-Day",
@@ -2002,18 +2008,18 @@
         "pos": "LW",
         "status": "Day-To-Day",
         "desc": "Lower body"
+      },
+      {
+        "name": "TEUVO TERAVAINEN",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "Lower body"
       }
     ],
     "colorado-avalanche": [
       {
         "name": "LOGAN O'CONNOR",
         "pos": "RW",
-        "status": "Day-To-Day",
-        "desc": "Lower body"
-      },
-      {
-        "name": "ZACHARY L'HEUREUX",
-        "pos": "LW",
         "status": "Day-To-Day",
         "desc": "Lower body"
       }
@@ -2047,7 +2053,7 @@
         "name": "MIKAEL PYYHTIA",
         "pos": "LW",
         "status": "Out",
-        "desc": "Lower body"
+        "desc": ""
       }
     ],
     "dallas-stars": [
@@ -2104,7 +2110,7 @@
         "desc": "Undisclosed"
       },
       {
-        "name": "JASON DICKINSON",
+        "name": "COLTON DACH",
         "pos": "C",
         "status": "Injured Reserve",
         "desc": "Undisclosed"
@@ -2188,6 +2194,12 @@
         "pos": "RW",
         "status": "Out",
         "desc": "Lower body"
+      },
+      {
+        "name": "SAM MONTEMBEAULT",
+        "pos": "G",
+        "status": "Day-To-Day",
+        "desc": ""
       }
     ],
     "nashville-predators": [
@@ -2236,6 +2248,12 @@
         "pos": "C",
         "status": "Day-To-Day",
         "desc": "Knee"
+      },
+      {
+        "name": "ALEXANDER ROMANOV",
+        "pos": "D",
+        "status": "Day-To-Day",
+        "desc": ""
       }
     ],
     "new-york-rangers": [
@@ -2394,6 +2412,14 @@
         "desc": ""
       }
     ],
+    "utah-mammoth": [
+      {
+        "name": "MIKHAIL SERGACHEV",
+        "pos": "D",
+        "status": "Day-To-Day",
+        "desc": ""
+      }
+    ],
     "vancouver-canucks": [
       {
         "name": "THATCHER DEMKO",
@@ -2406,12 +2432,6 @@
         "pos": "C",
         "status": "Injured Reserve",
         "desc": "Upper body"
-      },
-      {
-        "name": "JAKE DEBRUSK",
-        "pos": "LW",
-        "status": "Day-To-Day",
-        "desc": "Illness"
       }
     ],
     "vegas-golden-knights": [
@@ -2454,6 +2474,6 @@
   "injuries_meta": {
     "source": "dailyfaceoff.com",
     "status": "fresh",
-    "updated_at": "2026-10-07 14:35:38 UTC"
+    "updated_at": "2026-10-07 21:13:53 UTC"
   }
 }
