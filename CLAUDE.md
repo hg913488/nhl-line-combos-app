@@ -149,6 +149,11 @@ curl -s -o out.png "http://localhost:5173/api/og?type=ig&recap=<gameId>&card=fin
   read/write) and body `{"ref":"main","inputs":{"mode":"recap","publish":"true","include_preseason":"true"}}`. Leave `date` blank:
   a recap run then checks last night and tonight. Send `mode=picks` the same way every 30 min from 11 AM to 2 PM ET and `mode=daily` from 2 PM to 6 PM ET; both are once-a-day, so repeats are skipped. Dispatch inputs do **not** read the `IG_PUBLISH` repo variable, so `publish` must be sent.
   The token lives in the poller, never in the repo. Theme `auto` alternates by ET day like the scheduled runs.
+- **Player posts (`mode=picks`, `mode=risers`):** two midday carousels, both scheduled in `instagram.yml` (11:47 AM ET players to watch, 1:17 PM ET
+  moving up) and both once per ET day, skipping themselves when `prop_sheet.json` is stale or fewer than 3 players qualify. "Moving up"
+  (`selectRisers` in `lib/og/picks-select.js`) = the sheet's `ROLE_UP` flag + the player's strongest promotion in `lineup_changes.json` over the last 48 h
+  that lands in the top six, top pair or PP1/PP2, for games not yet started, and it never repeats a name already in that day's players-to-watch.
+  Cards reuse `picksListCard`/`picksPlayerCard` (`?type=ig&risers=<date>&ids=…&card=list|player&rank=n`). Log kinds `picks` / `risers`.
 - **Reels (`mode=reel`):** a finished vertical video at `public/reels/<slug>.mp4` plus `<slug>.txt` (the caption) goes out as a Reel.
   Dispatch `instagram.yml` with `mode=reel`, `reel=<slug>`, `publish=true`. The mp4 is fetched by Instagram from
   `${SITE_ORIGIN}/reels/<slug>.mp4`, so **merge and let Vercel deploy first**; a dry run (`publish=false`) HEADs that URL

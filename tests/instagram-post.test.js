@@ -207,3 +207,10 @@ test('a single card posts as a plain image, not a one-item carousel', async t =>
   assert.equal(bodies.filter(body => body.includes('media_type=CAROUSEL')).length, 0, 'no carousel container');
   assert.ok(bodies.some(body => body.includes('image_url=') && body.includes('caption=CAP') && !body.includes('is_carousel_item')));
 });
+
+test('risers mode skips, rather than posts, when the prop sheet is not for that day', async t => {
+  const env = { ...process.env };
+  t.after(() => { process.env = env; });
+  process.env.IG_MODE = 'risers';
+  assert.deepEqual(await run({ date: '2020-01-01', publish: false }), { skipped: true });
+});
