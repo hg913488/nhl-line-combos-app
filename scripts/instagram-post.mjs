@@ -15,7 +15,8 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { selectWatch, picksCaption, PICKS_DEEP } from '../lib/og/picks-select.js';
+import { selectWatch, picksCaption, selectRisers, risersCaption, PICKS_DEEP } from '../lib/og/picks-select.js';
+import { slateOpener, slateHook, recapHook } from '../lib/captions/hooks.js';
 import { isFinal, goalsIn, marginIn, wentPast60, recapSlots, claimRecaps, scoreboardDue, scoreboardPages, scoreboardCaption, shiftDate } from './lib/recap-queue.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -112,13 +113,14 @@ export function pickRecap(games) {
   return pickRecaps(games, 1)[0] || null;
 }
 
-export function recapCaption(game) {
+export function recapCaption(game, date = '') {
   const winner = (game.homeTeam.score ?? 0) > (game.awayTeam.score ?? 0) ? game.homeTeam : game.awayTeam;
   const loser = winner === game.homeTeam ? game.awayTeam : game.homeTeam;
   const extra = game.gameOutcome?.lastPeriodType && game.gameOutcome.lastPeriodType !== 'REG'
     ? ` (${game.gameOutcome.lastPeriodType})` : '';
   return [
     `${winner.abbrev} ${winner.score}, ${loser.abbrev} ${loser.score}${extra}.`,
+    ...(recapHook(game, date) ? [recapHook(game, date)] : []),
     '',
     'Every goal, every shot on the ice where it happened, and the numbers behind it.',
     SITE_ORIGIN.replace(/^https:\/\//, ''),
@@ -135,11 +137,11 @@ export function cardUrl(card, date, origin = SITE_ORIGIN, options = {}) {
 }
 
 export function buildCaption(games, date) {
-  const when = new Date(`${date}T12:00:00Z`).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' });
   const matchups = games.slice(0, 6).map(game => `${game.away} @ ${game.home}`).join(' · ');
   const teamTags = [...new Set(games.flatMap(game => [game.away, game.home]))].slice(0, 12).map(abbr => `#${abbr}`).join(' ');
   return [
-    `${when}: ${games.length} ${games.length === 1 ? 'game' : 'games'} on the slate.`,
+    slateOpener(games, date),
+    ...(slateHook(games, date) ? [slateHook(games, date)] : []),
     matchups,
     '',
     'Line combinations, line moves, starting goalies and injuries — free, updated through the day.',
@@ -460,43 +462,57 @@ const readData = name => {
 const picksUrl = (date, ids, card, rank, theme = THEME, origin = SITE_ORIGIN) =>
   `${origin}/api/og?type=ig&picks=${date}&ids=${ids.join(',')}&card=${card}${rank ? `&rank=${rank}` : ''}&format=jpg${theme === 'dark' ? '&theme=dark' : ''}`;
 
-// Midday "players to watch": one list slide plus a slide each for the top three.
-// One per ET day. Skipped, not failed, when the prop sheet is stale or thin.
-async function runPicks({ date, log, publish, force, outDir }) {
-  if (!force && log.posts.some(post => post.kind === 'picks' && post.date === date && post.published)) {
-    console.log(`Already published the players-to-watch post for ${date}; nothing to do. Set IG_FORCE=true to post again.`);
+// Two midday player posts share one runner: "players to watch" (who matters tonight) and
+// "moving up" (who was promoted in the last 48 hours and plays tonight). One per ET day each.
+// Skipped, not failed, when the prop sheet is stale or too thin.
+const risersUrl = (date, ids, card, rank, theme = THEME, origin = SITE_ORIGIN) =>
+  `${origin}/api/og?type=ig&risers=${date}&ids=${ids.join(',')}&card=${card}${rank ? `&rank=${rank}` : ''}&format=jpg${theme === 'dark' ? '&theme=dark' : ''}`;
+
+async function runPlayers(kind, { date, log, publish, force, outDir }) {
+  const isRisers = kind === 'risers';
+  const noun = isRisers ? 'moving-up' : 'players-to-watch';
+  if (!force && log.posts.some(post => post.kind === kind && post.date === date && post.published)) {
+    console.log(`Already published the ${noun} post for ${date}; nothing to do. Set IG_FORCE=true to post again.`);
     return { skipped: true };
   }
   const sheet = readData('prop_sheet.json');
-  const players = selectWatch(sheet, { date, now: process.env.IG_NOW ? new Date(process.env.IG_NOW) : new Date(), ga: readData('goals_against_by_position.json'), spotlight: readData('spotlight.json') });
+  const now = process.env.IG_NOW ? new Date(process.env.IG_NOW) : new Date();
+  const ga = readData('goals_against_by_position.json');
+  const spotlight = readData('spotlight.json');
+  const watch = selectWatch(sheet, { date, now, ga, spotlight });
+  const players = isRisers
+    ? selectRisers(sheet, readData('lineup_changes.json'), { date, now, ga, spotlight, exclude: watch.map(player => player.id) })
+    : watch;
   if (!players.length) {
-    console.log(`No players worth featuring for ${date} (prop sheet is for ${sheet?.date ?? 'nothing'}); nothing to post.`);
+    console.log(`No players worth featuring for ${date} (${noun}; prop sheet is for ${sheet?.date ?? 'nothing'}); nothing to post.`);
     return { skipped: true };
   }
 
   const deep = Math.min(PICKS_DEEP, players.length);
   const ids = players.map(player => player.id);
-  const urls = [picksUrl(date, ids, 'list'), ...Array.from({ length: deep }, (_, i) => picksUrl(date, ids, 'player', i + 1))];
+  const url = isRisers ? risersUrl : picksUrl;
+  const urls = [url(date, ids, 'list'), ...Array.from({ length: deep }, (_, i) => url(date, ids, 'player', i + 1))];
   const alts = [
-    `Players to watch tonight: ${players.map(player => player.display).join(', ')}`,
+    isRisers ? `Players moving up the lineup: ${players.map(player => player.display).join(', ')}` : `Players to watch tonight: ${players.map(player => player.display).join(', ')}`,
     ...players.slice(0, deep).map(player => `${player.display} of ${player.team}: ${player.clauses.slice(0, 2).join(', ')}`),
   ];
-  const caption = picksCaption(players, date, SITE_ORIGIN.replace(/^https:\/\//, ''));
-  console.log(`Players to watch for ${date}: ${players.map(player => player.display).join(', ')}; ${urls.length} slides; ${THEME} theme.`);
+  const site = SITE_ORIGIN.replace(/^https:\/\//, '');
+  const caption = isRisers ? risersCaption(players, date, site) : picksCaption(players, date, site);
+  console.log(`${isRisers ? 'Moving up' : 'Players to watch'} for ${date}: ${players.map(player => player.display).join(', ')}; ${urls.length} slides; ${THEME} theme.`);
 
   if (!publish) {
     console.log('DRY RUN — downloading cards instead of posting.');
-    await saveCards(urls, urls.map((_, i) => `${date}-picks-${i + 1}`), outDir);
+    await saveCards(urls, urls.map((_, i) => `${date}-${kind}-${i + 1}`), outDir);
     console.log(`\n--- caption ---\n${caption}\n---------------`);
     return { dryRun: true };
   }
   const igUserId = process.env.IG_USER_ID;
   const token = process.env.IG_ACCESS_TOKEN;
   if (!igUserId || !token) throw new Error('IG_USER_ID and IG_ACCESS_TOKEN are required to publish');
-  const { id, recovered } = await postCarousel({ key: `picks:${date}`, urls, alts, caption, log, igUserId, token, force });
-  log.posts = [...log.posts, { date, kind: 'picks', published: true, media_id: id, theme: THEME, players: ids, posted_at: new Date().toISOString() }].slice(-120);
+  const { id, recovered } = await postCarousel({ key: `${kind}:${date}`, urls, alts, caption, log, igUserId, token, force });
+  log.posts = [...log.posts, { date, kind, published: true, media_id: id, theme: THEME, players: ids, posted_at: new Date().toISOString() }].slice(-120);
   writeLog(log);
-  console.log(`${recovered ? 'Recovered (already live)' : 'Published'} players to watch: ${id}`);
+  console.log(`${recovered ? 'Recovered (already live)' : 'Published'} ${noun}: ${id}`);
   return { mediaId: id };
 }
 
@@ -506,14 +522,16 @@ export async function run({ date = (/^\d{4}-\d{2}-\d{2}$/.test(process.env.IG_DA
   if (process.env.IG_MODE === 'reel') return runReel({ log, publish, force });
   const isRecap = process.env.IG_MODE === 'recap';
   const isPicks = process.env.IG_MODE === 'picks';
+  const isRisers = process.env.IG_MODE === 'risers';
   // The daily set is one per date; recaps are one per game, so they key
   // differently — otherwise the day's daily post blocks that night's recap.
-  if (!force && !isRecap && !isPicks && log.posts.some(post => post.date === date && post.published && (post.kind || 'daily') === 'daily')) {
+  if (!force && !isRecap && !isPicks && !isRisers && log.posts.some(post => post.date === date && post.published && (post.kind || 'daily') === 'daily')) {
     console.log(`Already published the daily set for ${date}; nothing to do. Set IG_FORCE=true to post again.`);
     return { skipped: true };
   }
 
-  if (isPicks) return runPicks({ date, log, publish, force, outDir });
+  if (isPicks) return runPlayers('picks', { date, log, publish, force, outDir });
+  if (isRisers) return runPlayers('risers', { date, log, publish, force, outDir });
 
   // Recap mode: claim slots for games as they finish, then the night's roundup.
   if (isRecap) {

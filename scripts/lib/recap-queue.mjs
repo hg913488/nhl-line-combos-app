@@ -5,6 +5,8 @@
 // the night's "best N" on every run let a later run choose different games than
 // an earlier one and post extra recaps for the same night.
 
+import { formatDay, scoreboardHook } from '../../lib/captions/hooks.js';
+
 export const isFinal = game => ['FINAL', 'OFF'].includes(game.gameState);
 export const goalsIn = game => (game.homeTeam?.score ?? 0) + (game.awayTeam?.score ?? 0);
 export const marginIn = game => Math.abs((game.homeTeam?.score ?? 0) - (game.awayTeam?.score ?? 0));
@@ -87,11 +89,12 @@ const resultLine = game => {
 };
 
 export function scoreboardCaption(games, date, siteLabel) {
-  const when = new Date(`${date}T12:00:00Z`).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' });
+  const when = formatDay(date);
   const finished = games.filter(isFinal);
   const tags = [...new Set(finished.flatMap(game => [game.awayTeam.abbrev, game.homeTeam.abbrev]))].slice(0, 12).map(abbr => `#${abbr}`).join(' ');
   return [
     `${when}: ${finished.length} ${finished.length === 1 ? 'final' : 'finals'} from around the league.`,
+    ...(scoreboardHook(finished, date) ? [scoreboardHook(finished, date)] : []),
     finished.slice(0, 16).map(resultLine).join(' · '),
     '',
     'Goals, shots and the numbers behind every game.',

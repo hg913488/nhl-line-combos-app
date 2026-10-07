@@ -11,6 +11,10 @@ on:
     # game id, so the sweep cannot repost what the late run already covered.
     - cron: '47 5 * * *'
     - cron: '7 13 * * *'
+    # Player posts: 11:47 AM ET players to watch, 1:17 PM ET players moving up the lineup.
+    # Each is once a day (repeats are no-ops) and skips itself when the prop sheet is stale or thin.
+    - cron: '47 15 * * *'
+    - cron: '17 17 * * *'
   workflow_dispatch:
     inputs:
       publish:
@@ -33,7 +37,7 @@ on:
       mode:
         description: 'Which carousel'
         type: choice
-        options: [daily, recap, picks, reel, diagnose]
+        options: [daily, recap, picks, risers, reel, diagnose]
         default: daily
       date:
         description: 'Date to use (YYYY-MM-DD, Eastern). Blank = today'
@@ -85,6 +89,12 @@ jobs:
               '47 5 * * *'|'7 13 * * *')
                 echo "SCHEDULED_MODE=recap" >> "$GITHUB_ENV"
                 echo "SCHEDULED_DATE=$(TZ=America/New_York date -d yesterday +%F)" >> "$GITHUB_ENV"
+                ;;
+              '47 15 * * *')
+                echo "SCHEDULED_MODE=picks" >> "$GITHUB_ENV"
+                ;;
+              '17 17 * * *')
+                echo "SCHEDULED_MODE=risers" >> "$GITHUB_ENV"
                 ;;
               *)
                 echo "SCHEDULED_MODE=daily" >> "$GITHUB_ENV"
