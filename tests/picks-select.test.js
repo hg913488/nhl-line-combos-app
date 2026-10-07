@@ -78,7 +78,7 @@ test('a projected goalie is marked as such', () => {
 test('caption lists players with reasons, tags teams once, and avoids betting language', () => {
   const picked = selectWatch(sheetOf([player('AAA', { game_id: 1 }), player('BBB', { game_id: 2 }), player('CCC', { game_id: 3 })], [1, 2, 3].map(n => ({ game_id: n, start: FUTURE }))), { date: DATE });
   const caption = picksCaption(picked, DATE, 'example.test');
-  assert.match(caption, /Players to watch tonight, Thursday, October 8/);
+  assert.match(caption, /(Players to watch tonight|Who to watch tonight|Tonight's players to watch), Thursday, October 8/);
   assert.match(caption, /1\. Player \w+ \(\w+\):/);
   assert.ok(caption.length < 2200);
   assert.doesNotMatch(caption, /\b(bet|bets|betting|odds|parlay|pick'?em|picks?|props?|wager|lock|sportsbook)\b/i);
@@ -148,7 +148,7 @@ test('the risers caption names players and the move, tags teams once and avoids 
   const changes = { events: ['ANA', 'BOS', 'BUF'].map(team => event(team, `RISER ${team}`, promoted('forward_line', 3, 1))) };
   const picked = selectRisers(sheetOf([riser('ANA'), riser('BOS', { game_id: 2 }), riser('BUF', { game_id: 3 })], [1, 2, 3].map(game_id => ({ game_id, start: FUTURE }))), changes, { date: DATE, now: NOW });
   const caption = risersCaption(picked, DATE, 'example.test');
-  assert.match(caption, /Moving up the lineup, Thursday, October 8\./);
+  assert.match(caption, /(Moving up the lineup|Promoted in the last 48 hours|Lineup risers tonight), Thursday, October 8\./);
   assert.match(caption, /Moved up from line 3 to line 1/);
   assert.ok(caption.length < 2200);
   assert.doesNotMatch(caption, /\b(bet|odds|parlay|wager)\b/i);

@@ -160,6 +160,10 @@ curl -s -o out.png "http://localhost:5173/api/og?type=ig&recap=<gameId>&card=fin
   (must be `200`, `video/*`, < 100 MB) and prints the caption. Same safety as carousels (`guardedPublish`: caption lookup
   before any retry, attempt cap); the container wait is up to 5 min for video. Idempotency key `reel:<slug>`, log kind `reel`.
   Video sources and the render pipeline live in `video/` (not on the deploy path); only the finished mp4 is committed to `public/reels/`.
+- **Captions (`lib/captions/hooks.js`):** every generated caption (daily, recap, scoreboard, players to watch, moving up) gets a data-driven opener
+  and a hook line. Hooks must be **pure functions of (kind, date/game id, data)** — `findPublished` matches a live post by exact caption text, so
+  no `Math.random`, no clock. Rotation comes from `hashSeed`/`pick`. A hook is only written when the field exists (no invented claims; "moved up N spots"
+  needs a real `from`). Same bans as the cards: no pronouns for players, no wagering words. Reel captions stay hand-written in `public/reels/<slug>.txt`.
 - Test a card with `curl` against `/api/og?type=ig&...&format=jpg` before dispatching the workflow. Dry-run the whole night against
   the dev server with `IG_LOG_PATH=<empty json> SITE_ORIGIN=http://localhost:5173 IG_MODE=recap IG_DATE=<date> node scripts/instagram-post.mjs`.
 - **Republish the review artifact whenever the cards change** — it is the user's review surface, not a local Preview

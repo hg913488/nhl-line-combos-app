@@ -16,6 +16,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { selectWatch, picksCaption, selectRisers, risersCaption, PICKS_DEEP } from '../lib/og/picks-select.js';
+import { slateOpener, slateHook, recapHook } from '../lib/captions/hooks.js';
 import { isFinal, goalsIn, marginIn, wentPast60, recapSlots, claimRecaps, scoreboardDue, scoreboardPages, scoreboardCaption, shiftDate } from './lib/recap-queue.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -112,13 +113,14 @@ export function pickRecap(games) {
   return pickRecaps(games, 1)[0] || null;
 }
 
-export function recapCaption(game) {
+export function recapCaption(game, date = '') {
   const winner = (game.homeTeam.score ?? 0) > (game.awayTeam.score ?? 0) ? game.homeTeam : game.awayTeam;
   const loser = winner === game.homeTeam ? game.awayTeam : game.homeTeam;
   const extra = game.gameOutcome?.lastPeriodType && game.gameOutcome.lastPeriodType !== 'REG'
     ? ` (${game.gameOutcome.lastPeriodType})` : '';
   return [
     `${winner.abbrev} ${winner.score}, ${loser.abbrev} ${loser.score}${extra}.`,
+    ...(recapHook(game, date) ? [recapHook(game, date)] : []),
     '',
     'Every goal, every shot on the ice where it happened, and the numbers behind it.',
     SITE_ORIGIN.replace(/^https:\/\//, ''),
@@ -135,11 +137,11 @@ export function cardUrl(card, date, origin = SITE_ORIGIN, options = {}) {
 }
 
 export function buildCaption(games, date) {
-  const when = new Date(`${date}T12:00:00Z`).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' });
   const matchups = games.slice(0, 6).map(game => `${game.away} @ ${game.home}`).join(' · ');
   const teamTags = [...new Set(games.flatMap(game => [game.away, game.home]))].slice(0, 12).map(abbr => `#${abbr}`).join(' ');
   return [
-    `${when}: ${games.length} ${games.length === 1 ? 'game' : 'games'} on the slate.`,
+    slateOpener(games, date),
+    ...(slateHook(games, date) ? [slateHook(games, date)] : []),
     matchups,
     '',
     'Line combinations, line moves, starting goalies and injuries — free, updated through the day.',
