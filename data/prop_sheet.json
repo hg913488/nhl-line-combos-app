@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-06T22:48:35Z",
+  "generated_at": "2026-10-07T01:41:18Z",
   "date": "2026-10-06",
   "window": {
     "games": 10,
@@ -2128,7 +2128,7 @@
       "home": true,
       "pos": "RW",
       "line": "L1",
-      "pp": 2,
+      "pp": 1,
       "b2b": false,
       "last10": {
         "gp": 10,
@@ -2153,6 +2153,8 @@
         "source": "confirmed"
       },
       "flags": [
+        "PP1",
+        "ROLE_UP",
         "HOT"
       ],
       "number": 22
@@ -2278,7 +2280,7 @@
       "home": true,
       "pos": "LW",
       "line": "L3",
-      "pp": 1,
+      "pp": 2,
       "b2b": false,
       "last10": {
         "gp": 10,
@@ -2303,7 +2305,6 @@
         "source": "confirmed"
       },
       "flags": [
-        "PP1",
         "ROLE_UP"
       ],
       "number": 76
@@ -6980,8 +6981,8 @@
       "number": 38
     },
     {
-      "id": 8477407,
-      "name": "ANTHONY DUCLAIR",
+      "id": 8481601,
+      "name": "SIMON HOLMSTROM",
       "team": "NYI",
       "opp": "NYR",
       "game_id": 2026020048,
@@ -6991,20 +6992,20 @@
       "pp": 2,
       "b2b": false,
       "last10": {
-        "gp": 8,
-        "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 10,
-        "toi": 721.4,
-        "pptoi": 67.8
+        "gp": 10,
+        "g": 2,
+        "a": 3,
+        "p": 5,
+        "sog": 12,
+        "toi": 1029.6,
+        "pptoi": 107.8
       },
       "season": {
         "gp": 2,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 4
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 1
       },
       "opp_index": 1.2973,
       "opp_goalie": {
@@ -7013,9 +7014,10 @@
         "source": "confirmed"
       },
       "flags": [
+        "ROLE_UP",
         "SOFT_MATCHUP"
       ],
-      "number": 11
+      "number": 92
     },
     {
       "id": 8476419,
@@ -7054,8 +7056,8 @@
       "number": 44
     },
     {
-      "id": 8481601,
-      "name": "SIMON HOLMSTROM",
+      "id": 8477407,
+      "name": "ANTHONY DUCLAIR",
       "team": "NYI",
       "opp": "NYR",
       "game_id": 2026020048,
@@ -7065,20 +7067,20 @@
       "pp": 2,
       "b2b": false,
       "last10": {
-        "gp": 10,
-        "g": 2,
-        "a": 3,
-        "p": 5,
-        "sog": 12,
-        "toi": 1029.6,
-        "pptoi": 107.8
+        "gp": 8,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 10,
+        "toi": 721.4,
+        "pptoi": 67.8
       },
       "season": {
         "gp": 2,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 1
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 4
       },
       "opp_index": 0.7589,
       "opp_goalie": {
@@ -7086,10 +7088,8 @@
         "status": "Confirmed",
         "source": "confirmed"
       },
-      "flags": [
-        "ROLE_UP"
-      ],
-      "number": 92
+      "flags": [],
+      "number": 11
     },
     {
       "id": 8476292,
@@ -8120,8 +8120,8 @@
       "opp_index": 1.5856,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -8160,8 +8160,8 @@
       "opp_index": 1.224,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -8200,8 +8200,8 @@
       "opp_index": 1.3913,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -8211,8 +8211,8 @@
       "number": 21
     },
     {
-      "id": 8477402,
-      "name": "PAVEL BUCHNEVICH",
+      "id": 8481580,
+      "name": "CONNOR MCMICHAEL",
       "team": "STL",
       "opp": "CHI",
       "game_id": 2026020050,
@@ -8223,30 +8223,31 @@
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 3,
-        "a": 1,
-        "p": 4,
-        "sog": 12,
-        "toi": 970.2,
-        "pptoi": 130.8
+        "g": 4,
+        "a": 6,
+        "p": 10,
+        "sog": 16,
+        "toi": 952.8,
+        "pptoi": 86.5
       },
       "season": {
         "gp": 2,
         "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 2
+        "a": 1,
+        "p": 1,
+        "sog": 3
       },
       "opp_index": 1.5856,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
+        "HOT",
         "SOFT_MATCHUP"
       ],
-      "number": 89
+      "number": 77
     },
     {
       "id": 8482745,
@@ -8278,8 +8279,8 @@
       "opp_index": 1.224,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -8289,43 +8290,43 @@
       "number": 83
     },
     {
-      "id": 8481580,
-      "name": "CONNOR MCMICHAEL",
+      "id": 8481013,
+      "name": "JONATAN BERGGREN",
       "team": "STL",
       "opp": "CHI",
       "game_id": 2026020050,
       "home": false,
       "pos": "RW",
       "line": "L2",
-      "pp": 2,
+      "pp": null,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 4,
-        "a": 6,
-        "p": 10,
-        "sog": 16,
-        "toi": 952.8,
-        "pptoi": 86.5
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 12,
+        "toi": 890.2,
+        "pptoi": 64.3
       },
       "season": {
         "gp": 2,
         "g": 0,
-        "a": 1,
-        "p": 1,
+        "a": 0,
+        "p": 0,
         "sog": 3
       },
       "opp_index": 1.3913,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
-        "HOT",
+        "ROLE_UP",
         "SOFT_MATCHUP"
       ],
-      "number": 77
+      "number": 29
     },
     {
       "id": 8482089,
@@ -8357,8 +8358,8 @@
       "opp_index": 1.5856,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -8395,8 +8396,8 @@
       "opp_index": 1.224,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -8404,46 +8405,46 @@
       "number": 15
     },
     {
-      "id": 8481013,
-      "name": "JONATAN BERGGREN",
+      "id": 8477402,
+      "name": "PAVEL BUCHNEVICH",
       "team": "STL",
       "opp": "CHI",
       "game_id": 2026020050,
       "home": false,
       "pos": "RW",
       "line": "L3",
-      "pp": null,
+      "pp": 2,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 1,
-        "a": 2,
-        "p": 3,
+        "g": 3,
+        "a": 1,
+        "p": 4,
         "sog": 12,
-        "toi": 890.2,
-        "pptoi": 64.3
+        "toi": 970.2,
+        "pptoi": 130.8
       },
       "season": {
         "gp": 2,
         "g": 0,
         "a": 0,
         "p": 0,
-        "sog": 3
+        "sog": 2
       },
       "opp_index": 1.3913,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
       ],
-      "number": 29
+      "number": 89
     },
     {
-      "id": 8477527,
-      "name": "ROSS JOHNSTON",
+      "id": 8479346,
+      "name": "DILLON DUBE",
       "team": "STL",
       "opp": "CHI",
       "game_id": 2026020050,
@@ -8453,13 +8454,13 @@
       "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 7,
+        "gp": 1,
         "g": 0,
         "a": 0,
         "p": 0,
-        "sog": 5,
-        "toi": 614.4,
-        "pptoi": 2.0
+        "sog": 0,
+        "toi": 796.0,
+        "pptoi": 5.0
       },
       "season": {
         "gp": 1,
@@ -8471,13 +8472,13 @@
       "opp_index": 1.5856,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
       ],
-      "number": 49
+      "number": 65
     },
     {
       "id": 8480459,
@@ -8509,8 +8510,8 @@
       "opp_index": 1.224,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -8518,8 +8519,8 @@
       "number": 22
     },
     {
-      "id": 8479346,
-      "name": "DILLON DUBE",
+      "id": 8477527,
+      "name": "ROSS JOHNSTON",
       "team": "STL",
       "opp": "CHI",
       "game_id": 2026020050,
@@ -8529,13 +8530,13 @@
       "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 1,
+        "gp": 7,
         "g": 0,
         "a": 0,
         "p": 0,
-        "sog": 0,
-        "toi": 796.0,
-        "pptoi": 5.0
+        "sog": 5,
+        "toi": 614.4,
+        "pptoi": 2.0
       },
       "season": {
         "gp": 1,
@@ -8547,13 +8548,13 @@
       "opp_index": 1.3913,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
       ],
-      "number": 65
+      "number": 49
     },
     {
       "id": 8481598,
@@ -8585,91 +8586,13 @@
       "opp_index": 1.2715,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
       ],
       "number": 6
-    },
-    {
-      "id": 8476892,
-      "name": "COLTON PARAYKO",
-      "team": "STL",
-      "opp": "CHI",
-      "game_id": 2026020050,
-      "home": false,
-      "pos": "D",
-      "line": "D1",
-      "pp": null,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 3,
-        "a": 2,
-        "p": 5,
-        "sog": 14,
-        "toi": 1243.0,
-        "pptoi": 12.0
-      },
-      "season": {
-        "gp": 2,
-        "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 4
-      },
-      "opp_index": 1.2715,
-      "opp_goalie": {
-        "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
-      },
-      "flags": [
-        "SOFT_MATCHUP"
-      ],
-      "number": 55
-    },
-    {
-      "id": 8475764,
-      "name": "CAM FOWLER",
-      "team": "STL",
-      "opp": "CHI",
-      "game_id": 2026020050,
-      "home": false,
-      "pos": "D",
-      "line": "D2",
-      "pp": 1,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 1,
-        "a": 2,
-        "p": 3,
-        "sog": 7,
-        "toi": 1209.1,
-        "pptoi": 70.8
-      },
-      "season": {
-        "gp": 2,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 3
-      },
-      "opp_index": 1.2715,
-      "opp_goalie": {
-        "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
-      },
-      "flags": [
-        "PP1",
-        "ROLE_UP",
-        "SOFT_MATCHUP"
-      ],
-      "number": 17
     },
     {
       "id": 8484790,
@@ -8679,7 +8602,7 @@
       "game_id": 2026020050,
       "home": false,
       "pos": "D",
-      "line": "D2",
+      "line": "D1",
       "pp": 2,
       "b2b": false,
       "last10": {
@@ -8701,8 +8624,8 @@
       "opp_index": 1.2715,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -8717,7 +8640,7 @@
       "game_id": 2026020050,
       "home": false,
       "pos": "D",
-      "line": "D3",
+      "line": "D2",
       "pp": null,
       "b2b": false,
       "last10": {
@@ -8739,13 +8662,92 @@
       "opp_index": 1.2715,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "ROLE_UP",
+        "SOFT_MATCHUP"
+      ],
+      "number": 4
+    },
+    {
+      "id": 8476892,
+      "name": "COLTON PARAYKO",
+      "team": "STL",
+      "opp": "CHI",
+      "game_id": 2026020050,
+      "home": false,
+      "pos": "D",
+      "line": "D2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 2,
+        "p": 5,
+        "sog": 14,
+        "toi": 1243.0,
+        "pptoi": 12.0
+      },
+      "season": {
+        "gp": 2,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 4
+      },
+      "opp_index": 1.2715,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
       ],
-      "number": 4
+      "number": 55
+    },
+    {
+      "id": 8475764,
+      "name": "CAM FOWLER",
+      "team": "STL",
+      "opp": "CHI",
+      "game_id": 2026020050,
+      "home": false,
+      "pos": "D",
+      "line": "D3",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 7,
+        "toi": 1209.1,
+        "pptoi": 70.8
+      },
+      "season": {
+        "gp": 2,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 3
+      },
+      "opp_index": 1.2715,
+      "opp_goalie": {
+        "name": "SPENCER KNIGHT",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1",
+        "ROLE_UP",
+        "SOFT_MATCHUP"
+      ],
+      "number": 17
     },
     {
       "id": 8478443,
@@ -8777,8 +8779,8 @@
       "opp_index": 1.2715,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -9485,8 +9487,8 @@
       "opp_index": 0.8649,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 49
@@ -9521,8 +9523,8 @@
       "opp_index": 0.9617,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -9560,8 +9562,8 @@
       "opp_index": 1.3913,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -9600,8 +9602,8 @@
       "opp_index": 0.8649,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "HOT"
@@ -9638,8 +9640,8 @@
       "opp_index": 0.9617,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 71
@@ -9674,8 +9676,8 @@
       "opp_index": 1.3913,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -9714,8 +9716,8 @@
       "opp_index": 0.8649,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 24
@@ -9750,8 +9752,8 @@
       "opp_index": 0.9617,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -9788,8 +9790,8 @@
       "opp_index": 1.3913,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -9797,24 +9799,24 @@
       "number": 95
     },
     {
-      "id": 8483553,
-      "name": "MARC GATCOMB",
+      "id": 8483890,
+      "name": "BRAEDEN BOWMAN",
       "team": "VGK",
       "opp": "SEA",
       "game_id": 2026020051,
       "home": false,
       "pos": "LW",
       "line": "L4",
-      "pp": null,
+      "pp": 2,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 2,
-        "a": 1,
-        "p": 3,
-        "sog": 18,
-        "toi": 591.2,
-        "pptoi": 1.2
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 14,
+        "toi": 726.8,
+        "pptoi": 82.0
       },
       "season": {
         "gp": 3,
@@ -9826,11 +9828,11 @@
       "opp_index": 0.8649,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 17
+      "number": 42
     },
     {
       "id": 8475343,
@@ -9862,31 +9864,31 @@
       "opp_index": 0.9617,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 26
     },
     {
-      "id": 8483890,
-      "name": "BRAEDEN BOWMAN",
+      "id": 8483553,
+      "name": "MARC GATCOMB",
       "team": "VGK",
       "opp": "SEA",
       "game_id": 2026020051,
       "home": false,
       "pos": "RW",
       "line": "L4",
-      "pp": 2,
+      "pp": null,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 1,
-        "a": 3,
-        "p": 4,
-        "sog": 14,
-        "toi": 726.8,
-        "pptoi": 82.0
+        "g": 2,
+        "a": 1,
+        "p": 3,
+        "sog": 18,
+        "toi": 591.2,
+        "pptoi": 1.2
       },
       "season": {
         "gp": 3,
@@ -9898,13 +9900,13 @@
       "opp_index": 1.3913,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
       ],
-      "number": 42
+      "number": 17
     },
     {
       "id": 8475188,
@@ -9936,8 +9938,8 @@
       "opp_index": 0.6358,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "HOT"
@@ -9974,8 +9976,8 @@
       "opp_index": 0.6358,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -10013,8 +10015,8 @@
       "opp_index": 0.6358,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 29
@@ -10049,8 +10051,8 @@
       "opp_index": 0.6358,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 4
@@ -10085,8 +10087,8 @@
       "opp_index": 0.6358,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 5
@@ -10121,8 +10123,8 @@
       "opp_index": 0.6358,
       "opp_goalie": {
         "name": "JOEY DACCORD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 15
@@ -10156,9 +10158,9 @@
       },
       "opp_index": 1.009,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "HOT"
@@ -10194,13 +10196,12 @@
       },
       "opp_index": 0.6995,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
-        "ROLE_UP",
         "HOT"
       ],
       "number": 10
@@ -10234,9 +10235,9 @@
       },
       "opp_index": 0.3794,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP",
@@ -10273,9 +10274,9 @@
       },
       "opp_index": 1.009,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "HOT"
@@ -10311,9 +10312,9 @@
       },
       "opp_index": 0.6995,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "HOT"
@@ -10349,9 +10350,9 @@
       },
       "opp_index": 0.3794,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "HOT"
@@ -10387,54 +10388,14 @@
       },
       "opp_index": 1.009,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
-        "PP1",
-        "ROLE_UP"
+        "PP1"
       ],
       "number": 84
-    },
-    {
-      "id": 8484800,
-      "name": "BERKLY CATTON",
-      "team": "SEA",
-      "opp": "VGK",
-      "game_id": 2026020051,
-      "home": true,
-      "pos": "C",
-      "line": "L3",
-      "pp": 1,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 2,
-        "a": 1,
-        "p": 3,
-        "sog": 10,
-        "toi": 819.9,
-        "pptoi": 73.4
-      },
-      "season": {
-        "gp": 3,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 4
-      },
-      "opp_index": 0.6995,
-      "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "PP1",
-        "ROLE_UP"
-      ],
-      "number": 27
     },
     {
       "id": 8483524,
@@ -10443,7 +10404,7 @@
       "opp": "VGK",
       "game_id": 2026020051,
       "home": true,
-      "pos": "RW",
+      "pos": "C",
       "line": "L3",
       "pp": 1,
       "b2b": false,
@@ -10463,21 +10424,58 @@
         "p": 2,
         "sog": 3
       },
-      "opp_index": 0.3794,
+      "opp_index": 0.6995,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
-        "PP1",
-        "ROLE_UP"
+        "PP1"
       ],
       "number": 51
     },
     {
-      "id": 8483570,
-      "name": "BEN MEYERS",
+      "id": 8484800,
+      "name": "BERKLY CATTON",
+      "team": "SEA",
+      "opp": "VGK",
+      "game_id": 2026020051,
+      "home": true,
+      "pos": "RW",
+      "line": "L3",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 1,
+        "p": 3,
+        "sog": 10,
+        "toi": 819.9,
+        "pptoi": 73.4
+      },
+      "season": {
+        "gp": 3,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 4
+      },
+      "opp_index": 0.3794,
+      "opp_goalie": {
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1"
+      ],
+      "number": 27
+    },
+    {
+      "id": 8482751,
+      "name": "RYAN WINTERTON",
       "team": "SEA",
       "opp": "VGK",
       "game_id": 2026020051,
@@ -10489,27 +10487,27 @@
       "last10": {
         "gp": 10,
         "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 7,
-        "toi": 701.8,
-        "pptoi": 1.0
+        "a": 1,
+        "p": 1,
+        "sog": 22,
+        "toi": 848.3,
+        "pptoi": 1.2
       },
       "season": {
-        "gp": 1,
+        "gp": 3,
         "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 0
+        "a": 1,
+        "p": 1,
+        "sog": 7
       },
       "opp_index": 1.009,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 59
+      "number": 26
     },
     {
       "id": 8477919,
@@ -10540,16 +10538,16 @@
       },
       "opp_index": 0.6995,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 89
     },
     {
-      "id": 8482751,
-      "name": "RYAN WINTERTON",
+      "id": 8483570,
+      "name": "BEN MEYERS",
       "team": "SEA",
       "opp": "VGK",
       "game_id": 2026020051,
@@ -10561,27 +10559,27 @@
       "last10": {
         "gp": 10,
         "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 22,
-        "toi": 848.3,
-        "pptoi": 1.2
+        "a": 0,
+        "p": 0,
+        "sog": 7,
+        "toi": 701.8,
+        "pptoi": 1.0
       },
       "season": {
-        "gp": 3,
+        "gp": 1,
         "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 7
+        "a": 0,
+        "p": 0,
+        "sog": 0
       },
       "opp_index": 0.3794,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 26
+      "number": 59
     },
     {
       "id": 8478407,
@@ -10612,9 +10610,9 @@
       },
       "opp_index": 0.6358,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "HOT"
@@ -10650,9 +10648,9 @@
       },
       "opp_index": 0.6358,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 6
@@ -10686,9 +10684,9 @@
       },
       "opp_index": 0.6358,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 41
@@ -10722,13 +10720,12 @@
       },
       "opp_index": 0.6358,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
-        "PP1",
-        "ROLE_UP"
+        "PP1"
       ],
       "number": 62
     },
@@ -10761,9 +10758,9 @@
       },
       "opp_index": 0.6358,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 55
@@ -10797,9 +10794,9 @@
       },
       "opp_index": 0.6358,
       "opp_goalie": {
-        "name": "ADIN HILL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "CARTER HART",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 8
@@ -11329,7 +11326,6 @@
         "source": "confirmed"
       },
       "flags": [
-        "ROLE_UP",
         "SOFT_MATCHUP"
       ],
       "number": 7
