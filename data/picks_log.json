@@ -10,17 +10,17 @@
     "seasons": 2
   },
   "summary": {
-    "graded": 106,
-    "hits": 57,
-    "hit_rate": 0.5377,
-    "pending": 4,
+    "graded": 110,
+    "hits": 59,
+    "hit_rate": 0.5364,
+    "pending": 20,
     "void": 0,
     "baseline_hit_rate": 0.5,
     "by_position": {
       "C": {
-        "graded": 25,
-        "hits": 16,
-        "hit_rate": 0.64
+        "graded": 28,
+        "hits": 18,
+        "hit_rate": 0.6429
       },
       "LW": {
         "graded": 25,
@@ -33,16 +33,16 @@
         "hit_rate": 0.5455
       },
       "D": {
-        "graded": 23,
+        "graded": 24,
         "hits": 11,
-        "hit_rate": 0.4783
+        "hit_rate": 0.4583
       }
     },
     "by_season": {
       "20262027": {
-        "graded": 106,
-        "hits": 57,
-        "hit_rate": 0.5377
+        "graded": 110,
+        "hits": 59,
+        "hit_rate": 0.5364
       }
     }
   },
@@ -5812,8 +5812,18 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-07T08:42:25Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": false,
+        "goals_by_position": {
+          "C": 1,
+          "LW": 1,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-08T09:00:50Z"
+      }
     },
     {
       "id": "2026020054-WPG",
@@ -5856,8 +5866,18 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-07T08:42:25Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "goals_by_position": {
+          "C": 1,
+          "LW": 2,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-08T09:00:50Z"
+      }
     },
     {
       "id": "2026020055-EDM",
@@ -5900,8 +5920,18 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-07T08:42:25Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "goals_by_position": {
+          "C": 1,
+          "LW": 0,
+          "RW": 2,
+          "D": 2
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-08T09:00:50Z"
+      }
     },
     {
       "id": "2026020055-ANA",
@@ -5944,6 +5974,896 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-07T08:42:25Z",
+      "status": "graded",
+      "result": {
+        "hit": false,
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 2,
+          "D": 0
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-08T09:00:50Z"
+      }
+    },
+    {
+      "id": "2026020056-UTA",
+      "game_id": 2026020056,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-08T23:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "UTA",
+      "defense": "BOS",
+      "venue": "away",
+      "watch": "D",
+      "ranking": [
+        "D",
+        "LW",
+        "RW",
+        "C"
+      ],
+      "index": {
+        "C": 0.436,
+        "LW": 0.9956,
+        "RW": 0.6374,
+        "D": 1.9329
+      },
+      "ga_l10": {
+        "C": 5,
+        "LW": 7,
+        "RW": 5,
+        "D": 9
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020056-BOS",
+      "game_id": 2026020056,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-08T23:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "BOS",
+      "defense": "UTA",
+      "venue": "home",
+      "watch": "C",
+      "ranking": [
+        "C",
+        "RW",
+        "D",
+        "LW"
+      ],
+      "index": {
+        "C": 1.3079,
+        "LW": 0.4267,
+        "RW": 1.0199,
+        "D": 0.8591
+      },
+      "ga_l10": {
+        "C": 15,
+        "LW": 3,
+        "RW": 8,
+        "D": 4
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020057-DAL",
+      "game_id": 2026020057,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-08T23:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "DAL",
+      "defense": "BUF",
+      "venue": "away",
+      "watch": "C",
+      "ranking": [
+        "C",
+        "LW",
+        "RW",
+        "D"
+      ],
+      "index": {
+        "C": 1.2207,
+        "LW": 0.9956,
+        "RW": 0.7649,
+        "D": 0.6443
+      },
+      "ga_l10": {
+        "C": 14,
+        "LW": 7,
+        "RW": 6,
+        "D": 3
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020057-BUF",
+      "game_id": 2026020057,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-08T23:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "BUF",
+      "defense": "DAL",
+      "venue": "home",
+      "watch": "C",
+      "ranking": [
+        "C",
+        "LW",
+        "RW",
+        "D"
+      ],
+      "index": {
+        "C": 0.8719,
+        "LW": 0.8533,
+        "RW": 0.6374,
+        "D": 0.4295
+      },
+      "ga_l10": {
+        "C": 10,
+        "LW": 6,
+        "RW": 5,
+        "D": 2
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020058-NSH",
+      "game_id": 2026020058,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-08T23:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "NSH",
+      "defense": "MTL",
+      "venue": "away",
+      "watch": "C",
+      "ranking": [
+        "C",
+        "RW",
+        "D",
+        "LW"
+      ],
+      "index": {
+        "C": 1.3079,
+        "LW": 0.8533,
+        "RW": 1.1474,
+        "D": 0.8591
+      },
+      "ga_l10": {
+        "C": 15,
+        "LW": 6,
+        "RW": 9,
+        "D": 4
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020058-MTL",
+      "game_id": 2026020058,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-08T23:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "MTL",
+      "defense": "NSH",
+      "venue": "home",
+      "watch": "LW",
+      "ranking": [
+        "LW",
+        "C",
+        "D",
+        "RW"
+      ],
+      "index": {
+        "C": 0.8719,
+        "LW": 1.1378,
+        "RW": 0.6374,
+        "D": 0.8591
+      },
+      "ga_l10": {
+        "C": 10,
+        "LW": 8,
+        "RW": 5,
+        "D": 4
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020059-PHI",
+      "game_id": 2026020059,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-08T23:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "PHI",
+      "defense": "OTT",
+      "venue": "away",
+      "watch": "RW",
+      "ranking": [
+        "RW",
+        "C",
+        "D",
+        "LW"
+      ],
+      "index": {
+        "C": 0.6975,
+        "LW": 0.4267,
+        "RW": 1.1474,
+        "D": 0.6443
+      },
+      "ga_l10": {
+        "C": 8,
+        "LW": 3,
+        "RW": 9,
+        "D": 3
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020059-OTT",
+      "game_id": 2026020059,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-08T23:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "OTT",
+      "defense": "PHI",
+      "venue": "home",
+      "watch": "C",
+      "ranking": [
+        "C",
+        "D",
+        "RW",
+        "LW"
+      ],
+      "index": {
+        "C": 1.1335,
+        "LW": 0.7111,
+        "RW": 0.8924,
+        "D": 1.0738
+      },
+      "ga_l10": {
+        "C": 13,
+        "LW": 5,
+        "RW": 7,
+        "D": 5
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020060-MIN",
+      "game_id": 2026020060,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-08T23:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "MIN",
+      "defense": "TBL",
+      "venue": "away",
+      "watch": "RW",
+      "ranking": [
+        "RW",
+        "LW",
+        "C",
+        "D"
+      ],
+      "index": {
+        "C": 0.7847,
+        "LW": 0.8533,
+        "RW": 1.1474,
+        "D": 0.6443
+      },
+      "ga_l10": {
+        "C": 9,
+        "LW": 6,
+        "RW": 9,
+        "D": 3
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020060-TBL",
+      "game_id": 2026020060,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-08T23:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "TBL",
+      "defense": "MIN",
+      "venue": "home",
+      "watch": "D",
+      "ranking": [
+        "D",
+        "C",
+        "LW",
+        "RW"
+      ],
+      "index": {
+        "C": 0.7847,
+        "LW": 0.7111,
+        "RW": 0.6374,
+        "D": 1.7181
+      },
+      "ga_l10": {
+        "C": 9,
+        "LW": 5,
+        "RW": 5,
+        "D": 8
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020061-VAN",
+      "game_id": 2026020061,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-08T23:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "VAN",
+      "defense": "CAR",
+      "venue": "away",
+      "watch": "RW",
+      "ranking": [
+        "RW",
+        "C",
+        "D",
+        "LW"
+      ],
+      "index": {
+        "C": 1.0463,
+        "LW": 0.4267,
+        "RW": 1.2749,
+        "D": 0.8591
+      },
+      "ga_l10": {
+        "C": 12,
+        "LW": 3,
+        "RW": 10,
+        "D": 4
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020061-CAR",
+      "game_id": 2026020061,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-08T23:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "CAR",
+      "defense": "VAN",
+      "venue": "home",
+      "watch": "RW",
+      "ranking": [
+        "RW",
+        "D",
+        "C",
+        "LW"
+      ],
+      "index": {
+        "C": 1.1335,
+        "LW": 0.8533,
+        "RW": 1.7848,
+        "D": 1.2886
+      },
+      "ga_l10": {
+        "C": 13,
+        "LW": 6,
+        "RW": 14,
+        "D": 6
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020062-CHI",
+      "game_id": 2026020062,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-08T23:30:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "CHI",
+      "defense": "NYI",
+      "venue": "away",
+      "watch": "RW",
+      "ranking": [
+        "RW",
+        "D",
+        "LW",
+        "C"
+      ],
+      "index": {
+        "C": 0.6975,
+        "LW": 0.8533,
+        "RW": 1.6574,
+        "D": 0.8591
+      },
+      "ga_l10": {
+        "C": 8,
+        "LW": 6,
+        "RW": 13,
+        "D": 4
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020062-NYI",
+      "game_id": 2026020062,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-08T23:30:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "NYI",
+      "defense": "CHI",
+      "venue": "home",
+      "watch": "LW",
+      "ranking": [
+        "LW",
+        "D",
+        "RW",
+        "C"
+      ],
+      "index": {
+        "C": 1.1335,
+        "LW": 1.7067,
+        "RW": 1.2749,
+        "D": 1.2886
+      },
+      "ga_l10": {
+        "C": 13,
+        "LW": 12,
+        "RW": 10,
+        "D": 6
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020063-SJS",
+      "game_id": 2026020063,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-09T00:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "SJS",
+      "defense": "STL",
+      "venue": "away",
+      "watch": "RW",
+      "ranking": [
+        "RW",
+        "D",
+        "C",
+        "LW"
+      ],
+      "index": {
+        "C": 0.8719,
+        "LW": 0.8533,
+        "RW": 1.4024,
+        "D": 1.0738
+      },
+      "ga_l10": {
+        "C": 10,
+        "LW": 6,
+        "RW": 11,
+        "D": 5
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020063-STL",
+      "game_id": 2026020063,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-09T00:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "STL",
+      "defense": "SJS",
+      "venue": "home",
+      "watch": "D",
+      "ranking": [
+        "D",
+        "LW",
+        "C",
+        "RW"
+      ],
+      "index": {
+        "C": 1.0463,
+        "LW": 1.4222,
+        "RW": 0.8924,
+        "D": 1.5034
+      },
+      "ga_l10": {
+        "C": 12,
+        "LW": 10,
+        "RW": 7,
+        "D": 7
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020064-COL",
+      "game_id": 2026020064,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-09T01:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "COL",
+      "defense": "CGY",
+      "venue": "away",
+      "watch": "C",
+      "ranking": [
+        "C",
+        "RW",
+        "LW",
+        "D"
+      ],
+      "index": {
+        "C": 1.5695,
+        "LW": 0.9956,
+        "RW": 1.0199,
+        "D": 0.4295
+      },
+      "ga_l10": {
+        "C": 18,
+        "LW": 7,
+        "RW": 8,
+        "D": 2
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020064-CGY",
+      "game_id": 2026020064,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-09T01:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "CGY",
+      "defense": "COL",
+      "venue": "home",
+      "watch": "C",
+      "ranking": [
+        "C",
+        "RW",
+        "LW",
+        "D"
+      ],
+      "index": {
+        "C": 0.6104,
+        "LW": 0.4267,
+        "RW": 0.51,
+        "D": 0.2148
+      },
+      "ga_l10": {
+        "C": 7,
+        "LW": 3,
+        "RW": 4,
+        "D": 1
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020065-TOR",
+      "game_id": 2026020065,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-09T02:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "TOR",
+      "defense": "VGK",
+      "venue": "away",
+      "watch": "LW",
+      "ranking": [
+        "LW",
+        "C",
+        "D",
+        "RW"
+      ],
+      "index": {
+        "C": 0.6975,
+        "LW": 0.8533,
+        "RW": 0.3825,
+        "D": 0.6443
+      },
+      "ga_l10": {
+        "C": 8,
+        "LW": 6,
+        "RW": 3,
+        "D": 3
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "id": "2026020065-VGK",
+      "game_id": 2026020065,
+      "date": "2026-10-08",
+      "start_time_utc": "2026-10-09T02:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "VGK",
+      "defense": "TOR",
+      "venue": "home",
+      "watch": "LW",
+      "ranking": [
+        "LW",
+        "RW",
+        "C",
+        "D"
+      ],
+      "index": {
+        "C": 1.2207,
+        "LW": 1.5645,
+        "RW": 1.5299,
+        "D": 1.0738
+      },
+      "ga_l10": {
+        "C": 14,
+        "LW": 11,
+        "RW": 12,
+        "D": 5
+      },
+      "league_l10_avg": {
+        "C": 11.4688,
+        "LW": 7.0312,
+        "RW": 7.8438,
+        "D": 4.6562
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-07",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-08T09:00:50Z",
       "status": "pending",
       "result": null
     }
