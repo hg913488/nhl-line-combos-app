@@ -60,6 +60,11 @@ const ROUTES = {
     title: `NHL Player Spotlight — ${SITE_NAME}`,
     description: 'Who is heating up and cooling down across the NHL: last five games against the season, streaks, droughts and line promotions.',
   },
+  fatigue: {
+    path: '/schedule-fatigue',
+    title: `NHL Schedule Fatigue — ${SITE_NAME}`,
+    description: 'Back-to-backs, three games in four nights, road trips and time-zone travel for every team playing tonight, with the rest gap in each matchup.',
+  },
   matchups: {
     path: '/goals-allowed',
     title: `NHL Goals Allowed by Position — ${SITE_NAME}`,
@@ -102,6 +107,7 @@ const PATH_TO_CARD = new Map([
   ['injuries', 'injuries'],
   ['players', 'players'],
   ['spotlight', 'spotlight'],
+  ['schedule-fatigue', 'fatigue'],
   ['goals-allowed', 'matchups'],
   ['matchups', 'matchups'],
   ['playoffs', 'playoffs'],

@@ -1,0 +1,27 @@
+/* Schedule fatigue page. Selectors scoped to .fatigue-page. */
+.fatigue-page { max-width: 1040px; margin: 0 auto; padding: clamp(24px, 4vw, 44px) 24px 64px; }
+.fatigue-page .slate-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; padding-bottom: 22px; margin-bottom: 26px; border-bottom: 1px solid var(--border); }
+.fatigue-list { display: grid; gap: 12px; }
+.fatigue-game { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 20px; align-items: start; padding: 20px 24px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
+.fatigue-side { display: grid; gap: 8px; min-width: 0; }
+.fatigue-home { text-align: right; justify-items: end; }
+.fatigue-role { color: var(--dim); font: 700 10px/1 'Syne', sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.fatigue-page .fatigue-team { padding: 0; min-height: 0; border: 0; background: none; color: var(--white); font: 800 20px/1.1 var(--font-display); letter-spacing: 0; text-transform: none; text-align: inherit; cursor: pointer; }
+.fatigue-page .fatigue-team:hover { color: var(--accent); }
+.fatigue-at { padding-top: 24px; color: var(--dim); font: 700 10px/1 'Syne', sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.fatigue-flags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.fatigue-home .fatigue-flags { justify-content: flex-end; }
+.fatigue-flags li { padding: 5px 8px; border: 1px solid var(--border); border-radius: 3px; color: var(--dove); font: 700 10px/1 'Syne', sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+.fatigue-flags li.tired { color: var(--accent); border-color: var(--accent); }
+.fatigue-flags li.none { border-color: transparent; padding-left: 0; padding-right: 0; color: var(--dim); }
+.fatigue-facts { margin: 0; color: var(--dove); font: 400 11px/1.4 'Space Mono', monospace; }
+.fatigue-edge { grid-column: 1 / -1; margin: 0; padding-top: 14px; border-top: 1px solid var(--border); color: var(--accent); font: 700 10px/1 'Syne', sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+@media (max-width: 767px) {
+  .fatigue-page { padding: 22px 16px 48px; }
+  .fatigue-page .slate-heading { flex-direction: column; gap: 18px; }
+  .fatigue-game { grid-template-columns: 1fr; gap: 14px; padding: 16px; }
+  .fatigue-at { display: none; }
+  .fatigue-home { padding-top: 14px; border-top: 1px solid var(--border); }
+  .fatigue-home { text-align: left; justify-items: start; }
+  .fatigue-home .fatigue-flags { justify-content: flex-start; }
+}

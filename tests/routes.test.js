@@ -19,6 +19,7 @@ test('every static route round-trips through build and parse', () => {
     { tab: 'injuries' },
     { tab: 'player' },
     { tab: 'spotlight' },
+    { tab: 'fatigue' },
     { tab: 'stats' },
     { tab: 'playoffs' },
     { tab: 'picks' },

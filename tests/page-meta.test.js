@@ -16,6 +16,7 @@ const ROUTE_CASES = [
   ['/line-moves', '', `NHL Line Moves — ${SITE_NAME}`, `${SITE_URL}/line-moves`, 'card=moves'],
   ['/injuries', '', `NHL Injuries — ${SITE_NAME}`, `${SITE_URL}/injuries`, 'card=injuries'],
   ['/players', '', `NHL Player Stats — ${SITE_NAME}`, `${SITE_URL}/players`, 'card=players'],
+  ['/schedule-fatigue', '', `NHL Schedule Fatigue — ${SITE_NAME}`, `${SITE_URL}/schedule-fatigue`, 'card=fatigue'],
   ['/spotlight', '', `NHL Player Spotlight — ${SITE_NAME}`, `${SITE_URL}/spotlight`, 'card=spotlight'],
   ['/goals-allowed', '', `NHL Goals Allowed by Position — ${SITE_NAME}`, `${SITE_URL}/goals-allowed`, 'card=matchups'],
   ['/playoffs', '', `NHL Playoffs — ${SITE_NAME}`, `${SITE_URL}/playoffs`, 'card=playoffs'],
