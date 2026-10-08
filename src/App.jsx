@@ -803,6 +803,27 @@ function SlateCompact({ game, status, showScore, networks, tag }) {
   </div>;
 }
 
+// Live games swap the lineup drop-down for the game clock, refreshed from the same feed the game center uses.
+function SlateLiveClock({ game }) {
+  const [live, setLive] = useState(null);
+  useEffect(() => {
+    let active = true;
+    const load = () => fetch(`/api/game?id=${encodeURIComponent(game.id)}`).then(r => (r.ok ? r.json() : null)).then(data => { if (active && data) setLive(data); }).catch(() => {});
+    load();
+    const timer = window.setInterval(load, 20000);
+    return () => { active = false; window.clearInterval(timer); };
+  }, [game.id]);
+  const period = live?.period ?? game.periodDescriptor?.number;
+  const type = live?.periodType ?? game.periodDescriptor?.periodType;
+  const label = type === 'OT' ? 'OT' : type === 'SO' ? 'Shootout' : period ? `Period ${period}` : 'Live';
+  const time = live?.clock?.timeRemaining;
+  return <div className="slate-live-clock" role="status">
+    <i className="slate-live-dot" aria-hidden="true" />
+    <span className="slate-live-period">{live?.clock?.inIntermission ? 'Intermission' : label}</span>
+    <strong className="slate-live-time">{time || '—'}</strong>
+  </div>;
+}
+
 function SlateGame({ game, onOpenMoves, onOpenGame, onOpenBoard, onTeam, lineupsOpen = false }) {
   const [showLineups, setShowLineups] = useState(lineupsOpen);
   const status = gameStatus(game);
@@ -828,9 +849,10 @@ function SlateGame({ game, onOpenMoves, onOpenGame, onOpenBoard, onTeam, lineups
       boardLink={<NavLink to="/goals-allowed" className="slate-more" onNavigate={onOpenBoard}>All 32 teams →</NavLink>} />
     <div className="slate-actions">
       <NavLink to={`/games/${game.id}`} className="slate-link" onNavigate={() => onOpenGame(String(game.id))}>Game center <ArrowRight size={13} aria-hidden="true" /></NavLink>
-      <button className="slate-link slate-lineup-toggle" aria-expanded={showLineups} onClick={() => setShowLineups(value => !value)}>{showLineups ? 'Hide lineups' : 'Lineups'} <ChevronDown size={13} aria-hidden="true" /></button>
+      {status.phase !== 'live' && <button className="slate-link slate-lineup-toggle" aria-expanded={showLineups} onClick={() => setShowLineups(value => !value)}>{showLineups ? 'Hide lineups' : 'Lineups'} <ChevronDown size={13} aria-hidden="true" /></button>}
     </div>
-    {showLineups && <div className="slate-lineups">
+    {status.phase === 'live' && <SlateLiveClock game={game} />}
+    {status.phase !== 'live' && showLineups && <div className="slate-lineups">
       <div className="matchup-lineups">{[game.awayTeam, game.homeTeam].map(team => <SlateLineupTeam key={team.abbrev} team={team} />)}</div>
       <p className="snapshot-notice">Projected lineups as of {UPDATED_AT}. Not confirmed for this game.</p>
     </div>}

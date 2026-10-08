@@ -834,3 +834,8 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
   .slate-panel .slate-name { font-size: 16px; }
   .slate-panel .slate-score { font-size: 30px; padding-inline: 4px; }
 }
+
+.slate-live-clock { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 28px 16px 32px; border-top: 1px solid var(--border); color: var(--white); }
+.slate-live-period { color: var(--red); font: 700 11px/1 'Space Mono', monospace; letter-spacing: .1em; text-transform: uppercase; }
+.slate-live-time { font: 800 34px/1 'Syne', sans-serif; font-variant-numeric: tabular-nums; }
+@media (max-width: 767px) { .slate-panel .slate-live-clock { order: 2; padding: 18px 16px 24px; } .slate-live-time { font-size: 28px; } }
