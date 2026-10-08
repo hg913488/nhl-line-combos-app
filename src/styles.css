@@ -84,7 +84,7 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .slate-team-away a.slate-name:hover { color: var(--away-c); }
 .slate-team-home a.slate-name:hover { color: var(--home-c); }
 .slate-record { color: var(--dim); font: 400 11px/1 'Space Mono', monospace; font-variant-numeric: tabular-nums; }
-.slate-score { margin-left: auto; color: var(--white); font: 800 36px/1 'Syne', sans-serif; font-variant-numeric: tabular-nums; }
+.slate-score { flex: 0 0 auto; margin-left: auto; color: var(--white); font: 800 36px/1 'Syne', sans-serif; font-variant-numeric: tabular-nums; }
 .slate-team-home .slate-score { margin-right: auto; margin-left: 0; }
 .slate-status { display: grid; justify-items: center; gap: 6px; min-width: 112px; text-align: center; }
 .slate-state { color: var(--white); font: 600 13px/1.2 'Space Grotesk', sans-serif; white-space: nowrap; }
@@ -701,6 +701,7 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .slate-tab:hover { background: var(--hover); }
 .slate-strip.open .slate-tab { border-right-color: var(--border); background: transparent; }
 .slate-tab:focus-visible { outline-offset: -3px; }
+.slate-tab-stick { display: flex; flex-direction: column; align-items: center; gap: 14px; will-change: transform; }
 .slate-tab-index { color: var(--dim); font: 700 10px/1 'Space Mono', monospace; letter-spacing: .08em; font-variant-numeric: tabular-nums; }
 .slate-tab-logos { display: grid; justify-items: center; gap: 4px; }
 .slate-tab-logos img { width: 40px; height: 40px; transition: transform .35s cubic-bezier(.16, 1, .3, 1); }
@@ -770,7 +771,8 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
   .slate-strip { scroll-snap-align: start; }
   .slate-tab-index { display: none; }
   .slate-tab-logos img { width: 30px; height: 30px; }
-  .slate-tab { gap: 10px; padding: 16px 0 16px 3px; }
+  .slate-tab { padding: 16px 0 16px 3px; }
+  .slate-tab-stick { gap: 10px; }
   .slate-tab-label { font-size: 12px; gap: 6px; }
   .slate-tab-state { font-size: 8px; }
   .slate-track { min-height: 0; }
@@ -821,4 +823,14 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 @media (max-width: 767px) {
   .slate-panel .watch-unit { display: none; }
   .slate-panel .slate-watch .watch-index { font-size: 9.5px; }
+}
+
+/* Desktop open panel: the display face is wide, so tighten the matchup row until name and score never touch. */
+@media (min-width: 768px) {
+  .slate-panel .slate-matchup { gap: 12px; padding-inline: 20px; }
+  .slate-panel .slate-team { gap: 12px; }
+  .slate-panel .slate-team img { width: 44px; height: 44px; }
+  .slate-panel .slate-status { min-width: 84px; }
+  .slate-panel .slate-name { font-size: 16px; }
+  .slate-panel .slate-score { font-size: 30px; padding-inline: 4px; }
 }

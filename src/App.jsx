@@ -844,6 +844,7 @@ function SlateTab({ game, index, open, onToggle }) {
   const awaySlug = abbrToSlug(away.abbrev), homeSlug = abbrToSlug(home.abbrev);
   return <button type="button" className="slate-tab" id={`slate-tab-${game.id}`} aria-expanded={open} aria-controls={`slate-panel-${game.id}`} onClick={onToggle}
     aria-label={`${away.abbrev} at ${home.abbrev}, ${status.label}`}>
+    <span className="slate-tab-stick">
     <span className="slate-tab-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
     <span className="slate-tab-logos" aria-hidden="true">
       <TeamLogo slug={awaySlug} abbr={away.abbrev} size={40} />
@@ -856,6 +857,7 @@ function SlateTab({ game, index, open, onToggle }) {
       <span>{home.abbrev}{showScore ? ` ${home.score ?? 0}` : ''}</span>
     </span>
     <span className="slate-tab-state" aria-hidden="true">{status.phase === 'live' && <i className="slate-live-dot" />}{status.label}</span>
+    </span>
   </button>;
 }
 
@@ -878,6 +880,33 @@ function SlateRail({ games, date, onOpenMoves, onOpenGame, onOpenBoard, onTeam }
   // Panels mount on first open so lineup/roster fetches only run for games the reader looks at.
   const [seen, setSeen] = useState(() => new Set());
   useEffect(() => { setSeen(prev => [...openIds].every(id => prev.has(id)) ? prev : new Set([...prev, ...openIds])); }, [openIds]);
+
+  // Phones: an open game's tab (logos + score) rides down the strip so the reader still sees who is playing.
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return undefined;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const mobile = window.innerWidth < 768;
+      const line = document.querySelector('.tabs-bar')?.getBoundingClientRect().bottom || 0;
+      rail.querySelectorAll('.slate-strip').forEach(strip => {
+        const stick = strip.querySelector('.slate-tab-stick');
+        if (!stick) return;
+        let shift = 0;
+        if (mobile && strip.classList.contains('open')) {
+          const rect = strip.getBoundingClientRect();
+          shift = Math.max(0, Math.min(line - rect.top + 8, rect.height - stick.offsetHeight - 16));
+        }
+        stick.style.transform = shift ? `translateY(${Math.round(shift)}px)` : '';
+      });
+    };
+    const queue = () => { if (!frame) frame = requestAnimationFrame(update); };
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    update();
+    return () => { cancelAnimationFrame(frame); window.removeEventListener('scroll', queue); window.removeEventListener('resize', queue); };
+  }, [games, openIds]);
 
   useEffect(() => {
     const rail = railRef.current;
