@@ -13,7 +13,7 @@ function useFatigue(date) {
   useEffect(() => {
     let active = true;
     setState({ date, games: [], loading: true, error: '' });
-    getJSON(`/api/schedule-fatigue?date=${date}`, 3600000)
+    getJSON(`/api/schedule?date=${date}&fatigue=1`, 3600000)
       .then(data => { if (active) setState({ date, games: data.games, loading: false, error: '' }); })
       .catch(error => { if (active) setState({ date, games: [], loading: false, error: error.message }); });
     return () => { active = false; };

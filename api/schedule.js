@@ -1,5 +1,9 @@
+import fatigueHandler from '../lib/schedule-fatigue.js';
+
 export default async function handler(req, res) {
   const { date } = req.query;
+  // Rest/travel flags share this function: the project is at Vercel's 12-function cap.
+  if (req.query.fatigue === '1') return fatigueHandler(req, res);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date || '') || !Number.isFinite(Date.parse(date)) || new Date(date).toISOString().slice(0, 10) !== date) {
     return res.status(400).json({ error: 'Invalid schedule date' });
   }
