@@ -10,22 +10,22 @@
     "seasons": 2
   },
   "summary": {
-    "graded": 104,
-    "hits": 56,
-    "hit_rate": 0.5385,
-    "pending": 6,
+    "graded": 106,
+    "hits": 57,
+    "hit_rate": 0.5377,
+    "pending": 4,
     "void": 0,
-    "baseline_hit_rate": 0.4976,
+    "baseline_hit_rate": 0.5,
     "by_position": {
       "C": {
-        "graded": 24,
-        "hits": 15,
-        "hit_rate": 0.625
+        "graded": 25,
+        "hits": 16,
+        "hit_rate": 0.64
       },
       "LW": {
-        "graded": 24,
+        "graded": 25,
         "hits": 12,
-        "hit_rate": 0.5
+        "hit_rate": 0.48
       },
       "RW": {
         "graded": 33,
@@ -40,9 +40,9 @@
     },
     "by_season": {
       "20262027": {
-        "graded": 104,
-        "hits": 56,
-        "hit_rate": 0.5385
+        "graded": 106,
+        "hits": 57,
+        "hit_rate": 0.5377
       }
     }
   },
@@ -5704,8 +5704,18 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-07T08:42:25Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "goals_by_position": {
+          "C": 1,
+          "LW": 1,
+          "RW": 1,
+          "D": 0
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-08T02:54:43Z"
+      }
     },
     {
       "id": "2026020053-WSH",
@@ -5748,8 +5758,18 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-07T08:42:25Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": false,
+        "goals_by_position": {
+          "C": 1,
+          "LW": 0,
+          "RW": 4,
+          "D": 0
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-08T02:54:43Z"
+      }
     },
     {
       "id": "2026020054-COL",
