@@ -1,35 +1,7 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-10-07 23:18:46 UTC",
+  "updated_at": "2026-10-08 02:05:56 UTC",
   "matchups": [
-    {
-      "away": {
-        "team": "colorado-avalanche",
-        "goalie": "MACKENZIE BLACKWOOD",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/3792/Blackwood-Mackenzie_COL-2025_.png",
-        "stats": {
-          "record": "2-0-0",
-          "gaa": "2.5",
-          "svpct": "0.912",
-          "so": 0
-        }
-      },
-      "home": {
-        "team": "winnipeg-jets",
-        "goalie": "STUART SKINNER",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/4741/Skinner-Stuart_WPG-2026_.png",
-        "stats": {
-          "record": "1-0-1",
-          "gaa": "2.9",
-          "svpct": "0.908",
-          "so": 0
-        }
-      },
-      "date": "2026-10-07",
-      "time": "19:30"
-    },
     {
       "away": {
         "team": "pittsburgh-penguins",
@@ -38,8 +10,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/31270/Silovs-Arturs_PIT-2026_.png",
         "stats": {
           "record": "2-0-0",
-          "gaa": "2.46",
-          "svpct": "0.886",
+          "gaa": "3.44",
+          "svpct": "0.855",
           "so": 1
         }
       },
@@ -50,8 +22,36 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/28990/Thompson-Logan_WSH-Dec-2024_.png",
         "stats": {
           "record": "1-0-0",
-          "gaa": "2.0",
-          "svpct": "0.939",
+          "gaa": "2.5",
+          "svpct": "0.911",
+          "so": 0
+        }
+      },
+      "date": "2026-10-07",
+      "time": "19:30"
+    },
+    {
+      "away": {
+        "team": "colorado-avalanche",
+        "goalie": "MACKENZIE BLACKWOOD",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/3792/Blackwood-Mackenzie_COL-2025_.png",
+        "stats": {
+          "record": "2-0-0",
+          "gaa": "2.34",
+          "svpct": "0.913",
+          "so": 0
+        }
+      },
+      "home": {
+        "team": "winnipeg-jets",
+        "goalie": "STUART SKINNER",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/4741/Skinner-Stuart_WPG-2026_.png",
+        "stats": {
+          "record": "1-0-1",
+          "gaa": "2.68",
+          "svpct": "0.923",
           "so": 0
         }
       },

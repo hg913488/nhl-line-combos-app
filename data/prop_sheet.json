@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-07T23:19:46Z",
+  "generated_at": "2026-10-08T02:06:49Z",
   "date": "2026-10-07",
   "window": {
     "games": 10,
@@ -2513,9 +2513,7 @@
         "status": "Confirmed",
         "source": "confirmed"
       },
-      "flags": [
-        "ROLE_UP"
-      ],
+      "flags": [],
       "number": 93
     },
     {
@@ -3013,121 +3011,6 @@
       "number": 26
     },
     {
-      "id": 8484509,
-      "name": "JOSH SAMANSKI",
-      "team": "EDM",
-      "opp": "ANA",
-      "game_id": 2026020055,
-      "home": false,
-      "pos": "C",
-      "line": "L3",
-      "pp": null,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 2,
-        "a": 1,
-        "p": 3,
-        "sog": 5,
-        "toi": 590.9,
-        "pptoi": 1.6
-      },
-      "season": {
-        "gp": 2,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 0
-      },
-      "opp_index": 1.5695,
-      "opp_goalie": {
-        "name": "LUKAS DOSTAL",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": [
-        "ROLE_UP",
-        "SOFT_MATCHUP"
-      ],
-      "number": 81
-    },
-    {
-      "id": 8483455,
-      "name": "ISAAC HOWARD",
-      "team": "EDM",
-      "opp": "ANA",
-      "game_id": 2026020055,
-      "home": false,
-      "pos": "RW",
-      "line": "L3",
-      "pp": 2,
-      "b2b": false,
-      "last10": {
-        "gp": 4,
-        "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 8,
-        "toi": 605.5,
-        "pptoi": 85.5
-      },
-      "season": {
-        "gp": 3,
-        "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 5
-      },
-      "opp_index": 0.6374,
-      "opp_goalie": {
-        "name": "LUKAS DOSTAL",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": [
-        "ROLE_UP"
-      ],
-      "number": 53
-    },
-    {
-      "id": 8479368,
-      "name": "MAX JONES",
-      "team": "EDM",
-      "opp": "ANA",
-      "game_id": 2026020055,
-      "home": false,
-      "pos": "LW",
-      "line": "L4",
-      "pp": null,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 10,
-        "toi": 567.7,
-        "pptoi": 6.8
-      },
-      "season": {
-        "gp": 3,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 4
-      },
-      "opp_index": 1.4222,
-      "opp_goalie": {
-        "name": "LUKAS DOSTAL",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": [
-        "SOFT_MATCHUP"
-      ],
-      "number": 46
-    },
-    {
       "id": 8486161,
       "name": "OWEN MICHAELS",
       "team": "EDM",
@@ -3135,7 +3018,7 @@
       "game_id": 2026020055,
       "home": false,
       "pos": "C",
-      "line": "L4",
+      "line": "L3",
       "pp": 2,
       "b2b": false,
       "last10": {
@@ -3174,7 +3057,7 @@
       "game_id": 2026020055,
       "home": false,
       "pos": "RW",
-      "line": "L4",
+      "line": "L3",
       "pp": null,
       "b2b": false,
       "last10": {
@@ -3199,8 +3082,124 @@
         "status": "Confirmed",
         "source": "confirmed"
       },
-      "flags": [],
+      "flags": [
+        "ROLE_UP"
+      ],
       "number": 21
+    },
+    {
+      "id": 8483455,
+      "name": "ISAAC HOWARD",
+      "team": "EDM",
+      "opp": "ANA",
+      "game_id": 2026020055,
+      "home": false,
+      "pos": "LW",
+      "line": "L4",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 4,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 8,
+        "toi": 605.5,
+        "pptoi": 85.5
+      },
+      "season": {
+        "gp": 3,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 5
+      },
+      "opp_index": 1.4222,
+      "opp_goalie": {
+        "name": "LUKAS DOSTAL",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "ROLE_UP",
+        "SOFT_MATCHUP"
+      ],
+      "number": 53
+    },
+    {
+      "id": 8484509,
+      "name": "JOSH SAMANSKI",
+      "team": "EDM",
+      "opp": "ANA",
+      "game_id": 2026020055,
+      "home": false,
+      "pos": "C",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 1,
+        "p": 3,
+        "sog": 5,
+        "toi": 590.9,
+        "pptoi": 1.6
+      },
+      "season": {
+        "gp": 2,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
+      },
+      "opp_index": 1.5695,
+      "opp_goalie": {
+        "name": "LUKAS DOSTAL",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "ROLE_UP",
+        "SOFT_MATCHUP"
+      ],
+      "number": 81
+    },
+    {
+      "id": 8479368,
+      "name": "MAX JONES",
+      "team": "EDM",
+      "opp": "ANA",
+      "game_id": 2026020055,
+      "home": false,
+      "pos": "RW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 10,
+        "toi": 567.7,
+        "pptoi": 6.8
+      },
+      "season": {
+        "gp": 3,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 4
+      },
+      "opp_index": 0.6374,
+      "opp_goalie": {
+        "name": "LUKAS DOSTAL",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [],
+      "number": 46
     },
     {
       "id": 8475218,
