@@ -1,11 +1,147 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-08T08:59:35Z",
+  "generated_at": "2026-10-08T14:40:14Z",
   "retention": {
     "max_age_days": 90,
     "max_events": 500
   },
   "events": [
+    {
+      "id": "b0d5ddc3029df82b6b85",
+      "occurred_at": "2026-10-08T14:40:14Z",
+      "player": "JONAS JOHANSSON",
+      "team": "ottawa-senators",
+      "previous_team": "ottawa-senators",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "ottawa-senators",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": 2,
+        "power_play": null
+      },
+      "after": {
+        "team": "ottawa-senators",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "8431e340a604578f1924",
+      "occurred_at": "2026-10-08T14:40:14Z",
+      "player": "JOSH SAMANSKI",
+      "team": "edmonton-oilers",
+      "previous_team": "edmonton-oilers",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "edmonton-oilers",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "edmonton-oilers",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": null,
+          "to": 2
+        }
+      ]
+    },
+    {
+      "id": "5c35b1b8d398e755c136",
+      "occurred_at": "2026-10-08T14:40:14Z",
+      "player": "OWEN MICHAELS",
+      "team": "edmonton-oilers",
+      "previous_team": "edmonton-oilers",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "edmonton-oilers",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "edmonton-oilers",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": 2,
+          "to": null
+        }
+      ]
+    },
+    {
+      "id": "4c43a5012068132fd7ca",
+      "occurred_at": "2026-10-08T14:40:14Z",
+      "player": "LINUS ULLMARK",
+      "team": "ottawa-senators",
+      "previous_team": "ottawa-senators",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "ottawa-senators",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "ottawa-senators",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": 1,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
     {
       "id": "d06474f53965a59cd79e",
       "occurred_at": "2026-10-08T02:52:51Z",
@@ -17284,142 +17420,6 @@
           "from": 1,
           "to": 2,
           "direction": "demoted"
-        }
-      ]
-    },
-    {
-      "id": "5807466add8c6607da97",
-      "occurred_at": "2026-10-01T22:53:37Z",
-      "player": "COLTEN ELLIS",
-      "team": "buffalo-sabres",
-      "previous_team": "buffalo-sabres",
-      "event_types": [
-        "addition"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "buffalo-sabres",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "buffalo-sabres",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": 2,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "addition",
-          "from": false,
-          "to": true
-        }
-      ]
-    },
-    {
-      "id": "f901370eb42fc892a790",
-      "occurred_at": "2026-10-01T20:59:04Z",
-      "player": "JOSH SAMANSKI",
-      "team": "edmonton-oilers",
-      "previous_team": "edmonton-oilers",
-      "event_types": [
-        "addition"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "edmonton-oilers",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "edmonton-oilers",
-        "rostered": true,
-        "forward_line": 4,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "addition",
-          "from": false,
-          "to": true
-        }
-      ]
-    },
-    {
-      "id": "f8002ecc18a4b6398e12",
-      "occurred_at": "2026-10-01T20:59:04Z",
-      "player": "ARTTU HYRY",
-      "team": "dallas-stars",
-      "previous_team": "dallas-stars",
-      "event_types": [
-        "addition"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "dallas-stars",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "dallas-stars",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "addition",
-          "from": false,
-          "to": true
-        }
-      ]
-    },
-    {
-      "id": "ecf4d66fd20e8fbf5ff8",
-      "occurred_at": "2026-10-01T20:59:04Z",
-      "player": "NOAH WARREN",
-      "team": "anaheim-ducks",
-      "previous_team": "anaheim-ducks",
-      "event_types": [
-        "addition"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "anaheim-ducks",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "anaheim-ducks",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 3,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "addition",
-          "from": false,
-          "to": true
         }
       ]
     }
