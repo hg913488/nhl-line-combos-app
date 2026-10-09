@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-10-09 09:06:24 UTC",
+  "updated_at": "2026-10-09 14:25:52 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -109,16 +109,16 @@
       ],
       "pp1": [
         "MORGAN GEEKIE",
+        "ELIAS LINDHOLM",
         "PAVEL ZACHA",
-        "JJ PETERKA",
         "DAVID PASTRNAK",
-        "HAMPUS LINDHOLM"
+        "FREDERIC BRUNET"
       ],
       "pp2": [
         "JAMES HAGENS",
-        "FRASER MINTEN",
         "CASEY MITTELSTADT",
-        "ELIAS LINDHOLM",
+        "JJ PETERKA",
+        "HAMPUS LINDHOLM",
         "MASON LOHREI"
       ]
     },
@@ -175,11 +175,11 @@
         "RASMUS DAHLIN"
       ],
       "pp2": [
-        "JOSH NORRIS",
+        "KONSTA HELENIUS",
         "RYAN MCLEOD",
         "JOSH DOAN",
         "OWEN POWER",
-        "OLEN ZELLWEGER"
+        "JOSH NORRIS"
       ]
     },
     "calgary-flames": {
@@ -367,12 +367,12 @@
         [
           "ARTTURI LEHKONEN",
           "NATHAN MACKINNON",
-          "MARTIN NECAS"
+          "NAZEM KADRI"
         ],
         [
           "GABRIEL LANDESKOG",
           "BROCK NELSON",
-          "NAZEM KADRI"
+          "MARTIN NECAS"
         ],
         [
           "JADEN SCHWARTZ",
@@ -392,7 +392,7 @@
         ],
         [
           "BRETT KULAK",
-          "SAM MALINSKI"
+          "NOAH JUULSEN"
         ],
         [
           "JOSH MANSON",
@@ -783,18 +783,18 @@
     "minnesota-wild": {
       "forwards": [
         [
-          "BLAKE COLEMAN",
+          "KIRILL KAPRIZOV",
           "JOEL ERIKSSON EK",
           "MATT BOLDY"
         ],
         [
-          "KIRILL KAPRIZOV",
-          "DANILA YUROV",
+          "BLAKE COLEMAN",
+          "RYAN HARTMAN",
           "MAXIM SHABANOV"
         ],
         [
           "MARCUS FOLIGNO",
-          "RYAN HARTMAN",
+          "DANILA YUROV",
           "BOBBY BRINK"
         ],
         [
@@ -809,12 +809,12 @@
           "JARED SPURGEON"
         ],
         [
-          "OLLI MAATTA",
+          "ZACH BOGOSIAN",
           "JONAS BRODIN"
         ],
         [
           "DAEMON HUNT",
-          "ZACH BOGOSIAN"
+          "DAVID SPACEK"
         ]
       ],
       "goalies": [
@@ -905,7 +905,7 @@
         [
           "STEVEN STAMKOS",
           "RYAN O'REILLY",
-          "ALEX KERFOOT"
+          "JONATHAN MARCHESSAULT"
         ],
         [
           "FILIP FORSBERG",
@@ -915,7 +915,7 @@
         [
           "REID SCHAEFER",
           "MAVRIK BOURQUE",
-          "JONATHAN MARCHESSAULT"
+          "ALEX KERFOOT"
         ],
         [
           "ROSS COLTON",
@@ -1377,7 +1377,7 @@
         "MICHAEL MISA",
         "TYLER TOFFOLI",
         "KIEFER SHERWOOD",
-        "DMITRY ORLOV"
+        "JACOB TROUBA"
       ]
     },
     "seattle-kraken": {
@@ -1549,27 +1549,27 @@
         "BRAYDEN POINT",
         "NIKITA KUCHEROV",
         "JOHN CARLSON",
-        "CHARLE-EDOUARD D'ASTOUS"
+        "BRANDON HAGEL"
       ],
       "pp2": [
-        "GAGE GONCALVES",
+        "PONTUS HOLMBERG",
         "ANTHONY CIRELLI",
         "CONOR GEEKIE",
-        "BRANDON HAGEL",
-        "J.J. MOSER"
+        "CHARLE-EDOUARD D'ASTOUS",
+        "GAGE GONCALVES"
       ]
     },
     "toronto-maple-leafs": {
       "forwards": [
         [
-          "KIRILL MARCHENKO",
+          "JACK ROSLOVIC",
           "AUSTON MATTHEWS",
-          "JACK ROSLOVIC"
+          "WILLIAM NYLANDER"
         ],
         [
           "EASTON COWAN",
           "JOHN TAVARES",
-          "WILLIAM NYLANDER"
+          "KIRILL MARCHENKO"
         ],
         [
           "GAVIN MCKENNA",
@@ -2203,6 +2203,18 @@
         "pos": "G",
         "status": "Injured Reserve",
         "desc": "Undisclosed"
+      },
+      {
+        "name": "WILLIAM TRUDEAU",
+        "pos": "D",
+        "status": "Day-To-Day",
+        "desc": "Upper body"
+      },
+      {
+        "name": "MAVRIK BOURQUE",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "Upper body"
       }
     ],
     "new-jersey-devils": [
@@ -2289,6 +2301,12 @@
         "pos": "D",
         "status": "Day-To-Day",
         "desc": "Lower body"
+      },
+      {
+        "name": "WILLIAM EKLUND",
+        "pos": "LW",
+        "status": "Day-To-Day",
+        "desc": ""
       }
     ],
     "philadelphia-flyers": [
@@ -2393,6 +2411,12 @@
         "pos": "C",
         "status": "Out",
         "desc": ""
+      },
+      {
+        "name": "OLIVER EKMAN-LARSSON",
+        "pos": "D",
+        "status": "Day-To-Day",
+        "desc": ""
       }
     ],
     "vancouver-canucks": [
@@ -2455,6 +2479,6 @@
   "injuries_meta": {
     "source": "dailyfaceoff.com",
     "status": "fresh",
-    "updated_at": "2026-10-09 09:06:24 UTC"
+    "updated_at": "2026-10-09 14:25:52 UTC"
   }
 }
