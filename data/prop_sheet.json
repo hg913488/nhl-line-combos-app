@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-09T22:54:12Z",
+  "generated_at": "2026-10-10T01:50:38Z",
   "date": "2026-10-09",
   "window": {
     "games": 10,
@@ -4051,31 +4051,31 @@
       "number": 44
     },
     {
-      "id": 8478421,
-      "name": "A.J. GREER",
+      "id": 8484762,
+      "name": "BECKETT SENNECKE",
       "team": "ANA",
       "opp": "WPG",
       "game_id": 2026020069,
       "home": false,
       "pos": "LW",
       "line": "L1",
-      "pp": null,
+      "pp": 1,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 3,
-        "a": 4,
-        "p": 7,
-        "sog": 19,
-        "toi": 871.7,
-        "pptoi": 32.3
+        "g": 7,
+        "a": 2,
+        "p": 9,
+        "sog": 30,
+        "toi": 1100.5,
+        "pptoi": 232.9
       },
       "season": {
         "gp": 3,
-        "g": 0,
+        "g": 3,
         "a": 1,
-        "p": 1,
-        "sog": 7
+        "p": 4,
+        "sog": 11
       },
       "opp_index": 1.0894,
       "opp_goalie": {
@@ -4084,9 +4084,11 @@
         "source": "confirmed"
       },
       "flags": [
+        "PP1",
+        "ROLE_UP",
         "HOT"
       ],
-      "number": 18
+      "number": 45
     },
     {
       "id": 8484153,
@@ -4129,31 +4131,31 @@
       "number": 91
     },
     {
-      "id": 8483445,
-      "name": "CUTTER GAUTHIER",
+      "id": 8482118,
+      "name": "SAM COLANGELO",
       "team": "ANA",
       "opp": "WPG",
       "game_id": 2026020069,
       "home": false,
       "pos": "RW",
       "line": "L1",
-      "pp": 1,
+      "pp": 2,
       "b2b": false,
       "last10": {
-        "gp": 10,
-        "g": 3,
-        "a": 8,
-        "p": 11,
-        "sog": 39,
-        "toi": 1046.3,
-        "pptoi": 235.0
+        "gp": 1,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 624.0,
+        "pptoi": 0.0
       },
       "season": {
-        "gp": 3,
-        "g": 2,
-        "a": 2,
-        "p": 4,
-        "sog": 16
+        "gp": 1,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
       },
       "opp_index": 1.1383,
       "opp_goalie": {
@@ -4161,38 +4163,35 @@
         "status": "Confirmed",
         "source": "confirmed"
       },
-      "flags": [
-        "PP1",
-        "HOT"
-      ],
-      "number": 61
+      "flags": [],
+      "number": 12
     },
     {
-      "id": 8473986,
-      "name": "ALEX KILLORN",
+      "id": 8481754,
+      "name": "NIKITA NESTERENKO",
       "team": "ANA",
       "opp": "WPG",
       "game_id": 2026020069,
       "home": false,
       "pos": "LW",
       "line": "L2",
-      "pp": 2,
+      "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 10,
-        "g": 2,
-        "a": 2,
-        "p": 4,
-        "sog": 16,
-        "toi": 1058.3,
-        "pptoi": 127.0
+        "gp": 3,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 1,
+        "toi": 667.0,
+        "pptoi": 5.0
       },
       "season": {
         "gp": 3,
-        "g": 1,
+        "g": 0,
         "a": 0,
-        "p": 1,
-        "sog": 4
+        "p": 0,
+        "sog": 1
       },
       "opp_index": 1.0894,
       "opp_goalie": {
@@ -4200,8 +4199,10 @@
         "status": "Confirmed",
         "source": "confirmed"
       },
-      "flags": [],
-      "number": 17
+      "flags": [
+        "ROLE_UP"
+      ],
+      "number": 13
     },
     {
       "id": 8475798,
@@ -4244,8 +4245,8 @@
       "number": 64
     },
     {
-      "id": 8484762,
-      "name": "BECKETT SENNECKE",
+      "id": 8483445,
+      "name": "CUTTER GAUTHIER",
       "team": "ANA",
       "opp": "WPG",
       "game_id": 2026020069,
@@ -4256,19 +4257,19 @@
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 7,
-        "a": 2,
-        "p": 9,
-        "sog": 30,
-        "toi": 1100.5,
-        "pptoi": 232.9
+        "g": 3,
+        "a": 8,
+        "p": 11,
+        "sog": 39,
+        "toi": 1046.3,
+        "pptoi": 235.0
       },
       "season": {
         "gp": 3,
-        "g": 3,
-        "a": 1,
+        "g": 2,
+        "a": 2,
         "p": 4,
-        "sog": 11
+        "sog": 16
       },
       "opp_index": 1.1383,
       "opp_goalie": {
@@ -4280,34 +4281,34 @@
         "PP1",
         "HOT"
       ],
-      "number": 45
+      "number": 61
     },
     {
-      "id": 8481754,
-      "name": "NIKITA NESTERENKO",
+      "id": 8473986,
+      "name": "ALEX KILLORN",
       "team": "ANA",
       "opp": "WPG",
       "game_id": 2026020069,
       "home": false,
       "pos": "LW",
       "line": "L3",
-      "pp": null,
+      "pp": 2,
       "b2b": false,
       "last10": {
-        "gp": 3,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 1,
-        "toi": 667.0,
-        "pptoi": 5.0
+        "gp": 10,
+        "g": 2,
+        "a": 2,
+        "p": 4,
+        "sog": 16,
+        "toi": 1058.3,
+        "pptoi": 127.0
       },
       "season": {
         "gp": 3,
-        "g": 0,
+        "g": 1,
         "a": 0,
-        "p": 0,
-        "sog": 1
+        "p": 1,
+        "sog": 4
       },
       "opp_index": 1.0894,
       "opp_goalie": {
@@ -4316,7 +4317,7 @@
         "source": "confirmed"
       },
       "flags": [],
-      "number": 13
+      "number": 17
     },
     {
       "id": 8480068,
@@ -4357,31 +4358,31 @@
       "number": 25
     },
     {
-      "id": 8486052,
-      "name": "NIKITA KLEPOV",
+      "id": 8478421,
+      "name": "A.J. GREER",
       "team": "ANA",
       "opp": "WPG",
       "game_id": 2026020069,
       "home": false,
       "pos": "RW",
       "line": "L3",
-      "pp": 2,
+      "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 1,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 0,
-        "toi": 603.0,
-        "pptoi": 48.0
+        "gp": 10,
+        "g": 3,
+        "a": 4,
+        "p": 7,
+        "sog": 19,
+        "toi": 871.7,
+        "pptoi": 32.3
       },
       "season": {
-        "gp": 1,
+        "gp": 3,
         "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 0
+        "a": 1,
+        "p": 1,
+        "sog": 7
       },
       "opp_index": 1.1383,
       "opp_goalie": {
@@ -4389,8 +4390,10 @@
         "status": "Confirmed",
         "source": "confirmed"
       },
-      "flags": [],
-      "number": 40
+      "flags": [
+        "HOT"
+      ],
+      "number": 18
     },
     {
       "id": 8482408,
@@ -4542,31 +4545,31 @@
       "number": 2
     },
     {
-      "id": 8483482,
-      "name": "TRISTAN LUNEAU",
+      "id": 8483521,
+      "name": "NOAH WARREN",
       "team": "ANA",
       "opp": "WPG",
       "game_id": 2026020069,
       "home": false,
       "pos": "D",
       "line": "D1",
-      "pp": 2,
+      "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 4,
-        "g": 1,
+        "gp": 3,
+        "g": 0,
         "a": 1,
-        "p": 2,
+        "p": 1,
         "sog": 3,
-        "toi": 1301.0,
-        "pptoi": 31.0
+        "toi": 855.7,
+        "pptoi": 0.0
       },
       "season": {
         "gp": 3,
         "g": 0,
         "a": 1,
         "p": 1,
-        "sog": 1
+        "sog": 3
       },
       "opp_index": 1.2632,
       "opp_goalie": {
@@ -4575,9 +4578,10 @@
         "source": "confirmed"
       },
       "flags": [
+        "ROLE_UP",
         "SOFT_MATCHUP"
       ],
-      "number": 67
+      "number": 47
     },
     {
       "id": 8483490,
@@ -4694,31 +4698,31 @@
       "number": 55
     },
     {
-      "id": 8483521,
-      "name": "NOAH WARREN",
+      "id": 8483482,
+      "name": "TRISTAN LUNEAU",
       "team": "ANA",
       "opp": "WPG",
       "game_id": 2026020069,
       "home": false,
       "pos": "D",
       "line": "D3",
-      "pp": null,
+      "pp": 2,
       "b2b": false,
       "last10": {
-        "gp": 3,
-        "g": 0,
+        "gp": 4,
+        "g": 1,
         "a": 1,
-        "p": 1,
+        "p": 2,
         "sog": 3,
-        "toi": 855.7,
-        "pptoi": 0.0
+        "toi": 1301.0,
+        "pptoi": 31.0
       },
       "season": {
         "gp": 3,
         "g": 0,
         "a": 1,
         "p": 1,
-        "sog": 3
+        "sog": 1
       },
       "opp_index": 1.2632,
       "opp_goalie": {
@@ -4729,7 +4733,7 @@
       "flags": [
         "SOFT_MATCHUP"
       ],
-      "number": 47
+      "number": 67
     },
     {
       "id": 8478398,
@@ -4761,8 +4765,8 @@
       "opp_index": 1.3617,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -4801,8 +4805,8 @@
       "opp_index": 1.3333,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -4841,8 +4845,8 @@
       "opp_index": 0.8854,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -4880,8 +4884,8 @@
       "opp_index": 1.3617,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP",
@@ -4919,8 +4923,8 @@
       "opp_index": 1.3333,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -4957,8 +4961,8 @@
       "opp_index": 0.8854,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -4996,8 +5000,8 @@
       "opp_index": 1.3617,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -5034,8 +5038,8 @@
       "opp_index": 1.3333,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -5072,8 +5076,8 @@
       "opp_index": 0.8854,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 9
@@ -5108,8 +5112,8 @@
       "opp_index": 1.3617,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -5146,8 +5150,8 @@
       "opp_index": 1.3333,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -5184,8 +5188,8 @@
       "opp_index": 0.8854,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 93
@@ -5220,8 +5224,8 @@
       "opp_index": 1.2632,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP",
@@ -5259,8 +5263,8 @@
       "opp_index": 1.2632,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP",
@@ -5298,8 +5302,8 @@
       "opp_index": 1.2632,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP",
@@ -5337,8 +5341,8 @@
       "opp_index": 1.2632,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -5377,8 +5381,8 @@
       "opp_index": 1.2632,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -5415,8 +5419,8 @@
       "opp_index": 1.2632,
       "opp_goalie": {
         "name": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"

@@ -1,7 +1,35 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-10-09 22:53:27 UTC",
+  "updated_at": "2026-10-10 01:49:54 UTC",
   "matchups": [
+    {
+      "away": {
+        "team": "pittsburgh-penguins",
+        "goalie": "SERGEI MURASHOV",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/36361/Murashov-Sergei_PIT-2026-2_.png",
+        "stats": {
+          "record": "0-1-0",
+          "gaa": "2.88",
+          "svpct": "0.926",
+          "so": 0
+        }
+      },
+      "home": {
+        "team": "columbus-blue-jackets",
+        "goalie": "CAM TALBOT",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/1059/Talbot-Cam_CBJ-2026_.png",
+        "stats": {
+          "record": "0-0-0",
+          "gaa": "2.55",
+          "svpct": "0.846",
+          "so": 0
+        }
+      },
+      "date": "2026-10-09",
+      "time": "19:00"
+    },
     {
       "away": {
         "team": "new-york-rangers",
@@ -10,7 +38,7 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/25267/Shesterkin-Igor_NYR-2024-2_.png",
         "stats": {
           "record": "3-1-0",
-          "gaa": "1.75",
+          "gaa": "1.79",
           "svpct": "0.927",
           "so": 0
         }
@@ -22,36 +50,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/28990/Thompson-Logan_WSH-Dec-2024_.png",
         "stats": {
           "record": "2-0-0",
-          "gaa": "2.5",
-          "svpct": "0.921",
-          "so": 0
-        }
-      },
-      "date": "2026-10-09",
-      "time": "19:00"
-    },
-    {
-      "away": {
-        "team": "pittsburgh-penguins",
-        "goalie": "SERGEI MURASHOV",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/36361/Murashov-Sergei_PIT-2026-2_.png",
-        "stats": {
-          "record": "0-1-0",
-          "gaa": "3.1",
-          "svpct": "0.912",
-          "so": 0
-        }
-      },
-      "home": {
-        "team": "columbus-blue-jackets",
-        "goalie": "CAM TALBOT",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/1059/Talbot-Cam_CBJ-2026_.png",
-        "stats": {
-          "record": "0-0-0",
-          "gaa": "0.0",
-          "svpct": "0.0",
+          "gaa": "2.2",
+          "svpct": "0.928",
           "so": 0
         }
       },
@@ -66,8 +66,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2065/Grubauer-Philipp_SEA-2026_.png",
         "stats": {
           "record": "0-1-0",
-          "gaa": "2.25",
-          "svpct": "0.903",
+          "gaa": "2.4",
+          "svpct": "0.926",
           "so": 0
         }
       },
@@ -78,8 +78,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/1870/Gibson-John_DET-1_.png",
         "stats": {
           "record": "1-2-0",
-          "gaa": "2.37",
-          "svpct": "0.903",
+          "gaa": "3.41",
+          "svpct": "0.862",
           "so": 0
         }
       },
@@ -90,12 +90,12 @@
       "away": {
         "team": "anaheim-ducks",
         "goalie": "LUKAS DOSTAL",
-        "status": "Unconfirmed",
+        "status": "Confirmed",
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/29143/Dostal-Lukas_ANA-2026_.png",
         "stats": {
           "record": "2-1-0",
-          "gaa": "3.66",
-          "svpct": "0.872",
+          "gaa": "3.21",
+          "svpct": "0.885",
           "so": 0
         }
       },
@@ -106,8 +106,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/36270/Stevenson-Clay_WPG-2026_.png",
         "stats": {
           "record": "1-0-0",
-          "gaa": "2.0",
-          "svpct": "0.938",
+          "gaa": "2.14",
+          "svpct": "0.917",
           "so": 0
         }
       },
