@@ -10,12 +10,12 @@
     "seasons": 2
   },
   "summary": {
-    "graded": 138,
-    "hits": 74,
-    "hit_rate": 0.5362,
-    "pending": 28,
+    "graded": 140,
+    "hits": 75,
+    "hit_rate": 0.5357,
+    "pending": 26,
     "void": 0,
-    "baseline_hit_rate": 0.5036,
+    "baseline_hit_rate": 0.5018,
     "by_position": {
       "C": {
         "graded": 37,
@@ -33,16 +33,16 @@
         "hit_rate": 0.55
       },
       "D": {
-        "graded": 28,
-        "hits": 12,
-        "hit_rate": 0.4286
+        "graded": 30,
+        "hits": 13,
+        "hit_rate": 0.4333
       }
     },
     "by_season": {
       "20262027": {
-        "graded": 138,
-        "hits": 74,
-        "hit_rate": 0.5362
+        "graded": 140,
+        "hits": 75,
+        "hit_rate": 0.5357
       }
     }
   },
@@ -7540,8 +7540,18 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-10T08:32:29Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": false,
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 1,
+          "D": 0
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-10T21:59:49Z"
+      }
     },
     {
       "id": "2026020070-BOS",
@@ -7584,8 +7594,18 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-10T08:32:29Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "goals_by_position": {
+          "C": 4,
+          "LW": 0,
+          "RW": 0,
+          "D": 1
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-10T21:59:49Z"
+      }
     },
     {
       "id": "2026020071-VAN",
