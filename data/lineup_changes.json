@@ -1,11 +1,664 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-10T21:58:29Z",
+  "generated_at": "2026-10-11T01:03:51Z",
   "retention": {
     "max_age_days": 90,
     "max_events": 500
   },
   "events": [
+    {
+      "id": "fcaeaaf66be94d1f93ef",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "KAILER YAMAMOTO",
+      "team": "utah-mammoth",
+      "previous_team": "utah-mammoth",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "utah-mammoth",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "utah-mammoth",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 4,
+          "to": 3,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "f045555ff9f3620fd677",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "OLIVER EKMAN-LARSSON",
+      "team": "toronto-maple-leafs",
+      "previous_team": "toronto-maple-leafs",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "toronto-maple-leafs",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "toronto-maple-leafs",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 3,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
+    {
+      "id": "e647138f03c418820418",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "TREVOR VAN RIEMSDYK",
+      "team": "pittsburgh-penguins",
+      "previous_team": "pittsburgh-penguins",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "pittsburgh-penguins",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 3,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "pittsburgh-penguins",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "b579755754f3943650a3",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "JACK MCBAIN",
+      "team": "utah-mammoth",
+      "previous_team": "utah-mammoth",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "utah-mammoth",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "utah-mammoth",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 3,
+          "to": 4,
+          "direction": "demoted"
+        }
+      ]
+    },
+    {
+      "id": "b1c4c2c49aff1c55e616",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "VINCENT TROCHECK",
+      "team": "utah-mammoth",
+      "previous_team": "utah-mammoth",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "utah-mammoth",
+        "rostered": true,
+        "forward_line": 1,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "utah-mammoth",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 1,
+          "to": 2,
+          "direction": "demoted"
+        }
+      ]
+    },
+    {
+      "id": "a4f254a66f49b0b3b93f",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "JEFFREY VIEL",
+      "team": "tampa-bay-lightning",
+      "previous_team": "tampa-bay-lightning",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "tampa-bay-lightning",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "tampa-bay-lightning",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "a082c4f0162e817fd9d2",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "SCOTT SABOURIN",
+      "team": "tampa-bay-lightning",
+      "previous_team": "tampa-bay-lightning",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "tampa-bay-lightning",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "tampa-bay-lightning",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
+    {
+      "id": "93e7dd80fc8e5e7cde24",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "VICTOR HEDMAN",
+      "team": "tampa-bay-lightning",
+      "previous_team": "tampa-bay-lightning",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "tampa-bay-lightning",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "tampa-bay-lightning",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 3,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
+    {
+      "id": "934ff975dc992f5234c6",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "NICK BLANKENBURG",
+      "team": "toronto-maple-leafs",
+      "previous_team": "toronto-maple-leafs",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "toronto-maple-leafs",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 3,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "toronto-maple-leafs",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "8d621a5f9393ad4a9c7e",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "BO GROULX",
+      "team": "toronto-maple-leafs",
+      "previous_team": "toronto-maple-leafs",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "toronto-maple-leafs",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "toronto-maple-leafs",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": 2,
+          "to": null
+        }
+      ]
+    },
+    {
+      "id": "88c0cfc61c27120d2eb7",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "CHARLE-EDOUARD D'ASTOUS",
+      "team": "tampa-bay-lightning",
+      "previous_team": "tampa-bay-lightning",
+      "event_types": [
+        "defense_pair"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "tampa-bay-lightning",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 3,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "tampa-bay-lightning",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "defense_pair",
+          "from": 3,
+          "to": null
+        }
+      ]
+    },
+    {
+      "id": "7d844b0fab2d29124577",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "VILLE KOIVUNEN",
+      "team": "pittsburgh-penguins",
+      "previous_team": "pittsburgh-penguins",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "pittsburgh-penguins",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "pittsburgh-penguins",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "7900ec7af90d0efa4684",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "ZACK MACEWEN",
+      "team": "toronto-maple-leafs",
+      "previous_team": "toronto-maple-leafs",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "toronto-maple-leafs",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "toronto-maple-leafs",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "5648fe9d1df4f1c3aade",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "ROSS COLTON",
+      "team": "nashville-predators",
+      "previous_team": "nashville-predators",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "nashville-predators",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "nashville-predators",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 4,
+          "to": 3,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "3c3841afd1d58d794a00",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "LAWSON CROUSE",
+      "team": "utah-mammoth",
+      "previous_team": "utah-mammoth",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "utah-mammoth",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "utah-mammoth",
+        "rostered": true,
+        "forward_line": 1,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 3,
+          "to": 1,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "3a537e2e0f81c5581adb",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "ANDERS LEE",
+      "team": "utah-mammoth",
+      "previous_team": "utah-mammoth",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "utah-mammoth",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "utah-mammoth",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 2,
+          "to": 3,
+          "direction": "demoted"
+        }
+      ]
+    },
+    {
+      "id": "2f65898314a9394641b0",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "ELMER SODERBLOM",
+      "team": "pittsburgh-penguins",
+      "previous_team": "pittsburgh-penguins",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "pittsburgh-penguins",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "pittsburgh-penguins",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
+    {
+      "id": "171e64c8814bca004874",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "REID SCHAEFER",
+      "team": "nashville-predators",
+      "previous_team": "nashville-predators",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "nashville-predators",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "nashville-predators",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 3,
+          "to": 4,
+          "direction": "demoted"
+        }
+      ]
+    },
+    {
+      "id": "0de8c9de4bd91b7e0938",
+      "occurred_at": "2026-10-11T01:03:51Z",
+      "player": "SPENCER STASTNEY",
+      "team": "pittsburgh-penguins",
+      "previous_team": "pittsburgh-penguins",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "pittsburgh-penguins",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "pittsburgh-penguins",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": 3,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
     {
       "id": "dab464739936b34b05c7",
       "occurred_at": "2026-10-10T21:58:29Z",
@@ -16746,669 +17399,6 @@
           "type": "addition",
           "from": false,
           "to": true
-        }
-      ]
-    },
-    {
-      "id": "0691cabafb6c4ec24ca6",
-      "occurred_at": "2026-10-05T22:33:28Z",
-      "player": "ALEX VLASIC",
-      "team": "chicago-blackhawks",
-      "previous_team": "chicago-blackhawks",
-      "event_types": [
-        "defense_pair"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "chicago-blackhawks",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 1,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "chicago-blackhawks",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 2,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "defense_pair",
-          "from": 1,
-          "to": 2,
-          "direction": "demoted"
-        }
-      ]
-    },
-    {
-      "id": "ee3a179618949d355eff",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "MICHAEL RASMUSSEN",
-      "team": "detroit-red-wings",
-      "previous_team": "detroit-red-wings",
-      "event_types": [
-        "power_play"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "detroit-red-wings",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "detroit-red-wings",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "changes": [
-        {
-          "type": "power_play",
-          "from": null,
-          "to": 2
-        }
-      ]
-    },
-    {
-      "id": "ea648d954cf3e4afb2e7",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "WYATT JOHNSTON",
-      "team": "dallas-stars",
-      "previous_team": "dallas-stars",
-      "event_types": [
-        "forward_line"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "dallas-stars",
-        "rostered": true,
-        "forward_line": 1,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 1
-      },
-      "after": {
-        "team": "dallas-stars",
-        "rostered": true,
-        "forward_line": 2,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 1
-      },
-      "changes": [
-        {
-          "type": "forward_line",
-          "from": 1,
-          "to": 2,
-          "direction": "demoted"
-        }
-      ]
-    },
-    {
-      "id": "e9aa9dbedb0df82ecb70",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "JOEL KIVIRANTA",
-      "team": "dallas-stars",
-      "previous_team": "dallas-stars",
-      "event_types": [
-        "addition"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "dallas-stars",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "dallas-stars",
-        "rostered": true,
-        "forward_line": 4,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "addition",
-          "from": false,
-          "to": true
-        }
-      ]
-    },
-    {
-      "id": "e450ac3c9170b9cf0c3f",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "JAMIE BENN",
-      "team": "dallas-stars",
-      "previous_team": "dallas-stars",
-      "event_types": [
-        "forward_line"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "dallas-stars",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "dallas-stars",
-        "rostered": true,
-        "forward_line": 1,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "changes": [
-        {
-          "type": "forward_line",
-          "from": 3,
-          "to": 1,
-          "direction": "promoted"
-        }
-      ]
-    },
-    {
-      "id": "d85e7dbd3f200eb9f1a4",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "JONATHAN LEKKERIMAKI",
-      "team": "vancouver-canucks",
-      "previous_team": "vancouver-canucks",
-      "event_types": [
-        "forward_line",
-        "power_play"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "vancouver-canucks",
-        "rostered": true,
-        "forward_line": 4,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 1
-      },
-      "after": {
-        "team": "vancouver-canucks",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "changes": [
-        {
-          "type": "forward_line",
-          "from": 4,
-          "to": 3,
-          "direction": "promoted"
-        },
-        {
-          "type": "power_play",
-          "from": 1,
-          "to": 2,
-          "direction": "demoted"
-        }
-      ]
-    },
-    {
-      "id": "d78a0e9a808363cc96c1",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "NATE DANIELSON",
-      "team": "detroit-red-wings",
-      "previous_team": "detroit-red-wings",
-      "event_types": [
-        "power_play"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "detroit-red-wings",
-        "rostered": true,
-        "forward_line": 4,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "detroit-red-wings",
-        "rostered": true,
-        "forward_line": 4,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "power_play",
-          "from": 2,
-          "to": null
-        }
-      ]
-    },
-    {
-      "id": "c376596f285e26b193bf",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "BRENDAN GALLAGHER",
-      "team": "vancouver-canucks",
-      "previous_team": "vancouver-canucks",
-      "event_types": [
-        "power_play"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "vancouver-canucks",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "vancouver-canucks",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "power_play",
-          "from": 2,
-          "to": null
-        }
-      ]
-    },
-    {
-      "id": "b8491bfd3ed57f41e618",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "MATTHEW POITRAS",
-      "team": "boston-bruins",
-      "previous_team": "boston-bruins",
-      "event_types": [
-        "addition"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "boston-bruins",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "boston-bruins",
-        "rostered": true,
-        "forward_line": 4,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "addition",
-          "from": false,
-          "to": true
-        }
-      ]
-    },
-    {
-      "id": "a3ac74acbca15012432d",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "HENDRIX LAPIERRE",
-      "team": "pittsburgh-penguins",
-      "previous_team": "pittsburgh-penguins",
-      "event_types": [
-        "forward_line"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "pittsburgh-penguins",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "pittsburgh-penguins",
-        "rostered": true,
-        "forward_line": 4,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "changes": [
-        {
-          "type": "forward_line",
-          "from": 3,
-          "to": 4,
-          "direction": "demoted"
-        }
-      ]
-    },
-    {
-      "id": "a1e29d48f4541357ff0f",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "NOAH OSTLUND",
-      "team": "buffalo-sabres",
-      "previous_team": "buffalo-sabres",
-      "event_types": [
-        "power_play"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "buffalo-sabres",
-        "rostered": true,
-        "forward_line": 2,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "buffalo-sabres",
-        "rostered": true,
-        "forward_line": 2,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 1
-      },
-      "changes": [
-        {
-          "type": "power_play",
-          "from": 2,
-          "to": 1,
-          "direction": "promoted"
-        }
-      ]
-    },
-    {
-      "id": "a0db4c301e09b321032f",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "GUSTAV FORSLING",
-      "team": "florida-panthers",
-      "previous_team": "florida-panthers",
-      "event_types": [
-        "power_play"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "florida-panthers",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 1,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "florida-panthers",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 1,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "power_play",
-          "from": 2,
-          "to": null
-        }
-      ]
-    },
-    {
-      "id": "89559cd4ba800c7bc9ab",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "FILIP HALLANDER",
-      "team": "pittsburgh-penguins",
-      "previous_team": "pittsburgh-penguins",
-      "event_types": [
-        "removal"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "pittsburgh-penguins",
-        "rostered": true,
-        "forward_line": 4,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "pittsburgh-penguins",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "removal",
-          "from": true,
-          "to": false
-        }
-      ]
-    },
-    {
-      "id": "6d8ca2fb739ee114826f",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "VILLE KOIVUNEN",
-      "team": "pittsburgh-penguins",
-      "previous_team": "pittsburgh-penguins",
-      "event_types": [
-        "addition"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "pittsburgh-penguins",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "pittsburgh-penguins",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "addition",
-          "from": false,
-          "to": true
-        }
-      ]
-    },
-    {
-      "id": "6a0984c6eae28184001a",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "ELIAS NILS PETTERSSON",
-      "team": "vancouver-canucks",
-      "previous_team": "vancouver-canucks",
-      "event_types": [
-        "defense_pair"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "vancouver-canucks",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 3,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "vancouver-canucks",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 1,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "defense_pair",
-          "from": 3,
-          "to": 1,
-          "direction": "promoted"
-        }
-      ]
-    },
-    {
-      "id": "5c984b26f1e005a55162",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "ROOPE HINTZ",
-      "team": "dallas-stars",
-      "previous_team": "dallas-stars",
-      "event_types": [
-        "forward_line"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "dallas-stars",
-        "rostered": true,
-        "forward_line": 2,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 1
-      },
-      "after": {
-        "team": "dallas-stars",
-        "rostered": true,
-        "forward_line": 1,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 1
-      },
-      "changes": [
-        {
-          "type": "forward_line",
-          "from": 2,
-          "to": 1,
-          "direction": "promoted"
-        }
-      ]
-    },
-    {
-      "id": "5801c653eec3b128dcce",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "JOSH DOAN",
-      "team": "buffalo-sabres",
-      "previous_team": "buffalo-sabres",
-      "event_types": [
-        "power_play"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "buffalo-sabres",
-        "rostered": true,
-        "forward_line": 1,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 1
-      },
-      "after": {
-        "team": "buffalo-sabres",
-        "rostered": true,
-        "forward_line": 1,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "changes": [
-        {
-          "type": "power_play",
-          "from": 1,
-          "to": 2,
-          "direction": "demoted"
-        }
-      ]
-    },
-    {
-      "id": "570b46e4a153423411dd",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "JONATHAN ASPIROT",
-      "team": "boston-bruins",
-      "previous_team": "boston-bruins",
-      "event_types": [
-        "removal"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "boston-bruins",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 3,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "boston-bruins",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "removal",
-          "from": true,
-          "to": false
-        }
-      ]
-    },
-    {
-      "id": "55215a6280285e34bbf4",
-      "occurred_at": "2026-10-05T16:10:10Z",
-      "player": "JUSTIN HRYCKOWIAN",
-      "team": "dallas-stars",
-      "previous_team": "dallas-stars",
-      "event_types": [
-        "forward_line"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "dallas-stars",
-        "rostered": true,
-        "forward_line": 1,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "dallas-stars",
-        "rostered": true,
-        "forward_line": 3,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "changes": [
-        {
-          "type": "forward_line",
-          "from": 1,
-          "to": 3,
-          "direction": "demoted"
         }
       ]
     }
