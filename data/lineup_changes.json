@@ -1,11 +1,249 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-11T01:03:51Z",
+  "generated_at": "2026-10-11T02:08:43Z",
   "retention": {
     "max_age_days": 90,
     "max_events": 500
   },
   "events": [
+    {
+      "id": "fbbda442155a4838ea59",
+      "occurred_at": "2026-10-11T02:08:43Z",
+      "player": "A.J. GREER",
+      "team": "anaheim-ducks",
+      "previous_team": "anaheim-ducks",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "anaheim-ducks",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "anaheim-ducks",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "c282b252855d98648da4",
+      "occurred_at": "2026-10-11T02:08:43Z",
+      "player": "IGOR SHESTERKIN",
+      "team": "new-york-rangers",
+      "previous_team": "new-york-rangers",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "new-york-rangers",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": 1,
+        "power_play": null
+      },
+      "after": {
+        "team": "new-york-rangers",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "954b32a6f83a3550abf1",
+      "occurred_at": "2026-10-11T02:08:43Z",
+      "player": "ERIK GUSTAFSSON",
+      "team": "los-angeles-kings",
+      "previous_team": "los-angeles-kings",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "los-angeles-kings",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "los-angeles-kings",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
+    {
+      "id": "91da775084266de15264",
+      "occurred_at": "2026-10-11T02:08:43Z",
+      "player": "ANDRE LEE",
+      "team": "los-angeles-kings",
+      "previous_team": "los-angeles-kings",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "los-angeles-kings",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "los-angeles-kings",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
+    {
+      "id": "5afe52ec70dcb61c38c9",
+      "occurred_at": "2026-10-11T02:08:43Z",
+      "player": "FRANK VATRANO",
+      "team": "anaheim-ducks",
+      "previous_team": "anaheim-ducks",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "anaheim-ducks",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "anaheim-ducks",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
+    {
+      "id": "52fd0564551818be483d",
+      "occurred_at": "2026-10-11T02:08:43Z",
+      "player": "CALLUM TUNG",
+      "team": "new-york-rangers",
+      "previous_team": "new-york-rangers",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "new-york-rangers",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "new-york-rangers",
+        "rostered": true,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": 2,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
+    {
+      "id": "119a3c5f8c3333d931e5",
+      "occurred_at": "2026-10-11T02:08:43Z",
+      "player": "SCOTT LAUGHTON",
+      "team": "los-angeles-kings",
+      "previous_team": "los-angeles-kings",
+      "event_types": [
+        "power_play"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "los-angeles-kings",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "los-angeles-kings",
+        "rostered": true,
+        "forward_line": 3,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "power_play",
+          "from": null,
+          "to": 2
+        }
+      ]
+    },
     {
       "id": "fcaeaaf66be94d1f93ef",
       "occurred_at": "2026-10-11T01:03:51Z",
@@ -17144,254 +17382,6 @@
         "forward_line": null,
         "defense_pair": null,
         "goalie_slot": 2,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "addition",
-          "from": false,
-          "to": true
-        }
-      ]
-    },
-    {
-      "id": "3f56556cc6782cc7ba2f",
-      "occurred_at": "2026-10-05T22:33:28Z",
-      "player": "ALEX BUMP",
-      "team": "philadelphia-flyers",
-      "previous_team": "philadelphia-flyers",
-      "event_types": [
-        "removal"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "philadelphia-flyers",
-        "rostered": true,
-        "forward_line": 4,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "philadelphia-flyers",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "removal",
-          "from": true,
-          "to": false
-        }
-      ]
-    },
-    {
-      "id": "3d56b6f900c56b1ea1f7",
-      "occurred_at": "2026-10-05T22:33:28Z",
-      "player": "CONOR GARLAND",
-      "team": "columbus-blue-jackets",
-      "previous_team": "columbus-blue-jackets",
-      "event_types": [
-        "forward_line"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "columbus-blue-jackets",
-        "rostered": true,
-        "forward_line": 2,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "columbus-blue-jackets",
-        "rostered": true,
-        "forward_line": 4,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "changes": [
-        {
-          "type": "forward_line",
-          "from": 2,
-          "to": 4,
-          "direction": "demoted"
-        }
-      ]
-    },
-    {
-      "id": "2feeaa1495d9ad48e61f",
-      "occurred_at": "2026-10-05T22:33:28Z",
-      "player": "ARTYOM LEVSHUNOV",
-      "team": "chicago-blackhawks",
-      "previous_team": "chicago-blackhawks",
-      "event_types": [
-        "defense_pair",
-        "power_play"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "chicago-blackhawks",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 2,
-        "goalie_slot": null,
-        "power_play": 1
-      },
-      "after": {
-        "team": "chicago-blackhawks",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 1,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "changes": [
-        {
-          "type": "defense_pair",
-          "from": 2,
-          "to": 1,
-          "direction": "promoted"
-        },
-        {
-          "type": "power_play",
-          "from": 1,
-          "to": 2,
-          "direction": "demoted"
-        }
-      ]
-    },
-    {
-      "id": "26d4df29bf25e68624c4",
-      "occurred_at": "2026-10-05T22:33:28Z",
-      "player": "CAMERON CROTTY",
-      "team": "ottawa-senators",
-      "previous_team": "ottawa-senators",
-      "event_types": [
-        "addition"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "ottawa-senators",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "ottawa-senators",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 3,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "addition",
-          "from": false,
-          "to": true
-        }
-      ]
-    },
-    {
-      "id": "12955ef5bb2d028260a9",
-      "occurred_at": "2026-10-05T22:33:28Z",
-      "player": "JAKE SANDERSON",
-      "team": "ottawa-senators",
-      "previous_team": "ottawa-senators",
-      "event_types": [
-        "removal"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "ottawa-senators",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 1,
-        "goalie_slot": null,
-        "power_play": 1
-      },
-      "after": {
-        "team": "ottawa-senators",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "removal",
-          "from": true,
-          "to": false
-        }
-      ]
-    },
-    {
-      "id": "0efdadccbb7eb6d0bd06",
-      "occurred_at": "2026-10-05T22:33:28Z",
-      "player": "IAN COLE",
-      "team": "chicago-blackhawks",
-      "previous_team": "chicago-blackhawks",
-      "event_types": [
-        "defense_pair"
-      ],
-      "importance": "medium",
-      "before": {
-        "team": "chicago-blackhawks",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 1,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "chicago-blackhawks",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": 2,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "defense_pair",
-          "from": 1,
-          "to": 2,
-          "direction": "demoted"
-        }
-      ]
-    },
-    {
-      "id": "07b2c798cd57b6d3217b",
-      "occurred_at": "2026-10-05T22:33:28Z",
-      "player": "MATT REMPE",
-      "team": "new-york-rangers",
-      "previous_team": "new-york-rangers",
-      "event_types": [
-        "addition"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "new-york-rangers",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "new-york-rangers",
-        "rostered": true,
-        "forward_line": 4,
-        "defense_pair": null,
-        "goalie_slot": null,
         "power_play": null
       },
       "changes": [
