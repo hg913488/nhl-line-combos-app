@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-11T20:12:57Z",
+  "generated_at": "2026-10-11T22:27:53Z",
   "date": "2026-10-11",
   "window": {
     "games": 10,
@@ -702,121 +702,6 @@
       "number": 46
     },
     {
-      "id": 8477949,
-      "name": "ALEX TUCH",
-      "team": "WSH",
-      "opp": "SEA",
-      "game_id": 2026020084,
-      "home": true,
-      "pos": "LW",
-      "line": "L1",
-      "pp": 2,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 3,
-        "a": 0,
-        "p": 3,
-        "sog": 38,
-        "toi": 1160.8,
-        "pptoi": 121.7
-      },
-      "season": {
-        "gp": 4,
-        "g": 3,
-        "a": 0,
-        "p": 3,
-        "sog": 13
-      },
-      "opp_index": 0.5714,
-      "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [],
-      "number": 89
-    },
-    {
-      "id": 8479400,
-      "name": "PIERRE-LUC DUBOIS",
-      "team": "WSH",
-      "opp": "SEA",
-      "game_id": 2026020084,
-      "home": true,
-      "pos": "C",
-      "line": "L1",
-      "pp": 1,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 2,
-        "a": 8,
-        "p": 10,
-        "sog": 15,
-        "toi": 927.4,
-        "pptoi": 134.4
-      },
-      "season": {
-        "gp": 4,
-        "g": 1,
-        "a": 3,
-        "p": 4,
-        "sog": 6
-      },
-      "opp_index": 0.8113,
-      "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "PP1",
-        "HOT"
-      ],
-      "number": 80
-    },
-    {
-      "id": 8476880,
-      "name": "TOM WILSON",
-      "team": "WSH",
-      "opp": "SEA",
-      "game_id": 2026020084,
-      "home": true,
-      "pos": "RW",
-      "line": "L1",
-      "pp": 1,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 4,
-        "a": 7,
-        "p": 11,
-        "sog": 17,
-        "toi": 1097.6,
-        "pptoi": 123.7
-      },
-      "season": {
-        "gp": 4,
-        "g": 2,
-        "a": 3,
-        "p": 5,
-        "sog": 7
-      },
-      "opp_index": 1.6134,
-      "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "PP1",
-        "HOT",
-        "SOFT_MATCHUP"
-      ],
-      "number": 43
-    },
-    {
       "id": 8471214,
       "name": "ALEX OVECHKIN",
       "team": "WSH",
@@ -824,7 +709,7 @@
       "game_id": 2026020084,
       "home": true,
       "pos": "LW",
-      "line": "L2",
+      "line": "L1",
       "pp": 1,
       "b2b": false,
       "last10": {
@@ -845,127 +730,15 @@
       },
       "opp_index": 0.5714,
       "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "PP1"
-      ],
-      "number": 8
-    },
-    {
-      "id": 8478440,
-      "name": "DYLAN STROME",
-      "team": "WSH",
-      "opp": "SEA",
-      "game_id": 2026020084,
-      "home": true,
-      "pos": "C",
-      "line": "L2",
-      "pp": 1,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 2,
-        "a": 6,
-        "p": 8,
-        "sog": 17,
-        "toi": 942.6,
-        "pptoi": 147.6
-      },
-      "season": {
-        "gp": 4,
-        "g": 0,
-        "a": 4,
-        "p": 4,
-        "sog": 8
-      },
-      "opp_index": 0.8113,
-      "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
-        "HOT"
+        "ROLE_UP"
       ],
-      "number": 17
-    },
-    {
-      "id": 8478463,
-      "name": "ANTHONY BEAUVILLIER",
-      "team": "WSH",
-      "opp": "SEA",
-      "game_id": 2026020084,
-      "home": true,
-      "pos": "RW",
-      "line": "L2",
-      "pp": null,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 2,
-        "a": 1,
-        "p": 3,
-        "sog": 12,
-        "toi": 855.4,
-        "pptoi": 0.3
-      },
-      "season": {
-        "gp": 4,
-        "g": 1,
-        "a": 0,
-        "p": 1,
-        "sog": 6
-      },
-      "opp_index": 1.6134,
-      "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "SOFT_MATCHUP"
-      ],
-      "number": 72
-    },
-    {
-      "id": 8481656,
-      "name": "ALIAKSEI PROTAS",
-      "team": "WSH",
-      "opp": "SEA",
-      "game_id": 2026020084,
-      "home": true,
-      "pos": "LW",
-      "line": "L3",
-      "pp": null,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 2,
-        "a": 4,
-        "p": 6,
-        "sog": 16,
-        "toi": 1006.6,
-        "pptoi": 0.0
-      },
-      "season": {
-        "gp": 4,
-        "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 4
-      },
-      "opp_index": 0.5714,
-      "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [],
-      "number": 21
+      "number": 8
     },
     {
       "id": 8484999,
@@ -975,7 +748,7 @@
       "game_id": 2026020084,
       "home": true,
       "pos": "C",
-      "line": "L3",
+      "line": "L1",
       "pp": 2,
       "b2b": false,
       "last10": {
@@ -996,12 +769,246 @@
       },
       "opp_index": 0.8113,
       "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "ROLE_UP"
+      ],
+      "number": 62
+    },
+    {
+      "id": 8481656,
+      "name": "ALIAKSEI PROTAS",
+      "team": "WSH",
+      "opp": "SEA",
+      "game_id": 2026020084,
+      "home": true,
+      "pos": "RW",
+      "line": "L1",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 4,
+        "p": 6,
+        "sog": 16,
+        "toi": 1006.6,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 4,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 4
+      },
+      "opp_index": 1.6134,
+      "opp_goalie": {
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "ROLE_UP",
+        "SOFT_MATCHUP"
+      ],
+      "number": 21
+    },
+    {
+      "id": 8477949,
+      "name": "ALEX TUCH",
+      "team": "WSH",
+      "opp": "SEA",
+      "game_id": 2026020084,
+      "home": true,
+      "pos": "LW",
+      "line": "L2",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 0,
+        "p": 3,
+        "sog": 38,
+        "toi": 1160.8,
+        "pptoi": 121.7
+      },
+      "season": {
+        "gp": 4,
+        "g": 3,
+        "a": 0,
+        "p": 3,
+        "sog": 13
+      },
+      "opp_index": 0.5714,
+      "opp_goalie": {
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 62
+      "number": 89
+    },
+    {
+      "id": 8482088,
+      "name": "JUSTIN SOURDIF",
+      "team": "WSH",
+      "opp": "SEA",
+      "game_id": 2026020084,
+      "home": true,
+      "pos": "C",
+      "line": "L2",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 7,
+        "toi": 873.2,
+        "pptoi": 78.3
+      },
+      "season": {
+        "gp": 4,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 3
+      },
+      "opp_index": 0.8113,
+      "opp_goalie": {
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "ROLE_UP"
+      ],
+      "number": 34
+    },
+    {
+      "id": 8476880,
+      "name": "TOM WILSON",
+      "team": "WSH",
+      "opp": "SEA",
+      "game_id": 2026020084,
+      "home": true,
+      "pos": "RW",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 4,
+        "a": 7,
+        "p": 11,
+        "sog": 17,
+        "toi": 1097.6,
+        "pptoi": 123.7
+      },
+      "season": {
+        "gp": 4,
+        "g": 2,
+        "a": 3,
+        "p": 5,
+        "sog": 7
+      },
+      "opp_index": 1.6134,
+      "opp_goalie": {
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1",
+        "HOT",
+        "SOFT_MATCHUP"
+      ],
+      "number": 43
+    },
+    {
+      "id": 8484186,
+      "name": "RYAN LEONARD",
+      "team": "WSH",
+      "opp": "SEA",
+      "game_id": 2026020084,
+      "home": true,
+      "pos": "LW",
+      "line": "L3",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 6,
+        "a": 2,
+        "p": 8,
+        "sog": 25,
+        "toi": 849.7,
+        "pptoi": 105.3
+      },
+      "season": {
+        "gp": 4,
+        "g": 2,
+        "a": 1,
+        "p": 3,
+        "sog": 10
+      },
+      "opp_index": 0.5714,
+      "opp_goalie": {
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1",
+        "ROLE_UP",
+        "HOT"
+      ],
+      "number": 9
+    },
+    {
+      "id": 8478440,
+      "name": "DYLAN STROME",
+      "team": "WSH",
+      "opp": "SEA",
+      "game_id": 2026020084,
+      "home": true,
+      "pos": "C",
+      "line": "L3",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 6,
+        "p": 8,
+        "sog": 17,
+        "toi": 942.6,
+        "pptoi": 147.6
+      },
+      "season": {
+        "gp": 4,
+        "g": 0,
+        "a": 4,
+        "p": 4,
+        "sog": 8
+      },
+      "opp_index": 0.8113,
+      "opp_goalie": {
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1",
+        "HOT"
+      ],
+      "number": 17
     },
     {
       "id": 8479385,
@@ -1032,14 +1039,50 @@
       },
       "opp_index": 1.6134,
       "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
       ],
       "number": 25
+    },
+    {
+      "id": 8483573,
+      "name": "ETHEN FRANK",
+      "team": "WSH",
+      "opp": "SEA",
+      "game_id": 2026020084,
+      "home": true,
+      "pos": "LW",
+      "line": "L4",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 7,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 5,
+        "toi": 544.4,
+        "pptoi": 28.9
+      },
+      "season": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
+      },
+      "opp_index": 0.5714,
+      "opp_goalie": {
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [],
+      "number": 53
     },
     {
       "id": 8476432,
@@ -1048,7 +1091,7 @@
       "opp": "SEA",
       "game_id": 2026020084,
       "home": true,
-      "pos": "LW",
+      "pos": "C",
       "line": "L4",
       "pp": null,
       "b2b": false,
@@ -1068,89 +1111,52 @@
         "p": 2,
         "sog": 11
       },
-      "opp_index": 0.5714,
+      "opp_index": 0.8113,
       "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 22
     },
     {
-      "id": 8482088,
-      "name": "JUSTIN SOURDIF",
-      "team": "WSH",
-      "opp": "SEA",
-      "game_id": 2026020084,
-      "home": true,
-      "pos": "C",
-      "line": "L4",
-      "pp": null,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 1,
-        "a": 3,
-        "p": 4,
-        "sog": 7,
-        "toi": 873.2,
-        "pptoi": 78.3
-      },
-      "season": {
-        "gp": 4,
-        "g": 1,
-        "a": 0,
-        "p": 1,
-        "sog": 3
-      },
-      "opp_index": 0.8113,
-      "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [],
-      "number": 34
-    },
-    {
-      "id": 8484186,
-      "name": "RYAN LEONARD",
+      "id": 8478463,
+      "name": "ANTHONY BEAUVILLIER",
       "team": "WSH",
       "opp": "SEA",
       "game_id": 2026020084,
       "home": true,
       "pos": "RW",
       "line": "L4",
-      "pp": 2,
+      "pp": null,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 6,
-        "a": 2,
-        "p": 8,
-        "sog": 25,
-        "toi": 849.7,
-        "pptoi": 105.3
-      },
-      "season": {
-        "gp": 4,
         "g": 2,
         "a": 1,
         "p": 3,
-        "sog": 10
+        "sog": 12,
+        "toi": 855.4,
+        "pptoi": 0.3
+      },
+      "season": {
+        "gp": 4,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 6
       },
       "opp_index": 1.6134,
       "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
-        "HOT",
         "SOFT_MATCHUP"
       ],
-      "number": 9
+      "number": 72
     },
     {
       "id": 8479345,
@@ -1181,9 +1187,9 @@
       },
       "opp_index": 0.8767,
       "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -1219,9 +1225,9 @@
       },
       "opp_index": 0.8767,
       "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 27
@@ -1255,9 +1261,9 @@
       },
       "opp_index": 0.8767,
       "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 42
@@ -1291,9 +1297,9 @@
       },
       "opp_index": 0.8767,
       "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 73
@@ -1327,9 +1333,9 @@
       },
       "opp_index": 0.8767,
       "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 44
@@ -1363,9 +1369,9 @@
       },
       "opp_index": 0.8767,
       "opp_goalie": {
-        "name": "PHILIPP GRUBAUER",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "JOEY DACCORD",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 52
@@ -1568,31 +1574,31 @@
       "number": 23
     },
     {
-      "id": 8481024,
-      "name": "LINUS KARLSSON",
+      "id": 8478444,
+      "name": "BROCK BOESER",
       "team": "VAN",
       "opp": "NYR",
       "game_id": 2026020085,
       "home": false,
       "pos": "RW",
       "line": "L2",
-      "pp": 2,
+      "pp": 1,
       "b2b": true,
       "last10": {
         "gp": 10,
-        "g": 1,
+        "g": 2,
         "a": 5,
-        "p": 6,
-        "sog": 17,
-        "toi": 894.0,
-        "pptoi": 74.0
+        "p": 7,
+        "sog": 16,
+        "toi": 1137.0,
+        "pptoi": 220.9
       },
       "season": {
         "gp": 6,
         "g": 1,
-        "a": 4,
-        "p": 5,
-        "sog": 11
+        "a": 3,
+        "p": 4,
+        "sog": 8
       },
       "opp_index": 0.9412,
       "opp_goalie": {
@@ -1601,10 +1607,12 @@
         "source": "confirmed"
       },
       "flags": [
+        "PP1",
         "ROLE_UP",
+        "HOT",
         "B2B"
       ],
-      "number": 94
+      "number": 6
     },
     {
       "id": 8483499,
@@ -1684,31 +1692,31 @@
       "number": 18
     },
     {
-      "id": 8478444,
-      "name": "BROCK BOESER",
+      "id": 8481024,
+      "name": "LINUS KARLSSON",
       "team": "VAN",
       "opp": "NYR",
       "game_id": 2026020085,
       "home": false,
       "pos": "RW",
       "line": "L3",
-      "pp": 1,
+      "pp": 2,
       "b2b": true,
       "last10": {
         "gp": 10,
-        "g": 2,
+        "g": 1,
         "a": 5,
-        "p": 7,
-        "sog": 16,
-        "toi": 1137.0,
-        "pptoi": 220.9
+        "p": 6,
+        "sog": 17,
+        "toi": 894.0,
+        "pptoi": 74.0
       },
       "season": {
         "gp": 6,
         "g": 1,
-        "a": 3,
-        "p": 4,
-        "sog": 8
+        "a": 4,
+        "p": 5,
+        "sog": 11
       },
       "opp_index": 0.9412,
       "opp_goalie": {
@@ -1717,49 +1725,10 @@
         "source": "confirmed"
       },
       "flags": [
-        "PP1",
-        "HOT",
+        "ROLE_UP",
         "B2B"
       ],
-      "number": 6
-    },
-    {
-      "id": 8483395,
-      "name": "ARSHDEEP BAINS",
-      "team": "VAN",
-      "opp": "NYR",
-      "game_id": 2026020085,
-      "home": false,
-      "pos": "LW",
-      "line": "L4",
-      "pp": null,
-      "b2b": true,
-      "last10": {
-        "gp": 6,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 3,
-        "toi": 681.2,
-        "pptoi": 5.2
-      },
-      "season": {
-        "gp": 6,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 3
-      },
-      "opp_index": 1.0,
-      "opp_goalie": {
-        "name": "DYLAN GARAND",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": [
-        "B2B"
-      ],
-      "number": 13
+      "number": 94
     },
     {
       "id": 8484136,
@@ -1768,7 +1737,7 @@
       "opp": "NYR",
       "game_id": 2026020085,
       "home": false,
-      "pos": "C",
+      "pos": "LW",
       "line": "L4",
       "pp": null,
       "b2b": true,
@@ -1788,7 +1757,7 @@
         "p": 2,
         "sog": 7
       },
-      "opp_index": 0.631,
+      "opp_index": 1.0,
       "opp_goalie": {
         "name": "DYLAN GARAND",
         "status": "Confirmed",
@@ -1798,6 +1767,44 @@
         "B2B"
       ],
       "number": 63
+    },
+    {
+      "id": 8482691,
+      "name": "AATU RATY",
+      "team": "VAN",
+      "opp": "NYR",
+      "game_id": 2026020085,
+      "home": false,
+      "pos": "C",
+      "line": "L4",
+      "pp": null,
+      "b2b": true,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 14,
+        "toi": 684.8,
+        "pptoi": 9.0
+      },
+      "season": {
+        "gp": 3,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 3
+      },
+      "opp_index": 0.631,
+      "opp_goalie": {
+        "name": "DYLAN GARAND",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "B2B"
+      ],
+      "number": 54
     },
     {
       "id": 8475848,
@@ -1916,8 +1923,8 @@
       "number": 17
     },
     {
-      "id": 8476467,
-      "name": "JAMIE OLEKSIAK",
+      "id": 8483678,
+      "name": "ELIAS NILS PETTERSSON",
       "team": "VAN",
       "opp": "NYR",
       "game_id": 2026020085,
@@ -1928,19 +1935,19 @@
       "b2b": true,
       "last10": {
         "gp": 10,
-        "g": 1,
-        "a": 4,
-        "p": 5,
-        "sog": 7,
-        "toi": 1114.7,
-        "pptoi": 0.0
+        "g": 2,
+        "a": 0,
+        "p": 2,
+        "sog": 10,
+        "toi": 952.0,
+        "pptoi": 5.5
       },
       "season": {
         "gp": 6,
         "g": 1,
-        "a": 2,
-        "p": 3,
-        "sog": 2
+        "a": 0,
+        "p": 1,
+        "sog": 6
       },
       "opp_index": 0.4384,
       "opp_goalie": {
@@ -1949,9 +1956,10 @@
         "source": "confirmed"
       },
       "flags": [
+        "ROLE_UP",
         "B2B"
       ],
-      "number": 4
+      "number": 25
     },
     {
       "id": 8484240,
@@ -1992,8 +2000,8 @@
       "number": 5
     },
     {
-      "id": 8483678,
-      "name": "ELIAS NILS PETTERSSON",
+      "id": 8478465,
+      "name": "GUILLAUME BRISEBOIS",
       "team": "VAN",
       "opp": "NYR",
       "game_id": 2026020085,
@@ -2003,20 +2011,20 @@
       "pp": null,
       "b2b": true,
       "last10": {
-        "gp": 10,
-        "g": 2,
+        "gp": 0,
+        "g": 0,
         "a": 0,
-        "p": 2,
-        "sog": 10,
-        "toi": 952.0,
-        "pptoi": 5.5
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
       },
       "season": {
-        "gp": 6,
-        "g": 1,
+        "gp": 0,
+        "g": 0,
         "a": 0,
-        "p": 1,
-        "sog": 6
+        "p": 0,
+        "sog": 0
       },
       "opp_index": 0.4384,
       "opp_goalie": {
@@ -2027,7 +2035,7 @@
       "flags": [
         "B2B"
       ],
-      "number": 25
+      "number": 55
     },
     {
       "id": 8474568,
@@ -2097,8 +2105,8 @@
       "opp_index": 1.0,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "HOT"
@@ -2135,8 +2143,8 @@
       "opp_index": 1.7127,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2175,8 +2183,8 @@
       "opp_index": 1.6134,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2215,8 +2223,8 @@
       "opp_index": 1.0,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 24
@@ -2251,8 +2259,8 @@
       "opp_index": 1.7127,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2290,8 +2298,8 @@
       "opp_index": 1.6134,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2330,8 +2338,8 @@
       "opp_index": 1.0,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 50
@@ -2366,8 +2374,8 @@
       "opp_index": 1.7127,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -2404,8 +2412,8 @@
       "opp_index": 1.6134,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -2442,8 +2450,8 @@
       "opp_index": 1.0,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 28
@@ -2478,8 +2486,8 @@
       "opp_index": 1.7127,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -2516,8 +2524,8 @@
       "opp_index": 1.6134,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -2554,8 +2562,8 @@
       "opp_index": 1.3151,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -2592,8 +2600,8 @@
       "opp_index": 1.3151,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2632,8 +2640,8 @@
       "opp_index": 1.3151,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -2670,8 +2678,8 @@
       "opp_index": 1.3151,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -2708,8 +2716,8 @@
       "opp_index": 1.3151,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -2746,8 +2754,8 @@
       "opp_index": 1.3151,
       "opp_goalie": {
         "name": "KEVIN LANKINEN",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
