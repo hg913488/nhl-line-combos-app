@@ -6,6 +6,13 @@
     "grading": "Hit when the offense team scored at least one goal by a skater listed at the watched position (NHL stats API skater summary). Empty-net goals count; shootout goals do not.",
     "games": "Regular season and playoffs only. Picks are logged before puck drop and never changed afterwards."
   },
+  "current_method": {
+    "version": 3,
+    "signal": "Positions C, LW, RW, D ranked by the defending team's last-10 goals allowed to each position divided by the league average for that position (index; 1.00 = league average, higher = softer than the league). Descending; ties keep C, LW, RW, D order. WATCH is the top position. A position with no league average is indexed 0.",
+    "grading": "Hit when the offense team scored at least one goal by a skater listed at the watched position (NHL stats API skater summary). Empty-net goals count; shootout goals do not.",
+    "games": "Regular season and playoffs only. Picks are logged before puck drop and never changed afterwards.",
+    "eligibility": "Complete finite nonnegative team inputs and positive league averages; matching-season snapshot no more than 3 calendar days old and not future dated; top index > 1.00. Historical selections remain locked."
+  },
   "retention": {
     "seasons": 2
   },
@@ -13,14 +20,22 @@
     "graded": 172,
     "hits": 93,
     "hit_rate": 0.5407,
-    "pending": 6,
+    "review": 2,
+    "position_baseline": {
+      "C": 0.6802,
+      "LW": 0.4419,
+      "RW": 0.5174,
+      "D": 0.3488
+    },
+    "always_c_hit_rate": 0.6802,
+    "pending": 4,
     "void": 0,
-    "baseline_hit_rate": 0.4956,
+    "baseline_hit_rate": 0.4971,
     "by_position": {
       "C": {
-        "graded": 42,
-        "hits": 29,
-        "hit_rate": 0.6905
+        "graded": 43,
+        "hits": 30,
+        "hit_rate": 0.6977
       },
       "LW": {
         "graded": 45,
@@ -28,9 +43,9 @@
         "hit_rate": 0.5111
       },
       "RW": {
-        "graded": 51,
-        "hits": 27,
-        "hit_rate": 0.5294
+        "graded": 50,
+        "hits": 26,
+        "hit_rate": 0.52
       },
       "D": {
         "graded": 34,
@@ -1060,9 +1075,17 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-01T08:59:17Z",
-      "status": "graded",
+      "status": "review",
       "result": {
-        "hit": false,
+        "hit": null,
+        "scorers": [
+          {
+            "player_id": 8476453,
+            "name": "Nikita Kucherov",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 0,
@@ -1070,8 +1093,26 @@
           "D": 0
         },
         "score_reconciled": false,
-        "graded_at": "2026-10-04T01:44:12Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 0,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": false,
+            "graded_at": "2026-10-04T01:44:12Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020010-NYR",
@@ -1114,9 +1155,35 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-01T08:59:17Z",
-      "status": "graded",
+      "status": "review",
       "result": {
-        "hit": true,
+        "hit": null,
+        "scorers": [
+          {
+            "player_id": 8484210,
+            "name": "Gabe Perreault",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8476459,
+            "name": "Mika Zibanejad",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8481604,
+            "name": "Pavel Dorofeyev",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8480009,
+            "name": "Eeli Tolvanen",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -1124,8 +1191,26 @@
           "D": 0
         },
         "score_reconciled": false,
-        "graded_at": "2026-10-04T01:44:12Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 3,
+              "D": 0
+            },
+            "score_reconciled": false,
+            "graded_at": "2026-10-04T01:44:12Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020011-BUF",
@@ -4303,6 +4388,14 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8482159,
+            "name": "Tyson Foerster",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 0,
@@ -4310,8 +4403,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-06T02:23:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 0,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-06T02:23:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020040-TBL",
@@ -4357,6 +4467,32 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8478010,
+            "name": "Brayden Point",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8480995,
+            "name": "Pontus Holmberg",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8479542,
+            "name": "Brandon Hagel",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8481624,
+            "name": "Ilya Mikheyev",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 1,
@@ -4364,8 +4500,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-06T02:23:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 1,
+              "RW": 2,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-06T02:23:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020041-OTT",
@@ -4411,6 +4564,26 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8480208,
+            "name": "Drake Batherson",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8482116,
+            "name": "Tim Stützle",
+            "position": "C",
+            "goals": 2
+          },
+          {
+            "player_id": 8478020,
+            "name": "Michael Amadio",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 0,
@@ -4418,8 +4591,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-06T03:20:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 0,
+              "RW": 2,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-06T03:20:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020041-BOS",
@@ -4465,6 +4655,14 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8485395,
+            "name": "James Hagens",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -4472,8 +4670,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-06T03:20:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-06T03:20:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020042-WPG",
@@ -4519,6 +4734,26 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8482149,
+            "name": "Cole Perfetti",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8480113,
+            "name": "Alex Iafallo",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8476392,
+            "name": "Adam Lowry",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 1,
@@ -4526,8 +4761,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-06T03:20:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 1,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-06T03:20:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020042-PIT",
@@ -4573,6 +4825,20 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8485414,
+            "name": "Ben Kindel",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8483398,
+            "name": "Declan Carlile",
+            "position": "D",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -4580,8 +4846,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-06T03:20:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 0,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-06T03:20:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020043-SJS",
@@ -4627,6 +4910,7 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [],
         "goals_by_position": {
           "C": 0,
           "LW": 0,
@@ -4634,8 +4918,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-06T03:20:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-06T03:20:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020043-DAL",
@@ -4681,6 +4982,38 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8473994,
+            "name": "Jamie Benn",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8480036,
+            "name": "Miro Heiskanen",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8481641,
+            "name": "Joel Kiviranta",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8480027,
+            "name": "Jason Robertson",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8478420,
+            "name": "Mikko Rantanen",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 3,
@@ -4688,8 +5021,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-06T03:20:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 3,
+              "RW": 1,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-06T03:20:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020044-NSH",
@@ -4735,6 +5085,20 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8481535,
+            "name": "Nils Hoglander",
+            "position": "LW",
+            "goals": 2
+          },
+          {
+            "player_id": 8474564,
+            "name": "Steven Stamkos",
+            "position": "C",
+            "goals": 2
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 2,
@@ -4742,8 +5106,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T02:42:18Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 2,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T02:42:18Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020044-TOR",
@@ -4789,6 +5170,38 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8479318,
+            "name": "Auston Matthews",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8477939,
+            "name": "William Nylander",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8486067,
+            "name": "Gavin McKenna",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8478458,
+            "name": "Jack Roslovic",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8475166,
+            "name": "John Tavares",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 3,
           "LW": 1,
@@ -4796,8 +5209,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T02:42:18Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 3,
+              "LW": 1,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T02:42:18Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020045-CAR",
@@ -4843,6 +5273,38 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8476873,
+            "name": "Mark Jankowski",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8475791,
+            "name": "Taylor Hall",
+            "position": "LW",
+            "goals": 2
+          },
+          {
+            "player_id": 8480762,
+            "name": "Eric Robinson",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8480830,
+            "name": "Andrei Svechnikov",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8478427,
+            "name": "Sebastian Aho",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 4,
@@ -4850,8 +5312,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T02:42:18Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 4,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T02:42:18Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020045-MTL",
@@ -4897,6 +5376,26 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8483515,
+            "name": "Juraj Slafkovský",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8482737,
+            "name": "Zachary Bolduc",
+            "position": "RW",
+            "goals": 2
+          },
+          {
+            "player_id": 8480018,
+            "name": "Nick Suzuki",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 1,
@@ -4904,8 +5403,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T02:42:18Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 1,
+              "RW": 2,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T02:42:18Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020046-OTT",
@@ -4951,6 +5467,26 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8480208,
+            "name": "Drake Batherson",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8482667,
+            "name": "William Eklund",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8482116,
+            "name": "Tim Stützle",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 1,
@@ -4958,8 +5494,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T02:42:18Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 1,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T02:42:18Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020046-DET",
@@ -5005,6 +5558,32 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8477946,
+            "name": "Dylan Larkin",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8475753,
+            "name": "Justin Faulk",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8479337,
+            "name": "Alex DeBrincat",
+            "position": "RW",
+            "goals": 2
+          },
+          {
+            "player_id": 8478042,
+            "name": "Viktor Arvidsson",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 1,
@@ -5012,8 +5591,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T02:42:18Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 1,
+              "RW": 2,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T02:42:18Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020047-UTA",
@@ -5059,6 +5655,38 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8477346,
+            "name": "MacKenzie Weegar",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8478474,
+            "name": "Lawson Crouse",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8476389,
+            "name": "Vincent Trocheck",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8479343,
+            "name": "Clayton Keller",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8477951,
+            "name": "Nick Schmaltz",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 1,
@@ -5066,8 +5694,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T08:42:25Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 1,
+              "RW": 1,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T08:42:25Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020047-NJD",
@@ -5113,6 +5758,20 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8482146,
+            "name": "Luke Evangelista",
+            "position": "RW",
+            "goals": 2
+          },
+          {
+            "player_id": 8480003,
+            "name": "Jesper Boqvist",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -5120,8 +5779,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T08:42:25Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 2,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T08:42:25Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020049-MIN",
@@ -5167,6 +5843,20 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8485702,
+            "name": "Maxim Shabanov",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8483525,
+            "name": "Danila Yurov",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 0,
@@ -5174,8 +5864,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T02:42:18Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 0,
+              "RW": 2,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T02:42:18Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020049-BUF",
@@ -5221,6 +5928,26 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8482671,
+            "name": "Owen Power",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8483500,
+            "name": "Noah Ostlund",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8479420,
+            "name": "Tage Thompson",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 0,
@@ -5228,8 +5955,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T02:42:18Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 0,
+              "RW": 0,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T02:42:18Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020048-NYI",
@@ -5275,6 +6019,20 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8484221,
+            "name": "Calum Ritchie",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8477500,
+            "name": "Bo Horvat",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 0,
@@ -5282,8 +6040,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T08:42:25Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T08:42:25Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020048-NYR",
@@ -5329,6 +6104,20 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8482109,
+            "name": "Alexis Lafrenière",
+            "position": "LW",
+            "goals": 3
+          },
+          {
+            "player_id": 8477416,
+            "name": "Oliver Bjorkstrand",
+            "position": "RW",
+            "goals": 2
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 3,
@@ -5336,8 +6125,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T08:42:25Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 3,
+              "RW": 2,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T08:42:25Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020050-STL",
@@ -5383,6 +6189,20 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8482745,
+            "name": "Mason McTavish",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8481580,
+            "name": "Connor McMichael",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 1,
@@ -5390,8 +6210,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T08:42:25Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 1,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T08:42:25Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020050-CHI",
@@ -5437,6 +6274,32 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8482062,
+            "name": "Cole Smith",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8485391,
+            "name": "Anton Frondell",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8483493,
+            "name": "Frank Nazar",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8483506,
+            "name": "Sam Rinzel",
+            "position": "D",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 0,
@@ -5444,8 +6307,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T08:42:25Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 0,
+              "RW": 1,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T08:42:25Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020051-VGK",
@@ -5491,6 +6371,32 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8478109,
+            "name": "Victor Olofsson",
+            "position": "LW",
+            "goals": 2
+          },
+          {
+            "player_id": 8478403,
+            "name": "Jack Eichel",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8476881,
+            "name": "Tomas Hertl",
+            "position": "C",
+            "goals": 2
+          },
+          {
+            "player_id": 8475913,
+            "name": "Mark Stone",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 3,
           "LW": 2,
@@ -5498,8 +6404,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T08:42:25Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 3,
+              "LW": 2,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T08:42:25Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020051-SEA",
@@ -5545,6 +6468,20 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8483524,
+            "name": "Shane Wright",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8477955,
+            "name": "Jared McCann",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 1,
@@ -5552,8 +6489,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T08:42:25Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 1,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T08:42:25Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020052-FLA",
@@ -5599,6 +6553,20 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8479314,
+            "name": "Matthew Tkachuk",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8477495,
+            "name": "Seth Jones",
+            "position": "D",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 1,
@@ -5606,8 +6574,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T08:42:25Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 1,
+              "RW": 0,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T08:42:25Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020052-LAK",
@@ -5653,6 +6638,14 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8482155,
+            "name": "Alex Laferriere",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 0,
@@ -5660,8 +6653,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-07T08:42:25Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 0,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-07T08:42:25Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020053-PIT",
@@ -5707,6 +6717,26 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8475810,
+            "name": "Bryan Rust",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8481582,
+            "name": "Nick Robertson",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8478438,
+            "name": "Tommy Novak",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 1,
@@ -5714,8 +6744,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-08T02:54:43Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 1,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-08T02:54:43Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020053-WSH",
@@ -5761,6 +6808,38 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8477949,
+            "name": "Alex Tuch",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8478463,
+            "name": "Anthony Beauvillier",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8476880,
+            "name": "Tom Wilson",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8484186,
+            "name": "Ryan Leonard",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8479400,
+            "name": "Pierre-Luc Dubois",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -5768,8 +6847,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-08T02:54:43Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 4,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-08T02:54:43Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020054-COL",
@@ -5815,6 +6911,20 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8475768,
+            "name": "Jaden Schwartz",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8482768,
+            "name": "Fedor Svechkov",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 1,
@@ -5822,8 +6932,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-08T09:00:50Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 1,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-08T09:00:50Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020054-WPG",
@@ -5869,6 +6996,20 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8482149,
+            "name": "Cole Perfetti",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8478398,
+            "name": "Kyle Connor",
+            "position": "LW",
+            "goals": 2
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 2,
@@ -5876,8 +7017,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-08T09:00:50Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 2,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-08T09:00:50Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020055-EDM",
@@ -5923,6 +7081,32 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8481617,
+            "name": "Vasily Podkolzin",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8480803,
+            "name": "Evan Bouchard",
+            "position": "D",
+            "goals": 2
+          },
+          {
+            "player_id": 8478402,
+            "name": "Connor McDavid",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8477953,
+            "name": "Kasperi Kapanen",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -5930,8 +7114,25 @@
           "D": 2
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-08T09:00:50Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 2,
+              "D": 2
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-08T09:00:50Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020055-ANA",
@@ -5977,6 +7178,14 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8484762,
+            "name": "Beckett Sennecke",
+            "position": "RW",
+            "goals": 2
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 0,
@@ -5984,8 +7193,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-08T09:00:50Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 0,
+              "RW": 2,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-08T09:00:50Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020056-UTA",
@@ -6031,6 +7257,14 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8480855,
+            "name": "Jack McBain",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -6038,8 +7272,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T02:20:06Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T02:20:06Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020056-BOS",
@@ -6085,6 +7336,38 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8479987,
+            "name": "Morgan Geekie",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8483505,
+            "name": "Matthew Poitras",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8479999,
+            "name": "Casey Mittelstadt",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8477956,
+            "name": "David Pastrnak",
+            "position": "RW",
+            "goals": 2
+          },
+          {
+            "player_id": 8482511,
+            "name": "Mason Lohrei",
+            "position": "D",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 3,
           "LW": 0,
@@ -6092,8 +7375,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T02:20:06Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 3,
+              "LW": 0,
+              "RW": 2,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T02:20:06Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020057-DAL",
@@ -6139,6 +7439,32 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8478449,
+            "name": "Roope Hintz",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8480027,
+            "name": "Jason Robertson",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8478420,
+            "name": "Mikko Rantanen",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8479351,
+            "name": "Sam Steel",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 1,
@@ -6146,8 +7472,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T03:05:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 1,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T03:05:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020057-BUF",
@@ -6193,6 +7536,7 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [],
         "goals_by_position": {
           "C": 0,
           "LW": 0,
@@ -6200,8 +7544,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T03:05:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T03:05:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020058-NSH",
@@ -6247,6 +7608,32 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8475158,
+            "name": "Ryan O'Reilly",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8477021,
+            "name": "Alexander Kerfoot",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8484241,
+            "name": "Matthew Wood",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8481726,
+            "name": "Adam Edstrom",
+            "position": "C",
+            "goals": 2
+          }
+        ],
         "goals_by_position": {
           "C": 4,
           "LW": 0,
@@ -6254,8 +7641,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T03:05:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 4,
+              "LW": 0,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T03:05:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020058-MTL",
@@ -6301,6 +7705,20 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8480018,
+            "name": "Nick Suzuki",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8481618,
+            "name": "Alex Newhook",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 0,
@@ -6308,8 +7726,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T03:05:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T03:05:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020059-PHI",
@@ -6355,6 +7790,14 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8484387,
+            "name": "Matvei Michkov",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 0,
@@ -6362,8 +7805,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T03:05:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 0,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T03:05:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020059-OTT",
@@ -6409,6 +7869,20 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8476393,
+            "name": "Nick Cousins",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8484759,
+            "name": "Carter Yakemchuk",
+            "position": "D",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -6416,8 +7890,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T03:05:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 0,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T03:05:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020060-MIN",
@@ -6463,6 +7954,20 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8480800,
+            "name": "Quinn Hughes",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8476399,
+            "name": "Blake Coleman",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 1,
@@ -6470,8 +7975,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T03:05:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 1,
+              "RW": 0,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T03:05:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020060-TBL",
@@ -6517,6 +8039,20 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8474590,
+            "name": "John Carlson",
+            "position": "D",
+            "goals": 2
+          },
+          {
+            "player_id": 8478519,
+            "name": "Anthony Cirelli",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -6524,8 +8060,25 @@
           "D": 2
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T03:05:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 0,
+              "D": 2
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T03:05:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020061-VAN",
@@ -6571,6 +8124,14 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8478498,
+            "name": "Jake DeBrusk",
+            "position": "LW",
+            "goals": 2
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 2,
@@ -6578,8 +8139,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T02:20:06Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 2,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T02:20:06Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020061-CAR",
@@ -6625,6 +8203,32 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8480817,
+            "name": "K'Andre Miller",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8482702,
+            "name": "Logan Stankoven",
+            "position": "C",
+            "goals": 3
+          },
+          {
+            "player_id": 8476873,
+            "name": "Mark Jankowski",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8480830,
+            "name": "Andrei Svechnikov",
+            "position": "RW",
+            "goals": 2
+          }
+        ],
         "goals_by_position": {
           "C": 3,
           "LW": 1,
@@ -6632,8 +8236,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T02:20:06Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 3,
+              "LW": 1,
+              "RW": 2,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T02:20:06Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020062-CHI",
@@ -6679,6 +8300,14 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8483493,
+            "name": "Frank Nazar",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -6686,8 +8315,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T09:08:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T09:08:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020062-NYI",
@@ -6733,6 +8379,26 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8482476,
+            "name": "Emil Heineman",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8477407,
+            "name": "Anthony Duclair",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8477500,
+            "name": "Bo Horvat",
+            "position": "C",
+            "goals": 2
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 2,
@@ -6740,8 +8406,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T09:08:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 2,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T09:08:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020063-SJS",
@@ -6787,6 +8470,26 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8477498,
+            "name": "Darnell Nurse",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8484911,
+            "name": "Collin Graf",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8475726,
+            "name": "Tyler Toffoli",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -6794,8 +8497,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T09:08:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 1,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T09:08:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020063-STL",
@@ -6841,6 +8561,20 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8479346,
+            "name": "Dillon Dube",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8481580,
+            "name": "Connor McMichael",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 1,
@@ -6848,8 +8582,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T09:08:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 1,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T09:08:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020064-COL",
@@ -6895,6 +8646,32 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8477492,
+            "name": "Nathan MacKinnon",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8475768,
+            "name": "Jaden Schwartz",
+            "position": "LW",
+            "goals": 2
+          },
+          {
+            "player_id": 8478038,
+            "name": "Devon Toews",
+            "position": "D",
+            "goals": 2
+          },
+          {
+            "player_id": 8480069,
+            "name": "Cale Makar",
+            "position": "D",
+            "goals": 2
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 2,
@@ -6902,8 +8679,25 @@
           "D": 4
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T09:08:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 2,
+              "RW": 0,
+              "D": 4
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T09:08:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020064-CGY",
@@ -6949,6 +8743,26 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8480860,
+            "name": "Kevin Bahl",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8483609,
+            "name": "Adam Klapka",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8474150,
+            "name": "Mikael Backlund",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -6956,8 +8770,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T09:08:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 1,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T09:08:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020065-TOR",
@@ -7003,6 +8834,26 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8484158,
+            "name": "Easton Cowan",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8478458,
+            "name": "Jack Roslovic",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8477426,
+            "name": "Nick Paul",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 1,
@@ -7010,8 +8861,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T09:08:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 1,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T09:08:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020065-VGK",
@@ -7057,6 +8925,26 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8479353,
+            "name": "Brett Howden",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8478403,
+            "name": "Jack Eichel",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8475913,
+            "name": "Mark Stone",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 0,
@@ -7064,8 +8952,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-09T09:08:04Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 0,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-09T09:08:04Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020066-SEA",
@@ -7111,6 +9016,38 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8482713,
+            "name": "Mackie Samoskevich",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8483570,
+            "name": "Ben Meyers",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8477919,
+            "name": "Freddy Gaudreau",
+            "position": "C",
+            "goals": 2
+          },
+          {
+            "player_id": 8484800,
+            "name": "Berkly Catton",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8478407,
+            "name": "Vince Dunn",
+            "position": "D",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 4,
           "LW": 0,
@@ -7118,8 +9055,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-10T02:42:38Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 4,
+              "LW": 0,
+              "RW": 1,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-10T02:42:38Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020066-DET",
@@ -7165,6 +9119,26 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8484794,
+            "name": "Michael Brandsegg-Nygård",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8478042,
+            "name": "Viktor Arvidsson",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8482171,
+            "name": "William Wallinder",
+            "position": "D",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 1,
@@ -7172,8 +9146,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-10T02:42:38Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 1,
+              "RW": 1,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-10T02:42:38Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020067-NYR",
@@ -7219,6 +9210,14 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8482109,
+            "name": "Alexis Lafrenière",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 1,
@@ -7226,8 +9225,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-10T02:42:38Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 1,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-10T02:42:38Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020067-WSH",
@@ -7273,6 +9289,26 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8476880,
+            "name": "Tom Wilson",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8480043,
+            "name": "Timothy Liljegren",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8476432,
+            "name": "Boone Jenner",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -7280,8 +9316,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-10T02:42:38Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 1,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-10T02:42:38Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020068-PIT",
@@ -7327,6 +9380,20 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8475810,
+            "name": "Bryan Rust",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8471215,
+            "name": "Evgeni Malkin",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -7334,8 +9401,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-10T02:42:38Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-10T02:42:38Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020068-CBJ",
@@ -7381,6 +9465,20 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8476923,
+            "name": "Damon Severson",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8479671,
+            "name": "Mathieu Olivier",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 0,
@@ -7388,8 +9486,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-10T02:42:38Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 0,
+              "RW": 1,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-10T02:42:38Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020069-ANA",
@@ -7435,6 +9550,38 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8481538,
+            "name": "Judd Caulfield",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8485512,
+            "name": "Tim Washe",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8482118,
+            "name": "Sam Colangelo",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8481754,
+            "name": "Nikita Nesterenko",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8475798,
+            "name": "Mikael Granlund",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 3,
           "LW": 0,
@@ -7442,8 +9589,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-10T08:32:29Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 3,
+              "LW": 0,
+              "RW": 2,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-10T08:32:29Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020069-WPG",
@@ -7489,6 +9653,14 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8478398,
+            "name": "Kyle Connor",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 1,
@@ -7496,8 +9668,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-10T08:32:29Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 1,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-10T08:32:29Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020070-PHI",
@@ -7543,6 +9732,14 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8485406,
+            "name": "Porter Martone",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 0,
@@ -7550,8 +9747,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-10T21:59:49Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 0,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-10T21:59:49Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020070-BOS",
@@ -7597,6 +9811,38 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8479999,
+            "name": "Casey Mittelstadt",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8482177,
+            "name": "Marat Khusnutdinov",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8478401,
+            "name": "Pavel Zacha",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8482511,
+            "name": "Mason Lohrei",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8483489,
+            "name": "Fraser Minten",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 4,
           "LW": 0,
@@ -7604,8 +9850,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-10T21:59:49Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 4,
+              "LW": 0,
+              "RW": 0,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-10T21:59:49Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020071-VAN",
@@ -7651,6 +9914,14 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8481024,
+            "name": "Linus Karlsson",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -7658,8 +9929,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T01:05:37Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T01:05:37Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020071-NJD",
@@ -7705,6 +9993,26 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8479407,
+            "name": "Jesper Bratt",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8480002,
+            "name": "Nico Hischier",
+            "position": "C",
+            "goals": 2
+          },
+          {
+            "player_id": 8480003,
+            "name": "Jesper Boqvist",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 3,
           "LW": 1,
@@ -7712,8 +10020,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T01:05:37Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 3,
+              "LW": 1,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T01:05:37Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020072-EDM",
@@ -7759,6 +10084,26 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8481617,
+            "name": "Vasily Podkolzin",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8475218,
+            "name": "Mattias Ekholm",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8480029,
+            "name": "Alex Formenton",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 1,
@@ -7766,8 +10111,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T01:05:37Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 1,
+              "RW": 1,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T01:05:37Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020072-SJS",
@@ -7813,6 +10175,14 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8484801,
+            "name": "Macklin Celebrini",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -7820,8 +10190,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T01:05:37Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T01:05:37Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020073-MIN",
@@ -7867,6 +10254,20 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8478864,
+            "name": "Kirill Kaprizov",
+            "position": "LW",
+            "goals": 3
+          },
+          {
+            "player_id": 8481557,
+            "name": "Matt Boldy",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 4,
@@ -7874,8 +10275,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 4,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020073-FLA",
@@ -7921,6 +10339,14 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8479314,
+            "name": "Matthew Tkachuk",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 1,
@@ -7928,8 +10354,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 1,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020074-UTA",
@@ -7975,6 +10418,32 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8477951,
+            "name": "Nick Schmaltz",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8479977,
+            "name": "Kailer Yamamoto",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8475314,
+            "name": "Anders Lee",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8478507,
+            "name": "John Marino",
+            "position": "D",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 1,
@@ -7982,8 +10451,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 1,
+              "RW": 1,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020074-BUF",
@@ -8029,6 +10515,14 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8479420,
+            "name": "Tage Thompson",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -8036,8 +10530,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020075-DET",
@@ -8083,6 +10594,7 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [],
         "goals_by_position": {
           "C": 0,
           "LW": 0,
@@ -8090,8 +10602,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020075-MTL",
@@ -8137,6 +10666,7 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [],
         "goals_by_position": {
           "C": 0,
           "LW": 0,
@@ -8144,8 +10674,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020076-NSH",
@@ -8191,6 +10738,20 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8479525,
+            "name": "Ross Colton",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8476539,
+            "name": "Jonathan Marchessault",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -8198,8 +10759,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020076-OTT",
@@ -8245,6 +10823,20 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8480208,
+            "name": "Drake Batherson",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8482116,
+            "name": "Tim Stützle",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -8252,8 +10844,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020077-DAL",
@@ -8299,6 +10908,14 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8475794,
+            "name": "Tyler Seguin",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -8306,8 +10923,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020077-PIT",
@@ -8353,6 +10987,14 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8480980,
+            "name": "Connor Dewar",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -8360,8 +11002,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020078-CAR",
@@ -8407,6 +11066,38 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8482809,
+            "name": "Jackson Blake",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8476873,
+            "name": "Mark Jankowski",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8478427,
+            "name": "Sebastian Aho",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8475791,
+            "name": "Taylor Hall",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8476921,
+            "name": "Jordan Martinook",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 3,
@@ -8414,8 +11105,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 3,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020078-CHI",
@@ -8461,6 +11169,20 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8484197,
+            "name": "Oliver Moore",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8484390,
+            "name": "Roman Kantserov",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -8468,8 +11190,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020079-CBJ",
@@ -8515,6 +11254,26 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8482705,
+            "name": "Cole Sillinger",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8482660,
+            "name": "Kent Johnson",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8477501,
+            "name": "Valeri Nichushkin",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 0,
@@ -8522,8 +11281,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 0,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020079-STL",
@@ -8569,6 +11345,32 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8483516,
+            "name": "Jimmy Snuggerud",
+            "position": "RW",
+            "goals": 2
+          },
+          {
+            "player_id": 8482089,
+            "name": "Jake Neighbours",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8481013,
+            "name": "Jonatan Berggren",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8477402,
+            "name": "Pavel Buchnevich",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 2,
@@ -8576,8 +11378,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 2,
+              "RW": 3,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020080-TOR",
@@ -8623,6 +11442,32 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8477939,
+            "name": "William Nylander",
+            "position": "RW",
+            "goals": 2
+          },
+          {
+            "player_id": 8479318,
+            "name": "Auston Matthews",
+            "position": "C",
+            "goals": 2
+          },
+          {
+            "player_id": 8483565,
+            "name": "Nick Blankenburg",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8484158,
+            "name": "Easton Cowan",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 0,
@@ -8630,8 +11475,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 0,
+              "RW": 3,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020080-COL",
@@ -8677,6 +11539,20 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8477492,
+            "name": "Nathan MacKinnon",
+            "position": "C",
+            "goals": 2
+          },
+          {
+            "player_id": 8475754,
+            "name": "Brock Nelson",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 3,
           "LW": 0,
@@ -8684,8 +11560,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 3,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020081-TBL",
@@ -8731,6 +11624,20 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8477404,
+            "name": "Jake Guentzel",
+            "position": "C",
+            "goals": 2
+          },
+          {
+            "player_id": 8479542,
+            "name": "Brandon Hagel",
+            "position": "LW",
+            "goals": 3
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 3,
@@ -8738,8 +11645,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 3,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020081-NYI",
@@ -8785,6 +11709,26 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8476419,
+            "name": "Jean-Gabriel Pageau",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8477950,
+            "name": "Tony DeAngelo",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8475170,
+            "name": "Brayden Schenn",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 0,
@@ -8792,8 +11736,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 0,
+              "RW": 0,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020082-ANA",
@@ -8839,6 +11800,32 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8478366,
+            "name": "Frank Vatrano",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8481605,
+            "name": "Jackson LaCombe",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8480068,
+            "name": "Ryan Poehling",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8481754,
+            "name": "Nikita Nesterenko",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 0,
@@ -8846,8 +11833,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 0,
+              "RW": 1,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020082-CGY",
@@ -8893,6 +11897,20 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8484234,
+            "name": "Aydar Suniev",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8480028,
+            "name": "Morgan Frost",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 1,
@@ -8900,8 +11918,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 1,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020083-LAK",
@@ -8947,6 +11982,14 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8478550,
+            "name": "Artemi Panarin",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 1,
@@ -8954,8 +11997,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 1,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020083-VGK",
@@ -9001,6 +12061,20 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8484803,
+            "name": "Trevor Connelly",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8478483,
+            "name": "Mitch Marner",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 1,
@@ -9008,8 +12082,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-11T08:55:00Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 1,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-11T08:55:00Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020084-SEA",
@@ -9055,6 +12146,38 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8482751,
+            "name": "Ryan Winterton",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8474586,
+            "name": "Jordan Eberle",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8477955,
+            "name": "Jared McCann",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8477919,
+            "name": "Freddy Gaudreau",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8481554,
+            "name": "Kaapo Kakko",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 2,
           "LW": 1,
@@ -9062,8 +12185,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-12T01:27:22Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 2,
+              "LW": 1,
+              "RW": 2,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-12T01:27:22Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020084-WSH",
@@ -9109,6 +12249,26 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8476432,
+            "name": "Boone Jenner",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8479385,
+            "name": "Jordan Kyrou",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8471214,
+            "name": "Alex Ovechkin",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 1,
@@ -9116,8 +12276,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-12T01:27:22Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 1,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-12T01:27:22Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020085-VAN",
@@ -9163,6 +12340,20 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8483678,
+            "name": "Elias Pettersson",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8478498,
+            "name": "Jake DeBrusk",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 1,
@@ -9170,8 +12361,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-12T01:27:22Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 1,
+              "RW": 0,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-12T01:27:22Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020085-NYR",
@@ -9217,6 +12425,32 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8482157,
+            "name": "Will Cuylle",
+            "position": "LW",
+            "goals": 2
+          },
+          {
+            "player_id": 8481789,
+            "name": "Tye Kartye",
+            "position": "LW",
+            "goals": 2
+          },
+          {
+            "player_id": 8482109,
+            "name": "Alexis Lafrenière",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8484210,
+            "name": "Gabe Perreault",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 5,
@@ -9224,8 +12458,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-12T01:27:22Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 0,
+              "LW": 5,
+              "RW": 1,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-12T01:27:22Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020086-CAR",
@@ -9271,6 +12522,32 @@
       "status": "graded",
       "result": {
         "hit": true,
+        "scorers": [
+          {
+            "player_id": 8476906,
+            "name": "Shayne Gostisbehere",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8480830,
+            "name": "Andrei Svechnikov",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8478427,
+            "name": "Sebastian Aho",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8476873,
+            "name": "Mark Jankowski",
+            "position": "LW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 1,
@@ -9278,8 +12555,25 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-12T02:39:26Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 1,
+              "RW": 1,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-12T02:39:26Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020086-PHI",
@@ -9325,6 +12619,14 @@
       "status": "graded",
       "result": {
         "hit": false,
+        "scorers": [
+          {
+            "player_id": 8477989,
+            "name": "Christian Dvorak",
+            "position": "C",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 1,
           "LW": 0,
@@ -9332,8 +12634,25 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-12T02:39:26Z"
-      }
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": [
+        {
+          "checked_at": "2026-10-12T22:55:26Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "goals_by_position": {
+              "C": 1,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-12T02:39:26Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020087-FLA",
@@ -9376,8 +12695,33 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-12T09:15:42Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "scorers": [
+          {
+            "player_id": 8477933,
+            "name": "Sam Reinhart",
+            "position": "C",
+            "goals": 2
+          },
+          {
+            "player_id": 8482113,
+            "name": "Anton Lundell",
+            "position": "C",
+            "goals": 1
+          }
+        ],
+        "goals_by_position": {
+          "C": 3,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": []
     },
     {
       "id": "2026020087-BUF",
@@ -9420,8 +12764,51 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-12T09:15:42Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": false,
+        "scorers": [
+          {
+            "player_id": 8480802,
+            "name": "Ryan McLeod",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8479420,
+            "name": "Tage Thompson",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8480839,
+            "name": "Rasmus Dahlin",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8482659,
+            "name": "Josh Doan",
+            "position": "RW",
+            "goals": 1
+          },
+          {
+            "player_id": 8483500,
+            "name": "Noah Ostlund",
+            "position": "C",
+            "goals": 1
+          }
+        ],
+        "goals_by_position": {
+          "C": 3,
+          "LW": 0,
+          "RW": 1,
+          "D": 1
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-12T22:55:26Z"
+      },
+      "result_audit": []
     },
     {
       "id": "2026020088-OTT",
