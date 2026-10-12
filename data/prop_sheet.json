@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-11T22:27:53Z",
+  "generated_at": "2026-10-12T01:27:25Z",
   "date": "2026-10-11",
   "window": {
     "games": 10,
@@ -2792,8 +2792,8 @@
       "opp_index": 0.7143,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -2830,8 +2830,8 @@
       "opp_index": 1.4422,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2871,8 +2871,8 @@
       "opp_index": 0.9412,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2911,8 +2911,8 @@
       "opp_index": 0.7143,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "HOT",
@@ -2950,8 +2950,8 @@
       "opp_index": 1.4422,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "HOT",
@@ -2990,8 +2990,8 @@
       "opp_index": 0.9412,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -3030,8 +3030,8 @@
       "opp_index": 0.7143,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -3041,44 +3041,44 @@
       "number": 27
     },
     {
-      "id": 8473533,
-      "name": "JORDAN STAAL",
+      "id": 8476873,
+      "name": "MARK JANKOWSKI",
       "team": "CAR",
       "opp": "PHI",
       "game_id": 2026020086,
       "home": false,
       "pos": "C",
       "line": "L3",
-      "pp": 2,
+      "pp": null,
       "b2b": true,
       "last10": {
         "gp": 10,
-        "g": 4,
+        "g": 3,
         "a": 1,
-        "p": 5,
-        "sog": 19,
-        "toi": 1005.6,
-        "pptoi": 81.4
+        "p": 4,
+        "sog": 9,
+        "toi": 732.7,
+        "pptoi": 33.2
       },
       "season": {
         "gp": 6,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 6
+        "g": 3,
+        "a": 1,
+        "p": 4,
+        "sog": 7
       },
       "opp_index": 1.4422,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
-        "HOT",
+        "ROLE_UP",
         "B2B",
         "SOFT_MATCHUP"
       ],
-      "number": 11
+      "number": 77
     },
     {
       "id": 8476921,
@@ -3110,13 +3110,91 @@
       "opp_index": 0.9412,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
       ],
       "number": 48
+    },
+    {
+      "id": 8475235,
+      "name": "NICOLAS DESLAURIERS",
+      "team": "CAR",
+      "opp": "PHI",
+      "game_id": 2026020086,
+      "home": false,
+      "pos": "LW",
+      "line": "L4",
+      "pp": null,
+      "b2b": true,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 6,
+        "toi": 531.5,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 2,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
+      },
+      "opp_index": 0.7143,
+      "opp_goalie": {
+        "name": "JOSEPH WOLL",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "B2B"
+      ],
+      "number": 44
+    },
+    {
+      "id": 8480829,
+      "name": "JESPERI KOTKANIEMI",
+      "team": "CAR",
+      "opp": "PHI",
+      "game_id": 2026020086,
+      "home": false,
+      "pos": "C",
+      "line": "L4",
+      "pp": 2,
+      "b2b": true,
+      "last10": {
+        "gp": 9,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 5,
+        "toi": 777.3,
+        "pptoi": 23.6
+      },
+      "season": {
+        "gp": 4,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 1
+      },
+      "opp_index": 1.4422,
+      "opp_goalie": {
+        "name": "JOSEPH WOLL",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "ROLE_UP",
+        "B2B",
+        "SOFT_MATCHUP"
+      ],
+      "number": 82
     },
     {
       "id": 8480762,
@@ -3125,7 +3203,7 @@
       "opp": "PHI",
       "game_id": 2026020086,
       "home": false,
-      "pos": "LW",
+      "pos": "RW",
       "line": "L4",
       "pp": null,
       "b2b": true,
@@ -3145,93 +3223,16 @@
         "p": 3,
         "sog": 8
       },
-      "opp_index": 0.7143,
+      "opp_index": 0.9412,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
       ],
       "number": 50
-    },
-    {
-      "id": 8476873,
-      "name": "MARK JANKOWSKI",
-      "team": "CAR",
-      "opp": "PHI",
-      "game_id": 2026020086,
-      "home": false,
-      "pos": "C",
-      "line": "L4",
-      "pp": null,
-      "b2b": true,
-      "last10": {
-        "gp": 10,
-        "g": 3,
-        "a": 1,
-        "p": 4,
-        "sog": 9,
-        "toi": 732.7,
-        "pptoi": 33.2
-      },
-      "season": {
-        "gp": 6,
-        "g": 3,
-        "a": 1,
-        "p": 4,
-        "sog": 7
-      },
-      "opp_index": 1.4422,
-      "opp_goalie": {
-        "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "B2B",
-        "SOFT_MATCHUP"
-      ],
-      "number": 77
-    },
-    {
-      "id": 8480829,
-      "name": "JESPERI KOTKANIEMI",
-      "team": "CAR",
-      "opp": "PHI",
-      "game_id": 2026020086,
-      "home": false,
-      "pos": "RW",
-      "line": "L4",
-      "pp": null,
-      "b2b": true,
-      "last10": {
-        "gp": 9,
-        "g": 0,
-        "a": 2,
-        "p": 2,
-        "sog": 5,
-        "toi": 777.3,
-        "pptoi": 23.6
-      },
-      "season": {
-        "gp": 4,
-        "g": 0,
-        "a": 2,
-        "p": 2,
-        "sog": 1
-      },
-      "opp_index": 0.9412,
-      "opp_goalie": {
-        "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "B2B"
-      ],
-      "number": 82
     },
     {
       "id": 8476958,
@@ -3263,8 +3264,8 @@
       "opp_index": 1.5342,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B",
@@ -3302,8 +3303,8 @@
       "opp_index": 1.5342,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B",
@@ -3341,8 +3342,8 @@
       "opp_index": 1.5342,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B",
@@ -3380,8 +3381,8 @@
       "opp_index": 1.5342,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B",
@@ -3419,8 +3420,8 @@
       "opp_index": 1.5342,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -3460,8 +3461,8 @@
       "opp_index": 1.5342,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B",
@@ -3470,44 +3471,43 @@
       "number": 6
     },
     {
-      "id": 8481533,
-      "name": "TREVOR ZEGRAS",
+      "id": 8484142,
+      "name": "DENVER BARKEY",
       "team": "PHI",
       "opp": "CAR",
       "game_id": 2026020086,
       "home": true,
       "pos": "LW",
       "line": "L1",
-      "pp": 1,
+      "pp": 2,
       "b2b": true,
       "last10": {
         "gp": 10,
         "g": 1,
-        "a": 3,
-        "p": 4,
-        "sog": 11,
-        "toi": 1111.3,
-        "pptoi": 228.6
+        "a": 1,
+        "p": 2,
+        "sog": 9,
+        "toi": 851.0,
+        "pptoi": 119.6
       },
       "season": {
-        "gp": 6,
+        "gp": 3,
         "g": 0,
-        "a": 2,
-        "p": 2,
-        "sog": 5
+        "a": 1,
+        "p": 1,
+        "sog": 1
       },
       "opp_index": 0.4286,
       "opp_goalie": {
         "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
-        "PP1",
         "ROLE_UP",
         "B2B"
       ],
-      "number": 46
+      "number": 86
     },
     {
       "id": 8477989,
@@ -3539,8 +3539,8 @@
       "opp_index": 0.5408,
       "opp_goalie": {
         "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP",
@@ -3578,8 +3578,8 @@
       "opp_index": 1.3445,
       "opp_goalie": {
         "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -3619,8 +3619,8 @@
       "opp_index": 0.4286,
       "opp_goalie": {
         "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -3657,131 +3657,13 @@
       "opp_index": 0.5408,
       "opp_goalie": {
         "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
       ],
       "number": 14
-    },
-    {
-      "id": 8484387,
-      "name": "MATVEI MICHKOV",
-      "team": "PHI",
-      "opp": "CAR",
-      "game_id": 2026020086,
-      "home": true,
-      "pos": "RW",
-      "line": "L2",
-      "pp": 1,
-      "b2b": true,
-      "last10": {
-        "gp": 10,
-        "g": 2,
-        "a": 1,
-        "p": 3,
-        "sog": 17,
-        "toi": 882.7,
-        "pptoi": 176.3
-      },
-      "season": {
-        "gp": 6,
-        "g": 2,
-        "a": 0,
-        "p": 2,
-        "sog": 8
-      },
-      "opp_index": 1.3445,
-      "opp_goalie": {
-        "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "PP1",
-        "ROLE_UP",
-        "B2B",
-        "SOFT_MATCHUP"
-      ],
-      "number": 39
-    },
-    {
-      "id": 8484142,
-      "name": "DENVER BARKEY",
-      "team": "PHI",
-      "opp": "CAR",
-      "game_id": 2026020086,
-      "home": true,
-      "pos": "LW",
-      "line": "L3",
-      "pp": 2,
-      "b2b": true,
-      "last10": {
-        "gp": 10,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 9,
-        "toi": 851.0,
-        "pptoi": 119.6
-      },
-      "season": {
-        "gp": 3,
-        "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 1
-      },
-      "opp_index": 0.4286,
-      "opp_goalie": {
-        "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "B2B"
-      ],
-      "number": 86
-    },
-    {
-      "id": 8480220,
-      "name": "NOAH CATES",
-      "team": "PHI",
-      "opp": "CAR",
-      "game_id": 2026020086,
-      "home": true,
-      "pos": "C",
-      "line": "L3",
-      "pp": 2,
-      "b2b": true,
-      "last10": {
-        "gp": 10,
-        "g": 0,
-        "a": 2,
-        "p": 2,
-        "sog": 8,
-        "toi": 854.7,
-        "pptoi": 89.7
-      },
-      "season": {
-        "gp": 6,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 5
-      },
-      "opp_index": 0.5408,
-      "opp_goalie": {
-        "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "ROLE_UP",
-        "B2B"
-      ],
-      "number": 27
     },
     {
       "id": 8485406,
@@ -3791,7 +3673,7 @@
       "game_id": 2026020086,
       "home": true,
       "pos": "RW",
-      "line": "L3",
+      "line": "L2",
       "pp": 1,
       "b2b": true,
       "last10": {
@@ -3813,8 +3695,8 @@
       "opp_index": 1.3445,
       "opp_goalie": {
         "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -3832,7 +3714,7 @@
       "game_id": 2026020086,
       "home": true,
       "pos": "LW",
-      "line": "L4",
+      "line": "L3",
       "pp": 2,
       "b2b": true,
       "last10": {
@@ -3854,13 +3736,172 @@
       "opp_index": 0.4286,
       "opp_goalie": {
         "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "ROLE_UP",
+        "B2B"
+      ],
+      "number": 58
+    },
+    {
+      "id": 8481533,
+      "name": "TREVOR ZEGRAS",
+      "team": "PHI",
+      "opp": "CAR",
+      "game_id": 2026020086,
+      "home": true,
+      "pos": "C",
+      "line": "L3",
+      "pp": 1,
+      "b2b": true,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 11,
+        "toi": 1111.3,
+        "pptoi": 228.6
+      },
+      "season": {
+        "gp": 6,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 5
+      },
+      "opp_index": 0.5408,
+      "opp_goalie": {
+        "name": "PYOTR KOCHETKOV",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1",
+        "ROLE_UP",
+        "B2B"
+      ],
+      "number": 46
+    },
+    {
+      "id": 8484387,
+      "name": "MATVEI MICHKOV",
+      "team": "PHI",
+      "opp": "CAR",
+      "game_id": 2026020086,
+      "home": true,
+      "pos": "RW",
+      "line": "L3",
+      "pp": 1,
+      "b2b": true,
+      "last10": {
+        "gp": 10,
+        "g": 2,
+        "a": 1,
+        "p": 3,
+        "sog": 17,
+        "toi": 882.7,
+        "pptoi": 176.3
+      },
+      "season": {
+        "gp": 6,
+        "g": 2,
+        "a": 0,
+        "p": 2,
+        "sog": 8
+      },
+      "opp_index": 1.3445,
+      "opp_goalie": {
+        "name": "PYOTR KOCHETKOV",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1",
+        "ROLE_UP",
+        "B2B",
+        "SOFT_MATCHUP"
+      ],
+      "number": 39
+    },
+    {
+      "id": 8479336,
+      "name": "CARL GRUNDSTROM",
+      "team": "PHI",
+      "opp": "CAR",
+      "game_id": 2026020086,
+      "home": true,
+      "pos": "LW",
+      "line": "L4",
+      "pp": null,
+      "b2b": true,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 10,
+        "toi": 704.3,
+        "pptoi": 2.9
+      },
+      "season": {
+        "gp": 4,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 4
+      },
+      "opp_index": 0.4286,
+      "opp_goalie": {
+        "name": "PYOTR KOCHETKOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
       ],
-      "number": 58
+      "number": 91
+    },
+    {
+      "id": 8480220,
+      "name": "NOAH CATES",
+      "team": "PHI",
+      "opp": "CAR",
+      "game_id": 2026020086,
+      "home": true,
+      "pos": "C",
+      "line": "L4",
+      "pp": 2,
+      "b2b": true,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 8,
+        "toi": 854.7,
+        "pptoi": 89.7
+      },
+      "season": {
+        "gp": 6,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 5
+      },
+      "opp_index": 0.5408,
+      "opp_goalie": {
+        "name": "PYOTR KOCHETKOV",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "ROLE_UP",
+        "B2B"
+      ],
+      "number": 27
     },
     {
       "id": 8478569,
@@ -3869,7 +3910,7 @@
       "opp": "CAR",
       "game_id": 2026020086,
       "home": true,
-      "pos": "C",
+      "pos": "RW",
       "line": "L4",
       "pp": null,
       "b2b": true,
@@ -3889,55 +3930,17 @@
         "p": 0,
         "sog": 2
       },
-      "opp_index": 0.5408,
-      "opp_goalie": {
-        "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "B2B"
-      ],
-      "number": 52
-    },
-    {
-      "id": 8475253,
-      "name": "GARRETT WILSON",
-      "team": "PHI",
-      "opp": "CAR",
-      "game_id": 2026020086,
-      "home": true,
-      "pos": "RW",
-      "line": "L4",
-      "pp": null,
-      "b2b": true,
-      "last10": {
-        "gp": 4,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 3,
-        "toi": 567.0,
-        "pptoi": 0.0
-      },
-      "season": {
-        "gp": 1,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 0
-      },
       "opp_index": 1.3445,
       "opp_goalie": {
         "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B",
         "SOFT_MATCHUP"
       ],
-      "number": 10
+      "number": 52
     },
     {
       "id": 8477948,
@@ -3969,8 +3972,8 @@
       "opp_index": 0.6575,
       "opp_goalie": {
         "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -3978,42 +3981,42 @@
       "number": 6
     },
     {
-      "id": 8482142,
-      "name": "JAMIE DRYSDALE",
+      "id": 8484148,
+      "name": "OLIVER BONK",
       "team": "PHI",
       "opp": "CAR",
       "game_id": 2026020086,
       "home": true,
       "pos": "D",
       "line": "D1",
-      "pp": 2,
+      "pp": null,
       "b2b": true,
       "last10": {
-        "gp": 10,
+        "gp": 2,
         "g": 1,
-        "a": 0,
-        "p": 1,
-        "sog": 11,
-        "toi": 1317.5,
-        "pptoi": 206.9
+        "a": 1,
+        "p": 2,
+        "sog": 1,
+        "toi": 872.0,
+        "pptoi": 47.5
       },
       "season": {
-        "gp": 6,
+        "gp": 0,
         "g": 0,
         "a": 0,
         "p": 0,
-        "sog": 6
+        "sog": 0
       },
       "opp_index": 0.6575,
       "opp_goalie": {
         "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
       ],
-      "number": 9
+      "number": 59
     },
     {
       "id": 8476372,
@@ -4045,8 +4048,8 @@
       "opp_index": 0.6575,
       "opp_goalie": {
         "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP",
@@ -4055,81 +4058,42 @@
       "number": 24
     },
     {
-      "id": 8483460,
-      "name": "DAVID JIRICEK",
+      "id": 8482142,
+      "name": "JAMIE DRYSDALE",
       "team": "PHI",
       "opp": "CAR",
       "game_id": 2026020086,
       "home": true,
       "pos": "D",
       "line": "D2",
-      "pp": 1,
+      "pp": 2,
       "b2b": true,
       "last10": {
-        "gp": 5,
-        "g": 0,
-        "a": 1,
+        "gp": 10,
+        "g": 1,
+        "a": 0,
         "p": 1,
-        "sog": 6,
-        "toi": 1040.0,
-        "pptoi": 100.8
+        "sog": 11,
+        "toi": 1317.5,
+        "pptoi": 206.9
       },
       "season": {
-        "gp": 4,
+        "gp": 6,
         "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 5
+        "a": 0,
+        "p": 0,
+        "sog": 6
       },
       "opp_index": 0.6575,
       "opp_goalie": {
         "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "PP1",
-        "B2B"
-      ],
-      "number": 5
-    },
-    {
-      "id": 8482169,
-      "name": "HELGE GRANS",
-      "team": "PHI",
-      "opp": "CAR",
-      "game_id": 2026020086,
-      "home": true,
-      "pos": "D",
-      "line": "D3",
-      "pp": null,
-      "b2b": true,
-      "last10": {
-        "gp": 1,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 0,
-        "toi": 746.0,
-        "pptoi": 0.0
-      },
-      "season": {
-        "gp": 1,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 0
-      },
-      "opp_index": 0.6575,
-      "opp_goalie": {
-        "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
       ],
-      "number": 3
+      "number": 9
     },
     {
       "id": 8481122,
@@ -4161,13 +4125,52 @@
       "opp_index": 0.6575,
       "opp_goalie": {
         "name": "PYOTR KOCHETKOV",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
       ],
       "number": 44
+    },
+    {
+      "id": 8483460,
+      "name": "DAVID JIRICEK",
+      "team": "PHI",
+      "opp": "CAR",
+      "game_id": 2026020086,
+      "home": true,
+      "pos": "D",
+      "line": "D3",
+      "pp": 1,
+      "b2b": true,
+      "last10": {
+        "gp": 5,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 6,
+        "toi": 1040.0,
+        "pptoi": 100.8
+      },
+      "season": {
+        "gp": 4,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 5
+      },
+      "opp_index": 0.6575,
+      "opp_goalie": {
+        "name": "PYOTR KOCHETKOV",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1",
+        "B2B"
+      ],
+      "number": 5
     }
   ]
 }

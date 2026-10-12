@@ -10,12 +10,12 @@
     "seasons": 2
   },
   "summary": {
-    "graded": 166,
-    "hits": 88,
-    "hit_rate": 0.5301,
-    "pending": 6,
+    "graded": 170,
+    "hits": 92,
+    "hit_rate": 0.5412,
+    "pending": 2,
     "void": 0,
-    "baseline_hit_rate": 0.491,
+    "baseline_hit_rate": 0.4941,
     "by_position": {
       "C": {
         "graded": 42,
@@ -23,14 +23,14 @@
         "hit_rate": 0.6905
       },
       "LW": {
-        "graded": 43,
-        "hits": 21,
-        "hit_rate": 0.4884
+        "graded": 45,
+        "hits": 23,
+        "hit_rate": 0.5111
       },
       "RW": {
-        "graded": 48,
-        "hits": 25,
-        "hit_rate": 0.5208
+        "graded": 50,
+        "hits": 27,
+        "hit_rate": 0.54
       },
       "D": {
         "graded": 33,
@@ -40,9 +40,9 @@
     },
     "by_season": {
       "20262027": {
-        "graded": 166,
-        "hits": 88,
-        "hit_rate": 0.5301
+        "graded": 170,
+        "hits": 92,
+        "hit_rate": 0.5412
       }
     }
   },
@@ -9052,8 +9052,18 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-11T08:55:00Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "goals_by_position": {
+          "C": 2,
+          "LW": 1,
+          "RW": 2,
+          "D": 0
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-12T01:27:22Z"
+      }
     },
     {
       "id": "2026020084-WSH",
@@ -9096,8 +9106,18 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-11T08:55:00Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "goals_by_position": {
+          "C": 1,
+          "LW": 1,
+          "RW": 1,
+          "D": 0
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-12T01:27:22Z"
+      }
     },
     {
       "id": "2026020085-VAN",
@@ -9140,8 +9160,18 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-11T08:55:00Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "goals_by_position": {
+          "C": 0,
+          "LW": 1,
+          "RW": 0,
+          "D": 1
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-12T01:27:22Z"
+      }
     },
     {
       "id": "2026020085-NYR",
@@ -9184,8 +9214,18 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-11T08:55:00Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "goals_by_position": {
+          "C": 0,
+          "LW": 5,
+          "RW": 1,
+          "D": 0
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-12T01:27:22Z"
+      }
     },
     {
       "id": "2026020086-CAR",
