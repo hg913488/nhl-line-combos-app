@@ -82,7 +82,15 @@ jobs:
       # Roles, goalies and opponent context change through the day, so rebuild
       # the sheet on every lineup refresh.
       - name: Rebuild today's player prop sheet
+        id: prop_sheet
+        continue-on-error: true
         run: python scraper/build_prop_sheet.py
+
+      # A derived feed failure must not discard completed Picks grading. Restore
+      # failed feed output so a partial file cannot be included in the data commit.
+      - name: Restore failed player prop sheet
+        if: steps.prop_sheet.outcome == 'failure'
+        run: git restore -- data/prop_sheet.json
 
       - name: Commit refreshed data
         run: |
@@ -95,3 +103,12 @@ jobs:
             git commit -m "Update NHL data $(date +%F)"
             git push
           fi
+
+      # Report failure after publication: successful upstream updates survive,
+      # while the run remains visibly failed for troubleshooting and retry.
+      - name: Report derived feed failures after publishing
+        if: always() && (steps.prop_sheet.outcome == 'failure')
+        run: |
+          echo "::error::A derived player feed failed. Successful upstream data was retained for publication; failed feeds kept their previous version. Check the build and commit steps above."
+          echo "Derived player feed refresh failed; previous feed retained. Check publication step for upstream update status." >> "$GITHUB_STEP_SUMMARY"
+          exit 1

@@ -2,11 +2,14 @@ import React, { useState, useMemo, useEffect, useRef, useCallback, createContext
 import { Sun, Moon, Search, AlertCircle, ZoomIn, ZoomOut, ArrowRight, ChevronDown } from 'lucide-react';
 import useSchedule, { localDate } from './useSchedule.js';
 import PlayerDetails from './PlayerDetails.jsx';
+import PicksResults, { lockedPicks } from './PicksResults.jsx';
 import GameView from './GameView.jsx';
 import FatigueView from './FatigueView.jsx';
 // Lazy so data/spotlight.json (every skater) only downloads when the page is opened.
 const SpotlightView = React.lazy(() => import('./SpotlightView.jsx'));
 import JerseyIcon from './JerseyIcon.jsx';
+import './actual-usage.css';
+const ActualUsage = React.lazy(() => import('./ActualUsage.jsx'));
 import Select from './Select.jsx';
 import { formatET, getJSON, normalizeName, positionGroup, seasonForDate, seasonLabel, seasonsFrom } from './data-client.js';
 import { NHL_TEAMS, TEAM_COLORS } from './teams.js';
@@ -253,6 +256,7 @@ function useTeamRoster(team, enabled = true) {
 }
 
 function TeamBrowser({ slug, onSelect }) {
+  const [lineupView, setLineupView] = useState('projected');
   const [query, setQuery] = useState('');
   const team = NHL_TEAMS[slug];
   const { roster, error: rosterError } = useTeamRoster(team.abbr);
@@ -272,10 +276,11 @@ function TeamBrowser({ slug, onSelect }) {
       <header className="team-heading"><TeamLogo slug={slug} abbr={team.abbr} size={60} /><div><p className="muted">{seasonLabel(DATA_SEASON)} lineup snapshot</p><h1>{team.city} {team.name}</h1></div>
         {STANDINGS[team.abbr] && <div className="team-record"><span>Record as of {STANDINGS[team.abbr].date}</span><strong>{STANDINGS[team.abbr].record}</strong></div>}
       </header>
-      <p className="snapshot-notice"><AlertCircle size={17} /> Observed {UPDATED_AT}. Lineups may have changed since this snapshot.</p>
+      <p className="snapshot-notice"><AlertCircle size={17} /> Projected lines · {lineups.source || 'Published lineup feed'} · Updated {lineups.updated_at}. These are expected combinations, not confirmed game usage.</p>
+      <div className="lineup-view-switch" aria-label="Lineup view"><button aria-pressed={lineupView === 'projected'} onClick={() => setLineupView('projected')}>Projected lines</button><button aria-pressed={lineupView === 'actual'} onClick={() => setLineupView('actual')}>Actual usage</button></div>
       {rosterError && <p className="muted">Jersey numbers are temporarily unavailable.</p>}
       <RosterContext.Provider value={{ players: roster.team === team.abbr ? roster.players : {}, team: team.abbr }}>
-        <div className="team-lineup"><LineupContent data={TEAMS_DATA[slug]} /></div>
+        <div className="team-lineup">{lineupView === 'projected' ? <LineupContent data={TEAMS_DATA[slug]} /> : <React.Suspense fallback={<p className="data-state">Loading archived usage…</p>}><ActualUsage key={team.abbr} team={team.abbr} projected={TEAMS_DATA[slug]} roster={roster.team === team.abbr ? roster.players : {}} projectionUpdated={lineups.updated_at} /></React.Suspense>}</div>
       </RosterContext.Provider>
     </section>
   </main>;
@@ -297,9 +302,9 @@ function PlayerCard({ name, pos, lineChangedTo }) {
   const roster = useContext(RosterContext);
   const player = rosterPlayer(roster, name, pos);
   const isGoalie = pos === 'STR' || pos === 'BKP';
-  const parts = name.split(' ');
-  const first = parts.slice(0, -1).join(' ');
-  const last = parts.slice(-1)[0];
+  const parts = name.trim().split(/\s+/);
+  const first = player?.firstName || (parts.length > 1 ? parts[0] : '');
+  const last = player?.lastName || (parts.length > 1 ? parts.slice(1).join(' ') : parts[0]);
   const label = isGoalie ? 'G' : pos;
   return <button type="button" className="player-card-clickable player-tile"
     aria-label={`View ${name} statistics`}
@@ -568,7 +573,7 @@ function CompactLineup({ data, dense }) {
       <h3>{group.label}</h3>
       {group.units.map((unit, index) => <div className="compact-unit" key={`${group.label}-${index}`}>
         <span>{group.prefix}{index + 1}</span>
-        <div>{unit.map(player => <button key={player} onClick={() => triggerPlayerLookup?.(player, rosterPlayer(roster, player, group.pos), { team: roster?.team, pos: group.pos })} title={player}>{dense ? compactName(player) : player}</button>)}</div>
+        <div>{unit.map(player => <button key={player} onClick={() => triggerPlayerLookup?.(player, rosterPlayer(roster, player, group.pos), { team: roster?.team, pos: group.pos })} title={player}>{!dense && <><span className="compact-first">{player.trim().split(/\s+/)[0]}</span>{' '}</>}<strong className="compact-last">{player.trim().split(/\s+/).slice(1).join(' ') || player}</strong></button>)}</div>
       </div>)}
     </section>)}
   </div>;
@@ -1190,6 +1195,11 @@ function PlayerSheet() {
 
   const toggleSort = key => setSort(current => ({ key, dir: current.key === key && current.dir === 'desc' ? 'asc' : 'desc' }));
 
+  if (PROP_SHEET.date !== localDate()) return <section className="player-sheet">
+    <header className="sheet-heading"><div><span className="slate-kicker">Player sheet</span><h2>Tonight’s player sheet is awaiting refresh</h2></div></header>
+    <p className="data-state">The latest sheet is dated {PROP_SHEET.date || 'unknown'}. It is withheld here so an older slate is not shown as tonight’s lineup.</p>
+  </section>;
+
   if (!players.length) return <section className="player-sheet">
     <header className="sheet-heading"><div><span className="slate-kicker">Player sheet</span><h2>Skaters in tonight's lineups</h2></div></header>
     <p className="data-state">The player sheet covers regular-season and playoff games. It fills in automatically once the regular season starts — tonight's projected lineups are on the <a href="/">Tonight</a> page.</p>
@@ -1236,26 +1246,29 @@ function PicksView() {
   const { games, loading, error } = useSchedule(date);
   const gaSeason = GA_DATA.season ? `${GA_DATA.season} ` : '';
   return <main className="picks-page">
-    <header className="schedule-heading"><div><h1>Picks</h1><p className="muted">Which position each defense has allowed the most goals to over its last 10 games, measured against the {gaSeason}league average.</p></div><label>Date<input type="date" aria-label="Picks date" value={date} onChange={event => { if (event.target.value) setDate(event.target.value); }} /></label></header>
+    <header className="schedule-heading"><div><h1>Picks</h1><p className="muted">Position picks for each matchup. Browse past days to see what hit.</p></div><label>Date<input type="date" aria-label="Picks date" value={date} onChange={event => { if (event.target.value) setDate(event.target.value); }} /></label></header>
     {loading && <p className="data-state" role="status">Loading matchups...</p>}
     {error && <p className="data-state" role="alert">{error}</p>}
     {!loading && !error && !games.length && <p className="data-state">No games scheduled for {date}.</p>}
-    <div className="picks-list">{games.map(game => <article className="pick-matchup" key={game.id}>
+    <PicksResults date={date} onDate={setDate} />
+    {date >= localDate() && games.some(game => ['FUT','PRE'].includes(game.gameState) && Date.parse(game.startTimeUTC) > Date.now() && [game.awayTeam.abbrev,game.homeTeam.abbrev].some(offense => !lockedPicks.some(p=>String(p.game_id)===String(game.id) && p.offense===offense))) && <><h2>Upcoming matchup signals</h2><p className="muted">Current-data signals can change before locking. They are not part of the official record. Locked team picks appear in the history above.</p>
+    <div className="picks-list">{games.filter(game => ['FUT', 'PRE'].includes(game.gameState) && Date.parse(game.startTimeUTC) > Date.now() && [game.awayTeam.abbrev, game.homeTeam.abbrev].some(offense => !lockedPicks.some(p => String(p.game_id) === String(game.id) && p.offense === offense))).map(game => <article className="pick-matchup" key={game.id}>
       <header><div><TeamLogo slug={abbrToSlug(game.awayTeam.abbrev)} abbr={game.awayTeam.abbrev} size={28} /><strong>{game.awayTeam.abbrev}</strong><span>AT</span><TeamLogo slug={abbrToSlug(game.homeTeam.abbrev)} abbr={game.homeTeam.abbrev} size={28} /><strong>{game.homeTeam.abbrev}</strong></div><time>{new Date(game.startTimeUTC).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}</time></header>
       <div className="pick-sides">{[
         { offense: game.awayTeam.abbrev, defense: game.homeTeam.abbrev },
         { offense: game.homeTeam.abbrev, defense: game.awayTeam.abbrev },
-      ].map(side => {
+      ].filter(side => !lockedPicks.some(p => String(p.game_id) === String(game.id) && p.offense === side.offense)).map(side => {
         const ranked = rankPositions(GA_DATA.teams?.[side.defense]?.l10, GA_DATA.league?.l10_avg);
-        const top = ranked[0];
+        const available = POSITIONS.every(position => Number.isFinite(GA_DATA.teams?.[side.defense]?.l10?.[position]) && GA_DATA.teams[side.defense].l10[position] >= 0 && Number.isFinite(GA_DATA.league?.l10_avg?.[position]) && GA_DATA.league.l10_avg[position] > 0);
+        const top = available && ranked[0]?.index > 1 ? ranked[0] : null;
         return <section key={side.offense}><p>{side.offense} VS {side.defense}</p>
-          <strong className="pick-watch">WATCH {top?.position || '—'}</strong>
+          <strong className="pick-watch">{top ? `Watch ${top.position}` : 'No qualifying signal'}</strong>
           {top?.index != null && <span className="pick-index">{formatIndex(top.index)} league rate</span>}
           <div>{ranked.map(item => <span key={item.position}><b>{item.position}</b>{item.index != null ? formatIndex(item.index) : `${item.value} GA`}</span>)}</div>
         </section>;
       })}</div>
-    </article>)}</div>
-    {date === localDate() && <PlayerSheet />}
+    </article>)}</div></>}
+    {date === localDate() && <details className="pb-track-record"><summary>Player research sheet</summary><PlayerSheet /></details>}
   </main>;
 }
 
@@ -1852,7 +1865,7 @@ function PlayerStatsView() {
     {!loading && !error && <div className="player-results">
       {query.trim().length < 2 && <p className="muted">From the {seasonLabel(DATA_SEASON)} lineup archive</p>}
       {players.map(player => <button key={player.id || player.firstName + player.lastName} onClick={() => triggerPlayerLookup?.(player.firstName + ' ' + player.lastName, player)}>
-        <span>{player.firstName} {player.lastName}</span><small>{player.pos} {player.team}</small>
+        <span><span className="name-first">{player.firstName}</span>{' '}<strong className="name-last">{player.lastName}</strong></span><small>{player.pos} {player.team}</small>
       </button>)}
       {!players.length && <p className="data-state">No matching players.</p>}
     </div>}
@@ -2042,14 +2055,14 @@ export default function App() {
             <NavLink to="/teams" current={tab === 'all' || tab === 'compare'} onNavigate={() => openTeams('quick')}>TEAMS</NavLink>
             <NavLink to="/" current={tab === 'today' || tab === 'game'} onNavigate={() => setTab('today')}>TONIGHT</NavLink>
             <NavLink to="/news" current={['news', 'injuries', 'moves'].includes(tab)} onNavigate={() => openNews('nhl')}>NEWS</NavLink>
-            <NavLink to="/players" current={['player', 'spotlight', 'fatigue', 'stats', 'playoffs'].includes(tab)} onNavigate={() => setTab('player')}>STATS</NavLink>
+            <NavLink to="/spotlight" current={['player', 'spotlight', 'fatigue', 'stats', 'playoffs'].includes(tab)} onNavigate={() => setTab('spotlight')}>STATS</NavLink>
             <NavLink to="/picks" current={tab === 'picks'} onNavigate={() => setTab('picks')}>PICKS</NavLink>
           </nav>
           {SECTIONS_WITH_SUBVIEWS.has(tab) && <Select className="mobile-view-select" aria-label={`${mobileSectionLabel} view`} value={mobileNavValue} onChange={event => selectView(event.target.value)}>
             <optgroup label="TEAMS"><option value="teams-quick">Quick Scan</option><option value="teams-focus">Focused Team</option><option value="compare">Compare</option></optgroup>
             <option value="today">Tonight</option>
             <optgroup label="NEWS"><option value="news-nhl">NHL News</option><option value="news-reporters">Reporters</option><option value="moves">Line Moves</option><option value="injuries">Injuries</option></optgroup>
-            <optgroup label="STATS"><option value="player">Player Stats</option><option value="spotlight">Spotlight</option><option value="fatigue">Schedule Fatigue</option><option value="stats">Goals Allowed</option><option value="playoffs">Playoffs</option></optgroup>
+            <optgroup label="STATS"><option value="spotlight">Spotlight</option><option value="fatigue">Schedule Fatigue</option><option value="stats">Goals Allowed</option><option value="playoffs">Playoffs</option><option value="player">Player Search</option></optgroup>
             <option value="picks">Picks</option>
           </Select>}
         </div>
@@ -2072,13 +2085,13 @@ export default function App() {
           </div>
         </div>
         <div {...navMenuProps('stats')}>
-          <NavLink to="/players" className={`tab-btn${['player', 'spotlight', 'fatigue', 'stats', 'playoffs'].includes(tab) ? " active" : ""}`} onNavigate={() => setTab('player')}>STATS</NavLink>
+          <NavLink to="/spotlight" className={`tab-btn${['player', 'spotlight', 'fatigue', 'stats', 'playoffs'].includes(tab) ? " active" : ""}`} onNavigate={() => setTab('spotlight')}>STATS</NavLink>
           <div className="nav-submenu" aria-label="Stats views">
-            <NavLink to="/players" current={tab === 'player'} onNavigate={() => setTab('player')}>PLAYER STATS</NavLink>
             <NavLink to="/spotlight" current={tab === 'spotlight'} onNavigate={() => setTab('spotlight')}>SPOTLIGHT</NavLink>
             <NavLink to="/schedule-fatigue" current={tab === 'fatigue'} onNavigate={() => setTab('fatigue')}>SCHEDULE FATIGUE</NavLink>
             <NavLink to="/goals-allowed" current={tab === 'stats'} onNavigate={() => setTab('stats')}>GOALS ALLOWED</NavLink>
             <NavLink to="/playoffs" current={tab === 'playoffs'} onNavigate={() => setTab('playoffs')}>PLAYOFFS</NavLink>
+            <NavLink to="/players" current={tab === 'player'} onNavigate={() => setTab('player')}>PLAYER SEARCH</NavLink>
           </div>
         </div>
         <NavLink to="/picks" className={`tab-btn${tab === 'picks' ? " active" : ""}`} current={tab === 'picks'} onNavigate={() => setTab('picks')}>PICKS</NavLink>

@@ -839,3 +839,40 @@ html:has(.app-shell[data-theme='light']) { color-scheme: light; }
 .slate-live-period { color: var(--red); font: 700 11px/1 'Space Mono', monospace; letter-spacing: .1em; text-transform: uppercase; }
 .slate-live-time { font: 800 34px/1 'Syne', sans-serif; font-variant-numeric: tabular-nums; }
 @media (max-width: 767px) { .slate-panel .slate-live-clock { order: 2; padding: 18px 16px 24px; } .slate-live-time { font-size: 28px; } }
+
+/* Player identity: surname leads; keep the existing lineup layout. */
+.name-first { font-size:.78em; font-weight:400; color:var(--dove); }
+.name-last { font-size:1em; font-weight:800; }
+.app-shell .player-name > span { font-weight:400; font-size:10px; }
+.app-shell .player-name strong { font-weight:800; font-size:15px; }
+.app-shell .quick-scan .player-name > span { font-size:clamp(8px,9cqw,9px); }
+.app-shell .quick-scan .player-name strong { font-size:clamp(10px,13cqw,12px); }
+.app-shell .zoom-0 .player-name > span { font-size:9px; }
+.app-shell .zoom-0 .player-name strong { font-size:12px; }
+.app-shell .slate-lineups .player-name > span { font-size:9px; }
+.app-shell .slate-lineups .player-name strong { font-size:13px !important; }
+@media(max-width:767px){.app-shell .player-name > span{font-size:9px;}.app-shell .player-name strong{font-size:14px;}.app-shell .zoom-0 .player-name strong{font-size:12px;}}
+.app-shell .slate-panel .slate-lineups .player-name > span { font-size:8px; }
+.app-shell .slate-panel .slate-lineups .player-name strong { font-size:11px !important; }
+
+/* Surname emphasis on lineup charts, including compact zoom. */
+.app-shell .quick-scan .player-name > span{font-size:clamp(8px,8cqw,9px);}
+.app-shell .quick-scan .player-name strong{font-size:clamp(11px,15cqw,14px);font-weight:900;}
+.app-shell .zoom-0 .player-name > span{font-size:8px;}
+.app-shell .zoom-0 .player-name strong{font-size:13px;font-weight:900;}
+
+/* Compare/Quick Scan identity hierarchy, including mobile's legacy !important rule. */
+.app-shell .compare-page .player-name > span,
+.app-shell .quick-scan .player-name > span { font-size:8px !important; font-weight:400 !important; line-height:1.2; }
+.app-shell .compare-page .player-name strong,
+.app-shell .quick-scan .player-name strong { font-size:14px !important; font-weight:900 !important; line-height:1.2; }
+.app-shell .compare-page .zoom-1 .player-name strong { font-size:16px !important; }
+.app-shell .compare-page .zoom-2 .player-name strong { font-size:18px !important; }
+@media(max-width:767px){.app-shell .compare-page .player-name strong,.app-shell .quick-scan .player-name strong{font-size:13px !important;}}
+
+/* Quick Scan stays readable at its narrow tile width. */
+.app-shell .quick-scan .player-name > span{font-size:8px !important;white-space:normal;overflow:visible;text-overflow:clip;}
+.app-shell .quick-scan .player-name strong{font-size:11px !important;font-weight:800 !important;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.15;}
+.app-shell .compact-lineup .compact-unit button .compact-first{font-size:9px;font-weight:400;color:var(--dove);}
+.app-shell .compact-lineup .compact-unit button .compact-last{font-size:12px;font-weight:800;}
+.app-shell .compact-lineup.dense .compact-unit button .compact-last{font-size:10px;}

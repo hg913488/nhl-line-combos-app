@@ -103,3 +103,15 @@ Line combinations via [Daily Faceoff](https://www.dailyfaceoff.com). Live stats 
 ---
 
 *Built by [Himank Goel](https://goelstudio.ca)*
+
+## Picks results and usage context
+
+Picks now displays the saved pregame record rather than recalculating historical selections. Each position pick earns one hit if at least one skater on the chosen team scores at that position; additional goals are context, not extra wins. Regulation, overtime and empty-net goals count; shootout goals do not. Pending, void and unreconciled results are excluded from trusted accuracy. Scorers appear when collected by the newer grader. Filters include season, selected date, recent logged dates, position and result. Random-position, always-C and per-position descriptive benchmarks use matching settled team-games.
+
+New official selections require complete numeric inputs, a recent compatible snapshot and an index above 1.00; legacy selections are preserved. Method v3 eligibility is recorded separately from legacy v2. Recent finals and unresolved grades are rechecked for corrections, with prior results retained in an audit trail. An optional player-sheet or spotlight failure no longer discards already-collected Picks updates: successful artifacts publish, failed derived files are restored, and the workflow still reports failure.
+
+Player details compare the last five appearances with the previous five for total/average ice time and weighted shots per 60. Missing observations withhold affected comparisons. These are all-strengths measures; no PP/EV split is inferred from total TOI. Existing lineup tiles and presentation are unchanged. Game center also separates on-goal/unblocked shot counts by 5v5, power play, short-handed, empty-net and other/unknown situations. These counts are not expected goals.
+
+Offline actual-linemate research is available through `python scraper/analyze_linemates.py shifts.json --boxscore boxscore.json --output overlaps.json`. It excludes goalies and merges duplicate intervals; results are all-strengths shared ice time, not inferred coach-assigned lines or verified 5v5 usage. It does not change site lineups or published lineup data.
+
+Expected goals remains a next step requiring a permitted, attributed source or an independently validated current model. [Evolving-Hockey's historical explanation](https://evolving-hockey.com/blog/a-new-expected-goals-model-for-predicting-goals-in-the-nhl/) informs methodology; it is not the live data feed. Recommended future surfaces: player ixG/60 and goals-vs-xG, team 5v5 xGF/xGA rates, then game-center cumulative xG. Do not present current matchup indices as scoring probabilities.

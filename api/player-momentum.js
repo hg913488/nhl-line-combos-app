@@ -105,6 +105,36 @@ function consecutiveGames(games, predicate) {
   return count;
 }
 
+// Non-overlapping appearance windows. Never turn missing shots or TOI into zero.
+export function buildUsage(games) {
+  const window = rows => {
+    const toi = rows.map(game => parseToi(game?.toi));
+    const shots = rows.map(game => number(game?.shots));
+    const toiGames = toi.filter(value => value != null).length;
+    const shotGames = shots.filter(value => value != null && value >= 0).length;
+    const completeToi = rows.length > 0 && toiGames === rows.length;
+    const completeShots = rows.length > 0 && shotGames === rows.length;
+    const totalToiSeconds = completeToi ? toi.reduce((sum, value) => sum + value, 0) : null;
+    const averageToiSeconds = totalToiSeconds == null ? null : Math.round(totalToiSeconds / rows.length);
+    return {
+      games: rows.length, toiGames, shotGames,
+      firstDate: rows.at(-1)?.gameDate ?? null, lastDate: rows[0]?.gameDate ?? null,
+      totalToiSeconds, totalToi: formatToi(totalToiSeconds),
+      averageToiSeconds, averageToi: formatToi(averageToiSeconds),
+      shotsPer60: completeShots && totalToiSeconds > 0
+        ? rounded(shots.reduce((sum, value) => sum + value, 0) * 3600 / totalToiSeconds) : null,
+    };
+  };
+  const last5 = window(games.slice(0, 5));
+  const previous5 = window(games.slice(5, 10));
+  const fullWindows = last5.games === 5 && previous5.games === 5;
+  const compare = key => fullWindows && last5[key] != null && previous5[key] != null
+    ? rounded(last5[key] - previous5[key]) : null;
+  return { last5, previous5, fullWindows, versusPrevious5: {
+    averageToiSeconds: compare('averageToiSeconds'), shotsPer60: compare('shotsPer60'),
+  } };
+}
+
 export function buildLabels(games, season, last5) {
   if (!games.length) {
     return [{ type: 'no-games', label: 'No games recorded for this season', sampleSize: 0 }];
@@ -226,6 +256,7 @@ export default async function handler(req, res) {
       season,
       gameType: Number(gameType),
       summaries: { season: seasonSummary, last5, last10 },
+      usage: buildUsage(games),
       labels,
       ...buildContext(seasonSummary, last5, last10, landing),
       recentGames: games.slice(0, RECENT_GAME_LIMIT),

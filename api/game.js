@@ -146,6 +146,32 @@ function teamStatsFrom(rightRail) {
     .map(stat => ({ category: stat.category, away: stat.awayValue ?? null, home: stat.homeValue ?? null }));
 }
 
+// Strict 5v5 is separate from other even-strength and pulled-goalie situations.
+export function shotStrength(code, isHome) {
+  const state = parseSituation(code);
+  if (!state) return 'unknown';
+  if (String(code) === '1551') return '5v5';
+  if (!state.awayGoalie || !state.homeGoalie) return 'emptyNet';
+  const strength = goalStrength(code, isHome);
+  return strength === 'PP' ? 'powerPlay' : strength === 'SH' ? 'shortHanded' : 'other';
+}
+
+export function summarizeShotVolume(shots) {
+  const keys = ['all', '5v5', 'powerPlay', 'shortHanded', 'emptyNet', 'other', 'unknown'];
+  const rows = Object.fromEntries(keys.map(key => [key, {
+    away: { onGoal: 0, unblocked: 0 }, home: { onGoal: 0, unblocked: 0 },
+  }]));
+  for (const shot of shots) {
+    if (!['goal', 'shot', 'miss'].includes(shot.type) || !['away', 'home'].includes(shot.side)) continue;
+    const key = keys.includes(shot.strength) && shot.strength !== 'all' ? shot.strength : 'unknown';
+    for (const group of ['all', key]) {
+      rows[group][shot.side].unblocked += 1;
+      if (shot.type !== 'miss') rows[group][shot.side].onGoal += 1;
+    }
+  }
+  return rows;
+}
+
 export function buildGame(pbp, rightRail) {
   const awayTeam = pbp?.awayTeam || {};
   const homeTeam = pbp?.homeTeam || {};
@@ -176,6 +202,7 @@ export function buildGame(pbp, rightRail) {
       shooter: names[shooterId] || null,
       type,
       shotType: details.shotType || null,
+      strength: shotStrength(play.situationCode, teamId === homeTeam.id),
       x,
       y,
     };
@@ -189,6 +216,7 @@ export function buildGame(pbp, rightRail) {
         team: abbr,
         side: shot.side,
         scorerId,
+        scorerPosition: (pbp?.rosterSpots || []).find(spot => spot.playerId === scorerId)?.positionCode || null,
         scorer: names[scorerId] || null,
         headshot: playerHeadshot(pbp, abbr, scorerId, headshots),
         goalNumber: Number.isFinite(details.scoringPlayerTotal) ? details.scoringPlayerTotal : null,
@@ -226,6 +254,7 @@ export function buildGame(pbp, rightRail) {
     home: teamBlock(homeTeam),
     goals,
     shots,
+    shotVolume: summarizeShotVolume(shots),
     shotsByPeriod: shotsByPeriodFrom(rightRail, shots),
     teamStats: teamStatsFrom(rightRail),
     rosterNames: names,

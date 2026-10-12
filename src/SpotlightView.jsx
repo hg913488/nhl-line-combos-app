@@ -31,7 +31,7 @@ function Row({ player, stat, detail, onPlayer, tone }) {
       <button onClick={() => onPlayer(player.name,
         // Line moves for players without a game yet have no id: let the card search by name and team.
         player.id != null ? { id: String(player.id), firstName: first, lastName: rest.join(' '), pos: player.pos, team: player.team } : undefined,
-        { team: player.team, pos: player.pos || player.group })}>{player.name}</button>
+        { team: player.team, pos: player.pos || player.group })}><span className="name-first">{first}</span>{' '}<strong className="name-last">{rest.join(' ')}</strong></button>
       <small>{[player.team, posLabel(player.pos), detail].filter(Boolean).join(' · ')}</small>
     </div>
     <strong className={`spot-stat${tone ? ` spot-${tone}` : ''}`}>{stat}</strong>

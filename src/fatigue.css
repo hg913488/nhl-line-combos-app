@@ -1,27 +1,42 @@
-/* Schedule fatigue page. Selectors scoped to .fatigue-page. */
-.fatigue-page { max-width: 1040px; margin: 0 auto; padding: clamp(24px, 4vw, 44px) 24px 64px; }
-.fatigue-page .slate-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; padding-bottom: 22px; margin-bottom: 26px; border-bottom: 1px solid var(--border); }
-.fatigue-list { display: grid; gap: 12px; }
-.fatigue-game { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 20px; align-items: start; padding: 20px 24px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); }
-.fatigue-side { display: grid; gap: 8px; min-width: 0; }
-.fatigue-home { text-align: right; justify-items: end; }
-.fatigue-role { color: var(--dim); font: 700 10px/1 'Syne', sans-serif; letter-spacing: .12em; text-transform: uppercase; }
-.fatigue-page .fatigue-team { padding: 0; min-height: 0; border: 0; background: none; color: var(--white); font: 800 20px/1.1 var(--font-display); letter-spacing: 0; text-transform: none; text-align: inherit; cursor: pointer; }
-.fatigue-page .fatigue-team:hover { color: var(--accent); }
-.fatigue-at { padding-top: 24px; color: var(--dim); font: 700 10px/1 'Syne', sans-serif; letter-spacing: .12em; text-transform: uppercase; }
-.fatigue-flags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
-.fatigue-home .fatigue-flags { justify-content: flex-end; }
-.fatigue-flags li { padding: 5px 8px; border: 1px solid var(--border); border-radius: 3px; color: var(--dove); font: 700 10px/1 'Syne', sans-serif; letter-spacing: .1em; text-transform: uppercase; }
-.fatigue-flags li.tired { color: var(--accent); border-color: var(--accent); }
-.fatigue-flags li.none { border-color: transparent; padding-left: 0; padding-right: 0; color: var(--dim); }
-.fatigue-facts { margin: 0; color: var(--dove); font: 400 11px/1.4 'Space Mono', monospace; }
-.fatigue-edge { grid-column: 1 / -1; margin: 0; padding-top: 14px; border-top: 1px solid var(--border); color: var(--accent); font: 700 10px/1 'Syne', sans-serif; letter-spacing: .1em; text-transform: uppercase; }
-@media (max-width: 767px) {
-  .fatigue-page { padding: 22px 16px 48px; }
-  .fatigue-page .slate-heading { flex-direction: column; gap: 18px; }
-  .fatigue-game { grid-template-columns: 1fr; gap: 14px; padding: 16px; }
-  .fatigue-at { display: none; }
-  .fatigue-home { padding-top: 14px; border-top: 1px solid var(--border); }
-  .fatigue-home { text-align: left; justify-items: start; }
-  .fatigue-home .fatigue-flags { justify-content: flex-start; }
-}
+/* Hallmark · pre-emit critique: P4 H5 E4 S5 R5 V4. Scoped rest/travel redesign. */
+.fatigue-page { max-width:1200px; margin:0 auto; padding:26px 24px 48px; color:var(--white); min-width:0; }
+.fatigue-heading { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:20px; }
+.fatigue-heading h1 { margin:6px 0 8px; font:700 34px/1.1 var(--font-display); letter-spacing:-.025em; overflow-wrap:anywhere; }
+.fatigue-heading p { margin:0; color:var(--casper); font:14px/1.5 var(--font-body); }
+.fatigue-heading label { display:flex; flex-direction:column; gap:6px; color:var(--dove); font:11px/1.4 var(--font-body); }
+.fatigue-heading input { min-height:38px; border:1px solid var(--border); border-radius:4px; background:var(--surface); color:var(--white); padding:8px; font:13px var(--font-body); }
+.fatigue-role { display:block; color:var(--dove); font:700 10px/1.4 var(--font-data); letter-spacing:.07em; text-transform:uppercase; }
+.fatigue-date-strip { display:flex; align-items:center; gap:10px; padding:7px 0; border-block:1px solid var(--border); }
+.fatigue-date-strip strong { font:600 13px var(--font-body); }
+.fatigue-date-strip button,.fatigue-retry { display:flex; align-items:center; justify-content:center; gap:6px; min-height:36px; padding:6px 10px; background:transparent; border:0; color:var(--casper); cursor:pointer; font:600 11px var(--font-body); white-space:nowrap; }
+.fatigue-date-strip button:hover,.fatigue-retry:hover { color:var(--white); background:var(--surface); }
+.fatigue-date-strip .fatigue-today { margin-left:auto; }
+.fatigue-day-summary { margin:15px 0; color:var(--dove); font:12px/1.5 var(--font-body); }
+.fatigue-day-summary span { margin:0 6px; }
+.fatigue-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.fatigue-game { background:var(--surface); border:1px solid var(--border); border-radius:5px; min-width:0; overflow:clip; }
+.fatigue-game-top { display:flex; justify-content:space-between; align-items:center; padding:10px 14px; border-bottom:1px solid var(--border); color:var(--dove); font:10px/1.4 var(--font-data); }
+.fatigue-game-top a { display:flex; align-items:center; gap:3px; text-decoration:none; color:var(--casper); font:11px var(--font-body); white-space:nowrap; }
+.fatigue-game-top a:hover { text-decoration:underline; }
+.fatigue-sides { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+.fatigue-side { padding:14px; min-width:0; }
+.fatigue-side + .fatigue-side { border-left:1px solid var(--border); }
+.fatigue-team-heading { display:flex; align-items:center; gap:8px; margin-bottom:16px; }
+.fatigue-team-heading img { object-fit:contain; width:54px; height:36px; flex-shrink:0; }
+.fatigue-page .fatigue-team { display:block; padding:0; border:0; min-height:0; background:transparent; color:var(--white); font:700 15px/1.3 var(--font-body); text-align:left; cursor:pointer; }
+.fatigue-page .fatigue-team:hover:not(:disabled) { text-decoration:underline; }.fatigue-page .fatigue-team:disabled{cursor:default;}
+.fatigue-numbers { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin:0 0 12px; }
+.fatigue-numbers dt { min-height:28px; color:var(--dove); font:10px/1.4 var(--font-body); }
+.fatigue-numbers dd { margin:5px 0 0; font:700 27px/1 var(--font-data); }
+.fatigue-week { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:4px; margin:8px 0 10px; }
+.fatigue-week span { height:5px; background:var(--border); border-radius:1px; }.fatigue-week .filled { background:var(--fatigue-team-color); }
+.fatigue-main-flag { font:600 11px/1.5 var(--font-body); color:var(--casper); margin:10px 0; }
+.fatigue-busy { color:var(--red); }
+.fatigue-detail { border-top:1px solid var(--border); padding-top:6px; }
+.fatigue-detail summary { cursor:pointer; color:var(--dove); font:11px/1.5 var(--font-body); min-height:28px; }
+.fatigue-detail ul { padding-left:16px; margin:4px 0; color:var(--casper); font:11px/1.6 var(--font-body); }
+.fatigue-edge { margin:0; padding:10px 14px; border-top:1px solid var(--border); color:var(--casper); font:600 12px/1.5 var(--font-body); background:var(--bg); }
+.fatigue-about { border-top:1px solid var(--border); margin-top:24px; padding-top:15px; }.fatigue-about summary { cursor:pointer; font:600 13px var(--font-body); }.fatigue-about p { color:var(--casper); font:12px/1.7 var(--font-body); max-width:700px; }
+@media(min-width:1100px){.fatigue-list{grid-template-columns:repeat(3,minmax(0,1fr));}.fatigue-side{padding:12px 10px;}.fatigue-team-heading{gap:4px;}.fatigue-team-heading img{width:45px;height:30px;}.fatigue-page .fatigue-team{font-size:13px;}}
+@media(max-width:767px){.fatigue-page{padding:22px 12px 36px;}.fatigue-heading{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;}.fatigue-heading h1{font-size:28px;}.fatigue-heading p{font-size:12px;}.fatigue-heading label{flex-direction:row;align-items:center;}.fatigue-list{grid-template-columns:minmax(0,1fr);}.fatigue-side{padding:12px 10px;}.fatigue-team-heading{gap:5px;margin-bottom:12px;}.fatigue-team-heading img{width:45px;height:30px;}.fatigue-page .fatigue-team{font-size:13px;}.fatigue-numbers dd{font-size:23px;}.fatigue-detail summary{min-height:40px;}.fatigue-date-strip button{min-height:44px;}.fatigue-heading input{font-size:16px;}}
+@media(max-width:375px){.app-shell:has(.fatigue-page) .mobile-primary-nav a{font-size:8px;letter-spacing:0;padding-inline:2px;}.fatigue-team-heading img{width:39px;height:26px;}.fatigue-numbers dt{font-size:10px;}}

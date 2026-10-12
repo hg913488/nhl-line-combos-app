@@ -1,6 +1,38 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import playerMomentum, { buildContext, buildLabels, parseToi, summarizeGames } from '../api/player-momentum.js';
+import playerMomentum, { buildContext, buildLabels, buildUsage, parseToi, summarizeGames } from '../api/player-momentum.js';
+
+test('usage compares disjoint windows and computes weighted shots per 60', () => {
+  const games = Array.from({ length: 10 }, (_, index) => game(index + 1, index < 5
+    ? { toi: '20:00', shots: 4 } : { toi: '10:00', shots: 1 }));
+  const usage = buildUsage(games);
+  assert.equal(usage.last5.totalToi, '100:00');
+  assert.equal(usage.previous5.totalToi, '50:00');
+  assert.equal(usage.last5.shotsPer60, 12);
+  assert.equal(usage.previous5.shotsPer60, 6);
+  assert.deepEqual(usage.versusPrevious5, { averageToiSeconds: 600, shotsPer60: 6 });
+  const weighted = buildUsage([game(1, { toi: '10:00', shots: 2 }), game(2, { toi: '20:00', shots: 2 })]);
+  assert.equal(weighted.last5.shotsPer60, 8);
+  assert.equal(weighted.versusPrevious5.shotsPer60, null);
+});
+
+test('usage withholds comparisons and rates for incomplete or invalid data', () => {
+  const games = Array.from({ length: 10 }, (_, index) => game(index + 1));
+  games[0].toi = '18:99';
+  let usage = buildUsage(games);
+  assert.equal(usage.last5.toiGames, 4);
+  assert.equal(usage.last5.averageToi, null);
+  assert.equal(usage.last5.shotsPer60, null);
+  assert.equal(usage.versusPrevious5.averageToiSeconds, null);
+  games[0].toi = '18:00';
+  games[0].shots = null;
+  usage = buildUsage(games);
+  assert.equal(usage.last5.shotGames, 4);
+  assert.equal(usage.last5.shotsPer60, null);
+  assert.equal(buildUsage([]).last5.totalToi, null);
+  assert.equal(buildUsage([game(1, { toi: '00:00' })]).last5.shotsPer60, null);
+  assert.equal(buildUsage([game(1, { shots: 0 })]).last5.shotsPer60, 0);
+});
 
 function response() {
   return {

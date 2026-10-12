@@ -358,6 +358,19 @@ export default function GameView({ gameId, onBack, onTeam, onPlayer }) {
         </ul>
       </section>
 
+      {game.shotVolume && <section className="game-panel" aria-labelledby="game-volume-heading">
+        <h2 id="game-volume-heading">Shot volume by situation</h2>
+        <table className="sog-table">
+          <caption className="game-panel-note">Shots on goal / unblocked attempts. Unblocked attempts include goals, saved shots and misses.</caption>
+          <thead><tr><th scope="col">Situation</th><th scope="col">{game.away.abbr}</th><th scope="col">{game.home.abbr}</th></tr></thead>
+          <tbody>{Object.entries({ all: 'All situations', '5v5': '5-on-5', powerPlay: 'Power play', shortHanded: 'Short-handed', emptyNet: 'Either net empty', other: 'Other situations', unknown: 'Situation unavailable' })
+            .filter(([key]) => key === 'all' || game.shotVolume[key]?.away.unblocked || game.shotVolume[key]?.home.unblocked)
+            .map(([key, label]) => <tr key={key}><th scope="row">{label}</th>{['away', 'home'].map(side => <td key={side}>{game.shotVolume[key][side].onGoal} / {game.shotVolume[key][side].unblocked}</td>)}</tr>)}</tbody>
+        </table>
+        <p className="game-panel-note">Volume from recorded play-by-play, not a measure of chance quality. Empty-net situations are separated from 5-on-5.</p>
+        <details><summary>How expected goals would add context</summary><p>Expected goals estimates shot quality. A future xG view will need a validated model or attributed data source; these shot counts are not xG. <a href="https://evolving-hockey.com/blog/a-new-expected-goals-model-for-predicting-goals-in-the-nhl/" target="_blank" rel="noreferrer">Read Evolving-Hockey’s model explanation</a>.</p></details>
+      </section>}
+
       {game.shotsByPeriod.length > 0 && <section className="game-panel" aria-labelledby="game-sog-heading">
         <h2 id="game-sog-heading">Shots by period</h2>
         <table className="sog-table">

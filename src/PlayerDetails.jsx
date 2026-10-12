@@ -52,6 +52,16 @@ function InfoPanel({ label, children }) {
   </div>;
 }
 
+function usageSummary(usage) {
+  const seconds = usage.versusPrevious5?.averageToiSeconds;
+  if (!usage.fullWindows) return `${usage.last5.games + usage.previous5.games} games available · need 10 to compare`;
+  if (seconds == null) return 'Ice-time comparison unavailable';
+  if (seconds === 0) return 'Ice time per game is unchanged';
+  const amount = Math.round(Math.abs(seconds));
+  const duration = `${Math.floor(amount / 60)}:${String(amount % 60).padStart(2, '0')}`;
+  return `${duration} ${seconds > 0 ? 'more' : 'less'} ice time per game`;
+}
+
 export default function PlayerDetails({ modal, onClose }) {
   const [season, setSeason] = useState(modal.season);
   const [gameType, setGameType] = useState('2');
@@ -116,6 +126,7 @@ export default function PlayerDetails({ modal, onClose }) {
     ? [['Decision', 'decision'], ['Saves', 'saves'], ['Shots faced', 'shotsAgainst'], ['GA', 'goalsAgainst'], ['SV%', 'savePctg']]
     : [['G', 'goals'], ['A', 'assists'], ['PTS', 'points'], ['SOG', 'shots'], ['+/-', 'plusMinus']];
   const momentum = state.momentum;
+  const usage = momentum?.usage;
   const edge = state.edge?.availability !== 'unavailable' ? state.edge : null;
   const delta = value => value == null ? null : `${value > 0 ? '+' : ''}${value}`;
   // Landing/Edge give the canonical headshot; before they load (and for goalies, who skip both)
@@ -152,7 +163,7 @@ export default function PlayerDetails({ modal, onClose }) {
           {headshot && headshot !== failedHeadshot && <img className="player-headshot" src={headshot} alt="" width="64" height="64" onError={() => setFailedHeadshot(headshot)} />}
           <div>
           <p className="muted">{player.pos || 'Player'} {modal.player.team ? ` / ${modal.player.team}${modal.player.snapshot ? ' lineup snapshot' : ' current roster'}` : ''}</p>
-          <h2 id="player-dialog-title">{player.firstName} {player.lastName}</h2>
+          <h2 id="player-dialog-title"><span className="name-first">{player.firstName}</span>{' '}<strong className="name-last">{player.lastName}</strong></h2>
           </div>
         </div>
         {uniform && sweaterNumber != null && <div className="player-jersey"><JerseyIcon team={headshotTeam} number={sweaterNumber} size={84} /></div>}
@@ -173,7 +184,23 @@ export default function PlayerDetails({ modal, onClose }) {
       {!loading && !error && !games.length && <div className="data-state">No appearances in {seasonLabel(season)} {gameType === '3' ? 'playoffs' : 'regular season'}.</div>}
       {!loading && !error && games.length > 0 && <>
         <div className="player-metrics">{metrics.map(([label, value]) => <div key={label}><span>{label}</span><strong>{value}</strong></div>)}</div>
-        {!goalie && momentum && <ContextSection id="ctx-momentum" title="MOMENTUM" label="Recent player momentum" summary={momentumLine({ momentum, role })}
+        {!goalie && usage && <ContextSection id="ctx-usage" title="Ice time & shot rate" label="Ice time and shot rate comparison" summary={usageSummary(usage)}
+          open={openSection === 'usage'} onToggle={() => toggleSection('usage')}>
+          <p className="window-caption">Has this player been getting more ice time or shooting more often? Compare the most recent five games with the five games immediately before them.</p>
+          <div className="context-grid context-grid-2">{[['previous5', 'Earlier 5 games'], ['last5', 'Latest 5 games']].map(([key, label]) => {
+            const sample = usage[key];
+            return <div key={key}><span>{label}</span>
+              <strong>{sample.averageToi || '—'}</strong>
+              <small>Ice time per game (minutes:seconds)</small>
+              <small>Shot rate: {sample.shotsPer60 == null ? 'unavailable' : `${sample.shotsPer60} shots per 60 minutes`}</small>
+              {sample.firstDate && <small>{dateLabel(sample.firstDate)} – {dateLabel(sample.lastDate)} · {sample.games} games</small>}
+              {(sample.toiGames !== sample.games || sample.shotGames !== sample.games) && <small>Incomplete data: ice time {sample.toiGames}/{sample.games}, shots {sample.shotGames}/{sample.games}.</small>}
+            </div>;
+          })}</div>
+          <p className="window-caption">{usageSummary(usage)}{usage.fullWindows && usage.versusPrevious5.shotsPer60 != null ? `. Shot rate ${usage.versusPrevious5.shotsPer60 > 0 ? 'increased by' : usage.versusPrevious5.shotsPer60 < 0 ? 'decreased by' : 'changed by'} ${Math.abs(usage.versusPrevious5.shotsPer60)} shots per 60 minutes.` : ''}</p>
+          <details className="window-caption"><summary>What does shot rate mean?</summary><p>Shots per 60 minutes puts both periods on the same amount of ice time. A higher rate means the player shot more often while on the ice, even if their playing time changed. It is not a prediction of shots in the next game.</p><p>Includes all game situations. Changes are compared only when both groups contain five games with the required data. A change in ice time does not by itself prove a line or power-play promotion.</p></details>
+        </ContextSection>}
+        {!goalie && momentum && <ContextSection id="ctx-momentum" title="Momentum" label="Recent player momentum" summary={momentumLine({ momentum, role })}
           open={openSection === 'momentum'} onToggle={() => toggleSection('momentum')}>
           <div className="context-heading"><span>LAST 5 VS SEASON</span></div>
           {role && <p className="role-strip">

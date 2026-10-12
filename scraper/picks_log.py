@@ -49,6 +49,7 @@ VOID_SCHEDULE_STATES = {"PPD", "CNCL"}
 RETAINED_SEASONS = 2
 MISSING_GAME_VOID_DAYS = 3
 UNRECONCILED_GRACE_HOURS = 48
+CORRECTION_WINDOW_DAYS = 7
 EASTERN = ZoneInfo("America/New_York")
 
 SCHEDULE_URL = "https://api-web.nhle.com/v1/schedule/{date}"
@@ -152,15 +153,36 @@ def build_pick(
     game: dict[str, Any], side: dict[str, str], game_date: str,
     ga_data: dict[str, Any], logged_at: datetime,
 ) -> dict[str, Any]:
+    snapshot = ga_data.get("lastUpdated")
+    try:
+        snapshot_date = Date.fromisoformat(str(snapshot)[:10])
+    except ValueError:
+        raise ValueError("missing goals-against snapshot date")
+    age = (logged_at.astimezone(EASTERN).date() - snapshot_date).days
+    if age < 0 or age > 3 or snapshot_date > Date.fromisoformat(game_date):
+        raise ValueError("goals-against snapshot is stale or future dated")
+    if ga_data.get("season_id") != game.get("season"):
+        raise ValueError("goals-against snapshot is for another season")
     team = (ga_data.get("teams") or {}).get(side["defense"])
     if not isinstance(team, dict):
         print(f"WARNING: no goals-against data for {side['defense']}; "
-              "logging the all-zero ranking the Picks tab shows")
+              "skipping official pick")
     league_avg = ((ga_data.get("league") or {}).get("l10_avg")) or {}
     l10 = (team or {}).get("l10") or {}
+    for values, positive in ((l10, False), (league_avg, True)):
+        if not isinstance(values, dict) or any(
+            isinstance(values.get(p), bool) or not isinstance(values.get(p), (int, float))
+            or not math.isfinite(values[p]) or values[p] < 0
+            or (positive and values[p] <= 0) for p in POSITIONS
+        ):
+            raise ValueError("missing or invalid goals-against inputs")
     ranked = rank_positions(l10, league_avg)
+    if ranked[0][1] <= 1:
+        raise ValueError("no qualifying edge (top index must exceed 1.00)")
     indexes = dict(ranked)
     return {
+        "method_version": 3,
+        "eligibility": "Complete finite inputs; top position index > 1.00",
         "id": pick_id(game["id"], side["offense"]),
         "game_id": game["id"],
         "date": game_date,
@@ -216,8 +238,13 @@ def log_picks(
             continue
         new_sides = [side for side in game_sides(game)
                      if pick_id(game["id"], side["offense"]) not in existing_ids]
-        added.extend(build_pick(game, side, game_date, ga_data, now) for side in new_sides)
-        print(f"  {'logged' if new_sides else 'already logged'} {label}")
+        added_before = len(added)
+        for side in new_sides:
+            try:
+                added.append(build_pick(game, side, game_date, ga_data, now))
+            except ValueError as error:
+                print(f"  skip {side['offense']} vs {side['defense']}: {error}")
+        print(f"  {label}: {len(added) - added_before} new eligible pick(s)")
     return {**doc, "picks": doc["picks"] + added}, len(added)
 
 
@@ -247,10 +274,16 @@ def expected_skater_goals(game: dict[str, Any]) -> dict[str, int]:
 
 
 def _grade_result(pick: dict[str, Any], goals: dict[str, dict[str, int]],
-                  reconciled: bool, now: datetime) -> dict[str, Any]:
+                  reconciled: bool, now: datetime, rows=None) -> dict[str, Any]:
     by_position = goals.get(pick["offense"], {p: 0 for p in POSITIONS})
     return {
-        "hit": by_position[pick["watch"]] > 0,
+        "hit": by_position[pick["watch"]] > 0 if reconciled else None,
+        "scorers": [{"player_id": row.get("playerId"),
+                     "name": row.get("skaterFullName") or row.get("playerName"),
+                     "position": POSITION_LABELS.get(row.get("positionCode")),
+                     "goals": row.get("goals")}
+                    for row in (rows or []) if row.get("teamAbbrev") == pick["offense"]
+                    and row.get("goals", 0) > 0],
         "goals_by_position": dict(by_position),
         "score_reconciled": reconciled,
         "graded_at": _format_utc(now),
@@ -258,7 +291,11 @@ def _grade_result(pick: dict[str, Any], goals: dict[str, dict[str, int]],
 
 
 def _void(pick: dict[str, Any], reason: str, now: datetime) -> dict[str, Any]:
-    return {**pick, "status": "void",
+    audit = list(pick.get("result_audit", []))
+    if pick.get("result") is not None:
+        audit.append({"checked_at": _format_utc(now), "previous_status": pick["status"],
+                      "previous_result": pick["result"]})
+    return {**pick, "status": "void", "result_audit": audit,
             "result": {"void_reason": reason, "graded_at": _format_utc(now)}}
 
 
@@ -270,28 +307,37 @@ def _grade_game(
     if game is None:
         age = now.astimezone(EASTERN).date() - Date.fromisoformat(pick_date)
         if age.days >= MISSING_GAME_VOID_DAYS:
-            return [_void(pick, "game not found on scheduled date", now) for pick in picks]
+            return [_void(pick, "game not found on scheduled date", now) if pick.get("status") == "pending" else pick for pick in picks]
         return picks
     if game.get("gameScheduleState") in VOID_SCHEDULE_STATES:
         return [_void(pick, f"game {game['gameScheduleState']}", now) for pick in picks]
     if game.get("gameState") not in FINAL_GAME_STATES:
         return picks
 
-    goals = goals_by_team_position(fetch_goals(game["id"]))
+    rows = fetch_goals(game["id"])
+    goals = goals_by_team_position(rows)
     expected = expected_skater_goals(game)
     reconciled = all(sum(goals.get(team, {}).values()) == total
                      for team, total in expected.items())
     if not reconciled:
-        past_grace = now - _parse_utc(game["startTimeUTC"]) >= timedelta(
-            hours=UNRECONCILED_GRACE_HOURS)
-        if not past_grace:
-            print(f"  defer {game['id']}: skater goals {goals} do not match score "
-                  f"{expected} yet")
-            return picks
-        print(f"WARNING: grading {game['id']} with unreconciled goals "
-              "(likely a goalie goal or stats correction)")
-    return [{**pick, "status": "graded",
-             "result": _grade_result(pick, goals, reconciled, now)} for pick in picks]
+        print(f"  review {game['id']}: skater totals do not match final score")
+    updated = []
+    for pick in picks:
+        result = _grade_result(pick, goals, reconciled, now, rows)
+        if not reconciled:
+            result["review_reason"] = "Scorer totals do not match final score"
+        status = "graded" if reconciled else "review"
+        old = pick.get("result")
+        comparable = lambda r: {k: v for k, v in (r or {}).items() if k != "graded_at"}
+        if pick.get("status") == status and comparable(old) == comparable(result):
+            updated.append(pick)
+            continue
+        audit = list(pick.get("result_audit", []))
+        if old is not None:
+            audit.append({"checked_at": _format_utc(now), "previous_status": pick["status"],
+                          "previous_result": old})
+        updated.append({**pick, "status": status, "result": result, "result_audit": audit})
+    return updated
 
 
 def grade_picks(
@@ -300,7 +346,10 @@ def grade_picks(
 ) -> tuple[dict[str, Any], int]:
     pending: dict[tuple[str, int], list[dict[str, Any]]] = {}
     for pick in doc["picks"]:
-        if pick.get("status") == "pending":
+        age = (now.astimezone(EASTERN).date() - Date.fromisoformat(pick["date"])).days
+        if (pick.get("status") in ("pending", "review") or
+            (pick.get("status") == "graded" and
+             (age <= CORRECTION_WINDOW_DAYS or (pick.get("result") or {}).get("score_reconciled") is not True))):
             pending.setdefault((pick["date"], pick["game_id"]), []).append(pick)
     if not pending:
         return doc, 0
@@ -312,7 +361,7 @@ def grade_picks(
             schedules[pick_date] = {game["id"]: game for game in fetch_schedule(pick_date)}
         game = schedules[pick_date].get(game_id)
         for pick in _grade_game(picks, game, pick_date, fetch_goals, now):
-            if pick["status"] != "pending":
+            if pick != next(p for p in picks if p["id"] == pick["id"]):
                 updated[pick["id"]] = pick
 
     picks = [updated.get(pick["id"], pick) for pick in doc["picks"]]
@@ -329,8 +378,17 @@ def _tally(picks: list[dict[str, Any]]) -> dict[str, Any]:
     return {"graded": len(picks), "hits": hits, "hit_rate": _rate(hits, len(picks))}
 
 
+def trusted_grade(pick: dict[str, Any]) -> bool:
+    result = pick.get("result") or {}
+    goals = result.get("goals_by_position") or {}
+    watch = pick.get("watch")
+    return (pick.get("status") == "graded" and result.get("score_reconciled") is True
+            and watch in POSITIONS and all(type(goals.get(p)) is int and goals[p] >= 0 for p in POSITIONS)
+            and type(result.get("hit")) is bool and result["hit"] == (goals[watch] > 0))
+
+
 def build_summary(picks: list[dict[str, Any]]) -> dict[str, Any]:
-    graded = [pick for pick in picks if pick.get("status") == "graded"]
+    graded = [pick for pick in picks if trusted_grade(pick)]
     # Share of positions that scored in each graded game: the hit rate a random
     # position pick would have had, for judging whether the signal adds anything.
     baseline_hits = sum(
@@ -340,6 +398,13 @@ def build_summary(picks: list[dict[str, Any]]) -> dict[str, Any]:
     seasons = sorted({pick.get("season") for pick in graded if pick.get("season")})
     return {
         **_tally(graded),
+        "review": sum(1 for pick in picks if pick.get("status") == "review" or
+                      (pick.get("status") == "graded" and
+                       not trusted_grade(pick))),
+        "position_baseline": {p: _rate(sum(1 for pick in graded if
+            pick["result"]["goals_by_position"].get(p, 0) > 0), len(graded)) for p in POSITIONS},
+        "always_c_hit_rate": _rate(sum(1 for pick in graded if
+            pick["result"]["goals_by_position"].get("C", 0) > 0), len(graded)),
         "pending": sum(1 for pick in picks if pick.get("status") == "pending"),
         "void": sum(1 for pick in picks if pick.get("status") == "void"),
         "baseline_hit_rate": _rate(baseline_hits, len(graded) * len(POSITIONS)),
@@ -374,6 +439,8 @@ def finalize(doc: dict[str, Any]) -> dict[str, Any]:
     return {
         "schema_version": SCHEMA_VERSION,
         "method": METHOD,
+        "current_method": {**METHOD, "version": 3,
+                           "eligibility": "Complete finite nonnegative team inputs and positive league averages; matching-season snapshot no more than 3 calendar days old and not future dated; top index > 1.00. Historical selections remain locked."},
         "retention": {"seasons": RETAINED_SEASONS},
         "summary": build_summary(picks),
         "picks": picks,

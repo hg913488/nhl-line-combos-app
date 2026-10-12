@@ -17,9 +17,9 @@ GA_DATA = {
     "teams": {
         # TOR indexes: C 0.5, LW 1.25, RW 1.25, D 0.5 -> WATCH LW.
         "TOR": {"l10": {"C": 6, "LW": 5, "RW": 5, "D": 2}},
-        "MTL": {"l10": {"C": 12, "LW": 2, "RW": 2, "D": 2}},
+        "MTL": {"l10": {"C": 13, "LW": 2, "RW": 2, "D": 2}},
         "BOS": {"l10": {"C": 1, "LW": 0, "RW": 0, "D": 8}},
-        "NYR": {"l10": {"C": 6, "LW": 1, "RW": 1, "D": 1}},
+        "NYR": {"l10": {"C": 13, "LW": 1, "RW": 1, "D": 1}},
     },
     "league": {"l10_avg": {"C": 12.0, "LW": 4.0, "RW": 4.0, "D": 4.0}},
 }
@@ -174,13 +174,15 @@ class GradeTests(unittest.TestCase):
         self.assertEqual(count, 0)
         self.assertEqual({pick["status"] for pick in doc["picks"]}, {"pending"})
 
-    def test_unreconciled_stats_defer_then_grade_after_grace(self):
+    def test_unreconciled_stats_require_review(self):
         rows = [goal("TOR", "C")]  # score says 1-2, stats only show one goal
         _, count = self.grade(final_game(1, 2), rows)
-        self.assertEqual(count, 0)
+        self.assertEqual(count, 2)
         doc, count = self.grade(final_game(1, 2), rows, now=NOW + timedelta(days=3))
         self.assertEqual(count, 2)
         self.assertFalse(doc["picks"][0]["result"]["score_reconciled"])
+        self.assertEqual(doc["picks"][0]["status"], "review")
+        self.assertIsNone(doc["picks"][0]["result"]["hit"])
 
     def test_postponed_and_missing_games_are_voided(self):
         doc, _ = self.grade(game(gameScheduleState="PPD"), [])
@@ -192,13 +194,69 @@ class GradeTests(unittest.TestCase):
                                            NOW + timedelta(days=4))
         self.assertEqual(count, 2)
 
-    def test_graded_picks_are_not_regraded(self):
+    def test_recent_graded_pick_missing_schedule_preserves_result(self):
         doc, _ = self.grade(final_game(2, 1), [goal("MTL", "L", 2), goal("TOR", "D")])
         calls = []
         again, count = picks_log.grade_picks(doc, lambda d: calls.append(d) or [],
                                              lambda _: [], self.later)
-        self.assertEqual((count, calls), (0, []))
+        self.assertEqual((count, calls), (0, ["2026-10-10"]))
         self.assertEqual(again, doc)
+
+
+class ReliabilityTests(unittest.TestCase):
+    def test_stale_future_and_wrong_season_snapshots_skip(self):
+        for update in ({"lastUpdated": "2026-10-06"}, {"lastUpdated": "2026-10-11"}, {"season_id": 20252026}):
+            _, count = picks_log.log_picks(picks_log.empty_document(), "2026-10-10", [game()], {**GA_DATA, **update}, NOW)
+            self.assertEqual(count, 0)
+
+    def test_invalid_grades_excluded_from_summary(self):
+        pick = {"status": "graded", "watch": "D", "result": {"hit": True, "score_reconciled": True,
+                 "goals_by_position": {p: 0 for p in picks_log.POSITIONS}}}
+        self.assertEqual(picks_log.build_summary([pick])["graded"], 0)
+        self.assertEqual(picks_log.build_summary([pick])["review"], 1)
+
+    def test_invalid_and_no_edge_inputs_never_lock_a_pick(self):
+        import copy
+        for value in (None, float("nan"), -1, True):
+            ga = copy.deepcopy(GA_DATA)
+            ga["teams"]["TOR"]["l10"]["D"] = value
+            doc, count = picks_log.log_picks(picks_log.empty_document(), "2026-10-10", [game()], ga, NOW)
+            self.assertEqual(count, 1)
+            self.assertEqual(doc["picks"][0]["offense"], "TOR")
+        ga = copy.deepcopy(GA_DATA)
+        ga["teams"]["TOR"]["l10"] = {p: 0 for p in picks_log.POSITIONS}
+        _, count = picks_log.log_picks(picks_log.empty_document(), "2026-10-10", [game()], ga, NOW)
+        self.assertEqual(count, 1)
+
+    def test_correction_preserves_original_selection_and_previous_grade(self):
+        doc = logged_doc()
+        first, _ = picks_log.grade_picks(doc, lambda _: [final_game(1, 1)],
+            lambda _: [goal("MTL", "L"), goal("TOR", "C")], NOW + timedelta(days=1))
+        corrected_rows = [{**goal("MTL", "D"), "skaterFullName": "Test Defender", "playerId": 7}, goal("TOR", "C")]
+        changed, count = picks_log.grade_picks(first, lambda _: [final_game(1, 1)],
+            lambda _: corrected_rows, NOW + timedelta(days=2))
+        pick = changed["picks"][0]
+        self.assertEqual(count, 1)
+        self.assertEqual(pick["watch"], "LW")
+        self.assertFalse(pick["result"]["hit"])
+        self.assertTrue(pick["result_audit"][0]["previous_result"]["hit"])
+        self.assertEqual(pick["result"]["scorers"][0], {"player_id": 7, "name": "Test Defender", "position": "D", "goals": 1})
+        unchanged, count = picks_log.grade_picks(changed, lambda _: [final_game(1, 1)],
+            lambda _: corrected_rows, NOW + timedelta(days=3))
+        self.assertEqual(count, 0)
+        self.assertEqual(unchanged, changed)
+
+    def test_review_is_excluded_and_can_resolve(self):
+        doc, _ = picks_log.grade_picks(logged_doc(), lambda _: [final_game(1, 1)],
+            lambda _: [], NOW + timedelta(days=1))
+        summary = picks_log.build_summary(doc["picks"])
+        self.assertEqual((summary["graded"], summary["review"]), (0, 2))
+        resolved, count = picks_log.grade_picks(doc, lambda _: [final_game(1, 1)],
+            lambda _: [goal("MTL", "L"), goal("TOR", "C")], NOW + timedelta(days=2))
+        self.assertEqual(count, 2)
+        summary = picks_log.build_summary(resolved["picks"])
+        self.assertEqual(summary["always_c_hit_rate"], 0.5)
+        self.assertEqual(summary["position_baseline"]["LW"], 0.5)
 
 
 class SummaryTests(unittest.TestCase):
@@ -207,7 +265,7 @@ class SummaryTests(unittest.TestCase):
         goals = {p: 0 for p in picks_log.POSITIONS}
         goals.update(scored or ({watch: 1} if hit else {}))
         return {"watch": watch, "season": season, "status": status,
-                "result": {"hit": hit, "goals_by_position": goals}}
+                "result": {"hit": hit, "goals_by_position": goals, "score_reconciled": True}}
 
     def test_summary_math(self):
         picks = [self.pick("C", True, scored={"C": 1, "D": 2}), self.pick("C", False),
@@ -242,7 +300,7 @@ class FileTests(unittest.TestCase):
                 picks_log.run("log", path, ga_path, "2026-10-10", NOW + timedelta(hours=1))
             saved = json.loads(path.read_text())
             self.assertEqual(path.read_text(), first)
-            self.assertEqual(list(saved), ["schema_version", "method", "retention",
+            self.assertEqual(list(saved), ["schema_version", "method", "current_method", "retention",
                                            "summary", "picks"])
             self.assertEqual(saved["summary"]["pending"], 2)
             self.assertEqual([p.name for p in Path(directory).iterdir()
