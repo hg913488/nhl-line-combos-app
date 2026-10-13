@@ -1250,24 +1250,7 @@ function PicksView() {
     {loading && <p className="data-state" role="status">Loading matchups...</p>}
     {error && <p className="data-state" role="alert">{error}</p>}
     {!loading && !error && !games.length && <p className="data-state">No games scheduled for {date}.</p>}
-    <PicksResults date={date} onDate={setDate} />
-    {date >= localDate() && games.some(game => ['FUT','PRE'].includes(game.gameState) && Date.parse(game.startTimeUTC) > Date.now() && [game.awayTeam.abbrev,game.homeTeam.abbrev].some(offense => !lockedPicks.some(p=>String(p.game_id)===String(game.id) && p.offense===offense))) && <><h2>Upcoming matchup signals</h2><p className="muted">Current-data signals can change before locking. They are not part of the official record. Locked team picks appear in the history above.</p>
-    <div className="picks-list">{games.filter(game => ['FUT', 'PRE'].includes(game.gameState) && Date.parse(game.startTimeUTC) > Date.now() && [game.awayTeam.abbrev, game.homeTeam.abbrev].some(offense => !lockedPicks.some(p => String(p.game_id) === String(game.id) && p.offense === offense))).map(game => <article className="pick-matchup" key={game.id}>
-      <header><div><TeamLogo slug={abbrToSlug(game.awayTeam.abbrev)} abbr={game.awayTeam.abbrev} size={28} /><strong>{game.awayTeam.abbrev}</strong><span>AT</span><TeamLogo slug={abbrToSlug(game.homeTeam.abbrev)} abbr={game.homeTeam.abbrev} size={28} /><strong>{game.homeTeam.abbrev}</strong></div><time>{new Date(game.startTimeUTC).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}</time></header>
-      <div className="pick-sides">{[
-        { offense: game.awayTeam.abbrev, defense: game.homeTeam.abbrev },
-        { offense: game.homeTeam.abbrev, defense: game.awayTeam.abbrev },
-      ].filter(side => !lockedPicks.some(p => String(p.game_id) === String(game.id) && p.offense === side.offense)).map(side => {
-        const ranked = rankPositions(GA_DATA.teams?.[side.defense]?.l10, GA_DATA.league?.l10_avg);
-        const available = POSITIONS.every(position => Number.isFinite(GA_DATA.teams?.[side.defense]?.l10?.[position]) && GA_DATA.teams[side.defense].l10[position] >= 0 && Number.isFinite(GA_DATA.league?.l10_avg?.[position]) && GA_DATA.league.l10_avg[position] > 0);
-        const top = available && ranked[0]?.index > 1 ? ranked[0] : null;
-        return <section key={side.offense}><p>{side.offense} VS {side.defense}</p>
-          <strong className="pick-watch">{top ? `Watch ${top.position}` : 'No qualifying signal'}</strong>
-          {top?.index != null && <span className="pick-index">{formatIndex(top.index)} league rate</span>}
-          <div>{ranked.map(item => <span key={item.position}><b>{item.position}</b>{item.index != null ? formatIndex(item.index) : `${item.value} GA`}</span>)}</div>
-        </section>;
-      })}</div>
-    </article>)}</div></>}
+    <PicksResults date={date} onDate={setDate} scheduledGames={games} ga={GA_DATA} />
     {date === localDate() && <details className="pb-track-record"><summary>Player research sheet</summary><PlayerSheet /></details>}
   </main>;
 }

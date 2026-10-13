@@ -6,6 +6,7 @@ import { dailyMatchups, pickReason, matchingScorers, dayOutcome, POSITION_NAMES 
 import { TEAM_COLORS, NHL_TEAMS } from './teams.js';
 import { getJSON } from './data-client.js';
 import './picks-results.css';
+import { rankPositions, POSITIONS } from './picks-signal.js';
 
 export const lockedPicks = picksLog.picks || [];
 const TEAMS = Object.fromEntries(Object.values(NHL_TEAMS).map(t=>[t.abbr,t]));
@@ -34,16 +35,16 @@ function PositionRink({away,home}) {
 }
 function PickSide({pick, team, game}) {
   if (!pick) return <section className="pb-side"><span className="pb-eyebrow">{team}</span><h3>No locked pick</h3><p>No selection was saved for this team.</p></section>;
-  const status = pickStatus(pick);
+  const status = pick.provisional ? 'preview' : pickStatus(pick);
   const people = ['hit','miss'].includes(status) ? matchingScorers(pick,game) : [];
   const goalCount = pick.result?.goals_by_position?.[pick.watch];
-  const label = {hit:'Hit',miss:'Miss',pending:'Pending',review:'Awaiting review',void:'Void'}[status];
+  const label = {hit:'Hit',miss:'Miss',pending:'Pending',review:'Awaiting review',void:'Void',preview:'Preview'}[status];
   const Icon = status==='hit' ? Check : status==='miss' ? X : Clock;
   return <section className="pb-side">
     <div className="pb-side-head"><span className="pb-eyebrow">{team} pick</span><span className={`pb-status pb-${status}`}><Icon size={13} aria-hidden="true"/>{label}</span></div>
-    <h3>{POSITION_NAMES[pick.watch] || pick.watch}<span>to score</span></h3>
-    {people.length > 0 ? <div className="pb-scorers">{people.map(person=><div className="pb-scorer" key={person.id || person.name}><Face person={person} team={team}/><div><strong>{person.name || 'Scorer'}</strong><span>{person.goals} {person.goals===1 ? 'goal':'goals'}</span></div></div>)}</div> : <p className="pb-result-copy">{status==='miss' ? 'No goals from this position.' : status==='hit' ? `${goalCount} ${goalCount===1?'goal':'goals'} from this position.` : status==='review' ? 'Scoring totals need verification.' : status==='void' ? pick.result?.void_reason || 'Pick excluded from the record.' : 'Result added after the game.'}</p>}
-    <details className="pb-pick-detail"><summary>Why this pick?</summary><p>{pickReason(pick)}</p><p>Opponent’s last 10 games at lock time. This measures a matchup, not scoring probability.</p><small>Locked {stamp(pick.logged_at)} · Method v{pick.method_version || 2}</small></details>
+    <h3>{POSITION_NAMES[pick.watch] || pick.watch || 'No qualifying edge'}{pick.watch && <span>to score</span>}</h3>
+    {people.length > 0 ? <div className="pb-scorers">{people.map(person=><div className="pb-scorer" key={person.id || person.name}><Face person={person} team={team}/><div><strong>{person.name || 'Scorer'}</strong><span>{person.goals} {person.goals===1 ? 'goal':'goals'}</span></div></div>)}</div> : <p className="pb-result-copy">{status==='miss' ? 'No goals from this position.' : status==='hit' ? `${goalCount} ${goalCount===1?'goal':'goals'} from this position.` : status==='review' ? 'Scoring totals need verification.' : status==='void' ? pick.result?.void_reason || 'Pick excluded from the record.' : status==='preview' ? 'Not locked. Can change before puck drop.' : 'Result added after the game.'}</p>}
+    <details className="pb-pick-detail"><summary>Why this pick?</summary><p>{pick.provisional && !pick.watch ? 'No complete above-average matchup signal is available for this team.' : pickReason(pick)}</p><p>{pick.provisional ? 'Opponent’s latest 10-game sample. This measures a matchup, not scoring probability.' : 'Opponent’s last 10 games at lock time. This measures a matchup, not scoring probability.'}</p><small>{pick.provisional ? `Preview based on data updated ${pick.updated || 'unknown'}` : `Locked ${stamp(pick.logged_at)} · Method v${pick.method_version || 2}`}</small></details>
   </section>;
 }
 function MatchupCard({matchup}) {
@@ -57,21 +58,36 @@ function MatchupCard({matchup}) {
     <div className="pb-sides"><PickSide pick={away} team={matchup.away} game={game}/><PickSide pick={home} team={matchup.home} game={game}/></div>
   </article>;
 }
-export default function PicksResults({date,onDate}) {
+export default function PicksResults({date,onDate,scheduledGames=[],ga={}}) {
   const [method,setMethod] = useState('all');
   const days = [...new Set(lockedPicks.map(p=>p.date))].sort().reverse();
   const today = new Date().toLocaleDateString('en-CA');
   const rows = lockedPicks.filter(p=>p.date===date);
-  const games = useMemo(()=>dailyMatchups(lockedPicks,date),[date]);
+  const games = useMemo(()=>{
+    const groups=dailyMatchups(lockedPicks,date);
+    for(const game of scheduledGames){
+      if(date<today || !['FUT','PRE'].includes(game.gameState) || Date.parse(game.startTimeUTC)<=Date.now()) continue;
+      let group=groups.find(g=>String(g.id)===String(game.id));
+      if(!group){group={id:game.id,start:game.startTimeUTC,away:game.awayTeam.abbrev,home:game.homeTeam.abbrev,picks:[]};groups.push(group);}
+      for(const [offense,defense,venue] of [[group.away,group.home,'away'],[group.home,group.away,'home']]){
+        if(group.picks.some(p=>p.offense===offense))continue;
+        const allowed=ga.teams?.[defense]?.l10, averages=ga.league?.l10_avg;
+        const complete=POSITIONS.every(p=>Number.isFinite(allowed?.[p])&&allowed[p]>=0&&Number.isFinite(averages?.[p])&&averages[p]>0);
+        const ranked=complete?rankPositions(allowed,averages):[];const top=ranked[0]?.index>1?ranked[0]:null;
+        group.picks.push({id:`preview-${game.id}-${offense}`,offense,defense,venue,watch:top?.position||null,index:top?{[top.position]:top.index}:{},provisional:true,updated:ga.lastUpdated});
+      }
+    }
+    return groups.sort((a,b)=>a.start.localeCompare(b.start));
+  },[date,today,scheduledGames,ga]);
   const outcome = dayOutcome(rows);
   const season = rows[0]?.season || Math.max(...lockedPicks.map(p=>p.season));
   const seasonRows = lockedPicks.filter(p=>p.season===season && (method==='all' || String(p.method_version || 2)===method));
   const stats = pickPerformance(seasonRows);
-  const recent = [...new Set([today,...days])].sort().reverse().slice(0,5);
+  const recent = [...new Set([shiftDate(today,1),today,...days])].sort().reverse().slice(0,5);
   return <section className="picks-results" aria-label="Daily picks board">
-    <nav className="pb-day-nav" aria-label="Picks snapshots"><button aria-label="Previous day" onClick={()=>onDate?.(shiftDate(date,-1))}><ChevronLeft size={18}/></button><div>{recent.map(day=><button key={day} aria-pressed={day===date} onClick={()=>onDate?.(day)}>{day===today?'Today':dayLabel(day)}</button>)}</div><button aria-label="Next day" disabled={date>=today} onClick={()=>onDate?.(shiftDate(date,1))}><ChevronRight size={18}/></button></nav>
-    <div className="pb-day-heading"><div><span className="pb-eyebrow">{date < today ? 'Saved daily recap':'Daily picks'}</span><h2>{date===today ? 'Tonight’s board':`${dayLabel(date)} picks`}</h2></div><div className="pb-day-record" aria-live="polite"><strong>{outcome.settled ? `${outcome.hits} / ${outcome.settled}` : rows.length}</strong><span>{outcome.settled?'picks hit':'locked picks'}</span>{outcome.pending>0 && <small>{outcome.pending} pending</small>}{outcome.review>0 && <small>{outcome.review} awaiting review</small>}</div></div>
-    {games.length>0 ? <><p className="pb-snapshot-note">{games.length} matchups · Saved pregame position picks</p><div className="pb-board">{games.map(game=><MatchupCard key={game.id} matchup={game}/>)}</div></> : <p className="data-state">No locked picks saved for this date. Upcoming matchup signals appear below when available.</p>}
+    <nav className="pb-day-nav" aria-label="Picks snapshots"><button aria-label="Previous day" onClick={()=>onDate?.(shiftDate(date,-1))}><ChevronLeft size={18}/></button><div>{recent.map(day=><button key={day} aria-pressed={day===date} onClick={()=>onDate?.(day)}>{day===today?'Today':dayLabel(day)}</button>)}</div><button aria-label="Next day" onClick={()=>onDate?.(shiftDate(date,1))}><ChevronRight size={18}/></button></nav>
+    <div className="pb-day-heading"><div><span className="pb-eyebrow">{date < today ? 'Saved daily recap':'Daily picks'}</span><h2>{date===today ? 'Tonight’s board':date===shiftDate(today,1) ? 'Tomorrow’s board':`${dayLabel(date)} picks`}</h2></div><div className="pb-day-record" aria-live="polite"><strong>{outcome.settled ? `${outcome.hits} / ${outcome.settled}` : rows.length}</strong><span>{outcome.settled?'picks hit':rows.length?'locked picks':'locked picks yet'}</span>{outcome.pending>0 && <small>{outcome.pending} pending</small>}{outcome.review>0 && <small>{outcome.review} awaiting review</small>}</div></div>
+    {games.length>0 ? <><p className="pb-snapshot-note">{games.length} matchups · {games.some(g=>g.picks.some(p=>p.provisional))?'Previews can change before locking':'Saved pregame position picks'}</p><div className="pb-board">{games.map(game=><MatchupCard key={game.id} matchup={game}/>)}</div></> : <p className="data-state">No picks or upcoming matchups available for this date.</p>}
     <details className="pb-track-record"><summary>Track record &amp; how it works <span>{formatPickRate(stats.hitRate)} season hit rate</span></summary><div className="pb-track-body"><label>Pick method <select aria-label="Picks record method" value={method} onChange={e=>setMethod(e.target.value)}><option value="all">All methods</option><option value="2">Legacy v2</option><option value="3">Qualified edge v3</option></select></label><p>{stats.hits} hits from {stats.settled} settled picks this season. {stats.pending} pending · {stats.review} awaiting review · {stats.void} void.</p><p>Random-position benchmark: {formatPickRate(stats.randomRate)}. Always pick centers: {formatPickRate(stats.centerRate)}. These comparisons use the same settled team-games.</p><div className="pb-position-record">{stats.byPosition.map(p=><p key={p.position}><strong>{p.position} {p.hits}/{p.settled}</strong> · {formatPickRate(p.hitRate)} · Baseline {formatPickRate(p.baseline)}</p>)}</div><p>Each pick is for a position on the named team, not an individual player. Regulation, overtime and empty-net goals count; assists and shootout goals don’t. Extra goals don’t create extra wins. Unverified results and voids are excluded.</p><p>The newer qualified-edge method skips incomplete or stale inputs and matchups at or below the league average. Original picks remain unchanged, and later scoring corrections are recorded separately.</p><p>Saved log through {days[0] || 'no games'}. Results update when a refreshed log is published. Scorer portraits are added from verified identities where available.</p></div></details>
   </section>;
 }
