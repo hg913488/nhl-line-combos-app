@@ -17,25 +17,25 @@
     "seasons": 2
   },
   "summary": {
-    "graded": 172,
-    "hits": 93,
-    "hit_rate": 0.5407,
-    "review": 2,
+    "graded": 174,
+    "hits": 95,
+    "hit_rate": 0.546,
+    "review": 4,
     "position_baseline": {
-      "C": 0.6802,
-      "LW": 0.4419,
-      "RW": 0.5174,
-      "D": 0.3488
+      "C": 0.6782,
+      "LW": 0.4368,
+      "RW": 0.5172,
+      "D": 0.3506
     },
-    "always_c_hit_rate": 0.6802,
-    "pending": 4,
+    "always_c_hit_rate": 0.6782,
+    "pending": 0,
     "void": 0,
-    "baseline_hit_rate": 0.4971,
+    "baseline_hit_rate": 0.4957,
     "by_position": {
       "C": {
-        "graded": 43,
-        "hits": 30,
-        "hit_rate": 0.6977
+        "graded": 44,
+        "hits": 31,
+        "hit_rate": 0.7045
       },
       "LW": {
         "graded": 45,
@@ -43,9 +43,9 @@
         "hit_rate": 0.5111
       },
       "RW": {
-        "graded": 50,
-        "hits": 26,
-        "hit_rate": 0.52
+        "graded": 51,
+        "hits": 27,
+        "hit_rate": 0.5294
       },
       "D": {
         "graded": 34,
@@ -55,9 +55,9 @@
     },
     "by_season": {
       "20262027": {
-        "graded": 172,
-        "hits": 93,
-        "hit_rate": 0.5407
+        "graded": 174,
+        "hits": 95,
+        "hit_rate": 0.546
       }
     }
   },
@@ -12851,8 +12851,45 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-12T09:15:42Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "scorers": [
+          {
+            "player_id": 8482116,
+            "name": "Tim Stützle",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8481596,
+            "name": "Shane Pinto",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8482095,
+            "name": "Tyler Kleven",
+            "position": "D",
+            "goals": 1
+          },
+          {
+            "player_id": 8483676,
+            "name": "Stephen Halliday",
+            "position": "C",
+            "goals": 1
+          }
+        ],
+        "goals_by_position": {
+          "C": 3,
+          "LW": 0,
+          "RW": 0,
+          "D": 1
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-13T03:06:25Z"
+      },
+      "result_audit": []
     },
     {
       "id": "2026020088-NJD",
@@ -12895,8 +12932,27 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-12T09:15:42Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "scorers": [
+          {
+            "player_id": 8481721,
+            "name": "Arseny Gritsyuk",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 1,
+          "D": 0
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-13T03:06:25Z"
+      },
+      "result_audit": []
     },
     {
       "id": "2026020089-VGK",
@@ -12939,8 +12995,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-12T09:15:42Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-13T03:06:25Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "id": "2026020089-MIN",
@@ -12983,8 +13052,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-12T09:15:42Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-13T03:06:25Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     }
   ]
 }
