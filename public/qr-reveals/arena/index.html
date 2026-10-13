@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Between the Lines — Arena reveal</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono&family=Syne:wght@600;700;800&display=swap" rel="stylesheet"><style>
+*{box-sizing:border-box}body{margin:0;background:#17191D;color:#E7EAF0;font:15px 'Space Grotesk',system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:28px}header{display:flex;justify-content:space-between;align-items:baseline}h1 span{display:block;font-size:10px;letter-spacing:5px;margin-top:9px;color:#438BB7}h1{font-family:'Syne',sans-serif;font-size:28px;font-weight:500;letter-spacing:-.7px}header p{color:#A7ADB5}#stage{position:relative;height:min(65vh,650px);min-height:320px;border-radius:4px;overflow:hidden;background:#eef3f6}#scene{width:100%;height:100%;display:block}#flat{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;opacity:1;image-rendering:pixelated}footer{display:flex;align-items:center;gap:20px;padding:20px 0;flex-wrap:wrap}button{background:#438BB7;color:white;border:0;border-radius:4px;padding:12px 24px;cursor:pointer}label{display:flex;gap:12px;align-items:center}input{accent-color:#438BB7}a{color:inherit;overflow-wrap:anywhere}.identity{display:flex;gap:16px;align-items:center}.identity img{object-fit:contain;filter:drop-shadow(0 0 1px #E7EAF0)}#status{font-family:'Space Mono',monospace;color:#A7ADB5;font-size:13px}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #6c9166;outline-offset:4px}@media(max-width:600px){main{padding:16px}header{display:block}header p{font-size:13px}#stage{height:58vh}}
+</style></head><body><main><header><div class="identity"><img src="/qr-reveals/arena/between-mark.png" alt="" width="64" height="48"><h1>Between the Lines<span>HOCKEY</span></h1></div><p>From the rink to the bigger picture.</p></header><div id="stage"><canvas id="scene" aria-hidden="true"></canvas><canvas id="flat" role="img" aria-label="QR code for Between the Lines hockey website"></canvas></div><footer><button id="replay">Play arena reveal</button><label>Reveal <input id="scrub" type="range" min="0" max="100" value="100" aria-label="Camera reveal progress"></label><a id="destination" href="https://www.betweenthelineshockey.com">Explore tonight’s games</a></footer><p id="status" aria-live="polite">Preview destination: https://www.betweenthelineshockey.com</p></main>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+<script type="module">
+import {planCity} from '/qr-reveals/arena/city.mjs';
+const CONFIG={url:'https://www.betweenthelineshockey.com',paper:'#F4F6F8',wall:'#FFFFFF',roof:'#20252B',height:1,duration:8};
+const $=id=>document.getElementById(id),stage=$('stage'),flat=$('flat'),scrub=$('scrub'),status=$('status');
+const link=$('destination');link.href=CONFIG.url;status.textContent=`Scan to explore Between the Lines · ${CONFIG.url}`;
+let matrix,n,blocks;
+try{const qr=qrcode(0,'Q');qr.addData(CONFIG.url);qr.make();n=qr.getModuleCount();matrix=Array.from({length:n},(_,r)=>Array.from({length:n},(_,c)=>qr.isDark(r,c)));blocks=planCity(matrix,CONFIG.url);}catch(error){status.textContent='QR encoding unavailable. Use the destination link.';$('replay').disabled=true;scrub.disabled=true;throw error;}
+const clamp=x=>Math.max(0,Math.min(1,x)),smooth=x=>{x=clamp(x);return x*x*(3-2*x);};
+let W,H,codeCSS,renderer,scene,camera,sun,hemi,meshes=[],arenaDetails,detailMats=[],frame=0,progress=1,time=99;
+function drawFlat(){
+  W=stage.clientWidth;H=stage.clientHeight;
+  const dpr=Math.min(devicePixelRatio||1,2),modules=n+8;
+  const unit=Math.max(2,Math.floor(Math.min(W*.7,H*.65)*dpr/modules)),px=unit*modules;
+  codeCSS=px/dpr;flat.width=flat.height=px;flat.style.width=flat.style.height=`${codeCSS}px`;
+  const g=flat.getContext('2d');g.fillStyle=CONFIG.paper;g.fillRect(0,0,px,px);g.fillStyle=CONFIG.roof;
+  for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(matrix[r][c])g.fillRect((c+4)*unit,(r+4)*unit,unit,unit);
+}
+function pose(u,t=99){
+  progress=u;time=t;scrub.value=Math.round(u*100);
+  if(!renderer)return;
+  const e=smooth(u),m=smooth((u-.12)/.76),heightFinal=H/codeCSS*(n+8),viewHeight=heightFinal*(1.12-.12*e);
+  camera.left=-viewHeight*W/H/2;camera.right=-camera.left;camera.top=viewHeight/2;camera.bottom=-camera.top;
+  const el=(29+61*e)*Math.PI/180,az=(30*(1-e))*Math.PI/180,distance=150;
+  camera.position.set(distance*Math.cos(el)*Math.sin(az),distance*Math.sin(el),distance*Math.cos(el)*Math.cos(az));
+  camera.up.set(0,1-e,-e);camera.lookAt(0,0,0);camera.updateProjectionMatrix();
+  for(const {b,mesh,start}of meshes){
+    const q=smooth((m-start.delay*.15)/.85),mix=(a,b)=>a+(b-a)*q;
+    mesh.position.set(mix(start.x,b.x),mix(start.y,.28),mix(start.z,b.z));
+    mesh.scale.set(mix(start.w,b.w),mix(.36,.56),mix(start.d,b.d));
+    mesh.rotation.y=start.rot*(1-q);
+  }
+  if(arenaDetails){const fade=1-smooth((u-.1)/.35);arenaDetails.visible=fade>.001;for(const mat of detailMats){mat.opacity=fade;mat.transparent=true;} }
+  sun.position.set(20*(1-e),30+90*e,25*(1-e));sun.shadow.intensity=1-smooth((u-.65)/.25);hemi.intensity=1.8+e*.8;
+  // A brief final handoff preserves an exact pixel-aligned code.
+  flat.style.opacity=smooth((u-.96)/.04);$('scene').style.opacity=u===1?'0':'1';renderer.render(scene,camera);
+}
+function stop(){cancelAnimationFrame(frame);frame=0;}
+function play(){stop();if(reduce.matches){flat.style.opacity=1;pose(1);return;}const start=performance.now();
+  const tick=now=>{const t=(now-start)/1000;pose(clamp((t-1.8)/(CONFIG.duration-1.8)),t);if(t<CONFIG.duration)frame=requestAnimationFrame(tick);else frame=0;};frame=requestAnimationFrame(tick);
+}
+const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+$('replay').onclick=play;scrub.oninput=()=>{stop();pose(Number(scrub.value)/100);};
+reduce.addEventListener('change',()=>{if(reduce.matches){stop();pose(1);}});
+new ResizeObserver(()=>{drawFlat();if(renderer){renderer.setSize(W,H,false);pose(progress,time);}}).observe(stage);drawFlat();
+try{
+  const THREE=await import('https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js');
+  renderer=new THREE.WebGLRenderer({canvas:$('scene'),antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));renderer.setSize(W,H,false);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.setClearColor(CONFIG.paper);
+  scene=new THREE.Scene();camera=new THREE.OrthographicCamera(-1,1,1,-1,.1,500);
+  hemi=new THREE.HemisphereLight('#e4eaf0','#d4cfc3',1.8);scene.add(hemi);
+  sun=new THREE.DirectionalLight('#fff5e7',3);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-n,right:n,top:n,bottom:-n,near:1,far:250});sun.shadow.normalBias=.025;scene.add(sun,sun.target);
+  const ground=new THREE.Mesh(new THREE.PlaneGeometry(n*30,n*30),new THREE.MeshStandardMaterial({color:CONFIG.paper,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.y=-.02;ground.receiveShadow=true;scene.add(ground);
+  const wall=new THREE.MeshStandardMaterial({color:CONFIG.wall,roughness:.9}),roof=new THREE.MeshStandardMaterial({color:CONFIG.roof,roughness:1});
+  // Every seat-section becomes one exact QR footprint; no QR landmark towers.
+  const lanes=8,sectors=Math.ceil(blocks.length/lanes);
+  blocks.forEach((b,i)=>{
+    const lane=i%lanes,sector=Math.floor(i/lanes),angle=sector/sectors*Math.PI*2;
+    const rx=n*.53+lane*.86,rz=n*.30+lane*.86;
+    const start={x:Math.cos(angle)*rx,z:Math.sin(angle)*rz,y:.5+lane*.5,w:2.1,d:.85,rot:-angle-Math.PI/2,delay:lane/lanes};
+    const mesh=new THREE.Mesh(new THREE.BoxGeometry(1,1,1),[wall,wall,roof,wall,wall,wall]);mesh.castShadow=true;mesh.receiveShadow=true;scene.add(mesh);meshes.push({b,mesh,start});
+  });
+  arenaDetails=new THREE.Group();scene.add(arenaDetails);
+  // Hockey markings are baked into an original rink texture.
+  const iceCanvas=document.createElement('canvas');iceCanvas.width=1024;iceCanvas.height=512;
+  const g=iceCanvas.getContext('2d');g.fillStyle='#e9edf0';g.beginPath();g.roundRect(10,10,1004,492,100);g.fill();
+  g.save();g.clip();g.lineWidth=7;
+  for(const [x,color]of[[512,'#8b4148'],[330,'#526c82'],[694,'#526c82']]){g.strokeStyle=color;g.beginPath();g.moveTo(x,10);g.lineTo(x,502);g.stroke();}
+  g.lineWidth=4;g.strokeStyle='#8b4148';
+  for(const [x,y,r]of[[512,256,62],[210,140,58],[210,372,58],[814,140,58],[814,372,58]]){g.beginPath();g.arc(x,y,r,0,Math.PI*2);g.stroke();g.beginPath();g.arc(x,y,6,0,Math.PI*2);g.fillStyle='#8b4148';g.fill();}
+  for(const x of[100,924]){g.beginPath();g.moveTo(x,40);g.lineTo(x,472);g.stroke();}
+  g.restore();g.strokeStyle='#8a9299';g.lineWidth=9;g.beginPath();g.roundRect(10,10,1004,492,100);g.stroke();
+  const iceMat=new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(iceCanvas),transparent:true});detailMats.push(iceMat);
+  const ice=new THREE.Mesh(new THREE.PlaneGeometry(n*.97,n*.485),iceMat);ice.rotation.x=-Math.PI/2;ice.position.y=.05;arenaDetails.add(ice);
+  const trimMat=new THREE.MeshStandardMaterial({color:'#b6bdc4',roughness:.7,transparent:true});detailMats.push(trimMat);
+  // Arena concourse beneath the bowl.
+  const concourse=new THREE.Mesh(new THREE.CylinderGeometry(1,1,.22,96),trimMat);concourse.scale.set(n*.8,1,n*.54);concourse.position.y=-.08;arenaDetails.add(concourse);
+  const boardMat=new THREE.MeshStandardMaterial({color:'#252b33',transparent:true});detailMats.push(boardMat);
+  const score=new THREE.Mesh(new THREE.BoxGeometry(5,2.4,3.5),boardMat);score.position.y=8;arenaDetails.add(score);
+  const hanger=new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,5,8),trimMat);hanger.position.y=11.7;arenaDetails.add(hanger);
+  for(const x of[-n*.41,n*.41]){const net=new THREE.Mesh(new THREE.BoxGeometry(.45,.8,2.5),trimMat);net.position.set(x,.45,0);arenaDetails.add(net);}
+  if(reduce.matches)pose(1);else pose(0);
+  addEventListener('pagehide',()=>{stop();scene.traverse(o=>{o.geometry?.dispose();});wall.dispose();roof.dispose();ground.material.dispose();renderer.dispose();},{once:true});
+}catch(error){stop();flat.style.opacity=1;$('scene').style.display='none';$('replay').disabled=true;scrub.disabled=true;status.textContent='3D unavailable. The QR and destination link remain available.';console.warn(error);}
+</script></body></html>

@@ -9,7 +9,7 @@ import { pageMeta, applyPageMeta } from './src/page-meta.js';
 export const config = {
   // Everything except API routes, build assets, Vercel internals, and any path
   // with a file extension (favicon.svg, og-image.png, index.html, ...).
-  matcher: ['/((?!api/|assets/|data/|_vercel|.*\\.[^/]*$).*)'],
+  matcher: ['/((?!api/|assets/|data/|qr-reveals/|qrcity(?:/|$)|qrarena(?:/|$)|_vercel|.*\\.[^/]*$).*)'],
 };
 
 const HTML_CACHE = 's-maxage=300, stale-while-revalidate=600';
@@ -17,7 +17,7 @@ const SHELL_HEADER = 'x-btl-shell';
 const GAME_LANDING_TIMEOUT_MS = 1200;
 const SHELL_TIMEOUT_MS = 2500;
 
-const SKIP_PREFIXES = ['/api/', '/assets/', '/data/', '/_vercel'];
+const SKIP_PREFIXES = ['/api/', '/assets/', '/data/', '/qr-reveals/', '/_vercel'];
 
 function shouldHandle(request, url) {
   if (request.method !== 'GET' && request.method !== 'HEAD') return false;
@@ -26,6 +26,7 @@ function shouldHandle(request, url) {
   const accept = request.headers.get('accept') || '';
   if (accept && !accept.includes('text/html') && !accept.includes('*/*')) return false;
   const { pathname } = url;
+  if (/^\/(?:qrcity|qrarena)\/?$/.test(pathname)) return false;
   if (SKIP_PREFIXES.some(prefix => pathname === prefix.replace(/\/$/, '') || pathname.startsWith(prefix))) return false;
   // Any path segment with a file extension is a static asset, not a page.
   if (/\.[^/]*$/.test(pathname)) return false;

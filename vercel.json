@@ -7,7 +7,23 @@
   },
   "rewrites": [
     {
-      "source": "/((?!api/).*)",
+      "source": "/qrcity",
+      "destination": "/qr-reveals/city/index.html"
+    },
+    {
+      "source": "/qrcity/",
+      "destination": "/qr-reveals/city/index.html"
+    },
+    {
+      "source": "/qrarena",
+      "destination": "/qr-reveals/arena/index.html"
+    },
+    {
+      "source": "/qrarena/",
+      "destination": "/qr-reveals/arena/index.html"
+    },
+    {
+      "source": "/((?!api/|qr-reveals/).*)",
       "destination": "/index.html"
     }
   ],
@@ -16,6 +32,26 @@
       "source": "/matchups",
       "destination": "/goals-allowed",
       "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/qrcity",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/qrarena",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ]
 }
