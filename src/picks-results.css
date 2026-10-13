@@ -77,3 +77,37 @@
 
 @media(max-width:767px){.pb-day-nav > div{gap:0;}.pb-day-nav button{font-size:11px;padding-inline:6px;}.pb-day-nav > button{min-width:36px;}.pb-day-heading{gap:6px;}.picks-page > .schedule-heading{gap:10px;margin-bottom:12px;}.picks-page > .schedule-heading input{padding:6px;}.pb-day-heading .pb-eyebrow{display:none;}}
 @media(max-width:375px){.pb-day-nav > div > button:nth-child(5){display:none;}}
+
+/* Desktop only: the board gets the room the page already has. Wider page, three
+   readable columns, larger type. Mobile and tablet rules above are untouched. */
+@media(min-width:1100px){
+  .picks-page:has(.picks-results){max-width:1320px;}
+  .pb-day-heading h2{font-size:34px;}
+  .pb-day-heading p{font-size:15px;}
+  .pb-day-record strong{font-size:34px;}
+  .pb-day-record span{font-size:14px;}
+  .pb-day-nav button{font-size:14px;}
+  .pb-snapshot-note{font-size:13px;}
+  .pb-board{gap:20px;}
+  .pb-game-head{padding:16px 16px 8px;gap:12px;}
+  .pb-game-head strong{font-size:16px;}
+  .pb-game-head .pb-crest{width:56px;height:38px;}
+  .pb-game-link{font-size:12px;}
+  .pb-rink{max-width:340px;margin-bottom:14px;}
+  .pb-position text{font-size:14px;}
+  .pb-position.picked text{font-size:18px;}
+  .pb-side{padding:16px;}
+  .pb-eyebrow{font-size:11px;}
+  .pb-status{font-size:12px;}
+  .pb-side h3{font-size:22px;margin:10px 0;}
+  .pb-side h3 > span{font-size:14px;}
+  .pb-result-copy{font-size:15px;line-height:1.55;}
+  .pb-scorer strong{font-size:14px;}
+  .pb-scorer span{font-size:13px;}
+  .pb-face{width:44px;height:44px;}
+  .pb-pick-detail summary{font-size:13px;min-height:32px;}
+  .pb-pick-detail p{font-size:14px;}
+  .pb-pick-detail small{font-size:12px;}
+  .pb-track-record > summary{font-size:17px;}
+  .pb-track-body{font-size:15px;}
+}
