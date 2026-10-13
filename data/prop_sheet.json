@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-12T22:56:22Z",
+  "generated_at": "2026-10-13T01:00:24Z",
   "date": "2026-10-12",
   "window": {
     "games": 10,
@@ -3243,8 +3243,8 @@
       "number": 27
     },
     {
-      "id": 8478450,
-      "name": "PARKER WOTHERSPOON",
+      "id": 8478396,
+      "name": "NOAH HANIFIN",
       "team": "VGK",
       "opp": "MIN",
       "game_id": 2026020089,
@@ -3255,19 +3255,19 @@
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 0,
-        "a": 1,
+        "g": 1,
+        "a": 0,
         "p": 1,
-        "sog": 9,
-        "toi": 1223.7,
-        "pptoi": 5.0
+        "sog": 11,
+        "toi": 1207.6,
+        "pptoi": 21.7
       },
       "season": {
         "gp": 6,
-        "g": 0,
+        "g": 1,
         "a": 0,
-        "p": 0,
-        "sog": 5
+        "p": 1,
+        "sog": 9
       },
       "opp_index": 1.7534,
       "opp_goalie": {
@@ -3276,9 +3276,10 @@
         "source": "confirmed"
       },
       "flags": [
+        "ROLE_UP",
         "SOFT_MATCHUP"
       ],
-      "number": 29
+      "number": 15
     },
     {
       "id": 8478397,
@@ -3357,8 +3358,8 @@
       "number": 5
     },
     {
-      "id": 8478396,
-      "name": "NOAH HANIFIN",
+      "id": 8479639,
+      "name": "DYLAN COGHLAN",
       "team": "VGK",
       "opp": "MIN",
       "game_id": 2026020089,
@@ -3370,18 +3371,18 @@
       "last10": {
         "gp": 10,
         "g": 1,
-        "a": 0,
-        "p": 1,
-        "sog": 11,
-        "toi": 1207.6,
-        "pptoi": 21.7
+        "a": 2,
+        "p": 3,
+        "sog": 10,
+        "toi": 798.0,
+        "pptoi": 1.2
       },
       "season": {
-        "gp": 6,
-        "g": 1,
+        "gp": 0,
+        "g": 0,
         "a": 0,
-        "p": 1,
-        "sog": 9
+        "p": 0,
+        "sog": 0
       },
       "opp_index": 1.7534,
       "opp_goalie": {
@@ -3392,7 +3393,7 @@
       "flags": [
         "SOFT_MATCHUP"
       ],
-      "number": 15
+      "number": 52
     },
     {
       "id": 8478864,
@@ -3424,8 +3425,8 @@
       "opp_index": 1.1277,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -3463,8 +3464,8 @@
       "opp_index": 0.7273,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -3501,8 +3502,8 @@
       "opp_index": 0.5378,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -3539,8 +3540,8 @@
       "opp_index": 1.1277,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 20
@@ -3575,8 +3576,8 @@
       "opp_index": 0.7273,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 38
@@ -3611,8 +3612,8 @@
       "opp_index": 0.5378,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -3649,8 +3650,8 @@
       "opp_index": 1.1277,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 61
@@ -3685,8 +3686,8 @@
       "opp_index": 0.7273,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 22
@@ -3721,8 +3722,8 @@
       "opp_index": 0.5378,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 10
@@ -3757,8 +3758,8 @@
       "opp_index": 1.1277,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 78
@@ -3793,8 +3794,8 @@
       "opp_index": 0.7273,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 47
@@ -3829,8 +3830,8 @@
       "opp_index": 0.5378,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 13
@@ -3865,8 +3866,8 @@
       "opp_index": 0.4384,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -3904,8 +3905,8 @@
       "opp_index": 0.4384,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 46
@@ -3940,8 +3941,8 @@
       "opp_index": 0.4384,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 3
@@ -3976,8 +3977,8 @@
       "opp_index": 0.4384,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 25
@@ -4012,8 +4013,8 @@
       "opp_index": 0.4384,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 48
@@ -4048,8 +4049,8 @@
       "opp_index": 0.4384,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 24
