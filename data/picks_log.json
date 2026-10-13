@@ -12868,15 +12868,15 @@
             "goals": 1
           },
           {
-            "player_id": 8482095,
-            "name": "Tyler Kleven",
-            "position": "D",
-            "goals": 1
-          },
-          {
             "player_id": 8483676,
             "name": "Stephen Halliday",
             "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8482095,
+            "name": "Tyler Kleven",
+            "position": "D",
             "goals": 1
           }
         ],
@@ -12887,9 +12887,51 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-13T03:06:25Z"
+        "graded_at": "2026-10-13T15:10:04Z"
       },
-      "result_audit": []
+      "result_audit": [
+        {
+          "checked_at": "2026-10-13T15:10:04Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "scorers": [
+              {
+                "player_id": 8482116,
+                "name": "Tim Stützle",
+                "position": "C",
+                "goals": 1
+              },
+              {
+                "player_id": 8481596,
+                "name": "Shane Pinto",
+                "position": "C",
+                "goals": 1
+              },
+              {
+                "player_id": 8482095,
+                "name": "Tyler Kleven",
+                "position": "D",
+                "goals": 1
+              },
+              {
+                "player_id": 8483676,
+                "name": "Stephen Halliday",
+                "position": "C",
+                "goals": 1
+              }
+            ],
+            "goals_by_position": {
+              "C": 3,
+              "LW": 0,
+              "RW": 0,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-13T03:06:25Z"
+          }
+        }
+      ]
     },
     {
       "id": "2026020088-NJD",
