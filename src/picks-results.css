@@ -111,3 +111,16 @@
   .pb-track-record > summary{font-size:17px;}
   .pb-track-body{font-size:15px;}
 }
+
+/* Wide desktop: four matchups per row. Page widens so each card keeps the type size above. */
+@media(min-width:1400px){
+  .picks-page:has(.picks-results){max-width:1520px;}
+  .pb-board{grid-template-columns:repeat(4,minmax(0,1fr));}
+}
+@media(min-width:1400px){
+  .pb-game-head strong{font-size:15px;white-space:nowrap;}
+  .pb-game-head .pb-crest{width:48px;height:34px;}
+  .pb-side h3{font-size:20px;white-space:nowrap;}
+  .pb-side{padding:14px;}
+  .pb-rink{max-width:300px;}
+}
