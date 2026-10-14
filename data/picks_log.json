@@ -14416,16 +14416,16 @@
         "hit": false,
         "scorers": [
           {
-            "player_id": 8475151,
-            "name": "Kyle Palmieri",
-            "position": "C",
-            "goals": 2
-          },
-          {
             "player_id": 8481711,
             "name": "Matias Maccelli",
             "position": "LW",
             "goals": 1
+          },
+          {
+            "player_id": 8475151,
+            "name": "Kyle Palmieri",
+            "position": "C",
+            "goals": 2
           }
         ],
         "goals_by_position": {
@@ -14435,9 +14435,39 @@
           "D": 0
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-14T07:41:10Z"
+        "graded_at": "2026-10-14T20:11:23Z"
       },
-      "result_audit": []
+      "result_audit": [
+        {
+          "checked_at": "2026-10-14T20:11:23Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": false,
+            "scorers": [
+              {
+                "player_id": 8475151,
+                "name": "Kyle Palmieri",
+                "position": "C",
+                "goals": 2
+              },
+              {
+                "player_id": 8481711,
+                "name": "Matias Maccelli",
+                "position": "LW",
+                "goals": 1
+              }
+            ],
+            "goals_by_position": {
+              "C": 2,
+              "LW": 1,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-14T07:41:10Z"
+          }
+        }
+      ]
     },
     {
       "method_version": 3,
