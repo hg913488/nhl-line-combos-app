@@ -17,25 +17,25 @@
     "seasons": 2
   },
   "summary": {
-    "graded": 176,
-    "hits": 97,
-    "hit_rate": 0.5511,
-    "review": 2,
+    "graded": 178,
+    "hits": 99,
+    "hit_rate": 0.5562,
+    "review": 4,
     "position_baseline": {
-      "C": 0.6818,
-      "LW": 0.4375,
-      "RW": 0.517,
-      "D": 0.3523
+      "C": 0.6854,
+      "LW": 0.4382,
+      "RW": 0.5225,
+      "D": 0.3483
     },
-    "always_c_hit_rate": 0.6818,
-    "pending": 30,
+    "always_c_hit_rate": 0.6854,
+    "pending": 26,
     "void": 0,
-    "baseline_hit_rate": 0.4972,
+    "baseline_hit_rate": 0.4986,
     "by_position": {
       "C": {
-        "graded": 44,
-        "hits": 31,
-        "hit_rate": 0.7045
+        "graded": 46,
+        "hits": 33,
+        "hit_rate": 0.7174
       },
       "LW": {
         "graded": 46,
@@ -55,9 +55,9 @@
     },
     "by_season": {
       "20262027": {
-        "graded": 176,
-        "hits": 97,
-        "hit_rate": 0.5511
+        "graded": 178,
+        "hits": 99,
+        "hit_rate": 0.5562
       }
     }
   },
@@ -13225,8 +13225,51 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-13T09:28:23Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "scorers": [
+          {
+            "player_id": 8480002,
+            "name": "Nico Hischier",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8478542,
+            "name": "Evan Rodrigues",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8481559,
+            "name": "Jack Hughes",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8479407,
+            "name": "Jesper Bratt",
+            "position": "LW",
+            "goals": 1
+          },
+          {
+            "player_id": 8477511,
+            "name": "Anthony Mantha",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
+        "goals_by_position": {
+          "C": 3,
+          "LW": 1,
+          "RW": 1,
+          "D": 0
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-14T01:18:56Z"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -13271,8 +13314,39 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-13T09:28:23Z",
-      "status": "pending",
-      "result": null
+      "status": "graded",
+      "result": {
+        "hit": true,
+        "scorers": [
+          {
+            "player_id": 8479337,
+            "name": "Alex DeBrincat",
+            "position": "RW",
+            "goals": 2
+          },
+          {
+            "player_id": 8484471,
+            "name": "Emmitt Finnie",
+            "position": "C",
+            "goals": 1
+          },
+          {
+            "player_id": 8484794,
+            "name": "Michael Brandsegg-Nygård",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
+        "goals_by_position": {
+          "C": 1,
+          "LW": 0,
+          "RW": 3,
+          "D": 0
+        },
+        "score_reconciled": true,
+        "graded_at": "2026-10-14T01:18:56Z"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -13317,8 +13391,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-13T09:28:23Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-14T01:18:56Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -13363,8 +13450,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-13T09:28:23Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-14T01:18:56Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,

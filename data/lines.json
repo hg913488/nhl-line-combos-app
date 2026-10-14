@@ -1,6 +1,6 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-10-13 23:06:26 UTC",
+  "updated_at": "2026-10-14 01:17:07 UTC",
   "teams": {
     "anaheim-ducks": {
       "forwards": [
@@ -320,9 +320,9 @@
           "JORDAN GREENWAY"
         ],
         [
-          "OLIVER MOORE",
+          "RYAN DONATO",
           "DOMINIC TONINATO",
-          "RYAN DONATO"
+          "OLIVER MOORE"
         ]
       ],
       "defense": [
@@ -380,9 +380,9 @@
           "T.J. HUGHES"
         ],
         [
-          "ZACHARY L'HEUREUX",
+          "PARKER KELLY",
           "NICOLAS ROY",
-          "PARKER KELLY"
+          "ZACHARY L'HEUREUX"
         ]
       ],
       "defense": [
@@ -485,22 +485,21 @@
     "dallas-stars": {
       "forwards": [
         [
-          "SAM STEEL",
-          "WYATT JOHNSTON",
-          "MIKKO RANTANEN"
-        ],
-        [
           "JASON ROBERTSON",
           "ROOPE HINTZ",
           "JAMIE BENN"
         ],
         [
           "JUSTIN HRYCKOWIAN",
+          "SAM STEEL",
+          "MIKKO RANTANEN"
+        ],
+        [
+          "OSKAR BACK",
           "ARTTU HYRY",
           "TYLER SEGUIN"
         ],
         [
-          "OSKAR BACK",
           "RADEK FAKSA",
           "COLIN BLACKWELL"
         ]
@@ -528,14 +527,14 @@
         ]
       ],
       "pp1": [
-        "WYATT JOHNSTON",
+        "JAMIE BENN",
         "ROOPE HINTZ",
         "MIKKO RANTANEN",
         "MIRO HEISKANEN",
         "JASON ROBERTSON"
       ],
       "pp2": [
-        "JAMIE BENN",
+        "SAM STEEL",
         "JUSTIN HRYCKOWIAN",
         "TYLER SEGUIN",
         "ESA LINDELL",
@@ -790,16 +789,16 @@
         ],
         [
           "BLAKE COLEMAN",
-          "RYAN HARTMAN",
+          "DANILA YUROV",
           "MAXIM SHABANOV"
         ],
         [
           "RIEGER LORENZ",
-          "DANILA YUROV",
+          "RYAN HARTMAN",
           "BOBBY BRINK"
         ],
         [
-          "NICO STURM",
+          "TYLER PITLICK",
           "MICHAEL MCCARRON",
           "YAKOV TRENIN"
         ]
@@ -807,15 +806,15 @@
       "defense": [
         [
           "QUINN HUGHES",
-          "JARED SPURGEON"
-        ],
-        [
-          "OLLI MAATTA",
           "JONAS BRODIN"
         ],
         [
-          "DAEMON HUNT",
+          "OLLI MAATTA",
           "ZACH BOGOSIAN"
+        ],
+        [
+          "DAEMON HUNT",
+          "DAVID SPACEK"
         ]
       ],
       "goalies": [
@@ -838,7 +837,7 @@
         "RYAN HARTMAN",
         "DANILA YUROV",
         "BOBBY BRINK",
-        "JARED SPURGEON"
+        "DAVID SPACEK"
       ]
     },
     "montreal-canadiens": {
@@ -919,7 +918,6 @@
           "ALEX KERFOOT"
         ],
         [
-          "REID SCHAEFER",
           "JACK DRURY",
           "ADAM EDSTROM"
         ]
@@ -1034,12 +1032,12 @@
           "VICTOR EKLUND"
         ],
         [
-          "SIMON HOLMSTROM",
+          "ONDREJ PALAT",
           "JEAN-GABRIEL PAGEAU",
           "ANTHONY DUCLAIR"
         ],
         [
-          "ONDREJ PALAT",
+          "SIMON HOLMSTROM",
           "CASEY CIZIKAS",
           "MATIAS MACCELLI"
         ]
@@ -1055,7 +1053,7 @@
         ],
         [
           "TONY DEANGELO",
-          "SCOTT MAYFIELD"
+          "MATTHEW KESSEL"
         ]
       ],
       "goalies": [
@@ -1159,9 +1157,9 @@
           "CLAUDE GIROUX"
         ],
         [
-          "FABIAN ZETTERLUND",
+          "NICK COUSINS",
           "STEPHEN HALLIDAY",
-          "NICK COUSINS"
+          "FABIAN ZETTERLUND"
         ]
       ],
       "defense": [
@@ -1628,14 +1626,14 @@
           "LAWSON CROUSE"
         ],
         [
-          "KAILER YAMAMOTO",
           "LOGAN COOLEY",
+          "VINCENT TROCHECK",
           "DYLAN GUENTHER"
         ],
         [
+          "ANDERS LEE",
           "BARRETT HAYTON",
-          "VINCENT TROCHECK",
-          "ANDERS LEE"
+          "KAILER YAMAMOTO"
         ],
         [
           "JACK MCBAIN",
@@ -2074,6 +2072,12 @@
         "pos": "C",
         "status": "Injured Reserve",
         "desc": ""
+      },
+      {
+        "name": "WYATT JOHNSTON",
+        "pos": "C",
+        "status": "Day-To-Day",
+        "desc": "Illness"
       }
     ],
     "detroit-red-wings": [
@@ -2222,6 +2226,12 @@
         "pos": "LW",
         "status": "Day-To-Day",
         "desc": "Lower body"
+      },
+      {
+        "name": "JARED SPURGEON",
+        "pos": "D",
+        "status": "Day-To-Day",
+        "desc": "Upper body"
       }
     ],
     "montreal-canadiens": [
@@ -2568,6 +2578,6 @@
   "injuries_meta": {
     "source": "dailyfaceoff.com",
     "status": "fresh",
-    "updated_at": "2026-10-13 23:06:26 UTC"
+    "updated_at": "2026-10-14 01:17:07 UTC"
   }
 }
