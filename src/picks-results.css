@@ -82,34 +82,34 @@
    readable columns, larger type. Mobile and tablet rules above are untouched. */
 @media(min-width:1100px){
   .picks-page:has(.picks-results){max-width:1320px;}
-  .pb-day-heading h2{font-size:34px;}
-  .pb-day-heading p{font-size:15px;}
-  .pb-day-record strong{font-size:34px;}
-  .pb-day-record span{font-size:14px;}
-  .pb-day-nav button{font-size:14px;}
-  .pb-snapshot-note{font-size:13px;}
+  .pb-day-heading h2{font-size:28px;}
+  .pb-day-heading p{font-size:13px;}
+  .pb-day-record strong{font-size:28px;}
+  .pb-day-record span{font-size:13px;}
+  .pb-day-nav button{font-size:13px;}
+  .pb-snapshot-note{font-size:12px;}
   .pb-board{gap:20px;}
   .pb-game-head{padding:16px 16px 8px;gap:12px;}
-  .pb-game-head strong{font-size:16px;}
-  .pb-game-head .pb-crest{width:56px;height:38px;}
-  .pb-game-link{font-size:12px;}
+  .pb-game-head strong{font-size:14px;}
+  .pb-game-head .pb-crest{width:48px;height:32px;}
+  .pb-game-link{font-size:11px;}
   .pb-rink{max-width:340px;margin-bottom:14px;}
   .pb-position text{font-size:14px;}
-  .pb-position.picked text{font-size:18px;}
+  .pb-position.picked text{font-size:16px;}
   .pb-side{padding:16px;}
-  .pb-eyebrow{font-size:11px;}
-  .pb-status{font-size:12px;}
-  .pb-side h3{font-size:22px;margin:10px 0;}
-  .pb-side h3 > span{font-size:14px;}
-  .pb-result-copy{font-size:15px;line-height:1.55;}
-  .pb-scorer strong{font-size:14px;}
-  .pb-scorer span{font-size:13px;}
-  .pb-face{width:44px;height:44px;}
-  .pb-pick-detail summary{font-size:13px;min-height:32px;}
-  .pb-pick-detail p{font-size:14px;}
-  .pb-pick-detail small{font-size:12px;}
-  .pb-track-record > summary{font-size:17px;}
-  .pb-track-body{font-size:15px;}
+  .pb-eyebrow{font-size:10px;}
+  .pb-status{font-size:11px;}
+  .pb-side h3{font-size:18px;margin:8px 0;}
+  .pb-side h3 > span{font-size:12px;}
+  .pb-result-copy{font-size:13px;line-height:1.55;}
+  .pb-scorer strong{font-size:12px;}
+  .pb-scorer span{font-size:11px;}
+  .pb-face{width:38px;height:38px;}
+  .pb-pick-detail summary{font-size:12px;min-height:30px;}
+  .pb-pick-detail p{font-size:12px;}
+  .pb-pick-detail small{font-size:11px;}
+  .pb-track-record > summary{font-size:15px;}
+  .pb-track-body{font-size:13px;}
 }
 
 /* Wide desktop: four matchups per row. Page widens so each card keeps the type size above. */
@@ -118,9 +118,9 @@
   .pb-board{grid-template-columns:repeat(4,minmax(0,1fr));}
 }
 @media(min-width:1400px){
-  .pb-game-head strong{font-size:15px;white-space:nowrap;}
+  .pb-game-head strong{font-size:13px;white-space:nowrap;}
   .pb-game-head .pb-crest{width:48px;height:34px;}
-  .pb-side h3{font-size:20px;white-space:nowrap;}
+  .pb-side h3{font-size:17px;}
   .pb-side{padding:14px;}
   .pb-rink{max-width:300px;}
 }
