@@ -1009,6 +1009,53 @@
         "watch"
       ],
       "posted_at": "2026-10-13T23:10:52.081Z"
+    },
+    {
+      "date": "2026-10-13",
+      "kind": "recap",
+      "game_id": 2026020090,
+      "published": true,
+      "media_id": "18117418937017779",
+      "theme": "light",
+      "posted_at": "2026-10-14T10:37:29.864Z"
+    },
+    {
+      "date": "2026-10-13",
+      "kind": "recap",
+      "game_id": 2026020091,
+      "published": true,
+      "media_id": "18624624334027082",
+      "theme": "light",
+      "posted_at": "2026-10-14T10:38:08.927Z"
     }
-  ]
+  ],
+  "attempts": {
+    "recap:2026020092": {
+      "key": "recap:2026020092",
+      "n": 1,
+      "status": "failed",
+      "creation_id": "18106884407131968",
+      "first_at": "2026-10-14T10:38:08.930Z",
+      "at": "2026-10-14T10:38:29.187Z",
+      "error": "Media ID is not available (https://graph.instagram.com/v26.0/28401543849502431/media_publish)"
+    },
+    "recap:2026020094": {
+      "key": "recap:2026020094",
+      "n": 1,
+      "status": "failed",
+      "creation_id": "18106884500131968",
+      "first_at": "2026-10-14T10:38:29.601Z",
+      "at": "2026-10-14T10:38:50.742Z",
+      "error": "Media ID is not available (https://graph.instagram.com/v26.0/28401543849502431/media_publish)"
+    },
+    "scoreboard:2026-10-13": {
+      "key": "scoreboard:2026-10-13",
+      "n": 1,
+      "status": "failed",
+      "creation_id": "18106884563131968",
+      "first_at": "2026-10-14T10:38:51.642Z",
+      "at": "2026-10-14T10:39:03.542Z",
+      "error": "Media ID is not available (https://graph.instagram.com/v26.0/28401543849502431/media_publish)"
+    }
+  }
 }
