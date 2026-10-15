@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T19:53:21Z",
+  "generated_at": "2026-10-15T21:47:13Z",
   "date": "2026-10-15",
   "window": {
     "games": 10,
@@ -343,7 +343,6 @@
         "source": "projected"
       },
       "flags": [
-        "ROLE_UP",
         "SOFT_MATCHUP"
       ],
       "number": 20
@@ -419,9 +418,7 @@
         "status": "Likely",
         "source": "projected"
       },
-      "flags": [
-        "ROLE_UP"
-      ],
+      "flags": [],
       "number": 94
     },
     {
@@ -569,9 +566,7 @@
         "status": "Likely",
         "source": "projected"
       },
-      "flags": [
-        "ROLE_UP"
-      ],
+      "flags": [],
       "number": 8
     },
     {
@@ -647,7 +642,6 @@
       },
       "flags": [
         "PP1",
-        "ROLE_UP",
         "HOT"
       ],
       "number": 25
@@ -1388,9 +1382,7 @@
         "status": "Likely",
         "source": "projected"
       },
-      "flags": [
-        "ROLE_UP"
-      ],
+      "flags": [],
       "number": 3
     },
     {
@@ -1834,9 +1826,7 @@
         "status": "Confirmed",
         "source": "confirmed"
       },
-      "flags": [
-        "ROLE_UP"
-      ],
+      "flags": [],
       "number": 92
     },
     {
@@ -4140,8 +4130,7 @@
         "source": "confirmed"
       },
       "flags": [
-        "PP1",
-        "ROLE_UP"
+        "PP1"
       ],
       "number": 88
     },
@@ -4252,9 +4241,7 @@
         "status": "Confirmed",
         "source": "confirmed"
       },
-      "flags": [
-        "ROLE_UP"
-      ],
+      "flags": [],
       "number": 94
     },
     {
@@ -4510,9 +4497,7 @@
         "status": "Confirmed",
         "source": "confirmed"
       },
-      "flags": [
-        "ROLE_UP"
-      ],
+      "flags": [],
       "number": 25
     },
     {
@@ -4623,9 +4608,7 @@
         "status": "Confirmed",
         "source": "confirmed"
       },
-      "flags": [
-        "ROLE_UP"
-      ],
+      "flags": [],
       "number": 5
     },
     {
@@ -6228,9 +6211,7 @@
         "status": "Confirmed",
         "source": "confirmed"
       },
-      "flags": [
-        "ROLE_UP"
-      ],
+      "flags": [],
       "number": 28
     },
     {
@@ -6528,9 +6509,7 @@
         "status": "Confirmed",
         "source": "confirmed"
       },
-      "flags": [
-        "ROLE_UP"
-      ],
+      "flags": [],
       "number": 70
     },
     {
@@ -7450,8 +7429,8 @@
       "opp_index": 0.8848,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 29
@@ -7486,8 +7465,8 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -7526,8 +7505,8 @@
       "opp_index": 0.7837,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -7565,8 +7544,8 @@
       "opp_index": 0.8848,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -7604,8 +7583,8 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -7642,8 +7621,8 @@
       "opp_index": 0.7837,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 28
@@ -7678,8 +7657,8 @@
       "opp_index": 0.8848,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 27
@@ -7714,8 +7693,8 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -7752,8 +7731,8 @@
       "opp_index": 0.7837,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -7791,8 +7770,8 @@
       "opp_index": 0.8848,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 15
@@ -7827,8 +7806,8 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -7865,8 +7844,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -7903,8 +7882,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -7943,8 +7922,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -7981,8 +7960,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP",
@@ -8020,8 +7999,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -8058,8 +8037,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "JOSEPH WOLL",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
