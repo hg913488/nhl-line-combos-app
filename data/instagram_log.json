@@ -1153,5 +1153,16 @@
       ],
       "posted_at": "2026-10-15T20:23:28.379Z"
     }
-  ]
+  ],
+  "attempts": {
+    "daily:2026-10-15": {
+      "key": "daily:2026-10-15",
+      "n": 1,
+      "status": "failed",
+      "creation_id": "18107214953131968",
+      "first_at": "2026-10-15T21:49:46.887Z",
+      "at": "2026-10-15T21:50:18.693Z",
+      "error": "Media ID is not available (https://graph.instagram.com/v26.0/28401543849502431/media_publish)"
+    }
+  }
 }
