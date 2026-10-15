@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-14T21:58:08Z",
+  "generated_at": "2026-10-15T00:39:57Z",
   "date": "2026-10-14",
   "window": {
     "games": 10,
@@ -800,31 +800,31 @@
       "number": 17
     },
     {
-      "id": 8476880,
-      "name": "TOM WILSON",
+      "id": 8479385,
+      "name": "JORDAN KYROU",
       "team": "WSH",
       "opp": "MTL",
       "game_id": 2026020106,
       "home": true,
       "pos": "RW",
       "line": "L1",
-      "pp": 1,
+      "pp": 2,
       "b2b": true,
       "last10": {
         "gp": 10,
-        "g": 3,
-        "a": 6,
-        "p": 9,
-        "sog": 18,
-        "toi": 1118.5,
-        "pptoi": 111.4
+        "g": 2,
+        "a": 4,
+        "p": 6,
+        "sog": 13,
+        "toi": 802.1,
+        "pptoi": 102.0
       },
       "season": {
         "gp": 6,
-        "g": 2,
-        "a": 3,
-        "p": 5,
-        "sog": 10
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 6
       },
       "opp_index": 0.9256,
       "opp_goalie": {
@@ -833,39 +833,37 @@
         "source": "confirmed"
       },
       "flags": [
-        "PP1",
         "ROLE_UP",
-        "HOT",
         "B2B"
       ],
-      "number": 43
+      "number": 25
     },
     {
-      "id": 8481656,
-      "name": "ALIAKSEI PROTAS",
+      "id": 8471214,
+      "name": "ALEX OVECHKIN",
       "team": "WSH",
       "opp": "MTL",
       "game_id": 2026020106,
       "home": true,
       "pos": "LW",
       "line": "L2",
-      "pp": null,
+      "pp": 1,
       "b2b": true,
       "last10": {
         "gp": 10,
-        "g": 1,
-        "a": 4,
+        "g": 2,
+        "a": 3,
         "p": 5,
-        "sog": 13,
-        "toi": 991.2,
-        "pptoi": 0.4
+        "sog": 27,
+        "toi": 905.4,
+        "pptoi": 202.0
       },
       "season": {
         "gp": 6,
-        "g": 0,
-        "a": 2,
+        "g": 1,
+        "a": 1,
         "p": 2,
-        "sog": 7
+        "sog": 10
       },
       "opp_index": 0.7373,
       "opp_goalie": {
@@ -874,9 +872,10 @@
         "source": "confirmed"
       },
       "flags": [
+        "PP1",
         "B2B"
       ],
-      "number": 21
+      "number": 8
     },
     {
       "id": 8484999,
@@ -918,31 +917,31 @@
       "number": 62
     },
     {
-      "id": 8471214,
-      "name": "ALEX OVECHKIN",
+      "id": 8483491,
+      "name": "IVAN MIROSHNICHENKO",
       "team": "WSH",
       "opp": "MTL",
       "game_id": 2026020106,
       "home": true,
       "pos": "RW",
       "line": "L2",
-      "pp": 1,
+      "pp": 2,
       "b2b": true,
       "last10": {
-        "gp": 10,
+        "gp": 9,
         "g": 2,
-        "a": 3,
-        "p": 5,
-        "sog": 27,
-        "toi": 905.4,
-        "pptoi": 202.0
+        "a": 1,
+        "p": 3,
+        "sog": 7,
+        "toi": 556.8,
+        "pptoi": 0.0
       },
       "season": {
-        "gp": 6,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 10
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
       },
       "opp_index": 0.9256,
       "opp_goalie": {
@@ -951,156 +950,36 @@
         "source": "confirmed"
       },
       "flags": [
-        "PP1",
         "B2B"
       ],
-      "number": 8
+      "number": 63
     },
     {
-      "id": 8484186,
-      "name": "RYAN LEONARD",
+      "id": 8481656,
+      "name": "ALIAKSEI PROTAS",
       "team": "WSH",
       "opp": "MTL",
       "game_id": 2026020106,
       "home": true,
       "pos": "LW",
-      "line": "L3",
-      "pp": 1,
-      "b2b": true,
-      "last10": {
-        "gp": 10,
-        "g": 5,
-        "a": 5,
-        "p": 10,
-        "sog": 27,
-        "toi": 847.4,
-        "pptoi": 103.8
-      },
-      "season": {
-        "gp": 6,
-        "g": 2,
-        "a": 4,
-        "p": 6,
-        "sog": 16
-      },
-      "opp_index": 0.7373,
-      "opp_goalie": {
-        "name": "JAKUB DOBES",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": [
-        "PP1",
-        "HOT",
-        "B2B"
-      ],
-      "number": 9
-    },
-    {
-      "id": 8476432,
-      "name": "BOONE JENNER",
-      "team": "WSH",
-      "opp": "MTL",
-      "game_id": 2026020106,
-      "home": true,
-      "pos": "C",
       "line": "L3",
       "pp": null,
       "b2b": true,
       "last10": {
         "gp": 10,
-        "g": 5,
-        "a": 2,
-        "p": 7,
-        "sog": 29,
-        "toi": 928.2,
-        "pptoi": 4.0
-      },
-      "season": {
-        "gp": 6,
-        "g": 3,
-        "a": 1,
-        "p": 4,
-        "sog": 18
-      },
-      "opp_index": 1.2732,
-      "opp_goalie": {
-        "name": "JAKUB DOBES",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": [
-        "ROLE_UP",
-        "HOT",
-        "B2B",
-        "SOFT_MATCHUP"
-      ],
-      "number": 22
-    },
-    {
-      "id": 8479385,
-      "name": "JORDAN KYROU",
-      "team": "WSH",
-      "opp": "MTL",
-      "game_id": 2026020106,
-      "home": true,
-      "pos": "RW",
-      "line": "L3",
-      "pp": 2,
-      "b2b": true,
-      "last10": {
-        "gp": 10,
-        "g": 2,
-        "a": 4,
-        "p": 6,
-        "sog": 13,
-        "toi": 802.1,
-        "pptoi": 102.0
-      },
-      "season": {
-        "gp": 6,
         "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 6
-      },
-      "opp_index": 0.9256,
-      "opp_goalie": {
-        "name": "JAKUB DOBES",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": [
-        "B2B"
-      ],
-      "number": 25
-    },
-    {
-      "id": 8483573,
-      "name": "ETHEN FRANK",
-      "team": "WSH",
-      "opp": "MTL",
-      "game_id": 2026020106,
-      "home": true,
-      "pos": "LW",
-      "line": "L4",
-      "pp": 2,
-      "b2b": true,
-      "last10": {
-        "gp": 7,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 6,
-        "toi": 556.4,
-        "pptoi": 47.0
+        "a": 4,
+        "p": 5,
+        "sog": 13,
+        "toi": 991.2,
+        "pptoi": 0.4
       },
       "season": {
-        "gp": 2,
+        "gp": 6,
         "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 2
+        "a": 2,
+        "p": 2,
+        "sog": 7
       },
       "opp_index": 0.7373,
       "opp_goalie": {
@@ -1111,7 +990,7 @@
       "flags": [
         "B2B"
       ],
-      "number": 53
+      "number": 21
     },
     {
       "id": 8482088,
@@ -1121,7 +1000,7 @@
       "game_id": 2026020106,
       "home": true,
       "pos": "C",
-      "line": "L4",
+      "line": "L3",
       "pp": null,
       "b2b": true,
       "last10": {
@@ -1147,10 +1026,52 @@
         "source": "confirmed"
       },
       "flags": [
+        "ROLE_UP",
         "B2B",
         "SOFT_MATCHUP"
       ],
       "number": 34
+    },
+    {
+      "id": 8476880,
+      "name": "TOM WILSON",
+      "team": "WSH",
+      "opp": "MTL",
+      "game_id": 2026020106,
+      "home": true,
+      "pos": "RW",
+      "line": "L3",
+      "pp": 1,
+      "b2b": true,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 6,
+        "p": 9,
+        "sog": 18,
+        "toi": 1118.5,
+        "pptoi": 111.4
+      },
+      "season": {
+        "gp": 6,
+        "g": 2,
+        "a": 3,
+        "p": 5,
+        "sog": 10
+      },
+      "opp_index": 0.9256,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1",
+        "ROLE_UP",
+        "HOT",
+        "B2B"
+      ],
+      "number": 43
     },
     {
       "id": 8478463,
@@ -1159,7 +1080,7 @@
       "opp": "MTL",
       "game_id": 2026020106,
       "home": true,
-      "pos": "RW",
+      "pos": "LW",
       "line": "L4",
       "pp": null,
       "b2b": true,
@@ -1179,7 +1100,7 @@
         "p": 1,
         "sog": 8
       },
-      "opp_index": 0.9256,
+      "opp_index": 0.7373,
       "opp_goalie": {
         "name": "JAKUB DOBES",
         "status": "Confirmed",
@@ -1189,6 +1110,86 @@
         "B2B"
       ],
       "number": 72
+    },
+    {
+      "id": 8476432,
+      "name": "BOONE JENNER",
+      "team": "WSH",
+      "opp": "MTL",
+      "game_id": 2026020106,
+      "home": true,
+      "pos": "C",
+      "line": "L4",
+      "pp": null,
+      "b2b": true,
+      "last10": {
+        "gp": 10,
+        "g": 5,
+        "a": 2,
+        "p": 7,
+        "sog": 29,
+        "toi": 928.2,
+        "pptoi": 4.0
+      },
+      "season": {
+        "gp": 6,
+        "g": 3,
+        "a": 1,
+        "p": 4,
+        "sog": 18
+      },
+      "opp_index": 1.2732,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "HOT",
+        "B2B",
+        "SOFT_MATCHUP"
+      ],
+      "number": 22
+    },
+    {
+      "id": 8484186,
+      "name": "RYAN LEONARD",
+      "team": "WSH",
+      "opp": "MTL",
+      "game_id": 2026020106,
+      "home": true,
+      "pos": "RW",
+      "line": "L4",
+      "pp": 1,
+      "b2b": true,
+      "last10": {
+        "gp": 10,
+        "g": 5,
+        "a": 5,
+        "p": 10,
+        "sog": 27,
+        "toi": 847.4,
+        "pptoi": 103.8
+      },
+      "season": {
+        "gp": 6,
+        "g": 2,
+        "a": 4,
+        "p": 6,
+        "sog": 16
+      },
+      "opp_index": 0.9256,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1",
+        "HOT",
+        "B2B"
+      ],
+      "number": 9
     },
     {
       "id": 8479345,
@@ -1309,6 +1310,46 @@
       "number": 42
     },
     {
+      "id": 8479576,
+      "name": "VINCENT DESHARNAIS",
+      "team": "WSH",
+      "opp": "MTL",
+      "game_id": 2026020106,
+      "home": true,
+      "pos": "D",
+      "line": "D2",
+      "pp": null,
+      "b2b": true,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 3,
+        "toi": 1211.6,
+        "pptoi": 0.2
+      },
+      "season": {
+        "gp": 6,
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 2
+      },
+      "opp_index": 1.4328,
+      "opp_goalie": {
+        "name": "JAKUB DOBES",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "ROLE_UP",
+        "B2B",
+        "SOFT_MATCHUP"
+      ],
+      "number": 73
+    },
+    {
       "id": 8484873,
       "name": "COLE HUTSON",
       "team": "WSH",
@@ -1316,7 +1357,7 @@
       "game_id": 2026020106,
       "home": true,
       "pos": "D",
-      "line": "D2",
+      "line": "D3",
       "pp": 2,
       "b2b": true,
       "last10": {
@@ -1347,45 +1388,6 @@
         "SOFT_MATCHUP"
       ],
       "number": 44
-    },
-    {
-      "id": 8479576,
-      "name": "VINCENT DESHARNAIS",
-      "team": "WSH",
-      "opp": "MTL",
-      "game_id": 2026020106,
-      "home": true,
-      "pos": "D",
-      "line": "D3",
-      "pp": null,
-      "b2b": true,
-      "last10": {
-        "gp": 10,
-        "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 3,
-        "toi": 1211.6,
-        "pptoi": 0.2
-      },
-      "season": {
-        "gp": 6,
-        "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 2
-      },
-      "opp_index": 1.4328,
-      "opp_goalie": {
-        "name": "JAKUB DOBES",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": [
-        "B2B",
-        "SOFT_MATCHUP"
-      ],
-      "number": 73
     },
     {
       "id": 8475718,
@@ -1427,8 +1429,8 @@
       "number": 4
     },
     {
-      "id": 8480027,
-      "name": "JASON ROBERTSON",
+      "id": 8475794,
+      "name": "TYLER SEGUIN",
       "team": "DAL",
       "opp": "COL",
       "game_id": 2026020107,
@@ -1438,34 +1440,33 @@
       "pp": 1,
       "b2b": true,
       "last10": {
-        "gp": 10,
-        "g": 5,
-        "a": 6,
-        "p": 11,
-        "sog": 35,
-        "toi": 1308.6,
-        "pptoi": 260.1
+        "gp": 6,
+        "g": 2,
+        "a": 1,
+        "p": 3,
+        "sog": 18,
+        "toi": 901.3,
+        "pptoi": 63.8
       },
       "season": {
         "gp": 6,
         "g": 2,
-        "a": 3,
-        "p": 5,
-        "sog": 16
+        "a": 1,
+        "p": 3,
+        "sog": 18
       },
       "opp_index": 0.7373,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
         "ROLE_UP",
-        "HOT",
         "B2B"
       ],
-      "number": 21
+      "number": 91
     },
     {
       "id": 8478449,
@@ -1497,8 +1498,8 @@
       "opp_index": 0.679,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -1508,47 +1509,49 @@
       "number": 24
     },
     {
-      "id": 8473994,
-      "name": "JAMIE BENN",
+      "id": 8478420,
+      "name": "MIKKO RANTANEN",
       "team": "DAL",
       "opp": "COL",
       "game_id": 2026020107,
       "home": false,
       "pos": "RW",
       "line": "L1",
-      "pp": 2,
+      "pp": 1,
       "b2b": true,
       "last10": {
         "gp": 10,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 13,
-        "toi": 797.0,
-        "pptoi": 41.8
+        "g": 3,
+        "a": 9,
+        "p": 12,
+        "sog": 23,
+        "toi": 1316.3,
+        "pptoi": 274.0
       },
       "season": {
         "gp": 6,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 8
+        "g": 2,
+        "a": 4,
+        "p": 6,
+        "sog": 13
       },
       "opp_index": 1.0579,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
+        "PP1",
         "ROLE_UP",
+        "HOT",
         "B2B"
       ],
-      "number": 14
+      "number": 96
     },
     {
-      "id": 8475794,
-      "name": "TYLER SEGUIN",
+      "id": 8480027,
+      "name": "JASON ROBERTSON",
       "team": "DAL",
       "opp": "COL",
       "game_id": 2026020107,
@@ -1558,33 +1561,34 @@
       "pp": 1,
       "b2b": true,
       "last10": {
-        "gp": 6,
-        "g": 2,
-        "a": 1,
-        "p": 3,
-        "sog": 18,
-        "toi": 901.3,
-        "pptoi": 63.8
+        "gp": 10,
+        "g": 5,
+        "a": 6,
+        "p": 11,
+        "sog": 35,
+        "toi": 1308.6,
+        "pptoi": 260.1
       },
       "season": {
         "gp": 6,
         "g": 2,
-        "a": 1,
-        "p": 3,
-        "sog": 18
+        "a": 3,
+        "p": 5,
+        "sog": 16
       },
       "opp_index": 0.7373,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
         "ROLE_UP",
+        "HOT",
         "B2B"
       ],
-      "number": 91
+      "number": 21
     },
     {
       "id": 8479351,
@@ -1616,8 +1620,8 @@
       "opp_index": 0.679,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP",
@@ -1626,83 +1630,82 @@
       "number": 18
     },
     {
-      "id": 8478420,
-      "name": "MIKKO RANTANEN",
+      "id": 8473994,
+      "name": "JAMIE BENN",
       "team": "DAL",
       "opp": "COL",
       "game_id": 2026020107,
       "home": false,
       "pos": "RW",
       "line": "L2",
-      "pp": 1,
+      "pp": 2,
       "b2b": true,
       "last10": {
         "gp": 10,
-        "g": 3,
-        "a": 9,
-        "p": 12,
-        "sog": 23,
-        "toi": 1316.3,
-        "pptoi": 274.0
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 13,
+        "toi": 797.0,
+        "pptoi": 41.8
       },
       "season": {
         "gp": 6,
-        "g": 2,
-        "a": 4,
-        "p": 6,
-        "sog": 13
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 8
       },
       "opp_index": 1.0579,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
-        "PP1",
-        "HOT",
+        "ROLE_UP",
         "B2B"
       ],
-      "number": 96
+      "number": 14
     },
     {
-      "id": 8480840,
-      "name": "OSKAR BACK",
+      "id": 8484829,
+      "name": "JUSTIN HRYCKOWIAN",
       "team": "DAL",
       "opp": "COL",
       "game_id": 2026020107,
       "home": false,
       "pos": "LW",
       "line": "L3",
-      "pp": null,
+      "pp": 2,
       "b2b": true,
       "last10": {
         "gp": 10,
         "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 7,
-        "toi": 824.1,
-        "pptoi": 0.1
+        "a": 0,
+        "p": 0,
+        "sog": 10,
+        "toi": 944.1,
+        "pptoi": 47.0
       },
       "season": {
         "gp": 6,
         "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 4
+        "a": 0,
+        "p": 0,
+        "sog": 6
       },
       "opp_index": 0.7373,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP",
         "B2B"
       ],
-      "number": 10
+      "number": 49
     },
     {
       "id": 8484938,
@@ -1734,8 +1737,8 @@
       "opp_index": 0.679,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -1743,43 +1746,43 @@
       "number": 25
     },
     {
-      "id": 8484829,
-      "name": "JUSTIN HRYCKOWIAN",
+      "id": 8480840,
+      "name": "OSKAR BACK",
       "team": "DAL",
       "opp": "COL",
       "game_id": 2026020107,
       "home": false,
       "pos": "RW",
       "line": "L3",
-      "pp": 2,
+      "pp": null,
       "b2b": true,
       "last10": {
         "gp": 10,
         "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 10,
-        "toi": 944.1,
-        "pptoi": 47.0
+        "a": 1,
+        "p": 1,
+        "sog": 7,
+        "toi": 824.1,
+        "pptoi": 0.1
       },
       "season": {
         "gp": 6,
         "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 6
+        "a": 1,
+        "p": 1,
+        "sog": 4
       },
       "opp_index": 1.0579,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP",
         "B2B"
       ],
-      "number": 49
+      "number": 10
     },
     {
       "id": 8481641,
@@ -1811,8 +1814,8 @@
       "opp_index": 0.7373,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -1849,8 +1852,8 @@
       "opp_index": 0.679,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -1887,8 +1890,8 @@
       "opp_index": 1.0579,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -1925,8 +1928,8 @@
       "opp_index": 0.7164,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -1963,8 +1966,8 @@
       "opp_index": 0.7164,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2003,8 +2006,8 @@
       "opp_index": 0.7164,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -2041,8 +2044,8 @@
       "opp_index": 0.7164,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -2079,8 +2082,8 @@
       "opp_index": 0.7164,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -2117,8 +2120,8 @@
       "opp_index": 0.7164,
       "opp_goalie": {
         "name": "SCOTT WEDGEWOOD",
-        "status": "Likely",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "B2B"
@@ -2515,8 +2518,8 @@
       "number": 17
     },
     {
-      "id": 8478462,
-      "name": "NICOLAS ROY",
+      "id": 8484149,
+      "name": "GAVIN BRINDLEY",
       "team": "COL",
       "opp": "DAL",
       "game_id": 2026020107,
@@ -2526,20 +2529,20 @@
       "pp": null,
       "b2b": true,
       "last10": {
-        "gp": 10,
-        "g": 2,
-        "a": 2,
-        "p": 4,
-        "sog": 14,
-        "toi": 704.2,
-        "pptoi": 12.8
+        "gp": 3,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 4,
+        "toi": 425.3,
+        "pptoi": 23.3
       },
       "season": {
-        "gp": 6,
-        "g": 2,
-        "a": 2,
-        "p": 4,
-        "sog": 10
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
       },
       "opp_index": 0.8488,
       "opp_goalie": {
@@ -2550,7 +2553,7 @@
       "flags": [
         "B2B"
       ],
-      "number": 10
+      "number": 54
     },
     {
       "id": 8478038,
@@ -2561,7 +2564,7 @@
       "home": true,
       "pos": "D",
       "line": "D1",
-      "pp": 1,
+      "pp": 2,
       "b2b": true,
       "last10": {
         "gp": 10,
@@ -2586,12 +2589,90 @@
         "source": "confirmed"
       },
       "flags": [
-        "PP1",
         "ROLE_UP",
         "HOT",
         "B2B"
       ],
       "number": 7
+    },
+    {
+      "id": 8480069,
+      "name": "CALE MAKAR",
+      "team": "COL",
+      "opp": "DAL",
+      "game_id": 2026020107,
+      "home": true,
+      "pos": "D",
+      "line": "D1",
+      "pp": 1,
+      "b2b": true,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 4,
+        "p": 7,
+        "sog": 26,
+        "toi": 1459.7,
+        "pptoi": 233.6
+      },
+      "season": {
+        "gp": 5,
+        "g": 3,
+        "a": 4,
+        "p": 7,
+        "sog": 13
+      },
+      "opp_index": 0.2388,
+      "opp_goalie": {
+        "name": "CASEY DESMITH",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "PP1",
+        "HOT",
+        "B2B"
+      ],
+      "number": 8
+    },
+    {
+      "id": 8476967,
+      "name": "BRETT KULAK",
+      "team": "COL",
+      "opp": "DAL",
+      "game_id": 2026020107,
+      "home": true,
+      "pos": "D",
+      "line": "D2",
+      "pp": null,
+      "b2b": true,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 4,
+        "p": 4,
+        "sog": 8,
+        "toi": 1102.4,
+        "pptoi": 2.8
+      },
+      "season": {
+        "gp": 6,
+        "g": 0,
+        "a": 4,
+        "p": 4,
+        "sog": 4
+      },
+      "opp_index": 0.2388,
+      "opp_goalie": {
+        "name": "CASEY DESMITH",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [
+        "ROLE_UP",
+        "B2B"
+      ],
+      "number": 27
     },
     {
       "id": 8484258,
@@ -2601,8 +2682,8 @@
       "game_id": 2026020107,
       "home": true,
       "pos": "D",
-      "line": "D1",
-      "pp": 2,
+      "line": "D2",
+      "pp": null,
       "b2b": true,
       "last10": {
         "gp": 10,
@@ -2640,7 +2721,7 @@
       "game_id": 2026020107,
       "home": true,
       "pos": "D",
-      "line": "D2",
+      "line": "D3",
       "pp": null,
       "b2b": true,
       "last10": {
@@ -2679,7 +2760,7 @@
       "game_id": 2026020107,
       "home": true,
       "pos": "D",
-      "line": "D2",
+      "line": "D3",
       "pp": null,
       "b2b": true,
       "last10": {
@@ -2709,82 +2790,6 @@
         "B2B"
       ],
       "number": 84
-    },
-    {
-      "id": 8476967,
-      "name": "BRETT KULAK",
-      "team": "COL",
-      "opp": "DAL",
-      "game_id": 2026020107,
-      "home": true,
-      "pos": "D",
-      "line": "D3",
-      "pp": null,
-      "b2b": true,
-      "last10": {
-        "gp": 10,
-        "g": 0,
-        "a": 4,
-        "p": 4,
-        "sog": 8,
-        "toi": 1102.4,
-        "pptoi": 2.8
-      },
-      "season": {
-        "gp": 6,
-        "g": 0,
-        "a": 4,
-        "p": 4,
-        "sog": 4
-      },
-      "opp_index": 0.2388,
-      "opp_goalie": {
-        "name": "CASEY DESMITH",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": [
-        "B2B"
-      ],
-      "number": 27
-    },
-    {
-      "id": 8478454,
-      "name": "NOAH JUULSEN",
-      "team": "COL",
-      "opp": "DAL",
-      "game_id": 2026020107,
-      "home": true,
-      "pos": "D",
-      "line": "D3",
-      "pp": null,
-      "b2b": true,
-      "last10": {
-        "gp": 10,
-        "g": 0,
-        "a": 3,
-        "p": 3,
-        "sog": 3,
-        "toi": 763.9,
-        "pptoi": 3.2
-      },
-      "season": {
-        "gp": 4,
-        "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 2
-      },
-      "opp_index": 0.2388,
-      "opp_goalie": {
-        "name": "CASEY DESMITH",
-        "status": "Confirmed",
-        "source": "confirmed"
-      },
-      "flags": [
-        "B2B"
-      ],
-      "number": 47
     }
   ]
 }
