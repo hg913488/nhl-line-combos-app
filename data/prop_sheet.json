@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T14:09:06Z",
+  "generated_at": "2026-10-15T19:53:21Z",
   "date": "2026-10-15",
   "window": {
     "games": 10,
@@ -108,7 +108,7 @@
       "opp_index": 1.4747,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -146,7 +146,7 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -186,7 +186,7 @@
       "opp_index": 1.0449,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -222,7 +222,7 @@
       "opp_index": 1.4747,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -261,7 +261,7 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -300,7 +300,7 @@
       "opp_index": 1.0449,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -339,7 +339,7 @@
       "opp_index": 1.4747,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -378,7 +378,7 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -416,7 +416,7 @@
       "opp_index": 1.0449,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -425,8 +425,8 @@
       "number": 94
     },
     {
-      "id": 8479941,
-      "name": "JUSTIN DANFORTH",
+      "id": 8479359,
+      "name": "BECK MALENSTYN",
       "team": "BUF",
       "opp": "TOR",
       "game_id": 2026020108,
@@ -436,31 +436,31 @@
       "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 4,
+        "gp": 10,
         "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 1,
-        "toi": 603.5,
-        "pptoi": 0.8
+        "a": 3,
+        "p": 3,
+        "sog": 3,
+        "toi": 585.2,
+        "pptoi": 2.1
       },
       "season": {
-        "gp": 4,
+        "gp": 7,
         "g": 0,
-        "a": 0,
-        "p": 0,
+        "a": 2,
+        "p": 2,
         "sog": 1
       },
       "opp_index": 1.4747,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
         "SOFT_MATCHUP"
       ],
-      "number": 15
+      "number": 29
     },
     {
       "id": 8480064,
@@ -492,7 +492,7 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -501,8 +501,8 @@
       "number": 9
     },
     {
-      "id": 8479359,
-      "name": "BECK MALENSTYN",
+      "id": 8479941,
+      "name": "JUSTIN DANFORTH",
       "team": "BUF",
       "opp": "TOR",
       "game_id": 2026020108,
@@ -512,67 +512,29 @@
       "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 10,
+        "gp": 4,
         "g": 0,
-        "a": 3,
-        "p": 3,
-        "sog": 3,
-        "toi": 585.2,
-        "pptoi": 2.1
+        "a": 0,
+        "p": 0,
+        "sog": 1,
+        "toi": 603.5,
+        "pptoi": 0.8
       },
       "season": {
-        "gp": 7,
+        "gp": 4,
         "g": 0,
-        "a": 2,
-        "p": 2,
+        "a": 0,
+        "p": 0,
         "sog": 1
       },
       "opp_index": 1.0449,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
-      "number": 29
-    },
-    {
-      "id": 8480807,
-      "name": "MATTIAS SAMUELSSON",
-      "team": "BUF",
-      "opp": "TOR",
-      "game_id": 2026020108,
-      "home": false,
-      "pos": "D",
-      "line": "D1",
-      "pp": null,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 1,
-        "a": 6,
-        "p": 7,
-        "sog": 16,
-        "toi": 1389.3,
-        "pptoi": 4.5
-      },
-      "season": {
-        "gp": 7,
-        "g": 1,
-        "a": 3,
-        "p": 4,
-        "sog": 8
-      },
-      "opp_index": 0.9481,
-      "opp_goalie": {
-        "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "HOT"
-      ],
-      "number": 23
+      "number": 15
     },
     {
       "id": 8482803,
@@ -604,13 +566,51 @@
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
         "ROLE_UP"
       ],
       "number": 8
+    },
+    {
+      "id": 8480807,
+      "name": "MATTIAS SAMUELSSON",
+      "team": "BUF",
+      "opp": "TOR",
+      "game_id": 2026020108,
+      "home": false,
+      "pos": "D",
+      "line": "D1",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 6,
+        "p": 7,
+        "sog": 16,
+        "toi": 1389.3,
+        "pptoi": 4.5
+      },
+      "season": {
+        "gp": 7,
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 8
+      },
+      "opp_index": 0.9481,
+      "opp_goalie": {
+        "name": "SERGEI BOBROVSKY",
+        "status": "Likely",
+        "source": "projected"
+      },
+      "flags": [
+        "HOT"
+      ],
+      "number": 23
     },
     {
       "id": 8482671,
@@ -642,7 +642,7 @@
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -682,7 +682,7 @@
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -718,7 +718,7 @@
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -754,50 +754,47 @@
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "SERGEI BOBROVSKY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
       "number": 46
     },
     {
-      "id": 8480893,
-      "name": "KIRILL MARCHENKO",
+      "id": 8478458,
+      "name": "JACK ROSLOVIC",
       "team": "TOR",
       "opp": "BUF",
       "game_id": 2026020108,
       "home": true,
       "pos": "LW",
       "line": "L1",
-      "pp": 1,
+      "pp": 2,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 2,
-        "a": 6,
-        "p": 8,
-        "sog": 28,
-        "toi": 1151.9,
-        "pptoi": 236.5
+        "g": 3,
+        "a": 2,
+        "p": 5,
+        "sog": 25,
+        "toi": 937.2,
+        "pptoi": 67.0
       },
       "season": {
         "gp": 7,
-        "g": 1,
-        "a": 5,
-        "p": 6,
-        "sog": 17
+        "g": 3,
+        "a": 2,
+        "p": 5,
+        "sog": 20
       },
       "opp_index": 0.7373,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
-      "flags": [
-        "PP1",
-        "HOT"
-      ],
-      "number": 86
+      "flags": [],
+      "number": 96
     },
     {
       "id": 8479318,
@@ -829,7 +826,7 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -839,78 +836,82 @@
       "number": 34
     },
     {
-      "id": 8478458,
-      "name": "JACK ROSLOVIC",
+      "id": 8477939,
+      "name": "WILLIAM NYLANDER",
       "team": "TOR",
       "opp": "BUF",
       "game_id": 2026020108,
       "home": true,
       "pos": "RW",
       "line": "L1",
-      "pp": 2,
+      "pp": 1,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 3,
-        "a": 2,
-        "p": 5,
-        "sog": 25,
-        "toi": 937.2,
-        "pptoi": 67.0
+        "g": 9,
+        "a": 9,
+        "p": 18,
+        "sog": 33,
+        "toi": 1235.4,
+        "pptoi": 199.7
       },
       "season": {
         "gp": 7,
-        "g": 3,
-        "a": 2,
-        "p": 5,
-        "sog": 20
+        "g": 5,
+        "a": 7,
+        "p": 12,
+        "sog": 22
       },
       "opp_index": 0.9143,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
-      "flags": [],
-      "number": 96
+      "flags": [
+        "PP1",
+        "ROLE_UP",
+        "HOT"
+      ],
+      "number": 88
     },
     {
-      "id": 8484158,
-      "name": "EASTON COWAN",
+      "id": 8477426,
+      "name": "NICK PAUL",
       "team": "TOR",
       "opp": "BUF",
       "game_id": 2026020108,
       "home": true,
       "pos": "LW",
       "line": "L2",
-      "pp": 2,
+      "pp": null,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 3,
-        "a": 4,
-        "p": 7,
-        "sog": 19,
-        "toi": 971.7,
-        "pptoi": 84.7
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 9,
+        "toi": 856.2,
+        "pptoi": 65.9
       },
       "season": {
         "gp": 7,
-        "g": 3,
-        "a": 2,
-        "p": 5,
-        "sog": 15
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 7
       },
       "opp_index": 0.7373,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
-        "HOT"
+        "ROLE_UP"
       ],
-      "number": 53
+      "number": 20
     },
     {
       "id": 8475166,
@@ -942,7 +943,7 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -952,8 +953,8 @@
       "number": 91
     },
     {
-      "id": 8477939,
-      "name": "WILLIAM NYLANDER",
+      "id": 8480893,
+      "name": "KIRILL MARCHENKO",
       "team": "TOR",
       "opp": "BUF",
       "game_id": 2026020108,
@@ -964,31 +965,31 @@
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 9,
-        "a": 9,
-        "p": 18,
-        "sog": 33,
-        "toi": 1235.4,
-        "pptoi": 199.7
+        "g": 2,
+        "a": 6,
+        "p": 8,
+        "sog": 28,
+        "toi": 1151.9,
+        "pptoi": 236.5
       },
       "season": {
         "gp": 7,
-        "g": 5,
-        "a": 7,
-        "p": 12,
-        "sog": 22
+        "g": 1,
+        "a": 5,
+        "p": 6,
+        "sog": 17
       },
       "opp_index": 0.9143,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
         "PP1",
         "HOT"
       ],
-      "number": 88
+      "number": 86
     },
     {
       "id": 8486067,
@@ -1020,47 +1021,11 @@
       "opp_index": 0.7373,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
       "number": 92
-    },
-    {
-      "id": 8477426,
-      "name": "NICK PAUL",
-      "team": "TOR",
-      "opp": "BUF",
-      "game_id": 2026020108,
-      "home": true,
-      "pos": "C",
-      "line": "L3",
-      "pp": null,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 1,
-        "a": 3,
-        "p": 4,
-        "sog": 9,
-        "toi": 856.2,
-        "pptoi": 65.9
-      },
-      "season": {
-        "gp": 7,
-        "g": 1,
-        "a": 3,
-        "p": 4,
-        "sog": 7
-      },
-      "opp_index": 1.1852,
-      "opp_goalie": {
-        "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [],
-      "number": 20
     },
     {
       "id": 8476925,
@@ -1069,7 +1034,7 @@
       "opp": "BUF",
       "game_id": 2026020108,
       "home": true,
-      "pos": "RW",
+      "pos": "C",
       "line": "L3",
       "pp": null,
       "b2b": false,
@@ -1089,14 +1054,52 @@
         "p": 1,
         "sog": 9
       },
-      "opp_index": 0.9143,
+      "opp_index": 1.1852,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
       "number": 15
+    },
+    {
+      "id": 8484158,
+      "name": "EASTON COWAN",
+      "team": "TOR",
+      "opp": "BUF",
+      "game_id": 2026020108,
+      "home": true,
+      "pos": "RW",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 4,
+        "p": 7,
+        "sog": 19,
+        "toi": 971.7,
+        "pptoi": 84.7
+      },
+      "season": {
+        "gp": 7,
+        "g": 3,
+        "a": 2,
+        "p": 5,
+        "sog": 15
+      },
+      "opp_index": 0.9143,
+      "opp_goalie": {
+        "name": "UKKO-PEKKA LUUKKONEN",
+        "status": "Likely",
+        "source": "projected"
+      },
+      "flags": [
+        "HOT"
+      ],
+      "number": 53
     },
     {
       "id": 8479520,
@@ -1128,7 +1131,7 @@
       "opp_index": 0.7373,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -1164,7 +1167,7 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -1200,7 +1203,7 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -1236,7 +1239,7 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -1274,7 +1277,7 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -1310,7 +1313,7 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -1346,7 +1349,7 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -1382,7 +1385,7 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "UKKO-PEKKA LUUKKONEN",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -1391,40 +1394,43 @@
       "number": 3
     },
     {
-      "id": 8482476,
-      "name": "EMIL HEINEMAN",
+      "id": 8481711,
+      "name": "MATIAS MACCELLI",
       "team": "NYI",
       "opp": "OTT",
       "game_id": 2026020109,
       "home": false,
       "pos": "LW",
       "line": "L1",
-      "pp": null,
+      "pp": 1,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 3,
-        "a": 0,
-        "p": 3,
+        "g": 1,
+        "a": 5,
+        "p": 6,
         "sog": 13,
-        "toi": 879.1,
-        "pptoi": 57.2
+        "toi": 876.8,
+        "pptoi": 149.1
       },
       "season": {
         "gp": 6,
-        "g": 2,
-        "a": 0,
-        "p": 2,
-        "sog": 8
+        "g": 1,
+        "a": 4,
+        "p": 5,
+        "sog": 11
       },
       "opp_index": 0.4424,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
-      "flags": [],
-      "number": 51
+      "flags": [
+        "PP1",
+        "ROLE_UP"
+      ],
+      "number": 63
     },
     {
       "id": 8477500,
@@ -1456,8 +1462,8 @@
       "opp_index": 0.9312,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -1495,8 +1501,8 @@
       "opp_index": 1.0449,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -1533,8 +1539,8 @@
       "opp_index": 0.4424,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -1571,8 +1577,8 @@
       "opp_index": 0.9312,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 64
@@ -1607,8 +1613,8 @@
       "opp_index": 1.0449,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 38
@@ -1643,8 +1649,8 @@
       "opp_index": 0.4424,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP"
@@ -1681,8 +1687,8 @@
       "opp_index": 0.9312,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 44
@@ -1717,49 +1723,47 @@
       "opp_index": 1.0449,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 11
     },
     {
-      "id": 8481601,
-      "name": "SIMON HOLMSTROM",
+      "id": 8482476,
+      "name": "EMIL HEINEMAN",
       "team": "NYI",
       "opp": "OTT",
       "game_id": 2026020109,
       "home": false,
       "pos": "LW",
       "line": "L4",
-      "pp": 2,
+      "pp": null,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 11,
-        "toi": 973.3,
-        "pptoi": 99.3
+        "g": 3,
+        "a": 0,
+        "p": 3,
+        "sog": 13,
+        "toi": 879.1,
+        "pptoi": 57.2
       },
       "season": {
         "gp": 6,
-        "g": 1,
-        "a": 1,
+        "g": 2,
+        "a": 0,
         "p": 2,
-        "sog": 6
+        "sog": 8
       },
       "opp_index": 0.4424,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
-      "flags": [
-        "ROLE_UP"
-      ],
-      "number": 92
+      "flags": [],
+      "number": 51
     },
     {
       "id": 8475231,
@@ -1791,49 +1795,49 @@
       "opp_index": 0.9312,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 53
     },
     {
-      "id": 8481711,
-      "name": "MATIAS MACCELLI",
+      "id": 8481601,
+      "name": "SIMON HOLMSTROM",
       "team": "NYI",
       "opp": "OTT",
       "game_id": 2026020109,
       "home": false,
       "pos": "RW",
       "line": "L4",
-      "pp": 1,
+      "pp": 2,
       "b2b": false,
       "last10": {
         "gp": 10,
         "g": 1,
-        "a": 5,
-        "p": 6,
-        "sog": 13,
-        "toi": 876.8,
-        "pptoi": 149.1
+        "a": 1,
+        "p": 2,
+        "sog": 11,
+        "toi": 973.3,
+        "pptoi": 99.3
       },
       "season": {
         "gp": 6,
         "g": 1,
-        "a": 4,
-        "p": 5,
-        "sog": 11
+        "a": 1,
+        "p": 2,
+        "sog": 6
       },
       "opp_index": 1.0449,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
-        "PP1"
+        "ROLE_UP"
       ],
-      "number": 63
+      "number": 92
     },
     {
       "id": 8479378,
@@ -1865,8 +1869,8 @@
       "opp_index": 0.4741,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 8
@@ -1901,8 +1905,8 @@
       "opp_index": 0.4741,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -1940,8 +1944,8 @@
       "opp_index": 0.4741,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 3
@@ -1976,47 +1980,11 @@
       "opp_index": 0.4741,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 6
-    },
-    {
-      "id": 8477950,
-      "name": "TONY DEANGELO",
-      "team": "NYI",
-      "opp": "OTT",
-      "game_id": 2026020109,
-      "home": false,
-      "pos": "D",
-      "line": "D3",
-      "pp": 2,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 1,
-        "a": 3,
-        "p": 4,
-        "sog": 18,
-        "toi": 1097.9,
-        "pptoi": 87.8
-      },
-      "season": {
-        "gp": 6,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 9
-      },
-      "opp_index": 0.4741,
-      "opp_goalie": {
-        "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [],
-      "number": 77
     },
     {
       "id": 8482516,
@@ -2048,47 +2016,86 @@
       "opp_index": 0.4741,
       "opp_goalie": {
         "name": "LINUS ULLMARK",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 4
     },
     {
-      "id": 8477998,
-      "name": "WARREN FOEGELE",
+      "id": 8477950,
+      "name": "TONY DEANGELO",
+      "team": "NYI",
+      "opp": "OTT",
+      "game_id": 2026020109,
+      "home": false,
+      "pos": "D",
+      "line": "D3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 18,
+        "toi": 1097.9,
+        "pptoi": 87.8
+      },
+      "season": {
+        "gp": 6,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 9
+      },
+      "opp_index": 0.4741,
+      "opp_goalie": {
+        "name": "LINUS ULLMARK",
+        "status": "Confirmed",
+        "source": "confirmed"
+      },
+      "flags": [],
+      "number": 77
+    },
+    {
+      "id": 8483676,
+      "name": "STEPHEN HALLIDAY",
       "team": "OTT",
       "opp": "NYI",
       "game_id": 2026020109,
       "home": true,
       "pos": "LW",
       "line": "L1",
-      "pp": null,
+      "pp": 1,
       "b2b": false,
       "last10": {
-        "gp": 10,
-        "g": 0,
+        "gp": 9,
+        "g": 2,
         "a": 1,
-        "p": 1,
-        "sog": 6,
-        "toi": 725.6,
-        "pptoi": 26.6
+        "p": 3,
+        "sog": 11,
+        "toi": 661.1,
+        "pptoi": 172.7
       },
       "season": {
         "gp": 7,
-        "g": 0,
+        "g": 2,
         "a": 1,
-        "p": 1,
-        "sog": 3
+        "p": 3,
+        "sog": 7
       },
       "opp_index": 1.1797,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
-      "flags": [],
-      "number": 37
+      "flags": [
+        "PP1",
+        "ROLE_UP"
+      ],
+      "number": 34
     },
     {
       "id": 8482116,
@@ -2119,9 +2126,9 @@
       },
       "opp_index": 0.7619,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2158,9 +2165,9 @@
       },
       "opp_index": 1.0449,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2197,9 +2204,9 @@
       },
       "opp_index": 1.1797,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 95
@@ -2233,9 +2240,9 @@
       },
       "opp_index": 0.7619,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -2243,44 +2250,46 @@
       "number": 24
     },
     {
-      "id": 8482092,
-      "name": "RIDLY GREIG",
+      "id": 8473512,
+      "name": "CLAUDE GIROUX",
       "team": "OTT",
       "opp": "NYI",
       "game_id": 2026020109,
       "home": true,
       "pos": "RW",
       "line": "L2",
-      "pp": null,
+      "pp": 2,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 0,
-        "a": 2,
-        "p": 2,
-        "sog": 15,
-        "toi": 1048.1,
-        "pptoi": 90.3
+        "g": 1,
+        "a": 4,
+        "p": 5,
+        "sog": 19,
+        "toi": 1111.0,
+        "pptoi": 239.3
       },
       "season": {
-        "gp": 5,
-        "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 7
+        "gp": 7,
+        "g": 1,
+        "a": 4,
+        "p": 5,
+        "sog": 10
       },
       "opp_index": 1.0449,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
-      "flags": [],
-      "number": 71
+      "flags": [
+        "ROLE_UP"
+      ],
+      "number": 28
     },
     {
-      "id": 8478020,
-      "name": "MICHAEL AMADIO",
+      "id": 8476393,
+      "name": "NICK COUSINS",
       "team": "OTT",
       "opp": "NYI",
       "game_id": 2026020109,
@@ -2291,28 +2300,30 @@
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 2,
+        "g": 1,
         "a": 2,
-        "p": 4,
-        "sog": 12,
-        "toi": 1006.8,
-        "pptoi": 2.1
+        "p": 3,
+        "sog": 5,
+        "toi": 569.2,
+        "pptoi": 1.7
       },
       "season": {
         "gp": 7,
-        "g": 2,
-        "a": 2,
-        "p": 4,
-        "sog": 9
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 3
       },
       "opp_index": 1.1797,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
-      "flags": [],
-      "number": 22
+      "flags": [
+        "ROLE_UP"
+      ],
+      "number": 21
     },
     {
       "id": 8481596,
@@ -2343,52 +2354,52 @@
       },
       "opp_index": 0.7619,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 12
     },
     {
-      "id": 8473512,
-      "name": "CLAUDE GIROUX",
+      "id": 8478020,
+      "name": "MICHAEL AMADIO",
       "team": "OTT",
       "opp": "NYI",
       "game_id": 2026020109,
       "home": true,
       "pos": "RW",
       "line": "L3",
-      "pp": 2,
+      "pp": null,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 1,
-        "a": 4,
-        "p": 5,
-        "sog": 19,
-        "toi": 1111.0,
-        "pptoi": 239.3
+        "g": 2,
+        "a": 2,
+        "p": 4,
+        "sog": 12,
+        "toi": 1006.8,
+        "pptoi": 2.1
       },
       "season": {
         "gp": 7,
-        "g": 1,
-        "a": 4,
-        "p": 5,
-        "sog": 10
+        "g": 2,
+        "a": 2,
+        "p": 4,
+        "sog": 9
       },
       "opp_index": 1.0449,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 28
+      "number": 22
     },
     {
-      "id": 8476393,
-      "name": "NICK COUSINS",
+      "id": 8477998,
+      "name": "WARREN FOEGELE",
       "team": "OTT",
       "opp": "NYI",
       "game_id": 2026020109,
@@ -2399,67 +2410,64 @@
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 1,
-        "a": 2,
-        "p": 3,
-        "sog": 5,
-        "toi": 569.2,
-        "pptoi": 1.7
+        "g": 0,
+        "a": 1,
+        "p": 1,
+        "sog": 6,
+        "toi": 725.6,
+        "pptoi": 26.6
       },
       "season": {
         "gp": 7,
-        "g": 1,
+        "g": 0,
         "a": 1,
-        "p": 2,
+        "p": 1,
         "sog": 3
       },
       "opp_index": 1.1797,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 21
+      "number": 37
     },
     {
-      "id": 8483676,
-      "name": "STEPHEN HALLIDAY",
+      "id": 8482092,
+      "name": "RIDLY GREIG",
       "team": "OTT",
       "opp": "NYI",
       "game_id": 2026020109,
       "home": true,
       "pos": "C",
       "line": "L4",
-      "pp": 1,
+      "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 9,
-        "g": 2,
-        "a": 1,
-        "p": 3,
-        "sog": 11,
-        "toi": 661.1,
-        "pptoi": 172.7
+        "gp": 10,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 15,
+        "toi": 1048.1,
+        "pptoi": 90.3
       },
       "season": {
-        "gp": 7,
-        "g": 2,
+        "gp": 5,
+        "g": 0,
         "a": 1,
-        "p": 3,
+        "p": 1,
         "sog": 7
       },
       "opp_index": 0.7619,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
-      "flags": [
-        "PP1",
-        "ROLE_UP"
-      ],
-      "number": 34
+      "flags": [],
+      "number": 71
     },
     {
       "id": 8480188,
@@ -2490,9 +2498,9 @@
       },
       "opp_index": 1.0449,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 20
@@ -2526,16 +2534,16 @@
       },
       "opp_index": 0.4741,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 72
     },
     {
-      "id": 8481606,
-      "name": "JORDAN SPENCE",
+      "id": 8482245,
+      "name": "ARTEM ZUB",
       "team": "OTT",
       "opp": "NYI",
       "game_id": 2026020109,
@@ -2546,28 +2554,28 @@
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 11,
-        "toi": 1403.0,
-        "pptoi": 18.1
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 12,
+        "toi": 1276.6,
+        "pptoi": 10.2
       },
       "season": {
-        "gp": 7,
+        "gp": 0,
         "g": 0,
-        "a": 1,
-        "p": 1,
-        "sog": 7
+        "a": 0,
+        "p": 0,
+        "sog": 0
       },
       "opp_index": 0.4741,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 10
+      "number": 2
     },
     {
       "id": 8482095,
@@ -2598,9 +2606,9 @@
       },
       "opp_index": 0.4741,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 43
@@ -2634,9 +2642,9 @@
       },
       "opp_index": 0.4741,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -2645,8 +2653,8 @@
       "number": 26
     },
     {
-      "id": 8483435,
-      "name": "JORIAN DONOVAN",
+      "id": 8480075,
+      "name": "CAMERON CROTTY",
       "team": "OTT",
       "opp": "NYI",
       "game_id": 2026020109,
@@ -2656,16 +2664,16 @@
       "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 3,
+        "gp": 9,
         "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 1,
-        "toi": 465.3,
-        "pptoi": 0.0
+        "a": 1,
+        "p": 1,
+        "sog": 6,
+        "toi": 801.9,
+        "pptoi": 0.4
       },
       "season": {
-        "gp": 1,
+        "gp": 2,
         "g": 0,
         "a": 0,
         "p": 0,
@@ -2673,16 +2681,16 @@
       },
       "opp_index": 0.4741,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 56
+      "number": 5
     },
     {
-      "id": 8484409,
-      "name": "HOYT STANLEY",
+      "id": 8481606,
+      "name": "JORDAN SPENCE",
       "team": "OTT",
       "opp": "NYI",
       "game_id": 2026020109,
@@ -2692,29 +2700,29 @@
       "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 4,
+        "gp": 10,
         "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 1,
-        "toi": 655.0,
-        "pptoi": 0.8
+        "a": 1,
+        "p": 1,
+        "sog": 11,
+        "toi": 1403.0,
+        "pptoi": 18.1
       },
       "season": {
-        "gp": 4,
+        "gp": 7,
         "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 1
+        "a": 1,
+        "p": 1,
+        "sog": 7
       },
       "opp_index": 0.4741,
       "opp_goalie": {
-        "name": "ILYA SOROKIN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "name": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 73
+      "number": 10
     },
     {
       "id": 8477955,
@@ -2746,7 +2754,7 @@
       "opp_index": 1.1797,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -2784,7 +2792,7 @@
       "opp_index": 0.6772,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -2822,7 +2830,7 @@
       "opp_index": 0.9143,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -2862,7 +2870,7 @@
       "opp_index": 1.1797,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -2900,7 +2908,7 @@
       "opp_index": 0.6772,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -2938,7 +2946,7 @@
       "opp_index": 0.9143,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -2974,7 +2982,7 @@
       "opp_index": 1.1797,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -3013,7 +3021,7 @@
       "opp_index": 0.6772,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -3051,7 +3059,7 @@
       "opp_index": 0.9143,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -3087,7 +3095,7 @@
       "opp_index": 1.1797,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -3123,7 +3131,7 @@
       "opp_index": 0.6772,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -3161,7 +3169,7 @@
       "opp_index": 0.9143,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -3197,7 +3205,7 @@
       "opp_index": 0.4741,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -3233,7 +3241,7 @@
       "opp_index": 0.4741,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -3269,7 +3277,7 @@
       "opp_index": 0.4741,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -3305,7 +3313,7 @@
       "opp_index": 0.4741,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -3343,7 +3351,7 @@
       "opp_index": 0.4741,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -3379,38 +3387,38 @@
       "opp_index": 0.4741,
       "opp_goalie": {
         "name": "ANDREI VASILEVSKIY",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
       "number": 28
     },
     {
-      "id": 8482201,
-      "name": "GAGE GONCALVES",
+      "id": 8479542,
+      "name": "BRANDON HAGEL",
       "team": "TBL",
       "opp": "SEA",
       "game_id": 2026020111,
       "home": true,
       "pos": "LW",
       "line": "L1",
-      "pp": 2,
+      "pp": 1,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 1,
-        "a": 2,
-        "p": 3,
-        "sog": 10,
-        "toi": 896.7,
-        "pptoi": 69.3
+        "g": 6,
+        "a": 5,
+        "p": 11,
+        "sog": 41,
+        "toi": 1386.6,
+        "pptoi": 302.5
       },
       "season": {
         "gp": 6,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 3
+        "g": 4,
+        "a": 4,
+        "p": 8,
+        "sog": 27
       },
       "opp_index": 0.7373,
       "opp_goalie": {
@@ -3418,35 +3426,39 @@
         "status": "Unconfirmed",
         "source": "projected"
       },
-      "flags": [],
-      "number": 93
+      "flags": [
+        "PP1",
+        "ROLE_UP",
+        "HOT"
+      ],
+      "number": 38
     },
     {
-      "id": 8478010,
-      "name": "BRAYDEN POINT",
+      "id": 8478519,
+      "name": "ANTHONY CIRELLI",
       "team": "TBL",
       "opp": "SEA",
       "game_id": 2026020111,
       "home": true,
       "pos": "C",
       "line": "L1",
-      "pp": 1,
+      "pp": 2,
       "b2b": false,
       "last10": {
         "gp": 10,
         "g": 1,
-        "a": 2,
-        "p": 3,
-        "sog": 22,
-        "toi": 1150.3,
-        "pptoi": 321.0
+        "a": 1,
+        "p": 2,
+        "sog": 13,
+        "toi": 1127.6,
+        "pptoi": 90.4
       },
       "season": {
         "gp": 6,
         "g": 1,
-        "a": 2,
-        "p": 3,
-        "sog": 15
+        "a": 1,
+        "p": 2,
+        "sog": 10
       },
       "opp_index": 0.9312,
       "opp_goalie": {
@@ -3455,9 +3467,9 @@
         "source": "projected"
       },
       "flags": [
-        "PP1"
+        "ROLE_UP"
       ],
-      "number": 21
+      "number": 71
     },
     {
       "id": 8476453,
@@ -3500,88 +3512,13 @@
       "number": 86
     },
     {
-      "id": 8479542,
-      "name": "BRANDON HAGEL",
-      "team": "TBL",
-      "opp": "SEA",
-      "game_id": 2026020111,
-      "home": true,
-      "pos": "LW",
-      "line": "L2",
-      "pp": 1,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 6,
-        "a": 5,
-        "p": 11,
-        "sog": 41,
-        "toi": 1386.6,
-        "pptoi": 302.5
-      },
-      "season": {
-        "gp": 6,
-        "g": 4,
-        "a": 4,
-        "p": 8,
-        "sog": 27
-      },
-      "opp_index": 0.7373,
-      "opp_goalie": {
-        "name": "JOEY DACCORD",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "PP1",
-        "HOT"
-      ],
-      "number": 38
-    },
-    {
-      "id": 8478519,
-      "name": "ANTHONY CIRELLI",
-      "team": "TBL",
-      "opp": "SEA",
-      "game_id": 2026020111,
-      "home": true,
-      "pos": "C",
-      "line": "L2",
-      "pp": 2,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 13,
-        "toi": 1127.6,
-        "pptoi": 90.4
-      },
-      "season": {
-        "gp": 6,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 10
-      },
-      "opp_index": 0.9312,
-      "opp_goalie": {
-        "name": "JOEY DACCORD",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [],
-      "number": 71
-    },
-    {
       "id": 8477404,
       "name": "JAKE GUENTZEL",
       "team": "TBL",
       "opp": "SEA",
       "game_id": 2026020111,
       "home": true,
-      "pos": "RW",
+      "pos": "LW",
       "line": "L2",
       "pp": 1,
       "b2b": false,
@@ -3601,7 +3538,7 @@
         "p": 6,
         "sog": 16
       },
-      "opp_index": 1.4367,
+      "opp_index": 0.7373,
       "opp_goalie": {
         "name": "JOEY DACCORD",
         "status": "Unconfirmed",
@@ -3609,10 +3546,47 @@
       },
       "flags": [
         "PP1",
-        "HOT",
-        "SOFT_MATCHUP"
+        "HOT"
       ],
       "number": 59
+    },
+    {
+      "id": 8478010,
+      "name": "BRAYDEN POINT",
+      "team": "TBL",
+      "opp": "SEA",
+      "game_id": 2026020111,
+      "home": true,
+      "pos": "C",
+      "line": "L2",
+      "pp": 1,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 22,
+        "toi": 1150.3,
+        "pptoi": 321.0
+      },
+      "season": {
+        "gp": 6,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 15
+      },
+      "opp_index": 0.9312,
+      "opp_goalie": {
+        "name": "JOEY DACCORD",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1"
+      ],
+      "number": 21
     },
     {
       "id": 8481624,
@@ -3725,49 +3699,13 @@
       "number": 29
     },
     {
-      "id": 8479705,
-      "name": "JEFFREY VIEL",
-      "team": "TBL",
-      "opp": "SEA",
-      "game_id": 2026020111,
-      "home": true,
-      "pos": "LW",
-      "line": "L4",
-      "pp": null,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 0,
-        "a": 2,
-        "p": 2,
-        "sog": 11,
-        "toi": 607.0,
-        "pptoi": 3.2
-      },
-      "season": {
-        "gp": 5,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 6
-      },
-      "opp_index": 0.7373,
-      "opp_goalie": {
-        "name": "JOEY DACCORD",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [],
-      "number": 25
-    },
-    {
       "id": 8483447,
       "name": "CONOR GEEKIE",
       "team": "TBL",
       "opp": "SEA",
       "game_id": 2026020111,
       "home": true,
-      "pos": "C",
+      "pos": "LW",
       "line": "L4",
       "pp": 2,
       "b2b": false,
@@ -3787,7 +3725,7 @@
         "p": 1,
         "sog": 8
       },
-      "opp_index": 0.9312,
+      "opp_index": 0.7373,
       "opp_goalie": {
         "name": "JOEY DACCORD",
         "status": "Unconfirmed",
@@ -3795,6 +3733,80 @@
       },
       "flags": [],
       "number": 94
+    },
+    {
+      "id": 8483752,
+      "name": "DOMINIC JAMES",
+      "team": "TBL",
+      "opp": "SEA",
+      "game_id": 2026020111,
+      "home": true,
+      "pos": "C",
+      "line": "L4",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 7,
+        "g": 2,
+        "a": 1,
+        "p": 3,
+        "sog": 12,
+        "toi": 726.4,
+        "pptoi": 46.9
+      },
+      "season": {
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
+      },
+      "opp_index": 0.9312,
+      "opp_goalie": {
+        "name": "JOEY DACCORD",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [],
+      "number": 17
+    },
+    {
+      "id": 8479705,
+      "name": "JEFFREY VIEL",
+      "team": "TBL",
+      "opp": "SEA",
+      "game_id": 2026020111,
+      "home": true,
+      "pos": "RW",
+      "line": "L4",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 11,
+        "toi": 607.0,
+        "pptoi": 3.2
+      },
+      "season": {
+        "gp": 5,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 6
+      },
+      "opp_index": 1.4367,
+      "opp_goalie": {
+        "name": "JOEY DACCORD",
+        "status": "Unconfirmed",
+        "source": "projected"
+      },
+      "flags": [
+        "SOFT_MATCHUP"
+      ],
+      "number": 25
     },
     {
       "id": 8482655,
@@ -3805,7 +3817,7 @@
       "home": true,
       "pos": "D",
       "line": "D1",
-      "pp": null,
+      "pp": 2,
       "b2b": false,
       "last10": {
         "gp": 10,
@@ -3829,7 +3841,9 @@
         "status": "Unconfirmed",
         "source": "projected"
       },
-      "flags": [],
+      "flags": [
+        "ROLE_UP"
+      ],
       "number": 90
     },
     {
@@ -3943,31 +3957,31 @@
       "number": 81
     },
     {
-      "id": 8480426,
-      "name": "CHARLE-EDOUARD D'ASTOUS",
+      "id": 8475167,
+      "name": "VICTOR HEDMAN",
       "team": "TBL",
       "opp": "SEA",
       "game_id": 2026020111,
       "home": true,
       "pos": "D",
       "line": "D3",
-      "pp": 2,
+      "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 10,
-        "g": 1,
-        "a": 1,
+        "gp": 7,
+        "g": 0,
+        "a": 2,
         "p": 2,
-        "sog": 18,
-        "toi": 917.5,
-        "pptoi": 71.4
+        "sog": 6,
+        "toi": 754.0,
+        "pptoi": 20.7
       },
       "season": {
         "gp": 6,
-        "g": 1,
-        "a": 0,
-        "p": 1,
-        "sog": 10
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 5
       },
       "opp_index": 0.7111,
       "opp_goalie": {
@@ -3976,7 +3990,7 @@
         "source": "projected"
       },
       "flags": [],
-      "number": 51
+      "number": 77
     },
     {
       "id": 8481719,
@@ -4044,8 +4058,8 @@
       "opp_index": 1.0323,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -4083,8 +4097,8 @@
       "opp_index": 0.6772,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -4122,8 +4136,8 @@
       "opp_index": 0.6531,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -4132,8 +4146,8 @@
       "number": 88
     },
     {
-      "id": 8481032,
-      "name": "PAUL COTTER",
+      "id": 8483499,
+      "name": "LIAM OHGREN",
       "team": "VAN",
       "opp": "FLA",
       "game_id": 2026020112,
@@ -4144,30 +4158,30 @@
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 4,
-        "a": 2,
-        "p": 6,
-        "sog": 12,
-        "toi": 871.4,
-        "pptoi": 44.4
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 11,
+        "toi": 968.7,
+        "pptoi": 83.6
       },
       "season": {
         "gp": 8,
-        "g": 4,
-        "a": 2,
-        "p": 6,
-        "sog": 8
+        "g": 1,
+        "a": 3,
+        "p": 4,
+        "sog": 11
       },
       "opp_index": 1.0323,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
-        "HOT"
+        "ROLE_UP"
       ],
-      "number": 47
+      "number": 92
     },
     {
       "id": 8482079,
@@ -4199,8 +4213,8 @@
       "opp_index": 0.6772,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 23
@@ -4235,8 +4249,8 @@
       "opp_index": 0.6531,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP"
@@ -4244,76 +4258,78 @@
       "number": 94
     },
     {
-      "id": 8483499,
-      "name": "LIAM OHGREN",
+      "id": 8481032,
+      "name": "PAUL COTTER",
       "team": "VAN",
       "opp": "FLA",
       "game_id": 2026020112,
       "home": false,
       "pos": "LW",
       "line": "L3",
-      "pp": 2,
+      "pp": null,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 1,
-        "a": 3,
-        "p": 4,
-        "sog": 11,
-        "toi": 968.7,
-        "pptoi": 83.6
+        "g": 4,
+        "a": 2,
+        "p": 6,
+        "sog": 12,
+        "toi": 871.4,
+        "pptoi": 44.4
       },
       "season": {
         "gp": 8,
-        "g": 1,
-        "a": 3,
-        "p": 4,
-        "sog": 11
+        "g": 4,
+        "a": 2,
+        "p": 6,
+        "sog": 8
       },
       "opp_index": 1.0323,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
-      "flags": [],
-      "number": 92
+      "flags": [
+        "HOT"
+      ],
+      "number": 47
     },
     {
-      "id": 8482055,
-      "name": "DREW O'CONNOR",
+      "id": 8480078,
+      "name": "FILIP CHYTIL",
       "team": "VAN",
       "opp": "FLA",
       "game_id": 2026020112,
       "home": false,
       "pos": "C",
       "line": "L3",
-      "pp": null,
+      "pp": 2,
       "b2b": false,
       "last10": {
-        "gp": 10,
-        "g": 1,
-        "a": 2,
-        "p": 3,
-        "sog": 12,
-        "toi": 924.1,
-        "pptoi": 51.3
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 0.0,
+        "pptoi": 0.0
       },
       "season": {
-        "gp": 8,
-        "g": 1,
-        "a": 2,
-        "p": 3,
-        "sog": 10
+        "gp": 0,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
       },
       "opp_index": 0.6772,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 18
+      "number": 77
     },
     {
       "id": 8478444,
@@ -4345,8 +4361,8 @@
       "opp_index": 0.6531,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -4354,8 +4370,8 @@
       "number": 6
     },
     {
-      "id": 8483395,
-      "name": "ARSHDEEP BAINS",
+      "id": 8482055,
+      "name": "DREW O'CONNOR",
       "team": "VAN",
       "opp": "FLA",
       "game_id": 2026020112,
@@ -4365,29 +4381,29 @@
       "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 7,
+        "gp": 10,
         "g": 1,
         "a": 2,
         "p": 3,
-        "sog": 4,
-        "toi": 677.4,
-        "pptoi": 4.4
+        "sog": 12,
+        "toi": 924.1,
+        "pptoi": 51.3
       },
       "season": {
-        "gp": 7,
+        "gp": 8,
         "g": 1,
         "a": 2,
         "p": 3,
-        "sog": 4
+        "sog": 10
       },
       "opp_index": 1.0323,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 13
+      "number": 18
     },
     {
       "id": 8484136,
@@ -4419,8 +4435,8 @@
       "opp_index": 0.6772,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 63
@@ -4455,8 +4471,8 @@
       "opp_index": 0.6531,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 7
@@ -4491,8 +4507,8 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP"
@@ -4529,8 +4545,8 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -4568,8 +4584,8 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 4
@@ -4604,8 +4620,8 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP"
@@ -4642,15 +4658,15 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 8
     },
     {
-      "id": 8474568,
-      "name": "LUKE SCHENN",
+      "id": 8483768,
+      "name": "VICTOR MANCINI",
       "team": "VAN",
       "opp": "FLA",
       "game_id": 2026020112,
@@ -4660,29 +4676,29 @@
       "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 10,
+        "gp": 8,
         "g": 0,
-        "a": 2,
-        "p": 2,
-        "sog": 6,
-        "toi": 710.0,
-        "pptoi": 1.8
+        "a": 3,
+        "p": 3,
+        "sog": 8,
+        "toi": 844.8,
+        "pptoi": 1.6
       },
       "season": {
-        "gp": 7,
+        "gp": 1,
         "g": 0,
-        "a": 2,
-        "p": 2,
-        "sog": 5
+        "a": 0,
+        "p": 0,
+        "sog": 0
       },
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "AKIRA SCHMID",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 2
+      "number": 90
     },
     {
       "id": 8480801,
@@ -4714,8 +4730,8 @@
       "opp_index": 1.3272,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -4753,8 +4769,8 @@
       "opp_index": 1.6085,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -4791,8 +4807,8 @@
       "opp_index": 1.698,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -4831,8 +4847,8 @@
       "opp_index": 1.3272,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -4871,8 +4887,8 @@
       "opp_index": 1.6085,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -4911,8 +4927,8 @@
       "opp_index": 1.698,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP",
@@ -4950,8 +4966,8 @@
       "opp_index": 1.3272,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -4988,8 +5004,8 @@
       "opp_index": 1.6085,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -5026,8 +5042,8 @@
       "opp_index": 1.698,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -5064,8 +5080,8 @@
       "opp_index": 1.3272,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -5102,8 +5118,8 @@
       "opp_index": 1.6085,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -5140,8 +5156,8 @@
       "opp_index": 1.698,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -5178,8 +5194,8 @@
       "opp_index": 1.4222,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -5216,8 +5232,8 @@
       "opp_index": 1.4222,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -5254,8 +5270,8 @@
       "opp_index": 1.4222,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -5292,8 +5308,8 @@
       "opp_index": 1.4222,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -5332,8 +5348,8 @@
       "opp_index": 1.4222,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -5370,8 +5386,8 @@
       "opp_index": 1.4222,
       "opp_goalie": {
         "name": "LEEVI MERILAINEN",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -5407,8 +5423,8 @@
       },
       "opp_index": 0.7373,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -5445,8 +5461,8 @@
       },
       "opp_index": 1.4392,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -5485,8 +5501,8 @@
       },
       "opp_index": 1.1755,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -5523,8 +5539,8 @@
       },
       "opp_index": 0.7373,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -5561,8 +5577,8 @@
       },
       "opp_index": 1.4392,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -5601,8 +5617,8 @@
       },
       "opp_index": 1.1755,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -5640,8 +5656,8 @@
       },
       "opp_index": 0.7373,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -5678,8 +5694,8 @@
       },
       "opp_index": 1.4392,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -5716,8 +5732,8 @@
       },
       "opp_index": 1.1755,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -5752,8 +5768,8 @@
       },
       "opp_index": 0.7373,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -5788,8 +5804,8 @@
       },
       "opp_index": 1.4392,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -5826,8 +5842,8 @@
       },
       "opp_index": 1.1755,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -5862,8 +5878,8 @@
       },
       "opp_index": 1.4222,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -5900,8 +5916,8 @@
       },
       "opp_index": 1.4222,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -5940,8 +5956,8 @@
       },
       "opp_index": 1.4222,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -5978,8 +5994,8 @@
       },
       "opp_index": 1.4222,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -6016,8 +6032,8 @@
       },
       "opp_index": 1.4222,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -6054,8 +6070,8 @@
       },
       "opp_index": 1.4222,
       "opp_goalie": {
-        "name": "JAKE ALLEN",
-        "status": "Unconfirmed",
+        "name": "NICO DAWS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -6093,8 +6109,8 @@
       "opp_index": 0.4424,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP"
@@ -6131,8 +6147,8 @@
       "opp_index": 0.5926,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -6170,8 +6186,8 @@
       "opp_index": 0.7837,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -6209,8 +6225,8 @@
       "opp_index": 0.4424,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP"
@@ -6247,8 +6263,8 @@
       "opp_index": 0.5926,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -6286,8 +6302,8 @@
       "opp_index": 0.7837,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP"
@@ -6324,8 +6340,8 @@
       "opp_index": 0.4424,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 39
@@ -6360,8 +6376,8 @@
       "opp_index": 0.5926,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -6399,8 +6415,8 @@
       "opp_index": 0.7837,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP"
@@ -6437,8 +6453,8 @@
       "opp_index": 0.4424,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 93
@@ -6473,8 +6489,8 @@
       "opp_index": 0.5926,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 12
@@ -6509,8 +6525,8 @@
       "opp_index": 0.7837,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP"
@@ -6547,8 +6563,8 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -6585,8 +6601,8 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 22
@@ -6621,8 +6637,8 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 71
@@ -6657,8 +6673,8 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 7
@@ -6693,8 +6709,8 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 47
@@ -6729,8 +6745,8 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "DYLAN GARAND",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 8
@@ -6885,9 +6901,7 @@
         "status": "Confirmed",
         "source": "confirmed"
       },
-      "flags": [
-        "ROLE_UP"
-      ],
+      "flags": [],
       "number": 46
     },
     {
@@ -6999,9 +7013,7 @@
         "status": "Confirmed",
         "source": "confirmed"
       },
-      "flags": [
-        "ROLE_UP"
-      ],
+      "flags": [],
       "number": 94
     },
     {
@@ -7038,7 +7050,6 @@
         "source": "confirmed"
       },
       "flags": [
-        "ROLE_UP",
         "SOFT_MATCHUP"
       ],
       "number": 27
@@ -7077,8 +7088,7 @@
         "source": "confirmed"
       },
       "flags": [
-        "PP1",
-        "ROLE_UP"
+        "PP1"
       ],
       "number": 39
     },
@@ -7411,31 +7421,31 @@
       "number": 5
     },
     {
-      "id": 8478042,
-      "name": "VIKTOR ARVIDSSON",
+      "id": 8484160,
+      "name": "NATE DANIELSON",
       "team": "DET",
       "opp": "PHI",
       "game_id": 2026020110,
       "home": true,
       "pos": "LW",
       "line": "L1",
-      "pp": 1,
+      "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 10,
-        "g": 5,
+        "gp": 5,
+        "g": 0,
         "a": 1,
-        "p": 6,
-        "sog": 27,
-        "toi": 945.6,
-        "pptoi": 185.4
+        "p": 1,
+        "sog": 3,
+        "toi": 549.0,
+        "pptoi": 13.4
       },
       "season": {
-        "gp": 6,
-        "g": 3,
+        "gp": 5,
+        "g": 0,
         "a": 1,
-        "p": 4,
-        "sog": 16
+        "p": 1,
+        "sog": 3
       },
       "opp_index": 0.8848,
       "opp_goalie": {
@@ -7443,11 +7453,8 @@
         "status": "Unconfirmed",
         "source": "projected"
       },
-      "flags": [
-        "PP1",
-        "HOT"
-      ],
-      "number": 33
+      "flags": [],
+      "number": 29
     },
     {
       "id": 8477946,
@@ -7490,31 +7497,31 @@
       "number": 71
     },
     {
-      "id": 8484160,
-      "name": "NATE DANIELSON",
+      "id": 8478042,
+      "name": "VIKTOR ARVIDSSON",
       "team": "DET",
       "opp": "PHI",
       "game_id": 2026020110,
       "home": true,
       "pos": "RW",
       "line": "L1",
-      "pp": null,
+      "pp": 1,
       "b2b": false,
       "last10": {
-        "gp": 5,
-        "g": 0,
+        "gp": 10,
+        "g": 5,
         "a": 1,
-        "p": 1,
-        "sog": 3,
-        "toi": 549.0,
-        "pptoi": 13.4
+        "p": 6,
+        "sog": 27,
+        "toi": 945.6,
+        "pptoi": 185.4
       },
       "season": {
-        "gp": 5,
-        "g": 0,
+        "gp": 6,
+        "g": 3,
         "a": 1,
-        "p": 1,
-        "sog": 3
+        "p": 4,
+        "sog": 16
       },
       "opp_index": 0.7837,
       "opp_goalie": {
@@ -7522,8 +7529,11 @@
         "status": "Unconfirmed",
         "source": "projected"
       },
-      "flags": [],
-      "number": 29
+      "flags": [
+        "PP1",
+        "HOT"
+      ],
+      "number": 33
     },
     {
       "id": 8479337,
@@ -7635,9 +7645,7 @@
         "status": "Unconfirmed",
         "source": "projected"
       },
-      "flags": [
-        "ROLE_UP"
-      ],
+      "flags": [],
       "number": 28
     },
     {
@@ -8088,8 +8096,8 @@
       "opp_index": 1.7696,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -8128,8 +8136,8 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -8168,8 +8176,8 @@
       "opp_index": 1.3061,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -8208,8 +8216,8 @@
       "opp_index": 1.7696,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -8246,8 +8254,8 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -8284,8 +8292,8 @@
       "opp_index": 1.3061,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -8324,8 +8332,8 @@
       "opp_index": 1.7696,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -8362,8 +8370,8 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -8400,8 +8408,8 @@
       "opp_index": 1.3061,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -8438,8 +8446,8 @@
       "opp_index": 1.7696,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -8476,8 +8484,8 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -8514,8 +8522,8 @@
       "opp_index": 1.3061,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -8523,8 +8531,8 @@
       "number": 45
     },
     {
-      "id": 8480049,
-      "name": "DYLAN SAMBERG",
+      "id": 8479983,
+      "name": "MARIO FERRARO",
       "team": "WPG",
       "opp": "CHI",
       "game_id": 2026020114,
@@ -8535,28 +8543,30 @@
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 0,
-        "a": 2,
-        "p": 2,
-        "sog": 16,
-        "toi": 1302.0,
-        "pptoi": 9.3
+        "g": 2,
+        "a": 1,
+        "p": 3,
+        "sog": 13,
+        "toi": 1245.8,
+        "pptoi": 0.5
       },
       "season": {
         "gp": 6,
-        "g": 0,
-        "a": 2,
-        "p": 2,
-        "sog": 8
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 6
       },
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
-      "flags": [],
-      "number": 54
+      "flags": [
+        "ROLE_UP"
+      ],
+      "number": 38
     },
     {
       "id": 8480145,
@@ -8588,8 +8598,8 @@
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -8598,8 +8608,8 @@
       "number": 4
     },
     {
-      "id": 8479983,
-      "name": "MARIO FERRARO",
+      "id": 8480049,
+      "name": "DYLAN SAMBERG",
       "team": "WPG",
       "opp": "CHI",
       "game_id": 2026020114,
@@ -8610,28 +8620,28 @@
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 2,
-        "a": 1,
-        "p": 3,
-        "sog": 13,
-        "toi": 1245.8,
-        "pptoi": 0.5
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 16,
+        "toi": 1302.0,
+        "pptoi": 9.3
       },
       "season": {
         "gp": 6,
-        "g": 1,
-        "a": 0,
-        "p": 1,
-        "sog": 6
+        "g": 0,
+        "a": 2,
+        "p": 2,
+        "sog": 8
       },
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 38
+      "number": 54
     },
     {
       "id": 8476331,
@@ -8663,8 +8673,8 @@
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 2
@@ -8699,15 +8709,15 @@
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 24
     },
     {
-      "id": 8482459,
-      "name": "TYREL BAUER",
+      "id": 8481030,
+      "name": "JACK ST. IVANY",
       "team": "WPG",
       "opp": "CHI",
       "game_id": 2026020114,
@@ -8717,29 +8727,29 @@
       "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 4,
+        "gp": 5,
         "g": 0,
         "a": 0,
         "p": 0,
         "sog": 1,
-        "toi": 510.0,
+        "toi": 1067.0,
         "pptoi": 0.0
       },
       "season": {
-        "gp": 4,
+        "gp": 2,
         "g": 0,
         "a": 0,
         "p": 0,
-        "sog": 1
+        "sog": 0
       },
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "SPENCER KNIGHT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 77
+      "number": 6
     },
     {
       "id": 8484390,
@@ -8771,7 +8781,7 @@
       "opp_index": 1.1797,
       "opp_goalie": {
         "name": "STUART SKINNER",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -8809,7 +8819,7 @@
       "opp_index": 1.5238,
       "opp_goalie": {
         "name": "STUART SKINNER",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -8849,7 +8859,7 @@
       "opp_index": 1.3061,
       "opp_goalie": {
         "name": "STUART SKINNER",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -8888,7 +8898,7 @@
       "opp_index": 1.1797,
       "opp_goalie": {
         "name": "STUART SKINNER",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -8926,7 +8936,7 @@
       "opp_index": 1.5238,
       "opp_goalie": {
         "name": "STUART SKINNER",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -8944,7 +8954,7 @@
       "home": true,
       "pos": "RW",
       "line": "L2",
-      "pp": null,
+      "pp": 1,
       "b2b": false,
       "last10": {
         "gp": 10,
@@ -8965,13 +8975,130 @@
       "opp_index": 1.3061,
       "opp_goalie": {
         "name": "STUART SKINNER",
-        "status": "Unconfirmed",
+        "status": "Likely",
+        "source": "projected"
+      },
+      "flags": [
+        "PP1",
+        "ROLE_UP",
+        "SOFT_MATCHUP"
+      ],
+      "number": 86
+    },
+    {
+      "id": 8484197,
+      "name": "OLIVER MOORE",
+      "team": "CHI",
+      "opp": "WPG",
+      "game_id": 2026020114,
+      "home": true,
+      "pos": "LW",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 7,
+        "g": 2,
+        "a": 0,
+        "p": 2,
+        "sog": 8,
+        "toi": 699.9,
+        "pptoi": 64.4
+      },
+      "season": {
+        "gp": 7,
+        "g": 2,
+        "a": 0,
+        "p": 2,
+        "sog": 8
+      },
+      "opp_index": 1.1797,
+      "opp_goalie": {
+        "name": "STUART SKINNER",
+        "status": "Likely",
+        "source": "projected"
+      },
+      "flags": [
+        "ROLE_UP"
+      ],
+      "number": 11
+    },
+    {
+      "id": 8483493,
+      "name": "FRANK NAZAR",
+      "team": "CHI",
+      "opp": "WPG",
+      "game_id": 2026020114,
+      "home": true,
+      "pos": "C",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 3,
+        "a": 2,
+        "p": 5,
+        "sog": 16,
+        "toi": 1051.5,
+        "pptoi": 187.7
+      },
+      "season": {
+        "gp": 5,
+        "g": 2,
+        "a": 1,
+        "p": 3,
+        "sog": 9
+      },
+      "opp_index": 1.5238,
+      "opp_goalie": {
+        "name": "STUART SKINNER",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
         "SOFT_MATCHUP"
       ],
-      "number": 86
+      "number": 91
+    },
+    {
+      "id": 8477987,
+      "name": "RYAN DONATO",
+      "team": "CHI",
+      "opp": "WPG",
+      "game_id": 2026020114,
+      "home": true,
+      "pos": "RW",
+      "line": "L3",
+      "pp": 2,
+      "b2b": false,
+      "last10": {
+        "gp": 10,
+        "g": 1,
+        "a": 2,
+        "p": 3,
+        "sog": 17,
+        "toi": 727.6,
+        "pptoi": 88.5
+      },
+      "season": {
+        "gp": 7,
+        "g": 1,
+        "a": 1,
+        "p": 2,
+        "sog": 9
+      },
+      "opp_index": 1.3061,
+      "opp_goalie": {
+        "name": "STUART SKINNER",
+        "status": "Likely",
+        "source": "projected"
+      },
+      "flags": [
+        "ROLE_UP",
+        "SOFT_MATCHUP"
+      ],
+      "number": 8
     },
     {
       "id": 8482062,
@@ -8981,7 +9108,7 @@
       "game_id": 2026020114,
       "home": true,
       "pos": "LW",
-      "line": "L3",
+      "line": "L4",
       "pp": null,
       "b2b": false,
       "last10": {
@@ -9003,7 +9130,7 @@
       "opp_index": 1.1797,
       "opp_goalie": {
         "name": "STUART SKINNER",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -9017,8 +9144,8 @@
       "game_id": 2026020114,
       "home": true,
       "pos": "C",
-      "line": "L3",
-      "pp": 2,
+      "line": "L4",
+      "pp": null,
       "b2b": false,
       "last10": {
         "gp": 10,
@@ -9039,7 +9166,7 @@
       "opp_index": 1.5238,
       "opp_goalie": {
         "name": "STUART SKINNER",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -9055,7 +9182,7 @@
       "game_id": 2026020114,
       "home": true,
       "pos": "RW",
-      "line": "L3",
+      "line": "L4",
       "pp": null,
       "b2b": false,
       "last10": {
@@ -9077,7 +9204,7 @@
       "opp_index": 1.3061,
       "opp_goalie": {
         "name": "STUART SKINNER",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -9086,154 +9213,40 @@
       "number": 12
     },
     {
-      "id": 8477987,
-      "name": "RYAN DONATO",
-      "team": "CHI",
-      "opp": "WPG",
-      "game_id": 2026020114,
-      "home": true,
-      "pos": "LW",
-      "line": "L4",
-      "pp": 2,
-      "b2b": false,
-      "last10": {
-        "gp": 10,
-        "g": 1,
-        "a": 2,
-        "p": 3,
-        "sog": 17,
-        "toi": 727.6,
-        "pptoi": 88.5
-      },
-      "season": {
-        "gp": 7,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 9
-      },
-      "opp_index": 1.1797,
-      "opp_goalie": {
-        "name": "STUART SKINNER",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [],
-      "number": 8
-    },
-    {
-      "id": 8476952,
-      "name": "DOMINIC TONINATO",
-      "team": "CHI",
-      "opp": "WPG",
-      "game_id": 2026020114,
-      "home": true,
-      "pos": "C",
-      "line": "L4",
-      "pp": null,
-      "b2b": false,
-      "last10": {
-        "gp": 6,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 3,
-        "toi": 538.5,
-        "pptoi": 0.7
-      },
-      "season": {
-        "gp": 3,
-        "g": 0,
-        "a": 0,
-        "p": 0,
-        "sog": 1
-      },
-      "opp_index": 1.5238,
-      "opp_goalie": {
-        "name": "STUART SKINNER",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "SOFT_MATCHUP"
-      ],
-      "number": 25
-    },
-    {
-      "id": 8484197,
-      "name": "OLIVER MOORE",
-      "team": "CHI",
-      "opp": "WPG",
-      "game_id": 2026020114,
-      "home": true,
-      "pos": "RW",
-      "line": "L4",
-      "pp": 2,
-      "b2b": false,
-      "last10": {
-        "gp": 7,
-        "g": 2,
-        "a": 0,
-        "p": 2,
-        "sog": 8,
-        "toi": 699.9,
-        "pptoi": 64.4
-      },
-      "season": {
-        "gp": 7,
-        "g": 2,
-        "a": 0,
-        "p": 2,
-        "sog": 8
-      },
-      "opp_index": 1.3061,
-      "opp_goalie": {
-        "name": "STUART SKINNER",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [
-        "SOFT_MATCHUP"
-      ],
-      "number": 11
-    },
-    {
-      "id": 8481524,
-      "name": "BOWEN BYRAM",
+      "id": 8482807,
+      "name": "ETHAN DEL MASTRO",
       "team": "CHI",
       "opp": "WPG",
       "game_id": 2026020114,
       "home": true,
       "pos": "D",
       "line": "D1",
-      "pp": 1,
+      "pp": null,
       "b2b": false,
       "last10": {
         "gp": 10,
         "g": 0,
-        "a": 2,
-        "p": 2,
-        "sog": 14,
-        "toi": 1433.2,
-        "pptoi": 145.2
-      },
-      "season": {
-        "gp": 6,
-        "g": 0,
         "a": 1,
         "p": 1,
-        "sog": 5
+        "sog": 9,
+        "toi": 928.7,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 1,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
       },
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "STUART SKINNER",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
-      "flags": [
-        "PP1"
-      ],
-      "number": 24
+      "flags": [],
+      "number": 38
     },
     {
       "id": 8484783,
@@ -9265,7 +9278,7 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "STUART SKINNER",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -9301,7 +9314,7 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "STUART SKINNER",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -9337,7 +9350,7 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "STUART SKINNER",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -9373,7 +9386,7 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "STUART SKINNER",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -9409,7 +9422,7 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "STUART SKINNER",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -9445,7 +9458,7 @@
       "opp_index": 1.3272,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -9484,7 +9497,7 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -9523,7 +9536,7 @@
       "opp_index": 0.6531,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -9562,7 +9575,7 @@
       "opp_index": 1.3272,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -9601,7 +9614,7 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -9640,7 +9653,7 @@
       "opp_index": 0.6531,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -9678,7 +9691,7 @@
       "opp_index": 1.3272,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -9717,7 +9730,7 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -9755,7 +9768,7 @@
       "opp_index": 0.6531,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -9791,7 +9804,7 @@
       "opp_index": 1.3272,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -9829,7 +9842,7 @@
       "opp_index": 1.1852,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -9865,7 +9878,7 @@
       "opp_index": 0.6531,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -9901,7 +9914,7 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -9937,7 +9950,7 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -9973,7 +9986,7 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
@@ -9988,7 +10001,7 @@
       "home": false,
       "pos": "D",
       "line": "D2",
-      "pp": null,
+      "pp": 2,
       "b2b": false,
       "last10": {
         "gp": 10,
@@ -10009,11 +10022,49 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
+        "source": "projected"
+      },
+      "flags": [
+        "ROLE_UP"
+      ],
+      "number": 65
+    },
+    {
+      "id": 8482700,
+      "name": "NOLAN ALLAN",
+      "team": "SJS",
+      "opp": "NSH",
+      "game_id": 2026020115,
+      "home": false,
+      "pos": "D",
+      "line": "D3",
+      "pp": null,
+      "b2b": false,
+      "last10": {
+        "gp": 2,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 3,
+        "toi": 1102.0,
+        "pptoi": 0.0
+      },
+      "season": {
+        "gp": 2,
+        "g": 1,
+        "a": 0,
+        "p": 1,
+        "sog": 3
+      },
+      "opp_index": 0.7111,
+      "opp_goalie": {
+        "name": "JUUSE SAROS",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [],
-      "number": 65
+      "number": 5
     },
     {
       "id": 8475200,
@@ -10045,7 +10096,7 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
+        "status": "Likely",
         "source": "projected"
       },
       "flags": [
@@ -10053,42 +10104,6 @@
         "ROLE_UP"
       ],
       "number": 9
-    },
-    {
-      "id": 8484152,
-      "name": "LUCA CAGNONI",
-      "team": "SJS",
-      "opp": "NSH",
-      "game_id": 2026020115,
-      "home": false,
-      "pos": "D",
-      "line": "D3",
-      "pp": 2,
-      "b2b": false,
-      "last10": {
-        "gp": 9,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 13,
-        "toi": 1119.1,
-        "pptoi": 185.0
-      },
-      "season": {
-        "gp": 6,
-        "g": 1,
-        "a": 1,
-        "p": 2,
-        "sog": 9
-      },
-      "opp_index": 0.7111,
-      "opp_goalie": {
-        "name": "JUUSE SAROS",
-        "status": "Unconfirmed",
-        "source": "projected"
-      },
-      "flags": [],
-      "number": 42
     },
     {
       "id": 8474564,
@@ -10120,8 +10135,8 @@
       "opp_index": 1.6221,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -10160,8 +10175,8 @@
       "opp_index": 0.8466,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -10199,8 +10214,8 @@
       "opp_index": 0.7837,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -10238,8 +10253,8 @@
       "opp_index": 1.6221,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -10278,8 +10293,8 @@
       "opp_index": 0.8466,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 71
@@ -10314,8 +10329,8 @@
       "opp_index": 0.7837,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 21
@@ -10350,8 +10365,8 @@
       "opp_index": 1.6221,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP",
@@ -10389,8 +10404,8 @@
       "opp_index": 0.8466,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 51
@@ -10425,8 +10440,8 @@
       "opp_index": 0.7837,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 14
@@ -10461,8 +10476,8 @@
       "opp_index": 1.6221,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -10499,8 +10514,8 @@
       "opp_index": 0.8466,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 18
@@ -10535,8 +10550,8 @@
       "opp_index": 0.7837,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 84
@@ -10571,8 +10586,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -10609,8 +10624,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -10649,8 +10664,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -10687,8 +10702,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -10725,8 +10740,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -10763,8 +10778,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "ALEX NEDELJKOVIC",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -10801,8 +10816,8 @@
       "opp_index": 0.8848,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -10840,8 +10855,8 @@
       "opp_index": 0.9312,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -10879,8 +10894,8 @@
       "opp_index": 0.2612,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -10918,8 +10933,8 @@
       "opp_index": 0.8848,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "HOT"
@@ -10956,8 +10971,8 @@
       "opp_index": 0.9312,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "HOT"
@@ -10994,8 +11009,8 @@
       "opp_index": 0.2612,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 29
@@ -11030,8 +11045,8 @@
       "opp_index": 0.8848,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -11069,49 +11084,47 @@
       "opp_index": 0.9312,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 15
     },
     {
-      "id": 8477402,
-      "name": "PAVEL BUCHNEVICH",
+      "id": 8482784,
+      "name": "ZACHARY DEAN",
       "team": "STL",
       "opp": "MIN",
       "game_id": 2026020116,
       "home": false,
       "pos": "RW",
       "line": "L3",
-      "pp": 2,
+      "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 10,
-        "g": 4,
-        "a": 5,
-        "p": 9,
-        "sog": 15,
-        "toi": 1012.6,
-        "pptoi": 108.5
+        "gp": 2,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 674.0,
+        "pptoi": 2.5
       },
       "season": {
-        "gp": 6,
-        "g": 1,
-        "a": 4,
-        "p": 5,
-        "sog": 8
+        "gp": 2,
+        "g": 0,
+        "a": 0,
+        "p": 0,
+        "sog": 0
       },
       "opp_index": 0.2612,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
-      "flags": [
-        "HOT"
-      ],
-      "number": 89
+      "flags": [],
+      "number": 52
     },
     {
       "id": 8477527,
@@ -11143,8 +11156,8 @@
       "opp_index": 0.8848,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 49
@@ -11179,8 +11192,8 @@
       "opp_index": 0.9312,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "HOT"
@@ -11217,8 +11230,8 @@
       "opp_index": 0.2612,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 32
@@ -11232,7 +11245,7 @@
       "home": false,
       "pos": "D",
       "line": "D1",
-      "pp": null,
+      "pp": 2,
       "b2b": false,
       "last10": {
         "gp": 10,
@@ -11253,10 +11266,11 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
+        "ROLE_UP",
         "SOFT_MATCHUP"
       ],
       "number": 6
@@ -11291,8 +11305,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -11330,8 +11344,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -11368,8 +11382,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -11406,8 +11420,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -11444,8 +11458,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "JESPER WALLSTEDT",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -11979,8 +11993,8 @@
       "number": 25
     },
     {
-      "id": 8476874,
-      "name": "OLLI MAATTA",
+      "id": 8482641,
+      "name": "MATT KIERSTED",
       "team": "MIN",
       "opp": "STL",
       "game_id": 2026020116,
@@ -11990,20 +12004,20 @@
       "pp": null,
       "b2b": false,
       "last10": {
-        "gp": 10,
+        "gp": 2,
         "g": 0,
-        "a": 4,
-        "p": 4,
-        "sog": 6,
-        "toi": 1327.3,
-        "pptoi": 5.2
+        "a": 0,
+        "p": 0,
+        "sog": 0,
+        "toi": 1187.0,
+        "pptoi": 0.0
       },
       "season": {
-        "gp": 6,
+        "gp": 0,
         "g": 0,
-        "a": 2,
-        "p": 2,
-        "sog": 3
+        "a": 0,
+        "p": 0,
+        "sog": 0
       },
       "opp_index": 0.9481,
       "opp_goalie": {
@@ -12012,7 +12026,7 @@
         "source": "projected"
       },
       "flags": [],
-      "number": 3
+      "number": 26
     },
     {
       "id": 8474567,
@@ -12154,8 +12168,8 @@
       "opp_index": 0.8848,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -12193,8 +12207,8 @@
       "opp_index": 0.8466,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -12232,8 +12246,8 @@
       "opp_index": 0.5225,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 67
@@ -12268,8 +12282,8 @@
       "opp_index": 0.8848,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -12306,8 +12320,8 @@
       "opp_index": 0.8466,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP"
@@ -12344,8 +12358,8 @@
       "opp_index": 0.5225,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -12383,8 +12397,8 @@
       "opp_index": 0.8848,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 72
@@ -12419,8 +12433,8 @@
       "opp_index": 0.8466,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP"
@@ -12457,8 +12471,8 @@
       "opp_index": 0.5225,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "HOT"
@@ -12495,8 +12509,8 @@
       "opp_index": 0.8848,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 22
@@ -12531,8 +12545,8 @@
       "opp_index": 0.8466,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 82
@@ -12567,8 +12581,8 @@
       "opp_index": 0.5225,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 50
@@ -12603,8 +12617,8 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -12642,8 +12656,8 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 52
@@ -12678,8 +12692,8 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 88
@@ -12714,8 +12728,8 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 6
@@ -12750,8 +12764,8 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 26
@@ -12786,8 +12800,8 @@
       "opp_index": 0.7111,
       "opp_goalie": {
         "name": "DEVON LEVI",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 20
@@ -12822,8 +12836,8 @@
       "opp_index": 0.4424,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -12861,8 +12875,8 @@
       "opp_index": 1.3545,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -12901,8 +12915,8 @@
       "opp_index": 1.0449,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -12911,8 +12925,8 @@
       "number": 29
     },
     {
-      "id": 8480842,
-      "name": "FILIP HALLANDER",
+      "id": 8479365,
+      "name": "TRENT FREDERIC",
       "team": "EDM",
       "opp": "UTA",
       "game_id": 2026020117,
@@ -12922,31 +12936,31 @@
       "pp": 2,
       "b2b": false,
       "last10": {
-        "gp": 4,
+        "gp": 10,
         "g": 1,
-        "a": 2,
-        "p": 3,
-        "sog": 4,
-        "toi": 681.5,
-        "pptoi": 22.2
+        "a": 0,
+        "p": 1,
+        "sog": 11,
+        "toi": 565.0,
+        "pptoi": 56.5
       },
       "season": {
-        "gp": 4,
+        "gp": 6,
         "g": 1,
-        "a": 2,
-        "p": 3,
-        "sog": 4
+        "a": 0,
+        "p": 1,
+        "sog": 7
       },
       "opp_index": 0.4424,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP"
       ],
-      "number": 19
+      "number": 10
     },
     {
       "id": 8477450,
@@ -12978,8 +12992,8 @@
       "opp_index": 1.3545,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -13016,8 +13030,8 @@
       "opp_index": 1.0449,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -13055,8 +13069,8 @@
       "opp_index": 0.4424,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 26
@@ -13091,8 +13105,8 @@
       "opp_index": 1.3545,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -13129,15 +13143,15 @@
       "opp_index": 1.0449,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 21
     },
     {
-      "id": 8479365,
-      "name": "TRENT FREDERIC",
+      "id": 8480842,
+      "name": "FILIP HALLANDER",
       "team": "EDM",
       "opp": "UTA",
       "game_id": 2026020117,
@@ -13147,29 +13161,31 @@
       "pp": 2,
       "b2b": false,
       "last10": {
-        "gp": 10,
+        "gp": 4,
         "g": 1,
-        "a": 0,
-        "p": 1,
-        "sog": 11,
-        "toi": 565.0,
-        "pptoi": 56.5
+        "a": 2,
+        "p": 3,
+        "sog": 4,
+        "toi": 681.5,
+        "pptoi": 22.2
       },
       "season": {
-        "gp": 6,
+        "gp": 4,
         "g": 1,
-        "a": 0,
-        "p": 1,
-        "sog": 7
+        "a": 2,
+        "p": 3,
+        "sog": 4
       },
       "opp_index": 0.4424,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
-      "flags": [],
-      "number": 10
+      "flags": [
+        "ROLE_UP"
+      ],
+      "number": 19
     },
     {
       "id": 8484509,
@@ -13201,8 +13217,8 @@
       "opp_index": 1.3545,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -13239,8 +13255,8 @@
       "opp_index": 1.0449,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 53
@@ -13275,8 +13291,8 @@
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 14
@@ -13311,8 +13327,8 @@
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -13350,8 +13366,8 @@
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 6
@@ -13386,8 +13402,8 @@
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 5
@@ -13422,8 +13438,8 @@
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 85
@@ -13458,8 +13474,8 @@
       "opp_index": 0.9481,
       "opp_goalie": {
         "name": "KAREL VEJMELKA",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 49
@@ -13494,8 +13510,8 @@
       "opp_index": 1.1797,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 17
@@ -13530,8 +13546,8 @@
       "opp_index": 0.7619,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 11
@@ -13566,8 +13582,8 @@
       "opp_index": 0.7837,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -13604,8 +13620,8 @@
       "opp_index": 1.1797,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 61
@@ -13640,8 +13656,8 @@
       "opp_index": 0.7619,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -13678,8 +13694,8 @@
       "opp_index": 0.7837,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -13717,8 +13733,8 @@
       "opp_index": 1.1797,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -13755,8 +13771,8 @@
       "opp_index": 0.7619,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 76
@@ -13791,8 +13807,8 @@
       "opp_index": 0.7837,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 22
@@ -13827,8 +13843,8 @@
       "opp_index": 1.1797,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP"
@@ -13865,8 +13881,8 @@
       "opp_index": 0.7619,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 38
@@ -13901,8 +13917,8 @@
       "opp_index": 0.7837,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 43
@@ -13937,8 +13953,8 @@
       "opp_index": 0.0,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 7
@@ -13973,8 +13989,8 @@
       "opp_index": 0.0,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 71
@@ -14009,8 +14025,8 @@
       "opp_index": 0.0,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 37
@@ -14045,8 +14061,8 @@
       "opp_index": 0.0,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 28
@@ -14081,8 +14097,8 @@
       "opp_index": 0.0,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 55
@@ -14117,8 +14133,8 @@
       "opp_index": 0.0,
       "opp_goalie": {
         "name": "CARTER HART",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -14155,8 +14171,8 @@
       "opp_index": 1.0323,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 49
@@ -14191,8 +14207,8 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -14231,8 +14247,8 @@
       "opp_index": 1.1755,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -14270,8 +14286,8 @@
       "opp_index": 1.0323,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 21
@@ -14306,8 +14322,8 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -14344,8 +14360,8 @@
       "opp_index": 1.1755,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -14383,8 +14399,8 @@
       "opp_index": 1.0323,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1"
@@ -14421,8 +14437,8 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "PP1",
@@ -14461,47 +14477,47 @@
       "opp_index": 1.1755,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
       "number": 36
     },
     {
-      "id": 8483890,
-      "name": "BRAEDEN BOWMAN",
+      "id": 8483553,
+      "name": "MARC GATCOMB",
       "team": "VGK",
       "opp": "CGY",
       "game_id": 2026020118,
       "home": true,
       "pos": "LW",
       "line": "L4",
-      "pp": 2,
+      "pp": null,
       "b2b": false,
       "last10": {
         "gp": 10,
         "g": 1,
         "a": 1,
         "p": 2,
-        "sog": 7,
-        "toi": 739.3,
-        "pptoi": 88.1
+        "sog": 17,
+        "toi": 573.4,
+        "pptoi": 2.6
       },
       "season": {
         "gp": 8,
         "g": 1,
         "a": 1,
         "p": 2,
-        "sog": 6
+        "sog": 15
       },
       "opp_index": 1.0323,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 42
+      "number": 17
     },
     {
       "id": 8475343,
@@ -14533,8 +14549,8 @@
       "opp_index": 1.2698,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -14542,40 +14558,40 @@
       "number": 26
     },
     {
-      "id": 8483553,
-      "name": "MARC GATCOMB",
+      "id": 8483890,
+      "name": "BRAEDEN BOWMAN",
       "team": "VGK",
       "opp": "CGY",
       "game_id": 2026020118,
       "home": true,
       "pos": "RW",
       "line": "L4",
-      "pp": null,
+      "pp": 2,
       "b2b": false,
       "last10": {
         "gp": 10,
         "g": 1,
         "a": 1,
         "p": 2,
-        "sog": 17,
-        "toi": 573.4,
-        "pptoi": 2.6
+        "sog": 7,
+        "toi": 739.3,
+        "pptoi": 88.1
       },
       "season": {
         "gp": 8,
         "g": 1,
         "a": 1,
         "p": 2,
-        "sog": 15
+        "sog": 6
       },
       "opp_index": 1.1755,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [],
-      "number": 17
+      "number": 42
     },
     {
       "id": 8475188,
@@ -14607,8 +14623,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -14645,8 +14661,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -14683,8 +14699,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -14721,8 +14737,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "ROLE_UP",
@@ -14760,8 +14776,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
@@ -14798,8 +14814,8 @@
       "opp_index": 1.6592,
       "opp_goalie": {
         "name": "DUSTIN WOLF",
-        "status": "Unconfirmed",
-        "source": "projected"
+        "status": "Confirmed",
+        "source": "confirmed"
       },
       "flags": [
         "SOFT_MATCHUP"
