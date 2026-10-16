@@ -1,29 +1,57 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-10-15 21:45:25 UTC",
+  "updated_at": "2026-10-16 00:30:49 UTC",
   "matchups": [
     {
       "away": {
         "team": "seattle-kraken",
-        "goalie": "JOEY DACCORD",
-        "status": "Unconfirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/23589/Daccord-Joey_SEA-Oct2024_.png",
+        "goalie": "PHILIPP GRUBAUER",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2065/Grubauer-Philipp_SEA-2026_.png",
         "stats": {
-          "record": "3-1-0",
-          "gaa": "2.73",
-          "svpct": "0.913",
+          "record": "2-1-0",
+          "gaa": "2.34",
+          "svpct": "0.918",
           "so": 0
         }
       },
       "home": {
         "team": "tampa-bay-lightning",
         "goalie": "ANDREI VASILEVSKIY",
-        "status": "Likely",
+        "status": "Confirmed",
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2413/Vasilevskiy-Andrei_TBL-2024_.png",
         "stats": {
           "record": "3-2-0",
           "gaa": "2.45",
           "svpct": "0.885",
+          "so": 0
+        }
+      },
+      "date": "2026-10-15",
+      "time": "19:00"
+    },
+    {
+      "away": {
+        "team": "buffalo-sabres",
+        "goalie": "UKKO-PEKKA LUUKKONEN",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/4783/Luukkonen-Ukko-Pekka-BUF-2024.png",
+        "stats": {
+          "record": "2-2-1",
+          "gaa": "3.45",
+          "svpct": "0.85",
+          "so": 0
+        }
+      },
+      "home": {
+        "team": "toronto-maple-leafs",
+        "goalie": "SERGEI BOBROVSKY",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/1117/Bobrovsky-Sergei_TOR-2026_.png",
+        "stats": {
+          "record": "1-2-1",
+          "gaa": "2.96",
+          "svpct": "0.907",
           "so": 0
         }
       },
@@ -46,7 +74,7 @@
       "home": {
         "team": "new-jersey-devils",
         "goalie": "NICO DAWS",
-        "status": "Likely",
+        "status": "Confirmed",
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/29186/Daws-Nico_NJD-2024_-3.png",
         "stats": {
           "record": "0-2-0",
@@ -80,34 +108,6 @@
           "record": "1-1-1",
           "gaa": "3.7",
           "svpct": "0.875",
-          "so": 0
-        }
-      },
-      "date": "2026-10-15",
-      "time": "19:00"
-    },
-    {
-      "away": {
-        "team": "buffalo-sabres",
-        "goalie": "UKKO-PEKKA LUUKKONEN",
-        "status": "Likely",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/4783/Luukkonen-Ukko-Pekka-BUF-2024.png",
-        "stats": {
-          "record": "2-2-1",
-          "gaa": "3.45",
-          "svpct": "0.85",
-          "so": 0
-        }
-      },
-      "home": {
-        "team": "toronto-maple-leafs",
-        "goalie": "SERGEI BOBROVSKY",
-        "status": "Likely",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/1117/Bobrovsky-Sergei_TOR-2026_.png",
-        "stats": {
-          "record": "1-2-1",
-          "gaa": "2.96",
-          "svpct": "0.907",
           "so": 0
         }
       },
@@ -172,26 +172,26 @@
     },
     {
       "away": {
-        "team": "winnipeg-jets",
-        "goalie": "STUART SKINNER",
-        "status": "Likely",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/4741/Skinner-Stuart_WPG-2026_.png",
+        "team": "san-jose-sharks",
+        "goalie": "ALEX NEDELJKOVIC",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2727/Nedeljkovic-Alex_SJS-11_30_25_.png",
         "stats": {
-          "record": "3-0-1",
-          "gaa": "2.46",
-          "svpct": "0.917",
+          "record": "1-0-0",
+          "gaa": "1.94",
+          "svpct": "0.923",
           "so": 0
         }
       },
       "home": {
-        "team": "chicago-blackhawks",
-        "goalie": "SPENCER KNIGHT",
+        "team": "nashville-predators",
+        "goalie": "JUUSE SAROS",
         "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/30475/Knight-Spencer_CHI-2_.png",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2557/Saros-Juuse_NSH-2026_.png",
         "stats": {
-          "record": "2-3-0",
-          "gaa": "3.64",
-          "svpct": "0.886",
+          "record": "2-2-1",
+          "gaa": "3.17",
+          "svpct": "0.897",
           "so": 0
         }
       },
@@ -202,7 +202,7 @@
       "away": {
         "team": "st-louis-blues",
         "goalie": "JOEL HOFER",
-        "status": "Unconfirmed",
+        "status": "Confirmed",
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/28910/Hofer-Joel_STL-2022_.png",
         "stats": {
           "record": "2-1-1",
@@ -228,26 +228,26 @@
     },
     {
       "away": {
-        "team": "san-jose-sharks",
-        "goalie": "ALEX NEDELJKOVIC",
+        "team": "winnipeg-jets",
+        "goalie": "STUART SKINNER",
         "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2727/Nedeljkovic-Alex_SJS-11_30_25_.png",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/4741/Skinner-Stuart_WPG-2026_.png",
         "stats": {
-          "record": "1-0-0",
-          "gaa": "1.94",
-          "svpct": "0.923",
+          "record": "3-0-1",
+          "gaa": "2.46",
+          "svpct": "0.917",
           "so": 0
         }
       },
       "home": {
-        "team": "nashville-predators",
-        "goalie": "JUUSE SAROS",
-        "status": "Likely",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2557/Saros-Juuse_NSH-2026_.png",
+        "team": "chicago-blackhawks",
+        "goalie": "SPENCER KNIGHT",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/30475/Knight-Spencer_CHI-2_.png",
         "stats": {
-          "record": "2-2-1",
-          "gaa": "3.17",
-          "svpct": "0.897",
+          "record": "2-3-0",
+          "gaa": "3.64",
+          "svpct": "0.886",
           "so": 0
         }
       },
