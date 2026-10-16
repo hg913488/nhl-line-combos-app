@@ -17,25 +17,25 @@
     "seasons": 2
   },
   "summary": {
-    "graded": 209,
+    "graded": 210,
     "hits": 113,
-    "hit_rate": 0.5407,
-    "review": 3,
+    "hit_rate": 0.5381,
+    "review": 21,
     "position_baseline": {
-      "C": 0.6986,
-      "LW": 0.4498,
-      "RW": 0.5024,
-      "D": 0.3589
+      "C": 0.6952,
+      "LW": 0.4476,
+      "RW": 0.5048,
+      "D": 0.3571
     },
-    "always_c_hit_rate": 0.6986,
-    "pending": 19,
+    "always_c_hit_rate": 0.6952,
+    "pending": 3,
     "void": 0,
-    "baseline_hit_rate": 0.5024,
+    "baseline_hit_rate": 0.5012,
     "by_position": {
       "C": {
-        "graded": 53,
+        "graded": 54,
         "hits": 36,
-        "hit_rate": 0.6792
+        "hit_rate": 0.6667
       },
       "LW": {
         "graded": 53,
@@ -55,9 +55,9 @@
     },
     "by_season": {
       "20262027": {
-        "graded": 209,
+        "graded": 210,
         "hits": 113,
-        "hit_rate": 0.5407
+        "hit_rate": 0.5381
       }
     }
   },
@@ -15946,8 +15946,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -15992,8 +16005,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16038,8 +16064,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16084,8 +16123,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16130,8 +16182,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16176,8 +16241,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16222,8 +16300,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16268,8 +16359,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16314,21 +16418,45 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "review",
+      "status": "graded",
       "result": {
-        "hit": null,
-        "scorers": [],
+        "hit": false,
+        "scorers": [
+          {
+            "player_id": 8481604,
+            "name": "Pavel Dorofeyev",
+            "position": "RW",
+            "goals": 1
+          }
+        ],
         "goals_by_position": {
           "C": 0,
           "LW": 0,
-          "RW": 0,
+          "RW": 1,
           "D": 0
         },
-        "score_reconciled": false,
-        "graded_at": "2026-10-16T01:38:53Z",
-        "review_reason": "Scorer totals do not match final score"
+        "score_reconciled": true,
+        "graded_at": "2026-10-16T07:12:48Z"
       },
-      "result_audit": []
+      "result_audit": [
+        {
+          "checked_at": "2026-10-16T07:12:48Z",
+          "previous_status": "review",
+          "previous_result": {
+            "hit": null,
+            "scorers": [],
+            "goals_by_position": {
+              "C": 0,
+              "LW": 0,
+              "RW": 0,
+              "D": 0
+            },
+            "score_reconciled": false,
+            "graded_at": "2026-10-16T01:38:53Z",
+            "review_reason": "Scorer totals do not match final score"
+          }
+        }
+      ]
     },
     {
       "method_version": 3,
@@ -16373,8 +16501,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16419,8 +16560,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16465,8 +16619,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16511,8 +16678,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16557,8 +16737,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16603,8 +16796,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16649,8 +16855,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16695,8 +16914,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16741,8 +16973,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16787,8 +17032,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,
@@ -16833,6 +17091,157 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T07:12:48Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
+    },
+    {
+      "method_version": 3,
+      "eligibility": "Complete finite inputs; top position index > 1.00",
+      "id": "2026020119-COL",
+      "game_id": 2026020119,
+      "date": "2026-10-16",
+      "start_time_utc": "2026-10-17T01:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "COL",
+      "defense": "PIT",
+      "venue": "home",
+      "watch": "RW",
+      "ranking": [
+        "RW",
+        "LW",
+        "D",
+        "C"
+      ],
+      "index": {
+        "C": 0.6772,
+        "LW": 1.6221,
+        "RW": 1.9592,
+        "D": 0.7111
+      },
+      "ga_l10": {
+        "C": 8,
+        "LW": 11,
+        "RW": 15,
+        "D": 3
+      },
+      "league_l10_avg": {
+        "C": 11.8125,
+        "LW": 6.7812,
+        "RW": 7.6562,
+        "D": 4.2188
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-15",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-16T07:12:48Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "method_version": 3,
+      "eligibility": "Complete finite inputs; top position index > 1.00",
+      "id": "2026020120-BOS",
+      "game_id": 2026020120,
+      "date": "2026-10-16",
+      "start_time_utc": "2026-10-17T02:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "BOS",
+      "defense": "ANA",
+      "venue": "away",
+      "watch": "LW",
+      "ranking": [
+        "LW",
+        "C",
+        "D",
+        "RW"
+      ],
+      "index": {
+        "C": 1.0159,
+        "LW": 1.0323,
+        "RW": 0.7837,
+        "D": 0.9481
+      },
+      "ga_l10": {
+        "C": 12,
+        "LW": 7,
+        "RW": 6,
+        "D": 4
+      },
+      "league_l10_avg": {
+        "C": 11.8125,
+        "LW": 6.7812,
+        "RW": 7.6562,
+        "D": 4.2188
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-15",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-16T07:12:48Z",
+      "status": "pending",
+      "result": null
+    },
+    {
+      "method_version": 3,
+      "eligibility": "Complete finite inputs; top position index > 1.00",
+      "id": "2026020120-ANA",
+      "game_id": 2026020120,
+      "date": "2026-10-16",
+      "start_time_utc": "2026-10-17T02:00:00Z",
+      "season": 20262027,
+      "game_type": "regular",
+      "offense": "ANA",
+      "defense": "BOS",
+      "venue": "home",
+      "watch": "D",
+      "ranking": [
+        "D",
+        "LW",
+        "C",
+        "RW"
+      ],
+      "index": {
+        "C": 0.4233,
+        "LW": 0.8848,
+        "RW": 0.3918,
+        "D": 1.4222
+      },
+      "ga_l10": {
+        "C": 5,
+        "LW": 6,
+        "RW": 3,
+        "D": 6
+      },
+      "league_l10_avg": {
+        "C": 11.8125,
+        "LW": 6.7812,
+        "RW": 7.6562,
+        "D": 4.2188
+      },
+      "ga_snapshot": {
+        "last_updated": "2026-10-15",
+        "season": "2026-27",
+        "season_id": 20262027
+      },
+      "logged_at": "2026-10-16T07:12:48Z",
       "status": "pending",
       "result": null
     }
