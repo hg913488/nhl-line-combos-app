@@ -17031,14 +17031,14 @@
             "goals": 1
           },
           {
-            "player_id": 8483493,
-            "name": "Frank Nazar",
+            "player_id": 8484144,
+            "name": "Connor Bedard",
             "position": "C",
             "goals": 1
           },
           {
-            "player_id": 8484144,
-            "name": "Connor Bedard",
+            "player_id": 8483493,
+            "name": "Frank Nazar",
             "position": "C",
             "goals": 1
           }
@@ -17050,7 +17050,7 @@
           "D": 1
         },
         "score_reconciled": true,
-        "graded_at": "2026-10-16T12:33:31Z"
+        "graded_at": "2026-10-16T19:32:59Z"
       },
       "result_audit": [
         {
@@ -17068,6 +17068,47 @@
             "score_reconciled": false,
             "graded_at": "2026-10-16T07:12:48Z",
             "review_reason": "Scorer totals do not match final score"
+          }
+        },
+        {
+          "checked_at": "2026-10-16T19:32:59Z",
+          "previous_status": "graded",
+          "previous_result": {
+            "hit": true,
+            "scorers": [
+              {
+                "player_id": 8484783,
+                "name": "Artyom Levshunov",
+                "position": "D",
+                "goals": 1
+              },
+              {
+                "player_id": 8477987,
+                "name": "Ryan Donato",
+                "position": "C",
+                "goals": 1
+              },
+              {
+                "player_id": 8483493,
+                "name": "Frank Nazar",
+                "position": "C",
+                "goals": 1
+              },
+              {
+                "player_id": 8484144,
+                "name": "Connor Bedard",
+                "position": "C",
+                "goals": 1
+              }
+            ],
+            "goals_by_position": {
+              "C": 3,
+              "LW": 0,
+              "RW": 0,
+              "D": 1
+            },
+            "score_reconciled": true,
+            "graded_at": "2026-10-16T12:33:31Z"
           }
         }
       ]
