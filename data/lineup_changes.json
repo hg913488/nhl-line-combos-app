@@ -1,11 +1,114 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T00:30:04Z",
+  "generated_at": "2026-10-16T01:37:14Z",
   "retention": {
     "max_age_days": 90,
     "max_events": 500
   },
   "events": [
+    {
+      "id": "d3a0947b847092e97972",
+      "occurred_at": "2026-10-16T01:37:14Z",
+      "player": "FILIP HALLANDER",
+      "team": "edmonton-oilers",
+      "previous_team": "edmonton-oilers",
+      "event_types": [
+        "forward_line"
+      ],
+      "importance": "medium",
+      "before": {
+        "team": "edmonton-oilers",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "after": {
+        "team": "edmonton-oilers",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": 2
+      },
+      "changes": [
+        {
+          "type": "forward_line",
+          "from": 4,
+          "to": 2,
+          "direction": "promoted"
+        }
+      ]
+    },
+    {
+      "id": "aec16f8a94a54c15d706",
+      "occurred_at": "2026-10-16T01:37:14Z",
+      "player": "MAX JONES",
+      "team": "edmonton-oilers",
+      "previous_team": "edmonton-oilers",
+      "event_types": [
+        "addition"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "edmonton-oilers",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "edmonton-oilers",
+        "rostered": true,
+        "forward_line": 4,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "addition",
+          "from": false,
+          "to": true
+        }
+      ]
+    },
+    {
+      "id": "08820df1ae90b6a4049c",
+      "occurred_at": "2026-10-16T01:37:14Z",
+      "player": "JASON DICKINSON",
+      "team": "edmonton-oilers",
+      "previous_team": "edmonton-oilers",
+      "event_types": [
+        "removal"
+      ],
+      "importance": "high",
+      "before": {
+        "team": "edmonton-oilers",
+        "rostered": true,
+        "forward_line": 2,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "after": {
+        "team": "edmonton-oilers",
+        "rostered": false,
+        "forward_line": null,
+        "defense_pair": null,
+        "goalie_slot": null,
+        "power_play": null
+      },
+      "changes": [
+        {
+          "type": "removal",
+          "from": true,
+          "to": false
+        }
+      ]
+    },
     {
       "id": "eb35c3e2d9544d7b76c6",
       "occurred_at": "2026-10-16T00:30:04Z",
@@ -17263,108 +17366,6 @@
           "type": "removal",
           "from": true,
           "to": false
-        }
-      ]
-    },
-    {
-      "id": "c282b252855d98648da4",
-      "occurred_at": "2026-10-11T02:08:43Z",
-      "player": "IGOR SHESTERKIN",
-      "team": "new-york-rangers",
-      "previous_team": "new-york-rangers",
-      "event_types": [
-        "removal"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "new-york-rangers",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": 1,
-        "power_play": null
-      },
-      "after": {
-        "team": "new-york-rangers",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "removal",
-          "from": true,
-          "to": false
-        }
-      ]
-    },
-    {
-      "id": "954b32a6f83a3550abf1",
-      "occurred_at": "2026-10-11T02:08:43Z",
-      "player": "ERIK GUSTAFSSON",
-      "team": "los-angeles-kings",
-      "previous_team": "los-angeles-kings",
-      "event_types": [
-        "removal"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "los-angeles-kings",
-        "rostered": true,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": 2
-      },
-      "after": {
-        "team": "los-angeles-kings",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "removal",
-          "from": true,
-          "to": false
-        }
-      ]
-    },
-    {
-      "id": "91da775084266de15264",
-      "occurred_at": "2026-10-11T02:08:43Z",
-      "player": "ANDRE LEE",
-      "team": "los-angeles-kings",
-      "previous_team": "los-angeles-kings",
-      "event_types": [
-        "addition"
-      ],
-      "importance": "high",
-      "before": {
-        "team": "los-angeles-kings",
-        "rostered": false,
-        "forward_line": null,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "after": {
-        "team": "los-angeles-kings",
-        "rostered": true,
-        "forward_line": 4,
-        "defense_pair": null,
-        "goalie_slot": null,
-        "power_play": null
-      },
-      "changes": [
-        {
-          "type": "addition",
-          "from": false,
-          "to": true
         }
       ]
     }

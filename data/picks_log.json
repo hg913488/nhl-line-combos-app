@@ -20,7 +20,7 @@
     "graded": 209,
     "hits": 113,
     "hit_rate": 0.5407,
-    "review": 2,
+    "review": 3,
     "position_baseline": {
       "C": 0.6986,
       "LW": 0.4498,
@@ -28,7 +28,7 @@
       "D": 0.3589
     },
     "always_c_hit_rate": 0.6986,
-    "pending": 20,
+    "pending": 19,
     "void": 0,
     "baseline_hit_rate": 0.5024,
     "by_position": {
@@ -16314,8 +16314,21 @@
         "season_id": 20262027
       },
       "logged_at": "2026-10-15T07:29:50Z",
-      "status": "pending",
-      "result": null
+      "status": "review",
+      "result": {
+        "hit": null,
+        "scorers": [],
+        "goals_by_position": {
+          "C": 0,
+          "LW": 0,
+          "RW": 0,
+          "D": 0
+        },
+        "score_reconciled": false,
+        "graded_at": "2026-10-16T01:38:53Z",
+        "review_reason": "Scorer totals do not match final score"
+      },
+      "result_audit": []
     },
     {
       "method_version": 3,

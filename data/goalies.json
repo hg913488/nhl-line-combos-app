@@ -1,7 +1,35 @@
 {
   "source": "dailyfaceoff.com",
-  "updated_at": "2026-10-16 00:30:49 UTC",
+  "updated_at": "2026-10-16 01:37:59 UTC",
   "matchups": [
+    {
+      "away": {
+        "team": "new-york-islanders",
+        "goalie": "SEMYON VARLAMOV",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/1545/Varlamov-Semyon_NYI-2022_2.png",
+        "stats": {
+          "record": "0-1-0",
+          "gaa": "2.22",
+          "svpct": "0.892",
+          "so": 0
+        }
+      },
+      "home": {
+        "team": "ottawa-senators",
+        "goalie": "LINUS ULLMARK",
+        "status": "Confirmed",
+        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2534/Ullmark-Linus_OTT-2025_.png",
+        "stats": {
+          "record": "5-0-0",
+          "gaa": "1.27",
+          "svpct": "0.946",
+          "so": 0
+        }
+      },
+      "date": "2026-10-15",
+      "time": "19:00"
+    },
     {
       "away": {
         "team": "seattle-kraken",
@@ -10,8 +38,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2065/Grubauer-Philipp_SEA-2026_.png",
         "stats": {
           "record": "2-1-0",
-          "gaa": "2.34",
-          "svpct": "0.918",
+          "gaa": "2.44",
+          "svpct": "0.92",
           "so": 0
         }
       },
@@ -22,8 +50,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2413/Vasilevskiy-Andrei_TBL-2024_.png",
         "stats": {
           "record": "3-2-0",
-          "gaa": "2.45",
-          "svpct": "0.885",
+          "gaa": "2.32",
+          "svpct": "0.897",
           "so": 0
         }
       },
@@ -38,7 +66,7 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/4783/Luukkonen-Ukko-Pekka-BUF-2024.png",
         "stats": {
           "record": "2-2-1",
-          "gaa": "3.45",
+          "gaa": "3.75",
           "svpct": "0.85",
           "so": 0
         }
@@ -50,8 +78,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/1117/Bobrovsky-Sergei_TOR-2026_.png",
         "stats": {
           "record": "1-2-1",
-          "gaa": "2.96",
-          "svpct": "0.907",
+          "gaa": "2.95",
+          "svpct": "0.908",
           "so": 0
         }
       },
@@ -66,8 +94,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/32794/Garand-Dylan_NYR-2026_.png",
         "stats": {
           "record": "3-1-0",
-          "gaa": "1.14",
-          "svpct": "0.951",
+          "gaa": "2.05",
+          "svpct": "0.915",
           "so": 1
         }
       },
@@ -78,8 +106,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/29186/Daws-Nico_NJD-2024_-3.png",
         "stats": {
           "record": "0-2-0",
-          "gaa": "4.58",
-          "svpct": "0.824",
+          "gaa": "3.25",
+          "svpct": "0.864",
           "so": 0
         }
       },
@@ -94,8 +122,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/34600/Merila%CC%88inen-Leevi_VAN-2026-2_.png",
         "stats": {
           "record": "1-1-0",
-          "gaa": "2.46",
-          "svpct": "0.929",
+          "gaa": "1.99",
+          "svpct": "0.942",
           "so": 0
         }
       },
@@ -106,36 +134,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/29148/Schmid-Akira_FLA-2026_.png",
         "stats": {
           "record": "1-1-1",
-          "gaa": "3.7",
-          "svpct": "0.875",
-          "so": 0
-        }
-      },
-      "date": "2026-10-15",
-      "time": "19:00"
-    },
-    {
-      "away": {
-        "team": "new-york-islanders",
-        "goalie": "SEMYON VARLAMOV",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/1545/Varlamov-Semyon_NYI-2022_2.png",
-        "stats": {
-          "record": "0-1-0",
-          "gaa": "3.0",
-          "svpct": "0.864",
-          "so": 0
-        }
-      },
-      "home": {
-        "team": "ottawa-senators",
-        "goalie": "LINUS ULLMARK",
-        "status": "Confirmed",
-        "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2534/Ullmark-Linus_OTT-2025_.png",
-        "stats": {
-          "record": "5-0-0",
-          "gaa": "1.27",
-          "svpct": "0.948",
+          "gaa": "3.46",
+          "svpct": "0.871",
           "so": 0
         }
       },
@@ -150,8 +150,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/27288/Woll-Joseph_PHI-2026_.png",
         "stats": {
           "record": "0-2-2",
-          "gaa": "2.95",
-          "svpct": "0.914",
+          "gaa": "2.76",
+          "svpct": "0.918",
           "so": 0
         }
       },
@@ -162,8 +162,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/28133/Tarasov-Daniil_DET-2026-2_.png",
         "stats": {
           "record": "0-0-1",
-          "gaa": "0.66",
-          "svpct": "0.974",
+          "gaa": "0.92",
+          "svpct": "0.958",
           "so": 1
         }
       },
@@ -178,8 +178,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2727/Nedeljkovic-Alex_SJS-11_30_25_.png",
         "stats": {
           "record": "1-0-0",
-          "gaa": "1.94",
-          "svpct": "0.923",
+          "gaa": "1.43",
+          "svpct": "0.946",
           "so": 0
         }
       },
@@ -190,8 +190,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/2557/Saros-Juuse_NSH-2026_.png",
         "stats": {
           "record": "2-2-1",
-          "gaa": "3.17",
-          "svpct": "0.897",
+          "gaa": "3.14",
+          "svpct": "0.898",
           "so": 0
         }
       },
@@ -206,8 +206,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/28910/Hofer-Joel_STL-2022_.png",
         "stats": {
           "record": "2-1-1",
-          "gaa": "1.76",
-          "svpct": "0.92",
+          "gaa": "2.08",
+          "svpct": "0.913",
           "so": 1
         }
       },
@@ -218,8 +218,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/31763/Wallstedt-Jesper_MIN-2024_.png",
         "stats": {
           "record": "4-1-1",
-          "gaa": "1.82",
-          "svpct": "0.933",
+          "gaa": "1.88",
+          "svpct": "0.93",
           "so": 0
         }
       },
@@ -234,8 +234,8 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/4741/Skinner-Stuart_WPG-2026_.png",
         "stats": {
           "record": "3-0-1",
-          "gaa": "2.46",
-          "svpct": "0.917",
+          "gaa": "2.94",
+          "svpct": "0.903",
           "so": 0
         }
       },
@@ -246,7 +246,7 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/30475/Knight-Spencer_CHI-2_.png",
         "stats": {
           "record": "2-3-0",
-          "gaa": "3.64",
+          "gaa": "3.58",
           "svpct": "0.886",
           "so": 0
         }
@@ -262,7 +262,7 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/26614/Vejmelka-Karel_Utah-2025_.png",
         "stats": {
           "record": "4-1-0",
-          "gaa": "2.45",
+          "gaa": "2.44",
           "svpct": "0.895",
           "so": 1
         }
@@ -274,7 +274,7 @@
         "headshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/33010/Levi-Devon_EDM-2026_.png",
         "stats": {
           "record": "4-0-0",
-          "gaa": "2.76",
+          "gaa": "2.74",
           "svpct": "0.903",
           "so": 0
         }
