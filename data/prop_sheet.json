@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T00:38:54Z",
+  "generated_at": "2026-10-17T01:33:02Z",
   "date": "2026-10-16",
   "window": {
     "games": 10,
@@ -768,31 +768,31 @@
       "number": 29
     },
     {
-      "id": 8475172,
-      "name": "NAZEM KADRI",
+      "id": 8480039,
+      "name": "MARTIN NECAS",
       "team": "COL",
       "opp": "PIT",
       "game_id": 2026020119,
       "home": true,
       "pos": "RW",
       "line": "L1",
-      "pp": 1,
+      "pp": 2,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 1,
-        "a": 7,
-        "p": 8,
-        "sog": 25,
-        "toi": 1172.6,
-        "pptoi": 231.4
+        "g": 4,
+        "a": 5,
+        "p": 9,
+        "sog": 21,
+        "toi": 1252.7,
+        "pptoi": 267.2
       },
       "season": {
         "gp": 7,
-        "g": 0,
-        "a": 5,
-        "p": 5,
-        "sog": 20
+        "g": 4,
+        "a": 3,
+        "p": 7,
+        "sog": 17
       },
       "opp_index": 2.0425,
       "opp_goalie": {
@@ -801,12 +801,11 @@
         "source": "confirmed"
       },
       "flags": [
-        "PP1",
         "ROLE_UP",
         "HOT",
         "SOFT_MATCHUP"
       ],
-      "number": 91
+      "number": 88
     },
     {
       "id": 8476455,
@@ -884,31 +883,31 @@
       "number": 11
     },
     {
-      "id": 8480039,
-      "name": "MARTIN NECAS",
+      "id": 8475172,
+      "name": "NAZEM KADRI",
       "team": "COL",
       "opp": "PIT",
       "game_id": 2026020119,
       "home": true,
       "pos": "RW",
       "line": "L2",
-      "pp": 2,
+      "pp": 1,
       "b2b": false,
       "last10": {
         "gp": 10,
-        "g": 4,
-        "a": 5,
-        "p": 9,
-        "sog": 21,
-        "toi": 1252.7,
-        "pptoi": 267.2
+        "g": 1,
+        "a": 7,
+        "p": 8,
+        "sog": 25,
+        "toi": 1172.6,
+        "pptoi": 231.4
       },
       "season": {
         "gp": 7,
-        "g": 4,
-        "a": 3,
-        "p": 7,
-        "sog": 17
+        "g": 0,
+        "a": 5,
+        "p": 5,
+        "sog": 20
       },
       "opp_index": 2.0425,
       "opp_goalie": {
@@ -917,10 +916,12 @@
         "source": "confirmed"
       },
       "flags": [
+        "PP1",
+        "ROLE_UP",
         "HOT",
         "SOFT_MATCHUP"
       ],
-      "number": 88
+      "number": 91
     },
     {
       "id": 8475768,
